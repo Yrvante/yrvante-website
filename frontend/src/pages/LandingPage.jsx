@@ -416,11 +416,8 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-lg md:text-xl leading-relaxed text-gray-300 mb-6">
+            <p className="text-lg md:text-xl leading-relaxed text-gray-300">
               {t.about.description}
-            </p>
-            <p className="text-base leading-relaxed text-gray-400">
-              {t.about.description2}
             </p>
           </motion.div>
         </div>
