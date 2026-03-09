@@ -1,0 +1,116 @@
+{
+  "brand_identity": {
+    "name": "Yrvante",
+    "slogan": "Smart web & software",
+    "mission": "Empowering ZZP'ers and small businesses with engineering-grade web solutions.",
+    "tone": "Precision, Clarity, Dutch Minimalism, Elegant Engineering",
+    "aesthetic": "Strict Black & White, High Contrast, Serif Typography, Asymmetric Layouts"
+  },
+  "theme": {
+    "mode": "light",
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF",
+      "accent": "#1A1A1A",
+      "background": "#FFFFFF",
+      "surface": "#F8F8F8",
+      "border": "#E5E5E5",
+      "text_primary": "#000000",
+      "text_secondary": "#525252",
+      "selection_bg": "#000000",
+      "selection_text": "#FFFFFF"
+    },
+    "typography": {
+      "headings": {
+        "font_family": "Playfair Display, serif",
+        "weights": ["400", "600", "700"],
+        "tracking": "-0.02em",
+        "usage": "Use for H1-H3. Keep H1 massive (text-6xl+)."
+      },
+      "body": {
+        "font_family": "DM Sans, sans-serif",
+        "weights": ["400", "500"],
+        "leading": "relaxed",
+        "usage": "Use for all paragraphs and UI elements."
+      },
+      "mono": {
+        "font_family": "JetBrains Mono, monospace",
+        "usage": "Use for small labels, technical specs, and overlines."
+      }
+    }
+  },
+  "layout_system": {
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "grid": "grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-16",
+    "spacing": {
+      "section_y": "py-24 md:py-32",
+      "element_gap": "gap-8"
+    },
+    "border_radius": "rounded-none",
+    "shadows": "none"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-black text-white hover:bg-white hover:text-black border border-black transition-colors duration-300 rounded-none px-8 py-4 uppercase tracking-widest text-xs font-mono",
+      "secondary": "bg-transparent text-black border-b border-black hover:opacity-70 transition-opacity rounded-none px-0 py-2"
+    },
+    "cards": {
+      "style": "bg-white border border-gray-200 p-8 hover:border-black transition-colors duration-300 rounded-none",
+      "content_align": "left"
+    },
+    "inputs": {
+      "style": "bg-transparent border-b border-gray-300 focus:border-black outline-none py-4 px-0 rounded-none transition-colors placeholder:text-gray-400"
+    },
+    "navigation": {
+      "style": "fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100",
+      "link": "text-sm font-medium hover:text-gray-500 transition-colors"
+    }
+  },
+  "assets": {
+    "logo": "https://customer-assets.emergentagent.com/job_yrvante-design/artifacts/22y72wxq_Yrvante%20logo.png",
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop",
+      "services_1": "https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop",
+      "services_2": "https://images.unsplash.com/photo-1664575602554-2087b04935a5?q=80&w=2187&auto=format&fit=crop",
+      "services_3": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
+      "founder": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop",
+      "about_bg": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-1"
+    }
+  },
+  "motion": {
+    "library": "framer-motion",
+    "scroll": "lenis",
+    "animations": {
+      "fade_up": {
+        "initial": { "opacity": 0, "y": 20 },
+        "whileInView": { "opacity": 1, "y": 0 },
+        "viewport": { "once": true },
+        "transition": { "duration": 0.6, "ease": "easeOut" }
+      },
+      "stagger_children": {
+        "visible": { "transition": { "staggerChildren": 0.1 } }
+      }
+    }
+  },
+  "universal_guidelines": [
+    "Do NOT use gradients. Stick to solid Black and White.",
+    "Do NOT use rounded corners greater than 2px. Prefer sharp edges (rounded-none).",
+    "Use 'Playfair Display' for Headings to match the logo's serif style.",
+    "Ensure 'Smart web & software' slogan is visible near the hero.",
+    "Contact form must send emails to yvar@yrvante.com (simulated).",
+    "Language toggle (EN/NL) must be present in the nav.",
+    "Use asymmetric layouts (e.g., 8 col text, 4 col image) to avoid boredom.",
+    "Add 'data-testid' to all interactive elements."
+  ],
+  "implementation_steps": [
+    "Step 1: Install dependencies: `yarn add framer-motion @studio-freight/react-lenis lucide-react clsx tailwind-merge`.",
+    "Step 2: Update `tailwind.config.js` with the Yrvante theme (colors, fonts).",
+    "Step 3: Create the global layout wrapper with Lenis scroll and Navbar.",
+    "Step 4: Build the Landing Page sections sequentially (Hero -> Services -> About -> Contact).",
+    "Step 5: Implement the Contact Form with validation."
+  ]
+}
