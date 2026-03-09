@@ -58,8 +58,8 @@ const translations = {
     about: {
       title: "Over Yrvante",
       subtitle: "Onze achtergrond",
-      description: "Yrvante is opgericht door Yvar Bredewold, een technisch onderlegde professional met ervaring in high-precision engineering omgevingen en een sterke passie voor softwareontwikkeling.",
-      description2: "Met een engineering mindset en focus op gestructureerd probleemoplossen, creëert Yrvante strakke, betrouwbare en moderne websites ontworpen voor echte zakelijke behoeften.",
+      description: "Yrvante is opgericht door Yvar Bredewold, een technisch onderlegde professional met ervaring in high-precision manufacturing omgevingen, momenteel in transitie naar software engineering.",
+      description2: "Na meerdere jaren werken in verantwoordelijke productierollen, heeft hij besloten zich volledig te richten op een carrière in computer science. Met een engineering mindset en focus op gestructureerd probleemoplossen, creëert Yrvante strakke, betrouwbare en moderne websites. Het doel is om een hoogwaardige software engineer te worden en internationaal te werken.",
       location: "Almelo, Nederland",
     },
     portfolio: {
@@ -147,8 +147,8 @@ const translations = {
     about: {
       title: "About Yrvante",
       subtitle: "Our background",
-      description: "Yrvante was founded by Yvar Bredewold, a technically skilled professional with experience in high-precision engineering environments and a strong passion for software development.",
-      description2: "With an engineering mindset and a focus on structured problem-solving, Yrvante creates clean, reliable, and modern websites designed for real business needs.",
+      description: "Yrvante was founded by Yvar Bredewold, a technically skilled professional with experience in high-precision manufacturing environments, currently transitioning into software engineering.",
+      description2: "After several years working in high-responsibility production roles, he has decided to fully commit to building a career in computer science. With an engineering mindset and a focus on structured problem-solving, Yrvante creates clean, reliable, and modern websites. The goal is to become a highly skilled software engineer and work internationally.",
       location: "Almelo, Netherlands",
     },
     portfolio: {

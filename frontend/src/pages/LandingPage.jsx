@@ -74,7 +74,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="/" data-testid="nav-logo" className="flex items-center">
-            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
+            <img src={LOGO_URL} alt="Yrvante" className="h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -225,8 +225,10 @@ const HeroSection = () => {
             <h1 className="hero-title font-heading mb-4">
               Yrvante
             </h1>
-            <p className="font-mono text-lg md:text-xl italic text-yrvante-text-secondary mb-8">
-              {t.hero.slogan}
+            <p className="font-mono text-lg md:text-xl text-yrvante-text-secondary mb-8">
+              <span className="text-gray-400">(</span>
+              <span className="italic">"Smart web & software"</span>
+              <span className="text-gray-400">);</span>
             </p>
             <p className="text-base md:text-lg text-yrvante-text-secondary max-w-2xl mb-10 leading-relaxed">
               {t.hero.description}
@@ -243,12 +245,12 @@ const HeroSection = () => {
             </motion.button>
           </motion.div>
           <motion.div
-            className="lg:col-span-4 hidden lg:flex justify-center"
+            className="lg:col-span-4 hidden lg:flex justify-center items-center"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <img src={LOGO_URL} alt="Yrvante Logo" className="w-64 h-auto" />
+            <img src={LOGO_URL} alt="Yrvante Logo" className="w-80 h-auto" />
           </motion.div>
         </div>
       </div>
@@ -427,15 +429,9 @@ const AboutSection = () => {
   );
 };
 
-// Portfolio Section
+// Portfolio Section - Empty placeholders
 const PortfolioSection = () => {
   const { t } = useLanguage();
-
-  const portfolioItems = [
-    { name: "B&B by Chantal", type: "Bed & Breakfast" },
-    { name: "Kristina Luxe Nails", type: "Beauty Salon" },
-    { name: "Seth's Hairline", type: "Barbershop" },
-  ];
 
   return (
     <section id="portfolio" data-testid="portfolio-section" className="section-padding">
@@ -460,20 +456,18 @@ const PortfolioSection = () => {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          {portfolioItems.map((item, index) => (
+          {[0, 1, 2].map((index) => (
             <motion.div
               key={index}
               data-testid={`portfolio-card-${index}`}
-              className="portfolio-card card-yrvante group cursor-pointer"
+              className="portfolio-card card-yrvante group"
               variants={fadeUp}
             >
-              <div className="aspect-video bg-yrvante-surface mb-6 flex items-center justify-center border border-gray-200">
+              <div className="aspect-video bg-yrvante-surface flex items-center justify-center border border-gray-200">
                 <span className="font-mono text-xs uppercase tracking-widest text-gray-400">
                   {t.portfolio.comingSoon}
                 </span>
               </div>
-              <h3 className="text-xl font-heading mb-2">{item.name}</h3>
-              <p className="text-yrvante-text-secondary text-sm">{item.type}</p>
             </motion.div>
           ))}
         </motion.div>
