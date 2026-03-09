@@ -1,34 +1,149 @@
-.App-logo {
-    height: 40vmin;
+/* Yrvante Custom Styles */
+
+/* Navigation */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #000000;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hero section */
+.hero-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.9;
+}
+
+/* Service cards animation */
+.service-card {
+    transform: translateY(0);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Portfolio cards */
+.portfolio-card {
+    overflow: hidden;
+}
+
+.portfolio-card img {
+    transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Contact form */
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    font-size: 0.875rem;
+    color: #525252;
+    transition: all 0.3s ease;
     pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+    top: -0.5rem;
+    font-size: 0.75rem;
+    color: #000000;
+}
+
+/* Language toggle */
+.lang-toggle {
+    position: relative;
+}
+
+.lang-toggle button {
+    transition: opacity 0.3s ease;
+}
+
+.lang-toggle button.active {
+    font-weight: 600;
+}
+
+.lang-toggle button:not(.active) {
+    opacity: 0.5;
+}
+
+/* Smooth scroll offset for fixed nav */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Loading animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
     }
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.animate-pulse-slow {
+    animation: pulse 2s ease-in-out infinite;
 }
 
-.App-link {
-    color: #61dafb;
+/* Fade animations */
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
-@keyframes App-logo-spin {
+@keyframes fadeInUp {
     from {
-        transform: rotate(0deg);
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
-        transform: rotate(360deg);
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Mobile menu */
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
     }
 }
