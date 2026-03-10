@@ -19,6 +19,7 @@ import {
   ArrowRight,
   Globe
 } from "lucide-react";
+import HeroAnimation from "../components/HeroAnimation";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -700,6 +701,7 @@ const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen bg-white">
       <Navigation />
+      <HeroAnimation />
       <HeroSection />
       <ServicesSection />
       <TargetSection />
