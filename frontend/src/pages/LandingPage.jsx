@@ -701,7 +701,7 @@ const Footer = () => {
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen bg-white relative">
-      <BackgroundDecorations showShapes={true} showCode={true} showDots={false} />
+      <BackgroundDecorations />
       <Navigation />
       <HeroAnimation />
       <HeroSection />
