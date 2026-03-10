@@ -10,7 +10,7 @@ const HeroAnimation = () => {
       hasStartedRef.current = true;
       setTimeout(() => {
         runLoop();
-      }, 800);
+      }, 1000);
     }
   }, []);
 
@@ -127,8 +127,8 @@ const HeroAnimation = () => {
     const VISIBLE = Math.floor((wrap?.offsetHeight || 200) / LINE_H);
     let visCount = 0;
     let scrollOff = 0;
-    let delay = 1500;
-    const SPD = 60; // Faster typing
+    let delay = 2000;
+    const SPD = 120; // Slower, more relaxed typing
 
     lines.forEach((line) => {
       const el = document.createElement('div');
@@ -157,15 +157,15 @@ const HeroAnimation = () => {
             wf.appendChild(child);
             setTimeout(() => {
               if (child.classList?.contains('pw')) child.classList.add('show');
-            }, 50);
+            }, 100);
           }
         }
       }, delay);
 
-      delay += line.h.includes('"cm"') ? SPD * 1.5 : SPD;
+      delay += line.h.includes('"cm"') ? SPD * 1.8 : SPD;
     });
 
-    const T = delay + 200;
+    const T = delay + 800; // Longer pause after code
 
     // Morph to real site
     setTimeout(() => {
@@ -180,60 +180,61 @@ const HeroAnimation = () => {
           real.classList.add('show');
           stage.classList.add('white');
 
-          setTimeout(() => stage.querySelector('#rsH1')?.classList.add('show'), 400);
-          setTimeout(() => stage.querySelector('#rsRule')?.classList.add('show'), 800);
-          setTimeout(() => stage.querySelector('#rsSub')?.classList.add('show'), 1200);
-          setTimeout(() => stage.querySelector('#rsTagline')?.classList.add('show'), 2000);
-        }, 300);
-      }, 200);
+          // Slower, more graceful text reveals
+          setTimeout(() => stage.querySelector('#rsH1')?.classList.add('show'), 600);
+          setTimeout(() => stage.querySelector('#rsRule')?.classList.add('show'), 1400);
+          setTimeout(() => stage.querySelector('#rsSub')?.classList.add('show'), 2200);
+          setTimeout(() => stage.querySelector('#rsTagline')?.classList.add('show'), 3200);
+        }, 500);
+      }, 400);
     }, T);
 
-    const morphStart = T + 200 + 300 + 2000 + 4000;
+    const morphStart = T + 400 + 500 + 3200 + 6000; // Much longer display time
 
     // Scene 2 → 3
     setTimeout(() => {
       ['rsH1', 'rsRule', 'rsSub', 'rsTagline'].forEach(id => {
         const el = stage.querySelector(`#${id}`);
         if (el) {
-          el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+          el.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
           el.style.opacity = '0';
           el.style.transform = 'translateY(-10px)';
         }
       });
 
       if (nav) {
-        nav.style.transition = 'opacity 0.6s ease';
+        nav.style.transition = 'opacity 1s ease';
         nav.style.opacity = '0';
       }
       if (chrome) {
-        chrome.style.transition = 'opacity 0.6s ease';
+        chrome.style.transition = 'opacity 1s ease';
         chrome.style.opacity = '0';
       }
 
       setTimeout(() => {
         sceneFinal.style.opacity = '1';
         setTimeout(() => {
-          fw.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+          fw.style.transition = 'opacity 1.2s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1)';
           fw.style.opacity = '1';
           fw.style.transform = 'translateY(0)';
-        }, 200);
+        }, 400);
         setTimeout(() => {
-          fr.style.transition = 'width 0.8s ease';
+          fr.style.transition = 'width 1.2s ease';
           fr.style.width = '120px';
-        }, 500);
+        }, 900);
         setTimeout(() => {
-          fs.style.transition = 'opacity 0.6s ease';
+          fs.style.transition = 'opacity 1s ease';
           fs.style.opacity = '1';
-        }, 800);
-      }, 800);
+        }, 1400);
+      }, 1200);
     }, morphStart);
 
-    // Loop
-    const loopStart = morphStart + 800 + 800 + 5000;
+    // Loop - longer final display
+    const loopStart = morphStart + 1200 + 1400 + 7000;
     setTimeout(() => {
-      blackFade.style.transition = 'opacity 1.2s ease';
+      blackFade.style.transition = 'opacity 1.5s ease';
       blackFade.style.opacity = '1';
-      setTimeout(() => runLoop(), 1200);
+      setTimeout(() => runLoop(), 1500);
     }, loopStart);
   };
 
@@ -276,7 +277,7 @@ const HeroAnimation = () => {
           display: flex;
           flex-direction: column;
           border-right: 1px solid rgba(255,255,255,0.08);
-          transition: width 1s cubic-bezier(0.4,0,0.2,1), opacity 0.8s ease;
+          transition: width 1.4s cubic-bezier(0.25,0.1,0.25,1), opacity 1.2s ease;
           overflow: hidden;
           background: rgba(0,0,0,0.3);
         }
@@ -341,7 +342,7 @@ const HeroAnimation = () => {
         .code-col {
           display: flex;
           flex-direction: column;
-          transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+          transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1);
         }
         .code-scroll-wrap::before {
           content: '';
@@ -375,7 +376,7 @@ const HeroAnimation = () => {
           opacity: 0;
           height: 0;
           font-family: 'JetBrains Mono', monospace;
-          transition: opacity 0.2s ease, height 0.1s ease;
+          transition: opacity 0.4s ease, height 0.2s ease;
         }
         .cl.show { opacity: 1; height: 1.65em; }
         .cl.typing { 
@@ -426,14 +427,14 @@ const HeroAnimation = () => {
           border-radius: 4px;
           opacity: 0;
           transform: translateY(8px) scale(0.98);
-          transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+          transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25,0.1,0.25,1);
           flex-shrink: 0;
         }
         .pw.show { opacity: 1; transform: translateY(0) scale(1); }
         .pw.fadeout { 
           opacity: 0; 
           transform: translateY(-10px) scale(1.02); 
-          transition: opacity 0.6s ease, transform 0.6s ease; 
+          transition: opacity 1s ease, transform 1s ease; 
         }
         
         .p-navbar {
@@ -492,7 +493,7 @@ const HeroAnimation = () => {
           display: flex;
           flex-direction: column;
           opacity: 0;
-          transition: opacity 0.8s ease;
+          transition: opacity 1.2s ease;
           background: #fff;
           pointer-events: none;
         }
@@ -578,15 +579,15 @@ const HeroAnimation = () => {
           text-align: center;
           z-index: 1;
           opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4,0,0.2,1);
+          transform: translateY(25px);
+          transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.25,0.1,0.25,1);
           margin-bottom: 16px;
         }
         .rs-rule {
           width: 0;
           height: 2px;
           background: #000;
-          transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+          transition: width 1.2s cubic-bezier(0.25,0.1,0.25,1);
           margin-bottom: 16px;
           flex-shrink: 0;
           z-index: 1;
@@ -600,8 +601,8 @@ const HeroAnimation = () => {
           text-align: center;
           z-index: 1;
           opacity: 0;
-          transform: translateY(15px);
-          transition: opacity 0.8s ease, transform 0.8s ease;
+          transform: translateY(20px);
+          transition: opacity 1s ease, transform 1s cubic-bezier(0.25,0.1,0.25,1);
           margin-bottom: 16px;
         }
         .rs-tagline {
@@ -613,7 +614,7 @@ const HeroAnimation = () => {
           text-align: center;
           z-index: 1;
           opacity: 0;
-          transition: opacity 0.6s ease;
+          transition: opacity 1s ease;
         }
         
         .rs-h1.show { opacity: 1; transform: translateY(0); }
@@ -632,7 +633,7 @@ const HeroAnimation = () => {
           justify-content: center;
           gap: 16px;
           opacity: 0;
-          transition: opacity 1s ease;
+          transition: opacity 1.4s ease;
         }
         
         #finalWord {
