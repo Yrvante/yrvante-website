@@ -1,9 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const HeroAnimation = () => {
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(true);
   const stageRef = useRef(null);
   const actxRef = useRef(null);
+  const hasStartedRef = useRef(false);
+
+  useEffect(() => {
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        getAudioContext();
+        runLoop();
+      }, 500);
+    }
+  }, []);
 
   const getAudioContext = () => {
     if (!actxRef.current) {
@@ -326,13 +338,14 @@ const HeroAnimation = () => {
           align-items: center;
           justify-content: center;
           background: #050505;
+          margin-top: 80px;
         }
         
         .stage {
           width: 100%;
-          height: 50vh;
-          min-height: 300px;
-          max-height: 440px;
+          height: 45vh;
+          min-height: 280px;
+          max-height: 400px;
           background: #070707;
           overflow: hidden;
           position: relative;
@@ -850,13 +863,6 @@ const HeroAnimation = () => {
 
       <div className="stage" id="stage" ref={stageRef}>
         <div className="vignette"></div>
-        <button
-          className={`start-btn ${started ? 'hidden' : ''}`}
-          onClick={startAnimation}
-          data-testid="hero-animation-start"
-        >
-          ▶ &nbsp;Afspelen
-        </button>
 
         {/* Scene 1: Editor + Preview */}
         <div className="scene-split" id="sceneSplit">

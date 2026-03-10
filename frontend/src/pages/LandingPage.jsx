@@ -68,14 +68,14 @@ const Navigation = () => {
     <nav
       data-testid="navigation"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-md border-b border-gray-100" : "bg-transparent"
+        scrolled ? "bg-white/95 backdrop-blur-md border-b border-gray-100" : "bg-white"
       }`}
     >
       <div className="container-yrvante">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+          {/* Logo - moved to left side, smaller */}
           <a href="/" data-testid="nav-logo" className="flex items-center">
-            <img src={LOGO_URL} alt="Yrvante" className="h-12 w-auto" />
+            <span className="font-heading text-xl font-bold tracking-tight">Yrvante</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -211,7 +211,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="min-h-screen flex items-center pt-20">
+    <section data-testid="hero-section" className="py-16 md:py-20">
       <div className="container-yrvante">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <motion.div
@@ -251,7 +251,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <img src={LOGO_URL} alt="Yrvante Logo" className="w-80 h-auto" />
+            <img src={LOGO_URL} alt="Yrvante Logo" className="w-72 h-auto" />
           </motion.div>
         </div>
       </div>
