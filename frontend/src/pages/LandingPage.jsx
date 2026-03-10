@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "../App";
 import axios from "axios";
 import { toast } from "sonner";
@@ -20,6 +20,7 @@ import {
   Globe
 } from "lucide-react";
 import HeroAnimation from "../components/HeroAnimation";
+import BackgroundDecorations from "../components/BackgroundDecorations";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -699,7 +700,8 @@ const Footer = () => {
 // Main Landing Page Component
 const LandingPage = () => {
   return (
-    <div data-testid="landing-page" className="min-h-screen bg-white">
+    <div data-testid="landing-page" className="min-h-screen bg-white relative">
+      <BackgroundDecorations showShapes={true} showCode={true} showDots={false} />
       <Navigation />
       <HeroAnimation />
       <HeroSection />
