@@ -20,7 +20,6 @@ import {
   Globe
 } from "lucide-react";
 import HeroAnimation from "../components/HeroAnimation";
-import BackgroundDecorations from "../components/BackgroundDecorations";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -701,7 +700,6 @@ const Footer = () => {
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen bg-white relative">
-      <BackgroundDecorations />
       <Navigation />
       <HeroAnimation />
       <HeroSection />

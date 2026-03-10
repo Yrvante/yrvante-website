@@ -1,13 +1,41 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
+import AdminDashboard from "./pages/AdminDashboard";
+import axios from "axios";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 // Language Context
 const LanguageContext = createContext();
 
 export const useLanguage = () => useContext(LanguageContext);
+
+// Generate or get visitor ID
+const getVisitorId = () => {
+  let visitorId = localStorage.getItem("visitor_id");
+  if (!visitorId) {
+    visitorId = 'v_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+    localStorage.setItem("visitor_id", visitorId);
+  }
+  return visitorId;
+};
+
+// Track page view
+const trackPageView = async (page) => {
+  try {
+    await axios.post(`${API}/analytics/pageview`, {
+      page,
+      visitor_id: getVisitorId(),
+      referrer: document.referrer || ""
+    });
+  } catch (e) {
+    console.log("Analytics tracking failed");
+  }
+};
 
 // Translations
 const translations = {
@@ -195,12 +223,18 @@ function App() {
   const [language, setLanguage] = useState("nl");
   const t = translations[language];
 
+  // Track page view on mount
+  useEffect(() => {
+    trackPageView(window.location.pathname);
+  }, []);
+
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
         <Toaster position="bottom-right" />
