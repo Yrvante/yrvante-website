@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../App";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import {
@@ -95,6 +96,12 @@ const Navigation = () => {
 
               {t.nav.about}
             </button>
+            <Link
+              to="/about"
+              data-testid="nav-about-page"
+              className="nav-link text-sm font-medium">
+              Meer over ons
+            </Link>
             <button
               data-testid="nav-portfolio"
               onClick={() => scrollToSection("portfolio")}
@@ -437,8 +444,11 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}>
 
-            <p className="text-lg md:text-xl leading-relaxed text-gray-300">
+            <p className="text-lg md:text-xl leading-relaxed text-gray-300 mb-6">
               {t.about.description}
+            </p>
+            <p className="text-base leading-relaxed text-gray-400">
+              {t.about.description2}
             </p>
           </motion.div>
         </div>

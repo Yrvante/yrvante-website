@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
 import AdminDashboard from "./pages/AdminDashboard";
+import AboutPage from "./pages/AboutPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -89,8 +90,8 @@ const translations = {
     about: {
       title: "Over Yrvante",
       subtitle: "Onze achtergrond",
-      description: "Yrvante is opgericht door Yvar Bredewold, een technisch onderlegde professional met ervaring in high-precision manufacturing omgevingen, momenteel in transitie naar software engineering.",
-      description2: "",
+      description: "Achter Yrvante schuilt een passie voor techniek en resultaat. Met een achtergrond in high-precision manufacturing weten wij als geen ander dat de kleinste details het grootste verschil maken.",
+      description2: "Ons doel? Kleine bedrijven helpen groeien met websites die niet alleen mooi zijn, maar ook écht werken. Wij zien een website niet als een statisch visitekaartje, maar als een oplossing voor een probleem.",
       location: "Almelo, Nederland",
     },
     portfolio: {
@@ -181,8 +182,8 @@ const translations = {
     about: {
       title: "About Yrvante",
       subtitle: "Our background",
-      description: "Yrvante was founded by Yvar Bredewold, a technically skilled professional with experience in high-precision manufacturing environments, currently transitioning into software engineering.",
-      description2: "",
+      description: "Behind Yrvante lies a passion for technology and results. With a background in high-precision manufacturing, we know better than anyone that the smallest details make the biggest difference.",
+      description2: "Our goal? Help small businesses grow with websites that are not only beautiful, but actually work. We see a website not as a static business card, but as a solution to a problem.",
       location: "Almelo, Netherlands",
     },
     portfolio: {
@@ -240,6 +241,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
