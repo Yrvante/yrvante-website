@@ -15,38 +15,38 @@ const HeroAnimation = () => {
   }, []);
 
   const lines = [
-    { h: '<span class="cm">&lt;!-- Yrvante --&gt;</span>', p: null },
-    { h: '<span class="ct">&lt;!DOCTYPE html&gt;</span>', p: null },
-    { h: '<span class="ct">&lt;<span class="ca">html</span> lang=<span class="cv">"nl"</span>&gt;</span>', p: null },
-    { h: '<span class="ct">  &lt;<span class="ca">head</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;<span class="ct">title</span>&gt;<span class="cv">Yrvante</span>&lt;/<span class="ct">title</span>&gt;</span>', p: null },
-    { h: '<span class="ct">  &lt;/<span class="ca">head</span>&gt;</span>', p: null },
-    { h: '<span class="ct">  &lt;<span class="ca">body</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;<span class="ct">header</span>&gt;</span>', p: 'navbar' },
-    { h: '<span class="cp">      &lt;<span class="ct">nav</span>&gt;Yrvante&lt;/<span class="ct">nav</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;/<span class="ct">header</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;<span class="ct">section</span> class=<span class="cv">"hero"</span>&gt;</span>', p: null },
-    { h: '<span class="cp">      &lt;<span class="ct">h1</span>&gt;Smart Web & Software&lt;/<span class="ct">h1</span>&gt;</span>', p: 'hero' },
-    { h: '<span class="ck">      &lt;<span class="ct">p</span>&gt;Moderne websites&lt;/<span class="ct">p</span>&gt;</span>', p: null },
-    { h: '<span class="cp">      &lt;<span class="ct">button</span>&gt;Contact&lt;/<span class="ct">button</span>&gt;</span>', p: 'btn' },
-    { h: '<span class="cw">    &lt;/<span class="ct">section</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;<span class="ct">section</span> class=<span class="cv">"services"</span>&gt;</span>', p: null },
-    { h: '<span class="cp">      &lt;<span class="ct">div</span>&gt;Web Design&lt;/<span class="ct">div</span>&gt;</span>', p: 'cards' },
-    { h: '<span class="cp">      &lt;<span class="ct">div</span>&gt;Development&lt;/<span class="ct">div</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;/<span class="ct">section</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;<span class="ct">footer</span>&gt;</span>', p: 'footer' },
-    { h: '<span class="cp">      &lt;<span class="ct">p</span>&gt;© Yrvante&lt;/<span class="ct">p</span>&gt;</span>', p: null },
-    { h: '<span class="cw">    &lt;/<span class="ct">footer</span>&gt;</span>', p: null },
-    { h: '<span class="ct">  &lt;/<span class="ca">body</span>&gt;</span>', p: null },
-    { h: '<span class="ct">&lt;/<span class="ca">html</span>&gt;</span>', p: null },
-  ];
+  { h: '<span class="cm">&lt;!-- Yrvante --&gt;</span>', p: null },
+  { h: '<span class="ct">&lt;!DOCTYPE html&gt;</span>', p: null },
+  { h: '<span class="ct">&lt;<span class="ca">html</span> lang=<span class="cv">"nl"</span>&gt;</span>', p: null },
+  { h: '<span class="ct">  &lt;<span class="ca">head</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;<span class="ct">title</span>&gt;<span class="cv">Yrvante</span>&lt;/<span class="ct">title</span>&gt;</span>', p: null },
+  { h: '<span class="ct">  &lt;/<span class="ca">head</span>&gt;</span>', p: null },
+  { h: '<span class="ct">  &lt;<span class="ca">body</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;<span class="ct">header</span>&gt;</span>', p: 'navbar' },
+  { h: '<span class="cp">      &lt;<span class="ct">nav</span>&gt;Yrvante&lt;/<span class="ct">nav</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;/<span class="ct">header</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;<span class="ct">section</span> class=<span class="cv">"hero"</span>&gt;</span>', p: null },
+  { h: '<span class="cp">      &lt;<span class="ct">h1</span>&gt;Smart Web & Software&lt;/<span class="ct">h1</span>&gt;</span>', p: 'hero' },
+  { h: '<span class="ck">      &lt;<span class="ct">p</span>&gt;Moderne websites&lt;/<span class="ct">p</span>&gt;</span>', p: null },
+  { h: '<span class="cp">      &lt;<span class="ct">button</span>&gt;Contact&lt;/<span class="ct">button</span>&gt;</span>', p: 'btn' },
+  { h: '<span class="cw">    &lt;/<span class="ct">section</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;<span class="ct">section</span> class=<span class="cv">"services"</span>&gt;</span>', p: null },
+  { h: '<span class="cp">      &lt;<span class="ct">div</span>&gt;Web Design&lt;/<span class="ct">div</span>&gt;</span>', p: 'cards' },
+  { h: '<span class="cp">      &lt;<span class="ct">div</span>&gt;Development&lt;/<span class="ct">div</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;/<span class="ct">section</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;<span class="ct">footer</span>&gt;</span>', p: 'footer' },
+  { h: '<span class="cp">      &lt;<span class="ct">p</span>&gt;© Yrvante&lt;/<span class="ct">p</span>&gt;</span>', p: null },
+  { h: '<span class="cw">    &lt;/<span class="ct">footer</span>&gt;</span>', p: null },
+  { h: '<span class="ct">  &lt;/<span class="ca">body</span>&gt;</span>', p: null },
+  { h: '<span class="ct">&lt;/<span class="ca">html</span>&gt;</span>', p: null }];
+
 
   const previews = {
     navbar: `<div class="pw p-navbar"><div class="p-nb-logo"></div><div class="p-nb-links"><div class="p-nb-link"></div><div class="p-nb-link"></div><div class="p-nb-link"></div></div></div>`,
     hero: `<div class="pw p-hero"><div class="p-h1"></div><div class="p-hsub"></div><div class="p-btn"></div></div>`,
     btn: ``,
     cards: `<div class="pw p-cards"><div class="p-card"></div><div class="p-card"></div><div class="p-card"></div></div>`,
-    footer: `<div class="pw p-footer"><div class="p-ft"></div></div>`,
+    footer: `<div class="pw p-footer"><div class="p-ft"></div></div>`
   };
 
   const runLoop = () => {
@@ -77,7 +77,7 @@ const HeroAnimation = () => {
     real.className = 'real-site';
 
     // Reset scene 2 elements
-    ['rsH1', 'rsSub', 'rsRule', 'rsTagline'].forEach(id => {
+    ['rsH1', 'rsSub', 'rsRule', 'rsTagline'].forEach((id) => {
       const el = stage.querySelector(`#${id}`);
       if (el) {
         el.classList.remove('show');
@@ -137,7 +137,7 @@ const HeroAnimation = () => {
       cc.appendChild(el);
 
       setTimeout(() => {
-        stage.querySelectorAll('.cl.typing').forEach(e => {
+        stage.querySelectorAll('.cl.typing').forEach((e) => {
           e.classList.remove('typing');
           e.classList.add('show');
         });
@@ -169,8 +169,8 @@ const HeroAnimation = () => {
 
     // Morph to real site
     setTimeout(() => {
-      stage.querySelectorAll('.cl.typing').forEach(e => e.classList.remove('typing'));
-      stage.querySelectorAll('#wireframes .pw').forEach(el => el.classList.add('fadeout'));
+      stage.querySelectorAll('.cl.typing').forEach((e) => e.classList.remove('typing'));
+      stage.querySelectorAll('#wireframes .pw').forEach((el) => el.classList.add('fadeout'));
 
       setTimeout(() => {
         editor.classList.add('collapse');
@@ -193,7 +193,7 @@ const HeroAnimation = () => {
 
     // Scene 2 → 3
     setTimeout(() => {
-      ['rsH1', 'rsRule', 'rsSub', 'rsTagline'].forEach(id => {
+      ['rsH1', 'rsRule', 'rsSub', 'rsTagline'].forEach((id) => {
         const el = stage.querySelector(`#${id}`);
         if (el) {
           el.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
@@ -738,7 +738,7 @@ const HeroAnimation = () => {
 
         {/* Scene 3: Final Logo */}
         <div id="sceneFinal">
-          <div id="finalWord">Yrvante</div>
+          <div id="finalWord" className="!font-thin">Yrvante</div>
           <div id="finalRule"></div>
           <div id="finalSlogan">
             <span className="sl-p">(</span>
@@ -750,8 +750,8 @@ const HeroAnimation = () => {
         {/* Black Fade Overlay */}
         <div id="blackFade"></div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default HeroAnimation;
