@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../App";
 import axios from "axios";
 import { toast } from "sonner";
-import { 
-  Monitor, 
-  Briefcase, 
-  Code, 
-  User, 
-  Building2, 
+import {
+  Monitor,
+  Briefcase,
+  Code,
+  User,
+  Building2,
   Rocket,
   Palette,
   Cpu,
@@ -17,8 +17,8 @@ import {
   Menu,
   X,
   ArrowRight,
-  Globe
-} from "lucide-react";
+  Globe } from
+"lucide-react";
 import HeroAnimation from "../components/HeroAnimation";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -68,9 +68,9 @@ const Navigation = () => {
     <nav
       data-testid="navigation"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-md border-b border-gray-100" : "bg-white"
-      }`}
-    >
+      scrolled ? "bg-white/95 backdrop-blur-md border-b border-gray-100" : "bg-white"}`
+      }>
+
       <div className="container-yrvante">
         <div className="flex items-center justify-between h-20">
           {/* Logo - moved to left side, smaller */}
@@ -83,29 +83,29 @@ const Navigation = () => {
             <button
               data-testid="nav-services"
               onClick={() => scrollToSection("services")}
-              className="nav-link text-sm font-medium"
-            >
+              className="nav-link text-sm font-medium">
+
               {t.nav.services}
             </button>
             <button
               data-testid="nav-about"
               onClick={() => scrollToSection("about")}
-              className="nav-link text-sm font-medium"
-            >
+              className="nav-link text-sm font-medium">
+
               {t.nav.about}
             </button>
             <button
               data-testid="nav-portfolio"
               onClick={() => scrollToSection("portfolio")}
-              className="nav-link text-sm font-medium"
-            >
+              className="nav-link text-sm font-medium">
+
               {t.nav.portfolio}
             </button>
             <button
               data-testid="nav-contact"
               onClick={() => scrollToSection("contact")}
-              className="nav-link text-sm font-medium"
-            >
+              className="nav-link text-sm font-medium">
+
               {t.nav.contact}
             </button>
 
@@ -114,16 +114,16 @@ const Navigation = () => {
               <button
                 data-testid="lang-nl"
                 onClick={() => setLanguage("nl")}
-                className={`text-xs font-mono uppercase ${language === "nl" ? "active font-bold" : ""}`}
-              >
+                className={`text-xs font-mono uppercase ${language === "nl" ? "active font-bold" : ""}`}>
+
                 NL
               </button>
               <span className="text-gray-300">/</span>
               <button
                 data-testid="lang-en"
                 onClick={() => setLanguage("en")}
-                className={`text-xs font-mono uppercase ${language === "en" ? "active font-bold" : ""}`}
-              >
+                className={`text-xs font-mono uppercase ${language === "en" ? "active font-bold" : ""}`}>
+
                 EN
               </button>
             </div>
@@ -133,8 +133,8 @@ const Navigation = () => {
           <button
             data-testid="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2"
-          >
+            className="md:hidden p-2">
+
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -143,36 +143,36 @@ const Navigation = () => {
       {/* Mobile Menu */}
       <div
         className={`mobile-menu fixed inset-0 top-20 bg-white z-40 md:hidden ${
-          mobileMenuOpen ? "open" : ""
-        }`}
-      >
+        mobileMenuOpen ? "open" : ""}`
+        }>
+
         <div className="container-yrvante py-8 flex flex-col space-y-6">
           <button
             data-testid="mobile-nav-services"
             onClick={() => scrollToSection("services")}
-            className="text-left text-2xl font-heading"
-          >
+            className="text-left text-2xl font-heading">
+
             {t.nav.services}
           </button>
           <button
             data-testid="mobile-nav-about"
             onClick={() => scrollToSection("about")}
-            className="text-left text-2xl font-heading"
-          >
+            className="text-left text-2xl font-heading">
+
             {t.nav.about}
           </button>
           <button
             data-testid="mobile-nav-portfolio"
             onClick={() => scrollToSection("portfolio")}
-            className="text-left text-2xl font-heading"
-          >
+            className="text-left text-2xl font-heading">
+
             {t.nav.portfolio}
           </button>
           <button
             data-testid="mobile-nav-contact"
             onClick={() => scrollToSection("contact")}
-            className="text-left text-2xl font-heading"
-          >
+            className="text-left text-2xl font-heading">
+
             {t.nav.contact}
           </button>
 
@@ -180,23 +180,23 @@ const Navigation = () => {
             <button
               data-testid="mobile-lang-nl"
               onClick={() => setLanguage("nl")}
-              className={`text-sm font-mono ${language === "nl" ? "font-bold" : "opacity-50"}`}
-            >
+              className={`text-sm font-mono ${language === "nl" ? "font-bold" : "opacity-50"}`}>
+
               NL
             </button>
             <span className="text-gray-300">/</span>
             <button
               data-testid="mobile-lang-en"
               onClick={() => setLanguage("en")}
-              className={`text-sm font-mono ${language === "en" ? "font-bold" : "opacity-50"}`}
-            >
+              className={`text-sm font-mono ${language === "en" ? "font-bold" : "opacity-50"}`}>
+
               EN
             </button>
           </div>
         </div>
       </div>
-    </nav>
-  );
+    </nav>);
+
 };
 
 // Hero Section
@@ -211,19 +211,19 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="py-16 md:py-20">
+    <section data-testid="hero-section" className="!-my-[50px] !pt-[64px] !pb-[64px] md:!py-20">
       <div className="container-yrvante">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <motion.div
             className="lg:col-span-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <p className="font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-6">
+            transition={{ duration: 0.8 }}>
+
+            <p className="uppercase font-mono text-xs tracking-widest mb-6 text-yrvante-text-secondary">
               Web Development & Software
             </p>
-            <h1 className="hero-title font-heading mb-4">
+            <h1 className="hero-title font-heading !font-thin mb-4">
               Yrvante
             </h1>
             <p className="font-mono text-lg md:text-xl text-yrvante-text-secondary mb-8">
@@ -239,8 +239,8 @@ const HeroSection = () => {
               onClick={scrollToContact}
               className="btn-primary inline-flex items-center gap-3"
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+              whileTap={{ scale: 0.98 }}>
+
               {t.hero.cta}
               <ArrowRight size={16} />
             </motion.button>
@@ -249,14 +249,14 @@ const HeroSection = () => {
             className="lg:col-span-4 hidden lg:flex justify-center items-center"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+            transition={{ duration: 0.8, delay: 0.2 }}>
+
             <img src={LOGO_URL} alt="Yrvante Logo" className="w-72 h-auto" />
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // Services Section
@@ -264,22 +264,22 @@ const ServicesSection = () => {
   const { t } = useLanguage();
 
   const services = [
-    {
-      icon: <Monitor size={32} strokeWidth={1} />,
-      title: t.services.web.title,
-      description: t.services.web.description,
-    },
-    {
-      icon: <Briefcase size={32} strokeWidth={1} />,
-      title: t.services.business.title,
-      description: t.services.business.description,
-    },
-    {
-      icon: <Code size={32} strokeWidth={1} />,
-      title: t.services.software.title,
-      description: t.services.software.description,
-    },
-  ];
+  {
+    icon: <Monitor size={32} strokeWidth={1} />,
+    title: t.services.web.title,
+    description: t.services.web.description
+  },
+  {
+    icon: <Briefcase size={32} strokeWidth={1} />,
+    title: t.services.business.title,
+    description: t.services.business.description
+  },
+  {
+    icon: <Code size={32} strokeWidth={1} />,
+    title: t.services.software.title,
+    description: t.services.software.description
+  }];
+
 
   return (
     <section id="services" data-testid="services-section" className="section-padding bg-yrvante-surface">
@@ -289,8 +289,8 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
+
           <p className="font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-4">
             {t.services.subtitle}
           </p>
@@ -302,24 +302,24 @@ const ServicesSection = () => {
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
-        >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              data-testid={`service-card-${index}`}
-              className="service-card card-yrvante"
-              variants={fadeUp}
-            >
+          viewport={{ once: true }}>
+
+          {services.map((service, index) =>
+          <motion.div
+            key={index}
+            data-testid={`service-card-${index}`}
+            className="service-card card-yrvante"
+            variants={fadeUp}>
+
               <div className="mb-6">{service.icon}</div>
               <h3 className="text-xl font-heading mb-4">{service.title}</h3>
               <p className="text-yrvante-text-secondary">{service.description}</p>
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // Target Audience Section
@@ -327,22 +327,22 @@ const TargetSection = () => {
   const { t } = useLanguage();
 
   const targets = [
-    {
-      icon: <User size={32} strokeWidth={1} />,
-      title: t.target.zzp.title,
-      description: t.target.zzp.description,
-    },
-    {
-      icon: <Building2 size={32} strokeWidth={1} />,
-      title: t.target.outdated.title,
-      description: t.target.outdated.description,
-    },
-    {
-      icon: <Rocket size={32} strokeWidth={1} />,
-      title: t.target.startup.title,
-      description: t.target.startup.description,
-    },
-  ];
+  {
+    icon: <User size={32} strokeWidth={1} />,
+    title: t.target.zzp.title,
+    description: t.target.zzp.description
+  },
+  {
+    icon: <Building2 size={32} strokeWidth={1} />,
+    title: t.target.outdated.title,
+    description: t.target.outdated.description
+  },
+  {
+    icon: <Rocket size={32} strokeWidth={1} />,
+    title: t.target.startup.title,
+    description: t.target.startup.description
+  }];
+
 
   return (
     <section data-testid="target-section" className="section-padding">
@@ -352,8 +352,8 @@ const TargetSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
+
           <p className="font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-4">
             {t.target.subtitle}
           </p>
@@ -365,24 +365,24 @@ const TargetSection = () => {
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
-        >
-          {targets.map((target, index) => (
-            <motion.div
-              key={index}
-              data-testid={`target-card-${index}`}
-              className="flex flex-col"
-              variants={fadeUp}
-            >
+          viewport={{ once: true }}>
+
+          {targets.map((target, index) =>
+          <motion.div
+            key={index}
+            data-testid={`target-card-${index}`}
+            className="flex flex-col"
+            variants={fadeUp}>
+
               <div className="mb-4">{target.icon}</div>
               <h3 className="text-xl font-heading mb-3">{target.title}</h3>
               <p className="text-yrvante-text-secondary">{target.description}</p>
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // About Section
@@ -398,8 +398,8 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+            transition={{ duration: 0.6 }}>
+
             <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4">
               {t.about.subtitle}
             </p>
@@ -415,16 +415,16 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+            transition={{ duration: 0.6, delay: 0.2 }}>
+
             <p className="text-lg md:text-xl leading-relaxed text-gray-300">
               {t.about.description}
             </p>
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // Portfolio Section - Empty placeholders
@@ -439,8 +439,8 @@ const PortfolioSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
+
           <p className="font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-4">
             {t.portfolio.subtitle}
           </p>
@@ -452,26 +452,26 @@ const PortfolioSection = () => {
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
-        >
-          {[0, 1, 2].map((index) => (
-            <motion.div
-              key={index}
-              data-testid={`portfolio-card-${index}`}
-              className="portfolio-card card-yrvante group"
-              variants={fadeUp}
-            >
+          viewport={{ once: true }}>
+
+          {[0, 1, 2].map((index) =>
+          <motion.div
+            key={index}
+            data-testid={`portfolio-card-${index}`}
+            className="portfolio-card card-yrvante group"
+            variants={fadeUp}>
+
               <div className="aspect-video bg-yrvante-surface flex items-center justify-center border border-gray-200">
                 <span className="font-mono text-xs uppercase tracking-widest text-gray-400">
                   {t.portfolio.comingSoon}
                 </span>
               </div>
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // Why Choose Us Section
@@ -479,22 +479,22 @@ const WhySection = () => {
   const { t } = useLanguage();
 
   const reasons = [
-    {
-      icon: <Palette size={32} strokeWidth={1} />,
-      title: t.why.design.title,
-      description: t.why.design.description,
-    },
-    {
-      icon: <Cpu size={32} strokeWidth={1} />,
-      title: t.why.expertise.title,
-      description: t.why.expertise.description,
-    },
-    {
-      icon: <DollarSign size={32} strokeWidth={1} />,
-      title: t.why.affordable.title,
-      description: t.why.affordable.description,
-    },
-  ];
+  {
+    icon: <Palette size={32} strokeWidth={1} />,
+    title: t.why.design.title,
+    description: t.why.design.description
+  },
+  {
+    icon: <Cpu size={32} strokeWidth={1} />,
+    title: t.why.expertise.title,
+    description: t.why.expertise.description
+  },
+  {
+    icon: <DollarSign size={32} strokeWidth={1} />,
+    title: t.why.affordable.title,
+    description: t.why.affordable.description
+  }];
+
 
   return (
     <section data-testid="why-section" className="section-padding bg-yrvante-surface">
@@ -504,8 +504,8 @@ const WhySection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
+
           <p className="font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-4">
             {t.why.subtitle}
           </p>
@@ -517,24 +517,24 @@ const WhySection = () => {
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
-        >
-          {reasons.map((reason, index) => (
-            <motion.div
-              key={index}
-              data-testid={`why-card-${index}`}
-              className="text-center md:text-left"
-              variants={fadeUp}
-            >
+          viewport={{ once: true }}>
+
+          {reasons.map((reason, index) =>
+          <motion.div
+            key={index}
+            data-testid={`why-card-${index}`}
+            className="text-center md:text-left"
+            variants={fadeUp}>
+
               <div className="mb-4 inline-block">{reason.icon}</div>
               <h3 className="text-xl font-heading mb-3">{reason.title}</h3>
               <p className="text-yrvante-text-secondary">{reason.description}</p>
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // Contact Section
@@ -543,14 +543,14 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -581,8 +581,8 @@ const ContactSection = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+            transition={{ duration: 0.6 }}>
+
             <p className="font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-4">
               {t.contact.subtitle}
             </p>
@@ -600,8 +600,8 @@ const ContactSection = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+            transition={{ duration: 0.6, delay: 0.2 }}>
+
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
                 <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest text-yrvante-text-secondary mb-2">
@@ -616,8 +616,8 @@ const ContactSection = () => {
                   onChange={handleChange}
                   required
                   className="input-yrvante"
-                  placeholder={t.contact.name}
-                />
+                  placeholder={t.contact.name} />
+
               </div>
 
               <div>
@@ -633,8 +633,8 @@ const ContactSection = () => {
                   onChange={handleChange}
                   required
                   className="input-yrvante"
-                  placeholder={t.contact.email}
-                />
+                  placeholder={t.contact.email} />
+
               </div>
 
               <div>
@@ -650,8 +650,8 @@ const ContactSection = () => {
                   required
                   rows={5}
                   className="input-yrvante resize-none"
-                  placeholder={t.contact.message}
-                />
+                  placeholder={t.contact.message} />
+
               </div>
 
               <motion.button
@@ -660,16 +660,16 @@ const ContactSection = () => {
                 disabled={isSubmitting}
                 className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-              >
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}>
+
                 {isSubmitting ? t.contact.sending : t.contact.send}
               </motion.button>
             </form>
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 // Footer
@@ -692,8 +692,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 };
 
 // Main Landing Page Component
@@ -710,8 +710,8 @@ const LandingPage = () => {
       <WhySection />
       <ContactSection />
       <Footer />
-    </div>
-  );
+    </div>);
+
 };
 
 export default LandingPage;
