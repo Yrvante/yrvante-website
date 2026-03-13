@@ -262,7 +262,7 @@ const HeroSection = () => {
 
 // Services Section
 const ServicesSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const services = [
   {
@@ -337,6 +337,32 @@ const ServicesSection = () => {
               )}
             </motion.div>
           )}
+        </motion.div>
+
+        {/* Links to more info */}
+        <motion.div
+          className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <Link
+            to="/calculator"
+            data-testid="services-calculator-link"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-mono text-xs uppercase tracking-widest hover:bg-gray-800 transition-colors"
+          >
+            {language === 'nl' ? 'Bereken je prijs' : 'Calculate your price'}
+            <ArrowRight size={14} />
+          </Link>
+          <Link
+            to="/waarom-website"
+            data-testid="services-why-link"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-black text-black font-mono text-xs uppercase tracking-widest hover:bg-gray-100 transition-colors"
+          >
+            {language === 'nl' ? 'Waarom een website?' : 'Why a website?'}
+            <ArrowRight size={14} />
+          </Link>
         </motion.div>
       </div>
     </section>);

@@ -5,6 +5,8 @@ import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AboutPage from "./pages/AboutPage";
+import WhyWebsitePage from "./pages/WhyWebsitePage";
+import CalculatorPage from "./pages/CalculatorPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -67,7 +69,7 @@ const translations = {
       },
       software: {
         title: "Maandelijks Onderhoud",
-        description: "Hosting, updates, beveiliging en backups. U hoeft zich nergens zorgen over te maken.",
+        description: "Hosting, updates, beveiliging en backups. Dit abonnement is optioneel — zonder dit plan ben je na oplevering zelf verantwoordelijk voor het onderhoud van je website.",
         price: "€15 per maand excl. BTW"
       },
     },
@@ -159,7 +161,7 @@ const translations = {
       },
       software: {
         title: "Monthly Maintenance",
-        description: "Hosting, updates, security and backups. You don't have to worry about anything.",
+        description: "Hosting, updates, security and backups. This subscription is optional — without this plan you are responsible for maintaining your website yourself after delivery.",
         price: "€15 per month excl. VAT"
       },
     },
@@ -242,6 +244,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/waarom-website" element={<WhyWebsitePage />} />
+            <Route path="/calculator" element={<CalculatorPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>

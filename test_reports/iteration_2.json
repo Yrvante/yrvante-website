@@ -1,0 +1,51 @@
+{
+  "summary": "Frontend testing completed for 3 new features: Why Website page (/waarom-website), Price Calculator page (/calculator), and updated Maintenance service description. All core functionality works correctly.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Language persistence",
+        "issues": ["Language preference not persisted to localStorage - direct URL navigation resets to Dutch. Minor UX issue, not critical."]
+      }
+    ]
+  },
+  "passed_tests": [
+    "/waarom-website page loads correctly with hero section showing 'Waarom een website tegenwoordig geen luxe meer is'",
+    "/waarom-website page displays all user-provided Dutch content about why websites are not a luxury anymore",
+    "/waarom-website page shows 95% statistic, 24/7 availability, €350 starting price",
+    "/waarom-website page has back link to homepage, calculator link, and contact CTA",
+    "/waarom-website page includes pricing comparison (Traditional €1,500-€5,000+ vs Yrvante €350)",
+    "/waarom-website page includes 'Wat krijg je bij Yrvante?' section with 3 benefit cards",
+    "/calculator page loads correctly with title 'Wat kost een website?'",
+    "/calculator page: Basic website type selection (€350) works",
+    "/calculator page: Advanced website type selection (€450) works - total updates dynamically",
+    "/calculator page: Extra pages counter (+/-) works correctly (€25 per page)",
+    "/calculator page: All add-on checkboxes work (SEO €75, Contact form €35, Analytics €45, etc.)",
+    "/calculator page: Monthly maintenance toggle shows €15/mnd when enabled",
+    "/calculator page: Total price updates dynamically with all selections",
+    "/calculator page: Summary panel displays all selected items with correct pricing",
+    "Homepage Services section shows updated 'Maandelijks Onderhoud' with 'optioneel' text",
+    "Homepage Services section displays full description: 'Dit abonnement is optioneel — zonder dit plan ben je na oplevering zelf verantwoordelijk voor het onderhoud van je website.'",
+    "'Bereken je prijs' button below services section links correctly to /calculator",
+    "'Waarom een website?' button below services section links correctly to /waarom-website",
+    "Navigation between pages works (back links, homepage links, CTA links)",
+    "Both pages have proper footer with Yrvante branding"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A - frontend only testing",
+    "frontend": "100%"
+  },
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Three new features were implemented and tested: 1) WhyWebsitePage at /waarom-website with comprehensive Dutch content about website importance, 2) CalculatorPage at /calculator with dynamic pricing calculator supporting website types (basic €350, advanced €450) and multiple add-ons, 3) Updated Maandelijks Onderhoud service description on homepage with 'optioneel' clarification. All features work correctly. Minor note: language preference is not persisted to localStorage, so direct URL navigation always shows Dutch. This is expected React state behavior."
+}
