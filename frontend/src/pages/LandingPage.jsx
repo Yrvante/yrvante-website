@@ -17,8 +17,9 @@ import {
   Menu,
   X,
   ArrowRight,
-  Globe } from
-"lucide-react";
+  Globe,
+  Shield
+} from "lucide-react";
 import HeroAnimation from "../components/HeroAnimation";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -267,17 +268,21 @@ const ServicesSection = () => {
   {
     icon: <Monitor size={32} strokeWidth={1} />,
     title: t.services.web.title,
-    description: t.services.web.description
+    description: t.services.web.description,
+    price: t.services.web.price
   },
   {
     icon: <Briefcase size={32} strokeWidth={1} />,
     title: t.services.business.title,
-    description: t.services.business.description
+    description: t.services.business.description,
+    price: t.services.business.price
   },
   {
-    icon: <Code size={32} strokeWidth={1} />,
+    icon: <Shield size={32} strokeWidth={1} />,
     title: t.services.software.title,
-    description: t.services.software.description
+    description: t.services.software.description,
+    price: t.services.software.price,
+    features: ["Hosting", "Updates", "Beveiliging", "Backups"]
   }];
 
 
@@ -308,12 +313,27 @@ const ServicesSection = () => {
           <motion.div
             key={index}
             data-testid={`service-card-${index}`}
-            className="service-card card-yrvante"
+            className="service-card card-yrvante flex flex-col"
             variants={fadeUp}>
 
               <div className="mb-6">{service.icon}</div>
               <h3 className="text-xl font-heading mb-4">{service.title}</h3>
-              <p className="text-yrvante-text-secondary">{service.description}</p>
+              <p className="text-yrvante-text-secondary mb-4">{service.description}</p>
+              {service.features && (
+                <ul className="text-sm text-yrvante-text-secondary mb-4 space-y-1">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="w-1 h-1 bg-black rounded-full"></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {service.price && (
+                <p className="mt-auto pt-4 border-t border-gray-200 font-mono text-sm font-medium">
+                  {service.price}
+                </p>
+              )}
             </motion.div>
           )}
         </motion.div>

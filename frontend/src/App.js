@@ -57,14 +57,17 @@ const translations = {
       web: {
         title: "Website Ontwikkeling",
         description: "Moderne, responsieve websites gebouwd voor freelancers en bedrijven.",
+        price: "Vanaf €350 excl. BTW"
       },
       business: {
         title: "Zakelijke Websites",
         description: "Professionele websites die vertrouwen opbouwen en klanten aantrekken.",
+        price: ""
       },
       software: {
-        title: "Maatwerk Software",
-        description: "Slimme tools en systemen die de efficiëntie van uw bedrijf verbeteren.",
+        title: "Maandelijks Onderhoud",
+        description: "Hosting, updates, beveiliging en backups. U hoeft zich nergens zorgen over te maken.",
+        price: "€15 per maand excl. BTW"
       },
     },
     target: {
@@ -146,14 +149,17 @@ const translations = {
       web: {
         title: "Website Development",
         description: "Modern, responsive websites built for freelancers and businesses.",
+        price: "From €350 excl. VAT"
       },
       business: {
         title: "Business Websites",
         description: "Professional websites that build trust and attract customers.",
+        price: ""
       },
       software: {
-        title: "Custom Software",
-        description: "Smart tools and systems that improve your business efficiency.",
+        title: "Monthly Maintenance",
+        description: "Hosting, updates, security and backups. You don't have to worry about anything.",
+        price: "€15 per month excl. VAT"
       },
     },
     target: {
