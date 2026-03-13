@@ -89,18 +89,11 @@ const Navigation = () => {
 
               {t.nav.services}
             </button>
-            <button
-              data-testid="nav-about"
-              onClick={() => scrollToSection("about")}
-              className="nav-link text-sm font-medium">
-
-              {t.nav.about}
-            </button>
             <Link
               to="/about"
               data-testid="nav-about-page"
               className="nav-link text-sm font-medium">
-              Meer over ons
+              {t.nav.about}
             </Link>
             <button
               data-testid="nav-portfolio"
@@ -279,10 +272,11 @@ const ServicesSection = () => {
     price: t.services.web.price
   },
   {
-    icon: <Briefcase size={32} strokeWidth={1} />,
+    icon: <Code size={32} strokeWidth={1} />,
     title: t.services.business.title,
     description: t.services.business.description,
-    price: t.services.business.price
+    price: t.services.business.price,
+    features: ["Afspraken systeem", "Klantportaal", "App development"]
   },
   {
     icon: <Shield size={32} strokeWidth={1} />,
@@ -412,49 +406,43 @@ const TargetSection = () => {
 
 };
 
-// About Section
+// About Section - Just a button to /about page
 const AboutSection = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
 
   return (
     <section id="about" data-testid="about-section" className="section-padding bg-black text-white">
       <div className="container-yrvante">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="flex flex-col items-center text-center">
           <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}>
-
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
+          >
             <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4">
-              {t.about.subtitle}
+              {language === 'nl' ? 'Wie zijn wij?' : 'Who are we?'}
             </p>
-            <h2 className="text-4xl md:text-5xl font-heading mb-8">{t.about.title}</h2>
-            <div className="flex items-center space-x-2 text-gray-400">
-              <MapPin size={16} />
-              <span className="font-mono text-sm">{t.about.location}</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="lg:col-span-7"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}>
-
-            <p className="text-lg md:text-xl leading-relaxed text-gray-300 mb-6">
-              {t.about.description}
+            <h2 className="text-4xl md:text-5xl font-heading mb-6">
+              {language === 'nl' ? 'Ontdek het verhaal achter Yrvante' : 'Discover the story behind Yrvante'}
+            </h2>
+            <p className="text-gray-400 mb-8">
+              {language === 'nl' 
+                ? 'Van high-precision manufacturing naar de digitale wereld. Ontdek hoe wij kleine bedrijven helpen groeien.' 
+                : 'From high-precision manufacturing to the digital world. Discover how we help small businesses grow.'}
             </p>
-            <p className="text-base leading-relaxed text-gray-400">
-              {t.about.description2}
-            </p>
+            <Link
+              to="/about"
+              className="inline-block bg-white text-black px-8 py-4 font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
+            >
+              {language === 'nl' ? 'Meer over ons' : 'About us'}
+            </Link>
           </motion.div>
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 };
 
 // Portfolio Section - Empty placeholders

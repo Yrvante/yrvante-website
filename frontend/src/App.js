@@ -61,9 +61,9 @@ const translations = {
         price: "Vanaf €350 excl. BTW"
       },
       business: {
-        title: "Zakelijke Websites",
-        description: "Professionele websites die vertrouwen opbouwen en klanten aantrekken.",
-        price: ""
+        title: "Geavanceerde Websites",
+        description: "Websites met werkende functionaliteiten: afspraken maken, klantportalen, app development en meer.",
+        price: "Vanaf €450 excl. BTW"
       },
       software: {
         title: "Maandelijks Onderhoud",
@@ -153,9 +153,9 @@ const translations = {
         price: "From €350 excl. VAT"
       },
       business: {
-        title: "Business Websites",
-        description: "Professional websites that build trust and attract customers.",
-        price: ""
+        title: "Advanced Websites",
+        description: "Websites with working features: appointment booking, client portals, app development and more.",
+        price: "From €450 excl. VAT"
       },
       software: {
         title: "Monthly Maintenance",

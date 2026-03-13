@@ -1,38 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../App";
-import { MapPin, ArrowLeft, Code, Target, Wrench, Users } from "lucide-react";
+import { MapPin, ArrowLeft, Target, Wrench, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Free to use code/tech images from Unsplash
+// Free to use code/tech images from Unsplash (no credit required for Unsplash license)
 const codeImages = [
   {
     url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
-    alt: "Code on screen",
-    credit: "Ilya Pavlov"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-    alt: "Laptop coding",
-    credit: "Christopher Gower"
+    alt: "Code on screen"
   },
   {
     url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
-    alt: "Programming code",
-    credit: "Arnold Francisca"
+    alt: "Programming code"
   },
   {
     url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
-    alt: "Computer screen code",
-    credit: "Clément H"
+    alt: "Computer screen code"
   }
 ];
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" }
-};
 
 const AboutPage = () => {
   const { language } = useLanguage();
@@ -49,17 +35,17 @@ const AboutPage = () => {
         title: "Onze Waarden",
         items: [
           {
-            icon: <Target size={24} strokeWidth={1.5} />,
+            icon: <Target size={28} strokeWidth={1.5} />,
             title: "Precisie",
             description: "Elk detail telt. Van code tot design, wij werken nauwkeurig en gestructureerd."
           },
           {
-            icon: <Wrench size={24} strokeWidth={1.5} />,
+            icon: <Wrench size={28} strokeWidth={1.5} />,
             title: "Oplossingen",
             description: "Wij zien problemen als uitdagingen. We stoppen niet tot het werkt."
           },
           {
-            icon: <Users size={24} strokeWidth={1.5} />,
+            icon: <Users size={28} strokeWidth={1.5} />,
             title: "Samenwerking",
             description: "Uw succes is ons succes. We denken mee en communiceren helder."
           }
@@ -79,17 +65,17 @@ const AboutPage = () => {
         title: "Our Values",
         items: [
           {
-            icon: <Target size={24} strokeWidth={1.5} />,
+            icon: <Target size={28} strokeWidth={1.5} />,
             title: "Precision",
             description: "Every detail counts. From code to design, we work accurately and structured."
           },
           {
-            icon: <Wrench size={24} strokeWidth={1.5} />,
+            icon: <Wrench size={28} strokeWidth={1.5} />,
             title: "Solutions",
             description: "We see problems as challenges. We don't stop until it works."
           },
           {
-            icon: <Users size={24} strokeWidth={1.5} />,
+            icon: <Users size={28} strokeWidth={1.5} />,
             title: "Collaboration",
             description: "Your success is our success. We think along and communicate clearly."
           }
@@ -105,30 +91,30 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
               <ArrowLeft size={16} />
               {t.back}
             </Link>
-            <span className="font-heading text-xl font-bold">Yrvante</span>
+            <Link to="/" className="font-heading text-xl font-bold">Yrvante</Link>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-32 pb-16 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4">
+            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">
               {t.subtitle}
             </p>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold mb-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-thin mb-4">
               {t.title}
             </h1>
           </motion.div>
@@ -136,19 +122,20 @@ const AboutPage = () => {
       </section>
 
       {/* Main Content */}
-      <section className="pb-20 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <section className="pb-24 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Text Content */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
+              className="lg:col-span-7 space-y-8"
             >
-              <p className="text-xl leading-relaxed text-gray-700">
+              <p className="text-xl md:text-2xl leading-relaxed text-gray-800 font-light">
                 {t.intro}
               </p>
+              <div className="w-16 h-px bg-black"></div>
               <p className="text-lg leading-relaxed text-gray-600">
                 {t.goal}
               </p>
@@ -164,37 +151,44 @@ const AboutPage = () => {
 
             {/* Image Grid */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="grid grid-cols-2 gap-4"
+              className="lg:col-span-5"
             >
-              {codeImages.map((img, i) => (
-                <div 
-                  key={i} 
-                  className={`relative overflow-hidden ${i === 0 ? 'col-span-2' : ''}`}
-                >
+              <div className="grid grid-cols-2 gap-3">
+                <div className="col-span-2 overflow-hidden">
                   <img
-                    src={img.url}
-                    alt={img.alt}
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                    style={{ aspectRatio: i === 0 ? '16/9' : '1/1' }}
+                    src={codeImages[0].url}
+                    alt={codeImages[0].alt}
+                    className="w-full h-48 object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   />
-                  <div className="absolute bottom-2 right-2 bg-black/50 px-2 py-1 text-white text-xs font-mono">
-                    {img.credit}
-                  </div>
                 </div>
-              ))}
+                <div className="overflow-hidden">
+                  <img
+                    src={codeImages[1].url}
+                    alt={codeImages[1].alt}
+                    className="w-full h-32 object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  />
+                </div>
+                <div className="overflow-hidden">
+                  <img
+                    src={codeImages[2].url}
+                    alt={codeImages[2].alt}
+                    className="w-full h-32 object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  />
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-24 px-6 md:px-12 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
           <motion.h2 
-            className="text-3xl md:text-4xl font-heading font-bold mb-12"
+            className="text-3xl md:text-4xl font-heading font-thin mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -206,15 +200,17 @@ const AboutPage = () => {
             {t.values.items.map((value, i) => (
               <motion.div
                 key={i}
-                className="bg-white p-8 border border-gray-200"
+                className="group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="mb-4">{value.icon}</div>
-                <h3 className="text-xl font-heading font-bold mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <div className="bg-white p-8 border border-gray-200 h-full transition-all duration-300 hover:border-black">
+                  <div className="mb-6 text-gray-400 group-hover:text-black transition-colors">{value.icon}</div>
+                  <h3 className="text-xl font-heading mb-4">{value.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -222,19 +218,19 @@ const AboutPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 md:px-12 bg-black text-white">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="py-24 px-6 md:px-12 bg-black text-white">
+        <div className="max-w-6xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">
+            <h2 className="text-3xl md:text-5xl font-heading font-thin mb-8">
               {language === 'nl' ? 'Klaar om te beginnen?' : 'Ready to start?'}
             </h2>
             <Link
               to="/#contact"
-              className="inline-block bg-white text-black px-8 py-4 font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
+              className="inline-block bg-white text-black px-10 py-4 font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
             >
               {t.cta}
             </Link>
@@ -243,10 +239,10 @@ const AboutPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <span className="font-heading font-bold">Yrvante</span>
-          <span className="text-sm text-gray-500">© {new Date().getFullYear()} Yrvante</span>
+      <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <span className="font-heading text-lg">Yrvante</span>
+          <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>
       </footer>
     </div>
