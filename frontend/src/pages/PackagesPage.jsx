@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Clock, Users, Phone, Mail, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const PackagesPage = () => {
@@ -23,14 +23,8 @@ const PackagesPage = () => {
         language === 'nl' ? 'Basis contactpagina' : 'Basic contact page',
         language === 'nl' ? '6 correctierondes' : '6 revision rounds',
       ],
-      notIncluded: [
-        language === 'nl' ? 'SEO optimalisatie' : 'SEO optimization',
-        language === 'nl' ? 'Blog functionaliteit' : 'Blog functionality',
-        language === 'nl' ? 'Contactformulier met email' : 'Contact form with email',
-      ],
-      color: 'gray',
+      idealFor: language === 'nl' ? 'ZZP\'ers, Startende ondernemers' : 'Freelancers, Starting entrepreneurs',
       popular: false,
-      idealFor: language === 'nl' ? 'ZZP\'ers, Startende ondernemers' : 'Freelancers, Starting entrepreneurs'
     },
     {
       id: 'pro',
@@ -48,14 +42,8 @@ const PackagesPage = () => {
         language === 'nl' ? 'Portfolio pagina' : 'Portfolio page',
         language === 'nl' ? 'Contactformulier (berichten direct in uw email)' : 'Contact form (messages directly to your email)',
       ],
-      notIncluded: [
-        language === 'nl' ? 'Afspraaksysteem' : 'Booking system',
-        language === 'nl' ? 'Google Reviews integratie' : 'Google Reviews integration',
-        language === 'nl' ? 'Meertalige website' : 'Multi-language website',
-      ],
-      color: 'black',
+      idealFor: language === 'nl' ? 'Groeiende MKB\'s, Dienstverleners' : 'Growing SMBs, Service providers',
       popular: true,
-      idealFor: language === 'nl' ? 'Groeiende MKB\'s, Dienstverleners' : 'Growing SMBs, Service providers'
     },
     {
       id: 'premium',
@@ -74,62 +62,55 @@ const PackagesPage = () => {
         language === 'nl' ? 'Meertalige optie op uw site' : 'Multi-language option on your site',
         language === 'nl' ? 'Priority support' : 'Priority support',
       ],
-      notIncluded: [],
-      color: 'gradient',
+      idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals',
       popular: false,
-      idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals'
     }
   ];
 
+  // Extra possibilities - no prices, just what's possible
   const extras = [
     {
-      name: language === 'nl' ? 'Extra pagina' : 'Extra page',
-      price: '€40',
+      icon: <Zap size={24} />,
+      title: language === 'nl' ? 'Extra pagina\'s' : 'Extra pages',
       description: language === 'nl' 
-        ? 'Voor extra content zoals diensten, blog artikelen, portfolio items of extra informatiepagina\'s.'
-        : 'For extra content like services, blog posts, portfolio items or extra information pages.',
-      icon: <Zap size={20} />
+        ? 'Diensten, blog artikelen, portfolio items, of extra informatiepagina\'s.'
+        : 'Services, blog posts, portfolio items, or extra information pages.',
     },
     {
-      name: language === 'nl' ? 'Meertalige website' : 'Multi-language website',
-      price: '€100',
+      icon: <Globe size={24} />,
+      title: language === 'nl' ? 'Meertalige website' : 'Multi-language website',
       description: language === 'nl'
-        ? 'Website beschikbaar in meerdere talen met taalwisselaar.'
-        : 'Website available in multiple languages with language switcher.',
-      icon: <Users size={20} />
+        ? 'Uw website in meerdere talen met een handige taalwisselaar.'
+        : 'Your website in multiple languages with a convenient language switcher.',
     },
     {
-      name: language === 'nl' ? 'Extra contactformulier' : 'Extra contact form',
-      price: '€80',
+      icon: <Mail size={24} />,
+      title: language === 'nl' ? 'Extra contactformulieren' : 'Extra contact forms',
       description: language === 'nl'
-        ? 'Extra formulier voor offerte aanvragen, afspraken verzoek via email of klantvragen.'
-        : 'Extra form for quote requests, appointment requests via email or customer questions.',
-      icon: <Mail size={20} />
+        ? 'Offerte aanvragen, afspraken verzoeken, of specifieke klantvragen.'
+        : 'Quote requests, appointment requests, or specific customer questions.',
     },
     {
-      name: language === 'nl' ? 'Website onderhoud' : 'Website maintenance',
-      price: '€20/mnd',
+      icon: <Shield size={24} />,
+      title: language === 'nl' ? 'Website onderhoud' : 'Website maintenance',
       description: language === 'nl'
-        ? 'Inclusief hosting, updates, kleine wijzigingen en beveiliging.'
-        : 'Including hosting, updates, small changes and security.',
-      icon: <Shield size={20} />
+        ? 'Hosting, updates, kleine wijzigingen en beveiliging. Alles geregeld.'
+        : 'Hosting, updates, small changes and security. Everything taken care of.',
     },
     {
-      name: language === 'nl' ? 'Online boekingssysteem' : 'Online booking system',
-      price: '€180',
+      icon: <Calendar size={24} />,
+      title: language === 'nl' ? 'Online boekingssysteem' : 'Online booking system',
       description: language === 'nl'
-        ? 'Afspraken boeken via de website met automatische bevestiging en admin dashboard.'
-        : 'Book appointments via the website with automatic confirmation and admin dashboard.',
-      icon: <Calendar size={20} />
+        ? 'Laat klanten direct online afspraken maken met automatische bevestigingen.'
+        : 'Let customers book appointments directly online with automatic confirmations.',
     },
     {
-      name: 'Google Reviews',
-      price: '€80',
+      icon: <Star size={24} />,
+      title: 'Google Reviews',
       description: language === 'nl'
-        ? 'Toon reviews direct op de website van Google Maps of social media.'
-        : 'Show reviews directly on the website from Google Maps or social media.',
-      icon: <Star size={20} />
-    }
+        ? 'Toon uw beste reviews direct op uw website voor meer vertrouwen.'
+        : 'Show your best reviews directly on your website for more trust.',
+    },
   ];
 
   return (
@@ -169,8 +150,8 @@ const PackagesPage = () => {
             </p>
             <p className="text-sm text-gray-500 max-w-xl mx-auto">
               {language === 'nl'
-                ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door de klant aangeleverd. Inclusief 6 correctierondes per project.'
-                : '* Prices exclude copywriting and photos. Content is provided by the client. Includes 6 revision rounds per project.'}
+                ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door u aangeleverd. Inclusief 6 correctierondes per project.'
+                : '* Prices exclude copywriting and photos. Content is provided by you. Includes 6 revision rounds per project.'}
             </p>
           </motion.div>
         </div>
@@ -232,20 +213,6 @@ const PackagesPage = () => {
                   ))}
                 </div>
 
-                {pkg.notIncluded.length > 0 && (
-                  <div className="mb-8">
-                    <p className={`text-xs uppercase tracking-wider mb-3 ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>
-                      {language === 'nl' ? 'Niet inclusief' : 'Not included'}
-                    </p>
-                    {pkg.notIncluded.map((item, i) => (
-                      <div key={i} className={`flex items-center gap-3 py-1 text-sm ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>
-                        <span className="w-4 h-0.5 bg-current" />
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
                 <Link
                   to="/calculator"
                   className={`block w-full text-center py-4 rounded-full font-bold transition-all ${
@@ -262,9 +229,9 @@ const PackagesPage = () => {
         </div>
       </section>
 
-      {/* Extras */}
+      {/* Extra possibilities - centered, no prices */}
       <section className="py-20 px-6 md:px-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -272,12 +239,12 @@ const PackagesPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-heading font-bold mb-4">
-              {language === 'nl' ? 'Extra Opties' : 'Extra Options'}
+              {language === 'nl' ? 'Extra Mogelijkheden' : 'Extra Possibilities'}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {language === 'nl'
-                ? 'Breid uw website uit met deze handige extra\'s.'
-                : 'Expand your website with these useful extras.'}
+                ? 'Breid uw website uit met deze handige opties. Vraag naar de mogelijkheden.'
+                : 'Expand your website with these useful options. Ask about the possibilities.'}
             </p>
           </motion.div>
 
@@ -289,25 +256,37 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-black hover:shadow-lg transition-all"
+                className="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:border-black hover:shadow-lg transition-all"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-                    {extra.icon}
-                  </div>
-                  <span className="text-xl font-bold">{extra.price}</span>
+                <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  {extra.icon}
                 </div>
-                <h3 className="font-bold text-lg mb-2">{extra.name}</h3>
+                <h3 className="font-bold text-lg mb-2">{extra.title}</h3>
                 <p className="text-sm text-gray-600">{extra.description}</p>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              to="/calculator"
+              className="inline-flex items-center gap-2 text-black font-medium hover:underline"
+            >
+              {language === 'nl' ? 'Bekijk alle prijzen in de calculator' : 'View all prices in the calculator'}
+              <ArrowRight size={16} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Booking System Detail */}
       <section className="py-20 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="bg-black text-white rounded-3xl p-8 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -319,7 +298,6 @@ const PackagesPage = () => {
                     ? 'Laat klanten direct online afspraken maken. Perfect voor kappers, coaches, therapeuten en andere dienstverleners.'
                     : 'Let customers book appointments directly online. Perfect for hairdressers, coaches, therapists and other service providers.'}
                 </p>
-                <div className="text-4xl font-heading font-bold mb-8">€180 <span className="text-lg font-normal text-gray-400">{language === 'nl' ? 'eenmalig' : 'one-time'}</span></div>
               </div>
               
               <div className="space-y-6">
@@ -329,10 +307,9 @@ const PackagesPage = () => {
                   </h4>
                   <ul className="space-y-3">
                     {[
-                      language === 'nl' ? 'Datum kiezen' : 'Choose date',
-                      language === 'nl' ? 'Tijd kiezen' : 'Choose time',
-                      language === 'nl' ? 'Naam + telefoonnummer/email invullen' : 'Fill in name + phone/email',
-                      language === 'nl' ? 'Afspraak request versturen' : 'Send appointment request',
+                      language === 'nl' ? 'Datum en tijd kiezen' : 'Choose date and time',
+                      language === 'nl' ? 'Contactgegevens invullen' : 'Fill in contact details',
+                      language === 'nl' ? 'Afspraak aanvragen' : 'Request appointment',
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-3">
                         <Check size={16} className="text-green-400" />
@@ -344,15 +321,14 @@ const PackagesPage = () => {
                 
                 <div>
                   <h4 className="font-bold mb-4 text-gray-400 text-sm uppercase tracking-wider">
-                    {language === 'nl' ? 'Voor de eigenaar (admin)' : 'For the owner (admin)'}
+                    {language === 'nl' ? 'Voor u (admin)' : 'For you (admin)'}
                   </h4>
                   <ul className="space-y-3">
                     {[
-                      language === 'nl' ? 'Speciale inloggegevens' : 'Special login credentials',
-                      language === 'nl' ? 'Overzicht van afspraken' : 'Overview of appointments',
-                      language === 'nl' ? 'Afspraken aanpassen/verwijderen/afwijzen/goedkeuren' : 'Edit/delete/reject/approve appointments',
-                      language === 'nl' ? 'Meldingen via email' : 'Notifications via email',
-                      language === 'nl' ? 'Kalender included' : 'Calendar included',
+                      language === 'nl' ? 'Overzicht van alle afspraken' : 'Overview of all appointments',
+                      language === 'nl' ? 'Goedkeuren of afwijzen' : 'Approve or reject',
+                      language === 'nl' ? 'Email notificaties' : 'Email notifications',
+                      language === 'nl' ? 'Kalender overzicht' : 'Calendar overview',
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-3">
                         <Check size={16} className="text-green-400" />
@@ -376,26 +352,26 @@ const PackagesPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-              {language === 'nl' ? 'Klaar om te beginnen?' : 'Ready to get started?'}
+              {language === 'nl' ? 'Vragen? Neem contact op' : 'Questions? Get in touch'}
             </h2>
             <p className="text-gray-600 mb-8">
               {language === 'nl'
-                ? 'Bereken direct uw prijs of neem contact op voor een gratis adviesgesprek.'
-                : 'Calculate your price directly or contact us for a free consultation.'}
+                ? 'Ik help u graag bij het kiezen van het juiste pakket. Bel of mail mij — vrijblijvend en zonder verplichtingen.'
+                : 'I\'d be happy to help you choose the right package. Call or email me — no obligations.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/calculator"
                 className="inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-all"
               >
-                {language === 'nl' ? 'Bereken je prijs' : 'Calculate your price'}
+                {language === 'nl' ? 'Bereken uw prijs' : 'Calculate your price'}
                 <ArrowRight size={18} />
               </Link>
               <Link
                 to="/#contact"
                 className="inline-flex items-center justify-center gap-3 border-2 border-black px-8 py-4 rounded-full font-bold hover:bg-black hover:text-white transition-all"
               >
-                {language === 'nl' ? 'Neem contact op' : 'Contact us'}
+                {language === 'nl' ? 'Neem contact op' : 'Contact me'}
               </Link>
             </div>
           </motion.div>
