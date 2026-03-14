@@ -77,17 +77,15 @@ const Navigation = () => {
   return (
     <nav
       data-testid="navigation"
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-sm" 
-          : "bg-transparent"
+      className={`fixed top-0 w-full z-50 transition-all duration-500 bg-white border-b border-gray-100 ${
+        scrolled ? "shadow-sm" : ""
       }`}
     >
       <div className="container-yrvante">
         <div className="flex items-center justify-between h-20">
           <a href="/" data-testid="nav-logo" className="flex items-center gap-3 group">
             <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
-            <span className={`font-heading text-xl font-bold tracking-tight transition-colors ${scrolled ? 'text-black' : 'text-white'} group-hover:opacity-70`}>Yrvante</span>
+            <span className="font-heading text-xl font-bold tracking-tight text-black group-hover:opacity-70 transition-colors">Yrvante</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -96,27 +94,27 @@ const Navigation = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className={`text-sm font-medium transition-colors relative group ${scrolled ? 'text-gray-600 hover:text-black' : 'text-white/80 hover:text-white'}`}
+                className="text-sm font-medium text-gray-600 hover:text-black transition-colors relative group"
               >
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full ${scrolled ? 'bg-black' : 'bg-white'}`} />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full" />
               </button>
             ))}
             
             <Link
               to="/calculator"
-              className="ml-4 px-5 py-2.5 bg-white text-black text-sm font-medium rounded-full hover:bg-gray-100 transition-all hover:scale-105"
+              className="ml-4 px-5 py-2.5 bg-black text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105"
             >
               {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
             </Link>
 
-            <div className="flex items-center space-x-2 ml-4 border-l border-white/20 pl-4">
+            <div className="flex items-center space-x-2 ml-4 border-l border-gray-200 pl-4">
               <button
                 onClick={() => setLanguage("nl")}
                 className={`text-xs font-mono uppercase px-2 py-1 rounded transition-colors ${
                   language === "nl" 
-                    ? "bg-white text-black" 
-                    : scrolled ? "text-gray-500 hover:bg-gray-100" : "text-white/60 hover:text-white"
+                    ? "bg-black text-white" 
+                    : "text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 NL
@@ -125,8 +123,8 @@ const Navigation = () => {
                 onClick={() => setLanguage("en")}
                 className={`text-xs font-mono uppercase px-2 py-1 rounded transition-colors ${
                   language === "en" 
-                    ? "bg-white text-black" 
-                    : scrolled ? "text-gray-500 hover:bg-gray-100" : "text-white/60 hover:text-white"
+                    ? "bg-black text-white" 
+                    : "text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 EN
@@ -137,7 +135,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled ? 'hover:bg-gray-100 text-black' : 'text-white hover:bg-white/10'}`}
+            className="lg:hidden p-2 text-black hover:bg-gray-100 rounded-lg transition-colors"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -192,7 +190,7 @@ const Navigation = () => {
   );
 };
 
-// Hero Section with Video Animation
+// Hero Section with Video Animation at TOP
 const HeroSection = () => {
   const { language } = useLanguage();
 
@@ -201,89 +199,89 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="relative min-h-screen flex items-center">
-      {/* Video/Animation Background */}
-      <div className="absolute inset-0 z-0">
+    <section data-testid="hero-section" className="pt-20">
+      {/* Video/Animation at TOP - standalone */}
+      <div className="w-full h-[50vh] md:h-[60vh] relative overflow-hidden">
         <HeroAnimation />
       </div>
       
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
-      
-      <div className="container-yrvante relative z-20">
-        <div className="max-w-3xl py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/20">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-white">
-                {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-6 text-white">
-              {language === 'nl' ? (
-                <>
-                  Uw bedrijf<br />
-                  <span className="text-gray-300">professioneel online</span>
-                </>
-              ) : (
-                <>
-                  Your business<br />
-                  <span className="text-gray-300">professionally online</span>
-                </>
-              )}
-            </h1>
-            
-            {/* Value proposition - NEW */}
-            <p className="text-xl text-gray-200 mb-4 max-w-xl leading-relaxed">
-              {language === 'nl' 
-                ? 'Ik bouw geen website — ik zorg dat uw bedrijf er online professioneel uitziet zodat klanten u serieus nemen.'
-                : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
-            </p>
-            <p className="text-lg text-gray-400 mb-8 max-w-xl">
-              {language === 'nl'
-                ? 'Dat is het verschil tussen een offerte vergelijken op prijs of op waarde.'
-                : "That's the difference between comparing quotes on price or on value."}
-            </p>
+      {/* Content below animation */}
+      <div className="bg-white py-16 md:py-24">
+        <div className="container-yrvante">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 rounded-full mb-6">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-black">
+                  {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
+                </span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight mb-6 text-black">
+                {language === 'nl' ? (
+                  <>
+                    Uw bedrijf<br />
+                    <span className="text-gray-400">professioneel online</span>
+                  </>
+                ) : (
+                  <>
+                    Your business<br />
+                    <span className="text-gray-400">professionally online</span>
+                  </>
+                )}
+              </h1>
+              
+              {/* Value proposition */}
+              <p className="text-lg md:text-xl text-gray-600 mb-4 max-w-2xl mx-auto leading-relaxed">
+                {language === 'nl' 
+                  ? 'Ik bouw geen website — ik zorg dat uw bedrijf er online professioneel uitziet zodat klanten u serieus nemen.'
+                  : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
+              </p>
+              <p className="text-base md:text-lg text-gray-500 mb-10 max-w-xl mx-auto">
+                {language === 'nl'
+                  ? 'Dat is het verschil tussen een offerte vergelijken op prijs of op waarde.'
+                  : "That's the difference between comparing quotes on price or on value."}
+              </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <motion.button
-                onClick={scrollToContact}
-                className="inline-flex items-center justify-center gap-3 bg-white text-black px-8 py-4 font-medium rounded-full hover:bg-gray-100 transition-all hover:scale-105"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {language === 'nl' ? 'Neem Contact Op' : 'Get In Touch'}
-                <ArrowRight size={18} />
-              </motion.button>
-              <Link
-                to="/pakketten"
-                className="inline-flex items-center justify-center gap-3 border-2 border-white text-white px-8 py-4 font-medium rounded-full hover:bg-white hover:text-black transition-all"
-              >
-                {language === 'nl' ? 'Bekijk Pakketten' : 'View Packages'}
-              </Link>
-            </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <motion.button
+                  onClick={scrollToContact}
+                  className="inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-4 font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {language === 'nl' ? 'Neem Contact Op' : 'Get In Touch'}
+                  <ArrowRight size={18} />
+                </motion.button>
+                <Link
+                  to="/pakketten"
+                  className="inline-flex items-center justify-center gap-3 border-2 border-black text-black px-8 py-4 font-medium rounded-full hover:bg-black hover:text-white transition-all"
+                >
+                  {language === 'nl' ? 'Bekijk Pakketten' : 'View Packages'}
+                </Link>
+              </div>
 
-            {/* Simple stats - removed 50+ */}
-            <div className="flex gap-8 text-white/80">
-              <div>
-                <p className="text-2xl font-heading font-bold text-white">100%</p>
-                <p className="text-sm">{language === 'nl' ? 'Tevreden klanten' : 'Satisfied clients'}</p>
+              {/* Stats */}
+              <div className="flex gap-8 md:gap-16 justify-center">
+                <div className="text-center">
+                  <p className="text-3xl md:text-4xl font-heading font-bold text-black">100%</p>
+                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Tevreden klanten' : 'Satisfied clients'}</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl md:text-4xl font-heading font-bold text-black">€500</p>
+                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Vanaf' : 'Starting from'}</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl md:text-4xl font-heading font-bold text-black">1-2</p>
+                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Weken' : 'Weeks'}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-heading font-bold text-white">€500</p>
-                <p className="text-sm">{language === 'nl' ? 'Vanaf' : 'Starting from'}</p>
-              </div>
-              <div>
-                <p className="text-2xl font-heading font-bold text-white">1-2</p>
-                <p className="text-sm">{language === 'nl' ? 'Weken' : 'Weeks'}</p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
