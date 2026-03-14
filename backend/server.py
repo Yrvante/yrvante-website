@@ -56,6 +56,7 @@ class ContactSubmission(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     email: EmailStr
+    phone: Optional[str] = ""
     message: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     email_sent: bool = False
@@ -64,6 +65,7 @@ class ContactSubmission(BaseModel):
 class ContactSubmissionCreate(BaseModel):
     name: str
     email: EmailStr
+    phone: Optional[str] = ""
     message: str
 
 class ContactResponse(BaseModel):
@@ -127,6 +129,7 @@ async def submit_contact(input: ContactSubmissionCreate):
         submission_obj = ContactSubmission(
             name=input.name,
             email=input.email,
+            phone=input.phone or "",
             message=input.message
         )
         
@@ -136,12 +139,14 @@ async def submit_contact(input: ContactSubmissionCreate):
         email_sent = False
         if resend.api_key:
             try:
+                phone_line = f"<p><strong>Telefoon:</strong> {input.phone}</p>" if input.phone else ""
                 html_content = f"""
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                     <h2 style="color: #000000; border-bottom: 2px solid #000;">Nieuw Website Aanvraag - Yrvante</h2>
                     <div style="padding: 20px 0;">
                         <p><strong>Naam:</strong> {input.name}</p>
                         <p><strong>Email:</strong> {input.email}</p>
+                        {phone_line}
                         <p><strong>Bericht:</strong></p>
                         <div style="background-color: #f8f8f8; padding: 15px; border-left: 3px solid #000;">
                             {input.message}

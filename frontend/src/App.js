@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AboutPage from "./pages/AboutPage";
 import WhyWebsitePage from "./pages/WhyWebsitePage";
 import CalculatorPage from "./pages/CalculatorPage";
+import PackagesPage from "./pages/PackagesPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -246,6 +247,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/waarom-website" element={<WhyWebsitePage />} />
             <Route path="/calculator" element={<CalculatorPage />} />
+            <Route path="/pakketten" element={<PackagesPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
