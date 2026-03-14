@@ -20,9 +20,9 @@ const CalculatorPage = () => {
   const content = {
     nl: {
       back: "Terug",
-      title: "Wat kost uw website?",
-      subtitle: "Bereken direct de prijs voor uw nieuwe website",
-      step1: "Stap 1: Kies uw pakket",
+      title: "Wat kost jouw website?",
+      subtitle: "Bereken direct de prijs voor je nieuwe website",
+      step1: "Stap 1: Kies je pakket",
       step2: "Stap 2: Voeg extra's toe (optioneel)",
       
       packages: {
@@ -64,7 +64,7 @@ const CalculatorPage = () => {
             "Afspraaksysteem",
             "Google Reviews integratie",
             "Meertalige website",
-            "Priority support"
+            "Snellere reactietijd (12 uur)"
           ]
         }
       },
@@ -102,13 +102,13 @@ const CalculatorPage = () => {
         },
         googleReviews: {
           title: "Google Reviews op website",
-          description: "Toon reviews direct op uw website",
+          description: "Toon reviews direct op je website",
           price: 80,
           unit: "eenmalig"
         }
       },
       
-      summary: "Uw offerte",
+      summary: "Jouw offerte",
       basePrice: "Pakket prijs",
       extras: "Extra opties",
       total: "Totaal",
@@ -118,7 +118,7 @@ const CalculatorPage = () => {
       
       ctaButton: "Vraag offerte aan",
       
-      note: "Prijzen zijn exclusief tekstschrijven en foto's. Content wordt door u aangeleverd. Inclusief 6 correctierondes per project.",
+      note: "Prijzen zijn exclusief tekstschrijven en foto's. Content wordt door jou aangeleverd. Inclusief 6 correctierondes per project.",
       optional: "(optioneel)"
     },
     en: {
@@ -350,7 +350,7 @@ const CalculatorPage = () => {
                     <ul className="space-y-2">
                       {pkg.includes.slice(0, 4).map((item, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                          <Check size={14} className="text-green-500 flex-shrink-0" />
+                          <Check size={14} className="text-black flex-shrink-0" />
                           {item}
                         </li>
                       ))}

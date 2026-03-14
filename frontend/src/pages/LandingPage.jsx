@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
 import { Link } from "react-router-dom";
@@ -19,9 +19,7 @@ import {
   Phone,
   MapPin,
   Clock,
-  TrendingUp,
   Send,
-  MessageCircle
 } from "lucide-react";
 import HeroAnimation from "../components/HeroAnimation";
 
@@ -29,21 +27,6 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_yrvante-design/artifacts/22y72wxq_Yrvante%20logo.png";
-
-// Animation variants
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
 
 // Navigation
 const Navigation = () => {
@@ -66,12 +49,11 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { id: "services", label: t.nav.services },
+    { id: "services", label: language === 'nl' ? 'Diensten' : 'Services' },
     { id: "pricing", label: language === 'nl' ? 'Pakketten' : 'Packages' },
-    { id: "why-us", label: language === 'nl' ? 'Waarom Yrvante' : 'Why Yrvante' },
     { id: "testimonials", label: language === 'nl' ? 'Reviews' : 'Reviews' },
     { id: "faq", label: 'FAQ' },
-    { id: "contact", label: t.nav.contact },
+    { id: "contact", label: 'Contact' },
   ];
 
   return (
@@ -112,9 +94,7 @@ const Navigation = () => {
               <button
                 onClick={() => setLanguage("nl")}
                 className={`text-xs font-mono uppercase px-2 py-1 rounded transition-colors ${
-                  language === "nl" 
-                    ? "bg-black text-white" 
-                    : "text-gray-500 hover:bg-gray-100"
+                  language === "nl" ? "bg-black text-white" : "text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 NL
@@ -122,9 +102,7 @@ const Navigation = () => {
               <button
                 onClick={() => setLanguage("en")}
                 className={`text-xs font-mono uppercase px-2 py-1 rounded transition-colors ${
-                  language === "en" 
-                    ? "bg-black text-white" 
-                    : "text-gray-500 hover:bg-gray-100"
+                  language === "en" ? "bg-black text-white" : "text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 EN
@@ -167,21 +145,6 @@ const Navigation = () => {
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
               </Link>
-              <div className="flex items-center space-x-4 pt-4 border-t border-gray-200">
-                <button
-                  onClick={() => { setLanguage("nl"); setMobileMenuOpen(false); }}
-                  className={`text-sm font-mono ${language === "nl" ? "font-bold" : "opacity-50"}`}
-                >
-                  NL
-                </button>
-                <span className="text-gray-300">/</span>
-                <button
-                  onClick={() => { setLanguage("en"); setMobileMenuOpen(false); }}
-                  className={`text-sm font-mono ${language === "en" ? "font-bold" : "opacity-50"}`}
-                >
-                  EN
-                </button>
-              </div>
             </div>
           </motion.div>
         )}
@@ -190,7 +153,7 @@ const Navigation = () => {
   );
 };
 
-// Hero Section with Video Animation at TOP
+// Hero Section - Animation at top, content directly below
 const HeroSection = () => {
   const { language } = useLanguage();
 
@@ -200,22 +163,22 @@ const HeroSection = () => {
 
   return (
     <section data-testid="hero-section" className="pt-20">
-      {/* Video/Animation at TOP - standalone */}
-      <div className="w-full h-[50vh] md:h-[60vh] relative overflow-hidden">
+      {/* Video/Animation at TOP */}
+      <div className="w-full h-[40vh] md:h-[50vh] relative overflow-hidden bg-black">
         <HeroAnimation />
       </div>
       
-      {/* Content below animation */}
-      <div className="bg-white py-16 md:py-24">
+      {/* Content directly below - no extra spacing */}
+      <div className="bg-white py-12 md:py-16">
         <div className="container-yrvante">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.6 }}
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 rounded-full mb-6">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
                 <span className="text-sm font-medium text-black">
                   {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
                 </span>
@@ -224,7 +187,7 @@ const HeroSection = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight mb-6 text-black">
                 {language === 'nl' ? (
                   <>
-                    Uw bedrijf<br />
+                    Jouw bedrijf<br />
                     <span className="text-gray-400">professioneel online</span>
                   </>
                 ) : (
@@ -235,22 +198,22 @@ const HeroSection = () => {
                 )}
               </h1>
               
-              {/* Value proposition */}
+              {/* Value proposition - using "we" and "jij" */}
               <p className="text-lg md:text-xl text-gray-600 mb-4 max-w-2xl mx-auto leading-relaxed">
                 {language === 'nl' 
-                  ? 'Ik bouw geen website — ik zorg dat uw bedrijf er online professioneel uitziet zodat klanten u serieus nemen.'
-                  : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
+                  ? 'Wij bouwen geen website — wij zorgen dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
+                  : "We don't build websites — we make sure your business looks professional online so customers take you seriously."}
               </p>
-              <p className="text-base md:text-lg text-gray-500 mb-10 max-w-xl mx-auto">
+              <p className="text-base md:text-lg text-gray-500 mb-8 max-w-xl mx-auto">
                 {language === 'nl'
                   ? 'Dat is het verschil tussen een offerte vergelijken op prijs of op waarde.'
                   : "That's the difference between comparing quotes on price or on value."}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
                 <motion.button
                   onClick={scrollToContact}
-                  className="inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-4 font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105"
+                  className="inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-4 font-medium rounded-full hover:bg-gray-800 transition-all"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -288,7 +251,62 @@ const HeroSection = () => {
   );
 };
 
-// Services Section - simplified
+// Why Expensive Section - Link to separate page
+const WhyExpensiveSection = () => {
+  const { language } = useLanguage();
+
+  return (
+    <section className="py-16 bg-white border-t border-gray-100">
+      <div className="container-yrvante">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                {language === 'nl' 
+                  ? 'Waarom zijn wij goedkoper?' 
+                  : 'Why are we more affordable?'}
+              </h2>
+              <p className="text-gray-600 mb-4">
+                {language === 'nl'
+                  ? 'Veel webdesignbureaus rekenen €1.500 tot €5.000 of meer voor een website. Wij geloven dat een professionele website voor iedere ondernemer bereikbaar moet zijn.'
+                  : 'Many web design agencies charge €1,500 to €5,000 or more for a website. We believe a professional website should be accessible to every entrepreneur.'}
+              </p>
+              <p className="text-gray-600 mb-6">
+                {language === 'nl'
+                  ? 'Daarom beginnen onze websites vanaf €500 — zonder kwaliteit in te leveren.'
+                  : "That's why our websites start from €500 — without compromising on quality."}
+              </p>
+              <Link
+                to="/waarom-website"
+                className="inline-flex items-center gap-2 text-black font-medium hover:underline"
+              >
+                {language === 'nl' ? 'Lees meer: Waarom een website geen luxe meer is' : 'Read more: Why a website is no longer a luxury'}
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+            <div className="bg-black text-white p-8 rounded-2xl">
+              <p className="text-sm text-gray-400 uppercase tracking-wider mb-4">
+                {language === 'nl' ? 'Vergelijk' : 'Compare'}
+              </p>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center pb-4 border-b border-gray-700">
+                  <span className="text-gray-300">{language === 'nl' ? 'Traditionele bureaus' : 'Traditional agencies'}</span>
+                  <span className="font-bold">€1.500 - €5.000+</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white font-medium">Yrvante</span>
+                  <span className="font-bold text-xl">Vanaf €500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Services Section - simplified with links
 const ServicesSection = () => {
   const { language } = useLanguage();
 
@@ -297,36 +315,33 @@ const ServicesSection = () => {
       icon: <Monitor size={32} strokeWidth={1.5} />,
       title: language === 'nl' ? 'Website Ontwikkeling' : 'Website Development',
       description: language === 'nl' 
-        ? 'Moderne, snelle websites die perfect werken op elk apparaat. Van simpele landingspagina tot uitgebreide bedrijfswebsite.'
-        : 'Modern, fast websites that work perfectly on any device. From simple landing pages to extensive business websites.',
+        ? 'Moderne, snelle websites die perfect werken op elk apparaat.'
+        : 'Modern, fast websites that work perfectly on any device.',
     },
     {
       icon: <Code size={32} strokeWidth={1.5} />,
       title: language === 'nl' ? 'Webapplicaties' : 'Web Applications',
       description: language === 'nl'
-        ? 'Complexe functionaliteiten zoals boekingssystemen, klantportalen en op maat gemaakte oplossingen.'
-        : 'Complex features like booking systems, client portals and custom-made solutions.',
+        ? 'Boekingssystemen, klantportalen en op maat gemaakte oplossingen.'
+        : 'Booking systems, client portals and custom-made solutions.',
     },
   ];
 
   return (
-    <section id="services" data-testid="services-section" className="py-24 bg-white">
+    <section id="services" data-testid="services-section" className="py-16 bg-white">
       <div className="container-yrvante">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="font-mono text-sm uppercase tracking-widest text-gray-500 mb-4">
-            {language === 'nl' ? 'Wat ik bied' : 'What I offer'}
-          </p>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-            {language === 'nl' ? 'Diensten' : 'Services'}
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+            {language === 'nl' ? 'Wat wij doen' : 'What we do'}
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -334,15 +349,13 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group p-8 bg-gray-50 rounded-2xl hover:bg-black hover:text-white transition-all duration-500"
+              className="p-8 border border-gray-200 rounded-2xl hover:border-black transition-all"
             >
-              <div className="mb-6 text-gray-400 group-hover:text-white transition-colors">
+              <div className="mb-4 text-black">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-heading font-bold mb-4">{service.title}</h3>
-              <p className="text-gray-600 group-hover:text-gray-300 transition-colors">
-                {service.description}
-              </p>
+              <h3 className="text-xl font-heading font-bold mb-2">{service.title}</h3>
+              <p className="text-gray-600">{service.description}</p>
             </motion.div>
           ))}
         </div>
@@ -360,51 +373,48 @@ const PricingSection = () => {
       name: language === 'nl' ? 'Basis' : 'Basic',
       price: '500',
       description: language === 'nl' 
-        ? 'Tot 3 pagina\'s, responsive design, snelle hosting'
-        : 'Up to 3 pages, responsive design, fast hosting',
+        ? 'Tot 3 pagina\'s, responsive, snelle hosting'
+        : 'Up to 3 pages, responsive, fast hosting',
       popular: false,
     },
     {
       name: 'Pro',
       price: '900',
       description: language === 'nl'
-        ? 'Tot 10 pagina\'s, SEO, blog, portfolio, contactformulier'
-        : 'Up to 10 pages, SEO, blog, portfolio, contact form',
+        ? 'Tot 10 pagina\'s, SEO, blog, contactformulier'
+        : 'Up to 10 pages, SEO, blog, contact form',
       popular: true,
     },
     {
       name: 'Premium',
       price: '1400',
       description: language === 'nl'
-        ? 'Tot 15 pagina\'s, boekingssysteem, meertalig, priority support'
-        : 'Up to 15 pages, booking system, multi-language, priority support',
+        ? 'Tot 15 pagina\'s, boekingssysteem, meertalig'
+        : 'Up to 15 pages, booking system, multi-language',
       popular: false,
     }
   ];
 
   return (
-    <section id="pricing" className="py-24 bg-gray-50">
+    <section id="pricing" className="py-16 bg-white border-t border-gray-100">
       <div className="container-yrvante">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="font-mono text-sm uppercase tracking-widest text-gray-500 mb-4">
-            {language === 'nl' ? 'Transparante prijzen' : 'Transparent pricing'}
-          </p>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
             {language === 'nl' ? 'Pakketten' : 'Packages'}
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto">
             {language === 'nl' 
-              ? 'Prijzen zijn exclusief BTW. Content (teksten en foto\'s) wordt door u aangeleverd.'
-              : 'Prices exclude VAT. Content (texts and photos) is provided by you.'}
+              ? 'Prijzen excl. BTW. Jij levert de teksten en foto\'s aan.'
+              : 'Prices excl. VAT. You provide the texts and photos.'}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
@@ -415,17 +425,17 @@ const PricingSection = () => {
               className={`relative p-6 rounded-2xl text-center ${
                 pkg.popular 
                   ? 'bg-black text-white' 
-                  : 'bg-white border border-gray-200'
+                  : 'border border-gray-200'
               }`}
             >
               {pkg.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 rounded-full text-xs font-bold">
                   {language === 'nl' ? 'Populair' : 'Popular'}
                 </div>
               )}
               
               <h3 className="text-xl font-heading font-bold mb-2">{pkg.name}</h3>
-              <div className="mb-4">
+              <div className="mb-3">
                 <span className="text-4xl font-heading font-bold">€{pkg.price}</span>
               </div>
               <p className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}>
@@ -449,88 +459,7 @@ const PricingSection = () => {
   );
 };
 
-// Why Us Section - brings back the old text about being affordable
-const WhyUsSection = () => {
-  const { language } = useLanguage();
-
-  return (
-    <section id="why-us" className="py-24 bg-white">
-      <div className="container-yrvante">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <p className="font-mono text-sm uppercase tracking-widest text-gray-500 mb-4">
-              {language === 'nl' ? 'Waarom Yrvante' : 'Why Yrvante'}
-            </p>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              {language === 'nl' 
-                ? 'Professioneel, zonder de hoge prijzen'
-                : 'Professional, without the high prices'}
-            </h2>
-            <div className="space-y-6 text-gray-600">
-              <p className="text-lg">
-                {language === 'nl'
-                  ? 'Veel ondernemers denken dat een website automatisch duizenden euro\'s moet kosten. En eerlijk gezegd is dat vaak ook zo — veel webdesignbureaus rekenen €1.500 tot €5.000 of meer.'
-                  : 'Many entrepreneurs think a website automatically costs thousands of euros. And honestly, that\'s often true — many web design agencies charge €1,500 to €5,000 or more.'}
-              </p>
-              <p className="text-lg">
-                {language === 'nl'
-                  ? 'Bij Yrvante geloof ik dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen mijn websites al vanaf €500. U krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.'
-                  : 'At Yrvante, I believe a professional website should be accessible to every entrepreneur. That\'s why my websites start from just €500. You get a modern, fast website that looks professional and works perfectly on mobile, tablet and desktop.'}
-              </p>
-              <p className="text-lg font-medium text-black">
-                {language === 'nl'
-                  ? 'Het belangrijkste: een website waar nieuwe klanten uw bedrijf leren kennen, vertrouwen krijgen en besluiten om contact op te nemen.'
-                  : 'The most important thing: a website where new customers get to know your business, gain trust and decide to get in touch.'}
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            {[
-              {
-                title: language === 'nl' ? 'Snelle oplevering' : 'Fast delivery',
-                description: language === 'nl' ? 'Uw website binnen 1-2 weken online' : 'Your website online within 1-2 weeks'
-              },
-              {
-                title: language === 'nl' ? 'Persoonlijk contact' : 'Personal contact',
-                description: language === 'nl' ? 'Direct contact via telefoon of email, geen lange wachttijden' : 'Direct contact via phone or email, no long waiting times'
-              },
-              {
-                title: language === 'nl' ? '6 correctierondes' : '6 revision rounds',
-                description: language === 'nl' ? 'Tot u 100% tevreden bent met het resultaat' : 'Until you are 100% satisfied with the result'
-              },
-              {
-                title: language === 'nl' ? 'Geen verborgen kosten' : 'No hidden costs',
-                description: language === 'nl' ? 'Transparante prijzen, u weet precies waar u aan toe bent' : 'Transparent prices, you know exactly what to expect'
-              }
-            ].map((item, index) => (
-              <div key={index} className="flex gap-4 p-6 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center flex-shrink-0">
-                  <Check size={20} className="text-white" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">{item.title}</h4>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Testimonials - without names and company
+// Testimonials - without names, using "we"
 const TestimonialsSection = () => {
   const { language } = useLanguage();
   const [current, setCurrent] = useState(0);
@@ -538,22 +467,22 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       text: language === 'nl'
-        ? "Binnen 2 weken was mijn website online en de kwaliteit is uitstekend. Heel tevreden met het resultaat!"
-        : "Within 2 weeks my website was online and the quality is excellent. Very satisfied with the result!",
+        ? "Binnen 2 weken was mijn website online. De kwaliteit is uitstekend en de communicatie was top!"
+        : "Within 2 weeks my website was online. The quality is excellent and communication was great!",
       type: language === 'nl' ? 'Bouwbedrijf' : 'Construction company',
       rating: 5
     },
     {
       text: language === 'nl'
-        ? "Als ZZP'er had ik een betaalbare maar professionele website nodig. Dit was precies wat ik zocht."
-        : "As a freelancer I needed an affordable but professional website. This was exactly what I was looking for.",
+        ? "Eindelijk een betaalbare maar professionele website. Precies wat ik als ZZP'er nodig had."
+        : "Finally an affordable but professional website. Exactly what I needed as a freelancer.",
       type: language === 'nl' ? 'ZZP\'er' : 'Freelancer',
       rating: 5
     },
     {
       text: language === 'nl'
-        ? "De communicatie was top en het resultaat overtrof mijn verwachtingen. Mijn nieuwe website trekt merkbaar meer klanten aan."
-        : "The communication was great and the result exceeded my expectations. My new website noticeably attracts more customers.",
+        ? "Het resultaat overtrof mijn verwachtingen. Mijn nieuwe website trekt merkbaar meer klanten aan."
+        : "The result exceeded my expectations. My new website noticeably attracts more customers.",
       type: language === 'nl' ? 'Coach' : 'Coach',
       rating: 5
     }
@@ -563,19 +492,16 @@ const TestimonialsSection = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-24 bg-black text-white overflow-hidden">
+    <section id="testimonials" className="py-16 bg-black text-white">
       <div className="container-yrvante">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="font-mono text-sm uppercase tracking-widest text-gray-400 mb-4">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold">
             {language === 'nl' ? 'Wat klanten zeggen' : 'What clients say'}
-          </p>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold">
-            {language === 'nl' ? 'Reviews' : 'Reviews'}
           </h2>
         </motion.div>
 
@@ -590,10 +516,10 @@ const TestimonialsSection = () => {
             >
               <div className="flex justify-center gap-1 mb-6">
                 {[...Array(testimonials[current].rating)].map((_, i) => (
-                  <Star key={i} className="text-yellow-400 fill-yellow-400" size={24} />
+                  <Star key={i} className="text-white fill-white" size={20} />
                 ))}
               </div>
-              <p className="text-2xl md:text-3xl font-heading mb-8 leading-relaxed">
+              <p className="text-xl md:text-2xl font-heading mb-6 leading-relaxed">
                 "{testimonials[current].text}"
               </p>
               <p className="text-gray-400">
@@ -602,12 +528,12 @@ const TestimonialsSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex justify-center gap-4 mt-12">
+          <div className="flex justify-center gap-4 mt-10">
             <button
               onClick={prev}
               className="p-3 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </button>
             <div className="flex items-center gap-2">
               {testimonials.map((_, i) => (
@@ -615,7 +541,7 @@ const TestimonialsSection = () => {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    i === current ? 'w-8 bg-white' : 'bg-gray-600'
+                    i === current ? 'w-6 bg-white' : 'bg-gray-600'
                   }`}
                 />
               ))}
@@ -624,7 +550,7 @@ const TestimonialsSection = () => {
               onClick={next}
               className="p-3 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
@@ -633,7 +559,7 @@ const TestimonialsSection = () => {
   );
 };
 
-// FAQ Section - updated answers
+// FAQ Section - removed CMS question, using "we" and "jij"
 const FAQSection = () => {
   const { language } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
@@ -642,68 +568,60 @@ const FAQSection = () => {
     {
       q: language === 'nl' ? 'Hoe lang duurt het om een website te maken?' : 'How long does it take to build a website?',
       a: language === 'nl' 
-        ? 'Een basis website is meestal binnen 1-2 weken klaar. Voor complexere projecten met extra functionaliteiten rekenen we 2-3 weken.'
-        : 'A basic website is usually ready within 1-2 weeks. For more complex projects with extra features we estimate 2-3 weeks.'
+        ? 'Een basis website is meestal binnen 1-2 weken klaar. Voor complexere projecten rekenen we 2-3 weken.'
+        : 'A basic website is usually ready within 1-2 weeks. For more complex projects we estimate 2-3 weeks.'
     },
     {
       q: language === 'nl' ? 'Wat heb ik nodig om te starten?' : 'What do I need to get started?',
       a: language === 'nl'
-        ? 'U levert de teksten, foto\'s en eventueel uw logo aan. Heeft u deze niet? Dan kan ik helpen met tekstschrijven en stockfoto\'s.'
-        : 'You provide the texts, photos and possibly your logo. Don\'t have these? I can help with copywriting and stock photos.'
+        ? 'Jij levert de teksten, foto\'s en eventueel je logo aan. Heb je deze niet? Dan kunnen wij helpen met tekstschrijven en stockfoto\'s.'
+        : 'You provide the texts, photos and possibly your logo. Don\'t have these? We can help with copywriting and stock photos.'
     },
     {
       q: language === 'nl' ? 'Zijn er maandelijkse kosten?' : 'Are there monthly costs?',
       a: language === 'nl'
-        ? 'De website zelf is een eenmalige investering. Optioneel bied ik een onderhoudsabonnement van €20/maand voor hosting, updates en kleine wijzigingen.'
-        : 'The website itself is a one-time investment. Optionally I offer a maintenance subscription of €20/month for hosting, updates and small changes.'
-    },
-    {
-      q: language === 'nl' ? 'Kan ik zelf de website aanpassen?' : 'Can I edit the website myself?',
-      a: language === 'nl'
-        ? 'Ja, ik kan een CMS (content management systeem) inbouwen zodat u zelf eenvoudig teksten en foto\'s kunt aanpassen.'
-        : 'Yes, I can build in a CMS (content management system) so you can easily edit texts and photos yourself.'
+        ? 'De website zelf is een eenmalige investering. Optioneel bieden wij een onderhoudsabonnement van €20/maand voor hosting, updates en kleine wijzigingen.'
+        : 'The website itself is a one-time investment. Optionally we offer a maintenance subscription of €20/month for hosting, updates and small changes.'
     },
     {
       q: language === 'nl' ? 'Hoe kan ik contact opnemen?' : 'How can I get in touch?',
       a: language === 'nl'
-        ? 'U kunt mij bereiken via email of telefoon. Heeft u vragen? Ik bel u graag terug om alles door te nemen — vrijblijvend en zonder verplichtingen.'
-        : 'You can reach me via email or phone. Have questions? I\'d be happy to call you back to discuss everything — no obligations.'
+        ? 'Je kunt ons bereiken via email of telefoon. Heb je vragen? We bellen je graag terug om alles door te nemen — vrijblijvend en zonder verplichtingen.'
+        : 'You can reach us via email or phone. Have questions? We\'d be happy to call you back to discuss everything — no obligations.'
     }
   ];
 
   return (
-    <section id="faq" className="py-24 bg-gray-50">
+    <section id="faq" className="py-16 bg-white border-t border-gray-100">
       <div className="container-yrvante">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="font-mono text-sm uppercase tracking-widest text-gray-500 mb-4">FAQ</p>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold">
-            {language === 'nl' ? 'Veelgestelde Vragen' : 'Frequently Asked Questions'}
+          <h2 className="text-3xl md:text-4xl font-heading font-bold">
+            {language === 'nl' ? 'Veelgestelde vragen' : 'FAQ'}
           </h2>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-2xl mx-auto space-y-3">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-white rounded-2xl overflow-hidden"
+              className="border border-gray-200 rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-6 text-left font-medium hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between p-5 text-left font-medium hover:bg-gray-50 transition-colors"
               >
-                <span className="text-lg">{faq.q}</span>
+                <span>{faq.q}</span>
                 <ChevronDown 
                   className={`transform transition-transform ${openIndex === index ? 'rotate-180' : ''}`} 
-                  size={24} 
+                  size={20} 
                 />
               </button>
               <AnimatePresence>
@@ -714,7 +632,7 @@ const FAQSection = () => {
                     exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden"
                   >
-                    <p className="px-6 pb-6 text-gray-600 leading-relaxed">{faq.a}</p>
+                    <p className="px-5 pb-5 text-gray-600">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -726,7 +644,7 @@ const FAQSection = () => {
   );
 };
 
-// Contact Section - updated CTA text
+// Contact Section - using "we" and "jij"
 const ContactSection = () => {
   const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
@@ -745,11 +663,7 @@ const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (formData.honeypot) {
-      return;
-    }
-
+    if (formData.honeypot) return;
     setIsSubmitting(true);
 
     try {
@@ -766,7 +680,6 @@ const ContactSection = () => {
         toast.success(t.contact.success);
       }
     } catch (error) {
-      console.error("Contact form error:", error);
       toast.error(t.contact.error);
     } finally {
       setIsSubmitting(false);
@@ -774,50 +687,47 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-16 bg-white border-t border-gray-100">
       <div className="container-yrvante">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <p className="font-mono text-sm uppercase tracking-widest text-gray-500 mb-4">
-              {t.contact.subtitle}
-            </p>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
               {language === 'nl' ? 'Neem contact op' : "Get in touch"}
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-gray-600 mb-8">
               {language === 'nl' 
-                ? 'Heeft u vragen of wilt u weten wat ik voor u kan betekenen? Stuur een bericht of bel mij — ik reageer binnen 24 uur.'
-                : 'Have questions or want to know what I can do for you? Send a message or call me — I respond within 24 hours.'}
+                ? 'Heb je vragen of wil je weten wat we voor je kunnen betekenen? Stuur een bericht of bel ons — we reageren binnen 24 uur.'
+                : 'Have questions or want to know what we can do for you? Send a message or call us — we respond within 24 hours.'}
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Mail size={20} />
+                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+                  <Mail size={18} className="text-white" />
                 </div>
                 <div>
                   <p className="font-medium">Email</p>
-                  <a href="mailto:info@yrvante.com" className="text-gray-600 hover:text-black transition-colors">
+                  <a href="mailto:info@yrvante.com" className="text-gray-600 hover:text-black">
                     info@yrvante.com
                   </a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Phone size={20} />
+                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+                  <Phone size={18} className="text-white" />
                 </div>
                 <div>
                   <p className="font-medium">{language === 'nl' ? 'Telefoon' : 'Phone'}</p>
-                  <p className="text-gray-600">{language === 'nl' ? 'Bel of app mij' : 'Call or message me'}</p>
+                  <p className="text-gray-600">{language === 'nl' ? 'Bel of app ons' : 'Call or message us'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                  <MapPin size={20} />
+                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+                  <MapPin size={18} className="text-white" />
                 </div>
                 <div>
                   <p className="font-medium">{language === 'nl' ? 'Locatie' : 'Location'}</p>
@@ -825,11 +735,11 @@ const ContactSection = () => {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Clock size={20} />
+                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+                  <Clock size={18} className="text-white" />
                 </div>
                 <div>
-                  <p className="font-medium">{language === 'nl' ? 'Reactietijd' : 'Response time'}</p>
+                  <p className="font-medium">{language === 'nl' ? 'Reactietijd' : 'Response'}</p>
                   <p className="text-gray-600">{language === 'nl' ? 'Binnen 24 uur' : 'Within 24 hours'}</p>
                 </div>
               </div>
@@ -842,96 +752,86 @@ const ContactSection = () => {
             viewport={{ once: true }}
           >
             {submitted ? (
-              <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Check className="text-green-600" size={32} />
+              <div className="border border-gray-200 rounded-2xl p-8 text-center">
+                <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Check className="text-white" size={28} />
                 </div>
-                <h3 className="text-2xl font-heading font-bold mb-2">
+                <h3 className="text-xl font-heading font-bold mb-2">
                   {language === 'nl' ? 'Bericht verzonden!' : 'Message sent!'}
                 </h3>
                 <p className="text-gray-600">
                   {language === 'nl' 
-                    ? 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact met u op.'
-                    : 'Thank you for your message. I will contact you within 24 hours.'}
+                    ? 'Bedankt! We nemen binnen 24 uur contact met je op.'
+                    : 'Thanks! We will contact you within 24 hours.'}
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <input
-                  type="text"
-                  name="honeypot"
-                  value={formData.honeypot}
-                  onChange={handleChange}
-                  style={{ display: 'none' }}
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">{t.contact.name} *</label>
+                    <label className="block text-sm font-medium mb-1">{language === 'nl' ? 'Naam' : 'Name'} *</label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black transition-colors"
-                      placeholder={language === 'nl' ? 'Uw naam' : 'Your name'}
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black"
+                      placeholder={language === 'nl' ? 'Je naam' : 'Your name'}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">{t.contact.email} *</label>
+                    <label className="block text-sm font-medium mb-1">Email *</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black transition-colors"
-                      placeholder={language === 'nl' ? 'uw@email.nl' : 'your@email.com'}
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black"
+                      placeholder={language === 'nl' ? 'je@email.nl' : 'your@email.com'}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {language === 'nl' ? 'Telefoonnummer' : 'Phone number'}
-                  </label>
+                  <label className="block text-sm font-medium mb-1">{language === 'nl' ? 'Telefoon' : 'Phone'}</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black transition-colors"
-                    placeholder={language === 'nl' ? '06 12345678' : '+31 6 12345678'}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black"
+                    placeholder="06 12345678"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">{t.contact.message} *</label>
+                  <label className="block text-sm font-medium mb-1">{language === 'nl' ? 'Bericht' : 'Message'} *</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black transition-colors resize-none"
-                    placeholder={language === 'nl' ? 'Vertel over uw project...' : 'Tell us about your project...'}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black resize-none"
+                    placeholder={language === 'nl' ? 'Vertel over je project...' : 'Tell us about your project...'}
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-3 bg-black text-white py-4 rounded-full font-medium hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-3 bg-black text-white py-4 rounded-full font-medium hover:bg-gray-800 transition-all disabled:opacity-50"
                 >
                   {isSubmitting ? (
-                    <span>{t.contact.sending}</span>
+                    <span>{language === 'nl' ? 'Verzenden...' : 'Sending...'}</span>
                   ) : (
                     <>
                       <Send size={18} />
-                      <span>{t.contact.send}</span>
+                      <span>{language === 'nl' ? 'Verstuur bericht' : 'Send message'}</span>
                     </>
                   )}
                 </button>
@@ -944,137 +844,65 @@ const ContactSection = () => {
   );
 };
 
-// CTA Section
-const CTASection = () => {
-  const { language } = useLanguage();
-
-  return (
-    <section className="py-24 bg-gradient-to-br from-gray-900 to-black text-white">
-      <div className="container-yrvante text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mx-auto"
-        >
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-            {language === 'nl' 
-              ? 'Klaar om online te gaan?' 
-              : 'Ready to go online?'}
-          </h2>
-          <p className="text-xl text-gray-300 mb-10">
-            {language === 'nl'
-              ? 'Bereken direct uw prijs of neem contact op. Ik denk graag met u mee.'
-              : 'Calculate your price directly or get in touch. I\'d love to help you.'}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/calculator"
-              className="inline-flex items-center justify-center gap-3 bg-white text-black px-8 py-4 font-medium rounded-full hover:bg-gray-100 transition-all hover:scale-105"
-            >
-              {language === 'nl' ? 'Bereken uw prijs' : 'Calculate your price'}
-              <ArrowRight size={18} />
-            </Link>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-3 border border-white px-8 py-4 font-medium rounded-full hover:bg-white hover:text-black transition-all"
-            >
-              {language === 'nl' ? 'Neem contact op' : 'Contact me'}
-            </a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
 // Footer
 const Footer = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const currentYear = new Date().getFullYear();
 
-  const links = {
-    pages: [
-      { name: language === 'nl' ? 'Home' : 'Home', href: '/' },
-      { name: language === 'nl' ? 'Pakketten' : 'Packages', href: '/pakketten' },
-      { name: language === 'nl' ? 'Calculator' : 'Calculator', href: '/calculator' },
-      { name: language === 'nl' ? 'Over Mij' : 'About Me', href: '/about' },
-      { name: language === 'nl' ? 'Waarom een Website?' : 'Why a Website?', href: '/waarom-website' },
-    ],
-  };
-
   return (
-    <footer className="bg-black text-white pt-16 pb-8">
+    <footer className="bg-black text-white py-12">
       <div className="container-yrvante">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Brand */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto invert" />
               <span className="font-heading text-xl font-bold">Yrvante</span>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 text-sm">
               {language === 'nl'
                 ? 'Professionele websites voor ZZP\'ers en MKB. Betaalbaar en resultaatgericht.'
                 : 'Professional websites for freelancers and SMBs. Affordable and result-driven.'}
             </p>
-            <div className="flex items-center gap-2 text-gray-400">
-              <MapPin size={16} />
-              <span>Almelo, Nederland</span>
-            </div>
           </div>
 
-          {/* Links */}
           <div>
             <h4 className="font-bold mb-4">{language === 'nl' ? 'Pagina\'s' : 'Pages'}</h4>
-            <ul className="space-y-3">
-              {links.pages.map((link, i) => (
-                <li key={i}>
-                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/pakketten" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
+              <li><Link to="/calculator" className="text-gray-400 hover:text-white">Calculator</Link></li>
+              <li><Link to="/waarom-website" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Waarom een website?' : 'Why a website?'}</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Over ons' : 'About us'}</Link></li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="font-bold mb-4">Contact</h4>
-            <ul className="space-y-3 text-gray-400">
-              <li>
-                <a href="mailto:info@yrvante.com" className="hover:text-white transition-colors">
-                  info@yrvante.com
-                </a>
-              </li>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li><a href="mailto:info@yrvante.com" className="hover:text-white">info@yrvante.com</a></li>
               <li>Almelo, Nederland</li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} Yrvante. {t.footer.rights}
-          </p>
+        <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+          <p>© {currentYear} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}</p>
         </div>
       </div>
     </footer>
   );
 };
 
-// Main Landing Page Component
+// Main Landing Page
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen bg-white">
       <Navigation />
       <HeroSection />
+      <WhyExpensiveSection />
       <ServicesSection />
       <PricingSection />
-      <WhyUsSection />
       <TestimonialsSection />
       <FAQSection />
-      <CTASection />
       <ContactSection />
       <Footer />
     </div>

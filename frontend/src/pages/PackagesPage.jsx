@@ -59,8 +59,8 @@ const PackagesPage = () => {
         language === 'nl' ? 'Contactformulier' : 'Contact form',
         language === 'nl' ? 'Afspraaksysteem' : 'Booking system',
         language === 'nl' ? 'Google Reviews integratie' : 'Google Reviews integration',
-        language === 'nl' ? 'Meertalige optie op uw site' : 'Multi-language option on your site',
-        language === 'nl' ? 'Priority support' : 'Priority support',
+        language === 'nl' ? 'Meertalige optie op je site' : 'Multi-language option on your site',
+        language === 'nl' ? 'Snellere reactietijd (binnen 12 uur)' : 'Faster response time (within 12 hours)',
       ],
       idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals',
       popular: false,
@@ -207,7 +207,7 @@ const PackagesPage = () => {
                   </p>
                   {pkg.includes.map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-2">
-                      <Check size={18} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-green-400' : 'text-green-500'}`} />
+                      <Check size={18} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black'}`} />
                       <span className={`text-sm ${pkg.popular ? 'text-gray-200' : 'text-gray-600'}`}>{item}</span>
                     </div>
                   ))}
@@ -230,7 +230,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Extra possibilities - centered, no prices */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50">
+      <section className="py-20 px-6 md:px-12 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -344,7 +344,7 @@ const PackagesPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50">
+      <section className="py-20 px-6 md:px-12 bg-white border-t border-gray-100">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -356,8 +356,8 @@ const PackagesPage = () => {
             </h2>
             <p className="text-gray-600 mb-8">
               {language === 'nl'
-                ? 'Ik help u graag bij het kiezen van het juiste pakket. Bel of mail mij — vrijblijvend en zonder verplichtingen.'
-                : 'I\'d be happy to help you choose the right package. Call or email me — no obligations.'}
+                ? 'We helpen je graag bij het kiezen van het juiste pakket. Bel of mail ons — vrijblijvend en zonder verplichtingen.'
+                : 'We\'d be happy to help you choose the right package. Call or email us — no obligations.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
