@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import axios from "axios";
+import { toast } from "sonner";
+
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const CalculatorPage = () => {
   const { language } = useLanguage();
@@ -17,6 +21,16 @@ const CalculatorPage = () => {
     bookingSystem: false,
     googleReviews: false,
   });
+  
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const content = {
     nl: {
@@ -119,7 +133,25 @@ const CalculatorPage = () => {
       ctaButton: "Vraag offerte aan",
       
       note: "Prijzen zijn exclusief tekstschrijven en foto's. Content wordt door jou aangeleverd.",
-      optional: "(optioneel)"
+      optional: "(optioneel)",
+      
+      // Form translations
+      formTitle: "Bijna klaar!",
+      formSubtitle: "Vul je gegevens in en ik neem binnen 24 uur contact met je op",
+      nameLabel: "Naam",
+      namePlaceholder: "Je naam",
+      emailLabel: "E-mail",
+      emailPlaceholder: "je@email.com",
+      phoneLabel: "Telefoon",
+      phonePlaceholder: "+31 6 12345678",
+      messageLabel: "Bericht (optioneel)",
+      messagePlaceholder: "Vertel iets over je project...",
+      submitButton: "Verstuur aanvraag",
+      submitting: "Versturen...",
+      successTitle: "Aanvraag verzonden!",
+      successMessage: "Bedankt voor je aanvraag. Ik neem binnen 24 uur contact met je op.",
+      backToCalc: "Terug naar calculator",
+      yourSelection: "Jouw selectie"
     },
     en: {
       back: "Back",
@@ -222,7 +254,25 @@ const CalculatorPage = () => {
       ctaButton: "Request quote",
       
       note: "Prices exclude copywriting and photos. Content is provided by you.",
-      optional: "(optional)"
+      optional: "(optional)",
+      
+      // Form translations
+      formTitle: "Almost there!",
+      formSubtitle: "Fill in your details and I'll contact you within 24 hours",
+      nameLabel: "Name",
+      namePlaceholder: "Your name",
+      emailLabel: "Email",
+      emailPlaceholder: "you@email.com",
+      phoneLabel: "Phone",
+      phonePlaceholder: "+31 6 12345678",
+      messageLabel: "Message (optional)",
+      messagePlaceholder: "Tell me about your project...",
+      submitButton: "Send request",
+      submitting: "Sending...",
+      successTitle: "Request sent!",
+      successMessage: "Thank you for your request. I will contact you within 24 hours.",
+      backToCalc: "Back to calculator",
+      yourSelection: "Your selection"
     }
   };
 
@@ -266,6 +316,72 @@ const CalculatorPage = () => {
       ...prev,
       extraPages: Math.max(0, Math.min(30, prev.extraPages + delta))
     }));
+  };
+
+  // Generate quote summary for email
+  const generateQuoteSummary = () => {
+    const packageName = t.packages[selectedPackage].name;
+    const packagePrice = prices[selectedPackage];
+    
+    let summary = `📦 PAKKET: ${packageName} - €${packagePrice}\n\n`;
+    
+    // Add extras
+    let extras = [];
+    if (addOns.extraPages > 0) {
+      extras.push(`• ${t.addOns.extraPages.title} (x${addOns.extraPages}) - €${addOns.extraPages * prices.extraPages}`);
+    }
+    if (addOns.multiLanguage) {
+      extras.push(`• ${t.addOns.multiLanguage.title} - €${prices.multiLanguage}`);
+    }
+    if (addOns.extraForm) {
+      extras.push(`• ${t.addOns.extraForm.title} - €${prices.extraForm}`);
+    }
+    if (addOns.bookingSystem) {
+      extras.push(`• ${t.addOns.bookingSystem.title} - €${prices.bookingSystem}`);
+    }
+    if (addOns.googleReviews) {
+      extras.push(`• ${t.addOns.googleReviews.title} - €${prices.googleReviews}`);
+    }
+    if (addOns.maintenance) {
+      extras.push(`• ${t.addOns.maintenance.title} - €${prices.maintenance}/maand`);
+    }
+    
+    if (extras.length > 0) {
+      summary += `➕ EXTRA'S:\n${extras.join('\n')}\n\n`;
+    }
+    
+    summary += `💰 TOTAAL EENMALIG: €${totals.oneTime}`;
+    if (addOns.maintenance) {
+      summary += `\n💳 MAANDELIJKS: €${totals.monthly}/maand`;
+    }
+    
+    return summary;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const quoteSummary = generateQuoteSummary();
+    const fullMessage = `${quoteSummary}\n\n📝 BERICHT:\n${formData.message || 'Geen extra bericht'}`;
+    
+    try {
+      await axios.post(`${API_URL}/api/contact`, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: fullMessage
+      });
+      
+      setSubmitted(true);
+      toast.success(language === 'nl' ? 'Aanvraag verzonden!' : 'Request sent!');
+    } catch (error) {
+      console.error('Error submitting quote:', error);
+      toast.error(language === 'nl' ? 'Er ging iets mis. Probeer opnieuw.' : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -519,12 +635,12 @@ const CalculatorPage = () => {
                 <p className="text-xs text-gray-500 mt-6">{t.exclVat}</p>
 
                 {/* CTA */}
-                <Link
-                  to="/#contact"
+                <button
+                  onClick={() => setShowQuoteForm(true)}
                   className="block w-full mt-8 py-4 bg-white text-black text-center font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105"
                 >
                   {t.ctaButton}
-                </Link>
+                </button>
               </div>
 
               {/* Note */}
@@ -538,6 +654,199 @@ const CalculatorPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Quote Request Modal */}
+      <AnimatePresence>
+        {showQuoteForm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={(e) => e.target === e.currentTarget && !submitted && setShowQuoteForm(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            >
+              {submitted ? (
+                // Success State
+                <div className="p-8 text-center">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Check size={40} className="text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">{t.successTitle}</h3>
+                  <p className="text-gray-500 mb-8">{t.successMessage}</p>
+                  <button
+                    onClick={() => {
+                      setShowQuoteForm(false);
+                      setSubmitted(false);
+                      setFormData({ name: '', email: '', phone: '', message: '' });
+                    }}
+                    className="px-8 py-3 bg-black text-white rounded-full font-bold hover:bg-gray-800 transition-colors"
+                  >
+                    {t.backToCalc}
+                  </button>
+                </div>
+              ) : (
+                // Form
+                <div className="p-8">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold">{t.formTitle}</h3>
+                      <p className="text-gray-500 text-sm mt-1">{t.formSubtitle}</p>
+                    </div>
+                    <button
+                      onClick={() => setShowQuoteForm(false)}
+                      className="text-gray-400 hover:text-black transition-colors p-2"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  {/* Selection Summary */}
+                  <div className="bg-gray-50 rounded-2xl p-4 mb-6">
+                    <p className="text-xs uppercase tracking-wider text-gray-500 mb-3">{t.yourSelection}</p>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="font-medium">{t.packages[selectedPackage].name}</span>
+                        <span>€{prices[selectedPackage]}</span>
+                      </div>
+                      {addOns.extraPages > 0 && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
+                          <span>€{addOns.extraPages * prices.extraPages}</span>
+                        </div>
+                      )}
+                      {addOns.multiLanguage && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.addOns.multiLanguage.title}</span>
+                          <span>€{prices.multiLanguage}</span>
+                        </div>
+                      )}
+                      {addOns.extraForm && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.addOns.extraForm.title}</span>
+                          <span>€{prices.extraForm}</span>
+                        </div>
+                      )}
+                      {addOns.bookingSystem && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.addOns.bookingSystem.title}</span>
+                          <span>€{prices.bookingSystem}</span>
+                        </div>
+                      )}
+                      {addOns.googleReviews && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.addOns.googleReviews.title}</span>
+                          <span>€{prices.googleReviews}</span>
+                        </div>
+                      )}
+                      {addOns.maintenance && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.addOns.maintenance.title}</span>
+                          <span>€{prices.maintenance}/mnd</span>
+                        </div>
+                      )}
+                      <div className="border-t border-gray-200 pt-2 mt-2 flex justify-between font-bold">
+                        <span>{t.oneTime}</span>
+                        <span>€{totals.oneTime}</span>
+                      </div>
+                      {addOns.maintenance && (
+                        <div className="flex justify-between text-gray-600">
+                          <span>{t.monthly}</span>
+                          <span>€{totals.monthly}/mnd</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Form */}
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">{t.nameLabel} *</label>
+                      <div className="relative">
+                        <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          placeholder={t.namePlaceholder}
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">{t.emailLabel} *</label>
+                      <div className="relative">
+                        <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder={t.emailPlaceholder}
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">{t.phoneLabel}</label>
+                      <div className="relative">
+                        <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder={t.phonePlaceholder}
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">{t.messageLabel}</label>
+                      <div className="relative">
+                        <MessageSquare size={18} className="absolute left-4 top-4 text-gray-400" />
+                        <textarea
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          placeholder={t.messagePlaceholder}
+                          rows={3}
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          {t.submitting}
+                        </>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          {t.submitButton}
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
