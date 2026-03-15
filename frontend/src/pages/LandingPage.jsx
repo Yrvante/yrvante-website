@@ -178,154 +178,134 @@ const HeroSection = () => {
       {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
-        <div className="grid grid-cols-12 gap-4 lg:gap-12 min-h-[calc(100vh-120px)] items-center">
+        <div className="min-h-[calc(100vh-120px)] flex flex-col justify-center">
           
-          {/* Left Side - Content */}
-          <div className="col-span-12 lg:col-span-7 py-8 lg:py-0">
-            {/* Availability Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6"
+          {/* Availability Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6"
+          >
+            <button 
+              onClick={scrollToContact}
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-green-300 transition-all duration-300 text-sm"
+              style={{
+                boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
+              }}
             >
-              <button 
-                onClick={scrollToContact}
-                className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-green-300 transition-all duration-300 text-sm"
-                style={{
-                  boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
-                }}
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-gray-600 group-hover:text-green-700 transition-colors">
+                {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
+              </span>
+            </button>
+          </motion.div>
+
+          {/* Slogan */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4"
+          >
+            Smart Web & Software
+          </motion.p>
+          
+          {/* Main Headline - BIG and prominent */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter mb-10"
+          >
+            {language === 'nl' ? (
+              <span className="flex flex-col">
+                <span>JOUW</span>
+                <span>BEDRIJF</span>
+                <span className="text-gray-400">ONLINE</span>
+              </span>
+            ) : (
+              <span className="flex flex-col">
+                <span>YOUR</span>
+                <span>BUSINESS</span>
+                <span className="text-gray-400">ONLINE</span>
+              </span>
+            )}
+          </motion.h1>
+
+          {/* Value Prop */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-8"
+          >
+            {language === 'nl' 
+              ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
+              : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-wrap gap-4 items-center mb-12"
+          >
+            <button
+              onClick={scrollToContact}
+              className="group px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-all"
+            >
+              {language === 'nl' ? 'Start Project' : 'Start Project'}
+              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+            <Link
+              to="/pakketten"
+              className="px-8 py-4 border border-black text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-all"
+            >
+              {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
+            </Link>
+          </motion.div>
+
+          {/* Stats Bar - At bottom */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-wrap items-center gap-6 lg:gap-10 py-6 border-t border-gray-200"
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black">€500</span>
+              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
+                {language === 'nl' ? 'Vanaf' : 'From'}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black">1-2</span>
+              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
+                {language === 'nl' ? 'Weken' : 'Weeks'}
+              </span>
+            </div>
+            <div className="hidden lg:flex items-center gap-6 ml-auto">
+              <a 
+                href="tel:+31642543859" 
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                <span className="text-gray-600 group-hover:text-green-700 transition-colors">
-                  {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
-                </span>
-              </button>
-            </motion.div>
-
-            {/* Slogan */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4"
-            >
-              Smart Web & Software
-            </motion.p>
-            
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[11vw] lg:text-[5.5vw] font-black leading-[1.1] tracking-tighter mb-6"
-            >
-              {language === 'nl' ? (
-                <span className="flex flex-col gap-0">
-                  <span>JOUW</span>
-                  <span>BEDRIJF</span>
-                  <span className="text-gray-400">ONLINE</span>
-                </span>
-              ) : (
-                <span className="flex flex-col gap-0">
-                  <span>YOUR</span>
-                  <span>BUSINESS</span>
-                  <span className="text-gray-400">ONLINE</span>
-                </span>
-              )}
-            </motion.h1>
-
-            {/* Stats Bar - Under headline */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-6 lg:gap-10 mb-6 py-4 border-y border-gray-200"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-black">€500</span>
-                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                  {language === 'nl' ? 'Vanaf' : 'From'}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-black">1-2</span>
-                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                  {language === 'nl' ? 'Weken' : 'Weeks'}
-                </span>
-              </div>
-              <div className="hidden lg:flex items-center gap-6 ml-auto">
-                <a 
-                  href="tel:+31642543859" 
-                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-                >
-                  <Phone size={14} />
-                  <span>+31 6 42543859</span>
-                </a>
-                <a 
-                  href="mailto:info@yrvante.com" 
-                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-                >
-                  <Mail size={14} />
-                  <span>info@yrvante.com</span>
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Value Prop */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm lg:text-base text-gray-500 max-w-md leading-relaxed mb-8"
-            >
-              {language === 'nl' 
-                ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
-                : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap gap-4 items-center"
-            >
-              <button
-                onClick={scrollToContact}
-                className="group px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-all"
+                <Phone size={14} />
+                <span>+31 6 42543859</span>
+              </a>
+              <a 
+                href="mailto:info@yrvante.com" 
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
               >
-                {language === 'nl' ? 'Start Project' : 'Start Project'}
-                <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
-              </button>
-              <Link
-                to="/pakketten"
-                className="px-8 py-4 border border-black text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-all"
-              >
-                {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Right Side - Logo (Desktop Only) */}
-          <div className="hidden lg:flex col-span-5 items-center justify-end pr-8">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative"
-            >
-              <img 
-                src={LOGO_URL} 
-                alt="Yrvante Logo" 
-                className="w-[480px] h-auto object-contain"
-                style={{ backgroundColor: 'white' }}
-              />
-            </motion.div>
-          </div>
+                <Mail size={14} />
+                <span>info@yrvante.com</span>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </div>
 
@@ -505,17 +485,17 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 lg:py-32 bg-black text-white">
+    <section id="pricing" className="py-24 lg:py-32 bg-gray-50">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="grid grid-cols-12 gap-4 mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
               (02)
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
               {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
             </h2>
             <p className="text-gray-500 mt-4 max-w-lg">
@@ -527,7 +507,7 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-gray-800">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
@@ -535,31 +515,36 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`p-8 lg:p-12 ${pkg.popular ? 'bg-white text-black' : 'bg-black'}`}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className={`group p-8 lg:p-10 rounded-sm border transition-all duration-300 cursor-pointer ${
+                pkg.popular 
+                  ? 'bg-black text-white border-black hover:bg-gray-900' 
+                  : 'bg-white text-black border-gray-200 hover:border-black hover:shadow-xl'
+              }`}
             >
-              <div className="flex justify-between items-start mb-12">
+              <div className="flex justify-between items-start mb-10">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
+                  <p className={`text-xs uppercase tracking-[0.2em] mb-2 ${pkg.popular ? 'text-green-400' : 'text-gray-400'}`}>
                     {pkg.popular && (language === 'nl' ? 'Populair' : 'Popular')}
                   </p>
                   <h3 className="text-xl font-bold tracking-tight">{pkg.name}</h3>
                 </div>
-                <span className="text-xs uppercase tracking-[0.2em] text-gray-500">
+                <span className={`text-xs uppercase tracking-[0.2em] ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>
                   0{index + 1}
                 </span>
               </div>
 
-              <div className="mb-12">
-                <span className="text-6xl lg:text-7xl font-black">€{pkg.price}</span>
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-2">
+              <div className="mb-10">
+                <span className="text-5xl lg:text-6xl font-black">€{pkg.price}</span>
+                <p className={`text-xs uppercase tracking-[0.2em] mt-2 ${pkg.popular ? 'text-gray-400' : 'text-gray-500'}`}>
                   {language === 'nl' ? 'Excl. BTW' : 'Excl. VAT'}
                 </p>
               </div>
 
-              <ul className="space-y-4 mb-12">
+              <ul className="space-y-3 mb-10">
                 {pkg.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm">
-                    <span className={`w-1 h-1 ${pkg.popular ? 'bg-black' : 'bg-white'}`} />
+                    <Check size={14} className={pkg.popular ? 'text-green-400' : 'text-gray-400'} />
                     {feature}
                   </li>
                 ))}
@@ -567,10 +552,10 @@ const PricingSection = () => {
 
               <Link
                 to="/calculator"
-                className={`block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] transition-colors ${
+                className={`block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 ${
                   pkg.popular 
-                    ? 'bg-black text-white hover:bg-gray-900' 
-                    : 'border border-white hover:bg-white hover:text-black'
+                    ? 'bg-white text-black hover:bg-gray-100' 
+                    : 'bg-black text-white hover:bg-gray-800'
                 }`}
               >
                 {language === 'nl' ? 'Selecteer' : 'Select'}
@@ -583,7 +568,7 @@ const PricingSection = () => {
         <div className="mt-12 text-center">
           <Link
             to="/pakketten"
-            className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors"
+            className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
           >
             {language === 'nl' ? 'Bekijk alle details →' : 'View all details →'}
           </Link>
