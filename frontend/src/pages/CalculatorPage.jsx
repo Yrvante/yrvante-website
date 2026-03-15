@@ -36,8 +36,7 @@ const CalculatorPage = () => {
             "Tot 3 pagina's",
             "Mobiel, tablet & desktop",
             "Snelle en veilige hosting",
-            "Basis contactpagina",
-            "6 correctierondes"
+            "Basis contactpagina"
           ]
         },
         pro: {
@@ -119,7 +118,7 @@ const CalculatorPage = () => {
       
       ctaButton: "Vraag offerte aan",
       
-      note: "Prijzen zijn exclusief tekstschrijven en foto's. Content wordt door jou aangeleverd. Inclusief 6 correctierondes per project.",
+      note: "Prijzen zijn exclusief tekstschrijven en foto's. Content wordt door jou aangeleverd.",
       optional: "(optioneel)"
     },
     en: {
@@ -222,7 +221,7 @@ const CalculatorPage = () => {
       
       ctaButton: "Request quote",
       
-      note: "Prices exclude copywriting and photos. Content is provided by you. Includes 6 revision rounds per project.",
+      note: "Prices exclude copywriting and photos. Content is provided by you.",
       optional: "(optional)"
     }
   };

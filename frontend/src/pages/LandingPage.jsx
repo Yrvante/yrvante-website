@@ -476,8 +476,8 @@ const PricingSection = () => {
       name: language === 'nl' ? 'BASIS' : 'BASIC',
       price: '500',
       features: language === 'nl' 
-        ? ['Tot 3 pagina\'s', 'Responsive design', 'Snelle hosting', '6 revisies']
-        : ['Up to 3 pages', 'Responsive design', 'Fast hosting', '6 revisions'],
+        ? ['Tot 3 pagina\'s', 'Responsive design', 'Snelle hosting', 'Basis contact']
+        : ['Up to 3 pages', 'Responsive design', 'Fast hosting', 'Basic contact'],
     },
     {
       name: 'PRO',

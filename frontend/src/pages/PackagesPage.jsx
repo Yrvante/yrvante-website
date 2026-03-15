@@ -22,7 +22,6 @@ const PackagesPage = () => {
         language === 'nl' ? 'Werkt perfect op mobiel, tablet en desktop' : 'Works perfectly on mobile, tablet and desktop',
         language === 'nl' ? 'Snelle en veilige hosting' : 'Fast and secure hosting',
         language === 'nl' ? 'Basis contactpagina' : 'Basic contact page',
-        language === 'nl' ? '6 correctierondes' : '6 revision rounds',
       ],
       notIncluded: [
         language === 'nl' ? 'SEO-optimalisatie (kan later toegevoegd worden)' : 'SEO optimization (can be added later)',
@@ -176,8 +175,8 @@ const PackagesPage = () => {
             </p>
             <p className="text-sm text-gray-500 max-w-xl mx-auto">
               {language === 'nl'
-                ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door u aangeleverd. Inclusief 6 correctierondes per project.'
-                : '* Prices exclude copywriting and photos. Content is provided by you. Includes 6 revision rounds per project.'}
+                ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door u aangeleverd.'
+                : '* Prices exclude copywriting and photos. Content is provided by you.'}
             </p>
           </motion.div>
         </div>
