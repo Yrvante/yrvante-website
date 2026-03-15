@@ -17,9 +17,9 @@ const PackagesPage = () => {
         : 'Perfect for starting entrepreneurs who want a professional online presence.',
       includes: [
         language === 'nl' ? 'Moderne responsive website' : 'Modern responsive website',
-        language === 'nl' ? 'Tot 3 pagina\'s (bijv. Home, Over ons, Contact)' : 'Up to 3 pages (e.g., Home, About, Contact)',
+        language === 'nl' ? 'Tot 3 pagina\'s (bijv. Home, Over mij, Contact)' : 'Up to 3 pages (e.g., Home, About, Contact)',
         language === 'nl' ? 'Werkt perfect op mobiel, tablet en desktop' : 'Works perfectly on mobile, tablet and desktop',
-        language === 'nl' ? 'Snelle hosting via Vercel' : 'Fast hosting via Vercel',
+        language === 'nl' ? 'Snelle en veilige hosting' : 'Fast and secure hosting',
         language === 'nl' ? 'Basis contactpagina' : 'Basic contact page',
         language === 'nl' ? '6 correctierondes' : '6 revision rounds',
       ],
@@ -37,8 +37,8 @@ const PackagesPage = () => {
       name: language === 'nl' ? 'Pro Website Pakket' : 'Pro Website Package',
       price: 900,
       description: language === 'nl'
-        ? 'Onze meest gekozen optie voor groeiende bedrijven die meer functionaliteit nodig hebben.'
-        : 'Our most chosen option for growing businesses that need more functionality.',
+        ? 'Mijn meest gekozen optie voor groeiende bedrijven die meer functionaliteit nodig hebben.'
+        : 'My most chosen option for growing businesses that need more functionality.',
       includes: [
         language === 'nl' ? 'Alles uit Basis Website Pakket' : 'Everything from Basic Website Package',
         language === 'nl' ? 'Basis SEO-optimalisatie (zoekwoordenonderzoek + on-page SEO)' : 'Basic SEO optimization (keyword research + on-page SEO)',
@@ -450,15 +450,15 @@ const PackagesPage = () => {
             </h2>
             <p className="text-gray-600 mb-8">
               {language === 'nl'
-                ? 'We helpen je graag bij het kiezen van het juiste pakket. Bel of mail ons — vrijblijvend en zonder verplichtingen.'
-                : 'We\'d be happy to help you choose the right package. Call or email us — no obligations.'}
+                ? 'Ik help je graag bij het kiezen van het juiste pakket. Bel of mail mij — vrijblijvend en zonder verplichtingen.'
+                : 'I\'d be happy to help you choose the right package. Call or email me — no obligations.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/calculator"
                 className="inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-all"
               >
-                {language === 'nl' ? 'Bereken uw prijs' : 'Calculate your price'}
+                {language === 'nl' ? 'Bereken je prijs' : 'Calculate your price'}
                 <ArrowRight size={18} />
               </Link>
               <Link

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+
 const HeroAnimation = () => {
   const [started, setStarted] = useState(true);
   const stageRef = useRef(null);
@@ -87,13 +89,11 @@ const HeroAnimation = () => {
 
     // Reset scene 3
     sceneFinal.style.opacity = '0';
-    const fw = stage.querySelector('#finalWord');
-    const fr = stage.querySelector('#finalRule');
-    const fs = stage.querySelector('#finalSlogan');
-    fw.style.opacity = '0';
-    fw.style.transform = 'translateY(20px)';
-    fr.style.width = '0';
-    fs.style.opacity = '0';
+    const fLogo = stage.querySelector('#finalLogo');
+    if (fLogo) {
+      fLogo.style.opacity = '0';
+      fLogo.style.transform = 'scale(0.9)';
+    }
 
     // Reset nav
     const nav = stage.querySelector('.rs-nav');
@@ -213,19 +213,14 @@ const HeroAnimation = () => {
 
       setTimeout(() => {
         sceneFinal.style.opacity = '1';
+        const fLogo = stage.querySelector('#finalLogo');
         setTimeout(() => {
-          fw.style.transition = 'opacity 1.2s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1)';
-          fw.style.opacity = '1';
-          fw.style.transform = 'translateY(0)';
+          if (fLogo) {
+            fLogo.style.transition = 'opacity 1.5s ease, transform 1.5s cubic-bezier(0.16,1,0.3,1)';
+            fLogo.style.opacity = '1';
+            fLogo.style.transform = 'scale(1)';
+          }
         }, 400);
-        setTimeout(() => {
-          fr.style.transition = 'width 1.2s ease';
-          fr.style.width = '120px';
-        }, 900);
-        setTimeout(() => {
-          fs.style.transition = 'opacity 1s ease';
-          fs.style.opacity = '1';
-        }, 1400);
       }, 1200);
     }, morphStart);
 
@@ -246,15 +241,14 @@ const HeroAnimation = () => {
         .hero-animation-wrapper {
           width: 100%;
           background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
-          margin-top: 80px;
           overflow: hidden;
         }
         
         .stage {
           width: 100%;
-          height: 50vh;
-          min-height: 320px;
-          max-height: 450px;
+          height: 55vh;
+          min-height: 380px;
+          max-height: 500px;
           background: transparent;
           overflow: hidden;
           position: relative;
@@ -736,15 +730,9 @@ const HeroAnimation = () => {
           </div>
         </div>
 
-        {/* Scene 3: Final Logo */}
+        {/* Scene 3: Final Logo with Image */}
         <div id="sceneFinal">
-          <div id="finalWord" className="!font-thin">Yrvante</div>
-          <div id="finalRule"></div>
-          <div id="finalSlogan">
-            <span className="sl-p">(</span>
-            <span className="sl-t">"Smart web & software"</span>
-            <span className="sl-p">);</span>
-          </div>
+          <img src={LOGO_URL} alt="Yrvante" id="finalLogo" style={{maxWidth: '320px', maxHeight: '200px', objectFit: 'contain'}} />
         </div>
 
         {/* Black Fade Overlay */}

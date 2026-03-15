@@ -26,7 +26,7 @@ import HeroAnimation from "../components/HeroAnimation";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_yrvante-design/artifacts/22y72wxq_Yrvante%20logo.png";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
 
 // Navigation
 const Navigation = () => {
@@ -66,8 +66,7 @@ const Navigation = () => {
       <div className="container-yrvante">
         <div className="flex items-center justify-between h-20">
           <a href="/" data-testid="nav-logo" className="flex items-center gap-3 group">
-            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
-            <span className="font-heading text-xl font-bold tracking-tight text-black group-hover:opacity-70 transition-colors">Yrvante</span>
+            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -163,8 +162,8 @@ const HeroSection = () => {
 
   return (
     <section data-testid="hero-section" className="pt-20">
-      {/* Video/Animation at TOP */}
-      <div className="w-full h-[40vh] md:h-[50vh] relative overflow-hidden bg-black">
+      {/* Video/Animation at TOP - no margin, full width */}
+      <div className="w-full h-[45vh] md:h-[55vh] relative overflow-hidden bg-black">
         <HeroAnimation />
       </div>
       
@@ -177,9 +176,9 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 rounded-full mb-6">
-                <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-black">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full mb-6 shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-green-700">
                   {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
                 </span>
               </div>
@@ -198,11 +197,11 @@ const HeroSection = () => {
                 )}
               </h1>
               
-              {/* Value proposition - using "we" and "jij" */}
+              {/* Value proposition - using "ik" and "jij" */}
               <p className="text-lg md:text-xl text-gray-600 mb-4 max-w-2xl mx-auto leading-relaxed">
                 {language === 'nl' 
-                  ? 'Wij bouwen geen website — wij zorgen dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
-                  : "We don't build websites — we make sure your business looks professional online so customers take you seriously."}
+                  ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
+                  : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
               </p>
               <p className="text-base md:text-lg text-gray-500 mb-8 max-w-xl mx-auto">
                 {language === 'nl'
@@ -228,12 +227,8 @@ const HeroSection = () => {
                 </Link>
               </div>
 
-              {/* Stats */}
+              {/* Stats - removed 100% tevreden */}
               <div className="flex gap-8 md:gap-16 justify-center">
-                <div className="text-center">
-                  <p className="text-3xl md:text-4xl font-heading font-bold text-black">100%</p>
-                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Tevreden klanten' : 'Satisfied clients'}</p>
-                </div>
                 <div className="text-center">
                   <p className="text-3xl md:text-4xl font-heading font-bold text-black">€500</p>
                   <p className="text-sm text-gray-500">{language === 'nl' ? 'Vanaf' : 'Starting from'}</p>
@@ -241,6 +236,10 @@ const HeroSection = () => {
                 <div className="text-center">
                   <p className="text-3xl md:text-4xl font-heading font-bold text-black">1-2</p>
                   <p className="text-sm text-gray-500">{language === 'nl' ? 'Weken' : 'Weeks'}</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl md:text-4xl font-heading font-bold text-black">ZZP</p>
+                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Persoonlijk' : 'Personal'}</p>
                 </div>
               </div>
             </motion.div>
@@ -263,18 +262,18 @@ const WhyExpensiveSection = () => {
             <div>
               <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
                 {language === 'nl' 
-                  ? 'Waarom zijn wij goedkoper?' 
-                  : 'Why are we more affordable?'}
+                  ? 'Waarom ben ik goedkoper?' 
+                  : 'Why am I more affordable?'}
               </h2>
               <p className="text-gray-600 mb-4">
                 {language === 'nl'
-                  ? 'Veel webdesignbureaus rekenen €1.500 tot €5.000 of meer voor een website. Wij geloven dat een professionele website voor iedere ondernemer bereikbaar moet zijn.'
-                  : 'Many web design agencies charge €1,500 to €5,000 or more for a website. We believe a professional website should be accessible to every entrepreneur.'}
+                  ? 'Veel webdesignbureaus rekenen €1.500 tot €5.000 of meer voor een website. Ik geloof dat een professionele website voor iedere ondernemer bereikbaar moet zijn.'
+                  : 'Many web design agencies charge €1,500 to €5,000 or more for a website. I believe a professional website should be accessible to every entrepreneur.'}
               </p>
               <p className="text-gray-600 mb-6">
                 {language === 'nl'
-                  ? 'Daarom beginnen onze websites vanaf €500 — zonder kwaliteit in te leveren.'
-                  : "That's why our websites start from €500 — without compromising on quality."}
+                  ? 'Daarom beginnen mijn websites vanaf €500 — zonder kwaliteit in te leveren.'
+                  : "That's why my websites start from €500 — without compromising on quality."}
               </p>
               <Link
                 to="/waarom-website"
@@ -337,7 +336,7 @@ const ServicesSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-            {language === 'nl' ? 'Wat wij doen' : 'What we do'}
+            {language === 'nl' ? 'Wat ik doe' : 'What I do'}
           </h2>
         </motion.div>
 
@@ -559,7 +558,7 @@ const TestimonialsSection = () => {
   );
 };
 
-// FAQ Section - comprehensive FAQs, using "we" and "jij"
+// FAQ Section - comprehensive FAQs, using "ik" and "jij"
 const FAQSection = () => {
   const { language } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
@@ -568,32 +567,32 @@ const FAQSection = () => {
     {
       q: language === 'nl' ? 'Hoe lang duurt het om een website te maken?' : 'How long does it take to build a website?',
       a: language === 'nl' 
-        ? 'Een basis website is meestal binnen 1 week klaar. Voor Pro en Premium pakketten rekenen we 1 tot 2 weken.'
-        : 'A basic website is usually ready within 1 week. For Pro and Premium packages we estimate 1 to 2 weeks.'
+        ? 'Een basis website is meestal binnen 1 week klaar. Voor Pro en Premium pakketten reken ik 1 tot 2 weken.'
+        : 'A basic website is usually ready within 1 week. For Pro and Premium packages I estimate 1 to 2 weeks.'
     },
     {
       q: language === 'nl' ? 'Wat heb ik nodig om te beginnen?' : 'What do I need to get started?',
       a: language === 'nl'
-        ? 'Om te starten heb ik een paar simpele dingen van je nodig: teksten voor je website (bijvoorbeeld een korte beschrijving van je bedrijf en diensten), foto\'s of afbeeldingen die je wilt gebruiken, en je logo (als je die al hebt). Heb je dit nog niet allemaal? Geen probleem. Ik kan je helpen met goede teksten en professionele stockfoto\'s.\n\nVoor je website heb je ook een domeinnaam nodig (bijvoorbeeld jouwbedrijf.nl). Je koopt een domeinnaam zelf bij een provider zoals TransIP of Antagonist. Dit kost maximaal ongeveer €10–€15 per jaar. Ik help je daarna met het koppelen van de domeinnaam aan je website. Zo blijft de domeinnaam altijd op jouw naam staan en blijf jij volledig eigenaar!'
-        : 'To get started I need a few simple things from you: texts for your website (e.g. a brief description of your business and services), photos or images you want to use, and your logo (if you have one). Don\'t have all of this yet? No problem. I can help you with good texts and professional stock photos.\n\nYou also need a domain name for your website (e.g. yourbusiness.com). You buy a domain name yourself from a provider like TransIP or Antagonist. This costs a maximum of about €10-€15 per year. I\'ll then help you connect the domain name to your website. This way the domain name always stays in your name and you remain the full owner!'
+        ? 'Om te starten heb ik een paar simpele dingen van je nodig:\n\n• Teksten voor je website (bijvoorbeeld een korte beschrijving van je bedrijf en diensten)\n• Foto\'s of afbeeldingen die je wilt gebruiken\n• Je logo (als je die al hebt)\n\nHeb je dit nog niet allemaal? Geen probleem. Ik kan je helpen met goede teksten en professionele stockfoto\'s.\n\nVoor je website heb je ook een domeinnaam nodig (bijvoorbeeld jouwbedrijf.nl). Je koopt een domeinnaam zelf bij een provider zoals TransIP of Antagonist. Dit kost maximaal ongeveer €10–€15 per jaar. Ik help je daarna met het koppelen van de domeinnaam aan je website. Zo blijft de domeinnaam altijd op jouw naam staan en blijf jij volledig eigenaar!'
+        : 'To get started I need a few simple things from you:\n\n• Texts for your website (e.g. a brief description of your business and services)\n• Photos or images you want to use\n• Your logo (if you have one)\n\nDon\'t have all of this yet? No problem. I can help you with good texts and professional stock photos.\n\nYou also need a domain name for your website (e.g. yourbusiness.com). You buy a domain name yourself from a provider like TransIP or Antagonist. This costs about €10-€15 per year max. I\'ll then help you connect the domain name to your website. This way the domain name always stays in your name and you remain the full owner!'
     },
     {
       q: language === 'nl' ? 'Kan ik de website later nog uitbreiden?' : 'Can I expand the website later?',
       a: language === 'nl'
-        ? 'Ja, je kan altijd de website aanpassen. Als je weet hoe dit werkt en je koopt alleen de website, dan moet je zelf dingen laten aanpassen. Maar kies je voor het maandelijkse abonnement? Dan hoef je niet alleen niks te betalen aan hosting en bugs — wij regelen dan alles voor je.'
-        : 'Yes, you can always adjust the website. If you know how this works and you only buy the website, you\'ll need to make adjustments yourself. But if you choose the monthly subscription? Then you don\'t have to pay anything for hosting and bugs — we take care of everything for you.'
+        ? 'Ja, je kan altijd de website aanpassen. Als je weet hoe dit werkt en je koopt alleen de website, dan moet je zelf dingen laten aanpassen. Maar kies je voor het maandelijkse abonnement? Dan hoef je niet alleen niks te betalen aan hosting en bugs — ik regel dan alles voor je.'
+        : 'Yes, you can always adjust the website. If you know how this works and you only buy the website, you\'ll need to make adjustments yourself. But if you choose the monthly subscription? Then you don\'t have to pay anything for hosting and bugs — I take care of everything for you.'
     },
     {
       q: language === 'nl' ? 'Wat gebeurt er als ik niet tevreden ben?' : 'What happens if I\'m not satisfied?',
       a: language === 'nl'
-        ? 'We blijven de website aanpassen tot jij tevreden bent. Je kan altijd voorbeelden laten zien en we blijven een test website sturen tot wij jouw volledige goedkeuring hebben op de voorwaarden die ondertekend zijn. Alleen dan gaan wij verder — tot jij tevreden bent.'
-        : 'We keep adjusting the website until you\'re satisfied. You can always show examples and we\'ll keep sending a test website until we have your full approval based on the signed terms. Only then do we proceed — until you\'re satisfied.'
+        ? 'Ik blijf de website aanpassen tot jij tevreden bent. Je kan altijd voorbeelden laten zien en ik blijf een test website sturen tot ik jouw volledige goedkeuring heb op de voorwaarden die ondertekend zijn. Alleen dan ga ik verder — tot jij tevreden bent.'
+        : 'I keep adjusting the website until you\'re satisfied. You can always show examples and I\'ll keep sending a test website until I have your full approval based on the signed terms. Only then do I proceed — until you\'re satisfied.'
     },
     {
       q: language === 'nl' ? 'Hoe werkt de betaling?' : 'How does payment work?',
       a: language === 'nl'
-        ? 'Wij werken met 40% aanbetaling nadat alles voor je duidelijk is bij de start van het project. De resterende 60% betaal je bij oplevering van de website. Na betaling maken wij je de host/co-host.'
-        : 'We work with a 40% deposit after everything is clear to you at the start of the project. You pay the remaining 60% upon delivery of the website. After payment, we\'ll make you the host/co-host.'
+        ? 'Ik werk met 40% aanbetaling nadat alles voor je duidelijk is bij de start van het project. De resterende 60% betaal je bij oplevering van de website. Na betaling maak ik je de host/co-host.'
+        : 'I work with a 40% deposit after everything is clear to you at the start of the project. You pay the remaining 60% upon delivery of the website. After payment, I\'ll make you the host/co-host.'
     },
     {
       q: language === 'nl' ? 'Blijft mijn website online als ik geen onderhoudspakket neem?' : 'Will my website stay online if I don\'t take a maintenance package?',
@@ -610,8 +609,8 @@ const FAQSection = () => {
     {
       q: language === 'nl' ? 'Maak jij ook webshops?' : 'Do you also make webshops?',
       a: language === 'nl'
-        ? 'Op dit moment richt ik mij volledig op professionele websites voor ZZP\'ers en kleine bedrijven. Webshops vallen buiten ons huidige aanbod.'
-        : 'At the moment I focus entirely on professional websites for freelancers and small businesses. Webshops are outside our current offering.'
+        ? 'Op dit moment richt ik mij volledig op professionele websites voor ZZP\'ers en kleine bedrijven. Webshops vallen buiten mijn huidige aanbod.'
+        : 'At the moment I focus entirely on professional websites for freelancers and small businesses. Webshops are outside my current offering.'
     },
     {
       q: language === 'nl' ? 'Wat is het verschil tussen jou en een groot webbureau?' : 'What\'s the difference between you and a large web agency?',
@@ -692,7 +691,7 @@ const FAQSection = () => {
   );
 };
 
-// Contact Section - using "we" and "jij"
+// Contact Section - using "ik" and "jij"
 const ContactSection = () => {
   const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
@@ -748,8 +747,8 @@ const ContactSection = () => {
             </h2>
             <p className="text-gray-600 mb-8">
               {language === 'nl' 
-                ? 'Heb je vragen of wil je weten wat we voor je kunnen betekenen? Stuur een bericht of bel ons — we reageren binnen 24 uur.'
-                : 'Have questions or want to know what we can do for you? Send a message or call us — we respond within 24 hours.'}
+                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht of bel mij — ik reageer binnen 24 uur.'
+                : 'Have questions or want to know what I can do for you? Send a message or call me — I respond within 24 hours.'}
             </p>
 
             <div className="space-y-4">
@@ -770,7 +769,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-medium">{language === 'nl' ? 'Telefoon' : 'Phone'}</p>
-                  <p className="text-gray-600">{language === 'nl' ? 'Bel of app ons' : 'Call or message us'}</p>
+                  <p className="text-gray-600">{language === 'nl' ? 'Bel of app mij' : 'Call or message me'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -809,8 +808,8 @@ const ContactSection = () => {
                 </h3>
                 <p className="text-gray-600">
                   {language === 'nl' 
-                    ? 'Bedankt! We nemen binnen 24 uur contact met je op.'
-                    : 'Thanks! We will contact you within 24 hours.'}
+                    ? 'Bedankt! Ik neem binnen 24 uur contact met je op.'
+                    : 'Thanks! I will contact you within 24 hours.'}
                 </p>
               </div>
             ) : (
@@ -865,7 +864,7 @@ const ContactSection = () => {
                     required
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-black resize-none"
-                    placeholder={language === 'nl' ? 'Vertel over je project...' : 'Tell us about your project...'}
+                    placeholder={language === 'nl' ? 'Vertel over je project...' : 'Tell me about your project...'}
                   />
                 </div>
 
@@ -903,8 +902,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto invert" />
-              <span className="font-heading text-xl font-bold">Yrvante</span>
+              <img src={LOGO_URL} alt="Yrvante" className="h-12 w-auto" style={{filter: 'invert(1)'}} />
             </div>
             <p className="text-gray-400 text-sm">
               {language === 'nl'
@@ -920,7 +918,7 @@ const Footer = () => {
               <li><Link to="/calculator" className="text-gray-400 hover:text-white">Calculator</Link></li>
               <li><Link to="/waarom-website" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Waarom een website?' : 'Why a website?'}</Link></li>
               <li><Link to="/blog" className="text-gray-400 hover:text-white">Blog</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Over ons' : 'About us'}</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Over mij' : 'About me'}</Link></li>
             </ul>
           </div>
 

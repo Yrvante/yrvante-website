@@ -34,7 +34,7 @@ const CalculatorPage = () => {
             "Moderne responsive website",
             "Tot 3 pagina's",
             "Mobiel, tablet & desktop",
-            "Snelle hosting via Vercel",
+            "Snelle en veilige hosting",
             "Basis contactpagina",
             "6 correctierondes"
           ]
@@ -137,7 +137,7 @@ const CalculatorPage = () => {
             "Modern responsive website",
             "Up to 3 pages",
             "Mobile, tablet & desktop",
-            "Fast hosting via Vercel",
+            "Fast and secure hosting",
             "Basic contact page",
             "6 revision rounds"
           ]

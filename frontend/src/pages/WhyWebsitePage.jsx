@@ -31,7 +31,7 @@ const WhyWebsitePage = () => {
       // Section 3 - The cost myth
       section3Title: "\"Een website is toch duur?\"",
       section3Text: "Toch denken veel ondernemers dat een website automatisch duizenden euro's moet kosten. En eerlijk gezegd is dat vaak ook zo. Veel webdesignbureaus rekenen €1.500 tot €5.000 of meer voor een website, met daarbovenop maandelijkse kosten voor onderhoud en hosting.",
-      section3Highlight: "Dat is precies waar wij het anders willen doen.",
+      section3Highlight: "Dat is precies waar ik het anders wil doen.",
       traditional: "Traditionele bureaus",
       traditionalPrice: "€1.500 - €5.000+",
       traditionalExtra: "+ maandelijkse kosten",
@@ -39,9 +39,9 @@ const WhyWebsitePage = () => {
       
       // Section 4 - Our solution
       section4Title: "Professionele websites, zonder onnodig hoge prijzen",
-      section4Text: "Bij Yrvante geloven wij dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen onze websites al vanaf €500. Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
-      section4Text2: "Daarnaast helpen wij je ook met het online houden van je website. Voor slechts €20 per maand regelen wij de hosting en zorgen we dat je website veilig, snel en altijd bereikbaar blijft.",
-      ourApproach: "Onze aanpak",
+      section4Text: "Bij Yrvante geloof ik dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen mijn websites al vanaf €500. Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
+      section4Text2: "Daarnaast help ik je ook met het online houden van je website. Voor slechts €25 per maand regel ik de hosting en zorg ik dat je website veilig, snel en altijd bereikbaar blijft.",
+      ourApproach: "Mijn aanpak",
       ourPrice: "Vanaf €500",
       ourExtra: "Geen verplichte abonnementen",
       ourPoints: ["Snel opgeleverd", "Professioneel resultaat", "Betaalbaar voor iedereen"],
@@ -51,9 +51,9 @@ const WhyWebsitePage = () => {
       card1Title: "Moderne website",
       card1Text: "Snel, professioneel en perfect op mobiel, tablet en desktop.",
       card2Title: "Volledige toegang",
-      card2Text: "Je houdt altijd zelf toegang. Wil je later zelf een tekst aanpassen of een foto veranderen? Dan kan dat gewoon. Liever dat wij het voor je regelen? Dat kan ook — veel klanten kiezen voor een klein onderhoudsabonnement zodat wij updates en aanpassingen voor hen doen.",
+      card2Text: "Je houdt altijd zelf toegang. Wil je later zelf een tekst aanpassen of een foto veranderen? Dan kan dat gewoon. Liever dat ik het voor je regel? Dat kan ook — veel klanten kiezen voor een klein onderhoudsabonnement zodat ik updates en aanpassingen voor hen doe.",
       card3Title: "Onderhoud optioneel",
-      card3Text: "€20/mnd als je wilt dat wij updates regelen. Dit is niet verplicht — zonder abonnement ben je zelf verantwoordelijk voor onderhoud na oplevering.",
+      card3Text: "€25/mnd als je wilt dat ik updates regel. Dit is niet verplicht — zonder abonnement ben je zelf verantwoordelijk voor onderhoud na oplevering.",
       
       // Section 6 - The goal
       section6Title: "Het belangrijkste:",
@@ -63,7 +63,7 @@ const WhyWebsitePage = () => {
       
       // CTA
       ctaTitle: "Benieuwd wat een website voor jouw bedrijf kan betekenen?",
-      ctaText: "Neem gerust contact met ons op. Wij denken graag met je mee en laten zien hoe jouw bedrijf professioneel online kan staan — zonder dat je daar duizenden euro's voor hoeft te betalen.",
+      ctaText: "Neem gerust contact met mij op. Ik denk graag met je mee en laat zien hoe jouw bedrijf professioneel online kan staan — zonder dat je daar duizenden euro's voor hoeft te betalen.",
       ctaButton: "Neem contact op",
       
       // Calculator link
@@ -97,16 +97,16 @@ const WhyWebsitePage = () => {
       
       section3Title: "\"Isn't a website expensive?\"",
       section3Text: "Yet many entrepreneurs think a website automatically costs thousands of euros. And honestly, that's often true. Many web design agencies charge €1,500 to €5,000 or more for a website, plus monthly costs for maintenance and hosting.",
-      section3Highlight: "That's exactly where we want to do things differently.",
+      section3Highlight: "That's exactly where I want to do things differently.",
       traditional: "Traditional agencies",
       traditionalPrice: "€1,500 - €5,000+",
       traditionalExtra: "+ monthly costs",
       traditionalPoints: ["Long lead time", "High startup costs", "Often overkill for SMBs"],
       
       section4Title: "Professional websites, without unnecessarily high prices",
-      section4Text: "At Yrvante, we believe a professional website should be accessible to every entrepreneur. That's why our websites start from just €500. You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
-      section4Text2: "We also help you keep your website online. For just €20 per month, we handle the hosting and ensure your website stays secure, fast, and always accessible.",
-      ourApproach: "Our approach",
+      section4Text: "At Yrvante, I believe a professional website should be accessible to every entrepreneur. That's why my websites start from just €500. You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
+      section4Text2: "I also help you keep your website online. For just €25 per month, I handle the hosting and ensure your website stays secure, fast, and always accessible.",
+      ourApproach: "My approach",
       ourPrice: "From €500",
       ourExtra: "No mandatory subscriptions",
       ourPoints: ["Fast delivery", "Professional result", "Affordable for everyone"],
@@ -115,9 +115,9 @@ const WhyWebsitePage = () => {
       card1Title: "Modern website",
       card1Text: "Fast, professional, and perfect on mobile, tablet, and desktop.",
       card2Title: "Full access",
-      card2Text: "You always keep access yourself. Want to change a text or photo later? You can do that. Prefer us to handle it? That's also possible — many customers choose a small maintenance subscription so we handle updates and changes for them.",
+      card2Text: "You always keep access yourself. Want to change a text or photo later? You can do that. Prefer me to handle it? That's also possible — many customers choose a small maintenance subscription so I handle updates and changes for them.",
       card3Title: "Maintenance optional",
-      card3Text: "€20/month if you want us to handle updates. This is not mandatory — without subscription you are responsible for maintenance after delivery.",
+      card3Text: "€25/month if you want me to handle updates. This is not mandatory — without subscription you are responsible for maintenance after delivery.",
       
       section6Title: "The most important thing:",
       section6Highlight: "finding more customers",
@@ -125,8 +125,8 @@ const WhyWebsitePage = () => {
       section6Tagline: "And that starts with being visible.",
       
       ctaTitle: "Curious what a website can mean for your business?",
-      ctaText: "Feel free to contact us. We'd love to think along with you and show you how your business can be professionally online — without having to pay thousands of euros.",
-      ctaButton: "Contact us",
+      ctaText: "Feel free to contact me. I'd love to think along with you and show you how your business can be professionally online — without having to pay thousands of euros.",
+      ctaButton: "Contact me",
       
       calculatorText: "Want to know exactly what a website costs?",
       calculatorButton: "Check our calculator",
@@ -515,7 +515,7 @@ const WhyWebsitePage = () => {
               whileHover={{ y: -4 }}
             >
               <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">{t.maintenance}</p>
-              <p className="text-4xl font-heading">€20<span className="text-xl">/mnd</span></p>
+              <p className="text-4xl font-heading">€25<span className="text-xl">/mnd</span></p>
               <p className="text-sm text-gray-500 mt-1">{t.optional}</p>
             </motion.div>
           </div>
