@@ -377,38 +377,38 @@ const CalculatorPage = () => {
               <p className="text-gray-500 text-sm mb-6">{t.optional}</p>
               
               {/* Losse prijzen overzicht */}
-              <div className="mb-8 p-6 bg-gray-900 text-white rounded-2xl">
+              <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-2xl">
                 <h3 className="font-bold text-lg mb-4">
                   {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
                     <p className="text-2xl font-bold">€50</p>
-                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
+                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
                   </div>
-                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
                     <p className="text-2xl font-bold">€200</p>
-                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
+                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
                   </div>
-                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
                     <p className="text-2xl font-bold">€80</p>
-                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
+                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
                   </div>
-                  <div className="text-center p-3 bg-gray-800 rounded-xl">
-                    <p className="text-2xl font-bold">€25<span className="text-sm text-gray-400">/pm</span></p>
-                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
+                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                    <p className="text-2xl font-bold">€25<span className="text-sm text-gray-500">/pm</span></p>
+                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
                   </div>
-                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
                     <p className="text-2xl font-bold">€250</p>
-                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
+                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
                   </div>
-                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
                     <p className="text-2xl font-bold">€120</p>
-                    <p className="text-sm text-gray-400">Google Reviews</p>
+                    <p className="text-sm text-gray-500">Google Reviews</p>
                   </div>
                 </div>
-                <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-xl p-4">
-                  <p className="text-sm text-yellow-200">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                  <p className="text-sm text-yellow-800">
                     <span className="font-bold">💡 Tip:</span> {language === 'nl' 
                       ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
                       : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}

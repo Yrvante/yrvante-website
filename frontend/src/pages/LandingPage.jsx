@@ -80,6 +80,12 @@ const Navigation = () => {
             >
               Pakketten
             </button>
+            <Link
+              to="/calculator"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+            >
+              Calculator
+            </Link>
             <button
               onClick={() => scrollToSection("contact")}
               className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
@@ -145,6 +151,12 @@ const Navigation = () => {
               >
                 Pakketten
               </button>
+              <Link
+                to="/calculator"
+                className="block text-xs font-medium uppercase tracking-[0.2em]"
+              >
+                Calculator
+              </Link>
               <button
                 onClick={() => scrollToSection("contact")}
                 className="block text-xs font-medium uppercase tracking-[0.2em]"
@@ -507,7 +519,7 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
@@ -515,28 +527,27 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className={`group p-8 lg:p-10 rounded-sm border transition-all duration-300 cursor-pointer ${
+              className={`group p-8 lg:p-10 rounded-2xl border-2 transition-all duration-300 cursor-pointer ${
                 pkg.popular 
-                  ? 'bg-black text-white border-black hover:bg-gray-900' 
-                  : 'bg-white text-black border-gray-200 hover:border-black hover:shadow-xl'
+                  ? 'bg-black text-white border-black' 
+                  : 'bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black'
               }`}
             >
               <div className="flex justify-between items-start mb-10">
                 <div>
-                  <p className={`text-xs uppercase tracking-[0.2em] mb-2 ${pkg.popular ? 'text-green-400' : 'text-gray-400'}`}>
+                  <p className={`text-xs uppercase tracking-[0.2em] mb-2 ${pkg.popular ? 'text-green-400' : 'text-gray-400 group-hover:text-green-400'}`}>
                     {pkg.popular && (language === 'nl' ? 'Populair' : 'Popular')}
                   </p>
                   <h3 className="text-xl font-bold tracking-tight">{pkg.name}</h3>
                 </div>
-                <span className={`text-xs uppercase tracking-[0.2em] ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>
+                <span className={`text-xs uppercase tracking-[0.2em] ${pkg.popular ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500'}`}>
                   0{index + 1}
                 </span>
               </div>
 
               <div className="mb-10">
                 <span className="text-5xl lg:text-6xl font-black">€{pkg.price}</span>
-                <p className={`text-xs uppercase tracking-[0.2em] mt-2 ${pkg.popular ? 'text-gray-400' : 'text-gray-500'}`}>
+                <p className={`text-xs uppercase tracking-[0.2em] mt-2 ${pkg.popular ? 'text-gray-400' : 'text-gray-500 group-hover:text-gray-400'}`}>
                   {language === 'nl' ? 'Excl. BTW' : 'Excl. VAT'}
                 </p>
               </div>
@@ -544,7 +555,7 @@ const PricingSection = () => {
               <ul className="space-y-3 mb-10">
                 {pkg.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm">
-                    <Check size={14} className={pkg.popular ? 'text-green-400' : 'text-gray-400'} />
+                    <Check size={14} className={pkg.popular ? 'text-green-400' : 'text-gray-400 group-hover:text-green-400'} />
                     {feature}
                   </li>
                 ))}
@@ -552,10 +563,10 @@ const PricingSection = () => {
 
               <Link
                 to="/calculator"
-                className={`block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 ${
+                className={`block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] rounded-lg transition-all duration-300 ${
                   pkg.popular 
                     ? 'bg-white text-black hover:bg-gray-100' 
-                    : 'bg-black text-white hover:bg-gray-800'
+                    : 'bg-black text-white group-hover:bg-white group-hover:text-black'
                 }`}
               >
                 {language === 'nl' ? 'Selecteer' : 'Select'}
@@ -760,45 +771,41 @@ const FAQSection = () => {
 
   return (
     <section id="faq" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        {/* Section Header */}
-        <div className="grid grid-cols-12 gap-4 mb-16">
-          <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
-              (05)
-            </p>
-          </div>
-          <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-              FAQ
-            </h2>
-          </div>
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+        {/* Section Header - Centered */}
+        <div className="text-center mb-16">
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">
+            (05)
+          </p>
+          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+            FAQ
+          </h2>
         </div>
 
-        {/* FAQ Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-gray-200 max-w-5xl">
+        {/* FAQ Grid - Centered */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {faqs.slice(0, 6).map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white"
+              className="bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-8 text-left group"
+                className="w-full p-6 text-left"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-3">
+                    <span className="text-xs text-gray-400 uppercase tracking-[0.2em] block mb-2">
                       0{index + 1}
                     </span>
-                    <span className="font-bold text-lg block">{faq.q}</span>
+                    <span className="font-bold text-base block">{faq.q}</span>
                   </div>
                   <ChevronDown 
-                    className={`flex-shrink-0 transform transition-transform mt-1 ${openIndex === index ? 'rotate-180' : ''}`} 
-                    size={20} 
+                    className={`flex-shrink-0 transform transition-transform mt-1 text-gray-400 ${openIndex === index ? 'rotate-180' : ''}`} 
+                    size={18} 
                   />
                 </div>
                 <AnimatePresence>
@@ -809,7 +816,7 @@ const FAQSection = () => {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <p className="text-gray-500 mt-4 leading-relaxed whitespace-pre-line">{faq.a}</p>
+                      <p className="text-gray-500 text-sm mt-4 leading-relaxed whitespace-pre-line">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -818,8 +825,8 @@ const FAQSection = () => {
           ))}
         </div>
 
-        {/* View All Link */}
-        <div className="mt-12">
+        {/* View All Link - Centered */}
+        <div className="mt-12 text-center">
           <button
             onClick={() => setOpenIndex(openIndex === 'all' ? null : 'all')}
             className="text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4"
