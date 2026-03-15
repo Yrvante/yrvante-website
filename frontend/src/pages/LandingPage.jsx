@@ -180,7 +180,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-12 gap-4 min-h-[calc(100vh-80px)] items-center">
           
           {/* Left Side - Typography Heavy */}
-          <div className="col-span-12 lg:col-span-8 py-12 lg:py-0">
+          <div className="col-span-12 lg:col-span-7 py-12 lg:py-0">
             {/* Availability Badge - Elegant pill at top */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -215,25 +215,25 @@ const HeroSection = () => {
               Smart Web & Software
             </motion.p>
             
-            {/* Main Headline - Brutalist Typography */}
+            {/* Main Headline - Brutalist Typography with more spacing */}
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[12vw] lg:text-[8vw] font-black leading-[0.85] tracking-tighter mb-8"
+              className="text-[12vw] lg:text-[7vw] font-black leading-[1.1] tracking-tighter mb-8"
             >
               {language === 'nl' ? (
-                <>
-                  JOUW<br />
-                  BEDRIJF<br />
+                <span className="flex flex-col gap-2">
+                  <span>JOUW</span>
+                  <span>BEDRIJF</span>
                   <span className="text-gray-400">ONLINE</span>
-                </>
+                </span>
               ) : (
-                <>
-                  YOUR<br />
-                  BUSINESS<br />
+                <span className="flex flex-col gap-2">
+                  <span>YOUR</span>
+                  <span>BUSINESS</span>
                   <span className="text-gray-400">ONLINE</span>
-                </>
+                </span>
               )}
             </motion.h1>
 
@@ -293,8 +293,20 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right Side - Empty for asymmetric layout */}
-          <div className="hidden lg:block col-span-4" />
+          {/* Right Side - Logo (Desktop Only) */}
+          <div className="hidden lg:flex col-span-5 items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <img 
+                src={LOGO_URL} 
+                alt="Yrvante Logo" 
+                className="w-80 h-auto object-contain opacity-90"
+              />
+            </motion.div>
+          </div>
         </div>
       </div>
 
