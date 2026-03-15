@@ -274,39 +274,23 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="relative"
             >
-              {/* Green Glow Availability Button */}
-              <div 
-                className="relative px-8 py-6 bg-black text-white rounded-sm cursor-pointer group"
-                style={{
-                  boxShadow: '0 0 40px rgba(34, 197, 94, 0.4), 0 0 80px rgba(34, 197, 94, 0.2)'
-                }}
+              {/* Elegant Green Glow Availability Badge */}
+              <button 
                 onClick={scrollToContact}
+                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-gray-200 hover:border-green-300 transition-all duration-300"
+                style={{
+                  boxShadow: '0 0 30px rgba(34, 197, 94, 0.3), 0 4px 20px rgba(0, 0, 0, 0.05)'
+                }}
               >
-                {/* Animated glow ring */}
-                <div 
-                  className="absolute inset-0 rounded-sm animate-pulse"
-                  style={{
-                    boxShadow: '0 0 30px rgba(34, 197, 94, 0.5), 0 0 60px rgba(34, 197, 94, 0.3)'
-                  }}
-                />
-                
-                <div className="relative z-10 text-center">
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-xs font-bold uppercase tracking-[0.2em]">
-                      {language === 'nl' ? '1 Project Beschikbaar' : '1 Project Available'}
-                    </span>
-                  </div>
-                  <p className="text-lg font-bold">
-                    {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
-                  </p>
-                  <p className="text-xs text-gray-400 mt-2 group-hover:text-white transition-colors">
-                    {language === 'nl' ? 'Klik om contact op te nemen →' : 'Click to get in touch →'}
-                  </p>
-                </div>
-              </div>
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <span className="text-sm font-medium text-gray-800 group-hover:text-green-700 transition-colors">
+                  {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
+                </span>
+              </button>
             </motion.div>
           </div>
         </div>
