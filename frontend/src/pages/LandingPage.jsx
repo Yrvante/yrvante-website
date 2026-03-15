@@ -260,16 +260,16 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[12vw] lg:text-[6.5vw] font-black leading-[1.15] tracking-tighter mb-8"
+              className="text-[10vw] lg:text-[5vw] font-black leading-[1.15] tracking-tighter mb-8"
             >
               {language === 'nl' ? (
-                <span className="flex flex-col gap-1 lg:gap-3">
+                <span className="flex flex-col gap-1 lg:gap-2">
                   <span>JOUW</span>
                   <span>BEDRIJF</span>
                   <span className="text-gray-400">ONLINE</span>
                 </span>
               ) : (
-                <span className="flex flex-col gap-1 lg:gap-3">
+                <span className="flex flex-col gap-1 lg:gap-2">
                   <span>YOUR</span>
                   <span>BUSINESS</span>
                   <span className="text-gray-400">ONLINE</span>
@@ -333,17 +333,39 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right Side - Logo (Desktop Only) */}
+          {/* Right Side - Logo (Desktop Only) with Animation */}
           <div className="hidden lg:flex col-span-5 items-center justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ 
+                duration: 1.2, 
+                delay: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+              className="relative"
             >
-              <img 
+              {/* Subtle glow effect behind logo */}
+              <div 
+                className="absolute inset-0 blur-3xl opacity-20 bg-gradient-to-br from-gray-300 to-transparent"
+                style={{ transform: 'scale(1.2)' }}
+              />
+              <motion.img 
                 src={LOGO_URL} 
                 alt="Yrvante Logo" 
-                className="w-[420px] h-auto object-contain"
+                className="w-[520px] h-auto object-contain relative z-10"
+                animate={{ 
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               />
             </motion.div>
           </div>
