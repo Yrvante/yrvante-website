@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../App";
 import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const CalculatorPage = () => {
   const { language } = useLanguage();
@@ -270,6 +271,7 @@ const CalculatorPage = () => {
 
   return (
     <div className="min-h-screen bg-white" data-testid="calculator-page">
+      <SEO page="/calculator" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 md:px-12">

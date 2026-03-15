@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../App";
 import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const PackagesPage = () => {
   const { language } = useLanguage();
@@ -139,6 +140,7 @@ const PackagesPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO page="/pakketten" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">

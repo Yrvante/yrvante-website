@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../App";
 import { ArrowRight, Search, Clock, TrendingUp, Shield, Zap, Globe, Users, CheckCircle, X, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
 
@@ -170,6 +171,7 @@ const WhyWebsitePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO page="/waarom-website" />
       {/* Navigation - matching homepage style */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 md:px-12">

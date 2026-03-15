@@ -4,6 +4,7 @@ import { useLanguage } from "../App";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
+import SEO from "../components/SEO";
 import {
   Monitor,
   Code,
@@ -179,12 +180,36 @@ const HeroSection = () => {
         <div className="grid grid-cols-12 gap-4 min-h-[calc(100vh-80px)] items-center">
           
           {/* Left Side - Typography Heavy */}
-          <div className="col-span-12 lg:col-span-7 py-12 lg:py-0">
+          <div className="col-span-12 lg:col-span-8 py-12 lg:py-0">
+            {/* Availability Badge - Elegant pill at top */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-8"
+            >
+              <button 
+                onClick={scrollToContact}
+                className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-green-300 transition-all duration-300 text-sm"
+                style={{
+                  boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
+                }}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-gray-600 group-hover:text-green-700 transition-colors">
+                  {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
+                </span>
+              </button>
+            </motion.div>
+
             {/* Slogan */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-6"
             >
               Smart Web & Software
@@ -194,7 +219,7 @@ const HeroSection = () => {
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               className="text-[12vw] lg:text-[8vw] font-black leading-[0.85] tracking-tighter mb-8"
             >
               {language === 'nl' ? (
@@ -216,7 +241,7 @@ const HeroSection = () => {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="text-sm lg:text-base text-gray-500 max-w-md leading-relaxed mb-10"
             >
               {language === 'nl' 
@@ -228,7 +253,7 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-wrap gap-4 items-center"
             >
               <button
@@ -250,7 +275,7 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-gray-200"
             >
               <div>
@@ -268,31 +293,8 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right Side - Availability Badge */}
-          <div className="col-span-12 lg:col-span-5 flex items-center justify-center lg:justify-end py-12 lg:py-0">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              {/* Elegant Green Glow Availability Badge */}
-              <button 
-                onClick={scrollToContact}
-                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-gray-200 hover:border-green-300 transition-all duration-300"
-                style={{
-                  boxShadow: '0 0 30px rgba(34, 197, 94, 0.3), 0 4px 20px rgba(0, 0, 0, 0.05)'
-                }}
-              >
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                <span className="text-sm font-medium text-gray-800 group-hover:text-green-700 transition-colors">
-                  {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
-                </span>
-              </button>
-            </motion.div>
-          </div>
+          {/* Right Side - Empty for asymmetric layout */}
+          <div className="hidden lg:block col-span-4" />
         </div>
       </div>
 
@@ -1068,6 +1070,7 @@ const Footer = () => {
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen bg-white">
+      <SEO page="/" />
       <Navigation />
       <HeroSection />
       <ServicesSection />

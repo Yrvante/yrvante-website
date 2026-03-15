@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../App";
 import { ArrowLeft, ArrowRight, Calendar, Clock, TrendingUp, Users, Target, DollarSign, Search, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const BlogPage = () => {
   const { language } = useLanguage();
@@ -246,6 +247,7 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO page="/blog" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
