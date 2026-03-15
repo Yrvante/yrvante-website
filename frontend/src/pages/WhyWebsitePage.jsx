@@ -1,141 +1,168 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, CheckCircle, ArrowRight, Search, Clock, TrendingUp, Shield, Zap, Eye, Users } from "lucide-react";
+import { ArrowRight, Search, Clock, TrendingUp, Shield, Zap, Globe, Users, CheckCircle, X, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
 
 const WhyWebsitePage = () => {
   const { language } = useLanguage();
 
   const content = {
     nl: {
-      back: "Terug",
-      heroTitle: "Waarom een website tegenwoordig",
+      heroTag: "De waarheid",
+      heroTitle: "Waarom een website",
       heroTitleHighlight: "geen luxe meer is",
-      heroSubtitle: "95% van de consumenten zoekt online voordat ze kopen",
+      heroSubtitle: "95% van de consumenten zoekt online voordat ze kopen. Zonder website mis je klanten.",
       
-      // Section 1 - The problem
+      stats: [
+        { value: "95%", label: "zoekt online" },
+        { value: "24/7", label: "bereikbaar" },
+        { value: "€500", label: "vanaf" }
+      ],
+      
       section1Title: "Klanten zoeken online",
-      section1Text: "Wanneer iemand vandaag een bedrijf zoekt, gebeurt dat bijna altijd online. Of het nu gaat om een kapper, restaurant, aannemer of coach — de eerste stap is bijna altijd een zoekopdracht op Google. Als jouw bedrijf daar geen professionele website heeft, is de kans groot dat een potentiële klant simpelweg naar een concurrent gaat die wél online zichtbaar is.",
+      section1Text: "Wanneer iemand vandaag een bedrijf zoekt, gebeurt dat bijna altijd online. Of het nu gaat om een kapper, restaurant, aannemer of coach — de eerste stap is bijna altijd een zoekopdracht op Google.",
       section1Warning: "Geen website? Dan gaat je potentiële klant naar een concurrent die wél zichtbaar is.",
       
-      // Section 2 - The value
-      section2Title: "Een website werkt 24/7 voor je",
-      section2Text: "Veel ondernemers realiseren zich alleen niet hoe groot dat verschil kan zijn. Een website werkt namelijk 24 uur per dag voor je: hij laat zien wat je doet, wekt vertrouwen bij nieuwe klanten en zorgt ervoor dat mensen contact opnemen voordat ze überhaupt met een concurrent praten.",
-      section2Benefits: [
-        "Laat zien wat je doet",
-        "Wekt vertrouwen bij klanten",
-        "Klanten nemen contact op voordat ze naar een concurrent gaan"
+      benefitsTitle: "Een website werkt 24/7 voor je",
+      benefits: [
+        { icon: <Globe size={24} />, title: "Altijd zichtbaar", text: "Je website werkt ook als jij slaapt, op vakantie bent of druk aan het werk bent." },
+        { icon: <Users size={24} />, title: "Vertrouwen wekken", text: "Een professionele website laat zien dat je serieus bent over je bedrijf." },
+        { icon: <TrendingUp size={24} />, title: "Meer klanten", text: "Klanten nemen contact op voordat ze überhaupt met een concurrent praten." }
       ],
       
-      // Section 3 - The cost myth
-      section3Title: "\"Een website is toch duur?\"",
-      section3Text: "Toch denken veel ondernemers dat een website automatisch duizenden euro's moet kosten. En eerlijk gezegd is dat vaak ook zo. Veel webdesignbureaus rekenen €1.500 tot €5.000 of meer voor een website, met daarbovenop maandelijkse kosten voor onderhoud en hosting.",
-      section3Highlight: "Dat is precies waar ik het anders wil doen.",
-      traditional: "Traditionele bureaus",
-      traditionalPrice: "€1.500 - €5.000+",
-      traditionalExtra: "+ maandelijkse kosten",
-      traditionalPoints: ["Lange doorlooptijd", "Hoge opstartkosten", "Vaak overkill voor MKB"],
+      mythTitle: "\"Een website is toch duur?\"",
+      mythText: "Veel ondernemers denken dat een website automatisch duizenden euro's moet kosten. En eerlijk gezegd is dat bij traditionele bureaus vaak ook zo.",
       
-      // Section 4 - Our solution
-      section4Title: "Professionele websites, zonder onnodig hoge prijzen",
-      section4Text: "Bij Yrvante geloof ik dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen mijn websites al vanaf €500. Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
-      section4Text2: "Daarnaast help ik je ook met het online houden van je website. Voor slechts €25 per maand regel ik de hosting en zorg ik dat je website veilig, snel en altijd bereikbaar blijft.",
-      ourApproach: "Mijn aanpak",
-      ourPrice: "Vanaf €500",
-      ourExtra: "Geen verplichte abonnementen",
-      ourPoints: ["Snel opgeleverd", "Professioneel resultaat", "Betaalbaar voor iedereen"],
+      comparisonTitle: "Het verschil",
+      traditional: {
+        title: "Traditionele bureaus",
+        price: "€3.000 - €8.000+",
+        extra: "+ maandelijkse kosten",
+        points: [
+          { text: "Weken tot maanden wachten", negative: true },
+          { text: "Betalen voor overhead", negative: true },
+          { text: "Meerdere contactpersonen", negative: true },
+          { text: "Vaak overkill voor MKB", negative: true }
+        ]
+      },
+      yrvante: {
+        title: "Yrvante",
+        price: "Vanaf €500",
+        extra: "Geen verplichte abonnementen",
+        points: [
+          { text: "Klaar binnen 1-2 weken", negative: false },
+          { text: "Direct contact met mij", negative: false },
+          { text: "Eerlijke, transparante prijzen", negative: false },
+          { text: "Precies wat je nodig hebt", negative: false }
+        ]
+      },
       
-      // Section 5 - What you get
-      section5Title: "Wat krijg je bij Yrvante?",
-      card1Title: "Moderne website",
-      card1Text: "Snel, professioneel en perfect op mobiel, tablet en desktop.",
-      card2Title: "Volledige toegang",
-      card2Text: "Je houdt altijd zelf toegang. Wil je later zelf een tekst aanpassen of een foto veranderen? Dan kan dat gewoon. Liever dat ik het voor je regel? Dat kan ook — veel klanten kiezen voor een klein onderhoudsabonnement zodat ik updates en aanpassingen voor hen doe.",
-      card3Title: "Onderhoud optioneel",
-      card3Text: "€25/mnd als je wilt dat ik updates regel. Dit is niet verplicht — zonder abonnement ben je zelf verantwoordelijk voor onderhoud na oplevering.",
+      solutionTitle: "Professionele websites, zonder onnodig hoge prijzen",
+      solutionText: "Bij Yrvante geloof ik dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen mijn websites al vanaf €500.",
+      solutionText2: "Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
       
-      // Section 6 - The goal
-      section6Title: "Het belangrijkste:",
-      section6Highlight: "meer klanten vinden",
-      section6Text: "Een goede website is uiteindelijk niet alleen een mooie pagina op internet. Het is een plek waar nieuwe klanten jouw bedrijf leren kennen, vertrouwen krijgen in je diensten en besluiten om contact op te nemen.",
-      section6Tagline: "En dat begint met zichtbaar zijn.",
+      featuresTitle: "Wat krijg je bij Yrvante?",
+      features: [
+        { icon: <Zap size={28} />, title: "Moderne website", text: "Snel, professioneel en perfect op elk apparaat." },
+        { icon: <Shield size={28} />, title: "Volledige eigendom", text: "Je houdt altijd zelf toegang en eigendom van je website." },
+        { icon: <Clock size={28} />, title: "Snelle oplevering", text: "Basis website binnen 1 week, Pro/Premium binnen 1-2 weken." }
+      ],
       
-      // CTA
+      goalTitle: "Het belangrijkste:",
+      goalHighlight: "meer klanten vinden",
+      goalText: "Een goede website is niet alleen een mooie pagina op internet. Het is een plek waar nieuwe klanten jouw bedrijf leren kennen en besluiten om contact op te nemen.",
+      goalTagline: "En dat begint met zichtbaar zijn.",
+      
       ctaTitle: "Benieuwd wat een website voor jouw bedrijf kan betekenen?",
-      ctaText: "Neem gerust contact met mij op. Ik denk graag met je mee en laat zien hoe jouw bedrijf professioneel online kan staan — zonder dat je daar duizenden euro's voor hoeft te betalen.",
+      ctaText: "Neem gerust contact met mij op. Ik denk graag met je mee — vrijblijvend en zonder verplichtingen.",
       ctaButton: "Neem contact op",
+      ctaCalculator: "Bereken je prijs",
       
-      // Calculator link
-      calculatorText: "Wil je weten wat een website precies kost?",
-      calculatorButton: "Bekijk onze calculator",
-      
-      // Pricing cards
-      basicWebsite: "Basis website",
-      advancedWebsite: "Geavanceerd",
-      maintenance: "Onderhoud",
-      optional: "optioneel",
-      exclVat: "excl. BTW"
+      packages: [
+        { name: "Basis", price: "€500", desc: "Startende ondernemers" },
+        { name: "Pro", price: "€900", desc: "Groeiende bedrijven" },
+        { name: "Premium", price: "€1400", desc: "Complete oplossing" }
+      ]
     },
     en: {
-      back: "Back",
-      heroTitle: "Why a website nowadays",
+      heroTag: "The truth",
+      heroTitle: "Why a website",
       heroTitleHighlight: "is no longer a luxury",
-      heroSubtitle: "95% of consumers search online before buying",
+      heroSubtitle: "95% of consumers search online before buying. Without a website you miss customers.",
       
-      section1Title: "Customers search online",
-      section1Text: "When someone searches for a business today, it almost always happens online. Whether it's a hairdresser, restaurant, contractor, or coach — the first step is almost always a Google search. If your business doesn't have a professional website there, chances are a potential customer will simply go to a competitor who is visible online.",
-      section1Warning: "No website? Then your potential customer goes to a competitor who is visible online.",
-      
-      section2Title: "A website works 24/7 for you",
-      section2Text: "Many entrepreneurs don't realize how big that difference can be. A website works 24 hours a day for you: it shows what you do, builds trust with new customers, and ensures people contact you before they even talk to a competitor.",
-      section2Benefits: [
-        "Shows what you do",
-        "Builds trust with customers",
-        "Customers contact you before going to a competitor"
+      stats: [
+        { value: "95%", label: "search online" },
+        { value: "24/7", label: "accessible" },
+        { value: "€500", label: "starting from" }
       ],
       
-      section3Title: "\"Isn't a website expensive?\"",
-      section3Text: "Yet many entrepreneurs think a website automatically costs thousands of euros. And honestly, that's often true. Many web design agencies charge €1,500 to €5,000 or more for a website, plus monthly costs for maintenance and hosting.",
-      section3Highlight: "That's exactly where I want to do things differently.",
-      traditional: "Traditional agencies",
-      traditionalPrice: "€1,500 - €5,000+",
-      traditionalExtra: "+ monthly costs",
-      traditionalPoints: ["Long lead time", "High startup costs", "Often overkill for SMBs"],
+      section1Title: "Customers search online",
+      section1Text: "When someone searches for a business today, it almost always happens online. Whether it's a hairdresser, restaurant, contractor, or coach — the first step is almost always a Google search.",
+      section1Warning: "No website? Then your potential customer goes to a competitor who is visible online.",
       
-      section4Title: "Professional websites, without unnecessarily high prices",
-      section4Text: "At Yrvante, I believe a professional website should be accessible to every entrepreneur. That's why my websites start from just €500. You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
-      section4Text2: "I also help you keep your website online. For just €25 per month, I handle the hosting and ensure your website stays secure, fast, and always accessible.",
-      ourApproach: "My approach",
-      ourPrice: "From €500",
-      ourExtra: "No mandatory subscriptions",
-      ourPoints: ["Fast delivery", "Professional result", "Affordable for everyone"],
+      benefitsTitle: "A website works 24/7 for you",
+      benefits: [
+        { icon: <Globe size={24} />, title: "Always visible", text: "Your website works while you sleep, are on vacation, or are busy working." },
+        { icon: <Users size={24} />, title: "Build trust", text: "A professional website shows that you're serious about your business." },
+        { icon: <TrendingUp size={24} />, title: "More customers", text: "Customers contact you before they even talk to a competitor." }
+      ],
       
-      section5Title: "What do you get at Yrvante?",
-      card1Title: "Modern website",
-      card1Text: "Fast, professional, and perfect on mobile, tablet, and desktop.",
-      card2Title: "Full access",
-      card2Text: "You always keep access yourself. Want to change a text or photo later? You can do that. Prefer me to handle it? That's also possible — many customers choose a small maintenance subscription so I handle updates and changes for them.",
-      card3Title: "Maintenance optional",
-      card3Text: "€25/month if you want me to handle updates. This is not mandatory — without subscription you are responsible for maintenance after delivery.",
+      mythTitle: "\"Isn't a website expensive?\"",
+      mythText: "Many entrepreneurs think a website automatically costs thousands of euros. And honestly, at traditional agencies that's often true.",
       
-      section6Title: "The most important thing:",
-      section6Highlight: "finding more customers",
-      section6Text: "A good website is ultimately not just a nice page on the internet. It's a place where new customers get to know your business, gain trust in your services, and decide to get in touch.",
-      section6Tagline: "And that starts with being visible.",
+      comparisonTitle: "The difference",
+      traditional: {
+        title: "Traditional agencies",
+        price: "€3,000 - €8,000+",
+        extra: "+ monthly costs",
+        points: [
+          { text: "Wait weeks to months", negative: true },
+          { text: "Pay for overhead", negative: true },
+          { text: "Multiple contact persons", negative: true },
+          { text: "Often overkill for SMBs", negative: true }
+        ]
+      },
+      yrvante: {
+        title: "Yrvante",
+        price: "From €500",
+        extra: "No mandatory subscriptions",
+        points: [
+          { text: "Ready within 1-2 weeks", negative: false },
+          { text: "Direct contact with me", negative: false },
+          { text: "Fair, transparent prices", negative: false },
+          { text: "Exactly what you need", negative: false }
+        ]
+      },
+      
+      solutionTitle: "Professional websites, without unnecessarily high prices",
+      solutionText: "At Yrvante I believe a professional website should be accessible to every entrepreneur. That's why my websites start from just €500.",
+      solutionText2: "You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
+      
+      featuresTitle: "What do you get at Yrvante?",
+      features: [
+        { icon: <Zap size={28} />, title: "Modern website", text: "Fast, professional and perfect on any device." },
+        { icon: <Shield size={28} />, title: "Full ownership", text: "You always keep access and ownership of your website." },
+        { icon: <Clock size={28} />, title: "Fast delivery", text: "Basic website within 1 week, Pro/Premium within 1-2 weeks." }
+      ],
+      
+      goalTitle: "The most important thing:",
+      goalHighlight: "finding more customers",
+      goalText: "A good website is not just a nice page on the internet. It's a place where new customers get to know your business and decide to get in touch.",
+      goalTagline: "And that starts with being visible.",
       
       ctaTitle: "Curious what a website can mean for your business?",
-      ctaText: "Feel free to contact me. I'd love to think along with you and show you how your business can be professionally online — without having to pay thousands of euros.",
+      ctaText: "Feel free to contact me. I'd love to think along with you — no obligations.",
       ctaButton: "Contact me",
+      ctaCalculator: "Calculate your price",
       
-      calculatorText: "Want to know exactly what a website costs?",
-      calculatorButton: "Check our calculator",
-      
-      basicWebsite: "Basic website",
-      advancedWebsite: "Advanced",
-      maintenance: "Maintenance",
-      optional: "optional",
-      exclVat: "excl. VAT"
+      packages: [
+        { name: "Basic", price: "€500", desc: "Starting entrepreneurs" },
+        { name: "Pro", price: "€900", desc: "Growing businesses" },
+        { name: "Premium", price: "€1400", desc: "Complete solution" }
+      ]
     }
   };
 
@@ -143,94 +170,95 @@ const WhyWebsitePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
+      {/* Navigation - matching homepage style */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
-              <ArrowLeft size={16} />
-              {t.back}
+            <Link to="/" className="flex items-center">
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
             </Link>
-            <Link to="/" className="font-heading text-xl font-bold">Yrvante</Link>
+            <div className="flex items-center gap-4">
+              <Link 
+                to="/pakketten" 
+                className="hidden md:inline-flex text-sm text-gray-600 hover:text-black transition-colors"
+              >
+                {language === 'nl' ? 'Pakketten' : 'Packages'}
+              </Link>
+              <Link 
+                to="/calculator" 
+                className="px-5 py-2.5 bg-black text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all"
+              >
+                {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-28 pb-8 px-6 md:px-12 bg-black text-white">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="py-16 md:py-24"
-          >
-            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">
-              {language === 'nl' ? 'De waarheid over online zichtbaarheid' : 'The truth about online visibility'}
-            </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-thin leading-tight mb-8">
-              {t.heroTitle}<br />
-              <span className="text-gray-500">{t.heroTitleHighlight}</span>
-            </h1>
-            <p className="text-xl text-gray-400 max-w-2xl">
-              {t.heroSubtitle}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Hero Section - Premium style */}
+      <section className="pt-20">
+        <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-32">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center"
+            >
+              <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-gray-300 mb-8">
+                {t.heroTag}
+              </span>
+              
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-6">
+                {t.heroTitle}<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">
+                  {t.heroTitleHighlight}
+                </span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+                {t.heroSubtitle}
+              </p>
 
-      {/* Stats bar */}
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-3 divide-x divide-gray-200">
-            <motion.div 
-              className="py-8 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <p className="text-3xl md:text-4xl font-heading font-thin">95%</p>
-              <p className="text-xs text-gray-500 mt-1">{language === 'nl' ? 'zoekt online' : 'search online'}</p>
-            </motion.div>
-            <motion.div 
-              className="py-8 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <p className="text-3xl md:text-4xl font-heading font-thin">24/7</p>
-              <p className="text-xs text-gray-500 mt-1">{language === 'nl' ? 'online bereikbaar' : 'online accessible'}</p>
-            </motion.div>
-            <motion.div 
-              className="py-8 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <p className="text-3xl md:text-4xl font-heading font-thin">€500</p>
-              <p className="text-xs text-gray-500 mt-1">{language === 'nl' ? 'al vanaf' : 'starting from'}</p>
+              {/* Stats */}
+              <div className="flex justify-center gap-8 md:gap-16">
+                {t.stats.map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + index * 0.1 }}
+                    className="text-center"
+                  >
+                    <p className="text-3xl md:text-4xl font-heading font-bold">{stat.value}</p>
+                    <p className="text-sm text-gray-500">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Section 1 - The Problem */}
-      <section className="py-20 px-6 md:px-12">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-20 md:py-28 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <Search className="text-gray-300 mb-6" size={48} strokeWidth={1} />
-              <h2 className="text-3xl md:text-4xl font-heading font-thin mb-6">
+              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mb-8">
+                <Search size={28} className="text-white" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
                 {t.section1Title}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 {t.section1Text}
               </p>
-              <div className="bg-red-50 border-l-4 border-red-400 p-4">
+              <div className="p-6 bg-red-50 border-l-4 border-red-500 rounded-r-2xl">
                 <p className="text-red-800 font-medium">
                   {t.section1Warning}
                 </p>
@@ -238,75 +266,72 @@ const WhyWebsitePage = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gray-900 text-white p-8 md:p-12"
+              className="relative"
             >
-              <Clock className="text-gray-500 mb-6" size={32} strokeWidth={1} />
-              <h3 className="text-2xl font-heading font-thin leading-relaxed mb-4">
-                {t.section2Title}
-              </h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
-                {t.section2Text}
-              </p>
-              <ul className="space-y-4">
-                {t.section2Benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-300">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="absolute -inset-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-3xl opacity-50 blur-2xl"></div>
+              <div className="relative bg-black text-white p-10 rounded-3xl">
+                <h3 className="text-2xl font-heading font-bold mb-6">
+                  {t.benefitsTitle}
+                </h3>
+                <div className="space-y-6">
+                  {t.benefits.map((benefit, index) => (
+                    <div key={index} className="flex gap-4">
+                      <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        {benefit.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-bold mb-1">{benefit.title}</h4>
+                        <p className="text-gray-400 text-sm">{benefit.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Section 3 - The Cost Myth */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
+      {/* Section 2 - The Myth & Comparison */}
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-thin mb-4">
-              {t.section3Title}
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              {t.mythTitle}
             </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              {t.mythText}
+            </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center mb-12"
-          >
-            <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              {t.section3Text}
-            </p>
-            <p className="text-xl font-heading">
-              {t.section3Highlight}
-            </p>
-          </motion.div>
+          <h3 className="text-center text-sm font-medium text-gray-400 uppercase tracking-wider mb-8">
+            {t.comparisonTitle}
+          </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Traditional agencies */}
+            {/* Traditional */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 border border-gray-200"
+              className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200"
             >
-              <p className="text-xs font-mono text-gray-400 uppercase tracking-wider mb-4">{t.traditional}</p>
-              <p className="text-4xl font-heading mb-2">{t.traditionalPrice}</p>
-              <p className="text-gray-500 mb-6">{t.traditionalExtra}</p>
-              <ul className="space-y-3 text-gray-600">
-                {t.traditionalPoints.map((point, index) => (
-                  <li key={index} className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-gray-300 rounded-full"></span>
-                    {point}
+              <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">{t.traditional.title}</p>
+              <p className="text-4xl font-heading font-bold text-red-600 mb-2">{t.traditional.price}</p>
+              <p className="text-gray-500 mb-8">{t.traditional.extra}</p>
+              <ul className="space-y-4">
+                {t.traditional.points.map((point, index) => (
+                  <li key={index} className="flex items-center gap-3 text-gray-600">
+                    <X size={18} className="text-red-500 flex-shrink-0" />
+                    {point.text}
                   </li>
                 ))}
               </ul>
@@ -318,19 +343,19 @@ const WhyWebsitePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-black text-white p-8 relative overflow-hidden"
+              className="bg-black text-white p-8 md:p-10 rounded-3xl relative overflow-hidden"
             >
-              <div className="absolute top-4 right-4 bg-white text-black px-3 py-1 text-xs font-mono uppercase">
-                Yrvante
+              <div className="absolute top-6 right-6 px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full">
+                <span className="text-xs text-green-400 font-medium">Aanbevolen</span>
               </div>
-              <p className="text-xs font-mono text-gray-400 uppercase tracking-wider mb-4">{t.ourApproach}</p>
-              <p className="text-4xl font-heading mb-2">{t.ourPrice}</p>
-              <p className="text-gray-400 mb-6">{t.ourExtra}</p>
-              <ul className="space-y-3 text-gray-300">
-                {t.ourPoints.map((point, index) => (
-                  <li key={index} className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-green-400" />
-                    {point}
+              <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">{t.yrvante.title}</p>
+              <p className="text-4xl font-heading font-bold text-green-400 mb-2">{t.yrvante.price}</p>
+              <p className="text-gray-400 mb-8">{t.yrvante.extra}</p>
+              <ul className="space-y-4">
+                {t.yrvante.points.map((point, index) => (
+                  <li key={index} className="flex items-center gap-3 text-gray-300">
+                    <CheckCircle size={18} className="text-green-400 flex-shrink-0" />
+                    {point.text}
                   </li>
                 ))}
               </ul>
@@ -339,194 +364,176 @@ const WhyWebsitePage = () => {
         </div>
       </section>
 
-      {/* Section 4 - Our Solution Text */}
-      <section className="py-20 px-6 md:px-12">
-        <div className="max-w-3xl mx-auto">
+      {/* Section 3 - Solution */}
+      <section className="py-20 md:py-28 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-thin mb-8">
-              {t.section4Title}
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">
+              {t.solutionTitle}
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              {t.section4Text}
+            <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              {t.solutionText}
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              {t.section4Text2}
+              {t.solutionText2}
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Section 5 - What you get */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
+      {/* Section 4 - Features */}
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-black text-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-16"
+            className="text-3xl md:text-4xl font-heading font-bold text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-thin">
-              {t.section5Title}
-            </h2>
-          </motion.div>
+            {t.featuresTitle}
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {t.features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 hover:bg-white/10 transition-all"
+              >
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-heading font-bold mb-3">{feature.title}</h3>
+                <p className="text-gray-400">{feature.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 5 - Goal */}
+      <section className="py-20 md:py-28 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="group"
             >
-              <div className="bg-white p-8 border border-gray-200 h-full transition-all hover:border-black">
-                <Zap className="text-gray-400 mb-6 group-hover:text-black transition-colors" size={32} strokeWidth={1} />
-                <h3 className="font-heading text-xl mb-3">{t.card1Title}</h3>
-                <p className="text-gray-600">
-                  {t.card1Text}
-                </p>
-              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                {t.goalTitle}<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600">
+                  {t.goalHighlight}
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                {t.goalText}
+              </p>
+              <p className="text-2xl font-heading font-bold">
+                {t.goalTagline}
+              </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="group"
+              className="text-center lg:text-right"
             >
-              <div className="bg-white p-8 border border-gray-200 h-full transition-all hover:border-black">
-                <Eye className="text-gray-400 mb-6 group-hover:text-black transition-colors" size={32} strokeWidth={1} />
-                <h3 className="font-heading text-xl mb-3">{t.card2Title}</h3>
-                <p className="text-gray-600">
-                  {t.card2Text}
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="group"
-            >
-              <div className="bg-white p-8 border border-gray-200 h-full transition-all hover:border-black">
-                <Shield className="text-gray-400 mb-6 group-hover:text-black transition-colors" size={32} strokeWidth={1} />
-                <h3 className="font-heading text-xl mb-3">{t.card3Title}</h3>
-                <p className="text-gray-600">
-                  {t.card3Text}
-                </p>
-              </div>
+              <p className="text-6xl md:text-8xl font-heading font-bold text-gray-100 leading-tight">
+                {language === 'nl' ? 'Zichtbaar' : 'Being'}<br />
+                {language === 'nl' ? 'zijn.' : 'visible.'}
+              </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Section 6 - The goal */}
-      <section className="py-20 px-6 md:px-12 bg-black text-white">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-          >
-            <div>
-              <TrendingUp className="text-gray-600 mb-6" size={48} strokeWidth={1} />
-              <h2 className="text-3xl md:text-4xl font-heading font-thin mb-6">
-                {t.section6Title}<br />
-                <span className="text-white">{t.section6Highlight}</span>
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                {t.section6Text}
-              </p>
-              <p className="text-white text-xl font-heading">
-                {t.section6Tagline}
-              </p>
-            </div>
-            <div className="text-center lg:text-right">
-              <p className="text-6xl md:text-8xl font-heading font-thin text-gray-700">
-                {language === 'nl' ? 'Zichtbaar' : 'Being'}<br />{language === 'nl' ? 'zijn.' : 'visible.'}
-              </p>
-            </div>
-          </motion.div>
+      {/* Pricing Cards */}
+      <section className="py-16 px-6 md:px-12 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {t.packages.map((pkg, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -4 }}
+                className={`p-8 rounded-3xl text-center transition-all ${
+                  index === 1 
+                    ? 'bg-black text-white scale-105 shadow-2xl' 
+                    : 'bg-white border border-gray-200'
+                }`}
+              >
+                <p className={`text-sm uppercase tracking-wider mb-2 ${index === 1 ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {pkg.name}
+                </p>
+                <p className="text-4xl font-heading font-bold mb-2">{pkg.price}</p>
+                <p className={`text-sm ${index === 1 ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {pkg.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 md:px-12">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-20 md:py-28 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-heading font-thin mb-6">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
               {t.ctaTitle}
             </h2>
-            <p className="text-gray-500 text-lg mb-10 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
               {t.ctaText}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/#contact"
-                className="inline-flex items-center justify-center gap-3 bg-black text-white px-10 py-5 font-mono text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors"
+                className="inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition-all"
               >
                 {t.ctaButton}
-                <ArrowRight size={16} />
+                <ArrowRight size={18} />
               </Link>
               <Link
                 to="/calculator"
-                className="inline-flex items-center justify-center gap-3 bg-white text-black border-2 border-black px-10 py-5 font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center justify-center gap-3 border-2 border-black px-8 py-4 rounded-full font-medium hover:bg-black hover:text-white transition-all"
               >
-                {t.calculatorButton}
-                <ArrowRight size={16} />
+                {t.ctaCalculator}
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Pricing cards */}
-      <section className="py-16 px-6 md:px-12 bg-white border-t border-gray-200">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.div 
-              className="bg-white p-8 border border-gray-200 text-center hover:border-black transition-colors"
-              whileHover={{ y: -4 }}
-            >
-              <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">{t.basicWebsite}</p>
-              <p className="text-4xl font-heading">€500</p>
-              <p className="text-sm text-gray-500 mt-1">{t.exclVat}</p>
-            </motion.div>
-            <motion.div 
-              className="bg-white p-8 border border-gray-200 text-center hover:border-black transition-colors"
-              whileHover={{ y: -4 }}
-            >
-              <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">Pro</p>
-              <p className="text-4xl font-heading">€900</p>
-              <p className="text-sm text-gray-500 mt-1">{t.exclVat}</p>
-            </motion.div>
-            <motion.div 
-              className="bg-white p-8 border border-gray-200 text-center hover:border-black transition-colors"
-              whileHover={{ y: -4 }}
-            >
-              <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">{t.maintenance}</p>
-              <p className="text-4xl font-heading">€25<span className="text-xl">/mnd</span></p>
-              <p className="text-sm text-gray-500 mt-1">{t.optional}</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
-          <span className="font-heading text-lg">Yrvante</span>
-          <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
+      <footer className="py-12 px-6 md:px-12 bg-black text-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" style={{filter: 'invert(1)'}} />
+            <div className="flex items-center gap-8 text-sm text-gray-400">
+              <a href="mailto:info@yrvante.com" className="hover:text-white transition-colors flex items-center gap-2">
+                <Mail size={16} />
+                info@yrvante.com
+              </a>
+              <span>Almelo, Nederland</span>
+            </div>
+            <p className="text-sm text-gray-500">© {new Date().getFullYear()} Yrvante</p>
+          </div>
         </div>
       </footer>
     </div>
