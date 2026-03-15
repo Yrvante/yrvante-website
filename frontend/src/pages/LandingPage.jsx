@@ -333,39 +333,18 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right Side - Logo (Desktop Only) with Animation */}
+          {/* Right Side - Logo (Desktop Only) */}
           <div className="hidden lg:flex col-span-5 items-center justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ 
-                duration: 1.2, 
-                delay: 0.3,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.3 }
-              }}
-              className="relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* Subtle glow effect behind logo */}
-              <div 
-                className="absolute inset-0 blur-3xl opacity-20 bg-gradient-to-br from-gray-300 to-transparent"
-                style={{ transform: 'scale(1.2)' }}
-              />
-              <motion.img 
+              <img 
                 src={LOGO_URL} 
                 alt="Yrvante Logo" 
-                className="w-[520px] h-auto object-contain relative z-10"
-                animate={{ 
-                  y: [0, -8, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                className="w-[520px] h-auto object-contain"
+                style={{ backgroundColor: 'white' }}
               />
             </motion.div>
           </div>
