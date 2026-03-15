@@ -39,10 +39,10 @@ const WhyWebsitePage = () => {
       
       // Section 4 - Our solution
       section4Title: "Professionele websites, zonder onnodig hoge prijzen",
-      section4Text: "Bij Yrvante geloven wij dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen onze websites al vanaf €350. Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
-      section4Text2: "Daarnaast helpen wij je ook met het online houden van je website. Voor slechts €15 per maand regelen wij de hosting en zorgen we dat je website veilig, snel en altijd bereikbaar blijft.",
+      section4Text: "Bij Yrvante geloven wij dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen onze websites al vanaf €500. Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
+      section4Text2: "Daarnaast helpen wij je ook met het online houden van je website. Voor slechts €20 per maand regelen wij de hosting en zorgen we dat je website veilig, snel en altijd bereikbaar blijft.",
       ourApproach: "Onze aanpak",
-      ourPrice: "Vanaf €350",
+      ourPrice: "Vanaf €500",
       ourExtra: "Geen verplichte abonnementen",
       ourPoints: ["Snel opgeleverd", "Professioneel resultaat", "Betaalbaar voor iedereen"],
       
@@ -53,7 +53,7 @@ const WhyWebsitePage = () => {
       card2Title: "Volledige toegang",
       card2Text: "Je houdt altijd zelf toegang. Wil je later zelf een tekst aanpassen of een foto veranderen? Dan kan dat gewoon. Liever dat wij het voor je regelen? Dat kan ook — veel klanten kiezen voor een klein onderhoudsabonnement zodat wij updates en aanpassingen voor hen doen.",
       card3Title: "Onderhoud optioneel",
-      card3Text: "€15/mnd als je wilt dat wij updates regelen. Dit is niet verplicht — zonder abonnement ben je zelf verantwoordelijk voor onderhoud na oplevering.",
+      card3Text: "€20/mnd als je wilt dat wij updates regelen. Dit is niet verplicht — zonder abonnement ben je zelf verantwoordelijk voor onderhoud na oplevering.",
       
       // Section 6 - The goal
       section6Title: "Het belangrijkste:",
@@ -104,10 +104,10 @@ const WhyWebsitePage = () => {
       traditionalPoints: ["Long lead time", "High startup costs", "Often overkill for SMBs"],
       
       section4Title: "Professional websites, without unnecessarily high prices",
-      section4Text: "At Yrvante, we believe a professional website should be accessible to every entrepreneur. That's why our websites start from just €350. You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
-      section4Text2: "We also help you keep your website online. For just €15 per month, we handle the hosting and ensure your website stays secure, fast, and always accessible.",
+      section4Text: "At Yrvante, we believe a professional website should be accessible to every entrepreneur. That's why our websites start from just €500. You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
+      section4Text2: "We also help you keep your website online. For just €20 per month, we handle the hosting and ensure your website stays secure, fast, and always accessible.",
       ourApproach: "Our approach",
-      ourPrice: "From €350",
+      ourPrice: "From €500",
       ourExtra: "No mandatory subscriptions",
       ourPoints: ["Fast delivery", "Professional result", "Affordable for everyone"],
       
@@ -117,7 +117,7 @@ const WhyWebsitePage = () => {
       card2Title: "Full access",
       card2Text: "You always keep access yourself. Want to change a text or photo later? You can do that. Prefer us to handle it? That's also possible — many customers choose a small maintenance subscription so we handle updates and changes for them.",
       card3Title: "Maintenance optional",
-      card3Text: "€15/month if you want us to handle updates. This is not mandatory — without subscription you are responsible for maintenance after delivery.",
+      card3Text: "€20/month if you want us to handle updates. This is not mandatory — without subscription you are responsible for maintenance after delivery.",
       
       section6Title: "The most important thing:",
       section6Highlight: "finding more customers",
@@ -207,7 +207,7 @@ const WhyWebsitePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <p className="text-3xl md:text-4xl font-heading font-thin">€350</p>
+              <p className="text-3xl md:text-4xl font-heading font-thin">€500</p>
               <p className="text-xs text-gray-500 mt-1">{language === 'nl' ? 'al vanaf' : 'starting from'}</p>
             </motion.div>
           </div>
@@ -491,7 +491,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Pricing cards */}
-      <section className="py-16 px-6 md:px-12 bg-gray-50 border-t border-gray-200">
+      <section className="py-16 px-6 md:px-12 bg-white border-t border-gray-200">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <motion.div 
@@ -499,15 +499,15 @@ const WhyWebsitePage = () => {
               whileHover={{ y: -4 }}
             >
               <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">{t.basicWebsite}</p>
-              <p className="text-4xl font-heading">€350</p>
+              <p className="text-4xl font-heading">€500</p>
               <p className="text-sm text-gray-500 mt-1">{t.exclVat}</p>
             </motion.div>
             <motion.div 
               className="bg-white p-8 border border-gray-200 text-center hover:border-black transition-colors"
               whileHover={{ y: -4 }}
             >
-              <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">{t.advancedWebsite}</p>
-              <p className="text-4xl font-heading">€450</p>
+              <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">Pro</p>
+              <p className="text-4xl font-heading">€900</p>
               <p className="text-sm text-gray-500 mt-1">{t.exclVat}</p>
             </motion.div>
             <motion.div 
@@ -515,7 +515,7 @@ const WhyWebsitePage = () => {
               whileHover={{ y: -4 }}
             >
               <p className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-3">{t.maintenance}</p>
-              <p className="text-4xl font-heading">€15<span className="text-xl">/mnd</span></p>
+              <p className="text-4xl font-heading">€20<span className="text-xl">/mnd</span></p>
               <p className="text-sm text-gray-500 mt-1">{t.optional}</p>
             </motion.div>
           </div>

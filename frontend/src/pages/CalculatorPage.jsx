@@ -73,13 +73,13 @@ const CalculatorPage = () => {
         extraPages: {
           title: "Extra pagina's",
           description: "Voor extra content (diensten, blog artikelen, portfolio items)",
-          price: 40,
+          price: 50,
           unit: "per pagina"
         },
         multiLanguage: {
           title: "Meertalige website",
           description: "Website in meerdere talen met taalwisselaar",
-          price: 100,
+          price: 200,
           unit: "eenmalig"
         },
         extraForm: {
@@ -91,19 +91,19 @@ const CalculatorPage = () => {
         maintenance: {
           title: "Onderhoud abonnement",
           description: "Hosting, updates, kleine wijzigingen en beveiliging",
-          price: 20,
+          price: 25,
           unit: "per maand"
         },
         bookingSystem: {
           title: "Online boekingssysteem",
           description: "Afspraken boeken via de website met admin dashboard",
-          price: 180,
+          price: 250,
           unit: "eenmalig"
         },
         googleReviews: {
           title: "Google Reviews op website",
           description: "Toon reviews direct op je website",
-          price: 80,
+          price: 120,
           unit: "eenmalig"
         }
       },
@@ -176,13 +176,13 @@ const CalculatorPage = () => {
         extraPages: {
           title: "Extra pages",
           description: "For extra content (services, blog posts, portfolio items)",
-          price: 40,
+          price: 50,
           unit: "per page"
         },
         multiLanguage: {
           title: "Multi-language website",
           description: "Website in multiple languages with language switcher",
-          price: 100,
+          price: 200,
           unit: "one-time"
         },
         extraForm: {
@@ -194,19 +194,19 @@ const CalculatorPage = () => {
         maintenance: {
           title: "Maintenance subscription",
           description: "Hosting, updates, small changes and security",
-          price: 20,
+          price: 25,
           unit: "per month"
         },
         bookingSystem: {
           title: "Online booking system",
           description: "Book appointments via the website with admin dashboard",
-          price: 180,
+          price: 250,
           unit: "one-time"
         },
         googleReviews: {
           title: "Google Reviews on website",
           description: "Show reviews directly on your website",
-          price: 80,
+          price: 120,
           unit: "one-time"
         }
       },
@@ -232,12 +232,12 @@ const CalculatorPage = () => {
     basic: 500,
     pro: 900,
     premium: 1400,
-    extraPages: 40,
-    multiLanguage: 100,
+    extraPages: 50,
+    multiLanguage: 200,
     extraForm: 80,
-    maintenance: 20,
-    bookingSystem: 180,
-    googleReviews: 80
+    maintenance: 25,
+    bookingSystem: 250,
+    googleReviews: 120
   };
 
   const calculateTotal = () => {
@@ -373,6 +373,46 @@ const CalculatorPage = () => {
             >
               <h2 className="text-2xl font-heading font-bold mb-2">{t.step2}</h2>
               <p className="text-gray-500 text-sm mb-6">{t.optional}</p>
+              
+              {/* Losse prijzen overzicht */}
+              <div className="mb-8 p-6 bg-gray-900 text-white rounded-2xl">
+                <h3 className="font-bold text-lg mb-4">
+                  {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                    <p className="text-2xl font-bold">€50</p>
+                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
+                  </div>
+                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                    <p className="text-2xl font-bold">€200</p>
+                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
+                  </div>
+                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                    <p className="text-2xl font-bold">€80</p>
+                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
+                  </div>
+                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                    <p className="text-2xl font-bold">€25<span className="text-sm text-gray-400">/pm</span></p>
+                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
+                  </div>
+                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                    <p className="text-2xl font-bold">€250</p>
+                    <p className="text-sm text-gray-400">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
+                  </div>
+                  <div className="text-center p-3 bg-gray-800 rounded-xl">
+                    <p className="text-2xl font-bold">€120</p>
+                    <p className="text-sm text-gray-400">Google Reviews</p>
+                  </div>
+                </div>
+                <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-xl p-4">
+                  <p className="text-sm text-yellow-200">
+                    <span className="font-bold">💡 Tip:</span> {language === 'nl' 
+                      ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
+                      : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
+                  </p>
+                </div>
+              </div>
               
               <div className="space-y-4">
                 {/* Extra Pages */}

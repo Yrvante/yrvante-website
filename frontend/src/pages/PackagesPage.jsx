@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const PackagesPage = () => {
@@ -23,7 +23,13 @@ const PackagesPage = () => {
         language === 'nl' ? 'Basis contactpagina' : 'Basic contact page',
         language === 'nl' ? '6 correctierondes' : '6 revision rounds',
       ],
+      notIncluded: [
+        language === 'nl' ? 'SEO-optimalisatie (kan later toegevoegd worden)' : 'SEO optimization (can be added later)',
+        language === 'nl' ? 'Contactformulier met email' : 'Contact form with email',
+        language === 'nl' ? 'Blog of portfolio pagina' : 'Blog or portfolio page',
+      ],
       idealFor: language === 'nl' ? 'ZZP\'ers, Startende ondernemers' : 'Freelancers, Starting entrepreneurs',
+      deliveryTime: language === 'nl' ? '~ 1 week' : '~ 1 week',
       popular: false,
     },
     {
@@ -35,14 +41,20 @@ const PackagesPage = () => {
         : 'Our most chosen option for growing businesses that need more functionality.',
       includes: [
         language === 'nl' ? 'Alles uit Basis Website Pakket' : 'Everything from Basic Website Package',
-        language === 'nl' ? 'Basis SEO-optimalisatie' : 'Basic SEO optimization',
+        language === 'nl' ? 'Basis SEO-optimalisatie (zoekwoordenonderzoek + on-page SEO)' : 'Basic SEO optimization (keyword research + on-page SEO)',
         language === 'nl' ? 'Tot 10 pagina\'s' : 'Up to 10 pages',
         language === 'nl' ? 'Complexere layout / extra secties' : 'Complex layout / extra sections',
         language === 'nl' ? 'Blog pagina' : 'Blog page',
         language === 'nl' ? 'Portfolio pagina' : 'Portfolio page',
-        language === 'nl' ? 'Contactformulier (berichten direct in uw email)' : 'Contact form (messages directly to your email)',
+        language === 'nl' ? 'Contactformulier (berichten direct in je email)' : 'Contact form (messages directly to your email)',
+      ],
+      notIncluded: [
+        language === 'nl' ? 'Boekingssysteem' : 'Booking system',
+        language === 'nl' ? 'Meertalige website' : 'Multi-language website',
+        language === 'nl' ? 'Google Reviews integratie' : 'Google Reviews integration',
       ],
       idealFor: language === 'nl' ? 'Groeiende MKB\'s, Dienstverleners' : 'Growing SMBs, Service providers',
+      deliveryTime: language === 'nl' ? '1-2 weken' : '1-2 weeks',
       popular: true,
     },
     {
@@ -57,14 +69,26 @@ const PackagesPage = () => {
         language === 'nl' ? 'Tot 15 pagina\'s' : 'Up to 15 pages',
         language === 'nl' ? 'Blog' : 'Blog',
         language === 'nl' ? 'Contactformulier' : 'Contact form',
-        language === 'nl' ? 'Afspraaksysteem' : 'Booking system',
+        language === 'nl' ? 'Afspraaksysteem ingebouwd' : 'Booking system built-in',
         language === 'nl' ? 'Google Reviews integratie' : 'Google Reviews integration',
         language === 'nl' ? 'Meertalige optie op je site' : 'Multi-language option on your site',
         language === 'nl' ? 'Snellere reactietijd (binnen 12 uur)' : 'Faster response time (within 12 hours)',
       ],
+      notIncluded: [],
       idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals',
+      deliveryTime: language === 'nl' ? '1-2 weken' : '1-2 weeks',
       popular: false,
     }
+  ];
+
+  // Losse prijzen voor extra's
+  const loosePrices = [
+    { name: language === 'nl' ? 'Extra pagina' : 'Extra page', price: '€50' },
+    { name: language === 'nl' ? 'Meertalig' : 'Multi-language', price: '€200' },
+    { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€80' },
+    { name: language === 'nl' ? 'Onderhoud' : 'Maintenance', price: '€25/pm' },
+    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€250' },
+    { name: 'Google Reviews', price: '€120' },
   ];
 
   // Extra possibilities - no prices, just what's possible
@@ -187,12 +211,19 @@ const PackagesPage = () => {
                   </p>
                 </div>
 
-                <div className="mb-8">
+                <div className="mb-6">
                   <span className="text-5xl font-heading font-bold">€{pkg.price}</span>
                   <span className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}> excl. BTW</span>
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-4 flex items-center gap-2">
+                  <Clock size={16} className={pkg.popular ? 'text-gray-400' : 'text-gray-400'} />
+                  <span className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}>
+                    {language === 'nl' ? 'Levertijd:' : 'Delivery:'} {pkg.deliveryTime}
+                  </span>
+                </div>
+
+                <div className="mb-4">
                   <p className={`text-xs uppercase tracking-wider mb-2 ${pkg.popular ? 'text-gray-400' : 'text-gray-400'}`}>
                     {language === 'nl' ? 'Ideaal voor' : 'Ideal for'}
                   </p>
@@ -201,17 +232,30 @@ const PackagesPage = () => {
                   </p>
                 </div>
 
-                <div className="space-y-1 mb-8">
+                <div className="space-y-1 mb-4">
                   <p className={`text-xs uppercase tracking-wider mb-3 ${pkg.popular ? 'text-gray-400' : 'text-gray-400'}`}>
                     {language === 'nl' ? 'Inclusief' : 'Included'}
                   </p>
                   {pkg.includes.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 py-2">
-                      <Check size={18} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black'}`} />
+                    <div key={i} className="flex items-start gap-3 py-1.5">
+                      <Check size={16} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black'}`} />
                       <span className={`text-sm ${pkg.popular ? 'text-gray-200' : 'text-gray-600'}`}>{item}</span>
                     </div>
                   ))}
                 </div>
+
+                {pkg.notIncluded && pkg.notIncluded.length > 0 && (
+                  <div className="space-y-1 mb-6 pt-4 border-t border-dashed ${pkg.popular ? 'border-gray-700' : 'border-gray-200'}">
+                    <p className={`text-xs uppercase tracking-wider mb-3 ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>
+                      {language === 'nl' ? 'Niet inbegrepen (apart te kopen)' : 'Not included (available separately)'}
+                    </p>
+                    {pkg.notIncluded.map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 py-1">
+                        <span className={`text-sm ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>• {item}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 <Link
                   to="/calculator"
@@ -226,6 +270,56 @@ const PackagesPage = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Losse Prijzen Section */}
+      <section className="py-16 px-6 md:px-12 bg-gray-900 text-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              {language === 'nl' ? 'Losse Extra\'s Toevoegen' : 'Add Individual Extras'}
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              {language === 'nl'
+                ? 'Wil je iets extra\'s bij je pakket? Hier zijn de losse prijzen.'
+                : 'Want to add something extra to your package? Here are the individual prices.'}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+            {loosePrices.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="text-center p-5 bg-gray-800 rounded-2xl"
+              >
+                <p className="text-2xl font-bold mb-1">{item.price}</p>
+                <p className="text-sm text-gray-400">{item.name}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            className="bg-yellow-500/20 border border-yellow-500/40 rounded-2xl p-6 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-lg text-yellow-200">
+              <span className="font-bold">💡 Tip:</span> {language === 'nl' 
+                ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
+                : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
+            </p>
+          </motion.div>
         </div>
       </section>
 

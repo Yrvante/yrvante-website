@@ -559,7 +559,7 @@ const TestimonialsSection = () => {
   );
 };
 
-// FAQ Section - removed CMS question, using "we" and "jij"
+// FAQ Section - comprehensive FAQs, using "we" and "jij"
 const FAQSection = () => {
   const { language } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
@@ -568,26 +568,74 @@ const FAQSection = () => {
     {
       q: language === 'nl' ? 'Hoe lang duurt het om een website te maken?' : 'How long does it take to build a website?',
       a: language === 'nl' 
-        ? 'Een basis website is meestal binnen 1-2 weken klaar. Voor complexere projecten rekenen we 2-3 weken.'
-        : 'A basic website is usually ready within 1-2 weeks. For more complex projects we estimate 2-3 weeks.'
+        ? 'Een basis website is meestal binnen 1 week klaar. Voor Pro en Premium pakketten rekenen we 1 tot 2 weken.'
+        : 'A basic website is usually ready within 1 week. For Pro and Premium packages we estimate 1 to 2 weeks.'
     },
     {
-      q: language === 'nl' ? 'Wat heb ik nodig om te starten?' : 'What do I need to get started?',
+      q: language === 'nl' ? 'Wat heb ik nodig om te beginnen?' : 'What do I need to get started?',
       a: language === 'nl'
-        ? 'Jij levert de teksten, foto\'s en eventueel je logo aan. Heb je deze niet? Dan kunnen wij helpen met tekstschrijven en stockfoto\'s.'
-        : 'You provide the texts, photos and possibly your logo. Don\'t have these? We can help with copywriting and stock photos.'
+        ? 'Om te starten heb ik een paar simpele dingen van je nodig: teksten voor je website (bijvoorbeeld een korte beschrijving van je bedrijf en diensten), foto\'s of afbeeldingen die je wilt gebruiken, en je logo (als je die al hebt). Heb je dit nog niet allemaal? Geen probleem. Ik kan je helpen met goede teksten en professionele stockfoto\'s.\n\nVoor je website heb je ook een domeinnaam nodig (bijvoorbeeld jouwbedrijf.nl). Je koopt een domeinnaam zelf bij een provider zoals TransIP of Antagonist. Dit kost maximaal ongeveer €10–€15 per jaar. Ik help je daarna met het koppelen van de domeinnaam aan je website. Zo blijft de domeinnaam altijd op jouw naam staan en blijf jij volledig eigenaar!'
+        : 'To get started I need a few simple things from you: texts for your website (e.g. a brief description of your business and services), photos or images you want to use, and your logo (if you have one). Don\'t have all of this yet? No problem. I can help you with good texts and professional stock photos.\n\nYou also need a domain name for your website (e.g. yourbusiness.com). You buy a domain name yourself from a provider like TransIP or Antagonist. This costs a maximum of about €10-€15 per year. I\'ll then help you connect the domain name to your website. This way the domain name always stays in your name and you remain the full owner!'
     },
     {
-      q: language === 'nl' ? 'Zijn er maandelijkse kosten?' : 'Are there monthly costs?',
+      q: language === 'nl' ? 'Kan ik de website later nog uitbreiden?' : 'Can I expand the website later?',
       a: language === 'nl'
-        ? 'De website zelf is een eenmalige investering. Optioneel bieden wij een onderhoudsabonnement van €20/maand voor hosting, updates en kleine wijzigingen.'
-        : 'The website itself is a one-time investment. Optionally we offer a maintenance subscription of €20/month for hosting, updates and small changes.'
+        ? 'Ja, je kan altijd de website aanpassen. Als je weet hoe dit werkt en je koopt alleen de website, dan moet je zelf dingen laten aanpassen. Maar kies je voor het maandelijkse abonnement? Dan hoef je niet alleen niks te betalen aan hosting en bugs — wij regelen dan alles voor je.'
+        : 'Yes, you can always adjust the website. If you know how this works and you only buy the website, you\'ll need to make adjustments yourself. But if you choose the monthly subscription? Then you don\'t have to pay anything for hosting and bugs — we take care of everything for you.'
     },
     {
-      q: language === 'nl' ? 'Hoe kan ik contact opnemen?' : 'How can I get in touch?',
+      q: language === 'nl' ? 'Wat gebeurt er als ik niet tevreden ben?' : 'What happens if I\'m not satisfied?',
       a: language === 'nl'
-        ? 'Je kunt ons bereiken via email of telefoon. Heb je vragen? We bellen je graag terug om alles door te nemen — vrijblijvend en zonder verplichtingen.'
-        : 'You can reach us via email or phone. Have questions? We\'d be happy to call you back to discuss everything — no obligations.'
+        ? 'We blijven de website aanpassen tot jij tevreden bent. Je kan altijd voorbeelden laten zien en we blijven een test website sturen tot wij jouw volledige goedkeuring hebben op de voorwaarden die ondertekend zijn. Alleen dan gaan wij verder — tot jij tevreden bent.'
+        : 'We keep adjusting the website until you\'re satisfied. You can always show examples and we\'ll keep sending a test website until we have your full approval based on the signed terms. Only then do we proceed — until you\'re satisfied.'
+    },
+    {
+      q: language === 'nl' ? 'Hoe werkt de betaling?' : 'How does payment work?',
+      a: language === 'nl'
+        ? 'Wij werken met 40% aanbetaling nadat alles voor je duidelijk is bij de start van het project. De resterende 60% betaal je bij oplevering van de website. Na betaling maken wij je de host/co-host.'
+        : 'We work with a 40% deposit after everything is clear to you at the start of the project. You pay the remaining 60% upon delivery of the website. After payment, we\'ll make you the host/co-host.'
+    },
+    {
+      q: language === 'nl' ? 'Blijft mijn website online als ik geen onderhoudspakket neem?' : 'Will my website stay online if I don\'t take a maintenance package?',
+      a: language === 'nl'
+        ? 'Ja, je website blijft gewoon online. Het onderhoudspakket is optioneel maar zorgt ervoor dat ik kleine aanpassingen doe, updates bijhoud en je website veilig en snel blijft.'
+        : 'Yes, your website will stay online. The maintenance package is optional but ensures that I make small adjustments, keep updates current, and your website stays safe and fast.'
+    },
+    {
+      q: language === 'nl' ? 'Kan ik zelf teksten en foto\'s aanpassen?' : 'Can I edit texts and photos myself?',
+      a: language === 'nl'
+        ? 'Dat is mogelijk, maar vraagt een uitgebreidere technische oplossing. Daar maak ik een aparte offerte voor. Het beste is dat we dat regelen via het onderhoudspakket. Zo hoef jij je geen zorgen te maken over technische zaken en ben je binnen no-time geholpen.'
+        : 'That\'s possible, but requires a more extensive technical solution. I\'ll make a separate quote for that. It\'s best that we arrange this via the maintenance package. This way you don\'t have to worry about technical matters and you\'ll be helped in no time.'
+    },
+    {
+      q: language === 'nl' ? 'Maak jij ook webshops?' : 'Do you also make webshops?',
+      a: language === 'nl'
+        ? 'Op dit moment richt ik mij volledig op professionele websites voor ZZP\'ers en kleine bedrijven. Webshops vallen buiten ons huidige aanbod.'
+        : 'At the moment I focus entirely on professional websites for freelancers and small businesses. Webshops are outside our current offering.'
+    },
+    {
+      q: language === 'nl' ? 'Wat is het verschil tussen jou en een groot webbureau?' : 'What\'s the difference between you and a large web agency?',
+      a: language === 'nl'
+        ? 'Bij een groot webbureau ben je één van de vele klanten. Je betaalt voor overhead, account managers en vergaderingen — niet voor je website. Bij Yrvante werk je rechtstreeks met mij. Geen tussenpersonen, geen wachtrijen, geen verrassingen achteraf. Ik lever snel, denk met je mee en ben altijd persoonlijk bereikbaar.\n\nGrote bureaus rekenen voor dezelfde website al snel €3000 tot €8000. Bij Yrvante betaal je een eerlijke prijs en krijg je een resultaat waar je trots op bent. Elke ZZP\'er verdient een website voor een eerlijke prijs.'
+        : 'At a large web agency, you\'re one of many clients. You pay for overhead, account managers and meetings — not for your website. At Yrvante you work directly with me. No intermediaries, no queues, no surprises afterwards. I deliver fast, think along with you and am always personally available.\n\nLarge agencies quickly charge €3000 to €8000 for the same website. At Yrvante you pay a fair price and get a result you\'re proud of. Every freelancer deserves a website for a fair price.'
+    },
+    {
+      q: language === 'nl' ? 'Mijn bedrijf is heel klein, is een website wel de moeite waard?' : 'My business is very small, is a website worth it?',
+      a: language === 'nl'
+        ? 'Juist dan. Mensen googlen tegenwoordig alles — ook de kapper om de hoek, de lokale schoonmaker of de startende coach. Als jij niet online staat, kiest de klant gewoon voor iemand die dat wel is. Een website is je 24/7 visitekaartje. Hij werkt ook als jij slaapt, op vakantie bent of druk aan het werk bent.\n\nJe hoeft geen groot bedrijf te zijn om er professioneel uit te zien — je hoeft alleen gevonden te worden. En met een basiswebsite vanaf €500 is de stap kleiner dan je denkt.'
+        : 'Especially then. People google everything nowadays — including the local hairdresser, the local cleaner, or the starting coach. If you\'re not online, the customer simply chooses someone who is. A website is your 24/7 business card. It works while you sleep, are on vacation, or are busy working.\n\nYou don\'t need to be a big company to look professional — you just need to be found. And with a basic website from €500, the step is smaller than you think.'
+    },
+    {
+      q: language === 'nl' ? 'Zit SEO standaard in elke website?' : 'Is SEO included in every website?',
+      a: language === 'nl'
+        ? 'Elke website die ik bouw heeft een solide technische basis — snelle laadtijd, mobielvriendelijk en correcte opbouw. Dat zijn de fundamenten die Google belangrijk vindt.\n\nUitgebreide SEO-optimalisatie, zoals zoekwoordonderzoek en het optimaliseren van alle pagina\'s voor Google, zit standaard in het Pro en Premium pakket. Bij het Basis pakket kan je dit altijd later toevoegen als extra.'
+        : 'Every website I build has a solid technical foundation — fast loading time, mobile-friendly and correct structure. These are the fundamentals Google finds important.\n\nExtensive SEO optimization, such as keyword research and optimizing all pages for Google, is included as standard in the Pro and Premium package. With the Basic package you can always add this later as an extra.'
+    },
+    {
+      q: language === 'nl' ? 'Kan ik ook alleen een pagina laten aanpassen van mijn bestaande site?' : 'Can I also have just one page adjusted from my existing site?',
+      a: language === 'nl'
+        ? 'Ja, dat kan. Heb je een bestaande website die een opfrisbeurt nodig heeft, of wil je één pagina laten aanpassen of toevoegen? Neem gewoon contact op en ik kijk wat ik voor je kan doen. Ik geef je altijd eerst een eerlijke prijsindicatie voordat er iets van start gaat.'
+        : 'Yes, that\'s possible. Do you have an existing website that needs a refresh, or do you want one page adjusted or added? Just get in touch and I\'ll see what I can do for you. I\'ll always give you an honest price indication first before anything starts.'
     }
   ];
 
@@ -871,6 +919,7 @@ const Footer = () => {
               <li><Link to="/pakketten" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
               <li><Link to="/calculator" className="text-gray-400 hover:text-white">Calculator</Link></li>
               <li><Link to="/waarom-website" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Waarom een website?' : 'Why a website?'}</Link></li>
+              <li><Link to="/blog" className="text-gray-400 hover:text-white">Blog</Link></li>
               <li><Link to="/about" className="text-gray-400 hover:text-white">{language === 'nl' ? 'Over ons' : 'About us'}</Link></li>
             </ul>
           </div>

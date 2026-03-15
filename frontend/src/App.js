@@ -8,6 +8,7 @@ import AboutPage from "./pages/AboutPage";
 import WhyWebsitePage from "./pages/WhyWebsitePage";
 import CalculatorPage from "./pages/CalculatorPage";
 import PackagesPage from "./pages/PackagesPage";
+import BlogPage from "./pages/BlogPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -61,17 +62,17 @@ const translations = {
       web: {
         title: "Website Ontwikkeling",
         description: "Moderne, responsieve websites gebouwd voor freelancers en bedrijven.",
-        price: "Vanaf €350 excl. BTW"
+        price: "Vanaf €500 excl. BTW"
       },
       business: {
         title: "Geavanceerde Websites",
         description: "Websites met werkende functionaliteiten: afspraken maken, klantportalen, app development en meer.",
-        price: "Vanaf €450 excl. BTW"
+        price: "Vanaf €900 excl. BTW"
       },
       software: {
         title: "Maandelijks Onderhoud",
         description: "Hosting, updates, beveiliging en backups. Dit abonnement is optioneel — zonder dit plan ben je na oplevering zelf verantwoordelijk voor het onderhoud van je website.",
-        price: "€15 per maand excl. BTW"
+        price: "€20 per maand excl. BTW"
       },
     },
     target: {
@@ -153,17 +154,17 @@ const translations = {
       web: {
         title: "Website Development",
         description: "Modern, responsive websites built for freelancers and businesses.",
-        price: "From €350 excl. VAT"
+        price: "From €500 excl. VAT"
       },
       business: {
         title: "Advanced Websites",
         description: "Websites with working features: appointment booking, client portals, app development and more.",
-        price: "From €450 excl. VAT"
+        price: "From €900 excl. VAT"
       },
       software: {
         title: "Monthly Maintenance",
         description: "Hosting, updates, security and backups. This subscription is optional — without this plan you are responsible for maintaining your website yourself after delivery.",
-        price: "€15 per month excl. VAT"
+        price: "€20 per month excl. VAT"
       },
     },
     target: {
@@ -248,6 +249,7 @@ function App() {
             <Route path="/waarom-website" element={<WhyWebsitePage />} />
             <Route path="/calculator" element={<CalculatorPage />} />
             <Route path="/pakketten" element={<PackagesPage />} />
+            <Route path="/blog" element={<BlogPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
