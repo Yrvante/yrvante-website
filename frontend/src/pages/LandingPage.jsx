@@ -28,9 +28,9 @@ const API = `${BACKEND_URL}/api`;
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
 
-// Navigation - Modern, clean, professional
+// Navigation - Brutalist, minimal
 const Navigation = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -48,75 +48,61 @@ const Navigation = () => {
     setMobileMenuOpen(false);
   };
 
-  const navLinks = [
-    { id: "services", label: language === 'nl' ? 'Diensten' : 'Services' },
-    { id: "pricing", label: language === 'nl' ? 'Pakketten' : 'Packages' },
-    { id: "faq", label: 'FAQ' },
-    { id: "contact", label: 'Contact' },
-  ];
-
   return (
     <nav
       data-testid="navigation"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100" 
-          : "bg-white border-b border-gray-50"
+        scrolled ? "bg-white border-b border-black" : "bg-white"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="/" data-testid="nav-logo" className="flex items-center">
-            <img src={LOGO_URL} alt="Yrvante" className="h-8 lg:h-10 w-auto" />
+            <span className="text-2xl font-black tracking-tighter">YRVANTE</span>
           </a>
 
-          {/* Desktop Navigation - All in one row */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
-              >
-                {link.label}
-              </button>
-            ))}
-            
-            <div className="w-px h-6 bg-gray-200 mx-2" />
-            
-            <Link
-              to="/waarom-website"
-              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+          {/* Desktop Navigation - Brutalist style */}
+          <div className="hidden lg:flex items-center gap-8">
+            <button
+              onClick={() => scrollToSection("services")}
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
             >
-              {language === 'nl' ? 'Waarom een website?' : 'Why a website?'}
-            </Link>
-            
-            <Link
-              to="/calculator"
-              className="ml-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-all"
+              Diensten
+            </button>
+            <button
+              onClick={() => scrollToSection("pricing")}
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
             >
-              {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
-            </Link>
+              Pakketten
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
+            >
+              Contact
+            </button>
+            
+            <div className="w-px h-4 bg-gray-300" />
+            
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-colors"
+            >
+              Start Project
+            </button>
 
-            <div className="flex items-center ml-3 p-1 bg-gray-100 rounded-lg">
+            <div className="flex text-xs font-mono">
               <button
                 onClick={() => setLanguage("nl")}
-                className={`text-xs font-medium px-2.5 py-1.5 rounded-md transition-all ${
-                  language === "nl" 
-                    ? "bg-white text-gray-900 shadow-sm" 
-                    : "text-gray-500 hover:text-gray-700"
-                }`}
+                className={`px-2 py-1 ${language === "nl" ? "text-black" : "text-gray-400"}`}
               >
                 NL
               </button>
+              <span className="text-gray-300">/</span>
               <button
                 onClick={() => setLanguage("en")}
-                className={`text-xs font-medium px-2.5 py-1.5 rounded-md transition-all ${
-                  language === "en" 
-                    ? "bg-white text-gray-900 shadow-sm" 
-                    : "text-gray-500 hover:text-gray-700"
-                }`}
+                className={`px-2 py-1 ${language === "en" ? "text-black" : "text-gray-400"}`}
               >
                 EN
               </button>
@@ -126,9 +112,9 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -140,32 +126,33 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-gray-100"
+            className="lg:hidden bg-white border-t border-black"
           >
-            <div className="px-6 py-4 space-y-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  {link.label}
-                </button>
-              ))}
-              <Link
-                to="/waarom-website"
-                className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg"
+            <div className="px-6 py-8 space-y-6">
+              <button
+                onClick={() => scrollToSection("services")}
+                className="block text-xs font-medium uppercase tracking-[0.2em]"
               >
-                {language === 'nl' ? 'Waarom een website?' : 'Why a website?'}
-              </Link>
-              <div className="pt-2">
-                <Link
-                  to="/calculator"
-                  className="block w-full text-center py-3 bg-gray-900 text-white font-medium rounded-lg"
-                >
-                  {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
-                </Link>
-              </div>
+                Diensten
+              </button>
+              <button
+                onClick={() => scrollToSection("pricing")}
+                className="block text-xs font-medium uppercase tracking-[0.2em]"
+              >
+                Pakketten
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="block text-xs font-medium uppercase tracking-[0.2em]"
+              >
+                Contact
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="block w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em]"
+              >
+                Start Project
+              </button>
             </div>
           </motion.div>
         )}
@@ -174,7 +161,7 @@ const Navigation = () => {
   );
 };
 
-// Hero Section - Modern, professional design
+// Hero Section - Brutalist Editorial Style
 const HeroSection = () => {
   const { language } = useLanguage();
 
@@ -183,151 +170,189 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="pt-16 lg:pt-20">
-      {/* Video/Animation */}
-      <div className="w-full h-[40vh] md:h-[50vh] relative overflow-hidden bg-gradient-to-b from-gray-900 to-black">
-        <HeroAnimation />
-      </div>
-      
-      {/* Content Section - Clean, professional */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-16 md:py-20">
-        <div className="max-w-6xl mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+    <section data-testid="hero-section" className="min-h-screen bg-white pt-20">
+      {/* Main Hero Content - Asymmetric Layout */}
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-12 gap-4 min-h-[calc(100vh-80px)] items-center">
+          
+          {/* Left Side - Typography Heavy */}
+          <div className="col-span-12 lg:col-span-7 py-12 lg:py-0">
+            {/* Small Label */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6"
             >
-              {/* Availability Badge - Subtle green */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full mb-8">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-emerald-700">
-                  {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
-                </span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight mb-6">
-                <span className="text-gray-900">
-                  {language === 'nl' ? 'Jouw bedrijf' : 'Your business'}
-                </span>
-                <br />
-                <span className="text-gray-400">
-                  {language === 'nl' ? 'professioneel online' : 'professionally online'}
-                </span>
-              </h1>
-              
-              {/* Value proposition */}
-              <p className="text-lg md:text-xl text-gray-600 mb-3 max-w-2xl mx-auto leading-relaxed">
-                {language === 'nl' 
-                  ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
-                  : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
-              </p>
-              <p className="text-base text-gray-500 mb-10 max-w-xl mx-auto">
-                {language === 'nl'
-                  ? 'Dat is het verschil tussen een offerte vergelijken op prijs of op waarde.'
-                  : "That's the difference between comparing quotes on price or on value."}
-              </p>
+              Web Design Studio — Almelo
+            </motion.p>
+            
+            {/* Main Headline - Brutalist Typography */}
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-[12vw] lg:text-[8vw] font-black leading-[0.85] tracking-tighter mb-8"
+            >
+              {language === 'nl' ? (
+                <>
+                  JOUW<br />
+                  BEDRIJF<br />
+                  <span className="text-gray-300">ONLINE</span>
+                </>
+              ) : (
+                <>
+                  YOUR<br />
+                  BUSINESS<br />
+                  <span className="text-gray-300">ONLINE</span>
+                </>
+              )}
+            </motion.h1>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <motion.button
-                  onClick={scrollToContact}
-                  className="inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-8 py-4 font-medium rounded-xl hover:bg-gray-800 transition-all shadow-lg shadow-gray-900/10"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {language === 'nl' ? 'Neem Contact Op' : 'Get In Touch'}
-                  <ArrowRight size={18} />
-                </motion.button>
-                <Link
-                  to="/pakketten"
-                  className="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 text-gray-700 px-8 py-4 font-medium rounded-xl hover:border-gray-900 hover:text-gray-900 transition-all"
-                >
-                  {language === 'nl' ? 'Bekijk Pakketten' : 'View Packages'}
-                </Link>
+            {/* Value Prop - Small Text */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-sm lg:text-base text-gray-500 max-w-md leading-relaxed mb-10"
+            >
+              {language === 'nl' 
+                ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
+                : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
+            </motion.p>
+
+            {/* CTA - Brutalist Button */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-wrap gap-4 items-center"
+            >
+              <button
+                onClick={scrollToContact}
+                className="group px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-all"
+              >
+                {language === 'nl' ? 'Start Project' : 'Start Project'}
+                <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </button>
+              <Link
+                to="/pakketten"
+                className="px-8 py-4 border border-black text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-all"
+              >
+                {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right Side - Stats & Info - Overlapping */}
+          <div className="col-span-12 lg:col-span-5 relative py-12 lg:py-0">
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2"
+            >
+              {/* Big Number */}
+              <div className="mb-8">
+                <span className="text-[20vw] lg:text-[12vw] font-black text-gray-100 leading-none block">
+                  €500
+                </span>
+                <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mt-2">
+                  {language === 'nl' ? 'Vanaf prijs' : 'Starting price'}
+                </p>
               </div>
 
-              {/* Stats - Horizontal inline style */}
-              <div className="flex items-center justify-center gap-6 md:gap-10 flex-wrap">
-                <div className="flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                  <span className="text-2xl font-heading font-bold text-gray-900">€500</span>
-                  <span className="text-sm text-gray-500">{language === 'nl' ? 'vanaf' : 'from'}</span>
+              {/* Stats Grid - Small Labels */}
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <span className="text-4xl font-black">1-2</span>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-1">
+                    {language === 'nl' ? 'Weken' : 'Weeks'}
+                  </p>
                 </div>
-                <div className="flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                  <span className="text-2xl font-heading font-bold text-gray-900">1-2</span>
-                  <span className="text-sm text-gray-500">{language === 'nl' ? 'weken' : 'weeks'}</span>
+                <div>
+                  <span className="text-4xl font-black">6</span>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-1">
+                    {language === 'nl' ? 'Revisies' : 'Revisions'}
+                  </p>
                 </div>
-                <div className="flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                  <span className="text-2xl font-heading font-bold text-gray-900">ZZP</span>
-                  <span className="text-sm text-gray-500">{language === 'nl' ? 'persoonlijk' : 'personal'}</span>
-                </div>
+              </div>
+
+              {/* Availability Tag */}
+              <div className="mt-10 flex items-center gap-3">
+                <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+                <span className="text-xs uppercase tracking-[0.2em]">
+                  {language === 'nl' ? 'Beschikbaar' : 'Available'}
+                </span>
               </div>
             </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Bottom Border Line */}
+      <div className="border-b border-gray-200" />
     </section>
   );
 };
 
-// Why Expensive Section - Modern, professional
+// Why Expensive Section - Brutalist
 const WhyExpensiveSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="py-24 lg:py-32 bg-white">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-12 gap-8 lg:gap-16">
+          {/* Left - Big Statement */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="col-span-12 lg:col-span-7"
           >
-            <span className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
-              {language === 'nl' ? 'Waarom Yrvante?' : 'Why Yrvante?'}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-gray-900">
-              {language === 'nl' 
-                ? 'Waarom ben ik goedkoper?' 
-                : 'Why am I more affordable?'}
-            </h2>
-            <p className="text-gray-600 mb-4 leading-relaxed">
-              {language === 'nl'
-                ? 'Veel webdesignbureaus rekenen €1.500 tot €5.000 of meer voor een website. Ik geloof dat een professionele website voor iedere ondernemer bereikbaar moet zijn.'
-                : 'Many web design agencies charge €1,500 to €5,000 or more for a website. I believe a professional website should be accessible to every entrepreneur.'}
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6">
+              (03)
             </p>
-            <p className="text-gray-600 mb-8 leading-relaxed">
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8">
+              {language === 'nl' 
+                ? 'WAAROM BEN IK GOEDKOPER?' 
+                : 'WHY AM I MORE AFFORDABLE?'}
+            </h2>
+            <p className="text-gray-500 leading-relaxed max-w-xl mb-8">
               {language === 'nl'
-                ? 'Daarom beginnen mijn websites vanaf €500 — zonder kwaliteit in te leveren.'
-                : "That's why my websites start from €500 — without compromising on quality."}
+                ? 'Veel webdesignbureaus rekenen €3.000 tot €8.000 voor een simpele website. Je betaalt voor overhead, managers en vergaderingen — niet voor je website.'
+                : 'Many web design agencies charge €3,000 to €8,000 for a simple website. You pay for overhead, managers and meetings — not for your website.'}
             </p>
             <Link
               to="/waarom-website"
-              className="inline-flex items-center gap-2 text-gray-900 font-medium hover:gap-3 transition-all"
+              className="text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4"
             >
-              {language === 'nl' ? 'Lees meer' : 'Read more'}
-              <ArrowRight size={16} />
+              {language === 'nl' ? 'Lees meer →' : 'Read more →'}
             </Link>
           </motion.div>
-          
+
+          {/* Right - Comparison */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-gray-900 text-white p-8 md:p-10 rounded-2xl"
+            className="col-span-12 lg:col-span-5"
           >
-            <p className="text-sm text-gray-400 uppercase tracking-wider mb-6">
-              {language === 'nl' ? 'Vergelijk' : 'Compare'}
-            </p>
-            <div className="space-y-6">
-              <div className="pb-6 border-b border-gray-700">
-                <p className="text-gray-400 text-sm mb-1">{language === 'nl' ? 'Traditionele bureaus' : 'Traditional agencies'}</p>
-                <p className="text-3xl font-heading font-bold">€1.500 - €5.000<span className="text-lg text-gray-500">+</span></p>
-              </div>
-              <div>
-                <p className="text-gray-400 text-sm mb-1">Yrvante</p>
-                <p className="text-3xl font-heading font-bold text-emerald-400">{language === 'nl' ? 'Vanaf' : 'From'} €500</p>
-              </div>
+            <div className="border-t border-black pt-8 mb-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">
+                {language === 'nl' ? 'Bureaus' : 'Agencies'}
+              </p>
+              <p className="text-5xl font-black line-through decoration-gray-300">€3.000+</p>
+            </div>
+            <div className="border-t border-black pt-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">
+                Yrvante
+              </p>
+              <p className="text-5xl font-black">€500</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-2">
+                {language === 'nl' ? 'Vanaf' : 'Starting from'}
+              </p>
             </div>
           </motion.div>
         </div>
@@ -336,121 +361,134 @@ const WhyExpensiveSection = () => {
   );
 };
 
-// Services Section - Modern cards
+// Services Section - Editorial Grid
 const ServicesSection = () => {
   const { language } = useLanguage();
 
-  const services = [
-    {
-      icon: <Monitor size={28} strokeWidth={1.5} />,
-      title: language === 'nl' ? 'Website Ontwikkeling' : 'Website Development',
-      description: language === 'nl' 
-        ? 'Moderne, snelle websites die perfect werken op elk apparaat.'
-        : 'Modern, fast websites that work perfectly on any device.',
-    },
-    {
-      icon: <Code size={28} strokeWidth={1.5} />,
-      title: language === 'nl' ? 'Webapplicaties' : 'Web Applications',
-      description: language === 'nl'
-        ? 'Boekingssystemen, klantportalen en op maat gemaakte oplossingen.'
-        : 'Booking systems, client portals and custom-made solutions.',
-    },
-  ];
-
   return (
-    <section id="services" data-testid="services-section" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="inline-block px-3 py-1 bg-white text-gray-600 text-sm font-medium rounded-full mb-4 border border-gray-200">
-            {language === 'nl' ? 'Diensten' : 'Services'}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900">
-            {language === 'nl' ? 'Wat ik doe' : 'What I do'}
-          </h2>
-        </motion.div>
+    <section id="services" data-testid="services-section" className="py-24 lg:py-32 bg-white">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        {/* Section Header - Asymmetric */}
+        <div className="grid grid-cols-12 gap-4 mb-16">
+          <div className="col-span-12 lg:col-span-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
+              (01)
+            </p>
+          </div>
+          <div className="col-span-12 lg:col-span-8">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+              {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
+            </h2>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="p-8 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all group"
-            >
-              <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-6 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-all">
-                {service.icon}
+        {/* Services Grid - Editorial Layout */}
+        <div className="grid grid-cols-12 gap-8 lg:gap-12">
+          {/* Service 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="col-span-12 lg:col-span-6 group"
+          >
+            <div className="border-t border-black pt-8">
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-400">01</span>
+                <Monitor size={24} strokeWidth={1} />
               </div>
-              <h3 className="text-xl font-heading font-bold mb-3 text-gray-900">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
-            </motion.div>
-          ))}
+              <h3 className="text-2xl lg:text-3xl font-bold mb-4">
+                {language === 'nl' ? 'Website Ontwikkeling' : 'Website Development'}
+              </h3>
+              <p className="text-gray-500 leading-relaxed">
+                {language === 'nl' 
+                  ? 'Moderne, snelle websites die perfect werken op elk apparaat. Van simpele landingspagina tot complete bedrijfswebsite.'
+                  : 'Modern, fast websites that work perfectly on any device. From simple landing page to complete business website.'}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Service 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="col-span-12 lg:col-span-6 group"
+          >
+            <div className="border-t border-black pt-8">
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-400">02</span>
+                <Code size={24} strokeWidth={1} />
+              </div>
+              <h3 className="text-2xl lg:text-3xl font-bold mb-4">
+                {language === 'nl' ? 'Web Applicaties' : 'Web Applications'}
+              </h3>
+              <p className="text-gray-500 leading-relaxed">
+                {language === 'nl'
+                  ? 'Boekingssystemen, klantportalen en op maat gemaakte oplossingen voor jouw specifieke bedrijfsbehoeften.'
+                  : 'Booking systems, client portals and custom solutions for your specific business needs.'}
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
 
-// Pricing Section - Modern, clean design
+// Pricing Section - Brutalist Editorial
 const PricingSection = () => {
   const { language } = useLanguage();
 
   const packages = [
     {
-      name: language === 'nl' ? 'Basis' : 'Basic',
+      name: language === 'nl' ? 'BASIS' : 'BASIC',
       price: '500',
-      description: language === 'nl' 
-        ? 'Tot 3 pagina\'s, responsive, snelle hosting'
-        : 'Up to 3 pages, responsive, fast hosting',
-      popular: false,
+      features: language === 'nl' 
+        ? ['Tot 3 pagina\'s', 'Responsive design', 'Snelle hosting', '6 revisies']
+        : ['Up to 3 pages', 'Responsive design', 'Fast hosting', '6 revisions'],
     },
     {
-      name: 'Pro',
+      name: 'PRO',
       price: '900',
-      description: language === 'nl'
-        ? 'Tot 10 pagina\'s, SEO, blog, contactformulier'
-        : 'Up to 10 pages, SEO, blog, contact form',
       popular: true,
+      features: language === 'nl'
+        ? ['Tot 10 pagina\'s', 'SEO optimalisatie', 'Blog & Portfolio', 'Contactformulier']
+        : ['Up to 10 pages', 'SEO optimization', 'Blog & Portfolio', 'Contact form'],
     },
     {
-      name: 'Premium',
+      name: 'PREMIUM',
       price: '1400',
-      description: language === 'nl'
-        ? 'Tot 15 pagina\'s, boekingssysteem, meertalig'
-        : 'Up to 15 pages, booking system, multi-language',
-      popular: false,
+      features: language === 'nl'
+        ? ['Tot 15 pagina\'s', 'Boekingssysteem', 'Meertalig', 'Priority support']
+        : ['Up to 15 pages', 'Booking system', 'Multi-language', 'Priority support'],
     }
   ];
 
   return (
-    <section id="pricing" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
-            {language === 'nl' ? 'Pakketten' : 'Packages'}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-gray-900">
-            {language === 'nl' ? 'Transparante prijzen' : 'Transparent pricing'}
-          </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
-            {language === 'nl' 
-              ? 'Prijzen excl. BTW. Jij levert de teksten en foto\'s aan.'
-              : 'Prices excl. VAT. You provide the texts and photos.'}
-          </p>
-        </motion.div>
+    <section id="pricing" className="py-24 lg:py-32 bg-black text-white">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        {/* Section Header */}
+        <div className="grid grid-cols-12 gap-4 mb-16">
+          <div className="col-span-12 lg:col-span-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
+              (02)
+            </p>
+          </div>
+          <div className="col-span-12 lg:col-span-8">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+              {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
+            </h2>
+            <p className="text-gray-500 mt-4 max-w-lg">
+              {language === 'nl' 
+                ? 'Transparante prijzen. Geen verborgen kosten. Jij levert teksten en foto\'s.'
+                : 'Transparent pricing. No hidden costs. You provide texts and photos.'}
+            </p>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+        {/* Pricing Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-gray-800">
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
@@ -458,37 +496,57 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className={`relative p-8 rounded-2xl text-center transition-all ${
-                pkg.popular 
-                  ? 'bg-gray-900 text-white shadow-xl' 
-                  : 'bg-gray-50 border border-gray-100 hover:border-gray-200'
-              }`}
+              className={`p-8 lg:p-12 ${pkg.popular ? 'bg-white text-black' : 'bg-black'}`}
             >
-              {pkg.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-4 py-1 rounded-full text-xs font-bold">
-                  {language === 'nl' ? 'Populair' : 'Popular'}
+              <div className="flex justify-between items-start mb-12">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
+                    {pkg.popular && (language === 'nl' ? 'Populair' : 'Popular')}
+                  </p>
+                  <h3 className="text-xl font-bold tracking-tight">{pkg.name}</h3>
                 </div>
-              )}
-              
-              <h3 className={`text-lg font-medium mb-3 ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}>{pkg.name}</h3>
-              <div className="mb-4">
-                <span className="text-4xl font-heading font-bold">€{pkg.price}</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-500">
+                  0{index + 1}
+                </span>
               </div>
-              <p className={`text-sm leading-relaxed ${pkg.popular ? 'text-gray-400' : 'text-gray-500'}`}>
-                {pkg.description}
-              </p>
+
+              <div className="mb-12">
+                <span className="text-6xl lg:text-7xl font-black">€{pkg.price}</span>
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-2">
+                  {language === 'nl' ? 'Excl. BTW' : 'Excl. VAT'}
+                </p>
+              </div>
+
+              <ul className="space-y-4 mb-12">
+                {pkg.features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm">
+                    <span className={`w-1 h-1 ${pkg.popular ? 'bg-black' : 'bg-white'}`} />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                to="/calculator"
+                className={`block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] transition-colors ${
+                  pkg.popular 
+                    ? 'bg-black text-white hover:bg-gray-900' 
+                    : 'border border-white hover:bg-white hover:text-black'
+                }`}
+              >
+                {language === 'nl' ? 'Selecteer' : 'Select'}
+              </Link>
             </motion.div>
           ))}
         </div>
 
-        <div className="text-center">
+        {/* Extra Link */}
+        <div className="mt-12 text-center">
           <Link
             to="/pakketten"
-            className="inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-xl font-medium hover:bg-gray-800 transition-all"
+            className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors"
           >
-            {language === 'nl' ? 'Bekijk alle details' : 'View all details'}
-            <ArrowRight size={18} />
+            {language === 'nl' ? 'Bekijk alle details →' : 'View all details →'}
           </Link>
         </div>
       </div>
@@ -677,52 +735,73 @@ const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 bg-white border-t border-gray-100">
-      <div className="container-yrvante">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold">
-            {language === 'nl' ? 'Veelgestelde vragen' : 'FAQ'}
-          </h2>
-        </motion.div>
+    <section id="faq" className="py-24 lg:py-32 bg-white">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        {/* Section Header */}
+        <div className="grid grid-cols-12 gap-4 mb-16">
+          <div className="col-span-12 lg:col-span-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
+              (05)
+            </p>
+          </div>
+          <div className="col-span-12 lg:col-span-8">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+              FAQ
+            </h2>
+          </div>
+        </div>
 
-        <div className="max-w-2xl mx-auto space-y-3">
-          {faqs.map((faq, index) => (
+        {/* FAQ Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-gray-200 max-w-5xl">
+          {faqs.slice(0, 6).map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="border border-gray-200 rounded-xl overflow-hidden"
+              className="bg-white"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-5 text-left font-medium hover:bg-gray-50 transition-colors"
+                className="w-full p-8 text-left group"
               >
-                <span>{faq.q}</span>
-                <ChevronDown 
-                  className={`transform transition-transform ${openIndex === index ? 'rotate-180' : ''}`} 
-                  size={20} 
-                />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs text-gray-400 uppercase tracking-[0.2em] block mb-3">
+                      0{index + 1}
+                    </span>
+                    <span className="font-bold text-lg block">{faq.q}</span>
+                  </div>
+                  <ChevronDown 
+                    className={`flex-shrink-0 transform transition-transform mt-1 ${openIndex === index ? 'rotate-180' : ''}`} 
+                    size={20} 
+                  />
+                </div>
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-gray-500 mt-4 leading-relaxed whitespace-pre-line">{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </button>
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="px-5 pb-5 text-gray-600">{faq.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.div>
           ))}
+        </div>
+
+        {/* View All Link */}
+        <div className="mt-12">
+          <button
+            onClick={() => setOpenIndex(openIndex === 'all' ? null : 'all')}
+            className="text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4"
+          >
+            {language === 'nl' ? 'Bekijk alle vragen →' : 'View all questions →'}
+          </button>
         </div>
       </div>
     </section>
@@ -772,130 +851,131 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="contact" className="py-24 lg:py-32 bg-gray-50">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-12 gap-8 lg:gap-16">
+          {/* Left - Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="col-span-12 lg:col-span-5"
           >
-            <span className="inline-block px-3 py-1 bg-white text-gray-600 text-sm font-medium rounded-full mb-4 border border-gray-200">
-              Contact
-            </span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-gray-900">
-              {language === 'nl' ? 'Neem contact op' : "Get in touch"}
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6">
+              (04)
+            </p>
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter mb-8">
+              {language === 'nl' ? 'CONTACT' : 'CONTACT'}
             </h2>
-            <p className="text-gray-600 mb-10 leading-relaxed">
+            <p className="text-gray-500 leading-relaxed mb-12 max-w-md">
               {language === 'nl' 
-                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht of bel mij — ik reageer binnen 24 uur.'
-                : 'Have questions or want to know what I can do for you? Send a message or call me — I respond within 24 hours.'}
+                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht — ik reageer binnen 24 uur.'
+                : 'Have questions or want to know what I can do for you? Send a message — I respond within 24 hours.'}
             </p>
 
-            <div className="space-y-5">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
-                  <Mail size={20} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <a href="mailto:info@yrvante.com" className="font-medium text-gray-900 hover:text-gray-600 transition-colors">
-                    info@yrvante.com
-                  </a>
-                </div>
+            <div className="space-y-8">
+              <div className="border-t border-black pt-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
+                <a href="mailto:info@yrvante.com" className="text-lg hover:underline underline-offset-4">
+                  info@yrvante.com
+                </a>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
-                  <MapPin size={20} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Locatie' : 'Location'}</p>
-                  <p className="font-medium text-gray-900">Almelo, Nederland</p>
-                </div>
+              <div className="border-t border-black pt-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">
+                  {language === 'nl' ? 'Locatie' : 'Location'}
+                </p>
+                <p className="text-lg">Almelo, Nederland</p>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
-                  <Clock size={20} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{language === 'nl' ? 'Reactietijd' : 'Response'}</p>
-                  <p className="font-medium text-gray-900">{language === 'nl' ? 'Binnen 24 uur' : 'Within 24 hours'}</p>
-                </div>
+              <div className="border-t border-black pt-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">
+                  {language === 'nl' ? 'Reactietijd' : 'Response'}
+                </p>
+                <p className="text-lg">{language === 'nl' ? 'Binnen 24 uur' : 'Within 24 hours'}</p>
               </div>
             </div>
           </motion.div>
 
+          {/* Right - Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="col-span-12 lg:col-span-7"
           >
             {submitted ? (
-              <div className="bg-white rounded-2xl p-10 text-center border border-gray-100 shadow-sm">
-                <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Check className="text-white" size={32} />
+              <div className="bg-white p-12 text-center">
+                <div className="w-16 h-16 border border-black flex items-center justify-center mx-auto mb-6">
+                  <Check size={32} />
                 </div>
-                <h3 className="text-xl font-heading font-bold mb-2 text-gray-900">
-                  {language === 'nl' ? 'Bericht verzonden!' : 'Message sent!'}
+                <h3 className="text-2xl font-bold mb-2">
+                  {language === 'nl' ? 'Bericht verzonden' : 'Message sent'}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-500">
                   {language === 'nl' 
-                    ? 'Bedankt! Ik neem binnen 24 uur contact met je op.'
-                    : 'Thanks! I will contact you within 24 hours.'}
+                    ? 'Ik neem binnen 24 uur contact met je op.'
+                    : 'I will contact you within 24 hours.'}
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-5">
+              <form onSubmit={handleSubmit} className="bg-white p-8 lg:p-12">
                 <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">{language === 'nl' ? 'Naam' : 'Name'} *</label>
+                    <label className="block text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">
+                      {language === 'nl' ? 'Naam' : 'Name'} *
+                    </label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 focus:bg-white transition-all"
+                      className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors"
                       placeholder={language === 'nl' ? 'Je naam' : 'Your name'}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <label className="block text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">
+                      Email *
+                    </label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 focus:bg-white transition-all"
+                      className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors"
                       placeholder={language === 'nl' ? 'je@email.nl' : 'your@email.com'}
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">{language === 'nl' ? 'Telefoon' : 'Phone'}</label>
+                <div className="mb-6">
+                  <label className="block text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    {language === 'nl' ? 'Telefoon' : 'Phone'}
+                  </label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 focus:bg-white transition-all"
+                    className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors"
                     placeholder="06 12345678"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">{language === 'nl' ? 'Bericht' : 'Message'} *</label>
+                <div className="mb-10">
+                  <label className="block text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    {language === 'nl' ? 'Bericht' : 'Message'} *
+                  </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 focus:bg-white transition-all resize-none"
+                    className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors resize-none"
                     placeholder={language === 'nl' ? 'Vertel over je project...' : 'Tell me about your project...'}
                   />
                 </div>
@@ -903,16 +983,11 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white py-4 rounded-xl font-medium hover:bg-gray-800 transition-all disabled:opacity-50"
+                  className="w-full py-5 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-colors disabled:opacity-50"
                 >
-                  {isSubmitting ? (
-                    <span>{language === 'nl' ? 'Verzenden...' : 'Sending...'}</span>
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      <span>{language === 'nl' ? 'Verstuur bericht' : 'Send message'}</span>
-                    </>
-                  )}
+                  {isSubmitting 
+                    ? (language === 'nl' ? 'Verzenden...' : 'Sending...') 
+                    : (language === 'nl' ? 'Verstuur Bericht' : 'Send Message')}
                 </button>
               </form>
             )}
@@ -923,53 +998,55 @@ const ContactSection = () => {
   );
 };
 
-// Footer - Modern, clean
+// Footer - Brutalist
 const Footer = () => {
   const { language } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-16">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          <div className="md:col-span-2">
-            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto mb-4" style={{filter: 'invert(1)'}} />
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
+    <footer className="py-12 bg-white border-t border-black">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-12 gap-8">
+          {/* Logo & Info */}
+          <div className="col-span-12 lg:col-span-4">
+            <span className="text-2xl font-black tracking-tighter">YRVANTE</span>
+            <p className="text-xs text-gray-500 mt-4 max-w-xs leading-relaxed">
               {language === 'nl'
-                ? 'Professionele websites voor ZZP\'ers en MKB. Betaalbaar, modern en resultaatgericht.'
-                : 'Professional websites for freelancers and SMBs. Affordable, modern and result-driven.'}
+                ? 'Professionele websites voor ZZP\'ers en MKB. Betaalbaar en resultaatgericht.'
+                : 'Professional websites for freelancers and SMBs. Affordable and result-driven.'}
             </p>
           </div>
 
-          <div>
-            <h4 className="font-medium text-gray-300 mb-4">{language === 'nl' ? 'Pagina\'s' : 'Pages'}</h4>
+          {/* Links */}
+          <div className="col-span-6 lg:col-span-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">
+              {language === 'nl' ? 'Pagina\'s' : 'Pages'}
+            </p>
             <ul className="space-y-3 text-sm">
-              <li><Link to="/pakketten" className="text-gray-400 hover:text-white transition-colors">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
-              <li><Link to="/calculator" className="text-gray-400 hover:text-white transition-colors">Calculator</Link></li>
-              <li><Link to="/waarom-website" className="text-gray-400 hover:text-white transition-colors">{language === 'nl' ? 'Waarom een website?' : 'Why a website?'}</Link></li>
-              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
+              <li><Link to="/pakketten" className="hover:underline underline-offset-4">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
+              <li><Link to="/calculator" className="hover:underline underline-offset-4">Calculator</Link></li>
+              <li><Link to="/waarom-website" className="hover:underline underline-offset-4">{language === 'nl' ? 'Waarom?' : 'Why?'}</Link></li>
+              <li><Link to="/blog" className="hover:underline underline-offset-4">Blog</Link></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-medium text-gray-300 mb-4">Contact</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li>
-                <a href="mailto:info@yrvante.com" className="hover:text-white transition-colors">
-                  info@yrvante.com
-                </a>
-              </li>
-              <li>Almelo, Nederland</li>
+          {/* Contact */}
+          <div className="col-span-6 lg:col-span-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">Contact</p>
+            <ul className="space-y-3 text-sm">
+              <li><a href="mailto:info@yrvante.com" className="hover:underline underline-offset-4">info@yrvante.com</a></li>
+              <li>Almelo, NL</li>
             </ul>
           </div>
-        </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">
-            © {currentYear} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
-          </p>
-          <div className="flex items-center gap-6 text-sm text-gray-500">
-            <span>{language === 'nl' ? 'KVK: Op aanvraag' : 'Chamber of Commerce: On request'}</span>
+          {/* Copyright */}
+          <div className="col-span-12 lg:col-span-4 lg:text-right">
+            <p className="text-xs text-gray-400">
+              © {currentYear} Yrvante
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
+            </p>
           </div>
         </div>
       </div>
@@ -977,16 +1054,15 @@ const Footer = () => {
   );
 };
 
-// Main Landing Page
+// Main Landing Page - Brutalist Editorial
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen bg-white">
       <Navigation />
       <HeroSection />
-      <WhyExpensiveSection />
       <ServicesSection />
+      <WhyExpensiveSection />
       <PricingSection />
-      <TestimonialsSection />
       <FAQSection />
       <ContactSection />
       <Footer />
