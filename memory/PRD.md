@@ -6,19 +6,20 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 ## Brand Identity
 - **Name**: Yrvante
 - **Slogan**: "Smart web & software"
-- **Founder**: Yvar Bredewold
+- **Founder**: Yvar Bredewold (ZZP'er - Freelancer)
 - **Location**: Almelo, Overijssel, Netherlands
 - **Contact Email**: info@yrvante.com
+- **Voice**: "ik/mij" (personal freelancer tone, NOT "wij/we")
 
 ## Value Proposition
-"Wij bouwen geen website — wij zorgen dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen."
+"Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen."
 
 ## Current Pricing Structure (December 2025)
 
 ### Main Packages
 | Package | Price | Delivery | Target | Features |
 |---------|-------|----------|--------|----------|
-| **Basis** | €500 | ~ 1 week | Starters | 3 pages, responsive, basic contact, Vercel hosting, 6 revisions |
+| **Basis** | €500 | ~ 1 week | Starters | 3 pages, responsive, basic contact, fast secure hosting, 6 revisions |
 | **Pro** | €900 | 1-2 weken | Growing SMBs | 10 pages, SEO (zoekwoordonderzoek + on-page), blog, portfolio, contact form |
 | **Premium** | €1400 | 1-2 weken | Ambitious | 15 pages, booking system, Google Reviews, multi-language, priority support (12h) |
 
@@ -37,10 +38,14 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 ## What's Been Implemented (December 2025)
 
 ### Latest Updates (This Session)
-- [x] **Extended FAQ** - Expanded from 4 to 12 detailed questions
-- [x] **Updated Calculator Prices** - New losse prijzen with tip about combining extras
-- [x] **Enhanced Packages Page** - Added delivery times, losse prijzen section with tip
-- [x] **New Blog Page** - Article about why websites aren't a luxury + agency pricing comparison
+- [x] **Voice Change** - All "wij/we" changed to "ik/mij" (freelancer tone)
+- [x] **New Logo** - User's uploaded logo with name and slogan
+- [x] **Green Glow Button** - "Beschikbaar voor nieuwe projecten" with green shadow
+- [x] **Stats Updated** - Removed "100% tevreden klanten", now shows €500, 1-2 Weken, ZZP
+- [x] **Hero Animation** - Fixed black border, increased height to 55vh
+- [x] **Basis Package** - Removed Vercel/SSL mentions, now "Snelle en veilige hosting"
+- [x] **Maintenance Price** - Updated from €20 to €25/pm everywhere
+- [x] **Extended FAQ** - 12 detailed questions with exact user content
 
 ### Pages
 | Route | Description | Status |
@@ -48,9 +53,9 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 | `/` | Premium landing page | ✅ |
 | `/about` | About page | ✅ |
 | `/waarom-website` | Why a website page | ✅ |
-| `/calculator` | Price calculator (all prices + tip) | ✅ |
-| `/pakketten` | Detailed packages + losse prijzen | ✅ |
-| `/blog` | Blog - "Waarom een website geen luxe meer is" | ✅ NEW |
+| `/calculator` | Price calculator | ✅ |
+| `/pakketten` | Detailed packages | ✅ |
+| `/blog` | Blog article | ✅ |
 | `/admin` | Admin dashboard | ✅ |
 
 ### FAQ Questions (12 total)
@@ -81,10 +86,10 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 ## File Structure
 ```
 /app/frontend/src/pages/
-├── LandingPage.jsx (hero + 12 FAQs)
-├── PackagesPage.jsx (packages + losse prijzen + tip)
-├── CalculatorPage.jsx (calculator + losse prijzen + tip)
-├── BlogPage.jsx (NEW - website necessity article)
+├── LandingPage.jsx (hero + 12 FAQs + "ik" voice)
+├── PackagesPage.jsx (packages + losse prijzen)
+├── CalculatorPage.jsx (calculator + losse prijzen)
+├── BlogPage.jsx (website necessity article)
 ├── AboutPage.jsx
 ├── WhyWebsitePage.jsx
 └── AdminDashboard.jsx
@@ -94,9 +99,10 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 - [x] Premium homepage with animation
 - [x] New pricing structure (€500/€900/€1400)
 - [x] Extended FAQ (12 questions)
-- [x] Calculator with losse prijzen + tip
-- [x] Packages page with delivery times + losse prijzen
-- [x] Blog page about website necessity
+- [x] Voice change to "ik" (ZZP'er tone)
+- [x] New logo integration
+- [x] Green glow availability button
+- [x] Stats without "100% tevreden"
 
 ## P1 Features (Upcoming)
 - [ ] Real portfolio projects
@@ -109,8 +115,8 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 - [ ] Client portal for project status
 
 ## Key Design Decisions
-1. **Voice**: "we/wij" for Yrvante, "jij/je" for customer
+1. **Voice**: "ik/mij" for Yrvante (personal ZZP'er tone), "jij/je" for customer
 2. **No names on reviews** - Only business type shown
-3. **Losse prijzen visible** - Calculator and packages page show all individual prices
-4. **Tip about combining** - Encourage higher packages when multiple extras selected
-5. **Delivery times shown** - ~ 1 week (Basis), 1-2 weken (Pro/Premium)
+3. **No "100% tevreden klanten"** - Removed as user has no customers yet
+4. **Maintenance €25/pm** - Updated from €20
+5. **No Vercel/SSL mentions** - Generic "snelle en veilige hosting"
