@@ -174,54 +174,15 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="min-h-screen bg-white pt-20 relative overflow-hidden">
-      {/* Main Hero Content - Asymmetric Layout */}
+    <section data-testid="hero-section" className="min-h-screen bg-white pt-24 relative overflow-hidden">
+      {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
-        {/* Top Bar - Stats & Contact Info (Desktop) */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="hidden lg:flex items-center justify-between py-6 border-b border-gray-200 mb-8"
-        >
-          <div className="flex items-center gap-12">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-black">€500</span>
-              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                {language === 'nl' ? 'Vanaf' : 'From'}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-black">1-2</span>
-              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                {language === 'nl' ? 'Weken' : 'Weeks'}
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-8">
-            <a 
-              href="tel:+31642543859" 
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-            >
-              <Phone size={14} />
-              <span>+31 6 42543859</span>
-            </a>
-            <a 
-              href="mailto:info@yrvante.com" 
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-            >
-              <Mail size={14} />
-              <span>info@yrvante.com</span>
-            </a>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-12 gap-4 lg:gap-8 min-h-[calc(100vh-200px)] items-center">
+        <div className="grid grid-cols-12 gap-4 lg:gap-12 min-h-[calc(100vh-120px)] items-center">
           
-          {/* Left Side - Typography Heavy */}
-          <div className="col-span-12 lg:col-span-7 py-12 lg:py-0">
-            {/* Availability Badge - Elegant pill at top */}
+          {/* Left Side - Content */}
+          <div className="col-span-12 lg:col-span-7 py-8 lg:py-0">
+            {/* Availability Badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -250,26 +211,26 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-6"
+              className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4"
             >
               Smart Web & Software
             </motion.p>
             
-            {/* Main Headline - Brutalist Typography with more spacing */}
+            {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[10vw] lg:text-[5vw] font-black leading-[1.15] tracking-tighter mb-8"
+              className="text-[11vw] lg:text-[5.5vw] font-black leading-[1.1] tracking-tighter mb-6"
             >
               {language === 'nl' ? (
-                <span className="flex flex-col gap-1 lg:gap-2">
+                <span className="flex flex-col gap-0">
                   <span>JOUW</span>
                   <span>BEDRIJF</span>
                   <span className="text-gray-400">ONLINE</span>
                 </span>
               ) : (
-                <span className="flex flex-col gap-1 lg:gap-2">
+                <span className="flex flex-col gap-0">
                   <span>YOUR</span>
                   <span>BUSINESS</span>
                   <span className="text-gray-400">ONLINE</span>
@@ -277,7 +238,44 @@ const HeroSection = () => {
               )}
             </motion.h1>
 
-            {/* Value Prop - Small Text */}
+            {/* Stats Bar - Under headline */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap items-center gap-6 lg:gap-10 mb-6 py-4 border-y border-gray-200"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-black">€500</span>
+                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
+                  {language === 'nl' ? 'Vanaf' : 'From'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-black">1-2</span>
+                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
+                  {language === 'nl' ? 'Weken' : 'Weeks'}
+                </span>
+              </div>
+              <div className="hidden lg:flex items-center gap-6 ml-auto">
+                <a 
+                  href="tel:+31642543859" 
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
+                >
+                  <Phone size={14} />
+                  <span>+31 6 42543859</span>
+                </a>
+                <a 
+                  href="mailto:info@yrvante.com" 
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
+                >
+                  <Mail size={14} />
+                  <span>info@yrvante.com</span>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Value Prop */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -289,7 +287,7 @@ const HeroSection = () => {
                 : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
             </motion.p>
 
-            {/* CTA - Brutalist Button */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -310,40 +308,20 @@ const HeroSection = () => {
                 {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
               </Link>
             </motion.div>
-
-            {/* Mobile Stats - Only shown on mobile */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex lg:hidden flex-wrap gap-6 mt-8 pt-6 border-t border-gray-200"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-black">€500</span>
-                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                  {language === 'nl' ? 'Vanaf' : 'From'}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-black">1-2</span>
-                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                  {language === 'nl' ? 'Weken' : 'Weeks'}
-                </span>
-              </div>
-            </motion.div>
           </div>
 
           {/* Right Side - Logo (Desktop Only) */}
-          <div className="hidden lg:flex col-span-5 items-center justify-center">
+          <div className="hidden lg:flex col-span-5 items-center justify-end pr-8">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative"
             >
               <img 
                 src={LOGO_URL} 
                 alt="Yrvante Logo" 
-                className="w-[520px] h-auto object-contain"
+                className="w-[480px] h-auto object-contain"
                 style={{ backgroundColor: 'white' }}
               />
             </motion.div>
