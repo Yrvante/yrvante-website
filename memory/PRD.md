@@ -1,15 +1,16 @@
 # Yrvante Website - Product Requirements Document
 
 ## Original Problem Statement
-Build a modern, production-ready premium business website for Yrvante - a Dutch web development startup based in Almelo, Netherlands. The website should generate new clients and showcase services professionally.
+Build a modern, production-ready premium business website for Yrvante - a Dutch web development startup. The website should generate new clients and showcase services professionally.
 
 ## Brand Identity
 - **Name**: Yrvante
-- **Slogan**: "Smart web & software"
+- **Slogan**: "Smart Web & Software"
 - **Founder**: Yvar Bredewold (ZZP'er - Freelancer)
-- **Location**: Almelo, Overijssel, Netherlands
+- **Location**: Nederland (NOT showing "Almelo" publicly anymore)
 - **Contact Email**: info@yrvante.com
 - **Voice**: "ik/mij" (personal freelancer tone, NOT "wij/we")
+- **Design Style**: Brutalist-editorial (bold typography, asymmetric layout, black/white)
 
 ## Value Proposition
 "Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen."
@@ -37,12 +38,19 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 
 ## What's Been Implemented (December 2025)
 
-### Latest Updates (This Session)
+### Latest Updates (This Session - Brutalist Redesign)
+- [x] **Brutalist-Editorial Design** - Complete homepage redesign with bold typography, asymmetric layout
+- [x] **Logo Image** - User's logo image added to header and footer (not text "YRVANTE")
+- [x] **Slogan in Hero** - "SMART WEB & SOFTWARE" displayed prominently at top of hero section
+- [x] **"Almelo" Removed** - Removed from all locations (header, contact section, footer) - now shows "Nederland"
+- [x] **Improved Text Contrast** - Changed gray text from gray-400 to gray-500/600 for better readability
+- [x] **Hero Animation Placement** - Video animation integrated into hero section with brutalist black border
+- [x] **Stats Section** - €500, 1-2 Weken, green "Beschikbaar" indicator under animation
+- [x] **Green Availability Button** - Animated green dot indicating availability
+
+### Previous Updates (This Session)
 - [x] **Voice Change** - All "wij/we" changed to "ik/mij" (freelancer tone)
 - [x] **New Logo** - User's uploaded logo with name and slogan
-- [x] **Green Glow Button** - "Beschikbaar voor nieuwe projecten" with green shadow
-- [x] **Stats Updated** - Removed "100% tevreden klanten", now shows €500, 1-2 Weken, ZZP
-- [x] **Hero Animation** - Fixed black border, increased height to 55vh
 - [x] **Basis Package** - Removed Vercel/SSL mentions, now "Snelle en veilige hosting"
 - [x] **Maintenance Price** - Updated from €20 to €25/pm everywhere
 - [x] **Extended FAQ** - 12 detailed questions with exact user content
@@ -120,3 +128,6 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 3. **No "100% tevreden klanten"** - Removed as user has no customers yet
 4. **Maintenance €25/pm** - Updated from €20
 5. **No Vercel/SSL mentions** - Generic "snelle en veilige hosting"
+6. **Brutalist-Editorial Style** - Black/white, large typography, asymmetric layouts
+7. **No "Almelo"** - Location now just shows "Nederland"
+8. **Logo as Image** - Using uploaded logo image, not text

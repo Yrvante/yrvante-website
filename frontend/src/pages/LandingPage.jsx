@@ -59,26 +59,30 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="/" data-testid="nav-logo" className="flex items-center">
-            <span className="text-2xl font-black tracking-tighter">YRVANTE</span>
+            <img 
+              src={LOGO_URL} 
+              alt="Yrvante" 
+              className="h-10 lg:h-12 w-auto object-contain"
+            />
           </a>
 
           {/* Desktop Navigation - Brutalist style */}
           <div className="hidden lg:flex items-center gap-8">
             <button
               onClick={() => scrollToSection("services")}
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
             >
               Diensten
             </button>
             <button
               onClick={() => scrollToSection("pricing")}
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
             >
               Pakketten
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
             >
               Contact
             </button>
@@ -177,14 +181,14 @@ const HeroSection = () => {
           
           {/* Left Side - Typography Heavy */}
           <div className="col-span-12 lg:col-span-7 py-12 lg:py-0">
-            {/* Small Label */}
+            {/* Slogan */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6"
+              className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-6"
             >
-              Web Design Studio — Almelo
+              Smart Web & Software
             </motion.p>
             
             {/* Main Headline - Brutalist Typography */}
@@ -198,13 +202,13 @@ const HeroSection = () => {
                 <>
                   JOUW<br />
                   BEDRIJF<br />
-                  <span className="text-gray-300">ONLINE</span>
+                  <span className="text-gray-400">ONLINE</span>
                 </>
               ) : (
                 <>
                   YOUR<br />
                   BUSINESS<br />
-                  <span className="text-gray-300">ONLINE</span>
+                  <span className="text-gray-400">ONLINE</span>
                 </>
               )}
             </motion.h1>
@@ -244,46 +248,39 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right Side - Stats & Info - Overlapping */}
+          {/* Right Side - Animation & Stats */}
           <div className="col-span-12 lg:col-span-5 relative py-12 lg:py-0">
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2"
+              className="lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 w-full"
             >
-              {/* Big Number */}
-              <div className="mb-8">
-                <span className="text-[20vw] lg:text-[12vw] font-black text-gray-100 leading-none block">
-                  €500
-                </span>
-                <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mt-2">
-                  {language === 'nl' ? 'Vanaf prijs' : 'Starting price'}
-                </p>
+              {/* Hero Animation - Brutalist Frame */}
+              <div className="mb-8 border border-black">
+                <HeroAnimation />
               </div>
 
               {/* Stats Grid - Small Labels */}
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-3 gap-6">
                 <div>
-                  <span className="text-4xl font-black">1-2</span>
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-1">
+                  <span className="text-3xl font-black">€500</span>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
+                    {language === 'nl' ? 'Vanaf' : 'From'}
+                  </p>
+                </div>
+                <div>
+                  <span className="text-3xl font-black">1-2</span>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
                     {language === 'nl' ? 'Weken' : 'Weeks'}
                   </p>
                 </div>
-                <div>
-                  <span className="text-4xl font-black">6</span>
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-1">
-                    {language === 'nl' ? 'Revisies' : 'Revisions'}
-                  </p>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-xs uppercase tracking-[0.2em]">
+                    {language === 'nl' ? 'Beschikbaar' : 'Available'}
+                  </span>
                 </div>
-              </div>
-
-              {/* Availability Tag */}
-              <div className="mt-10 flex items-center gap-3">
-                <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
-                <span className="text-xs uppercase tracking-[0.2em]">
-                  {language === 'nl' ? 'Beschikbaar' : 'Available'}
-                </span>
               </div>
             </motion.div>
           </div>
@@ -311,7 +308,7 @@ const WhyExpensiveSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-7"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-6">
               (03)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8">
@@ -371,7 +368,7 @@ const ServicesSection = () => {
         {/* Section Header - Asymmetric */}
         <div className="grid grid-cols-12 gap-4 mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
               (01)
             </p>
           </div>
@@ -393,7 +390,7 @@ const ServicesSection = () => {
           >
             <div className="border-t border-black pt-8">
               <div className="flex justify-between items-start mb-6">
-                <span className="text-xs uppercase tracking-[0.2em] text-gray-400">01</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
                 <Monitor size={24} strokeWidth={1} />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
@@ -417,7 +414,7 @@ const ServicesSection = () => {
           >
             <div className="border-t border-black pt-8">
               <div className="flex justify-between items-start mb-6">
-                <span className="text-xs uppercase tracking-[0.2em] text-gray-400">02</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
                 <Code size={24} strokeWidth={1} />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
@@ -740,7 +737,7 @@ const FAQSection = () => {
         {/* Section Header */}
         <div className="grid grid-cols-12 gap-4 mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
               (05)
             </p>
           </div>
@@ -767,7 +764,7 @@ const FAQSection = () => {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-xs text-gray-400 uppercase tracking-[0.2em] block mb-3">
+                    <span className="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-3">
                       0{index + 1}
                     </span>
                     <span className="font-bold text-lg block">{faq.q}</span>
@@ -881,13 +878,13 @@ const ContactSection = () => {
                 </a>
               </div>
               <div className="border-t border-black pt-6">
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                   {language === 'nl' ? 'Locatie' : 'Location'}
                 </p>
-                <p className="text-lg">Almelo, Nederland</p>
+                <p className="text-lg">Nederland</p>
               </div>
               <div className="border-t border-black pt-6">
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                   {language === 'nl' ? 'Reactietijd' : 'Response'}
                 </p>
                 <p className="text-lg">{language === 'nl' ? 'Binnen 24 uur' : 'Within 24 hours'}</p>
@@ -1009,7 +1006,11 @@ const Footer = () => {
         <div className="grid grid-cols-12 gap-8">
           {/* Logo & Info */}
           <div className="col-span-12 lg:col-span-4">
-            <span className="text-2xl font-black tracking-tighter">YRVANTE</span>
+            <img 
+              src={LOGO_URL} 
+              alt="Yrvante" 
+              className="h-12 w-auto object-contain"
+            />
             <p className="text-xs text-gray-500 mt-4 max-w-xs leading-relaxed">
               {language === 'nl'
                 ? 'Professionele websites voor ZZP\'ers en MKB. Betaalbaar en resultaatgericht.'
@@ -1019,7 +1020,7 @@ const Footer = () => {
 
           {/* Links */}
           <div className="col-span-6 lg:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
               {language === 'nl' ? 'Pagina\'s' : 'Pages'}
             </p>
             <ul className="space-y-3 text-sm">
@@ -1032,19 +1033,19 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="col-span-6 lg:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">Contact</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">Contact</p>
             <ul className="space-y-3 text-sm">
               <li><a href="mailto:info@yrvante.com" className="hover:underline underline-offset-4">info@yrvante.com</a></li>
-              <li>Almelo, NL</li>
+              <li>Nederland</li>
             </ul>
           </div>
 
           {/* Copyright */}
           <div className="col-span-12 lg:col-span-4 lg:text-right">
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-500">
               © {currentYear} Yrvante
             </p>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
             </p>
           </div>
