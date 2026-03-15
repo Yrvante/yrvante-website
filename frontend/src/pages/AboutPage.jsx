@@ -208,7 +208,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="bg-white p-8 border border-gray-200 h-full transition-all duration-300 hover:border-black">
+                <div className="bg-white p-8 rounded-3xl border border-gray-200 h-full transition-all duration-300 hover:border-black hover:shadow-lg">
                   <div className="mb-6 text-gray-400 group-hover:text-black transition-colors">{value.icon}</div>
                   <h3 className="text-xl font-heading mb-4">{value.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{value.description}</p>
@@ -220,19 +220,20 @@ const AboutPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 md:px-12 bg-black text-white">
+      <section className="py-24 px-6 md:px-12 bg-gray-50">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="bg-black text-white rounded-3xl p-12"
           >
             <h2 className="text-3xl md:text-5xl font-heading font-thin mb-8">
               {language === 'nl' ? 'Klaar om te beginnen?' : 'Ready to start?'}
             </h2>
             <Link
               to="/#contact"
-              className="inline-block bg-white text-black px-10 py-4 font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
+              className="inline-block bg-white text-black px-10 py-4 rounded-2xl font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
             >
               {t.cta}
             </Link>

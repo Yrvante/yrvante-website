@@ -113,6 +113,9 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 - [x] Stats without "100% tevreden"
 - [x] **SEO Optimization** - Unique page titles, meta descriptions, sitemap.xml, robots.txt
 - [x] **Multi-language** - NL/EN language switcher with dynamic SEO per language
+- [x] **Calculator with Quote Form** - Klant kan pakket + extra's kiezen en direct aanvragen
+- [x] **Rounded Design** - Alle elementen hebben nu ronde hoeken (rounded-2xl/3xl)
+- [x] **Consistent Styling** - Dezelfde kleuren en stijl op alle pagina's
 
 ## SEO Implementation
 - **sitemap.xml** - All pages with hreflang for NL/EN

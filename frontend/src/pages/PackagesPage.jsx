@@ -275,7 +275,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Losse Prijzen Section */}
-      <section className="py-16 px-6 md:px-12 bg-gray-900 text-white">
+      <section className="py-16 px-6 md:px-12 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -286,7 +286,7 @@ const PackagesPage = () => {
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
               {language === 'nl' ? 'Losse Extra\'s Toevoegen' : 'Add Individual Extras'}
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-500 max-w-2xl mx-auto">
               {language === 'nl'
                 ? 'Wil je iets extra\'s bij je pakket? Hier zijn de losse prijzen.'
                 : 'Want to add something extra to your package? Here are the individual prices.'}
@@ -301,21 +301,21 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="text-center p-5 bg-gray-800 rounded-2xl"
+                className="text-center p-5 bg-white rounded-3xl border border-gray-200"
               >
                 <p className="text-2xl font-bold mb-1">{item.price}</p>
-                <p className="text-sm text-gray-400">{item.name}</p>
+                <p className="text-sm text-gray-500">{item.name}</p>
               </motion.div>
             ))}
           </div>
 
           <motion.div
-            className="bg-yellow-500/20 border border-yellow-500/40 rounded-2xl p-6 text-center"
+            className="bg-yellow-50 border border-yellow-200 rounded-3xl p-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-lg text-yellow-200">
+            <p className="text-lg text-yellow-800">
               <span className="font-bold">💡 Tip:</span> {language === 'nl' 
                 ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
                 : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
@@ -351,9 +351,9 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:border-black hover:shadow-lg transition-all"
+                className="bg-white p-6 rounded-3xl border border-gray-200 text-center hover:border-black hover:shadow-lg transition-all"
               >
-                <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   {extra.icon}
                 </div>
                 <h3 className="font-bold text-lg mb-2">{extra.title}</h3>

@@ -422,7 +422,7 @@ const ServicesSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-6 group"
           >
-            <div className="border-t border-black pt-8">
+            <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
                 <Monitor size={24} strokeWidth={1} />
@@ -446,7 +446,7 @@ const ServicesSection = () => {
             transition={{ delay: 0.1 }}
             className="col-span-12 lg:col-span-6 group"
           >
-            <div className="border-t border-black pt-8">
+            <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
                 <Code size={24} strokeWidth={1} />
@@ -900,20 +900,20 @@ const ContactSection = () => {
                 : 'Have questions or want to know what I can do for you? Send a message — I respond within 24 hours.'}
             </p>
 
-            <div className="space-y-8">
-              <div className="border-t border-black pt-6">
+            <div className="space-y-6">
+              <div className="bg-white rounded-2xl p-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
                 <a href="mailto:info@yrvante.com" className="text-lg hover:underline underline-offset-4">
                   info@yrvante.com
                 </a>
               </div>
-              <div className="border-t border-black pt-6">
+              <div className="bg-white rounded-2xl p-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                   {language === 'nl' ? 'Locatie' : 'Location'}
                 </p>
                 <p className="text-lg">Nederland</p>
               </div>
-              <div className="border-t border-black pt-6">
+              <div className="bg-white rounded-2xl p-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                   {language === 'nl' ? 'Reactietijd' : 'Response'}
                 </p>
@@ -958,7 +958,7 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors"
+                      className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors"
                       placeholder={language === 'nl' ? 'Je naam' : 'Your name'}
                     />
                   </div>
@@ -972,7 +972,7 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors"
+                      className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors"
                       placeholder={language === 'nl' ? 'je@email.nl' : 'your@email.com'}
                     />
                   </div>
@@ -987,7 +987,7 @@ const ContactSection = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors"
+                    className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors"
                     placeholder="06 12345678"
                   />
                 </div>
@@ -1002,7 +1002,7 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-0 py-3 bg-transparent border-b border-gray-300 focus:border-black focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors resize-none"
                     placeholder={language === 'nl' ? 'Vertel over je project...' : 'Tell me about your project...'}
                   />
                 </div>
@@ -1010,7 +1010,7 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-5 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-colors disabled:opacity-50"
+                  className="w-full py-5 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-2xl hover:bg-gray-900 transition-colors disabled:opacity-50"
                 >
                   {isSubmitting 
                     ? (language === 'nl' ? 'Verzenden...' : 'Sending...') 
