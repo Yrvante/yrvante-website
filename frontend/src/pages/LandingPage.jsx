@@ -174,9 +174,16 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="min-h-screen bg-white pt-20">
+    <section data-testid="hero-section" className="min-h-screen bg-white pt-20 relative overflow-hidden">
+      {/* Background Animation - Transparent Overlay */}
+      <div className="absolute inset-0 pt-20 pointer-events-none">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[80%] opacity-[0.25]">
+          <HeroAnimation />
+        </div>
+      </div>
+
       {/* Main Hero Content - Asymmetric Layout */}
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-4 min-h-[calc(100vh-80px)] items-center">
           
           {/* Left Side - Typography Heavy */}
@@ -246,44 +253,37 @@ const HeroSection = () => {
                 {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
               </Link>
             </motion.div>
-          </div>
 
-          {/* Right Side - Animation & Stats */}
-          <div className="col-span-12 lg:col-span-5 relative py-12 lg:py-0">
+            {/* Stats Grid - Below CTA */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 w-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-gray-200"
             >
-              {/* Hero Animation - Brutalist Frame */}
-              <div className="mb-8 border border-black">
-                <HeroAnimation />
+              <div>
+                <span className="text-3xl font-black">€500</span>
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
+                  {language === 'nl' ? 'Vanaf' : 'From'}
+                </p>
               </div>
-
-              {/* Stats Grid - Small Labels */}
-              <div className="grid grid-cols-3 gap-6">
-                <div>
-                  <span className="text-3xl font-black">€500</span>
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
-                    {language === 'nl' ? 'Vanaf' : 'From'}
-                  </p>
-                </div>
-                <div>
-                  <span className="text-3xl font-black">1-2</span>
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
-                    {language === 'nl' ? 'Weken' : 'Weeks'}
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs uppercase tracking-[0.2em]">
-                    {language === 'nl' ? 'Beschikbaar' : 'Available'}
-                  </span>
-                </div>
+              <div>
+                <span className="text-3xl font-black">1-2</span>
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
+                  {language === 'nl' ? 'Weken' : 'Weeks'}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-xs uppercase tracking-[0.2em]">
+                  {language === 'nl' ? 'Beschikbaar' : 'Available'}
+                </span>
               </div>
             </motion.div>
           </div>
+
+          {/* Right Side - Empty space for background animation to show through */}
+          <div className="hidden lg:block col-span-5" />
         </div>
       </div>
 
