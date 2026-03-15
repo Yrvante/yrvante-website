@@ -177,7 +177,47 @@ const HeroSection = () => {
     <section data-testid="hero-section" className="min-h-screen bg-white pt-20 relative overflow-hidden">
       {/* Main Hero Content - Asymmetric Layout */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-12 gap-4 min-h-[calc(100vh-80px)] items-center">
+        
+        {/* Top Bar - Stats & Contact Info (Desktop) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="hidden lg:flex items-center justify-between py-6 border-b border-gray-200 mb-8"
+        >
+          <div className="flex items-center gap-12">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black">€500</span>
+              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
+                {language === 'nl' ? 'Vanaf' : 'From'}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black">1-2</span>
+              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
+                {language === 'nl' ? 'Weken' : 'Weeks'}
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-8">
+            <a 
+              href="tel:+31642543859" 
+              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
+            >
+              <Phone size={14} />
+              <span>+31 6 42543859</span>
+            </a>
+            <a 
+              href="mailto:info@yrvante.com" 
+              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
+            >
+              <Mail size={14} />
+              <span>info@yrvante.com</span>
+            </a>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-12 gap-4 lg:gap-8 min-h-[calc(100vh-200px)] items-center">
           
           {/* Left Side - Typography Heavy */}
           <div className="col-span-12 lg:col-span-7 py-12 lg:py-0">
@@ -186,7 +226,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-8"
+              className="mb-6"
             >
               <button 
                 onClick={scrollToContact}
@@ -220,16 +260,16 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[12vw] lg:text-[7vw] font-black leading-[1.1] tracking-tighter mb-8"
+              className="text-[12vw] lg:text-[6.5vw] font-black leading-[1.15] tracking-tighter mb-8"
             >
               {language === 'nl' ? (
-                <span className="flex flex-col gap-2">
+                <span className="flex flex-col gap-1 lg:gap-3">
                   <span>JOUW</span>
                   <span>BEDRIJF</span>
                   <span className="text-gray-400">ONLINE</span>
                 </span>
               ) : (
-                <span className="flex flex-col gap-2">
+                <span className="flex flex-col gap-1 lg:gap-3">
                   <span>YOUR</span>
                   <span>BUSINESS</span>
                   <span className="text-gray-400">ONLINE</span>
@@ -242,7 +282,7 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm lg:text-base text-gray-500 max-w-md leading-relaxed mb-10"
+              className="text-sm lg:text-base text-gray-500 max-w-md leading-relaxed mb-8"
             >
               {language === 'nl' 
                 ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
@@ -271,24 +311,24 @@ const HeroSection = () => {
               </Link>
             </motion.div>
 
-            {/* Stats Grid - Below CTA */}
+            {/* Mobile Stats - Only shown on mobile */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-gray-200"
+              className="flex lg:hidden flex-wrap gap-6 mt-8 pt-6 border-t border-gray-200"
             >
-              <div>
-                <span className="text-3xl font-black">€500</span>
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-black">€500</span>
+                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
                   {language === 'nl' ? 'Vanaf' : 'From'}
-                </p>
+                </span>
               </div>
-              <div>
-                <span className="text-3xl font-black">1-2</span>
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-black">1-2</span>
+                <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
                   {language === 'nl' ? 'Weken' : 'Weeks'}
-                </p>
+                </span>
               </div>
             </motion.div>
           </div>
@@ -303,7 +343,7 @@ const HeroSection = () => {
               <img 
                 src={LOGO_URL} 
                 alt="Yrvante Logo" 
-                className="w-80 h-auto object-contain opacity-90"
+                className="w-[420px] h-auto object-contain"
               />
             </motion.div>
           </div>
