@@ -322,14 +322,14 @@ const CalculatorPage = () => {
                     key={key}
                     data-testid={`package-${key}`}
                     onClick={() => setSelectedPackage(key)}
-                    className={`relative cursor-pointer p-6 rounded-2xl border-2 transition-all ${
+                    className={`relative cursor-pointer p-6 rounded-3xl border-2 transition-all ${
                       selectedPackage === key 
                         ? 'border-black bg-gray-50 shadow-lg' 
                         : 'border-gray-200 hover:border-gray-400'
                     }`}
                   >
                     {pkg.popular && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                         <Sparkles size={12} />
                         {language === 'nl' ? 'Populair' : 'Popular'}
                       </div>
@@ -377,37 +377,37 @@ const CalculatorPage = () => {
               <p className="text-gray-500 text-sm mb-6">{t.optional}</p>
               
               {/* Losse prijzen overzicht */}
-              <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-2xl">
+              <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-3xl">
                 <h3 className="font-bold text-lg mb-4">
                   {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
                     <p className="text-2xl font-bold">€50</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
                   </div>
-                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
                     <p className="text-2xl font-bold">€200</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
                   </div>
-                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
                     <p className="text-2xl font-bold">€80</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
                   </div>
-                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
                     <p className="text-2xl font-bold">€25<span className="text-sm text-gray-500">/pm</span></p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
                   </div>
-                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
                     <p className="text-2xl font-bold">€250</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
                   </div>
-                  <div className="text-center p-3 bg-white border border-gray-200 rounded-xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
                     <p className="text-2xl font-bold">€120</p>
                     <p className="text-sm text-gray-500">Google Reviews</p>
                   </div>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
                   <p className="text-sm text-yellow-800">
                     <span className="font-bold">💡 Tip:</span> {language === 'nl' 
                       ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
@@ -418,7 +418,7 @@ const CalculatorPage = () => {
               
               <div className="space-y-4">
                 {/* Extra Pages */}
-                <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="p-5 bg-gray-50 rounded-2xl border border-gray-200">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <h4 className="font-medium">{t.addOns.extraPages.title}</h4>
@@ -429,14 +429,14 @@ const CalculatorPage = () => {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => adjustExtraPages(-1)}
-                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-lg hover:border-black hover:bg-black hover:text-white transition-all"
+                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-black hover:bg-black hover:text-white transition-all"
                         >
                           <Minus size={16} />
                         </button>
                         <span className="w-10 text-center font-mono font-bold text-lg">{addOns.extraPages}</span>
                         <button
                           onClick={() => adjustExtraPages(1)}
-                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-lg hover:border-black hover:bg-black hover:text-white transition-all"
+                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-black hover:bg-black hover:text-white transition-all"
                         >
                           <Plus size={16} />
                         </button>
@@ -451,7 +451,7 @@ const CalculatorPage = () => {
                     key={key}
                     data-testid={`addon-${key}`}
                     onClick={() => toggleAddOn(key)}
-                    className={`p-5 rounded-xl border cursor-pointer transition-all ${
+                    className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                       addOns[key] 
                         ? 'border-black bg-gray-50 shadow-md' 
                         : 'border-gray-200 bg-white hover:border-gray-400'
@@ -464,7 +464,7 @@ const CalculatorPage = () => {
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="text-sm font-mono font-bold">€{addon.price} <span className="font-normal text-gray-400">{addon.unit}</span></span>
-                        <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
+                        <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
                           addOns[key] ? 'border-black bg-black' : 'border-gray-300'
                         }`}>
                           {addOns[key] && <Check size={14} className="text-white" />}
@@ -534,7 +534,7 @@ const CalculatorPage = () => {
               </div>
 
               {/* Note */}
-              <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="mt-4 p-4 bg-gray-50 rounded-2xl border border-gray-200">
                 <div className="flex gap-3">
                   <Info size={16} className="text-gray-400 flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-gray-500">{t.note}</p>
