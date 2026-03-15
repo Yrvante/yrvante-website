@@ -350,17 +350,12 @@ const CalculatorPage = () => {
                     <p className="text-3xl font-heading font-bold mb-4">€{pkg.price}</p>
                     
                     <ul className="space-y-2">
-                      {pkg.includes.slice(0, 4).map((item, i) => (
+                      {pkg.includes.map((item, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                          <Check size={14} className="text-black flex-shrink-0" />
+                          <Check size={14} className="text-green-500 flex-shrink-0" />
                           {item}
                         </li>
                       ))}
-                      {pkg.includes.length > 4 && (
-                        <li className="text-sm text-gray-400">
-                          + {pkg.includes.length - 4} {language === 'nl' ? 'meer' : 'more'}...
-                        </li>
-                      )}
                     </ul>
                   </div>
                 ))}
