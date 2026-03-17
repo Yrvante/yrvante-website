@@ -139,29 +139,98 @@ async def submit_contact(input: ContactSubmissionCreate):
         email_sent = False
         if resend.api_key:
             try:
-                phone_line = f"<p><strong>Telefoon:</strong> {input.phone}</p>" if input.phone else ""
+                # Format message with proper line breaks
+                formatted_message = input.message.replace('\n', '<br>')
+                
+                phone_line = f"""
+                    <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                            <span style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Telefoon</span><br>
+                            <span style="font-size: 16px; color: #000;">{input.phone}</span>
+                        </td>
+                    </tr>
+                """ if input.phone else ""
+                
                 html_content = f"""
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <h2 style="color: #000000; border-bottom: 2px solid #000;">Nieuw Website Aanvraag - Yrvante</h2>
-                    <div style="padding: 20px 0;">
-                        <p><strong>Naam:</strong> {input.name}</p>
-                        <p><strong>Email:</strong> {input.email}</p>
-                        {phone_line}
-                        <p><strong>Bericht:</strong></p>
-                        <div style="background-color: #f8f8f8; padding: 15px; border-left: 3px solid #000;">
-                            {input.message}
-                        </div>
-                    </div>
-                    <hr style="border: none; border-top: 1px solid #e5e5e5;">
-                    <p style="color: #666; font-size: 12px;">Dit bericht werd verzonden via het contactformulier op yrvante.com</p>
-                </div>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                </head>
+                <body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+                        <tr>
+                            <td align="center">
+                                <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <!-- Header -->
+                                    <tr>
+                                        <td style="background-color: #000; padding: 30px 40px;">
+                                            <h1 style="margin: 0; color: #fff; font-size: 24px; font-weight: 700;">YRVANTE</h1>
+                                            <p style="margin: 8px 0 0 0; color: #999; font-size: 14px;">Nieuwe Website Aanvraag</p>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Content -->
+                                    <tr>
+                                        <td style="padding: 40px;">
+                                            <table width="100%" cellpadding="0" cellspacing="0">
+                                                <!-- Klant Gegevens -->
+                                                <tr>
+                                                    <td style="padding-bottom: 30px;">
+                                                        <h2 style="margin: 0 0 20px 0; font-size: 18px; color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">Klant Gegevens</h2>
+                                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                                            <tr>
+                                                                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                                                                    <span style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Naam</span><br>
+                                                                    <span style="font-size: 16px; color: #000; font-weight: 600;">{input.name}</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                                                                    <span style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Email</span><br>
+                                                                    <a href="mailto:{input.email}" style="font-size: 16px; color: #000; text-decoration: none;">{input.email}</a>
+                                                                </td>
+                                                            </tr>
+                                                            {phone_line}
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <!-- Aanvraag Details -->
+                                                <tr>
+                                                    <td>
+                                                        <h2 style="margin: 0 0 20px 0; font-size: 18px; color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">Aanvraag Details</h2>
+                                                        <div style="background-color: #f9f9f9; border-radius: 12px; padding: 20px; font-size: 15px; line-height: 1.6; color: #333;">
+                                                            {formatted_message}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Footer -->
+                                    <tr>
+                                        <td style="background-color: #f9f9f9; padding: 20px 40px; border-top: 1px solid #eee;">
+                                            <p style="margin: 0; color: #999; font-size: 12px; text-align: center;">
+                                                Dit bericht werd verzonden via het contactformulier op yrvante.com
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
                 """
                 
                 params = {
-                    "from": SENDER_EMAIL,
+                    "from": f"Yrvante <{SENDER_EMAIL}>",
                     "to": [RECIPIENT_EMAIL],
-                    "subject": f"Nieuwe aanvraag van {input.name} - Yrvante",
-                    "html": html_content
+                    "subject": f"🚀 Nieuwe aanvraag van {input.name}",
+                    "html": html_content,
+                    "reply_to": input.email
                 }
                 
                 await asyncio.to_thread(resend.Emails.send, params)

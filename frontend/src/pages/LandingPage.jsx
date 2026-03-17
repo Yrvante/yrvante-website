@@ -22,6 +22,7 @@ import {
   Clock,
   Send,
 } from "lucide-react";
+import DemoPreview from "../components/DemoPreview";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -580,6 +581,9 @@ const PricingSection = () => {
             {language === 'nl' ? 'Bekijk alle details →' : 'View all details →'}
           </Link>
         </div>
+
+        {/* Demo Previews */}
+        <DemoPreview language={language} />
       </div>
     </section>
   );
