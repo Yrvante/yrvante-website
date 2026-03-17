@@ -93,15 +93,36 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 
 ## File Structure
 ```
-/app/frontend/src/pages/
-├── LandingPage.jsx (hero + 12 FAQs + "ik" voice)
-├── PackagesPage.jsx (packages + losse prijzen)
-├── CalculatorPage.jsx (calculator + losse prijzen)
-├── BlogPage.jsx (website necessity article)
-├── AboutPage.jsx
-├── WhyWebsitePage.jsx
-└── AdminDashboard.jsx
+/app/frontend/src/
+├── components/
+│   ├── DemoPreview.jsx (NEW - Interactive demo previews for each package)
+│   ├── SEO.jsx
+│   └── ui/ (shadcn components)
+├── pages/
+│   ├── LandingPage.jsx (hero + 12 FAQs + "ik" voice + DemoPreview)
+│   ├── PackagesPage.jsx (packages + losse prijzen)
+│   ├── CalculatorPage.jsx (calculator + losse prijzen)
+│   ├── BlogPage.jsx (website necessity article)
+│   ├── AboutPage.jsx
+│   ├── WhyWebsitePage.jsx
+│   └── AdminDashboard.jsx
 ```
+
+## Demo Previews Feature (December 2025)
+Three interactive website previews showing what customers can expect for each package:
+
+| Package | Demo Type | Color Theme | URL Preview |
+|---------|-----------|-------------|-------------|
+| Basis €500 | Hondenwandelservice | Amber/Brown | www.basispakket.nl |
+| Pro €900 | Schoonmaakbedrijf | Emerald/Green | www.propakket.nl |
+| Premium €1400 | Nagelstudio | Rose/Pink | www.premiumpakket.nl |
+
+**Features:**
+- Browser frame mockup with traffic light buttons
+- Tab switching with smooth animations (Framer Motion)
+- "Populair" badge on Pro tab
+- Description text updates per demo
+- Dutch/English language support
 
 ## P0 Features (Completed)
 - [x] Premium homepage with animation
@@ -116,6 +137,7 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 - [x] **Calculator with Quote Form** - Klant kan pakket + extra's kiezen en direct aanvragen
 - [x] **Rounded Design** - Alle elementen hebben nu ronde hoeken (rounded-2xl/3xl)
 - [x] **Consistent Styling** - Dezelfde kleuren en stijl op alle pagina's
+- [x] **Demo Website Previews** - Interactieve voorbeelden van elk pakket in de Pakketten sectie (December 2025)
 
 ## SEO Implementation
 - **sitemap.xml** - All pages with hreflang for NL/EN
