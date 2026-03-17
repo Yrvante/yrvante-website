@@ -9,6 +9,9 @@ import WhyWebsitePage from "./pages/WhyWebsitePage";
 import CalculatorPage from "./pages/CalculatorPage";
 import PackagesPage from "./pages/PackagesPage";
 import BlogPage from "./pages/BlogPage";
+import OverMijPage from "./pages/OverMijPage";
+import DienstenPage from "./pages/DienstenPage";
+import OnderhoudPage from "./pages/OnderhoudPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -246,10 +249,15 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/over-mij" element={<OverMijPage />} />
             <Route path="/waarom-website" element={<WhyWebsitePage />} />
             <Route path="/calculator" element={<CalculatorPage />} />
             <Route path="/pakketten" element={<PackagesPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/onderhoud" element={<OnderhoudPage />} />
+            <Route path="/diensten" element={<DienstenPage />} />
+            <Route path="/diensten/:type" element={<DienstenPage />} />
+            <Route path="/voor/:niche" element={<DienstenPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>

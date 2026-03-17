@@ -29,11 +29,12 @@ const API = `${BACKEND_URL}/api`;
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
 
-// Navigation - Brutalist, minimal
+// Navigation - Brutalist with Dropdown Menus
 const Navigation = () => {
   const { language, setLanguage } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -47,7 +48,26 @@ const Navigation = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setMobileMenuOpen(false);
+    setOpenDropdown(null);
   };
+
+  const dienstenLinks = [
+    { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
+    { to: '/diensten/webflow', label: 'Webflow Development' },
+    { to: '/diensten/branding', label: 'Branding' },
+    { divider: true },
+    { to: '/voor/coaches', label: language === 'nl' ? 'Website voor Coaches' : 'Website for Coaches' },
+    { to: '/voor/zzp', label: language === 'nl' ? 'Website voor ZZP\'ers' : 'Website for Freelancers' },
+    { divider: true },
+    { to: '/diensten', label: language === 'nl' ? 'Alle Diensten →' : 'All Services →' },
+  ];
+
+  const overLinks = [
+    { to: '/over-mij', label: language === 'nl' ? 'Over Mij' : 'About Me' },
+    { to: '/waarom-website', label: language === 'nl' ? 'Waarom een Website?' : 'Why a Website?' },
+    { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
+    { to: '/blog', label: 'Blog' },
+  ];
 
   return (
     <nav
@@ -67,26 +87,96 @@ const Navigation = () => {
             />
           </a>
 
-          {/* Desktop Navigation - Brutalist style */}
-          <div className="hidden lg:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("services")}
+          {/* Desktop Navigation - With Dropdowns */}
+          <div className="hidden lg:flex items-center gap-6">
+            {/* Diensten Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setOpenDropdown('diensten')}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <button
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors flex items-center gap-1 py-4"
+              >
+                {language === 'nl' ? 'Diensten' : 'Services'}
+                <ChevronDown size={12} className={`transition-transform ${openDropdown === 'diensten' ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {openDropdown === 'diensten' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 bg-white border border-gray-200 rounded-2xl shadow-xl py-3 min-w-[220px]"
+                  >
+                    {dienstenLinks.map((link, index) => (
+                      link.divider ? (
+                        <div key={index} className="border-t border-gray-100 my-2" />
+                      ) : (
+                        <Link
+                          key={index}
+                          to={link.to}
+                          className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      )
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <Link
+              to="/pakketten"
               className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
             >
-              Diensten
-            </button>
-            <button
-              onClick={() => scrollToSection("pricing")}
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
-            >
-              Pakketten
-            </button>
+              {language === 'nl' ? 'Pakketten' : 'Packages'}
+            </Link>
+            
             <Link
               to="/calculator"
               className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
             >
               Calculator
             </Link>
+
+            {/* Over Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setOpenDropdown('over')}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <button
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors flex items-center gap-1 py-4"
+              >
+                {language === 'nl' ? 'Over' : 'About'}
+                <ChevronDown size={12} className={`transition-transform ${openDropdown === 'over' ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {openDropdown === 'over' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 bg-white border border-gray-200 rounded-2xl shadow-xl py-3 min-w-[200px]"
+                  >
+                    {overLinks.map((link, index) => (
+                      <Link
+                        key={index}
+                        to={link.to}
+                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <button
               onClick={() => scrollToSection("contact")}
               className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
@@ -98,7 +188,7 @@ const Navigation = () => {
             
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-colors"
+              className="px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-colors rounded-full"
             >
               Start Project
             </button>
@@ -137,39 +227,96 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-black"
+            className="lg:hidden bg-white border-t border-black overflow-hidden"
           >
-            <div className="px-6 py-8 space-y-6">
-              <button
-                onClick={() => scrollToSection("services")}
-                className="block text-xs font-medium uppercase tracking-[0.2em]"
-              >
-                Diensten
-              </button>
-              <button
-                onClick={() => scrollToSection("pricing")}
-                className="block text-xs font-medium uppercase tracking-[0.2em]"
-              >
-                Pakketten
-              </button>
-              <Link
-                to="/calculator"
-                className="block text-xs font-medium uppercase tracking-[0.2em]"
-              >
-                Calculator
-              </Link>
+            <div className="px-6 py-6 space-y-4">
+              {/* Diensten Section */}
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
+                  {language === 'nl' ? 'Diensten' : 'Services'}
+                </p>
+                <div className="space-y-2 pl-2">
+                  {dienstenLinks.filter(l => !l.divider).map((link, index) => (
+                    <Link
+                      key={index}
+                      to={link.to}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-sm text-gray-600"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-t border-gray-100 pt-4">
+                <Link
+                  to="/pakketten"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-xs font-medium uppercase tracking-[0.2em] mb-4"
+                >
+                  {language === 'nl' ? 'Pakketten' : 'Packages'}
+                </Link>
+                <Link
+                  to="/calculator"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-xs font-medium uppercase tracking-[0.2em] mb-4"
+                >
+                  Calculator
+                </Link>
+              </div>
+
+              {/* Over Section */}
+              <div className="border-t border-gray-100 pt-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
+                  {language === 'nl' ? 'Over' : 'About'}
+                </p>
+                <div className="space-y-2 pl-2">
+                  {overLinks.map((link, index) => (
+                    <Link
+                      key={index}
+                      to={link.to}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-sm text-gray-600"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-t border-gray-100 pt-4">
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="block text-xs font-medium uppercase tracking-[0.2em] mb-4"
+                >
+                  Contact
+                </button>
+              </div>
+
               <button
                 onClick={() => scrollToSection("contact")}
-                className="block text-xs font-medium uppercase tracking-[0.2em]"
-              >
-                Contact
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="block w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em]"
+                className="block w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full"
               >
                 Start Project
               </button>
+
+              {/* Language Switcher */}
+              <div className="flex justify-center gap-4 pt-2">
+                <button
+                  onClick={() => setLanguage("nl")}
+                  className={`text-sm ${language === "nl" ? "text-black font-bold" : "text-gray-400"}`}
+                >
+                  Nederlands
+                </button>
+                <span className="text-gray-300">|</span>
+                <button
+                  onClick={() => setLanguage("en")}
+                  className={`text-sm ${language === "en" ? "text-black font-bold" : "text-gray-400"}`}
+                >
+                  English
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
@@ -1029,17 +1176,17 @@ const ContactSection = () => {
   );
 };
 
-// Footer - Brutalist
+// Footer - Brutalist with More Links
 const Footer = () => {
   const { language } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 bg-white border-t border-black">
+    <footer className="py-16 bg-white border-t border-black">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-8">
           {/* Logo & Info */}
-          <div className="col-span-12 lg:col-span-4">
+          <div className="col-span-12 lg:col-span-3">
             <img 
               src={LOGO_URL} 
               alt="Yrvante" 
@@ -1052,36 +1199,59 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Diensten Links */}
+          <div className="col-span-6 lg:col-span-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
+              {language === 'nl' ? 'Diensten' : 'Services'}
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/diensten/webdesign" className="text-gray-600 hover:text-black transition-colors">Webdesign</Link></li>
+              <li><Link to="/diensten/webflow" className="text-gray-600 hover:text-black transition-colors">Webflow</Link></li>
+              <li><Link to="/diensten/branding" className="text-gray-600 hover:text-black transition-colors">Branding</Link></li>
+              <li><Link to="/onderhoud" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</Link></li>
+            </ul>
+          </div>
+
+          {/* Voor Links */}
+          <div className="col-span-6 lg:col-span-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
+              {language === 'nl' ? 'Websites voor' : 'Websites for'}
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/voor/coaches" className="text-gray-600 hover:text-black transition-colors">Coaches</Link></li>
+              <li><Link to="/voor/zzp" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'ZZP\'ers' : 'Freelancers'}</Link></li>
+            </ul>
+          </div>
+
+          {/* Pagina's Links */}
           <div className="col-span-6 lg:col-span-2">
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
               {language === 'nl' ? 'Pagina\'s' : 'Pages'}
             </p>
-            <ul className="space-y-3 text-sm">
-              <li><Link to="/pakketten" className="hover:underline underline-offset-4">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
-              <li><Link to="/calculator" className="hover:underline underline-offset-4">Calculator</Link></li>
-              <li><Link to="/waarom-website" className="hover:underline underline-offset-4">{language === 'nl' ? 'Waarom?' : 'Why?'}</Link></li>
-              <li><Link to="/blog" className="hover:underline underline-offset-4">Blog</Link></li>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/pakketten" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
+              <li><Link to="/calculator" className="text-gray-600 hover:text-black transition-colors">Calculator</Link></li>
+              <li><Link to="/over-mij" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Over Mij' : 'About Me'}</Link></li>
+              <li><Link to="/waarom-website" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Waarom?' : 'Why?'}</Link></li>
+              <li><Link to="/blog" className="text-gray-600 hover:text-black transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="col-span-6 lg:col-span-2">
+          <div className="col-span-6 lg:col-span-3">
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">Contact</p>
-            <ul className="space-y-3 text-sm">
-              <li><a href="mailto:info@yrvante.com" className="hover:underline underline-offset-4">info@yrvante.com</a></li>
-              <li>Nederland</li>
+            <ul className="space-y-2 text-sm">
+              <li><a href="mailto:info@yrvante.com" className="text-gray-600 hover:text-black transition-colors">info@yrvante.com</a></li>
+              <li className="text-gray-600">Nederland</li>
             </ul>
-          </div>
-
-          {/* Copyright */}
-          <div className="col-span-12 lg:col-span-4 lg:text-right">
-            <p className="text-xs text-gray-500">
-              © {currentYear} Yrvante
-            </p>
-            <p className="text-xs text-gray-500 mt-1">
-              {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
-            </p>
+            <div className="mt-6">
+              <p className="text-xs text-gray-500">
+                © {currentYear} Yrvante
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
+              </p>
+            </div>
           </div>
         </div>
       </div>

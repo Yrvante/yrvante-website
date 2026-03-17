@@ -18,74 +18,150 @@ import {
   Users,
   Calendar,
   ArrowRight,
-  ChevronRight
+  ChevronRight,
+  Home,
+  Info,
+  MessageCircle,
+  Image,
+  Scissors,
+  Palette,
+  Gift,
+  Sun,
+  Moon,
+  Leaf,
+  Zap
 } from "lucide-react";
 
 // ============================================
 // DEMO 1: Basis Pakket - Hondenwandelservice
-// Simple, clean, single-page style
+// Beautiful, warm, inviting design
 // ============================================
 const BasisDemo = ({ language }) => {
   return (
-    <div className="bg-amber-50 min-h-full rounded-2xl overflow-hidden text-[8px] leading-tight">
+    <div className="bg-gradient-to-b from-amber-50 to-orange-50 min-h-full rounded-2xl overflow-hidden text-[8px] leading-tight">
       {/* Header */}
-      <header className="bg-amber-900 text-white px-3 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <Dog size={12} className="text-amber-300" />
-          <span className="font-bold text-[9px]">Basis Pakket</span>
+      <header className="bg-white/90 backdrop-blur-sm px-3 py-2 flex items-center justify-between border-b border-amber-100 sticky top-0">
+        <div className="flex items-center gap-1.5">
+          <div className="w-6 h-6 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center">
+            <Dog size={12} className="text-white" />
+          </div>
+          <div>
+            <span className="font-bold text-[9px] text-amber-900 block leading-tight">Basis Pakket</span>
+            <span className="text-[5px] text-amber-600">Hondenuitlaatservice</span>
+          </div>
         </div>
-        <div className="flex gap-2 text-[6px]">
-          <span>Home</span>
-          <span>Over</span>
-          <span>Contact</span>
-        </div>
+        <nav className="flex gap-2 text-[6px] text-amber-700">
+          <span className="hover:text-amber-900 cursor-pointer">Home</span>
+          <span className="hover:text-amber-900 cursor-pointer">Diensten</span>
+          <span className="hover:text-amber-900 cursor-pointer">Over Mij</span>
+          <span className="bg-amber-600 text-white px-2 py-0.5 rounded-full">Contact</span>
+        </nav>
       </header>
 
-      {/* Hero */}
-      <div className="bg-gradient-to-br from-amber-100 to-amber-200 px-3 py-4 text-center">
-        <div className="w-8 h-8 bg-amber-900 rounded-full mx-auto mb-2 flex items-center justify-center">
-          <Dog size={16} className="text-amber-300" />
+      {/* Hero Section - More elaborate */}
+      <div className="relative px-3 py-5 overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-2 right-2 w-16 h-16 bg-amber-200/50 rounded-full blur-xl" />
+        <div className="absolute bottom-2 left-2 w-12 h-12 bg-orange-200/50 rounded-full blur-xl" />
+        
+        <div className="relative text-center">
+          <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[6px] mb-2">
+            <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+            {language === 'nl' ? 'Beschikbaar' : 'Available'}
+          </div>
+          
+          <h1 className="font-bold text-[12px] text-amber-900 mb-1">
+            {language === 'nl' ? 'Hondenwandelen' : 'Dog Walking'}
+            <span className="text-amber-500"> met Liefde</span>
+          </h1>
+          <p className="text-amber-700 text-[7px] mb-3 max-w-[200px] mx-auto">
+            {language === 'nl' 
+              ? 'Professionele en liefdevolle uitlaatservice voor jouw trouwe viervoeter' 
+              : 'Professional and loving walking service for your loyal companion'}
+          </p>
+          
+          <div className="flex justify-center gap-2">
+            <button className="bg-gradient-to-r from-amber-600 to-orange-500 text-white px-3 py-1.5 rounded-full text-[7px] font-bold shadow-lg shadow-amber-200 flex items-center gap-1">
+              <Phone size={8} /> {language === 'nl' ? 'Bel Direct' : 'Call Now'}
+            </button>
+            <button className="bg-white text-amber-700 px-3 py-1.5 rounded-full text-[7px] font-medium border border-amber-200">
+              {language === 'nl' ? 'Meer Info' : 'Learn More'}
+            </button>
+          </div>
         </div>
-        <h1 className="font-bold text-[10px] text-amber-900 mb-1">
-          {language === 'nl' ? 'Hondenwandelen met Liefde' : 'Dog Walking with Love'}
-        </h1>
-        <p className="text-amber-700 text-[7px] mb-2">
-          {language === 'nl' ? 'Professionele uitlaatservice in jouw buurt' : 'Professional walking service in your area'}
-        </p>
-        <button className="bg-amber-900 text-white px-3 py-1 rounded-full text-[7px] font-bold">
-          {language === 'nl' ? 'Bel Nu' : 'Call Now'}
-        </button>
       </div>
 
-      {/* Services */}
+      {/* Trust Badges */}
+      <div className="flex justify-center gap-3 px-3 py-2 bg-white/50">
+        {[
+          { icon: Heart, label: language === 'nl' ? 'Met Liefde' : 'With Love' },
+          { icon: Shield, label: language === 'nl' ? 'Verzekerd' : 'Insured' },
+          { icon: Award, label: language === 'nl' ? '5 Jaar Ervaring' : '5 Years Exp.' },
+        ].map((badge, i) => (
+          <div key={i} className="flex items-center gap-1 text-[6px] text-amber-700">
+            <badge.icon size={10} className="text-amber-500" />
+            <span>{badge.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Services Grid - Enhanced */}
       <div className="px-3 py-3">
         <h2 className="font-bold text-[9px] text-amber-900 mb-2 text-center">
           {language === 'nl' ? 'Onze Diensten' : 'Our Services'}
         </h2>
         <div className="grid grid-cols-2 gap-2">
           {[
-            { icon: Dog, title: language === 'nl' ? 'Dagelijkse Wandeling' : 'Daily Walk', price: '€15' },
-            { icon: Heart, title: language === 'nl' ? 'Groepswandeling' : 'Group Walk', price: '€10' },
+            { icon: Dog, title: language === 'nl' ? 'Dagelijkse Wandeling' : 'Daily Walk', price: '€15', desc: '30-45 min' },
+            { icon: Users, title: language === 'nl' ? 'Groepswandeling' : 'Group Walk', price: '€10', desc: '60 min' },
+            { icon: Sun, title: language === 'nl' ? 'Puppyservice' : 'Puppy Care', price: '€20', desc: 'Extra aandacht' },
+            { icon: Home, title: language === 'nl' ? 'Huisbezoek' : 'Home Visit', price: '€25', desc: 'Op aanvraag' },
           ].map((service, i) => (
-            <div key={i} className="bg-white rounded-lg p-2 text-center shadow-sm">
-              <service.icon size={14} className="text-amber-600 mx-auto mb-1" />
-              <p className="font-bold text-[7px]">{service.title}</p>
-              <p className="text-amber-600 text-[8px] font-bold">{service.price}</p>
+            <div key={i} className="bg-white rounded-xl p-2 text-center shadow-sm border border-amber-100 hover:shadow-md transition-shadow">
+              <div className="w-7 h-7 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full mx-auto mb-1 flex items-center justify-center">
+                <service.icon size={14} className="text-amber-600" />
+              </div>
+              <p className="font-bold text-[7px] text-amber-900">{service.title}</p>
+              <p className="text-amber-600 text-[9px] font-bold">{service.price}</p>
+              <p className="text-amber-400 text-[5px]">{service.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Contact */}
-      <div className="bg-amber-900 text-white px-3 py-2 text-center">
-        <p className="text-[7px] mb-1">{language === 'nl' ? 'Neem contact op' : 'Get in touch'}</p>
-        <div className="flex justify-center gap-3 text-[6px]">
+      {/* Testimonial */}
+      <div className="mx-3 mb-2 bg-white rounded-xl p-2 shadow-sm border border-amber-100">
+        <div className="flex gap-0.5 mb-1">
+          {[1,2,3,4,5].map(i => <Star key={i} size={8} className="text-amber-500 fill-amber-500" />)}
+        </div>
+        <p className="text-amber-700 text-[6px] italic">
+          {language === 'nl' 
+            ? '"Max is altijd zo blij als ze langskomt! Aanrader!"' 
+            : '"Max is always so happy when she comes by! Recommended!"'}
+        </p>
+        <p className="text-amber-400 text-[6px] mt-1">- Lisa & Max</p>
+      </div>
+
+      {/* Contact Footer */}
+      <div className="bg-gradient-to-r from-amber-800 to-amber-900 text-white px-3 py-3">
+        <div className="text-center mb-2">
+          <p className="font-bold text-[8px] mb-1">{language === 'nl' ? 'Neem Contact Op' : 'Get in Touch'}</p>
+        </div>
+        <div className="flex justify-center gap-4 text-[6px]">
           <span className="flex items-center gap-1">
-            <Phone size={8} /> 06-12345678
+            <Phone size={8} className="text-amber-300" /> 06-12345678
           </span>
           <span className="flex items-center gap-1">
-            <Mail size={8} /> info@basis.nl
+            <Mail size={8} className="text-amber-300" /> info@basispakket.nl
           </span>
+        </div>
+        <div className="flex justify-center gap-1 mt-2">
+          <div className="w-5 h-5 bg-amber-700 rounded-full flex items-center justify-center">
+            <span className="text-[8px]">f</span>
+          </div>
+          <div className="w-5 h-5 bg-amber-700 rounded-full flex items-center justify-center">
+            <span className="text-[8px]">in</span>
+          </div>
         </div>
       </div>
     </div>
@@ -94,109 +170,180 @@ const BasisDemo = ({ language }) => {
 
 // ============================================
 // DEMO 2: Pro Pakket - Schoonmaakbedrijf
-// More professional, multiple sections
+// Professional, trustworthy, comprehensive
 // ============================================
 const ProDemo = ({ language }) => {
   return (
     <div className="bg-slate-50 min-h-full rounded-2xl overflow-hidden text-[8px] leading-tight">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200 px-3 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <SprayCan size={12} className="text-emerald-600" />
-          <span className="font-bold text-[9px] text-slate-800">Pro Pakket</span>
+      {/* Header - Professional */}
+      <header className="bg-white border-b border-slate-200 px-3 py-2 flex items-center justify-between sticky top-0 z-10">
+        <div className="flex items-center gap-1.5">
+          <div className="w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+            <SprayCan size={12} className="text-white" />
+          </div>
+          <div>
+            <span className="font-bold text-[9px] text-slate-800 block leading-tight">Pro Pakket</span>
+            <span className="text-[5px] text-emerald-600">Schoonmaakdiensten</span>
+          </div>
         </div>
         <nav className="flex gap-2 text-[6px] text-slate-600">
           <span>Home</span>
           <span>Diensten</span>
           <span>Prijzen</span>
+          <span>Portfolio</span>
           <span>Over Ons</span>
+          <span>Blog</span>
           <span className="bg-emerald-600 text-white px-2 py-0.5 rounded">Contact</span>
         </nav>
       </header>
 
-      {/* Hero */}
-      <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-3 py-4">
-        <div className="flex items-center gap-2">
+      {/* Hero - More impactful */}
+      <div className="bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 text-white px-3 py-4 relative overflow-hidden">
+        {/* Decorative shapes */}
+        <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/30 rounded-full blur-2xl" />
+        <div className="absolute bottom-0 left-0 w-16 h-16 bg-teal-400/20 rounded-full blur-xl" />
+        
+        <div className="relative flex items-center gap-3">
           <div className="flex-1">
-            <p className="text-emerald-200 text-[6px] uppercase tracking-wider mb-1">Professioneel & Betrouwbaar</p>
-            <h1 className="font-bold text-[11px] mb-1">
-              {language === 'nl' ? 'Schoonmaak die je ziet' : 'Cleaning you can see'}
+            <div className="inline-flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full text-[6px] mb-2">
+              <Zap size={8} className="text-yellow-300" />
+              {language === 'nl' ? 'Professioneel & Betrouwbaar' : 'Professional & Reliable'}
+            </div>
+            <h1 className="font-bold text-[13px] mb-1 leading-tight">
+              {language === 'nl' ? 'Schoonmaak die je' : 'Cleaning that you'}
+              <span className="text-emerald-200"> {language === 'nl' ? 'écht ziet' : 'can see'}</span>
             </h1>
-            <p className="text-emerald-100 text-[7px] mb-2">
-              {language === 'nl' ? 'Voor particulieren en bedrijven' : 'For homes and businesses'}
+            <p className="text-emerald-100 text-[7px] mb-3 max-w-[180px]">
+              {language === 'nl' 
+                ? 'Voor particulieren en bedrijven. Flexibel, betrouwbaar en altijd stipt op tijd.' 
+                : 'For homes and businesses. Flexible, reliable and always on time.'}
             </p>
-            <button className="bg-white text-emerald-700 px-3 py-1 rounded text-[7px] font-bold">
-              {language === 'nl' ? 'Gratis Offerte' : 'Free Quote'}
-            </button>
+            <div className="flex gap-2">
+              <button className="bg-white text-emerald-700 px-3 py-1.5 rounded text-[7px] font-bold shadow-lg flex items-center gap-1">
+                {language === 'nl' ? 'Gratis Offerte' : 'Free Quote'} <ArrowRight size={8} />
+              </button>
+              <button className="bg-emerald-500/30 text-white px-3 py-1.5 rounded text-[7px] font-medium border border-emerald-400/50">
+                <Phone size={8} className="inline mr-1" /> Bel Ons
+              </button>
+            </div>
           </div>
-          <div className="w-12 h-12 bg-emerald-500 rounded-lg flex items-center justify-center">
-            <SprayCan size={24} className="text-white" />
+          <div className="w-16 h-16 bg-white/10 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20">
+            <SprayCan size={28} className="text-white" />
           </div>
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-1 px-3 py-2 bg-white">
+      {/* Stats Bar - More impressive */}
+      <div className="grid grid-cols-4 gap-1 px-3 py-3 bg-white border-b border-slate-100">
         {[
-          { num: '500+', label: language === 'nl' ? 'Klanten' : 'Clients' },
-          { num: '10+', label: language === 'nl' ? 'Jaar' : 'Years' },
-          { num: '5/5', label: language === 'nl' ? 'Rating' : 'Rating' },
+          { num: '500+', label: language === 'nl' ? 'Tevreden Klanten' : 'Happy Clients' },
+          { num: '10+', label: language === 'nl' ? 'Jaar Ervaring' : 'Years Experience' },
+          { num: '24/7', label: language === 'nl' ? 'Bereikbaar' : 'Available' },
+          { num: '5.0', label: 'Google Rating', icon: Star },
         ].map((stat, i) => (
           <div key={i} className="text-center">
-            <p className="font-bold text-emerald-600 text-[10px]">{stat.num}</p>
-            <p className="text-slate-500 text-[6px]">{stat.label}</p>
+            <p className="font-bold text-emerald-600 text-[11px] flex items-center justify-center gap-0.5">
+              {stat.num}
+              {stat.icon && <stat.icon size={8} className="fill-yellow-400 text-yellow-400" />}
+            </p>
+            <p className="text-slate-500 text-[5px]">{stat.label}</p>
           </div>
         ))}
       </div>
 
-      {/* Services Grid */}
-      <div className="px-3 py-2">
-        <h2 className="font-bold text-[9px] text-slate-800 mb-2">
-          {language === 'nl' ? 'Onze Diensten' : 'Our Services'}
-        </h2>
+      {/* Services Grid - Comprehensive */}
+      <div className="px-3 py-3">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="font-bold text-[9px] text-slate-800">
+            {language === 'nl' ? 'Onze Diensten' : 'Our Services'}
+          </h2>
+          <span className="text-emerald-600 text-[6px]">{language === 'nl' ? 'Bekijk alles →' : 'View all →'}</span>
+        </div>
+        <div className="grid grid-cols-3 gap-1.5">
+          {[
+            { icon: SprayCan, title: language === 'nl' ? 'Kantoren' : 'Offices', price: 'Vanaf €80' },
+            { icon: Home, title: language === 'nl' ? 'Woningen' : 'Homes', price: 'Vanaf €60' },
+            { icon: Shield, title: language === 'nl' ? 'Dieptereiniging' : 'Deep Clean', price: 'Vanaf €150' },
+            { icon: Sparkles, title: language === 'nl' ? 'Glazenwassen' : 'Windows', price: 'Vanaf €40' },
+            { icon: Leaf, title: language === 'nl' ? 'Eco Schoon' : 'Eco Clean', price: 'Vanaf €90' },
+            { icon: Calendar, title: language === 'nl' ? 'Abonnement' : 'Subscription', price: 'Op maat' },
+          ].map((service, i) => (
+            <div key={i} className="bg-slate-50 rounded-lg p-2 text-center hover:bg-emerald-50 transition-colors border border-slate-100 hover:border-emerald-200">
+              <div className="w-6 h-6 bg-white rounded-lg mx-auto mb-1 flex items-center justify-center shadow-sm">
+                <service.icon size={12} className="text-emerald-600" />
+              </div>
+              <span className="font-medium text-[6px] text-slate-700 block">{service.title}</span>
+              <span className="text-emerald-600 text-[6px] font-bold">{service.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Why Choose Us */}
+      <div className="mx-3 mb-2 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-2 border border-emerald-100">
+        <h3 className="font-bold text-[8px] text-emerald-800 mb-1.5">{language === 'nl' ? 'Waarom Pro Pakket?' : 'Why Pro Pakket?'}</h3>
         <div className="grid grid-cols-2 gap-1">
           {[
-            { icon: SprayCan, title: language === 'nl' ? 'Kantoren' : 'Offices' },
-            { icon: Heart, title: language === 'nl' ? 'Woningen' : 'Homes' },
-            { icon: Shield, title: language === 'nl' ? 'Dieptereiniging' : 'Deep Clean' },
-            { icon: Award, title: language === 'nl' ? 'Glazenwassen' : 'Windows' },
-          ].map((service, i) => (
-            <div key={i} className="bg-white rounded-lg p-2 flex items-center gap-2 shadow-sm border border-slate-100">
-              <service.icon size={12} className="text-emerald-600" />
-              <span className="font-medium text-[7px]">{service.title}</span>
+            language === 'nl' ? 'Eigen materiaal' : 'Own supplies',
+            language === 'nl' ? 'Verzekerd tot €1M' : 'Insured up to €1M',
+            language === 'nl' ? 'Flexibele tijden' : 'Flexible times',
+            language === 'nl' ? 'Geen contracten' : 'No contracts',
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-1 text-[6px] text-emerald-700">
+              <Check size={8} className="text-emerald-500" />
+              <span>{item}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Testimonial */}
-      <div className="mx-3 mb-2 bg-emerald-50 rounded-lg p-2 border border-emerald-100">
-        <div className="flex gap-0.5 mb-1">
-          {[1,2,3,4,5].map(i => <Star key={i} size={8} className="text-yellow-500 fill-yellow-500" />)}
+      <div className="mx-3 mb-2 bg-white rounded-xl p-2 shadow-sm border border-slate-100">
+        <div className="flex items-start gap-2">
+          <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+            <Users size={10} className="text-emerald-600" />
+          </div>
+          <div>
+            <div className="flex gap-0.5 mb-0.5">
+              {[1,2,3,4,5].map(i => <Star key={i} size={6} className="text-yellow-500 fill-yellow-500" />)}
+            </div>
+            <p className="text-slate-600 text-[6px] italic">
+              {language === 'nl' 
+                ? '"Eindelijk een betrouwbaar schoonmaakbedrijf! Al 2 jaar zeer tevreden."' 
+                : '"Finally a reliable cleaning company! Very satisfied for 2 years now."'}
+            </p>
+            <p className="text-slate-400 text-[5px] mt-0.5">- Kantoor Amsterdam</p>
+          </div>
         </div>
-        <p className="text-slate-600 text-[6px] italic">
-          {language === 'nl' 
-            ? '"Eindelijk een betrouwbaar schoonmaakbedrijf!"' 
-            : '"Finally a reliable cleaning company!"'}
-        </p>
-        <p className="text-slate-400 text-[6px] mt-1">- Jan de Vries</p>
+      </div>
+
+      {/* Blog Preview */}
+      <div className="mx-3 mb-2">
+        <h3 className="font-bold text-[8px] text-slate-800 mb-1">Blog</h3>
+        <div className="bg-white rounded-lg p-2 border border-slate-100">
+          <p className="text-[6px] text-slate-600">{language === 'nl' ? '5 Tips voor een schoon kantoor →' : '5 Tips for a clean office →'}</p>
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="bg-slate-800 text-white px-3 py-2">
-        <div className="flex justify-between items-center">
-          <div className="text-[6px]">
-            <p className="font-bold mb-0.5">Pro Pakket Schoonmaak</p>
-            <p className="text-slate-400">info@propakket.nl</p>
+      <div className="bg-slate-800 text-white px-3 py-3">
+        <div className="flex justify-between items-start mb-2">
+          <div>
+            <p className="font-bold text-[8px] mb-1">Pro Pakket Schoonmaak</p>
+            <p className="text-slate-400 text-[5px]">{language === 'nl' ? 'Uw partner in properheid' : 'Your partner in cleanliness'}</p>
           </div>
-          <div className="flex gap-2">
-            <div className="w-5 h-5 bg-slate-700 rounded flex items-center justify-center">
-              <Phone size={8} />
-            </div>
-            <div className="w-5 h-5 bg-slate-700 rounded flex items-center justify-center">
-              <Mail size={8} />
-            </div>
+          <div className="text-right text-[5px] text-slate-400">
+            <p>info@propakket.nl</p>
+            <p>020-1234567</p>
           </div>
+        </div>
+        <div className="flex justify-between items-center pt-2 border-t border-slate-700">
+          <div className="flex gap-1">
+            {['fb', 'in', 'ig'].map((s, i) => (
+              <div key={i} className="w-4 h-4 bg-slate-700 rounded flex items-center justify-center text-[6px]">{s}</div>
+            ))}
+          </div>
+          <p className="text-[5px] text-slate-500">© 2025 Pro Pakket</p>
         </div>
       </div>
     </div>
@@ -205,70 +352,108 @@ const ProDemo = ({ language }) => {
 
 // ============================================
 // DEMO 3: Premium Pakket - Nagelstudio
-// Luxurious, elegant, full-featured
+// Luxurious, elegant, full-featured with booking
 // ============================================
 const PremiumDemo = ({ language }) => {
   return (
-    <div className="bg-rose-50 min-h-full rounded-2xl overflow-hidden text-[8px] leading-tight">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur px-3 py-2 flex items-center justify-between border-b border-rose-100">
-        <div className="flex items-center gap-1">
-          <Sparkles size={12} className="text-rose-500" />
-          <span className="font-bold text-[9px] text-rose-900">Premium Pakket</span>
+    <div className="bg-gradient-to-b from-rose-50 via-pink-50 to-white min-h-full rounded-2xl overflow-hidden text-[8px] leading-tight">
+      {/* Header - Elegant */}
+      <header className="bg-white/80 backdrop-blur-md px-3 py-2 flex items-center justify-between border-b border-rose-100 sticky top-0 z-10">
+        <div className="flex items-center gap-1.5">
+          <div className="w-6 h-6 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full flex items-center justify-center">
+            <Sparkles size={12} className="text-white" />
+          </div>
+          <div>
+            <span className="font-bold text-[9px] text-rose-900 block leading-tight">Premium Pakket</span>
+            <span className="text-[5px] text-rose-500">Luxe Nagelstudio</span>
+          </div>
         </div>
-        <nav className="flex gap-2 text-[6px] text-rose-700">
+        <nav className="flex gap-1.5 text-[6px] text-rose-600">
           <span>Home</span>
           <span>Behandelingen</span>
           <span>Prijzen</span>
           <span>Gallerij</span>
           <span>Over Ons</span>
-          <span className="bg-rose-500 text-white px-2 py-0.5 rounded-full">Boeken</span>
+          <span>Blog</span>
+          <span className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-2 py-0.5 rounded-full flex items-center gap-0.5">
+            <Calendar size={7} /> Boeken
+          </span>
         </nav>
-      </header>
-
-      {/* Hero */}
-      <div className="relative bg-gradient-to-br from-rose-200 via-rose-100 to-pink-100 px-3 py-3">
-        <div className="absolute top-1 right-2 text-[5px] bg-white/80 px-2 py-0.5 rounded-full text-rose-600 font-medium">
+        <div className="text-[5px] bg-rose-100 px-1.5 py-0.5 rounded text-rose-600 font-medium">
           NL | EN
         </div>
-        <div className="text-center">
-          <p className="text-rose-400 text-[6px] uppercase tracking-[0.2em] mb-1">Luxe Nagelstudio</p>
-          <h1 className="font-bold text-[12px] text-rose-900 mb-1">
-            {language === 'nl' ? 'Schoonheid in Detail' : 'Beauty in Detail'}
+      </header>
+
+      {/* Hero - Luxurious */}
+      <div className="relative px-3 py-4 overflow-hidden">
+        {/* Decorative gradient blobs */}
+        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-rose-200 to-pink-200 rounded-full blur-3xl opacity-60" />
+        <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-pink-200 to-rose-100 rounded-full blur-2xl opacity-50" />
+        
+        <div className="relative text-center">
+          <div className="inline-flex items-center gap-1 bg-rose-100 text-rose-600 px-2 py-0.5 rounded-full text-[6px] mb-2">
+            <Sparkles size={8} />
+            {language === 'nl' ? 'Luxe Nagelstudio' : 'Luxury Nail Studio'}
+          </div>
+          
+          <h1 className="font-bold text-[14px] text-rose-900 mb-1">
+            {language === 'nl' ? 'Schoonheid' : 'Beauty'}
+            <span className="bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent"> in Detail</span>
           </h1>
-          <p className="text-rose-600 text-[7px] mb-2">
-            {language === 'nl' ? 'Professionele nagelverzorging & nail art' : 'Professional nail care & nail art'}
+          <p className="text-rose-600 text-[7px] mb-3 max-w-[200px] mx-auto">
+            {language === 'nl' 
+              ? 'Professionele nagelverzorging & nail art in een ontspannen sfeer' 
+              : 'Professional nail care & nail art in a relaxed atmosphere'}
           </p>
-          <div className="flex justify-center gap-2">
-            <button className="bg-rose-500 text-white px-3 py-1 rounded-full text-[7px] font-bold flex items-center gap-1">
+          
+          <div className="flex justify-center gap-2 mb-3">
+            <button className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-4 py-1.5 rounded-full text-[7px] font-bold shadow-lg shadow-rose-200 flex items-center gap-1">
               <Calendar size={8} /> {language === 'nl' ? 'Afspraak Maken' : 'Book Now'}
             </button>
-            <button className="bg-white text-rose-600 px-3 py-1 rounded-full text-[7px] font-bold border border-rose-200">
+            <button className="bg-white text-rose-600 px-3 py-1.5 rounded-full text-[7px] font-medium border border-rose-200 shadow-sm">
               {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
             </button>
+          </div>
+
+          {/* Quick stats */}
+          <div className="flex justify-center gap-4">
+            {[
+              { num: '4.9', label: 'Google', icon: Star },
+              { num: '230+', label: 'Reviews' },
+              { num: '5+', label: language === 'nl' ? 'Jaar' : 'Years' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <p className="font-bold text-rose-700 text-[10px] flex items-center justify-center gap-0.5">
+                  {stat.num}
+                  {stat.icon && <stat.icon size={7} className="fill-yellow-400 text-yellow-400" />}
+                </p>
+                <p className="text-rose-400 text-[5px]">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Services */}
+      {/* Treatments - Elegant cards */}
       <div className="px-3 py-2">
         <div className="flex justify-between items-center mb-2">
           <h2 className="font-bold text-[9px] text-rose-900">
             {language === 'nl' ? 'Behandelingen' : 'Treatments'}
           </h2>
-          <span className="text-rose-400 text-[6px]">{language === 'nl' ? 'Bekijk alles' : 'View all'} →</span>
+          <span className="text-rose-400 text-[6px]">{language === 'nl' ? 'Alle behandelingen →' : 'All treatments →'}</span>
         </div>
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-4 gap-1.5">
           {[
-            { title: language === 'nl' ? 'Manicure' : 'Manicure', price: '€35', time: '45 min' },
-            { title: language === 'nl' ? 'Gellak' : 'Gel Polish', price: '€45', time: '60 min' },
-            { title: 'Nail Art', price: '€55+', time: '75 min' },
+            { title: language === 'nl' ? 'Manicure' : 'Manicure', price: '€35', time: '45 min', color: 'from-rose-100 to-pink-100' },
+            { title: language === 'nl' ? 'Gellak' : 'Gel Polish', price: '€45', time: '60 min', color: 'from-pink-100 to-rose-100' },
+            { title: 'Nail Art', price: '€55+', time: '75 min', color: 'from-rose-100 to-pink-100' },
+            { title: language === 'nl' ? 'Pedicure' : 'Pedicure', price: '€40', time: '50 min', color: 'from-pink-100 to-rose-100' },
           ].map((service, i) => (
-            <div key={i} className="bg-white rounded-xl p-2 text-center shadow-sm border border-rose-100">
-              <div className="w-6 h-6 bg-rose-100 rounded-full mx-auto mb-1 flex items-center justify-center">
+            <div key={i} className={`bg-gradient-to-br ${service.color} rounded-xl p-2 text-center border border-rose-100 hover:shadow-md transition-shadow`}>
+              <div className="w-6 h-6 bg-white rounded-full mx-auto mb-1 flex items-center justify-center shadow-sm">
                 <Sparkles size={10} className="text-rose-500" />
               </div>
-              <p className="font-bold text-[7px] text-rose-900">{service.title}</p>
+              <p className="font-bold text-[6px] text-rose-900">{service.title}</p>
               <p className="text-rose-500 text-[8px] font-bold">{service.price}</p>
               <p className="text-rose-300 text-[5px]">{service.time}</p>
             </div>
@@ -277,58 +462,98 @@ const PremiumDemo = ({ language }) => {
       </div>
 
       {/* Gallery Preview */}
-      <div className="px-3 py-1">
-        <h3 className="font-bold text-[8px] text-rose-900 mb-1">{language === 'nl' ? 'Ons Werk' : 'Our Work'}</h3>
+      <div className="px-3 py-2">
+        <div className="flex justify-between items-center mb-1.5">
+          <h3 className="font-bold text-[8px] text-rose-900">{language === 'nl' ? 'Ons Werk' : 'Our Work'}</h3>
+          <span className="text-rose-400 text-[6px]">{language === 'nl' ? 'Gallerij →' : 'Gallery →'}</span>
+        </div>
         <div className="flex gap-1">
-          {[1,2,3,4].map(i => (
-            <div key={i} className="flex-1 h-8 bg-gradient-to-br from-rose-200 to-pink-200 rounded-lg" />
+          {[1,2,3,4,5].map(i => (
+            <div key={i} className="flex-1 h-10 bg-gradient-to-br from-rose-200 to-pink-200 rounded-lg overflow-hidden relative">
+              <div className="absolute inset-0 bg-rose-300/20" />
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Reviews */}
-      <div className="px-3 py-2">
-        <div className="bg-white rounded-xl p-2 shadow-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-rose-100 rounded-full flex items-center justify-center">
-              <Users size={10} className="text-rose-500" />
+      {/* Google Reviews Widget */}
+      <div className="mx-3 mb-2 bg-white rounded-xl p-2 shadow-sm border border-rose-100">
+        <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center gap-1.5">
+            <div className="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center">
+              <Star size={10} className="text-rose-500 fill-rose-500" />
             </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-1">
-                <span className="font-bold text-[7px]">Google Reviews</span>
-                <div className="flex gap-0.5">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={6} className="text-yellow-500 fill-yellow-500" />)}
-                </div>
+            <div>
+              <span className="font-bold text-[7px] text-slate-800">Google Reviews</span>
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(i => <Star key={i} size={5} className="text-yellow-500 fill-yellow-500" />)}
               </div>
-              <p className="text-rose-400 text-[6px]">4.9/5 - 230+ {language === 'nl' ? 'beoordelingen' : 'reviews'}</p>
             </div>
+          </div>
+          <div className="text-right">
+            <p className="font-bold text-rose-600 text-[10px]">4.9/5</p>
+            <p className="text-rose-400 text-[5px]">230+ {language === 'nl' ? 'beoordelingen' : 'reviews'}</p>
+          </div>
+        </div>
+        <div className="bg-rose-50 rounded-lg p-1.5 text-[5px] text-rose-600 italic">
+          "{language === 'nl' ? 'Prachtig resultaat, heel fijne sfeer!' : 'Beautiful result, very nice atmosphere!'}" - Anna
+        </div>
+      </div>
+
+      {/* Blog Preview */}
+      <div className="mx-3 mb-2">
+        <h3 className="font-bold text-[8px] text-rose-900 mb-1">Blog</h3>
+        <div className="grid grid-cols-2 gap-1">
+          <div className="bg-white rounded-lg p-1.5 border border-rose-100">
+            <p className="text-[5px] text-rose-600">{language === 'nl' ? 'Nagelverzorging tips →' : 'Nail care tips →'}</p>
+          </div>
+          <div className="bg-white rounded-lg p-1.5 border border-rose-100">
+            <p className="text-[5px] text-rose-600">{language === 'nl' ? 'Trends 2025 →' : 'Trends 2025 →'}</p>
           </div>
         </div>
       </div>
 
-      {/* Booking CTA */}
-      <div className="mx-3 mb-2 bg-gradient-to-r from-rose-500 to-pink-500 rounded-xl p-2 text-white text-center">
-        <p className="font-bold text-[8px] mb-1">
-          {language === 'nl' ? 'Boek nu online!' : 'Book online now!'}
-        </p>
-        <p className="text-rose-100 text-[6px]">
-          {language === 'nl' ? '24/7 afspraken maken via ons systeem' : '24/7 booking via our system'}
-        </p>
+      {/* Online Booking CTA */}
+      <div className="mx-3 mb-2 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-500 rounded-xl p-3 text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] opacity-50" />
+        <div className="relative">
+          <p className="font-bold text-[9px] mb-1">
+            {language === 'nl' ? 'Boek nu online!' : 'Book online now!'}
+          </p>
+          <p className="text-rose-100 text-[6px] mb-2">
+            {language === 'nl' ? '24/7 afspraken maken via ons online systeem' : '24/7 booking via our online system'}
+          </p>
+          <button className="bg-white text-rose-600 px-4 py-1 rounded-full text-[7px] font-bold shadow-lg">
+            {language === 'nl' ? 'Direct Boeken' : 'Book Now'}
+          </button>
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="bg-rose-900 text-white px-3 py-2">
-        <div className="flex justify-between items-center text-[6px]">
+      <div className="bg-rose-900 text-white px-3 py-3">
+        <div className="flex justify-between items-start mb-2">
           <div>
-            <p className="font-bold">Premium Pakket Nails</p>
-            <div className="flex items-center gap-1 text-rose-300 mt-0.5">
+            <div className="flex items-center gap-1 mb-1">
+              <Sparkles size={10} className="text-rose-300" />
+              <p className="font-bold text-[8px]">Premium Pakket Nails</p>
+            </div>
+            <div className="flex items-center gap-1 text-rose-300 text-[5px]">
               <MapPin size={6} /> Amsterdam
             </div>
           </div>
-          <div className="text-right text-rose-300">
+          <div className="text-right text-[5px] text-rose-300">
             <p>Ma-Za: 9:00 - 18:00</p>
             <p>info@premiumpakket.nl</p>
+            <p>020-1234567</p>
           </div>
+        </div>
+        <div className="flex justify-between items-center pt-2 border-t border-rose-800">
+          <div className="flex gap-1">
+            {['fb', 'ig', 'tt'].map((s, i) => (
+              <div key={i} className="w-4 h-4 bg-rose-800 rounded flex items-center justify-center text-[6px]">{s}</div>
+            ))}
+          </div>
+          <p className="text-[5px] text-rose-400">© 2025 Premium Pakket</p>
         </div>
       </div>
     </div>
@@ -347,6 +572,7 @@ const DemoPreview = ({ language = 'nl' }) => {
       name: language === 'nl' ? 'Basis' : 'Basic',
       price: '€500',
       description: language === 'nl' ? 'Hondenwandelservice' : 'Dog Walking Service',
+      pages: language === 'nl' ? '3 pagina\'s' : '3 pages',
       color: 'amber'
     },
     { 
@@ -354,6 +580,7 @@ const DemoPreview = ({ language = 'nl' }) => {
       name: 'Pro',
       price: '€900',
       description: language === 'nl' ? 'Schoonmaakbedrijf' : 'Cleaning Company',
+      pages: language === 'nl' ? '10 pagina\'s + blog' : '10 pages + blog',
       color: 'emerald',
       popular: true
     },
@@ -362,6 +589,7 @@ const DemoPreview = ({ language = 'nl' }) => {
       name: 'Premium',
       price: '€1400',
       description: language === 'nl' ? 'Nagelstudio' : 'Nail Studio',
+      pages: language === 'nl' ? '15 pagina\'s + boekingssysteem' : '15 pages + booking',
       color: 'rose'
     },
   ];
@@ -378,64 +606,78 @@ const DemoPreview = ({ language = 'nl' }) => {
     }
   };
 
+  const activeInfo = demos.find(d => d.id === activeDemo);
+
   return (
-    <div data-testid="demo-preview-section" className="mt-16">
+    <div data-testid="demo-preview-section" className="mt-20">
       {/* Section Header */}
-      <div className="text-center mb-8">
-        <h3 className="text-2xl lg:text-3xl font-bold tracking-tight text-black mb-2">
+      <div className="text-center mb-10">
+        <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-3">
+          {language === 'nl' ? 'Live Voorbeelden' : 'Live Examples'}
+        </p>
+        <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-black mb-3">
           {language === 'nl' ? 'Bekijk wat je krijgt' : 'See what you get'}
         </h3>
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-500 text-sm max-w-md mx-auto">
           {language === 'nl' 
-            ? 'Interactieve voorbeelden van elk pakket' 
-            : 'Interactive examples of each package'}
+            ? 'Interactieve voorbeelden van elk pakket. Klik op de tabs om te zien wat elk niveau biedt.' 
+            : 'Interactive examples of each package. Click the tabs to see what each level offers.'}
         </p>
       </div>
 
-      {/* Demo Selector Tabs */}
-      <div className="flex justify-center gap-2 mb-6">
+      {/* Demo Selector Tabs - Enhanced */}
+      <div className="flex justify-center gap-3 mb-8">
         {demos.map((demo) => (
           <button
             key={demo.id}
             onClick={() => setActiveDemo(demo.id)}
             data-testid={`demo-tab-${demo.id}`}
-            className={`relative px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${
+            className={`relative px-5 py-4 rounded-2xl text-sm font-medium transition-all duration-300 min-w-[120px] ${
               activeDemo === demo.id
-                ? 'bg-black text-white shadow-lg'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-black text-white shadow-xl scale-105'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-102'
             }`}
           >
             {demo.popular && activeDemo !== demo.id && (
-              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold animate-pulse">
                 {language === 'nl' ? 'Populair' : 'Popular'}
               </span>
             )}
-            <span className="block font-bold">{demo.name}</span>
-            <span className="block text-xs opacity-70">{demo.price}</span>
+            <span className="block font-bold text-base">{demo.name}</span>
+            <span className="block text-xs opacity-70 mt-0.5">{demo.price}</span>
+            <span className="block text-[10px] opacity-50 mt-1">{demo.pages}</span>
           </button>
         ))}
       </div>
 
       {/* Demo Preview Container */}
-      <div className="max-w-2xl mx-auto">
-        {/* Browser Frame */}
-        <div className="bg-gray-800 rounded-t-2xl px-4 py-3 flex items-center gap-2">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500" />
-            <div className="w-3 h-3 rounded-full bg-green-500" />
+      <div className="max-w-3xl mx-auto">
+        {/* Browser Frame - More realistic */}
+        <div className="bg-gray-800 rounded-t-2xl px-4 py-3 flex items-center gap-3">
+          <div className="flex gap-2">
+            <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors" />
+            <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors" />
           </div>
           <div className="flex-1 mx-4">
-            <div className="bg-gray-700 rounded-lg px-3 py-1.5 text-gray-400 text-xs text-center">
+            <div className="bg-gray-700 rounded-lg px-4 py-2 text-gray-300 text-xs text-center flex items-center justify-center gap-2">
+              <svg className="w-3 h-3 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
               www.{activeDemo === 'basic' ? 'basispakket' : activeDemo === 'pro' ? 'propakket' : 'premiumpakket'}.nl
             </div>
+          </div>
+          <div className="flex gap-2 text-gray-500">
+            <div className="w-6 h-6 rounded bg-gray-700 flex items-center justify-center text-xs">←</div>
+            <div className="w-6 h-6 rounded bg-gray-700 flex items-center justify-center text-xs">→</div>
+            <div className="w-6 h-6 rounded bg-gray-700 flex items-center justify-center text-xs">↻</div>
           </div>
         </div>
 
         {/* Demo Content */}
         <div 
-          className="bg-white border-2 border-t-0 border-gray-800 rounded-b-2xl overflow-hidden"
-          style={{ height: '400px' }}
+          className="bg-white border-2 border-t-0 border-gray-800 rounded-b-2xl overflow-hidden shadow-2xl"
+          style={{ height: '480px' }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -444,22 +686,25 @@ const DemoPreview = ({ language = 'nl' }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="h-full overflow-y-auto"
+              className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300"
             >
               {renderDemo()}
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Demo Info */}
-        <div className="mt-4 text-center">
-          <p className="text-gray-500 text-sm">
-            {demos.find(d => d.id === activeDemo)?.description}
-          </p>
-          <p className="text-xs text-gray-400 mt-1">
+        {/* Demo Info - Enhanced */}
+        <div className="mt-6 text-center">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-${activeInfo?.color}-50 border border-${activeInfo?.color}-200`}>
+            <span className={`w-2 h-2 rounded-full bg-${activeInfo?.color}-500`} />
+            <span className={`text-${activeInfo?.color}-700 font-medium`}>
+              {activeInfo?.description}
+            </span>
+          </div>
+          <p className="text-xs text-gray-400 mt-3 max-w-md mx-auto">
             {language === 'nl' 
-              ? 'Dit is een interactief voorbeeld - jouw website wordt volledig op maat gemaakt' 
-              : 'This is an interactive example - your website will be fully customized'}
+              ? 'Dit is een interactief voorbeeld — jouw website wordt volledig op maat gemaakt met jouw branding, kleuren en content.' 
+              : 'This is an interactive example — your website will be fully customized with your branding, colors and content.'}
           </p>
         </div>
       </div>
