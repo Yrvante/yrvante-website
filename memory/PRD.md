@@ -95,34 +95,51 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 ```
 /app/frontend/src/
 ├── components/
-│   ├── DemoPreview.jsx (NEW - Interactive demo previews for each package)
+│   ├── DemoPreview.jsx (Improved - Interactive demo previews for each package with more content)
 │   ├── SEO.jsx
 │   └── ui/ (shadcn components)
 ├── pages/
-│   ├── LandingPage.jsx (hero + 12 FAQs + "ik" voice + DemoPreview)
+│   ├── LandingPage.jsx (hero + FAQs + Navigation with dropdowns + Expanded footer)
 │   ├── PackagesPage.jsx (packages + losse prijzen)
 │   ├── CalculatorPage.jsx (calculator + losse prijzen)
 │   ├── BlogPage.jsx (website necessity article)
 │   ├── AboutPage.jsx
 │   ├── WhyWebsitePage.jsx
-│   └── AdminDashboard.jsx
+│   ├── AdminDashboard.jsx
+│   ├── OverMijPage.jsx (NEW - "Mensen kopen van mensen" personal page)
+│   ├── OnderhoudPage.jsx (NEW - Why maintenance is important €25/month)
+│   └── DienstenPage.jsx (NEW - Services + Niche pages with dynamic routing)
 ```
 
-## Demo Previews Feature (December 2025)
-Three interactive website previews showing what customers can expect for each package:
+## New Pages (December 2025)
 
-| Package | Demo Type | Color Theme | URL Preview |
-|---------|-----------|-------------|-------------|
-| Basis €500 | Hondenwandelservice | Amber/Brown | www.basispakket.nl |
-| Pro €900 | Schoonmaakbedrijf | Emerald/Green | www.propakket.nl |
-| Premium €1400 | Nagelstudio | Rose/Pink | www.premiumpakket.nl |
+### Over Mij Page (/over-mij)
+- "Mensen kopen van mensen" - personal introduction
+- Yvar's background and story
+- "Mijn Aanpak" section: Persoonlijk, Resultaatgericht, Betrouwbaar, Snel
+- "Mijn Verhaal" timeline: Background → Passion → Yrvante
+- Agency comparison (€3.000+ vs €500)
 
-**Features:**
-- Browser frame mockup with traffic light buttons
-- Tab switching with smooth animations (Framer Motion)
-- "Populair" badge on Pro tab
-- Description text updates per demo
-- Dutch/English language support
+### Onderhoud Page (/onderhoud)
+- **Price**: €25/maand excl. BTW
+- **Features**: Hosting & Uptime, Beveiliging, Backups, Bug Fixes, Kleine Aanpassingen, Support
+- **Why maintenance matters**: Code Updates, SSL Certificates, Server Problems, Domain Management
+- **Horror stories**: What can go wrong without maintenance
+- **Comparison table**: With vs Without maintenance plan
+- **Agency comparison**: Small (€100-250), Medium (€250-500), Yrvante (€25)
+
+### Diensten Pages (/diensten, /diensten/:type)
+| Service | Price | Features |
+|---------|-------|----------|
+| Webdesign | €500 | Responsive, SEO-friendly, Fast loading |
+| Webflow Development | €900 | Visual CMS, Auto backups, Easy editing |
+| Branding | €300 | Logo, Colors, Typography, Style guide |
+
+### Niche Pages (/voor/:niche)
+| Niche | Target | Key Benefits |
+|-------|--------|--------------|
+| Coaches | Life/Business/Health coaches | Professional presence, Service overview, Booking |
+| ZZP'ers | Freelancers | Google visibility, 24/7 contact, Own domain |
 
 ## P0 Features (Completed)
 - [x] Premium homepage with animation
@@ -138,6 +155,13 @@ Three interactive website previews showing what customers can expect for each pa
 - [x] **Rounded Design** - Alle elementen hebben nu ronde hoeken (rounded-2xl/3xl)
 - [x] **Consistent Styling** - Dezelfde kleuren en stijl op alle pagina's
 - [x] **Demo Website Previews** - Interactieve voorbeelden van elk pakket in de Pakketten sectie (December 2025)
+- [x] **Improved Demo Previews** - Uitgebreidere en mooiere demo's met meer content (December 2025)
+- [x] **Over Mij Page** - "Mensen kopen van mensen" - persoonlijke introductie pagina
+- [x] **Diensten Pages** - Webdesign, Webflow Development, Branding service pagina's
+- [x] **Niche Pages** - Website voor Coaches, Website voor ZZP'ers
+- [x] **Onderhoud Page** - Uitgebreide pagina over waarom onderhoud belangrijk is
+- [x] **Navigation Dropdowns** - Diensten en Over dropdown menu's in header
+- [x] **Expanded Footer** - 5 kolommen met alle nieuwe pagina links
 
 ## SEO Implementation
 - **sitemap.xml** - All pages with hreflang for NL/EN
