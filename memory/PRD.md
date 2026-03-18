@@ -158,7 +158,12 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 - [x] **Improved Demo Previews** - Uitgebreidere en mooiere demo's met meer content (December 2025)
 - [x] **Over Mij Page** - "Mensen kopen van mensen" - persoonlijke introductie pagina
 - [x] **Diensten Pages** - Webdesign, Webflow Development, Branding service pagina's
-- [x] **Niche Pages** - Website voor Coaches, Website voor ZZP'ers
+- [x] **Expanded Niche Pages** - 14 niche pagina's voor specifieke branches (December 2025):
+  - Coaches, ZZP'ers, Kappers, Nagelstylisten, Interieurstylisten, Bloemisten
+  - Loodgieters, Restaurants, Personal Trainers, Fotografen, Makelaars
+  - Tandartsen, Garages, Hondentrimsalons
+- [x] **Abstract Background Image** - Mooie vloeiende achtergrondafbeelding in wit/grijs tinten
+- [x] **Branding Service Removed** - Verwijderd uit diensten, navigatie en footer
 - [x] **Onderhoud Page** - Uitgebreide pagina over waarom onderhoud belangrijk is
 - [x] **Navigation Dropdowns** - Diensten en Over dropdown menu's in header
 - [x] **Expanded Footer** - 5 kolommen met alle nieuwe pagina links
