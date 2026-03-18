@@ -54,12 +54,14 @@ const Navigation = () => {
   const dienstenLinks = [
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
     { to: '/diensten/webflow', label: 'Webflow Development' },
-    { to: '/diensten/branding', label: 'Branding' },
     { divider: true },
-    { to: '/voor/coaches', label: language === 'nl' ? 'Website voor Coaches' : 'Website for Coaches' },
-    { to: '/voor/zzp', label: language === 'nl' ? 'Website voor ZZP\'ers' : 'Website for Freelancers' },
+    { to: '/voor/kappers', label: language === 'nl' ? 'Kappers' : 'Hairdressers' },
+    { to: '/voor/nagelstylisten', label: language === 'nl' ? 'Nagelstylisten' : 'Nail Technicians' },
+    { to: '/voor/coaches', label: 'Coaches' },
+    { to: '/voor/restaurants', label: 'Restaurants' },
+    { to: '/voor/loodgieters', label: language === 'nl' ? 'Loodgieters' : 'Plumbers' },
     { divider: true },
-    { to: '/diensten', label: language === 'nl' ? 'Alle Diensten →' : 'All Services →' },
+    { to: '/diensten', label: language === 'nl' ? 'Alle Branches →' : 'All Industries →' },
   ];
 
   const overLinks = [
@@ -1207,7 +1209,6 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li><Link to="/diensten/webdesign" className="text-gray-600 hover:text-black transition-colors">Webdesign</Link></li>
               <li><Link to="/diensten/webflow" className="text-gray-600 hover:text-black transition-colors">Webflow</Link></li>
-              <li><Link to="/diensten/branding" className="text-gray-600 hover:text-black transition-colors">Branding</Link></li>
               <li><Link to="/onderhoud" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</Link></li>
             </ul>
           </div>
@@ -1218,8 +1219,11 @@ const Footer = () => {
               {language === 'nl' ? 'Websites voor' : 'Websites for'}
             </p>
             <ul className="space-y-2 text-sm">
+              <li><Link to="/voor/kappers" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Kappers' : 'Hairdressers'}</Link></li>
+              <li><Link to="/voor/nagelstylisten" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Nagelstylisten' : 'Nail Technicians'}</Link></li>
+              <li><Link to="/voor/restaurants" className="text-gray-600 hover:text-black transition-colors">Restaurants</Link></li>
               <li><Link to="/voor/coaches" className="text-gray-600 hover:text-black transition-colors">Coaches</Link></li>
-              <li><Link to="/voor/zzp" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'ZZP\'ers' : 'Freelancers'}</Link></li>
+              <li><Link to="/diensten" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Meer →' : 'More →'}</Link></li>
             </ul>
           </div>
 
