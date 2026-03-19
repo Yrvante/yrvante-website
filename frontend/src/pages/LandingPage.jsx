@@ -404,6 +404,23 @@ const HeroSection = () => {
         {/* Logo - Transparent right side */}
       </div>
 
+      {/* Logo - Transparent via screen blend mode */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
+        className="hidden lg:block absolute right-0 top-0 h-full pointer-events-none"
+        style={{ width: '45%' }}
+      >
+        <img
+          src="https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/8x6unwe5_IMG_1958.png"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-contain"
+          style={{ mixBlendMode: 'screen', opacity: 0.9 }}
+        />
+      </motion.div>
+
       {/* Bottom Border Line */}
       <div className="border-b border-gray-300/50" />
     </section>
