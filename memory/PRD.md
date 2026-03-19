@@ -141,6 +141,15 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 | Coaches | Life/Business/Health coaches | Professional presence, Service overview, Booking |
 | ZZP'ers | Freelancers | Google visibility, 24/7 contact, Own domain |
 
+## UI Updates (February 2026 - Phase 3)
+- [x] **Header vereenvoudigd** - Alleen Diensten (grote dropdown met alles), Over, Contact, Start Project
+- [x] **Diensten dropdown uitgebreid** - Pakketten, Calculator, alle niches en diensten in één dropdown
+- [x] **Logo transparant hero** - Yrvante logo als watermark rechts van de hero (opacity 6%, blend mode multiply)
+- [x] **Stats als pills** - €500 VANAF en 1-2 WEKEN direct onder subtitle als pill badges
+- [x] **Pill-shaped knoppen** - START PROJECT en BEKIJK WERK zijn volledig afgerond (rounded-full)
+- [x] **Google Reviews verwijderd** - Uit calculator add-ons, pakketten features, en losse prijslijst
+- [x] **Resend config bevestigd** - API key en e-mailadressen correct in backend/.env
+
 ## UI Updates (February 2026 - Phase 2)
 - [x] **Cloud Gray Color Scheme** - Alle knoppen en interactieve elementen bijgewerkt naar bg-gray-500 (cloud gray)
 - [x] **Light Section Backgrounds** - Alle donkere secties (bg-gray-900) omgezet naar lichtgrijs (bg-gray-100/bg-gray-50)
