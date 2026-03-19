@@ -50,6 +50,13 @@ Bouw een professionele bedrijfswebsite voor "Yrvante", een webdesign/software st
 8. Calendly "Plan een gratis gesprek" knop in contact sectie (CALENDLY_URL = https://calendly.com/yrvante)
 9. Centraal data-bestand aangemaakt: `/app/frontend/src/data/siteData.js`
 
+### Sessie 16 (Huidige batch - Maart 2026)
+1. **Calculator achtergrond** - Doorlopende, continue achtergrond via fixed positioning (identiek aan homepage)
+2. **Boekingssysteem preview** - Interactieve `BookingSystemPreview` component direct zichtbaar wanneer add-on wordt geselecteerd (dagknoppen Ma/Di/Wo/Do/Vr + tijdsloten)
+3. **Dynamische add-ons per pakket** - `excludedAddOns` constant: basic=[], pro=['extraForm'], premium=['multiLanguage','bookingSystem','extraForm']; met "Al inbegrepen" melding + auto-reset bij pakketwisseling
+4. **Navigatie fix** - `Onderhoud & Hosting` gaat direct naar `/onderhoud`; redirect toegevoegd in App.js voor `/diensten/onderhoud` → `/onderhoud`
+5. **Testing** - iteration_16.json: 100% pass (12/12 tests)
+
 ## Bestanden Structuur
 ```
 /app/
@@ -104,3 +111,4 @@ Bouw een professionele bedrijfswebsite voor "Yrvante", een webdesign/software st
 
 ## Geteste Iteraties
 - iteration_12.json - iteration_13.json - iteration_14.json - iteration_15.json (100% pass)
+- iteration_16.json (100% pass - 12/12 tests: calculator achtergrond, booking preview, dynamische add-ons, nav fix)
