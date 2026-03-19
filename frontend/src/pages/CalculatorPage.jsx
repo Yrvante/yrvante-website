@@ -403,7 +403,7 @@ const CalculatorPage = () => {
 
       {/* Header with Abstract Background */}
       <section className="pt-28 pb-12 px-6 md:px-12 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/50" />
+        <div className="absolute inset-0 bg-white/40" />
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -423,7 +423,7 @@ const CalculatorPage = () => {
       </section>
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
-        <div className="absolute inset-0 bg-white/80" />
+        <div className="absolute inset-0 bg-white/70" />
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Left column - Selections */}
           <div className="lg:col-span-2 space-y-12">
@@ -598,25 +598,25 @@ const CalculatorPage = () => {
               transition={{ delay: 0.6 }}
               className="sticky top-28"
             >
-              <div className="bg-black text-white p-8 rounded-3xl shadow-2xl" data-testid="price-summary">
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-900 p-8 rounded-3xl shadow-xl border border-gray-300" data-testid="price-summary">
                 <h3 className="font-heading text-xl font-bold mb-6">{t.summary}</h3>
                 
                 {/* Package */}
-                <div className="flex justify-between items-center py-3 border-b border-gray-700">
-                  <span className="text-gray-300">{t.packages[selectedPackage].name}</span>
+                <div className="flex justify-between items-center py-3 border-b border-gray-300">
+                  <span className="text-gray-600">{t.packages[selectedPackage].name}</span>
                   <span className="font-bold">€{prices[selectedPackage]}</span>
                 </div>
 
                 {/* Add-ons */}
                 {addOns.extraPages > 0 && (
-                  <div className="flex justify-between items-center py-3 border-b border-gray-700">
-                    <span className="text-gray-300">{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
+                  <div className="flex justify-between items-center py-3 border-b border-gray-300">
+                    <span className="text-gray-600">{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
                     <span>€{addOns.extraPages * prices.extraPages}</span>
                   </div>
                 )}
                 {Object.entries(addOns).filter(([key, value]) => key !== 'extraPages' && key !== 'maintenance' && value).map(([key]) => (
-                  <div key={key} className="flex justify-between items-center py-3 border-b border-gray-700">
-                    <span className="text-gray-300">{t.addOns[key].title}</span>
+                  <div key={key} className="flex justify-between items-center py-3 border-b border-gray-300">
+                    <span className="text-gray-600">{t.addOns[key].title}</span>
                     <span>€{prices[key]}</span>
                   </div>
                 ))}
@@ -628,7 +628,7 @@ const CalculatorPage = () => {
                     <span className="text-4xl font-heading font-bold" data-testid="total-onetime">€{totals.oneTime}</span>
                   </div>
                   {addOns.maintenance && (
-                    <div className="flex justify-between items-center text-gray-400">
+                    <div className="flex justify-between items-center text-gray-500">
                       <span>{t.monthly}</span>
                       <span className="text-xl font-bold" data-testid="total-monthly">€{totals.monthly}/mnd</span>
                     </div>
@@ -640,7 +640,7 @@ const CalculatorPage = () => {
                 {/* CTA */}
                 <button
                   onClick={() => setShowQuoteForm(true)}
-                  className="block w-full mt-8 py-4 bg-white text-black text-center font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105"
+                  className="block w-full mt-8 py-4 bg-gray-900 text-white text-center font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105"
                 >
                   {t.ctaButton}
                 </button>

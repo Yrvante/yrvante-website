@@ -337,8 +337,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
-      <div className="absolute inset-0 bg-white/50" />
+    <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden">
       {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
@@ -484,9 +483,8 @@ const WhyExpensiveSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="py-16 lg:py-20 bg-white relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-      <div className="absolute inset-0 bg-white/60" />
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
+    <section className="py-16 lg:py-20 relative">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Left - Big Statement */}
           <motion.div
@@ -550,9 +548,8 @@ const ServicesSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section id="services" data-testid="services-section" className="py-16 lg:py-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-      <div className="absolute inset-0 bg-white/70" />
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
+    <section id="services" data-testid="services-section" className="py-16 lg:py-20 relative">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         {/* Section Header - Asymmetric */}
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
@@ -1276,19 +1273,22 @@ const Footer = () => {
   );
 };
 
-// Main Landing Page - Brutalist Editorial
+// Main Landing Page - Brutalist Editorial with flowing background
 const LandingPage = () => {
   return (
-    <div data-testid="landing-page" className="min-h-screen bg-white">
-      <SEO page="/" />
-      <Navigation />
-      <HeroSection />
-      <ServicesSection />
-      <WhyExpensiveSection />
-      <PricingSection />
-      <FAQSection />
-      <ContactSection />
-      <Footer />
+    <div data-testid="landing-page" className="min-h-screen relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/50 to-white/60 pointer-events-none" />
+      <div className="relative z-10">
+        <SEO page="/" />
+        <Navigation />
+        <HeroSection />
+        <ServicesSection />
+        <WhyExpensiveSection />
+        <PricingSection />
+        <FAQSection />
+        <ContactSection />
+        <Footer />
+      </div>
     </div>
   );
 };
