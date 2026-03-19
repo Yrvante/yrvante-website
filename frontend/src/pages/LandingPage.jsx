@@ -1035,7 +1035,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-bold text-lg">+31 6 42543859</p>
-                  <p className="text-gray-500 text-sm">{language === 'nl' ? 'Bel me gewoon — ik neem op' : 'Just call me — I\'ll pick up'}</p>
+                  <p className="text-gray-500 text-sm">{language === 'nl' ? 'Bel me gerust!' : 'Feel free to call me!'}</p>
                 </div>
               </a>
 
