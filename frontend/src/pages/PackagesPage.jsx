@@ -73,7 +73,7 @@ const PackagesPage = () => {
         language === 'nl' ? 'Contactformulier' : 'Contact form',
         language === 'nl' ? 'Afspraaksysteem ingebouwd' : 'Booking system built-in',
         language === 'nl' ? 'Meertalige optie op je site' : 'Multi-language option on your site',
-        language === 'nl' ? 'Snellere reactietijd (binnen 8 uur)' : 'Faster response time (within 8 hours)',
+        language === 'nl' ? 'Snellere reactietijd (binnen 2 uur)' : 'Faster response time (within 2 hours)',
       ],
       notIncluded: [],
       idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals',

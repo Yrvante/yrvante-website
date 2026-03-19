@@ -981,8 +981,8 @@ const ContactSection = () => {
             </h2>
             <p className="text-gray-500 leading-relaxed mb-12 max-w-md">
               {language === 'nl' 
-                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht — ik reageer binnen 8 uur.'
-                : 'Have questions or want to know what I can do for you? Send a message — I respond within 8 hours.'}
+                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht — ik reageer binnen 2 uur.'
+                : 'Have questions or want to know what I can do for you? Send a message — I respond within 2 hours.'}
             </p>
 
             <div className="space-y-4">
@@ -1056,7 +1056,7 @@ const ContactSection = () => {
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {language === 'nl' ? 'Reactietijd' : 'Response'}
                   </p>
-                  <p className="text-base font-medium">{language === 'nl' ? 'binnen 8 uur' : 'within 8 hours'}</p>
+                  <p className="text-base font-medium">{language === 'nl' ? 'binnen 2 uur' : 'within 2 hours'}</p>
                 </div>
               </div>
             </div>
@@ -1079,8 +1079,8 @@ const ContactSection = () => {
                 </h3>
                 <p className="text-gray-500">
                   {language === 'nl' 
-                    ? 'Ik neem binnen 8 uur contact met je op.'
-                    : 'I will contact you within 8 hours.'}
+                    ? 'Ik neem binnen 2 uur contact met je op.'
+                    : 'I will contact you within 2 hours.'}
                 </p>
               </div>
             ) : (
