@@ -402,21 +402,6 @@ const HeroSection = () => {
         </div>
 
         {/* Logo - Transparent right side */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.2, delay: 0.4 }}
-          className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 items-center justify-center pointer-events-none"
-          style={{ width: '38%' }}
-        >
-          <div className="rounded-3xl p-12 bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm">
-            <img
-              src={LOGO_URL}
-              alt="Yrvante"
-              className="w-full max-w-xs object-contain"
-            />
-          </div>
-        </motion.div>
       </div>
 
       {/* Bottom Border Line */}
