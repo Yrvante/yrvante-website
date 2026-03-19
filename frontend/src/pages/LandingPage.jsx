@@ -1285,6 +1285,7 @@ const LandingPage = () => {
         <ServicesSection />
         <WhyExpensiveSection />
         <PricingSection />
+        <TestimonialsSection />
         <FAQSection />
         <ContactSection />
         <Footer />

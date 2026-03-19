@@ -640,7 +640,7 @@ const CalculatorPage = () => {
                 {/* CTA */}
                 <button
                   onClick={() => setShowQuoteForm(true)}
-                  className="block w-full mt-8 py-4 bg-gray-900 text-white text-center font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105"
+                  className="block w-full mt-8 py-4 bg-gray-500 text-white text-center font-bold rounded-full hover:bg-gray-600 transition-all transform hover:scale-105"
                 >
                   {t.ctaButton}
                 </button>
