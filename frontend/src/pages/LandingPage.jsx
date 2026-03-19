@@ -195,94 +195,55 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-black overflow-hidden"
+            className="lg:hidden bg-white border-t border-gray-200 overflow-hidden"
           >
-            <div className="px-6 py-6 space-y-4">
-              {/* Diensten Section */}
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
-                  {language === 'nl' ? 'Diensten' : 'Services'}
-                </p>
-                <div className="space-y-2 pl-2">
-                  {dienstenLinks.filter(l => !l.divider).map((link, index) => (
-                    <Link
-                      key={index}
-                      to={link.to}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-sm text-gray-600"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="border-t border-gray-100 pt-4">
+            <div className="px-6 py-4 space-y-1">
+              {dienstenLinks.filter(l => !l.divider).map((link, index) => (
                 <Link
-                  to="/pakketten"
+                  key={index}
+                  to={link.to}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block text-xs font-medium uppercase tracking-[0.2em] mb-4"
+                  className="block py-3 text-sm text-gray-700 hover:text-black border-b border-gray-100 last:border-0 transition-colors"
                 >
-                  {language === 'nl' ? 'Pakketten' : 'Packages'}
+                  {link.label}
                 </Link>
-                <Link
-                  to="/calculator"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-xs font-medium uppercase tracking-[0.2em] mb-4"
-                >
-                  Calculator
-                </Link>
-              </div>
+              ))}
+              <Link
+                to="/over-mij"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-3 text-sm text-gray-700 hover:text-black border-b border-gray-100 transition-colors"
+              >
+                {language === 'nl' ? 'Over Mij' : 'About Me'}
+              </Link>
+              <button
+                onClick={() => { scrollToSection("contact"); setMobileMenuOpen(false); }}
+                className="block w-full text-left py-3 text-sm text-gray-700 hover:text-black border-b border-gray-100 transition-colors"
+              >
+                Contact
+              </button>
 
-              {/* Over Section */}
-              <div className="border-t border-gray-100 pt-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
-                  {language === 'nl' ? 'Over' : 'About'}
-                </p>
-                <div className="space-y-2 pl-2">
-                  {overLinks.map((link, index) => (
-                    <Link
-                      key={index}
-                      to={link.to}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-sm text-gray-600"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="border-t border-gray-100 pt-4">
+              <div className="pt-4 pb-2">
                 <button
                   onClick={() => scrollToSection("contact")}
-                  className="block text-xs font-medium uppercase tracking-[0.2em] mb-4"
+                  className="block w-full py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
                 >
-                  Contact
+                  Start Project
                 </button>
               </div>
 
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="block w-full py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
-              >
-                Start Project
-              </button>
-
-              {/* Language Switcher */}
-              <div className="flex justify-center gap-4 pt-2">
+              <div className="flex justify-center gap-4 pt-2 pb-4">
                 <button
                   onClick={() => setLanguage("nl")}
                   className={`text-sm ${language === "nl" ? "text-black font-bold" : "text-gray-400"}`}
                 >
-                  Nederlands
+                  NL
                 </button>
                 <span className="text-gray-300">|</span>
                 <button
                   onClick={() => setLanguage("en")}
                   className={`text-sm ${language === "en" ? "text-black font-bold" : "text-gray-400"}`}
                 >
-                  English
+                  EN
                 </button>
               </div>
             </div>
@@ -442,19 +403,19 @@ const HeroSection = () => {
 
         {/* Logo - Transparent right side */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 items-center justify-center pointer-events-none"
-          style={{ width: '45%' }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 items-center justify-center pointer-events-none"
+          style={{ width: '38%' }}
         >
-          <img
-            src={LOGO_URL}
-            alt=""
-            aria-hidden="true"
-            className="w-full max-w-2xl object-contain"
-            style={{ opacity: 0.06, mixBlendMode: 'multiply', filter: 'grayscale(100%)' }}
-          />
+          <div className="rounded-3xl p-12 bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm">
+            <img
+              src={LOGO_URL}
+              alt="Yrvante"
+              className="w-full max-w-xs object-contain"
+            />
+          </div>
         </motion.div>
       </div>
 
@@ -1271,7 +1232,6 @@ const LandingPage = () => {
         <ServicesSection />
         <WhyExpensiveSection />
         <PricingSection />
-        <TestimonialsSection />
         <FAQSection />
         <ContactSection />
         <Footer />

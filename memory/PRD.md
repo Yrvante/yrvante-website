@@ -141,6 +141,11 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 | Coaches | Life/Business/Health coaches | Professional presence, Service overview, Booking |
 | ZZP'ers | Freelancers | Google visibility, 24/7 contact, Own domain |
 
+## UI Updates (February 2026 - Phase 4)
+- [x] **Mobiel menu vereenvoudigd** - Platte lijst zonder kopjes (DIENSTEN, OVER headers verwijderd)
+- [x] **Logo homepage** - Zwart en zichtbaar als elegant witte card rechts van de hero
+- [x] **Testimonials verwijderd** - "Wat klanten zeggen" sectie verwijderd van homepage
+
 ## UI Updates (February 2026 - Phase 3)
 - [x] **Header vereenvoudigd** - Alleen Diensten (grote dropdown met alles), Over, Contact, Start Project
 - [x] **Diensten dropdown uitgebreid** - Pakketten, Calculator, alle niches en diensten in één dropdown
