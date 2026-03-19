@@ -338,7 +338,7 @@ const HeroSection = () => {
 
   return (
     <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
-      <div className="absolute inset-0 bg-white/70" />
+      <div className="absolute inset-0 bg-white/50" />
       {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
@@ -485,7 +485,7 @@ const WhyExpensiveSection = () => {
 
   return (
     <section className="py-16 lg:py-20 bg-white relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-      <div className="absolute inset-0 bg-white/85" />
+      <div className="absolute inset-0 bg-white/60" />
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Left - Big Statement */}
@@ -551,7 +551,7 @@ const ServicesSection = () => {
 
   return (
     <section id="services" data-testid="services-section" className="py-16 lg:py-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-      <div className="absolute inset-0 bg-white/90" />
+      <div className="absolute inset-0 bg-white/70" />
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header - Asymmetric */}
         <div className="grid grid-cols-12 gap-4 mb-12">

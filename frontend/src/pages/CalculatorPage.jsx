@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
+const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
 
 const CalculatorPage = () => {
   const { language } = useLanguage();
@@ -400,28 +401,30 @@ const CalculatorPage = () => {
         </div>
       </nav>
 
-      {/* Header */}
-      <section className="pt-28 pb-12 px-6 md:px-12 bg-gradient-to-br from-gray-900 to-black text-white">
-        <div className="max-w-6xl mx-auto">
+      {/* Header with Abstract Background */}
+      <section className="pt-28 pb-12 px-6 md:px-12 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-white/50" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="py-12 md:py-16 text-center"
           >
-            <Calculator className="mx-auto mb-6 text-gray-400" size={48} strokeWidth={1.5} />
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4">
+            <Calculator className="mx-auto mb-6 text-gray-600" size={48} strokeWidth={1.5} />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 text-gray-900">
               {t.title}
             </h1>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-600">
               {t.subtitle}
             </p>
           </motion.div>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+        <div className="absolute inset-0 bg-white/80" />
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Left column - Selections */}
           <div className="lg:col-span-2 space-y-12">
             {/* Step 1: Package Selection */}
