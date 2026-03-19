@@ -27,7 +27,7 @@ import {
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/bd9ccb92eb46d5ed1a97a900c245c5b7666be86f56e6b6623a1e1da2f4bf67d5.png";
 
-// Service data - Removed branding
+// Service data - Only Webdesign and Onderhoud
 const services = {
   webdesign: {
     icon: Monitor,
@@ -58,34 +58,34 @@ const services = {
     },
     price: '€500',
   },
-  webflow: {
-    icon: Layers,
-    color: 'purple',
-    title: { nl: 'Webflow Development', en: 'Webflow Development' },
-    subtitle: { nl: 'No-code websites met professionele kwaliteit', en: 'No-code websites with professional quality' },
+  onderhoud: {
+    icon: Wrench,
+    color: 'emerald',
+    title: { nl: 'Onderhoud & Hosting', en: 'Maintenance & Hosting' },
+    subtitle: { nl: 'Jij focust op je bedrijf, ik op je website', en: 'You focus on your business, I focus on your website' },
     description: {
-      nl: 'Webflow combineert het beste van beide werelden: de flexibiliteit van custom code met de eenvoud van een visuele builder. Perfect voor bedrijven die later zelf kleine aanpassingen willen doen.',
-      en: 'Webflow combines the best of both worlds: the flexibility of custom code with the simplicity of a visual builder. Perfect for businesses that want to make small adjustments themselves later.'
+      nl: 'Een website bouwen is één ding. Hem online houden, veilig houden en werkend houden is iets heel anders. Met het onderhoudspakket hoef jij je daar geen zorgen over te maken. Plus: ik doe aanpassingen wanneer jij dat wilt.',
+      en: "Building a website is one thing. Keeping it online, secure and working is something else entirely. With the maintenance package, you don't have to worry about any of that. Plus: I make adjustments whenever you want."
     },
     features: {
       nl: [
-        'Visuele CMS voor content beheer',
-        'Ingebouwde hosting',
-        'Automatische backups',
-        'Eenvoudig zelf teksten aanpassen',
-        'Geavanceerde animaties',
-        'E-commerce mogelijkheden',
+        'Hosting & 99.9% uptime',
+        'SSL certificaat & beveiliging',
+        'Dagelijkse backups',
+        'Bug fixes zonder extra kosten',
+        'Kleine aanpassingen op aanvraag',
+        'Support binnen 24 uur',
       ],
       en: [
-        'Visual CMS for content management',
-        'Built-in hosting',
-        'Automatic backups',
-        'Easy to edit texts yourself',
-        'Advanced animations',
-        'E-commerce capabilities',
+        'Hosting & 99.9% uptime',
+        'SSL certificate & security',
+        'Daily backups',
+        'Bug fixes at no extra cost',
+        'Small adjustments on request',
+        'Support within 24 hours',
       ],
     },
-    price: '€900',
+    price: '€25/maand',
   },
 };
 

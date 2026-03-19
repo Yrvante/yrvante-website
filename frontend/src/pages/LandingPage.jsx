@@ -28,6 +28,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
 
 // Navigation - Brutalist with Dropdown Menus
 const Navigation = () => {
@@ -53,7 +54,7 @@ const Navigation = () => {
 
   const dienstenLinks = [
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
-    { to: '/diensten/webflow', label: 'Webflow Development' },
+    { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
     { divider: true },
     { to: '/voor/kappers', label: language === 'nl' ? 'Kappers' : 'Hairdressers' },
     { to: '/voor/nagelstylisten', label: language === 'nl' ? 'Nagelstylisten' : 'Nail Technicians' },
@@ -327,7 +328,7 @@ const Navigation = () => {
   );
 };
 
-// Hero Section - Brutalist Editorial Style
+// Hero Section - Brutalist Editorial Style with Background
 const HeroSection = () => {
   const { language } = useLanguage();
 
@@ -336,7 +337,8 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="min-h-screen bg-white pt-24 relative overflow-hidden">
+    <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+      <div className="absolute inset-0 bg-white/70" />
       {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
@@ -472,18 +474,19 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom Border Line */}
-      <div className="border-b border-gray-200" />
+      <div className="border-b border-gray-300/50" />
     </section>
   );
 };
 
-// Why Expensive Section - Brutalist
+// Why Expensive Section - Brutalist with reduced top padding
 const WhyExpensiveSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section className="py-16 lg:py-20 bg-white relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <div className="absolute inset-0 bg-white/85" />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Left - Big Statement */}
           <motion.div
@@ -547,10 +550,11 @@ const ServicesSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section id="services" data-testid="services-section" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section id="services" data-testid="services-section" className="py-16 lg:py-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <div className="absolute inset-0 bg-white/90" />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header - Asymmetric */}
-        <div className="grid grid-cols-12 gap-4 mb-16">
+        <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
               (01)
@@ -931,24 +935,26 @@ const FAQSection = () => {
           </h2>
         </div>
 
-        {/* FAQ Grid - Centered */}
+        {/* FAQ Grid - Show all FAQs */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {faqs.slice(0, 6).map((faq, index) => (
+          {faqs.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
               className="bg-gray-50 rounded-3xl border border-gray-200 hover:border-gray-300 transition-colors"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-6 text-left"
+                className="w-full p-6 text-left cursor-pointer"
+                data-testid={`faq-button-${index}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <span className="text-xs text-gray-400 uppercase tracking-[0.2em] block mb-2">
-                      0{index + 1}
+                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
                     </span>
                     <span className="font-bold text-base block">{faq.q}</span>
                   </div>
@@ -972,16 +978,6 @@ const FAQSection = () => {
               </button>
             </motion.div>
           ))}
-        </div>
-
-        {/* View All Link - Centered */}
-        <div className="mt-12 text-center">
-          <button
-            onClick={() => setOpenIndex(openIndex === 'all' ? null : 'all')}
-            className="text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4"
-          >
-            {language === 'nl' ? 'Bekijk alle vragen →' : 'View all questions →'}
-          </button>
         </div>
       </div>
     </section>
@@ -1226,8 +1222,7 @@ const Footer = () => {
             </p>
             <ul className="space-y-2 text-sm">
               <li><Link to="/diensten/webdesign" className="text-gray-600 hover:text-black transition-colors">Webdesign</Link></li>
-              <li><Link to="/diensten/webflow" className="text-gray-600 hover:text-black transition-colors">Webflow</Link></li>
-              <li><Link to="/onderhoud" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</Link></li>
+              <li><Link to="/onderhoud" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting'}</Link></li>
             </ul>
           </div>
 
