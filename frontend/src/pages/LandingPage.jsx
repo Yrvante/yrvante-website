@@ -1023,6 +1023,22 @@ const ContactSection = () => {
                   <p className="text-gray-500 text-sm">{language === 'nl' ? '15 minuten kennismaking via Calendly' : '15-minute intro call via Calendly'}</p>
                 </div>
               </button>
+
+              {/* Bellen */}
+              <a
+                href="tel:+31642543859"
+                data-testid="contact-phone-link"
+                className="flex items-center gap-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-2xl p-5 transition-colors group"
+              >
+                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                  <Phone size={22} className="text-gray-600" />
+                </div>
+                <div>
+                  <p className="font-bold text-lg">+31 6 42543859</p>
+                  <p className="text-gray-500 text-sm">{language === 'nl' ? 'Bel me gewoon — ik neem op' : 'Just call me — I\'ll pick up'}</p>
+                </div>
+              </a>
+
               <div className="bg-white rounded-2xl p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
                 <a href="mailto:info@yrvante.com" className="text-lg hover:underline underline-offset-4">
