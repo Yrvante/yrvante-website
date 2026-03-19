@@ -77,7 +77,6 @@ const CalculatorPage = () => {
             "Alles uit Pro +",
             "Tot 15 pagina's",
             "Afspraaksysteem",
-            "Google Reviews integratie",
             "Meertalige website",
             "Snellere reactietijd (12 uur)"
           ]
@@ -119,7 +118,8 @@ const CalculatorPage = () => {
           title: "Google Reviews op website",
           description: "Toon reviews direct op je website",
           price: 120,
-          unit: "eenmalig"
+          unit: "eenmalig",
+          hidden: true
         }
       },
       
@@ -198,7 +198,6 @@ const CalculatorPage = () => {
             "Everything from Pro +",
             "Up to 15 pages",
             "Booking system",
-            "Google Reviews integration",
             "Multi-language website",
             "Priority support"
           ]
@@ -240,7 +239,8 @@ const CalculatorPage = () => {
           title: "Google Reviews on website",
           description: "Show reviews directly on your website",
           price: 120,
-          unit: "one-time"
+          unit: "one-time",
+          hidden: true
         }
       },
       
@@ -515,10 +515,6 @@ const CalculatorPage = () => {
                     <p className="text-2xl font-bold">€250</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
-                    <p className="text-2xl font-bold">€120</p>
-                    <p className="text-sm text-gray-500">Google Reviews</p>
-                  </div>
                 </div>
                 <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
                   <p className="text-sm text-yellow-800">
@@ -559,7 +555,7 @@ const CalculatorPage = () => {
                 </div>
 
                 {/* Other add-ons */}
-                {Object.entries(t.addOns).filter(([key]) => key !== 'extraPages').map(([key, addon]) => (
+                {Object.entries(t.addOns).filter(([key, addon]) => key !== 'extraPages' && !addon.hidden).map(([key, addon]) => (
                   <div
                     key={key}
                     data-testid={`addon-${key}`}

@@ -53,6 +53,9 @@ const Navigation = () => {
   };
 
   const dienstenLinks = [
+    { to: '/pakketten', label: language === 'nl' ? '→ Pakketten & Prijzen' : '→ Packages & Pricing', highlight: true },
+    { to: '/calculator', label: language === 'nl' ? '→ Prijscalculator' : '→ Price Calculator', highlight: true },
+    { divider: true },
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
     { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
     { divider: true },
@@ -90,9 +93,9 @@ const Navigation = () => {
             />
           </a>
 
-          {/* Desktop Navigation - With Dropdowns */}
+          {/* Desktop Navigation - Simplified */}
           <div className="hidden lg:flex items-center gap-6">
-            {/* Diensten Dropdown */}
+            {/* Diensten Dropdown - All in one */}
             <div 
               className="relative"
               onMouseEnter={() => setOpenDropdown('diensten')}
@@ -120,7 +123,11 @@ const Navigation = () => {
                         <Link
                           key={index}
                           to={link.to}
-                          className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors"
+                          className={`block px-4 py-2 text-sm transition-colors ${
+                            link.highlight 
+                              ? 'text-gray-800 font-semibold hover:bg-gray-100 hover:text-black' 
+                              : 'text-gray-600 hover:bg-gray-50 hover:text-black'
+                          }`}
                         >
                           {link.label}
                         </Link>
@@ -132,53 +139,11 @@ const Navigation = () => {
             </div>
 
             <Link
-              to="/pakketten"
+              to="/over-mij"
               className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
             >
-              {language === 'nl' ? 'Pakketten' : 'Packages'}
+              {language === 'nl' ? 'Over' : 'About'}
             </Link>
-            
-            <Link
-              to="/calculator"
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
-            >
-              Calculator
-            </Link>
-
-            {/* Over Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setOpenDropdown('over')}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              <button
-                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors flex items-center gap-1 py-4"
-              >
-                {language === 'nl' ? 'Over' : 'About'}
-                <ChevronDown size={12} className={`transition-transform ${openDropdown === 'over' ? 'rotate-180' : ''}`} />
-              </button>
-              <AnimatePresence>
-                {openDropdown === 'over' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 bg-white border border-gray-200 rounded-2xl shadow-xl py-3 min-w-[200px]"
-                  >
-                    {overLinks.map((link, index) => (
-                      <Link
-                        key={index}
-                        to={link.to}
-                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             <button
               onClick={() => scrollToSection("contact")}
@@ -341,7 +306,7 @@ const HeroSection = () => {
       {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
-        <div className="min-h-[calc(100vh-120px)] flex flex-col justify-center">
+        <div className="min-h-[calc(100vh-120px)] flex flex-col justify-center relative">
           
           {/* Availability Badge */}
           <motion.div
@@ -404,72 +369,93 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-8"
+            className="text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-4"
           >
             {language === 'nl' 
               ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
               : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Stats - Inline with subtitle */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-700">
+              <span>€500</span>
+              <span className="text-gray-400 font-normal">{language === 'nl' ? 'VANAF' : 'FROM'}</span>
+            </span>
+            <span className="w-1 h-1 bg-gray-300 rounded-full" />
+            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-700">
+              <span>1-2</span>
+              <span className="text-gray-400 font-normal">{language === 'nl' ? 'WEKEN' : 'WEEKS'}</span>
+            </span>
+          </motion.div>
+
+          {/* CTA Buttons - Pill shaped */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-4 items-center mb-12"
+            className="flex flex-wrap gap-4 items-center mb-8"
           >
             <button
               onClick={scrollToContact}
-              className="group px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all"
+              className="group px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full"
             >
               {language === 'nl' ? 'Start Project' : 'Start Project'}
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <Link
               to="/pakketten"
-              className="px-8 py-4 border border-gray-500 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all"
+              className="px-8 py-4 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all rounded-full"
             >
               {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
             </Link>
           </motion.div>
 
-          {/* Stats Bar - At bottom */}
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap items-center gap-6 lg:gap-10 py-6 border-t border-gray-200"
+            className="flex flex-wrap items-center gap-6"
           >
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-black">€500</span>
-              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                {language === 'nl' ? 'Vanaf' : 'From'}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-black">1-2</span>
-              <span className="text-xs uppercase tracking-[0.15em] text-gray-500">
-                {language === 'nl' ? 'Weken' : 'Weeks'}
-              </span>
-            </div>
-            <div className="hidden lg:flex items-center gap-6 ml-auto">
-              <a 
-                href="tel:+31642543859" 
-                className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-              >
-                <Phone size={14} />
-                <span>+31 6 42543859</span>
-              </a>
-              <a 
-                href="mailto:info@yrvante.com" 
-                className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-              >
-                <Mail size={14} />
-                <span>info@yrvante.com</span>
-              </a>
-            </div>
+            <a 
+              href="tel:+31642543859" 
+              className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
+            >
+              <Phone size={14} />
+              <span>+31 6 42543859</span>
+            </a>
+            <a 
+              href="mailto:info@yrvante.com" 
+              className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
+            >
+              <Mail size={14} />
+              <span>info@yrvante.com</span>
+            </a>
           </motion.div>
         </div>
+
+        {/* Logo - Transparent right side */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 items-center justify-center pointer-events-none"
+          style={{ width: '45%' }}
+        >
+          <img
+            src={LOGO_URL}
+            alt=""
+            aria-hidden="true"
+            className="w-full max-w-2xl object-contain"
+            style={{ opacity: 0.06, mixBlendMode: 'multiply', filter: 'grayscale(100%)' }}
+          />
+        </motion.div>
       </div>
 
       {/* Bottom Border Line */}

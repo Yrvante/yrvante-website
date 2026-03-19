@@ -51,7 +51,6 @@ const PackagesPage = () => {
       notIncluded: [
         language === 'nl' ? 'Boekingssysteem' : 'Booking system',
         language === 'nl' ? 'Meertalige website' : 'Multi-language website',
-        language === 'nl' ? 'Google Reviews integratie' : 'Google Reviews integration',
       ],
       idealFor: language === 'nl' ? 'Groeiende MKB\'s, Dienstverleners' : 'Growing SMBs, Service providers',
       deliveryTime: language === 'nl' ? '1-2 weken' : '1-2 weeks',
@@ -70,7 +69,6 @@ const PackagesPage = () => {
         language === 'nl' ? 'Blog' : 'Blog',
         language === 'nl' ? 'Contactformulier' : 'Contact form',
         language === 'nl' ? 'Afspraaksysteem ingebouwd' : 'Booking system built-in',
-        language === 'nl' ? 'Google Reviews integratie' : 'Google Reviews integration',
         language === 'nl' ? 'Meertalige optie op je site' : 'Multi-language option on your site',
         language === 'nl' ? 'Snellere reactietijd (binnen 12 uur)' : 'Faster response time (within 12 hours)',
       ],
@@ -88,7 +86,6 @@ const PackagesPage = () => {
     { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€80' },
     { name: language === 'nl' ? 'Onderhoud' : 'Maintenance', price: '€25/pm' },
     { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€250' },
-    { name: 'Google Reviews', price: '€120' },
   ];
 
   // Extra possibilities - no prices, just what's possible
@@ -129,11 +126,11 @@ const PackagesPage = () => {
         : 'Let customers book appointments directly online with automatic confirmations.',
     },
     {
-      icon: <Star size={24} />,
-      title: 'Google Reviews',
+      icon: <Zap size={24} />,
+      title: language === 'nl' ? 'Snelle levering' : 'Fast delivery',
       description: language === 'nl'
-        ? 'Toon uw beste reviews direct op uw website voor meer vertrouwen.'
-        : 'Show your best reviews directly on your website for more trust.',
+        ? 'Jouw website online in 1-2 weken. Klaar voor gebruik vanaf dag één.'
+        : 'Your website online in 1-2 weeks. Ready to use from day one.',
     },
   ];
 
