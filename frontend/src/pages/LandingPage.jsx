@@ -413,9 +413,6 @@ const HeroSection = () => {
           style={{ mixBlendMode: 'screen', opacity: 0.9 }}
         />
       </motion.div>
-
-      {/* Bottom gradient fade — smooth scroll transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-b from-transparent to-white pointer-events-none" style={{ zIndex: 5 }} />
     </section>
   );
 };
