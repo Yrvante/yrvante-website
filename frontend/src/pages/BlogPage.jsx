@@ -5,6 +5,8 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, TrendingUp, Users, Target, Doll
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
+
 const BlogPage = () => {
   const { language } = useLanguage();
 
@@ -256,7 +258,9 @@ const BlogPage = () => {
               <ArrowLeft size={16} />
               {t.back}
             </Link>
-            <Link to="/" className="font-heading text-xl font-bold">Yrvante</Link>
+            <Link to="/" className="flex items-center">
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+            </Link>
           </div>
         </div>
       </nav>
@@ -446,7 +450,7 @@ const BlogPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <span className="font-heading text-lg font-bold">Yrvante</span>
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
           <span className="text-sm text-gray-400">Almelo, Nederland</span>
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>

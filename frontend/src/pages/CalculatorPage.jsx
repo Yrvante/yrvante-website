@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 
 const CalculatorPage = () => {
   const { language } = useLanguage();
@@ -396,7 +397,9 @@ const CalculatorPage = () => {
               <ArrowLeft size={16} />
               {t.back}
             </Link>
-            <Link to="/" className="font-heading text-xl font-bold">Yrvante</Link>
+            <Link to="/" className="flex items-center">
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+            </Link>
           </div>
         </div>
       </nav>
@@ -850,7 +853,7 @@ const CalculatorPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <span className="font-heading text-lg font-bold">Yrvante</span>
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>
       </footer>

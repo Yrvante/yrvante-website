@@ -5,6 +5,8 @@ import { MapPin, ArrowLeft, Target, Wrench, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
+
 // Free to use code/tech images from Unsplash (no credit required for Unsplash license)
 const codeImages = [
   {
@@ -100,7 +102,9 @@ const AboutPage = () => {
               <ArrowLeft size={16} />
               {t.back}
             </Link>
-            <Link to="/" className="font-heading text-xl font-bold">Yrvante</Link>
+            <Link to="/" className="flex items-center">
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+            </Link>
           </div>
         </div>
       </nav>
@@ -244,7 +248,7 @@ const AboutPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <span className="font-heading text-lg">Yrvante</span>
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>
       </footer>
