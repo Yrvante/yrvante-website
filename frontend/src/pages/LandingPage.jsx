@@ -400,34 +400,26 @@ const HeroSection = () => {
         {/* Logo - Transparent right side */}
       </div>
 
-      {/* Logo - Transparent via screen blend mode */}
+      {/* Logo - Groot in achtergrond gemengd */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-          y: [0, -16, 0],
-          rotate: [-1.5, 1.5, -1.5],
-        }}
-        transition={{ 
-          opacity: { duration: 1.2, delay: 0.5 },
-          scale: { duration: 1.2, delay: 0.5 },
-          y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.2 },
-          rotate: { duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.2 }
-        }}
-        className="hidden lg:block absolute right-0 top-0 h-full pointer-events-none"
-        style={{ width: '45%' }}
+        initial={{ opacity: 0, scale: 1.08 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 2.5, delay: 0.3, ease: "easeOut" }}
+        className="absolute inset-0 flex items-center pointer-events-none overflow-hidden"
+        style={{ zIndex: 1, justifyContent: 'flex-end', paddingRight: '3%' }}
       >
-        {/* Zachte gloed achter logo */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div style={{ width: '55%', height: '55%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(180,180,180,0.18) 0%, transparent 70%)', filter: 'blur(24px)' }} />
-        </div>
         <img
           src="https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/8x6unwe5_IMG_1958.png"
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-contain relative"
-          style={{ mixBlendMode: 'screen', opacity: 0.92 }}
+          style={{
+            mixBlendMode: 'multiply',
+            opacity: 0.09,
+            width: '52%',
+            maxWidth: '820px',
+            filter: 'blur(0.5px) grayscale(1)',
+            objectFit: 'contain',
+          }}
         />
       </motion.div>
     </section>
