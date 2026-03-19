@@ -29,7 +29,7 @@ const API = `${BACKEND_URL}/api`;
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
-const CALENDLY_URL = "https://calendly.com/yrvante";
+const CALENDLY_URL = "https://calendly.com/yvar-yrvante/30min";
 
 // Navigation - Brutalist with Dropdown Menus
 const Navigation = () => {
