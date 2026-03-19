@@ -1020,7 +1020,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-bold text-lg">{language === 'nl' ? 'Plan een gratis gesprek' : 'Schedule a free call'}</p>
-                  <p className="text-gray-500 text-sm">{language === 'nl' ? '15 minuten kennismaking via Calendly' : '15-minute intro call via Calendly'}</p>
+                  <p className="text-gray-500 text-sm">{language === 'nl' ? '15 minuten kennismaking' : '15-minute intro call'}</p>
                 </div>
               </button>
 
