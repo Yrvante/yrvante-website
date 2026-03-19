@@ -36,6 +36,28 @@ import {
   Hand,
   Ruler,
   Dog,
+  Terminal,
+  Palette,
+  MessageSquare,
+  Video,
+  Megaphone,
+  Database,
+  FileText,
+  Music,
+  BookOpen,
+  Users,
+  TrendingUp,
+  Brain,
+  HeartPulse,
+  Leaf,
+  Baby,
+  Truck,
+  Droplet,
+  Wind,
+  Scale,
+  Headphones,
+  Coffee,
+  Package,
 } from "lucide-react";
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
@@ -841,6 +863,232 @@ const niches = {
       en: ['Handyman services', 'All-round handyman', 'Home renovation', 'Small renovations'],
     },
   },
+
+  // ─── IT & DIGITAAL ───────────────────────────────────────────────
+  developers: {
+    icon: Terminal, color: 'blue',
+    title: { nl: 'Website voor ZZP Developers', en: 'Website for Freelance Developers' },
+    subtitle: { nl: 'Jouw skills verdienen een podium', en: 'Your skills deserve a stage' },
+    description: { nl: 'Als freelance developer verkoop je jezelf. Klanten googlen op naam of specialisatie. Een strakke portfolio-website laat zien wie je bent, wat je bouwt en hoe ze je inhuren.', en: 'As a freelance developer you sell yourself. A clean portfolio website shows who you are, what you build and how to hire you.' },
+    benefits: { nl: ['Portfolio met projecten', 'Tech stack vermeld', 'GitHub koppeling', 'Uurtarief en beschikbaarheid', 'Contactformulier', 'Klantcases uitgelicht'], en: ['Portfolio with projects', 'Tech stack listed', 'GitHub link', 'Hourly rate and availability', 'Contact form', 'Client cases highlighted'] },
+    examples: { nl: ['Frontend developers', 'Backend developers', 'Full-stack developers', 'App developers', 'WordPress developers'], en: ['Frontend developers', 'Backend developers', 'Full-stack developers', 'App developers'] },
+  },
+  grafisch_designers: {
+    icon: Palette, color: 'purple',
+    title: { nl: 'Website voor Grafisch Designers', en: 'Website for Graphic Designers' },
+    subtitle: { nl: 'Laat je werk voor je spreken', en: 'Let your work speak for you' },
+    description: { nl: 'Als grafisch designer is je website je mooiste visitekaartje. Een strakke portfolio met jouw stijl trekt de juiste klanten aan.', en: 'As a graphic designer your website is your best business card. A clean portfolio with your style attracts the right clients.' },
+    benefits: { nl: ['Visueel sterk portfolio', 'Projecten per categorie', 'Stijl en specialisaties zichtbaar', 'Tarieven en diensten', 'Contactformulier', 'Social media koppelingen'], en: ['Visually strong portfolio', 'Projects per category', 'Style and specializations visible', 'Rates and services', 'Contact form', 'Social media links'] },
+    examples: { nl: ['Logo designers', 'Brand designers', 'Motion designers', 'Print designers'], en: ['Logo designers', 'Brand designers', 'Motion designers', 'Print designers'] },
+  },
+  ux_designers: {
+    icon: Monitor, color: 'indigo',
+    title: { nl: 'Website voor UX/UI Designers', en: 'Website for UX/UI Designers' },
+    subtitle: { nl: 'Design thinking begint bij jouw site', en: 'Design thinking starts at your site' },
+    description: { nl: 'UX/UI designers worden ingehuurd op basis van hun process én resultaten. Toon casestudies en wireframes in een portfolio dat exact weergeeft hoe jij werkt.', en: 'UX/UI designers are hired based on their process and results. Show case studies and wireframes in a portfolio that exactly reflects how you work.' },
+    benefits: { nl: ['Casestudies met process', 'Wireframes en mockups', 'Tools en methoden vermeld', 'Beschikbaarheid zichtbaar', 'Contactformulier', 'LinkedIn koppeling'], en: ['Case studies with process', 'Wireframes and mockups', 'Tools and methods listed', 'Availability visible', 'Contact form', 'LinkedIn link'] },
+    examples: { nl: ['UX designers', 'UI designers', 'Product designers', 'Interaction designers'], en: ['UX designers', 'UI designers', 'Product designers', 'Interaction designers'] },
+  },
+  social_media_managers: {
+    icon: Megaphone, color: 'pink',
+    title: { nl: 'Website voor Social Media Managers', en: 'Website for Social Media Managers' },
+    subtitle: { nl: 'Bewijs je impact met cijfers', en: 'Prove your impact with numbers' },
+    description: { nl: 'Bedrijven willen resultaten zien. Een website met concrete cases, groeicijfers en reviews overtuigt sneller dan een LinkedIn-profiel alleen.', en: 'Companies want to see results. A website with concrete cases and reviews convinces faster than a LinkedIn profile alone.' },
+    benefits: { nl: ['Resultaten en statistieken', 'Platforms waarop je werkt', 'Klantcases', 'Diensten en tarieven', 'Contactformulier', 'Sociale bewijskracht'], en: ['Results and statistics', 'Platforms you work on', 'Client cases', 'Services and rates', 'Contact form', 'Social proof'] },
+    examples: { nl: ['Social media managers', 'Content creators', 'Community managers', 'TikTok specialisten'], en: ['Social media managers', 'Content creators', 'Community managers', 'TikTok specialists'] },
+  },
+  data_analisten: {
+    icon: Database, color: 'cyan',
+    title: { nl: 'Website voor Data Analisten', en: 'Website for Data Analysts' },
+    subtitle: { nl: 'Data vertaalt zich naar opdrachten', en: 'Data translates into assignments' },
+    description: { nl: 'Data analisten worden steeds vaker ingehuurd als ZZP\'er. Een professionele website met je specialisaties en tools maakt jou de eerste keuze.', en: 'Data analysts are increasingly hired as freelancers. A professional website with your specializations and tools makes you the first choice.' },
+    benefits: { nl: ['Specialisaties en tools vermeld', 'Projecten en resultaten', 'Sectoren waarin je werkt', 'Uurtarief en beschikbaarheid', 'Contactformulier', 'Portfolio met analyses'], en: ['Specializations and tools listed', 'Projects and results', 'Sectors you work in', 'Hourly rate and availability', 'Contact form', 'Portfolio with analyses'] },
+    examples: { nl: ['Data analisten', 'BI developers', 'Data scientists', 'Analytics consultants'], en: ['Data analysts', 'BI developers', 'Data scientists', 'Analytics consultants'] },
+  },
+  it_consultants: {
+    icon: Shield, color: 'slate',
+    title: { nl: 'Website voor IT Consultants', en: 'Website for IT Consultants' },
+    subtitle: { nl: 'Expertise die klanten kunnen vinden', en: 'Expertise clients can find' },
+    description: { nl: 'IT consultants worden gevonden via netwerk én Google. Een professionele website versterkt je geloofwaardigheid en haalt directe aanvragen op.', en: 'IT consultants are found through network and Google. A professional website strengthens your credibility and captures direct inquiries.' },
+    benefits: { nl: ['Specialisaties duidelijk', 'Certificaten en opleiding', 'Referenties van klanten', 'Tarieven en beschikbaarheid', 'Sectoren vermeld', 'Contactformulier'], en: ['Specializations clear', 'Certificates and training', 'Client references', 'Rates and availability', 'Sectors listed', 'Contact form'] },
+    examples: { nl: ['IT consultants', 'Cybersecurity experts', 'Cloud architects', 'IT projectmanagers'], en: ['IT consultants', 'Cybersecurity experts', 'Cloud architects', 'IT project managers'] },
+  },
+  videografen: {
+    icon: Video, color: 'red',
+    title: { nl: 'Website voor Videografen', en: 'Website for Videographers' },
+    subtitle: { nl: 'Laat je werk bewegen', en: 'Let your work move' },
+    description: { nl: 'Een videomaker die zichzelf niet op video presenteert, mist een kans. Laat je showreel zien op een snelle website en trek direct de juiste opdrachtgevers aan.', en: 'A videographer who doesn\'t present themselves on video misses an opportunity. Show your showreel and attract the right clients immediately.' },
+    benefits: { nl: ['Embedded video showreel', 'Portfolio per categorie', 'Uitrusting en stijl vermeld', 'Tarieven en pakketten', 'Beschikbaarheidskalender', 'Contactformulier'], en: ['Embedded video showreel', 'Portfolio per category', 'Equipment and style listed', 'Rates and packages', 'Availability calendar', 'Contact form'] },
+    examples: { nl: ['Trouwvideografen', 'Bedrijfsfilms', 'Drone videografen', 'Social media video'], en: ['Wedding videographers', 'Corporate films', 'Drone videographers', 'Social media video'] },
+  },
+
+  // ─── ZORG & WELZIJN ──────────────────────────────────────────────
+  verpleegkundigen: {
+    icon: HeartPulse, color: 'rose',
+    title: { nl: 'Website voor ZZP Verpleegkundigen', en: 'Website for Freelance Nurses' },
+    subtitle: { nl: 'Vertrouwen begint online', en: 'Trust starts online' },
+    description: { nl: 'Steeds meer verpleegkundigen werken als ZZP\'er. Een professionele website met je specialisaties maakt het makkelijker om opdrachten te vinden.', en: 'More and more nurses work as freelancers. A professional website with your specializations makes it easier to find assignments.' },
+    benefits: { nl: ['Specialisaties en ervaringen', 'BIG-registratie vermeld', 'Sectoren vermeld', 'Beschikbaarheid en tarieven', 'Contactformulier', 'Professionele uitstraling'], en: ['Specializations and experiences', 'Registration listed', 'Sectors listed', 'Availability and rates', 'Contact form', 'Professional appearance'] },
+    examples: { nl: ['Wijkverpleegkundigen', 'IC verpleegkundigen', 'GGZ verpleegkundigen', 'Gespecialiseerd verpleegkundigen'], en: ['District nurses', 'ICU nurses', 'Mental health nurses', 'Specialized nurses'] },
+  },
+  psychologen: {
+    icon: Brain, color: 'violet',
+    title: { nl: 'Website voor Psychologen', en: 'Website for Psychologists' },
+    subtitle: { nl: 'Patiënten vinden de juiste hulp', en: 'Patients find the right help' },
+    description: { nl: 'Mensen zoeken een psycholoog online die bij hen past. Een warme, betrouwbare website beschrijft jouw aanpak en maakt het laagdrempelig om contact op te nemen.', en: 'People search online for a psychologist that suits them. A warm, trustworthy website describes your approach and makes it easy to get in touch.' },
+    benefits: { nl: ['Aanpak en methoden uitgelegd', 'Specialisaties vermeld', 'BIG-registratie', 'Online afspraken plannen', 'Tarieven en vergoedingen', 'Warme uitstraling'], en: ['Approach and methods explained', 'Specializations listed', 'Registration', 'Online appointment planning', 'Rates and reimbursements', 'Warm appearance'] },
+    examples: { nl: ['GZ-psychologen', 'Klinisch psychologen', 'Sportpsychologen', 'Kinderpsychologen'], en: ['Clinical psychologists', 'Sports psychologists', 'Child psychologists', 'Organizational psychologists'] },
+  },
+  diëtisten: {
+    icon: Leaf, color: 'lime',
+    title: { nl: 'Website voor Diëtisten', en: 'Website for Dietitians' },
+    subtitle: { nl: 'Gezonde keuzes beginnen bij jou vinden', en: 'Healthy choices start with finding you' },
+    description: { nl: 'Mensen zoeken een diëtist die bij hun situatie past. Een website met jouw specialisaties en aanpak maakt dat ze sneller contact opnemen.', en: 'People search for a dietitian that fits their situation. A website with your specializations and approach makes them contact you sooner.' },
+    benefits: { nl: ['Specialisaties uitgelegd', 'Online consults mogelijk', 'Vergoeding info', 'Aanpak en werkwijze', 'Tarieven transparant', 'Contactformulier'], en: ['Specializations explained', 'Online consultations possible', 'Reimbursement info', 'Approach and method', 'Transparent pricing', 'Contact form'] },
+    examples: { nl: ['Sportdiëtisten', 'Klinisch diëtisten', 'Diëtisten voor diabetes'], en: ['Sports dietitians', 'Clinical dietitians', 'Diabetes dietitians'] },
+  },
+  logopedisten: {
+    icon: Headphones, color: 'teal',
+    title: { nl: 'Website voor Logopedisten', en: 'Website for Speech Therapists' },
+    subtitle: { nl: 'Gevonden worden door wie je nodig heeft', en: 'Found by those who need you' },
+    description: { nl: 'Ouders zoeken een logopedist voor hun kind, volwassenen zoeken hulp bij stotteren of stemklachten. Een heldere website maakt de keuze voor jou makkelijk.', en: 'Parents search for a speech therapist for their child, adults look for help with stuttering. A clear website makes choosing you easy.' },
+    benefits: { nl: ['Klachten en behandelingen', 'Leeftijdsgroepen vermeld', 'Online afspraken', 'Vergoeding informatie', 'Aanpak uitgelegd', 'Contactformulier'], en: ['Complaints and treatments', 'Age groups listed', 'Online appointments', 'Reimbursement information', 'Approach explained', 'Contact form'] },
+    examples: { nl: ['Kindertaal logopedisten', 'Stottertherapeuten', 'Stemtherapeuten', 'Dyslexiespecialisten'], en: ['Child speech therapists', 'Stuttering therapists', 'Voice therapists', 'Dyslexia specialists'] },
+  },
+  thuiszorg: {
+    icon: Home, color: 'amber',
+    title: { nl: 'Website voor Thuiszorgmedewerkers', en: 'Website for Home Care Workers' },
+    subtitle: { nl: 'Vertrouwen thuis begint online', en: 'Trust at home starts online' },
+    description: { nl: 'Gezinnen zoeken betrouwbare thuiszorg voor hun geliefden. Een warme, persoonlijke website bouwt dat vertrouwen en laat zien wat je doet en hoe ze je bereiken.', en: 'Families search for reliable home care for their loved ones. A warm, personal website builds trust and shows what you do and how to reach you.' },
+    benefits: { nl: ['Diensten duidelijk omschreven', 'Doelgroep vermeld', 'Vergoeding info', 'Referenties', 'Persoonlijke uitstraling', 'Contactformulier'], en: ['Services clearly described', 'Target group listed', 'Reimbursement info', 'References', 'Personal appearance', 'Contact form'] },
+    examples: { nl: ['Persoonlijke verzorgers', 'Huishoudelijke hulp', 'Kraamverzorgsters', 'Begeleiders thuis'], en: ['Personal carers', 'Domestic helpers', 'Maternity nurses', 'Home companions'] },
+  },
+
+  // ─── CREATIEF & COMMUNICATIE ────────────────────────────────────
+  tekstschrijvers: {
+    icon: FileText, color: 'stone',
+    title: { nl: 'Website voor Tekstschrijvers', en: 'Website for Copywriters' },
+    subtitle: { nl: 'De schrijver die zichzelf verkoopt', en: 'The writer who sells themselves' },
+    description: { nl: 'Als tekstschrijver of copywriter is je eigen website je beste portfolio. Laat zien wat je schrijft, voor wie je hebt geschreven en waarom klanten voor jou kiezen.', en: 'As a copywriter your own website is your best portfolio. Show what you write, who you have written for and why clients choose you.' },
+    benefits: { nl: ['Portfolio met teksten', 'Niches en specialisaties', 'Klantreviews', 'Tarieven en werkwijze', 'Contactformulier', 'Blog als showcase'], en: ['Portfolio with texts', 'Niches and specializations', 'Client reviews', 'Rates and method', 'Contact form', 'Blog as showcase'] },
+    examples: { nl: ['SEO-tekstschrijvers', 'Content marketeers', 'Webtekstschrijvers', 'UX writers'], en: ['SEO copywriters', 'Content marketers', 'Web copywriters', 'UX writers'] },
+  },
+  illustratoren: {
+    icon: Palette, color: 'orange',
+    title: { nl: 'Website voor Illustratoren', en: 'Website for Illustrators' },
+    subtitle: { nl: 'Je stijl verdient een podium', en: 'Your style deserves a stage' },
+    description: { nl: 'Klanten kiezen een illustrator op stijl. Een visueel verbluffende portfolio-website laat direct zien wat je uniek maakt.', en: 'Clients choose an illustrator based on style. A visually stunning portfolio website immediately shows what makes you unique.' },
+    benefits: { nl: ['Visueel portfolio per stijl', 'Opdrachten en klanten', 'Stijlen en technieken', 'Tarieven en levertijden', 'Contactformulier', 'Shop voor prints (optioneel)'], en: ['Visual portfolio per style', 'Assignments and clients', 'Styles and techniques', 'Rates and delivery times', 'Contact form', 'Shop for prints (optional)'] },
+    examples: { nl: ['Kinderboekillustratoren', 'Editorial illustratoren', 'Character designers', 'Comic artists'], en: ['Children\'s book illustrators', 'Editorial illustrators', 'Character designers', 'Comic artists'] },
+  },
+  muzikanten: {
+    icon: Music, color: 'purple',
+    title: { nl: 'Website voor Muzikanten', en: 'Website for Musicians' },
+    subtitle: { nl: 'Boekingen beginnen bij een goede website', en: 'Bookings start with a good website' },
+    description: { nl: 'Event planners en particulieren zoeken muzikanten online. Met een professionele website met audio/video fragmenten ben jij makkelijker te boeken.', en: 'Event planners and individuals search for musicians online. With a professional website with audio/video clips you are easier to book.' },
+    benefits: { nl: ['Audio en video fragmenten', 'Genres en repertoire', 'Beschikbaarheidskalender', 'Pakketten en tarieven', 'Contactformulier', 'Referenties van events'], en: ['Audio and video clips', 'Genres and repertoire', 'Availability calendar', 'Packages and rates', 'Contact form', 'Event references'] },
+    examples: { nl: ['Bruiloftmuzikanten', 'Bands', 'DJ\'s', 'Strijkstellen', 'Zangers/zangeressen'], en: ['Wedding musicians', 'Bands', 'DJs', 'String quartets', 'Singers'] },
+  },
+  vertalers: {
+    icon: Globe, color: 'blue',
+    title: { nl: 'Website voor Vertalers', en: 'Website for Translators' },
+    subtitle: { nl: 'Elke taal verdient een professional', en: 'Every language deserves a professional' },
+    description: { nl: 'Bedrijven en uitgevers zoeken vertalers op taalcombinatie en specialisatie. Een heldere website met jouw taalparen trekt direct de juiste klanten aan.', en: 'Companies search for translators by language combination and specialization. A clear website with your language pairs attracts the right clients.' },
+    benefits: { nl: ['Taalparen duidelijk vermeld', 'Vakgebieden en specialisaties', 'Certificaten vermeld', 'Tarieven per woord/uur', 'Contactformulier', 'Referenties'], en: ['Language pairs clearly listed', 'Fields and specializations', 'Certificates listed', 'Rates per word/hour', 'Contact form', 'References'] },
+    examples: { nl: ['Juridisch vertalers', 'Medisch vertalers', 'Technisch vertalers', 'Literair vertalers'], en: ['Legal translators', 'Medical translators', 'Technical translators', 'Literary translators'] },
+  },
+  stylisten: {
+    icon: Scissors, color: 'pink',
+    title: { nl: 'Website voor Stylisten', en: 'Website for Stylists' },
+    subtitle: { nl: 'Stijl begint bij een mooie website', en: 'Style starts with a beautiful website' },
+    description: { nl: 'Of je nu persoonlijk stylist of fashionstylist bent — klanten willen jouw werk zien. Een visueel portfolio met voor-en-na resultaten spreekt boekdelen.', en: 'Whether you are a personal stylist or fashion stylist — clients want to see your work. A visual portfolio with before-and-after results speaks volumes.' },
+    benefits: { nl: ['Portfolio met voor-en-na', 'Diensten en pakketten', 'Doelgroep vermeld', 'Tarieven transparant', 'Online afspraken', 'Social media koppeling'], en: ['Portfolio with before-and-after', 'Services and packages', 'Target group listed', 'Transparent pricing', 'Online appointments', 'Social media link'] },
+    examples: { nl: ['Personal stylisten', 'Fashion stylisten', 'Visagisten', 'Kleuranalisten'], en: ['Personal stylists', 'Fashion stylists', 'Make-up artists', 'Color analysts'] },
+  },
+
+  // ─── CONSULTANCY & TRAINING ──────────────────────────────────────
+  consultants: {
+    icon: Briefcase, color: 'gray',
+    title: { nl: 'Website voor Consultants', en: 'Website for Consultants' },
+    subtitle: { nl: 'Expertise die online gevonden wordt', en: 'Expertise found online' },
+    description: { nl: 'Opdrachtgevers zoeken een consultant op expertise en ervaring. Een professionele website met je achtergrond en referenties haalt directe aanvragen op.', en: 'Clients search for a consultant by expertise and experience. A professional website with your background and references captures direct inquiries.' },
+    benefits: { nl: ['Expertise en achtergrond', 'Werkwijze uitgelegd', 'Sectoren vermeld', 'Referenties en cases', 'Tarieven en beschikbaarheid', 'Contactformulier'], en: ['Expertise and background', 'Method explained', 'Sectors listed', 'References and cases', 'Rates and availability', 'Contact form'] },
+    examples: { nl: ['Strategie consultants', 'HR consultants', 'Financieel consultants', 'Change managers'], en: ['Strategy consultants', 'HR consultants', 'Financial consultants', 'Change managers'] },
+  },
+  trainers: {
+    icon: BookOpen, color: 'amber',
+    title: { nl: 'Website voor Trainers & Sprekers', en: 'Website for Trainers & Speakers' },
+    subtitle: { nl: 'Laat je expertise landen', en: 'Let your expertise land' },
+    description: { nl: 'Bedrijven boeken trainers en sprekers op basis van onderwerp en reputatie. Een krachtige website met video-fragmenten en referenties maakt dat ze direct boeken.', en: 'Companies book trainers and speakers based on topic and reputation. A powerful website with video clips and references makes them book directly.' },
+    benefits: { nl: ['Trainingen en thema\'s overzicht', 'Video van optreden', 'Referenties van opdrachtgevers', 'Beschikbaarheid en tarieven', 'Contactformulier', 'Downloads'], en: ['Training and theme overview', 'Video of performance', 'Client references', 'Availability and rates', 'Contact form', 'Downloads'] },
+    examples: { nl: ['Teamtrainers', 'Keynote sprekers', 'Verkooptrainers', 'Leiderschapstrainers'], en: ['Team trainers', 'Keynote speakers', 'Sales trainers', 'Leadership trainers'] },
+  },
+  financieel_adviseurs: {
+    icon: TrendingUp, color: 'emerald',
+    title: { nl: 'Website voor Financieel Adviseurs', en: 'Website for Financial Advisors' },
+    subtitle: { nl: 'Vertrouwen verdien je met uitstraling', en: 'Trust is earned with presence' },
+    description: { nl: 'Als financieel adviseur draait alles om vertrouwen. Een strakke website toont je kennis en haalt nieuwe klanten over om contact op te nemen.', en: 'As a financial advisor, trust is everything. A clean website shows your knowledge and convinces new clients to get in touch.' },
+    benefits: { nl: ['Diensten helder uitgelegd', 'Specialisaties vermeld', 'Klantreviews', 'Blogs als autoriteit', 'Gratis kennismaking aangeboden', 'Contactformulier'], en: ['Services clearly explained', 'Specializations listed', 'Client reviews', 'Blogs as authority', 'Free intro offered', 'Contact form'] },
+    examples: { nl: ['Financieel planners', 'Hypotheekadviseurs', 'Pensioenadviseurs', 'Belastingadviseurs ZZP'], en: ['Financial planners', 'Mortgage advisors', 'Pension advisors', 'Tax advisors for freelancers'] },
+  },
+  recruiters: {
+    icon: Users, color: 'blue',
+    title: { nl: 'Website voor ZZP Recruiters', en: 'Website for Freelance Recruiters' },
+    subtitle: { nl: 'Jij verbindt mensen — begin online', en: 'You connect people — start online' },
+    description: { nl: 'ZZP recruiters werken voor opdrachtgevers én kandidaten. Een website die beide doelgroepen aanspreekt vergroot je bereik aanzienlijk.', en: 'Freelance recruiters work for clients and candidates. A website addressing both target groups increases your reach significantly.' },
+    benefits: { nl: ['Sectoren en niches vermeld', 'Voor bedrijven én kandidaten', 'Vacatures plaatsen', 'Werkwijze uitgelegd', 'Referenties', 'Contactformulier'], en: ['Sectors and niches listed', 'For companies and candidates', 'Post vacancies', 'Method explained', 'References', 'Contact form'] },
+    examples: { nl: ['IT recruiters', 'Zorg recruiters', 'Techniek recruiters', 'Interim recruiters'], en: ['IT recruiters', 'Healthcare recruiters', 'Technical recruiters', 'Interim recruiters'] },
+  },
+  marketing_specialisten: {
+    icon: Megaphone, color: 'orange',
+    title: { nl: 'Website voor Marketing Specialisten', en: 'Website for Marketing Specialists' },
+    subtitle: { nl: 'Marketeers die zichzelf goed marketen', en: 'Marketers who market themselves well' },
+    description: { nl: 'Als freelance marketeer is je eigen website direct bewijs van je kunnen. Toon concrete resultaten en cases die laten zien wat je hebt bereikt.', en: 'As a freelance marketer your own website is direct proof of your ability. Show concrete results and cases that show what you have achieved.' },
+    benefits: { nl: ['Cases met resultaten', 'Specialisaties vermeld', 'Diensten en tarieven', 'Klantreviews', 'Blog of kennisbank', 'Contactformulier'], en: ['Cases with results', 'Specializations listed', 'Services and rates', 'Client reviews', 'Blog or knowledge base', 'Contact form'] },
+    examples: { nl: ['SEO specialisten', 'Google Ads specialisten', 'Email marketeers', 'Performance marketeers'], en: ['SEO specialists', 'Google Ads specialists', 'Email marketers', 'Performance marketers'] },
+  },
+
+  // ─── EXTRA VAKMANSCHAP ───────────────────────────────────────────
+  stukadoors: {
+    icon: Droplet, color: 'stone',
+    title: { nl: 'Website voor Stukadoors', en: 'Website for Plasterers' },
+    subtitle: { nl: 'Laat je vakmanschap spreken', en: 'Let your craftsmanship speak' },
+    description: { nl: 'Mensen zoeken een stukadoor via Google. Met projectfoto\'s, reviews en een contactformulier kiezen klanten eerder voor jou.', en: 'People search for a plasterer via Google. With project photos, reviews and a contact form, clients choose you more quickly.' },
+    benefits: { nl: ['Projectfoto\'s', 'Specialisaties', 'Werkgebied', 'Offerte aanvragen', 'Klantreviews', 'Contactgegevens'], en: ['Project photos', 'Specializations', 'Service area', 'Request quote', 'Customer reviews', 'Contact details'] },
+    examples: { nl: ['Stukadoors', 'Sierpleister specialisten', 'Gipsplaat verwerkers'], en: ['Plasterers', 'Decorative plaster specialists', 'Drywall processors'] },
+  },
+  dakdekkers: {
+    icon: Wind, color: 'slate',
+    title: { nl: 'Website voor Dakdekkers', en: 'Website for Roofers' },
+    subtitle: { nl: 'Gevonden bij elke lekkage', en: 'Found for every leak' },
+    description: { nl: 'Mensen zoeken een dakdekker wanneer het regent. Zorg dat jij als eerste verschijnt met een professionele website met directe contactmogelijkheden.', en: 'People search for a roofer when it rains. Make sure you appear first with a professional website with direct contact options.' },
+    benefits: { nl: ['Diensten duidelijk vermeld', 'Werkgebied', 'Spoedreparaties uitgelicht', 'Projectfoto\'s', 'Klantreviews', 'Direct bellen knop'], en: ['Services clearly listed', 'Service area', 'Emergency repairs highlighted', 'Project photos', 'Customer reviews', 'Direct call button'] },
+    examples: { nl: ['Plat dak specialisten', 'Dakpannen vervangers', 'Dakgoten reparateurs'], en: ['Flat roof specialists', 'Roof tile replacers', 'Gutter repairers'] },
+  },
+  tuiniers: {
+    icon: Leaf, color: 'green',
+    title: { nl: 'Website voor Tuiniers', en: 'Website for Gardeners' },
+    subtitle: { nl: 'Toon je groenste werk', en: 'Show your greenest work' },
+    description: { nl: 'Mensen dromen van een mooie tuin. Met voor-en-na foto\'s, duidelijke diensten en een contactformulier haal je die klanten binnen via Google.', en: 'People dream of a beautiful garden. With before-and-after photos, clear services and a contact form you attract those clients via Google.' },
+    benefits: { nl: ['Voor-en-na foto\'s', 'Diensten overzicht', 'Werkgebied vermeld', 'Seizoensaanbiedingen', 'Offerte aanvragen', 'Klantreviews'], en: ['Before-and-after photos', 'Services overview', 'Service area listed', 'Seasonal offers', 'Request quote', 'Customer reviews'] },
+    examples: { nl: ['Hovenier ZZP', 'Tuinonderhoud', 'Tuinontwerp', 'Gazononderhoud'], en: ['Freelance gardener', 'Garden maintenance', 'Garden design', 'Lawn care'] },
+  },
+  schoonmakers: {
+    icon: Sparkles, color: 'cyan',
+    title: { nl: 'Website voor Schoonmakers', en: 'Website for Cleaners' },
+    subtitle: { nl: 'Vertrouwen binnenshuis begint online', en: 'Trust indoors starts online' },
+    description: { nl: 'Particulieren en bedrijven zoeken betrouwbare schoonmakers. Een professionele website met tarieven en reviews geeft het vertrouwen dat nodig is om te boeken.', en: 'Individuals and companies search for reliable cleaners. A professional website with rates and reviews gives the trust needed to book.' },
+    benefits: { nl: ['Diensten duidelijk vermeld', 'Tarieven per dienst', 'Werkgebied', 'Klantreviews', 'Online offerte aanvragen', 'Professionele uitstraling'], en: ['Services clearly listed', 'Rates per service', 'Service area', 'Customer reviews', 'Online quote request', 'Professional appearance'] },
+    examples: { nl: ['Particulier schoonmakers', 'Kantoor schoonmakers', 'Raam wassers', 'Na-bouw schoonmakers'], en: ['Residential cleaners', 'Office cleaners', 'Window cleaners', 'Post-construction cleaners'] },
+  },
+  chauffeurs: {
+    icon: Truck, color: 'blue',
+    title: { nl: 'Website voor ZZP Chauffeurs', en: 'Website for Freelance Drivers' },
+    subtitle: { nl: 'Klanten vinden je op de weg', en: 'Clients find you on the road' },
+    description: { nl: 'Of je nu taxichauffeur, bezorger of transport ZZP\'er bent — een professionele website laat zien wat je doet en hoe klanten snel kunnen boeken.', en: 'Whether you are a taxi driver, delivery driver or transport freelancer — a professional website shows what you do and how clients can quickly book.' },
+    benefits: { nl: ['Diensten en voertuigen vermeld', 'Werkgebied', 'Tarieven en zones', 'Online boeken', 'Reviews', 'Direct bellen knop'], en: ['Services and vehicles listed', 'Service area', 'Rates and zones', 'Online booking', 'Reviews', 'Direct call button'] },
+    examples: { nl: ['Taxichauffeurs', 'Trouwkoetsen', 'Koeriers', 'Leerlingenvervoer'], en: ['Taxi drivers', 'Wedding cars', 'Couriers', 'Student transport'] },
+  },
 };
 
 const DienstenPage = () => {
@@ -1631,28 +1879,37 @@ const DienstenPage = () => {
             </div>
           </div>
 
-          {/* Additional niches row */}
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 text-center">
-              {language === 'nl' ? 'Meer Branches' : 'More Industries'}
-            </h3>
-            <div className="flex flex-wrap justify-center gap-2">
-              {['personaltrainers', 'tandartsen', 'hondentrimmers', 'timmerlieden', 'dierenartsen', 'klusbedrijven'].map((key) => {
-                const nicheData = niches[key];
-                if (!nicheData) return null;
-                return (
-                  <Link
-                    key={key}
-                    to={`/voor/${key}`}
-                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-full hover:shadow-md transition-all border border-gray-200 group"
-                  >
-                    <nicheData.icon size={14} className="text-gray-500" />
-                    <span className="text-sm text-gray-600 group-hover:text-black">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>
-                  </Link>
-                );
-              })}
+          {/* Meer Branches */}
+          {[
+            { label: { nl: 'Meer Branches', en: 'More Industries' }, keys: ['personaltrainers', 'tandartsen', 'hondentrimmers', 'timmerlieden', 'dierenartsen', 'klusbedrijven'] },
+            { label: { nl: 'IT & Digitaal', en: 'IT & Digital' }, keys: ['developers', 'grafisch_designers', 'ux_designers', 'social_media_managers', 'data_analisten', 'it_consultants', 'videografen'] },
+            { label: { nl: 'Zorg & Welzijn', en: 'Health & Wellbeing' }, keys: ['verpleegkundigen', 'psychologen', 'diëtisten', 'logopedisten', 'thuiszorg'] },
+            { label: { nl: 'Creatief & Communicatie', en: 'Creative & Communication' }, keys: ['tekstschrijvers', 'illustratoren', 'muzikanten', 'vertalers', 'stylisten'] },
+            { label: { nl: 'Consultancy & Training', en: 'Consultancy & Training' }, keys: ['consultants', 'trainers', 'financieel_adviseurs', 'recruiters', 'marketing_specialisten'] },
+            { label: { nl: 'Vakmanschap', en: 'Craftsmanship' }, keys: ['stukadoors', 'dakdekkers', 'tuiniers', 'schoonmakers', 'chauffeurs'] },
+          ].map((group) => (
+            <div key={group.label.nl} className="mt-8 pt-8 border-t border-gray-200">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 text-center">
+                {group.label[language]}
+              </h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                {group.keys.map((key) => {
+                  const nicheData = niches[key];
+                  if (!nicheData) return null;
+                  return (
+                    <Link
+                      key={key}
+                      to={`/voor/${key}`}
+                      className="flex items-center gap-2 px-4 py-2 bg-white rounded-full hover:shadow-md transition-all border border-gray-200 group"
+                    >
+                      <nicheData.icon size={14} className="text-gray-500" />
+                      <span className="text-sm text-gray-600 group-hover:text-black">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
