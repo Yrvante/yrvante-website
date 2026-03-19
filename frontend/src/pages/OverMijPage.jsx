@@ -169,7 +169,7 @@ const OverMijPage = () => {
               <div className="flex flex-wrap gap-4">
                 <button
                   onClick={scrollToContact}
-                  className="px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-900 transition-colors flex items-center gap-2"
+                  className="px-6 py-3 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
                 >
                   {language === 'nl' ? 'Neem Contact Op' : 'Get in Touch'}
                   <ArrowRight size={14} />
@@ -209,7 +209,7 @@ const OverMijPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 rounded-3xl p-6 hover:bg-gray-100 transition-colors"
               >
-                <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
                   <value.icon className="text-white" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">{value.title}</h3>
@@ -258,7 +258,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Why Not Big Agencies Section */}
-      <section className="py-20 bg-black text-white">
+      <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -327,7 +327,7 @@ const OverMijPage = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={scrollToContact}
-              className="px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-900 transition-colors"
+              className="px-8 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-800 transition-colors"
             >
               {language === 'nl' ? 'Start een Project' : 'Start a Project'}
             </button>

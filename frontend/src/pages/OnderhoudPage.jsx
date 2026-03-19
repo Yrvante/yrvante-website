@@ -200,7 +200,7 @@ const OnderhoudPage = () => {
 
               <button
                 onClick={scrollToContact}
-                className="px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-900 transition-colors"
+                className="px-8 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-800 transition-colors"
               >
                 {language === 'nl' ? 'Start Onderhoudspakket' : 'Start Maintenance Plan'}
               </button>
@@ -345,7 +345,7 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="bg-gray-50 rounded-3xl overflow-hidden">
-            <div className="grid grid-cols-3 bg-black text-white py-4 px-6">
+            <div className="grid grid-cols-3 bg-gray-800 text-white py-4 px-6">
               <div className="font-bold">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
               <div className="font-bold text-center text-green-400">
                 {language === 'nl' ? 'Met Pakket (€25/m)' : 'With Plan (€25/m)'}
@@ -456,7 +456,7 @@ const OnderhoudPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 rounded-3xl p-6"
               >
-                <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
                   <feature.icon className="text-white" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
@@ -468,7 +468,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-black text-white">
+      <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
             {language === 'nl' 

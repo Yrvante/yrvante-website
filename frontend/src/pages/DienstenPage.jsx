@@ -624,7 +624,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-black text-white">
+        <section className="py-16 bg-gray-900 text-white">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? `${service.title[language]} nodig?` : `Need ${service.title[language]}?`}
@@ -750,7 +750,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-black text-white">
+        <section className="py-16 bg-gray-900 text-white">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
@@ -995,7 +995,7 @@ const DienstenPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-black text-white">
+      <section className="py-16 bg-gray-900 text-white">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl font-bold mb-4">
             {language === 'nl' ? 'Jouw branche niet gevonden?' : "Didn't find your industry?"}

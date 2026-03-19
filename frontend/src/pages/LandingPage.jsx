@@ -191,7 +191,7 @@ const Navigation = () => {
             
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-colors rounded-full"
+              className="px-6 py-3 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-colors rounded-full"
             >
               Start Project
             </button>
@@ -299,7 +299,7 @@ const Navigation = () => {
 
               <button
                 onClick={() => scrollToSection("contact")}
-                className="block w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full"
+                className="block w-full py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full"
               >
                 Start Project
               </button>
@@ -420,14 +420,14 @@ const HeroSection = () => {
           >
             <button
               onClick={scrollToContact}
-              className="group px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 transition-all"
+              className="group px-8 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-all"
             >
               {language === 'nl' ? 'Start Project' : 'Start Project'}
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <Link
               to="/pakketten"
-              className="px-8 py-4 border border-black text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-all"
+              className="px-8 py-4 border border-black text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all"
             >
               {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
             </Link>
@@ -678,7 +678,7 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white hover:bg-black hover:text-white hover:border-black ${
+              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white hover:bg-gray-800 hover:text-white hover:border-gray-800 ${
                 pkg.popular ? 'border-black' : 'border-gray-200'
               }`}
             >
@@ -714,7 +714,7 @@ const PricingSection = () => {
 
               <Link
                 to="/calculator"
-                className="block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] rounded-2xl transition-all duration-300 bg-black text-white group-hover:bg-white group-hover:text-black"
+                className="block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] rounded-2xl transition-all duration-300 bg-gray-900 text-white group-hover:bg-white group-hover:text-black"
               >
                 {language === 'nl' ? 'Selecteer' : 'Select'}
               </Link>
@@ -772,7 +772,7 @@ const TestimonialsSection = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-16 bg-black text-white">
+    <section id="testimonials" className="py-16 bg-gray-900 text-white">
       <div className="container-yrvante">
         <motion.div
           className="text-center mb-12"
@@ -1048,7 +1048,7 @@ const ContactSection = () => {
 
             <div className="space-y-4">
               <a 
-                href="https://wa.me/31612345678"
+                href="https://wa.me/31642453859"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-green-500 hover:bg-green-600 text-white rounded-2xl p-5 transition-colors group"
@@ -1174,7 +1174,7 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-5 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] rounded-2xl hover:bg-gray-900 transition-colors disabled:opacity-50"
+                  className="w-full py-5 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-2xl hover:bg-gray-800 transition-colors disabled:opacity-50"
                 >
                   {isSubmitting 
                     ? (language === 'nl' ? 'Verzenden...' : 'Sending...') 
@@ -1277,7 +1277,7 @@ const Footer = () => {
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
-      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/50 to-white/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/40 to-white/50 pointer-events-none" />
       <div className="relative z-10">
         <SEO page="/" />
         <Navigation />

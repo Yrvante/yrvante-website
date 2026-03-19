@@ -459,7 +459,7 @@ const CalculatorPage = () => {
                         <p className="text-gray-500 text-sm mt-1">{pkg.description}</p>
                       </div>
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                        selectedPackage === key ? 'border-black bg-black' : 'border-gray-300'
+                        selectedPackage === key ? 'border-gray-800 bg-gray-800' : 'border-gray-300'
                       }`}>
                         {selectedPackage === key && <Check size={14} className="text-white" />}
                       </div>
@@ -542,14 +542,14 @@ const CalculatorPage = () => {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => adjustExtraPages(-1)}
-                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-black hover:bg-black hover:text-white transition-all"
+                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-800 hover:bg-gray-800 hover:text-white transition-all"
                         >
                           <Minus size={16} />
                         </button>
                         <span className="w-10 text-center font-mono font-bold text-lg">{addOns.extraPages}</span>
                         <button
                           onClick={() => adjustExtraPages(1)}
-                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-black hover:bg-black hover:text-white transition-all"
+                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-800 hover:bg-gray-800 hover:text-white transition-all"
                         >
                           <Plus size={16} />
                         </button>
@@ -578,7 +578,7 @@ const CalculatorPage = () => {
                       <div className="flex items-center gap-4">
                         <span className="text-sm font-mono font-bold">€{addon.price} <span className="font-normal text-gray-400">{addon.unit}</span></span>
                         <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
-                          addOns[key] ? 'border-black bg-black' : 'border-gray-300'
+                          addOns[key] ? 'border-gray-800 bg-gray-800' : 'border-gray-300'
                         }`}>
                           {addOns[key] && <Check size={14} className="text-white" />}
                         </div>
@@ -688,7 +688,7 @@ const CalculatorPage = () => {
                       setSubmitted(false);
                       setFormData({ name: '', email: '', phone: '', message: '' });
                     }}
-                    className="px-8 py-3 bg-black text-white rounded-full font-bold hover:bg-gray-800 transition-colors"
+                    className="px-8 py-3 bg-gray-900 text-white rounded-full font-bold hover:bg-gray-800 transition-colors"
                   >
                     {t.backToCalc}
                   </button>
@@ -829,7 +829,7 @@ const CalculatorPage = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-gray-800 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>

@@ -33,6 +33,51 @@ const seoData = {
       title: 'Over Yrvante | Smart Web & Software',
       description: 'Maak kennis met Yrvante. Ik bouw moderne websites voor ZZP\'ers en MKB. Persoonlijke aanpak, snelle levering, eerlijke prijzen.',
       keywords: 'over yrvante, webdesigner nederland, freelance webdesigner'
+    },
+    '/over-mij': {
+      title: 'Over Mij | Yrvante Webdesign',
+      description: 'Ik ben Yrvante — freelance webdesigner uit Almelo. Ik bouw snelle, professionele websites voor ZZP\'ers en MKB\'ers. Persoonlijk, betaalbaar en resultaatgericht.',
+      keywords: 'over yrvante, freelance webdesigner almelo, webdesigner nederland, ZZP website, MKB website'
+    },
+    '/onderhoud': {
+      title: 'Website Onderhoud & Hosting | €25/maand | Yrvante',
+      description: 'Ontspannen achterover leunen terwijl ik jouw website bijhoudt. Updates, beveiliging, back-ups en snelle hulp voor slechts €25 per maand.',
+      keywords: 'website onderhoud, website hosting, website beheer, website updates, website support'
+    },
+    '/diensten': {
+      title: 'Webdesign Diensten | Yrvante',
+      description: 'Ontdek alle webdesign diensten van Yrvante. Van landingspagina\'s tot webshops en boekingssystemen. Voor elke branche een passende oplossing.',
+      keywords: 'webdesign diensten, website laten maken, landingspagina, webshop, boekingssysteem'
+    },
+    '/voor/kappers': {
+      title: 'Website voor Kappers | Yrvante',
+      description: 'Een professionele website laten maken als kapper? Yrvante bouwt stijlvolle kapperssites met online afspraken, galerij en meer. Vanaf €500.',
+      keywords: 'website kapper, kapperszaak website, kapper online afspraken, webdesign kapper'
+    },
+    '/voor/loodgieters': {
+      title: 'Website voor Loodgieters | Yrvante',
+      description: 'Meer klanten als loodgieter via een professionele website. Met contactformulier, diensten en snel vindbaar op Google. Vanaf €500.',
+      keywords: 'website loodgieter, loodgietersbedrijf website, loodgieter online, webdesign loodgieter'
+    },
+    '/voor/electriciens': {
+      title: 'Website voor Electriciëns | Yrvante',
+      description: 'Professionele website voor electriciëns. Laat klanten je vinden via Google en vergroot je opdrachten. Vanaf €500.',
+      keywords: 'website electricien, elektricien website, webdesign electricien'
+    },
+    '/voor/coaches': {
+      title: 'Website voor Coaches | Yrvante',
+      description: 'Een professionele coachingswebsite laten maken? Met online boeken, diensten en testimonials. Yrvante helpt je groeien. Vanaf €500.',
+      keywords: 'website coach, coaching website, life coach website, webdesign coach'
+    },
+    '/voor/nagelstudios': {
+      title: 'Website voor Nagelstudio\'s | Yrvante',
+      description: 'Laat je nagelstudio online schitteren. Professionele website met galerij, behandelingen en online afspraken. Vanaf €500.',
+      keywords: 'website nagelstudio, nagelstudio online, nail studio website'
+    },
+    '/voor/restaurants': {
+      title: 'Website voor Restaurants | Yrvante',
+      description: 'Een professionele restaurantwebsite met menu, reserveringen en sfeerfotos. Meer gasten via Google. Vanaf €500.',
+      keywords: 'website restaurant, restaurant website, horeca website, menu website'
     }
   },
   en: {
@@ -65,6 +110,41 @@ const seoData = {
       title: 'About Yrvante | Smart Web & Software',
       description: 'Meet Yrvante. I build modern websites for freelancers and SMBs. Personal approach, fast delivery, fair prices.',
       keywords: 'about yrvante, web designer netherlands, freelance web designer'
+    },
+    '/over-mij': {
+      title: 'About Me | Yrvante Web Design',
+      description: 'I\'m Yrvante — freelance web designer from Almelo. I build fast, professional websites for freelancers and SMBs. Personal, affordable and result-driven.',
+      keywords: 'about yrvante, freelance web designer almelo, web designer netherlands'
+    },
+    '/onderhoud': {
+      title: 'Website Maintenance & Hosting | €25/month | Yrvante',
+      description: 'Relax while I take care of your website. Updates, security, backups and quick support for just €25 per month.',
+      keywords: 'website maintenance, website hosting, website management, website updates'
+    },
+    '/diensten': {
+      title: 'Web Design Services | Yrvante',
+      description: 'Discover all web design services from Yrvante. From landing pages to webshops and booking systems. A fitting solution for every industry.',
+      keywords: 'web design services, website creation, landing page, webshop, booking system'
+    },
+    '/voor/kappers': {
+      title: 'Website for Hair Salons | Yrvante',
+      description: 'A professional website for hair salons with online booking, gallery and more. From €500.',
+      keywords: 'hair salon website, barber website, hairdresser website'
+    },
+    '/voor/loodgieters': {
+      title: 'Website for Plumbers | Yrvante',
+      description: 'More customers as a plumber with a professional website. Contact form, services and easy to find on Google. From €500.',
+      keywords: 'plumber website, plumbing business website'
+    },
+    '/voor/coaches': {
+      title: 'Website for Coaches | Yrvante',
+      description: 'A professional coaching website with online booking, services and testimonials. From €500.',
+      keywords: 'coach website, coaching website, life coach website'
+    },
+    '/voor/restaurants': {
+      title: 'Website for Restaurants | Yrvante',
+      description: 'A professional restaurant website with menu, reservations and photos. More guests via Google. From €500.',
+      keywords: 'restaurant website, hospitality website, menu website'
     }
   }
 };
