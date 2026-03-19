@@ -53,17 +53,13 @@ const Navigation = () => {
   };
 
   const dienstenLinks = [
-    { to: '/pakketten', label: language === 'nl' ? '→ Pakketten & Prijzen' : '→ Packages & Pricing', highlight: true },
-    { to: '/calculator', label: language === 'nl' ? '→ Prijscalculator' : '→ Price Calculator', highlight: true },
+    { to: '/pakketten', label: language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing' },
+    { to: '/calculator', label: language === 'nl' ? 'Prijscalculator' : 'Price Calculator' },
     { divider: true },
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
     { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
     { divider: true },
-    { to: '/voor/kappers', label: language === 'nl' ? 'Kappers' : 'Hairdressers' },
-    { to: '/voor/nagelstylisten', label: language === 'nl' ? 'Nagelstylisten' : 'Nail Technicians' },
-    { to: '/voor/coaches', label: 'Coaches' },
-    { to: '/voor/restaurants', label: 'Restaurants' },
-    { to: '/voor/loodgieters', label: language === 'nl' ? 'Loodgieters' : 'Plumbers' },
+    { to: '/over-mij', label: language === 'nl' ? 'Over Mij' : 'About Me' },
     { divider: true },
     { to: '/diensten', label: language === 'nl' ? 'Alle Branches →' : 'All Industries →' },
   ];
@@ -118,16 +114,12 @@ const Navigation = () => {
                   >
                     {dienstenLinks.map((link, index) => (
                       link.divider ? (
-                        <div key={index} className="border-t border-gray-100 my-2" />
+                        <div key={index} className="border-t border-gray-100 my-1" />
                       ) : (
                         <Link
                           key={index}
                           to={link.to}
-                          className={`block px-4 py-2 text-sm transition-colors ${
-                            link.highlight 
-                              ? 'text-gray-800 font-semibold hover:bg-gray-100 hover:text-black' 
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-black'
-                          }`}
+                          className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors rounded-lg mx-1"
                         >
                           {link.label}
                         </Link>
@@ -421,8 +413,8 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Bottom Border Line */}
-      <div className="border-b border-gray-300/50" />
+      {/* Bottom gradient fade — no hard line */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-white pointer-events-none z-20" />
     </section>
   );
 };
@@ -1226,7 +1218,7 @@ const Footer = () => {
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
-      <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/40 to-white/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-white/20 to-white/35 lg:from-white/70 lg:via-white/75 lg:to-white/80 pointer-events-none" />
       <div className="relative z-10">
         <SEO page="/" />
         <Navigation />
