@@ -306,13 +306,13 @@ const HeroSection = () => {
               <span className="flex flex-col">
                 <span>JOUW</span>
                 <span>BEDRIJF</span>
-                <span className="text-gray-400">ONLINE</span>
+                <span className="text-gray-500">ONLINE</span>
               </span>
             ) : (
               <span className="flex flex-col">
                 <span>YOUR</span>
                 <span>BUSINESS</span>
-                <span className="text-gray-400">ONLINE</span>
+                <span className="text-gray-500">ONLINE</span>
               </span>
             )}
           </motion.h1>
