@@ -270,16 +270,16 @@ const HeroSection = () => {
           >
             <button 
               onClick={scrollToContact}
-              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-green-300 transition-all duration-300 text-sm"
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-gray-400 transition-all duration-300 text-sm"
               style={{
                 boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
               }}
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-gray-500"></span>
               </span>
-              <span className="text-gray-600 group-hover:text-green-700 transition-colors">
+              <span className="text-gray-600 group-hover:text-gray-800 transition-colors">
                 {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
               </span>
             </button>
@@ -413,8 +413,8 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Bottom gradient fade — no hard line */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-white pointer-events-none z-20" />
+      {/* Bottom gradient fade — smooth scroll transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-b from-transparent to-white pointer-events-none" style={{ zIndex: 5 }} />
     </section>
   );
 };
@@ -992,7 +992,7 @@ const ContactSection = () => {
                 href="https://wa.me/31642453859"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-green-500 hover:bg-green-600 text-white rounded-2xl p-5 transition-colors group"
+                className="flex items-center gap-4 bg-gray-800 hover:bg-gray-700 text-white rounded-2xl p-5 transition-colors group"
               >
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                   <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
@@ -1001,7 +1001,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-bold text-lg">WhatsApp Business</p>
-                  <p className="text-green-100 text-sm">{language === 'nl' ? 'Snel antwoord op je vragen' : 'Quick answers to your questions'}</p>
+                  <p className="text-gray-300 text-sm">{language === 'nl' ? 'Snel antwoord op je vragen' : 'Quick answers to your questions'}</p>
                 </div>
               </a>
               <div className="bg-white rounded-2xl p-5">
