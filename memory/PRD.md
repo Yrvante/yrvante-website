@@ -141,6 +141,15 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 | Coaches | Life/Business/Health coaches | Professional presence, Service overview, Booking |
 | ZZP'ers | Freelancers | Google visibility, 24/7 contact, Own domain |
 
+## UI Updates (February 2026)
+- [x] **Grey Color Scheme** - Alle bg-black elementen vervangen door bg-gray-900 en bg-gray-800
+- [x] **Package Card Hover** - Pakket kaarten worden nu GRIJS bij hover (hover:bg-gray-800) i.p.v. zwart
+- [x] **Grey CTA Sections** - Alle CTA secties op alle pagina's nu bg-gray-900
+- [x] **Grey Hero Gradients** - Hero gradient secties in PackagesPage, BlogPage, WhyWebsitePage geüpdated
+- [x] **Grey Demo Tabs** - Actieve demo tab in DemoPreview nu bg-gray-900 i.p.v. bg-black
+- [x] **SEO Expanded** - SEO data toegevoegd voor /over-mij, /onderhoud, /diensten en niche pagina's
+- [x] **WhatsApp** - Nummer bijgewerkt naar +31642453859
+
 ## P0 Features (Completed)
 - [x] Premium homepage with animation
 - [x] New pricing structure (€500/€900/€1400)

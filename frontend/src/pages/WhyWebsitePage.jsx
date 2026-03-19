@@ -199,7 +199,7 @@ const WhyWebsitePage = () => {
 
       {/* Hero Section - Premium style */}
       <section className="pt-20">
-        <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
+        <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
           <div className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}

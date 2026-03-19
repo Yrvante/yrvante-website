@@ -154,7 +154,7 @@ const PackagesPage = () => {
       </nav>
 
       {/* Hero */}
-      <section className="pt-28 pb-16 px-6 md:px-12 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">
+      <section className="pt-28 pb-16 px-6 md:px-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
