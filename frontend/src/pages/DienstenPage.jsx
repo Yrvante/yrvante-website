@@ -867,36 +867,129 @@ const DienstenPage = () => {
         </div>
       </section>
 
-      {/* Niches Grid - Expanded */}
+      {/* Niches Grid - Organized in 3 columns */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
-          <h2 className="text-2xl font-bold mb-2">
-            {language === 'nl' ? 'Websites voor' : 'Websites for'}
-          </h2>
-          <p className="text-gray-500 mb-8">
-            {language === 'nl' ? 'Speciale expertise voor jouw branche' : 'Special expertise for your industry'}
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {Object.entries(niches).map(([key, nicheData], index) => (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <Link
-                  to={`/voor/${key}`}
-                  className="block bg-white rounded-2xl p-5 hover:shadow-lg transition-all border border-gray-100 group"
-                >
-                  <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <nicheData.icon size={20} className="text-gray-600" />
-                  </div>
-                  <h3 className="font-bold text-sm mb-1">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h3>
-                  <p className="text-gray-500 text-xs line-clamp-2">{nicheData.subtitle[language]}</p>
-                </Link>
-              </motion.div>
-            ))}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-2">
+              {language === 'nl' ? 'Websites voor' : 'Websites for'}
+            </h2>
+            <p className="text-gray-500">
+              {language === 'nl' ? 'Speciale expertise voor jouw branche' : 'Special expertise for your industry'}
+            </p>
+          </div>
+          
+          {/* Organized in 3 category columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Column 1: Beauty & Wellness */}
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 pb-2 border-b border-gray-200">
+                {language === 'nl' ? 'Beauty & Wellness' : 'Beauty & Wellness'}
+              </h3>
+              <div className="space-y-2">
+                {['kappers', 'nagelstylisten', 'interieurstylisten'].map((key) => {
+                  const nicheData = niches[key];
+                  if (!nicheData) return null;
+                  return (
+                    <Link
+                      key={key}
+                      to={`/voor/${key}`}
+                      className="flex items-center gap-3 p-3 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                    >
+                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                        <nicheData.icon size={18} className="text-gray-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
+                        <p className="text-gray-400 text-xs truncate">{nicheData.subtitle[language]}</p>
+                      </div>
+                      <ArrowRight size={14} className="text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 transition-all" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Column 2: Zakelijke Diensten */}
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 pb-2 border-b border-gray-200">
+                {language === 'nl' ? 'Zakelijke Diensten' : 'Business Services'}
+              </h3>
+              <div className="space-y-2">
+                {['coaches', 'zzp', 'fotografen', 'makelaars'].map((key) => {
+                  const nicheData = niches[key];
+                  if (!nicheData) return null;
+                  return (
+                    <Link
+                      key={key}
+                      to={`/voor/${key}`}
+                      className="flex items-center gap-3 p-3 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                    >
+                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                        <nicheData.icon size={18} className="text-gray-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
+                        <p className="text-gray-400 text-xs truncate">{nicheData.subtitle[language]}</p>
+                      </div>
+                      <ArrowRight size={14} className="text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 transition-all" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Column 3: Ambacht & Horeca */}
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 pb-2 border-b border-gray-200">
+                {language === 'nl' ? 'Ambacht & Horeca' : 'Craft & Hospitality'}
+              </h3>
+              <div className="space-y-2">
+                {['loodgieters', 'restaurants', 'bloemisten', 'garages'].map((key) => {
+                  const nicheData = niches[key];
+                  if (!nicheData) return null;
+                  return (
+                    <Link
+                      key={key}
+                      to={`/voor/${key}`}
+                      className="flex items-center gap-3 p-3 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                    >
+                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                        <nicheData.icon size={18} className="text-gray-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
+                        <p className="text-gray-400 text-xs truncate">{nicheData.subtitle[language]}</p>
+                      </div>
+                      <ArrowRight size={14} className="text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 transition-all" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Additional niches row */}
+          <div className="mt-8 pt-8 border-t border-gray-200">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 text-center">
+              {language === 'nl' ? 'Meer Branches' : 'More Industries'}
+            </h3>
+            <div className="flex flex-wrap justify-center gap-2">
+              {['personaltrainers', 'tandartsen', 'hondentrimmers'].map((key) => {
+                const nicheData = niches[key];
+                if (!nicheData) return null;
+                return (
+                  <Link
+                    key={key}
+                    to={`/voor/${key}`}
+                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-full hover:shadow-md transition-all border border-gray-200 group"
+                  >
+                    <nicheData.icon size={14} className="text-gray-500" />
+                    <span className="text-sm text-gray-600 group-hover:text-black">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
