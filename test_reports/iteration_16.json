@@ -1,0 +1,43 @@
+{
+  "summary": "Frontend-only testing for 4 new features: (1) Calculator background continuous pattern, (2) Booking system preview on addon selection, (3) Dynamic add-ons per package (excludedAddOns), (4) Navigation Onderhoud & Hosting -> /onderhoud. All 12 test requirements verified and PASSED via Playwright automated tests.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "1. PASS: Calculator page has continuous flowing background (fixed BG_IMAGE with cover/center, saturate/brightness/contrast filter)",
+    "2. PASS: Pro package shows all add-ons EXCEPT extraForm - 'Al inbegrepen in dit pakket: Extra contactformulier' notice shown",
+    "3. PASS: Premium package shows ONLY onderhoud addon - multiLanguage, bookingSystem, extraForm all hidden with 'Al inbegrepen in dit pakket: Meertalige website, Online boekingssysteem, Extra contactformulier'",
+    "4. PASS: Basic package shows ALL add-ons (multiLanguage, bookingSystem, extraForm, maintenance all visible, no Al inbegrepen notice)",
+    "5. PASS: Clicking bookingSystem addon in Pro package shows interactive BookingSystemPreview below it",
+    "6. PASS: Booking preview has 5 day tabs (Ma/Di/Wo/Do/Vr) - clicking Wo changes selection to dark background",
+    "7. PASS: Booking preview has 6 time slots (09:00-17:00) - clicking 09:00 shows 'Afspraak bevestigen' confirm button",
+    "8. PASS: Switching from Premium to Basic resets excluded add-ons (bookingSystem unselected after switch)",
+    "9. PASS: Navigation Diensten dropdown shows 'Onderhoud & Hosting' link with href=/onderhoud",
+    "10. PASS: Clicking 'Onderhoud & Hosting' navigates to /onderhoud (URL confirmed)",
+    "11. PASS: /diensten/onderhoud redirects to /onderhoud (React Navigate replace redirect working)",
+    "12. PASS: Price summary: Pro (€900) + bookingSystem (€250) = €1150 correctly displayed in right sidebar"
+  ],
+  "test_report_links": [
+    "/app/test_reports/iteration_16.json"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: handlePackageChange only resets excluded add-ons when switching TO a package. When switching FROM Premium to Basic, excludedAddOns['basic']=[] so no reset occurs. The previously excluded add-ons (set to false by Premium switch) remain false in Basic - this is correct behavior.",
+    "Note: English text in CalculatorPage still says 'within 24 hours' for formSubtitle/successMessage - flagged in iteration_15, still present (may be intentional for Dutch-first app)"
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A (frontend-only testing)",
+    "frontend": "100% - All 12 requirements PASS"
+  },
+  "seed_data_creation": "None required",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 16: All 4 new features verified and passing. (1) Calculator continuous background - BG_IMAGE with fixed positioning. (2) BookingSystemPreview component renders below bookingSystem addon when selected, with 5-day tabs and 6 time slots. (3) excludedAddOns constant: basic=[], pro=['extraForm'], premium=['multiLanguage','bookingSystem','extraForm']. (4) Nav /onderhoud link correct + /diensten/onderhoud redirect to /onderhoud working. Price calculation: Pro+bookingSystem=€1150 confirmed."
+}

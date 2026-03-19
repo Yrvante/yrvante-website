@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import axios from "axios";
@@ -10,6 +10,100 @@ import { toast } from "sonner";
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
+
+// Which add-ons are already included per package (don't show as extra)
+const excludedAddOns = {
+  basic: [],
+  pro: ['extraForm'],        // Contact form already in Pro
+  premium: ['multiLanguage', 'bookingSystem', 'extraForm'] // All included in Premium
+};
+
+// Interactive Booking System Preview
+const BookingSystemPreview = ({ language }) => {
+  const [selectedDay, setSelectedDay] = useState(1);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const days = ['Ma', 'Di', 'Wo', 'Do', 'Vr'];
+  const times = ['09:00', '10:30', '12:00', '14:00', '15:30', '17:00'];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.3 }}
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm"
+    >
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Calendar size={16} className="text-gray-600" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-gray-800">
+              {language === 'nl' ? 'Voorbeeld: Boekingssysteem' : 'Preview: Booking System'}
+            </p>
+            <p className="text-xs text-gray-400">
+              {language === 'nl' ? '24/7 afspraken op jouw website' : '24/7 bookings on your website'}
+            </p>
+          </div>
+        </div>
+
+        {/* Day selector */}
+        <div className="flex gap-1.5 mb-3">
+          {days.map((day, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); setSelectedDay(i); setSelectedTime(null); }}
+              className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${
+                selectedDay === i ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {day}
+            </button>
+          ))}
+        </div>
+
+        {/* Time slots */}
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {times.map((time, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); setSelectedTime(i); }}
+              className={`py-2 rounded-xl text-xs transition-all ${
+                selectedTime === i
+                  ? 'bg-gray-900 text-white'
+                  : 'bg-gray-50 border border-gray-200 text-gray-600 hover:border-gray-400'
+              }`}
+            >
+              {time}
+            </button>
+          ))}
+        </div>
+
+        <AnimatePresence>
+          {selectedTime !== null && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 5 }}
+              className="mb-3"
+            >
+              <button className="w-full py-2.5 bg-gray-900 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2">
+                <Check size={14} />
+                {language === 'nl' ? 'Afspraak bevestigen' : 'Confirm Appointment'}
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <p className="text-center text-xs text-gray-400">
+          {language === 'nl' ? 'Klik op een dag en tijdslot — zo werkt het op jouw website' : 'Click a day and time slot — this is how it works on your website'}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
 
 const CalculatorPage = () => {
   const { language } = useLanguage();
@@ -23,6 +117,20 @@ const CalculatorPage = () => {
     bookingSystem: false,
     googleReviews: false,
   });
+
+  const handlePackageChange = (key) => {
+    setSelectedPackage(key);
+    const excluded = excludedAddOns[key] || [];
+    if (excluded.length > 0) {
+      setAddOns(prev => {
+        const updated = { ...prev };
+        excluded.forEach(addon => {
+          if (typeof updated[addon] === 'boolean') updated[addon] = false;
+        });
+        return updated;
+      });
+    }
+  };
   
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -387,10 +495,13 @@ const CalculatorPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white" data-testid="calculator-page">
+    <div className="min-h-screen relative" data-testid="calculator-page">
+      {/* Fixed Background - Continuous flowing pattern */}
+      <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.5) brightness(1.02) contrast(1.05)'}} />
+      <div className="fixed inset-0 -z-10 bg-white/62" />
       <SEO page="/calculator" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
@@ -404,9 +515,8 @@ const CalculatorPage = () => {
         </div>
       </nav>
 
-      {/* Header with Abstract Background */}
-      <section className="pt-28 pb-12 px-6 md:px-12 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/40" />
+      {/* Header */}
+      <section className="pt-28 pb-12 px-6 md:px-12 relative">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -425,9 +535,8 @@ const CalculatorPage = () => {
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
-        <div className="absolute inset-0 bg-white/70" />
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Left column - Selections */}
           <div className="lg:col-span-2 space-y-12">
             {/* Step 1: Package Selection */}
@@ -442,7 +551,7 @@ const CalculatorPage = () => {
                   <div
                     key={key}
                     data-testid={`package-${key}`}
-                    onClick={() => setSelectedPackage(key)}
+                    onClick={() => handlePackageChange(key)}
                     className={`relative cursor-pointer p-6 rounded-3xl border-2 transition-all ${
                       selectedPackage === key 
                         ? 'border-black bg-gray-50 shadow-lg' 
@@ -557,32 +666,57 @@ const CalculatorPage = () => {
                   </div>
                 </div>
 
-                {/* Other add-ons */}
-                {Object.entries(t.addOns).filter(([key, addon]) => key !== 'extraPages' && !addon.hidden).map(([key, addon]) => (
-                  <div
-                    key={key}
-                    data-testid={`addon-${key}`}
-                    onClick={() => toggleAddOn(key)}
-                    className={`p-5 rounded-2xl border cursor-pointer transition-all ${
-                      addOns[key] 
-                        ? 'border-black bg-gray-50 shadow-md' 
-                        : 'border-gray-200 bg-white hover:border-gray-400'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <h4 className="font-medium">{addon.title}</h4>
-                        <p className="text-sm text-gray-500">{addon.description}</p>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm font-mono font-bold">€{addon.price} <span className="font-normal text-gray-400">{addon.unit}</span></span>
-                        <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
-                          addOns[key] ? 'border-gray-500 bg-gray-500' : 'border-gray-300'
-                        }`}>
-                          {addOns[key] && <Check size={14} className="text-white" />}
+                {/* Included-in-package notice */}
+                {(excludedAddOns[selectedPackage] || []).length > 0 && (
+                  <div className="flex items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 rounded-2xl">
+                    <Check size={14} className="text-green-600 flex-shrink-0" />
+                    <p className="text-sm text-green-700">
+                      {language === 'nl'
+                        ? `Al inbegrepen in dit pakket: ${(excludedAddOns[selectedPackage] || []).map(k => t.addOns[k]?.title).filter(Boolean).join(', ')}`
+                        : `Already included in this package: ${(excludedAddOns[selectedPackage] || []).map(k => t.addOns[k]?.title).filter(Boolean).join(', ')}`}
+                    </p>
+                  </div>
+                )}
+
+                {/* Other add-ons - filtered per package */}
+                {Object.entries(t.addOns)
+                  .filter(([key, addon]) =>
+                    key !== 'extraPages' &&
+                    !addon.hidden &&
+                    !(excludedAddOns[selectedPackage] || []).includes(key)
+                  )
+                  .map(([key, addon]) => (
+                  <div key={key}>
+                    <div
+                      data-testid={`addon-${key}`}
+                      onClick={() => toggleAddOn(key)}
+                      className={`p-5 rounded-2xl border cursor-pointer transition-all ${
+                        addOns[key] 
+                          ? 'border-black bg-gray-50 shadow-md' 
+                          : 'border-gray-200 bg-white hover:border-gray-400'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium">{addon.title}</h4>
+                          <p className="text-sm text-gray-500">{addon.description}</p>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <span className="text-sm font-mono font-bold">€{addon.price} <span className="font-normal text-gray-400">{addon.unit}</span></span>
+                          <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
+                            addOns[key] ? 'border-gray-500 bg-gray-500' : 'border-gray-300'
+                          }`}>
+                            {addOns[key] && <Check size={14} className="text-white" />}
+                          </div>
                         </div>
                       </div>
                     </div>
+                    {/* Show booking system preview when selected */}
+                    <AnimatePresence>
+                      {key === 'bookingSystem' && addOns.bookingSystem && (
+                        <BookingSystemPreview language={language} />
+                      )}
+                    </AnimatePresence>
                   </div>
                 ))}
               </div>
