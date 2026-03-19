@@ -163,7 +163,10 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
   - Loodgieters, Restaurants, Personal Trainers, Fotografen, Makelaars
   - Tandartsen, Garages, Hondentrimsalons
 - [x] **Abstract Background Image** - Mooie vloeiende achtergrondafbeelding in wit/grijs tinten
-- [x] **Branding Service Removed** - Verwijderd uit diensten, navigatie en footer
+- [x] **WhatsApp Business** - Groene knop in contact sectie met wa.me link
+- [x] **Extended Nagelstudio Demo** - Uitgebreide Premium demo met promo banner, 6 behandelingen, team sectie, Instagram
+- [x] **Organized Niches Layout** - "Websites voor" sectie in 3 kolommen: Beauty & Wellness, Zakelijke Diensten, Ambacht & Horeca
+- [x] **Consistent Background** - Onderhoud pagina heeft nu dezelfde abstracte achtergrond vibe
 - [x] **Onderhoud Page** - Uitgebreide pagina over waarom onderhoud belangrijk is
 - [x] **Navigation Dropdowns** - Diensten en Over dropdown menu's in header
 - [x] **Expanded Footer** - 5 kolommen met alle nieuwe pagina links
