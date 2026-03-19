@@ -400,26 +400,20 @@ const HeroSection = () => {
         {/* Logo - Transparent right side */}
       </div>
 
-      {/* Logo - Groot in achtergrond gemengd */}
+      {/* Logo - Helder zichtbaar rechts */}
       <motion.div
-        initial={{ opacity: 0, scale: 1.08 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 2.5, delay: 0.3, ease: "easeOut" }}
-        className="absolute inset-0 flex items-center pointer-events-none overflow-hidden"
-        style={{ zIndex: 1, justifyContent: 'flex-end', paddingRight: '3%' }}
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+        className="hidden lg:flex absolute right-0 top-0 h-full items-center pointer-events-none"
+        style={{ width: '46%', zIndex: 2 }}
       >
         <img
           src="https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/8x6unwe5_IMG_1958.png"
-          alt=""
+          alt="Yrvante"
           aria-hidden="true"
-          style={{
-            mixBlendMode: 'multiply',
-            opacity: 0.09,
-            width: '52%',
-            maxWidth: '820px',
-            filter: 'blur(0.5px) grayscale(1)',
-            objectFit: 'contain',
-          }}
+          className="w-full h-auto object-contain"
+          style={{ mixBlendMode: 'screen', opacity: 1 }}
         />
       </motion.div>
     </section>
@@ -1262,9 +1256,9 @@ const Footer = () => {
 const LandingPage = () => {
   return (
     <div data-testid="landing-page" className="min-h-screen relative">
-      {/* Background - desaturated to remove warm glow */}
-      <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.25) brightness(1.05)'}} />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-white/20 to-white/35 lg:from-white/70 lg:via-white/75 lg:to-white/80 pointer-events-none" />
+      {/* Background - betere kwaliteit, minder desaturatie */}
+      <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.55) brightness(1.02) contrast(1.05)'}} />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/15 to-white/25 lg:from-white/55 lg:via-white/60 lg:to-white/70 pointer-events-none" />
       <div className="relative z-10">
         <SEO page="/" />
         <Navigation />
