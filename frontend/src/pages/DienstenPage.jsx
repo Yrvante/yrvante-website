@@ -24,7 +24,7 @@ import {
   PawPrint,
 } from "lucide-react";
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/bd9ccb92eb46d5ed1a97a900c245c5b7666be86f56e6b6623a1e1da2f4bf67d5.png";
 
 // Service data - Only Webdesign and Onderhoud
@@ -624,24 +624,24 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-900 text-white">
+        <section className="py-16 bg-gray-100 text-gray-800">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? `${service.title[language]} nodig?` : `Need ${service.title[language]}?`}
             </h2>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-500 mb-6">
               {language === 'nl' ? `Vanaf ${service.price} excl. BTW` : `From ${service.price} excl. VAT`}
             </p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={scrollToContact}
-                className="px-6 py-3 bg-white text-black text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-100 transition-colors"
+                className="px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
               >
                 {language === 'nl' ? 'Neem Contact Op' : 'Get in Touch'}
               </button>
               <Link
                 to="/calculator"
-                className="px-6 py-3 border border-white text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-white hover:text-black transition-colors"
+                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -714,19 +714,15 @@ const DienstenPage = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {nicheData.benefits[language].map((benefit, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 bg-gray-50 rounded-2xl p-4"
+                  className="flex items-center gap-3 bg-gray-50 rounded-2xl p-4 hover:bg-gray-100 transition-colors"
                 >
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
                   </div>
                   <span className="text-gray-700">{benefit}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -750,24 +746,24 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-900 text-white">
+        <section className="py-16 bg-gray-100 text-gray-800">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
             </h2>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-500 mb-6">
               {language === 'nl' ? 'Vanaf €500 excl. BTW' : 'From €500 excl. VAT'}
             </p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={scrollToContact}
-                className="px-6 py-3 bg-white text-black text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-100 transition-colors"
+                className="px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
               >
                 {language === 'nl' ? 'Neem Contact Op' : 'Get in Touch'}
               </button>
               <Link
                 to="/calculator"
-                className="px-6 py-3 border border-white text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-white hover:text-black transition-colors"
+                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -838,13 +834,7 @@ const DienstenPage = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {Object.entries(services).map(([key, service], index) => (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
+              <div key={key}>
                 <Link
                   to={`/diensten/${key}`}
                   className="block bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
@@ -861,7 +851,7 @@ const DienstenPage = () => {
                     <ArrowRight size={20} className="text-gray-400 group-hover:translate-x-2 transition-transform" />
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -995,19 +985,19 @@ const DienstenPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gray-900 text-white">
+      <section className="py-16 bg-gray-100 text-gray-800">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl font-bold mb-4">
             {language === 'nl' ? 'Jouw branche niet gevonden?' : "Didn't find your industry?"}
           </h2>
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-500 mb-6">
             {language === 'nl'
               ? 'Geen probleem! Ik maak websites voor elke branche. Neem contact op en we bespreken jouw wensen.'
               : "No problem! I create websites for any industry. Get in touch and we'll discuss your needs."}
           </p>
           <button
             onClick={scrollToContact}
-            className="px-6 py-3 bg-white text-black text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-100 transition-colors"
+            className="px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
           >
             {language === 'nl' ? 'Neem Contact Op' : 'Get in Touch'}
           </button>

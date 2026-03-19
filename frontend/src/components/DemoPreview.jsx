@@ -690,7 +690,7 @@ const DemoPreview = ({ language = 'nl' }) => {
             data-testid={`demo-tab-${demo.id}`}
             className={`relative px-5 py-4 rounded-2xl text-sm font-medium transition-all duration-300 min-w-[120px] ${
               activeDemo === demo.id
-                ? 'bg-gray-900 text-white shadow-xl scale-105'
+                ? 'bg-gray-600 text-white shadow-xl scale-105'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-102'
             }`}
           >

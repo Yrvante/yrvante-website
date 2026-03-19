@@ -27,7 +27,7 @@ import DemoPreview from "../components/DemoPreview";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
 
 // Navigation - Brutalist with Dropdown Menus
@@ -191,7 +191,7 @@ const Navigation = () => {
             
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-6 py-3 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-colors rounded-full"
+              className="px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-colors rounded-full"
             >
               Start Project
             </button>
@@ -299,7 +299,7 @@ const Navigation = () => {
 
               <button
                 onClick={() => scrollToSection("contact")}
-                className="block w-full py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full"
+                className="block w-full py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
               >
                 Start Project
               </button>
@@ -420,14 +420,14 @@ const HeroSection = () => {
           >
             <button
               onClick={scrollToContact}
-              className="group px-8 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-all"
+              className="group px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all"
             >
               {language === 'nl' ? 'Start Project' : 'Start Project'}
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <Link
               to="/pakketten"
-              className="px-8 py-4 border border-black text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all"
+              className="px-8 py-4 border border-gray-500 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all"
             >
               {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
             </Link>
@@ -678,8 +678,8 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white hover:bg-gray-800 hover:text-white hover:border-gray-800 ${
-                pkg.popular ? 'border-black' : 'border-gray-200'
+              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white hover:bg-gray-100 hover:text-gray-900 hover:border-gray-400 ${
+                pkg.popular ? 'border-gray-400' : 'border-gray-200'
               }`}
             >
               {/* Populair Badge */}
@@ -714,7 +714,7 @@ const PricingSection = () => {
 
               <Link
                 to="/calculator"
-                className="block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] rounded-2xl transition-all duration-300 bg-gray-900 text-white group-hover:bg-white group-hover:text-black"
+                className="block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] rounded-2xl transition-all duration-300 bg-gray-500 text-white group-hover:bg-gray-600"
               >
                 {language === 'nl' ? 'Selecteer' : 'Select'}
               </Link>
@@ -772,7 +772,7 @@ const TestimonialsSection = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-16 bg-gray-900 text-white">
+    <section id="testimonials" className="py-16 bg-gray-100 text-gray-800">
       <div className="container-yrvante">
         <motion.div
           className="text-center mb-12"
@@ -796,13 +796,13 @@ const TestimonialsSection = () => {
             >
               <div className="flex justify-center gap-1 mb-6">
                 {[...Array(testimonials[current].rating)].map((_, i) => (
-                  <Star key={i} className="text-white fill-white" size={20} />
+                  <Star key={i} className="text-gray-500 fill-gray-500" size={20} />
                 ))}
               </div>
               <p className="text-xl md:text-2xl font-heading mb-6 leading-relaxed">
                 "{testimonials[current].text}"
               </p>
-              <p className="text-gray-400">
+              <p className="text-gray-500">
                 — {testimonials[current].type}
               </p>
             </motion.div>
@@ -811,7 +811,7 @@ const TestimonialsSection = () => {
           <div className="flex justify-center gap-4 mt-10">
             <button
               onClick={prev}
-              className="p-3 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors"
+              className="p-3 border border-gray-300 rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
             >
               <ChevronLeft size={20} />
             </button>
@@ -821,14 +821,14 @@ const TestimonialsSection = () => {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    i === current ? 'w-6 bg-white' : 'bg-gray-600'
+                    i === current ? 'w-6 bg-gray-500' : 'bg-gray-300'
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={next}
-              className="p-3 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors"
+              className="p-3 border border-gray-300 rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
             >
               <ChevronRight size={20} />
             </button>
@@ -1174,7 +1174,7 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-5 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-2xl hover:bg-gray-800 transition-colors disabled:opacity-50"
+                  className="w-full py-5 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-2xl hover:bg-gray-600 transition-colors disabled:opacity-50"
                 >
                   {isSubmitting 
                     ? (language === 'nl' ? 'Verzenden...' : 'Sending...') 
@@ -1195,7 +1195,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-16 bg-white border-t border-black">
+    <footer className="py-16 bg-white border-t border-gray-200">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-8">
           {/* Logo & Info */}

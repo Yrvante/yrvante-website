@@ -194,7 +194,7 @@ const PackagesPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className={`relative rounded-3xl p-8 ${
                   pkg.popular 
-                    ? 'bg-gray-900 text-white scale-105 shadow-2xl z-10' 
+                    ? 'bg-gray-600 text-white scale-105 shadow-2xl z-10' 
                     : 'bg-white border border-gray-200 shadow-lg'
                 }`}
               >
@@ -262,8 +262,8 @@ const PackagesPage = () => {
                   to="/calculator"
                   className={`block w-full text-center py-4 rounded-full font-bold transition-all ${
                     pkg.popular
-                      ? 'bg-white text-black hover:bg-gray-100'
-                      : 'bg-gray-900 text-white hover:bg-gray-800'
+                      ? 'bg-white text-gray-900 hover:bg-gray-100'
+                      : 'bg-gray-500 text-white hover:bg-gray-600'
                   }`}
                 >
                   {language === 'nl' ? 'Selecteer Pakket' : 'Select Package'}
@@ -382,7 +382,7 @@ const PackagesPage = () => {
       {/* Booking System Detail */}
       <section className="py-20 px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
-          <div className="bg-gray-900 text-white rounded-3xl p-8 md:p-12">
+          <div className="bg-gray-700 text-white rounded-3xl p-8 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
@@ -457,14 +457,14 @@ const PackagesPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/calculator"
-                className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-all"
+                className="inline-flex items-center justify-center gap-3 bg-gray-500 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-600 transition-all"
               >
                 {language === 'nl' ? 'Bereken je prijs' : 'Calculate your price'}
                 <ArrowRight size={18} />
               </Link>
               <Link
                 to="/#contact"
-                className="inline-flex items-center justify-center gap-3 border-2 border-black px-8 py-4 rounded-full font-bold hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all"
+                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-bold hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all"
               >
                 {language === 'nl' ? 'Neem contact op' : 'Contact me'}
               </Link>

@@ -20,7 +20,7 @@ import {
   Phone,
 } from "lucide-react";
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
 
 const OverMijPage = () => {
@@ -169,7 +169,7 @@ const OverMijPage = () => {
               <div className="flex flex-wrap gap-4">
                 <button
                   onClick={scrollToContact}
-                  className="px-6 py-3 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
+                  className="px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors flex items-center gap-2"
                 >
                   {language === 'nl' ? 'Neem Contact Op' : 'Get in Touch'}
                   <ArrowRight size={14} />
@@ -209,8 +209,8 @@ const OverMijPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 rounded-3xl p-6 hover:bg-gray-100 transition-colors"
               >
-                <div className="w-12 h-12 bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
-                  <value.icon className="text-white" size={24} />
+                <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
+                  <value.icon className="text-gray-600" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">{value.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
@@ -258,7 +258,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Why Not Big Agencies Section */}
-      <section className="py-20 bg-gray-900 text-white">
+      <section className="py-20 bg-gray-100 text-gray-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -270,7 +270,7 @@ const OverMijPage = () => {
                   ? 'Waarom ik goedkoper ben dan bureaus' 
                   : 'Why I am cheaper than agencies'}
               </h2>
-              <p className="text-gray-400 leading-relaxed mb-6">
+              <p className="text-gray-600 leading-relaxed mb-6">
                 {language === 'nl'
                   ? 'Bij een groot bureau betaal je voor overhead, kantoorruimte, account managers, projectmanagers en vergaderingen over vergaderingen. Al die kosten worden doorberekend in jouw factuur.'
                   : 'At a big agency you pay for overhead, office space, account managers, project managers and meetings about meetings. All those costs are passed on in your invoice.'}
@@ -283,10 +283,10 @@ const OverMijPage = () => {
             </div>
 
             <div className="space-y-4">
-              <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
+              <div className="bg-gray-200 rounded-2xl p-6 border border-gray-300">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-400 text-sm">{language === 'nl' ? 'Gemiddeld bureau' : 'Average agency'}</span>
-                  <span className="text-red-400 text-2xl font-black line-through">€3.000 - €8.000</span>
+                  <span className="text-gray-600 text-sm">{language === 'nl' ? 'Gemiddeld bureau' : 'Average agency'}</span>
+                  <span className="text-red-500 text-2xl font-black line-through">€3.000 - €8.000</span>
                 </div>
                 <div className="text-xs text-gray-500">
                   {language === 'nl' 
@@ -327,7 +327,7 @@ const OverMijPage = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={scrollToContact}
-              className="px-8 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-800 transition-colors"
+              className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
             >
               {language === 'nl' ? 'Start een Project' : 'Start a Project'}
             </button>

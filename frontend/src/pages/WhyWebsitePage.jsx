@@ -5,7 +5,7 @@ import { ArrowRight, Search, Clock, TrendingUp, Shield, Zap, Globe, Users, Check
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 
 const WhyWebsitePage = () => {
   const { language } = useLanguage();
@@ -188,7 +188,7 @@ const WhyWebsitePage = () => {
               </Link>
               <Link 
                 to="/calculator" 
-                className="px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all"
+                className="px-5 py-2.5 bg-gray-500 text-white text-sm font-medium rounded-full hover:bg-gray-600 transition-all"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
               </Link>
@@ -251,8 +251,8 @@ const WhyWebsitePage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mb-8">
-                <Search size={28} className="text-white" />
+              <div className="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center mb-8">
+                <Search size={28} className="text-gray-600" />
               </div>
               <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
                 {t.section1Title}
@@ -274,7 +274,7 @@ const WhyWebsitePage = () => {
               className="relative"
             >
               <div className="absolute -inset-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-3xl opacity-50 blur-2xl"></div>
-              <div className="relative bg-gray-900 text-white p-10 rounded-3xl">
+              <div className="relative bg-gray-700 text-white p-10 rounded-3xl">
                 <h3 className="text-2xl font-heading font-bold mb-6">
                   {t.benefitsTitle}
                 </h3>
@@ -345,7 +345,7 @@ const WhyWebsitePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-gray-900 text-white p-8 md:p-10 rounded-3xl relative overflow-hidden"
+              className="bg-gray-700 text-white p-8 md:p-10 rounded-3xl relative overflow-hidden"
             >
               <div className="absolute top-6 right-6 px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full">
                 <span className="text-xs text-green-400 font-medium">Aanbevolen</span>
@@ -388,7 +388,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 4 - Features */}
-      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-900 text-white">
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-100 text-gray-800">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -407,13 +407,13 @@ const WhyWebsitePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 hover:bg-white/10 transition-all"
+                className="text-center p-8 bg-white rounded-3xl border border-gray-200 hover:bg-gray-50 transition-all shadow-sm"
               >
-                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-heading font-bold mb-3">{feature.title}</h3>
-                <p className="text-gray-400">{feature.text}</p>
+                <h3 className="text-xl font-heading font-bold mb-3 text-gray-800">{feature.title}</h3>
+                <p className="text-gray-500">{feature.text}</p>
               </motion.div>
             ))}
           </div>
@@ -471,8 +471,8 @@ const WhyWebsitePage = () => {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
                 className={`p-8 rounded-3xl text-center transition-all ${
-                  index === 1
-                  ? 'bg-gray-900 text-white scale-105 shadow-2xl' 
+                index === 1
+                  ? 'bg-gray-600 text-white scale-105 shadow-2xl' 
                     : 'bg-white border border-gray-200'
                 }`}
               >
@@ -506,14 +506,14 @@ const WhyWebsitePage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/#contact"
-                className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition-all"
+                className="inline-flex items-center justify-center gap-3 bg-gray-500 text-white px-8 py-4 rounded-full font-medium hover:bg-gray-600 transition-all"
               >
                 {t.ctaButton}
                 <ArrowRight size={18} />
               </Link>
               <Link
                 to="/calculator"
-                className="inline-flex items-center justify-center gap-3 border-2 border-black px-8 py-4 rounded-full font-medium hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all"
+                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-medium hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all"
               >
                 {t.ctaCalculator}
               </Link>
@@ -523,16 +523,16 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 md:px-12 bg-gray-900 text-white">
+      <footer className="py-12 px-6 md:px-12 bg-gray-100 text-gray-700">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" style={{filter: 'invert(1)'}} />
-            <div className="flex items-center gap-8 text-sm text-gray-400">
-              <a href="mailto:info@yrvante.com" className="hover:text-white transition-colors flex items-center gap-2">
+            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
+            <div className="flex items-center gap-8 text-sm text-gray-500">
+              <a href="mailto:info@yrvante.com" className="hover:text-gray-700 transition-colors flex items-center gap-2">
                 <Mail size={16} />
                 info@yrvante.com
               </a>
-              <span>Almelo, Nederland</span>
+              <span>Nederland</span>
             </div>
             <p className="text-sm text-gray-500">© {new Date().getFullYear()} Yrvante</p>
           </div>

@@ -315,7 +315,7 @@ const BlogPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.section1.points.map((point, index) => (
               <div key={index} className="p-6 bg-gray-50 rounded-2xl">
-                <div className="w-12 h-12 bg-gray-800 text-white rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 text-gray-700 rounded-xl flex items-center justify-center mb-4">
                   {point.icon}
                 </div>
                 <h3 className="font-bold text-lg mb-2">{point.title}</h3>
@@ -372,7 +372,7 @@ const BlogPage = () => {
               </ul>
             </div>
             {/* Yrvante */}
-            <div className="p-8 bg-gray-900 text-white rounded-2xl">
+            <div className="p-8 bg-gray-700 text-white rounded-2xl">
               <h3 className="font-bold text-xl mb-2">{t.comparison.yrvante.title}</h3>
               <p className="text-3xl font-heading font-bold text-green-400 mb-6">{t.comparison.yrvante.price}</p>
               <ul className="space-y-3">
@@ -411,7 +411,7 @@ const BlogPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 py-12 px-8 bg-gray-900 text-white rounded-3xl"
+          className="mb-16 py-12 px-8 bg-gray-100 text-gray-800 rounded-3xl"
         >
           <h2 className="text-2xl font-heading font-bold mb-8 text-center">{t.stats.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -435,7 +435,7 @@ const BlogPage = () => {
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">{t.conclusion.text}</p>
           <Link
             to="/pakketten"
-            className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-all"
+            className="inline-flex items-center justify-center gap-3 bg-gray-500 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-600 transition-all"
           >
             {t.conclusion.cta}
             <ArrowRight size={18} />

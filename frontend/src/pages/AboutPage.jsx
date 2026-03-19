@@ -226,7 +226,7 @@ const AboutPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gray-900 text-white rounded-3xl p-12"
+            className="bg-gray-700 text-white rounded-3xl p-12"
           >
             <h2 className="text-3xl md:text-5xl font-heading font-thin mb-8">
               {language === 'nl' ? 'Klaar om te beginnen?' : 'Ready to start?'}

@@ -24,7 +24,7 @@ import {
   DollarSign,
 } from "lucide-react";
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_a2868257-4a63-4a64-87b7-72ff6867dc17/artifacts/gwcgd4lw_Yrvante%20logo%20en%20naam%20en%20slogan%20.jpeg";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
 
 const OnderhoudPage = () => {
@@ -200,7 +200,7 @@ const OnderhoudPage = () => {
 
               <button
                 onClick={scrollToContact}
-                className="px-8 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-800 transition-colors"
+                className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
               >
                 {language === 'nl' ? 'Start Onderhoudspakket' : 'Start Maintenance Plan'}
               </button>
@@ -345,7 +345,7 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="bg-gray-50 rounded-3xl overflow-hidden">
-            <div className="grid grid-cols-3 bg-gray-800 text-white py-4 px-6">
+            <div className="grid grid-cols-3 bg-gray-200 text-gray-800 py-4 px-6">
               <div className="font-bold">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
               <div className="font-bold text-center text-green-400">
                 {language === 'nl' ? 'Met Pakket (€25/m)' : 'With Plan (€25/m)'}
@@ -376,7 +376,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Agency Comparison */}
-      <section className="py-20 bg-gray-900 text-white">
+      <section className="py-20 bg-gray-100 text-gray-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
@@ -387,7 +387,7 @@ const OnderhoudPage = () => {
                 ? 'Wat bureaus rekenen voor onderhoud' 
                 : 'What agencies charge for maintenance'}
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-500 max-w-2xl mx-auto">
               {language === 'nl'
                 ? 'Veel webdesign bureaus rekenen absurde bedragen voor onderhoud. Ze noemen het "retainer fees" of "service level agreements". In werkelijkheid betaal je voor overhead.'
                 : 'Many web design agencies charge absurd amounts for maintenance. They call it "retainer fees" or "service level agreements". In reality you pay for overhead.'}
@@ -395,26 +395,26 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-800 rounded-3xl p-6 border border-gray-700">
+            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200">
               <p className="text-xs uppercase tracking-wider text-gray-500 mb-2">
                 {language === 'nl' ? 'Klein Bureau' : 'Small Agency'}
               </p>
-              <p className="text-3xl font-black text-red-400 mb-2">€100-250</p>
-              <p className="text-sm text-gray-400">/ {language === 'nl' ? 'maand' : 'month'}</p>
-              <div className="mt-4 pt-4 border-t border-gray-700 text-xs text-gray-500">
+              <p className="text-3xl font-black text-red-500 mb-2">€100-250</p>
+              <p className="text-sm text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</p>
+              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-500">
                 {language === 'nl' 
                   ? 'Vaak alleen hosting + "support op aanvraag"'
                   : 'Often just hosting + "support on request"'}
               </div>
             </div>
 
-            <div className="bg-gray-800 rounded-3xl p-6 border border-gray-700">
+            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200">
               <p className="text-xs uppercase tracking-wider text-gray-500 mb-2">
                 {language === 'nl' ? 'Middelgroot Bureau' : 'Medium Agency'}
               </p>
-              <p className="text-3xl font-black text-red-400 mb-2">€250-500</p>
-              <p className="text-sm text-gray-400">/ {language === 'nl' ? 'maand' : 'month'}</p>
-              <div className="mt-4 pt-4 border-t border-gray-700 text-xs text-gray-500">
+              <p className="text-3xl font-black text-red-500 mb-2">€250-500</p>
+              <p className="text-sm text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</p>
+              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-500">
                 {language === 'nl'
                   ? 'Inclusief "X uur support per maand"'
                   : 'Including "X hours support per month"'}
@@ -456,8 +456,8 @@ const OnderhoudPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 rounded-3xl p-6"
               >
-                <div className="w-12 h-12 bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
-                  <feature.icon className="text-white" size={24} />
+                <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
+                  <feature.icon className="text-gray-600" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
@@ -468,7 +468,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-900 text-white">
+      <section className="py-20 bg-gray-50 text-gray-800">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
             {language === 'nl' 
@@ -481,12 +481,12 @@ const OnderhoudPage = () => {
               : "For €25 per month I handle everything. You focus on your customers, I focus on your website."}
           </p>
           
-          <div className="bg-gray-900 rounded-3xl p-8 mb-8 max-w-md mx-auto">
+          <div className="bg-white border border-gray-200 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
             <div className="flex items-baseline justify-center gap-2 mb-4">
-              <span className="text-5xl font-black">€25</span>
-              <span className="text-gray-400">/ {language === 'nl' ? 'maand' : 'month'}</span>
+              <span className="text-5xl font-black text-gray-800">€25</span>
+              <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
             </div>
-            <ul className="space-y-2 text-sm text-gray-400 text-left">
+            <ul className="space-y-2 text-sm text-gray-600 text-left">
               {[
                 language === 'nl' ? 'Hosting inclusief' : 'Hosting included',
                 language === 'nl' ? 'SSL & beveiliging' : 'SSL & security',
@@ -495,7 +495,7 @@ const OnderhoudPage = () => {
                 language === 'nl' ? 'Kleine aanpassingen' : 'Small changes',
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <Check size={14} className="text-green-400" />
+                  <Check size={14} className="text-green-500" />
                   {item}
                 </li>
               ))}
@@ -504,7 +504,7 @@ const OnderhoudPage = () => {
 
           <button
             onClick={scrollToContact}
-            className="px-8 py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-100 transition-colors"
+            className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
           >
             {language === 'nl' ? 'Start Onderhoudspakket' : 'Start Maintenance Plan'}
           </button>
