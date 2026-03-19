@@ -259,7 +259,7 @@ const CalculatorPage = () => {
       
       // Form translations
       formTitle: "Almost there!",
-      formSubtitle: "Fill in your details and I'll contact you within 24 hours",
+      formSubtitle: "Fill in your details and I'll contact you within 8 hours",
       nameLabel: "Name",
       namePlaceholder: "Your name",
       emailLabel: "Email",
@@ -271,7 +271,7 @@ const CalculatorPage = () => {
       submitButton: "Send request",
       submitting: "Sending...",
       successTitle: "Request sent!",
-      successMessage: "Thank you for your request. I will contact you within 24 hours.",
+      successMessage: "Thank you for your request. I will contact you within 8 hours.",
       backToCalc: "Back to calculator",
       yourSelection: "Your selection"
     }
