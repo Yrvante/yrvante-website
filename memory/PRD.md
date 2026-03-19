@@ -166,7 +166,10 @@ Build a modern, production-ready premium business website for Yrvante - a Dutch 
 - [x] **WhatsApp Business** - Groene knop in contact sectie met wa.me link
 - [x] **Extended Nagelstudio Demo** - Uitgebreide Premium demo met promo banner, 6 behandelingen, team sectie, Instagram
 - [x] **Organized Niches Layout** - "Websites voor" sectie in 3 kolommen: Beauty & Wellness, Zakelijke Diensten, Ambacht & Horeca
-- [x] **Consistent Background** - Onderhoud pagina heeft nu dezelfde abstracte achtergrond vibe
+- [x] **Webflow Removed** - Vervangen door Onderhoud & Hosting service (€25/maand)
+- [x] **All FAQs Visible** - Alle 12 FAQ's zijn nu zichtbaar en klikbaar (geen "bekijk alle" knop)
+- [x] **Abstract Background Everywhere** - Vloeiende achtergrond op homepage, Over Mij, Diensten, Onderhoud pagina's
+- [x] **Reduced Spacing** - Ruimte tussen hero en diensten sectie verkleind (33%)
 - [x] **Onderhoud Page** - Uitgebreide pagina over waarom onderhoud belangrijk is
 - [x] **Navigation Dropdowns** - Diensten en Over dropdown menu's in header
 - [x] **Expanded Footer** - 5 kolommen met alle nieuwe pagina links
