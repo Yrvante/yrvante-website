@@ -148,23 +148,34 @@ const OverMijPage = () => {
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
                 {language === 'nl' ? 'Over Mij' : 'About Me'}
               </p>
-              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6">
+              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
                 {language === 'nl' ? (
-                  <>Mensen kopen van <span className="text-gray-400">mensen</span></>
+                  <>Geen bureau.<br/>Geen tussenlagen.<br/><span className="text-gray-400">Geen bullshit.</span></>
                 ) : (
-                  <>People buy from <span className="text-gray-400">people</span></>
+                  <>No agency.<br/>No middlemen.<br/><span className="text-gray-400">No bullshit.</span></>
                 )}
               </h1>
               <p className="text-gray-600 leading-relaxed mb-6">
                 {language === 'nl'
-                  ? 'Hallo! Ik ben Yvar, de oprichter van Yrvante. Ik geloof dat elk klein bedrijf een professionele online aanwezigheid verdient — zonder de woekerprijzen van grote bureaus.'
-                  : "Hi! I'm Yvar, the founder of Yrvante. I believe every small business deserves a professional online presence — without the outrageous prices of big agencies."}
+                  ? 'Ik ben Yvar, de oprichter van Yrvante. Bij mij werk je rechtstreeks met de persoon die jouw website bouwt — geen account managers, geen vergaderingen, geen verrassingen.'
+                  : "I'm Yvar, the founder of Yrvante. With me you work directly with the person who builds your website — no account managers, no meetings, no surprises."}
               </p>
-              <p className="text-gray-600 leading-relaxed mb-8">
-                {language === 'nl'
-                  ? 'Bij mij krijg je geen account manager, geen eindeloze vergaderingen en geen verrassingen achteraf. Je werkt rechtstreeks met mij — de persoon die daadwerkelijk jouw website bouwt.'
-                  : "With me, you don't get an account manager, no endless meetings and no surprises afterwards. You work directly with me — the person who actually builds your website."}
-              </p>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 mb-8 p-5 bg-white/80 rounded-2xl border border-gray-100">
+                <div className="text-center">
+                  <p className="text-3xl font-black text-gray-900">1</p>
+                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'aanspreekpunt' : 'point of contact'}</p>
+                </div>
+                <div className="text-center border-x border-gray-200">
+                  <p className="text-3xl font-black text-gray-900">0</p>
+                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'verrassingen' : 'surprises'}</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-black text-gray-900">∞</p>
+                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'directe lijn' : 'direct line'}</p>
+                </div>
+              </div>
 
               <div className="flex flex-wrap gap-4">
                 <button

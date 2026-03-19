@@ -78,7 +78,7 @@ const CalculatorPage = () => {
             "Tot 15 pagina's",
             "Afspraaksysteem",
             "Meertalige website",
-            "Snellere reactietijd (12 uur)"
+            "Snellere reactietijd (binnen 8 uur)"
           ]
         }
       },
@@ -138,7 +138,7 @@ const CalculatorPage = () => {
       
       // Form translations
       formTitle: "Bijna klaar!",
-      formSubtitle: "Vul je gegevens in en ik neem binnen 24 uur contact met je op",
+      formSubtitle: "Vul je gegevens in en ik neem binnen 8 uur contact met je op",
       nameLabel: "Naam",
       namePlaceholder: "Je naam",
       emailLabel: "E-mail",
@@ -150,7 +150,7 @@ const CalculatorPage = () => {
       submitButton: "Verstuur aanvraag",
       submitting: "Versturen...",
       successTitle: "Aanvraag verzonden!",
-      successMessage: "Bedankt voor je aanvraag. Ik neem binnen 24 uur contact met je op.",
+      successMessage: "Bedankt voor je aanvraag. Ik neem binnen 8 uur contact met je op.",
       backToCalc: "Terug naar calculator",
       yourSelection: "Jouw selectie"
     },

@@ -29,6 +29,7 @@ const API = `${BACKEND_URL}/api`;
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
+const CALENDLY_URL = "https://calendly.com/yrvante";
 
 // Navigation - Brutalist with Dropdown Menus
 const Navigation = () => {
@@ -983,8 +984,8 @@ const ContactSection = () => {
             </h2>
             <p className="text-gray-500 leading-relaxed mb-12 max-w-md">
               {language === 'nl' 
-                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht — ik reageer binnen 24 uur.'
-                : 'Have questions or want to know what I can do for you? Send a message — I respond within 24 hours.'}
+                ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht — ik reageer binnen 8 uur.'
+                : 'Have questions or want to know what I can do for you? Send a message — I respond within 8 hours.'}
             </p>
 
             <div className="space-y-4">
@@ -992,7 +993,7 @@ const ContactSection = () => {
                 href="https://wa.me/31642453859"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-gray-800 hover:bg-gray-700 text-white rounded-2xl p-5 transition-colors group"
+                className="flex items-center gap-4 bg-gray-500 hover:bg-gray-600 text-white rounded-2xl p-5 transition-colors group"
               >
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                   <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
@@ -1004,6 +1005,27 @@ const ContactSection = () => {
                   <p className="text-gray-300 text-sm">{language === 'nl' ? 'Snel antwoord op je vragen' : 'Quick answers to your questions'}</p>
                 </div>
               </a>
+
+              {/* Calendly – Plan een gratis gesprek */}
+              <button
+                data-testid="calendly-book-button"
+                onClick={() => {
+                  if (window.Calendly) {
+                    window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+                  } else {
+                    window.open(CALENDLY_URL, '_blank');
+                  }
+                }}
+                className="w-full flex items-center gap-4 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 rounded-2xl p-5 transition-colors group text-left"
+              >
+                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                  <Clock size={22} className="text-gray-600" />
+                </div>
+                <div>
+                  <p className="font-bold text-lg">{language === 'nl' ? 'Plan een gratis gesprek' : 'Schedule a free call'}</p>
+                  <p className="text-gray-500 text-sm">{language === 'nl' ? '15 minuten kennismaking via Calendly' : '15-minute intro call via Calendly'}</p>
+                </div>
+              </button>
               <div className="bg-white rounded-2xl p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
                 <a href="mailto:info@yrvante.com" className="text-lg hover:underline underline-offset-4">
@@ -1021,7 +1043,7 @@ const ContactSection = () => {
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {language === 'nl' ? 'Reactietijd' : 'Response'}
                   </p>
-                  <p className="text-base font-medium">{language === 'nl' ? '< 24 uur' : '< 24 hours'}</p>
+                  <p className="text-base font-medium">{language === 'nl' ? 'binnen 8 uur' : 'within 8 hours'}</p>
                 </div>
               </div>
             </div>
@@ -1044,8 +1066,8 @@ const ContactSection = () => {
                 </h3>
                 <p className="text-gray-500">
                   {language === 'nl' 
-                    ? 'Ik neem binnen 24 uur contact met je op.'
-                    : 'I will contact you within 24 hours.'}
+                    ? 'Ik neem binnen 8 uur contact met je op.'
+                    : 'I will contact you within 8 hours.'}
                 </p>
               </div>
             ) : (
@@ -1217,7 +1239,9 @@ const Footer = () => {
 // Main Landing Page - Brutalist Editorial with flowing background
 const LandingPage = () => {
   return (
-    <div data-testid="landing-page" className="min-h-screen relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+    <div data-testid="landing-page" className="min-h-screen relative">
+      {/* Background - desaturated to remove warm glow */}
+      <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.25) brightness(1.05)'}} />
       <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-white/20 to-white/35 lg:from-white/70 lg:via-white/75 lg:to-white/80 pointer-events-none" />
       <div className="relative z-10">
         <SEO page="/" />

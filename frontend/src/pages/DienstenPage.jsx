@@ -22,6 +22,20 @@ import {
   Stethoscope,
   Car,
   PawPrint,
+  Zap,
+  Activity,
+  BarChart2,
+  Paintbrush,
+  Hammer,
+  Star,
+  Globe,
+  Code,
+  Shield,
+  Search,
+  Clock,
+  Hand,
+  Ruler,
+  Dog,
 } from "lucide-react";
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
@@ -539,6 +553,294 @@ const niches = {
       en: ['Dog grooming salons', 'Cat grooming salons', 'Mobile groomers', 'Pet boarding'],
     },
   },
+  schoonheidsspecialisten: {
+    icon: Star,
+    color: 'pink',
+    title: { nl: 'Website voor Schoonheidsspecialisten', en: 'Website for Beauty Specialists' },
+    subtitle: { nl: 'Laat je expertise glansen', en: 'Let your expertise shine' },
+    description: {
+      nl: 'Als schoonheidsspecialist lever je vertrouwen en persoonlijke aandacht. Een mooie website laat je behandelingen zien, bouwt vertrouwen op en zorgt voor meer boekingen.',
+      en: "As a beauty specialist you deliver trust and personal attention. A beautiful website showcases your treatments, builds trust and generates more bookings."
+    },
+    benefits: {
+      nl: [
+        'Behandelingen overzichtelijk gepresenteerd',
+        'Online afspraken boeken',
+        'Prijslijst per behandeling',
+        'Voor en na foto\'s',
+        'Sfeervolle beelden van je salon',
+        'Social media integratie',
+      ],
+      en: [
+        'Treatments clearly presented',
+        'Online appointment booking',
+        'Price list per treatment',
+        'Before and after photos',
+        'Atmospheric images of your salon',
+        'Social media integration',
+      ],
+    },
+    examples: {
+      nl: ['Schoonheidssalons', 'Beautysalons', 'Waxingsalons', 'Huidverzorgingsstudio\'s'],
+      en: ['Beauty salons', 'Skincare studios', 'Waxing studios', 'Esthetic studios'],
+    },
+  },
+  masseurs: {
+    icon: Hand,
+    color: 'teal',
+    title: { nl: 'Website voor Masseurs', en: 'Website for Massage Therapists' },
+    subtitle: { nl: 'Rust en professionaliteit online', en: 'Peace and professionalism online' },
+    description: {
+      nl: 'Massagetherapie draait om vertrouwen en ontspanning. Klanten willen weten wie je bent en wat je aanpak is. Een rustige, professionele website geeft precies dat gevoel.',
+      en: "Massage therapy is about trust and relaxation. Clients want to know who you are and what your approach is. A calm, professional website gives exactly that feeling."
+    },
+    benefits: {
+      nl: [
+        'Behandelingen uitgelegd',
+        'Online afspraken boeken',
+        'Tarieven transparant',
+        'Locatie en sfeer getoond',
+        'Klantgetuigenissen',
+        'Certificaten en opleidingen',
+      ],
+      en: [
+        'Treatments explained',
+        'Online appointment booking',
+        'Transparent pricing',
+        'Location and atmosphere shown',
+        'Client testimonials',
+        'Certificates and training',
+      ],
+    },
+    examples: {
+      nl: ['Massagepraktijken', 'Sportmasseurs', 'Wellnesspraktijken', 'Thuismassage'],
+      en: ['Massage practices', 'Sports masseurs', 'Wellness practices', 'Home massage'],
+    },
+  },
+  fysiotherapeuten: {
+    icon: Activity,
+    color: 'blue',
+    title: { nl: 'Website voor Fysiotherapeuten', en: 'Website for Physiotherapists' },
+    subtitle: { nl: 'Patiënten vinden je makkelijker', en: 'Patients find you more easily' },
+    description: {
+      nl: 'Patiënten zoeken een fysiotherapeut via Google. Een professionele website met je specialisaties, team en contactgegevens maakt dat ze voor jou kiezen.',
+      en: "Patients search for a physiotherapist via Google. A professional website with your specializations, team and contact details makes them choose you."
+    },
+    benefits: {
+      nl: [
+        'Specialisaties duidelijk vermeld',
+        'Team en aanpak voorgesteld',
+        'Online afspraken plannen',
+        'Klachten en behandelingen uitgelegd',
+        'Patiëntreviews',
+        'Vergoedingen en verzekeringen info',
+      ],
+      en: [
+        'Specializations clearly listed',
+        'Team and approach introduced',
+        'Online appointment planning',
+        'Complaints and treatments explained',
+        'Patient reviews',
+        'Reimbursement and insurance info',
+      ],
+    },
+    examples: {
+      nl: ['Fysiotherapiepraktijken', 'Sportfysio', 'Kinderfysio', 'Manueel therapeuten'],
+      en: ['Physiotherapy practices', 'Sports physio', 'Pediatric physio', 'Manual therapists'],
+    },
+  },
+  accountants: {
+    icon: BarChart2,
+    color: 'slate',
+    title: { nl: 'Website voor Accountants', en: 'Website for Accountants' },
+    subtitle: { nl: 'Vertrouwen uitstralen online', en: 'Radiate trust online' },
+    description: {
+      nl: 'Als accountant of boekhouder is vertrouwen alles. Een strakke, professionele website toont je expertise en haalt nieuwe klanten over om contact op te nemen.',
+      en: "As an accountant or bookkeeper, trust is everything. A clean, professional website shows your expertise and convinces new clients to get in touch."
+    },
+    benefits: {
+      nl: [
+        'Diensten duidelijk uitgelegd',
+        'Tarieven transparant',
+        'Branche specialisaties',
+        'Contactformulier voor offertes',
+        'Klantreviews',
+        'Blog met fiscale tips',
+      ],
+      en: [
+        'Services clearly explained',
+        'Transparent pricing',
+        'Industry specializations',
+        'Contact form for quotes',
+        'Client reviews',
+        'Blog with tax tips',
+      ],
+    },
+    examples: {
+      nl: ['Accountantskantoren', 'Boekhouders', 'Belastingadviseurs', 'Administratiekantoren'],
+      en: ['Accounting firms', 'Bookkeepers', 'Tax advisors', 'Administrative offices'],
+    },
+  },
+  electriciens: {
+    icon: Zap,
+    color: 'yellow',
+    title: { nl: 'Website voor Elektriciens', en: 'Website for Electricians' },
+    subtitle: { nl: 'Gevonden worden bij elke klus', en: 'Found for every job' },
+    description: {
+      nl: 'Klanten zoeken een elektricien wanneer het mis gaat. Zorg dat jij als eerste verschijnt met een duidelijke website vol reviews, diensten en een makkelijk te bereiken telefoonnummer.',
+      en: "Clients search for an electrician when something goes wrong. Make sure you appear first with a clear website full of reviews, services and an easy-to-reach phone number."
+    },
+    benefits: {
+      nl: [
+        'Snel vindbaar op Google',
+        'Duidelijk telefoonnummer',
+        'Diensten en tarieven',
+        'Werkgebied vermeld',
+        'Klantreviews',
+        'Spoed service uitgelicht',
+      ],
+      en: [
+        'Quickly findable on Google',
+        'Clear phone number',
+        'Services and rates',
+        'Service area listed',
+        'Customer reviews',
+        'Emergency service highlighted',
+      ],
+    },
+    examples: {
+      nl: ['Elektriciensbedrijven', 'Installatiebedrijven', 'Storingsservice', 'Domotica installateurs'],
+      en: ['Electrical companies', 'Installation companies', 'Breakdown service', 'Domotics installers'],
+    },
+  },
+  schilders: {
+    icon: Paintbrush,
+    color: 'orange',
+    title: { nl: 'Website voor Schilders', en: 'Website for Painters' },
+    subtitle: { nl: 'Je werk verdient een podium', en: 'Your work deserves a stage' },
+    description: {
+      nl: 'Als schilder spreken de resultaten voor zichzelf. Laat je portfolio online zien met mooie voor-en-na foto\'s en win nieuwe klanten via Google.',
+      en: "As a painter, the results speak for themselves. Show your portfolio online with beautiful before-and-after photos and win new customers via Google."
+    },
+    benefits: {
+      nl: [
+        'Portfolio met voor-en-na foto\'s',
+        'Diensten overzicht',
+        'Werkgebied vermeld',
+        'Offerte aanvragen via formulier',
+        'Klantreviews',
+        'Bereikbaarheid duidelijk',
+      ],
+      en: [
+        'Portfolio with before-and-after photos',
+        'Services overview',
+        'Service area listed',
+        'Request quote via form',
+        'Customer reviews',
+        'Availability clear',
+      ],
+    },
+    examples: {
+      nl: ['Schildersbedrijven', 'Binnen schilders', 'Buiten schilders', 'Decorateurs'],
+      en: ['Painting companies', 'Interior painters', 'Exterior painters', 'Decorators'],
+    },
+  },
+  timmerlieden: {
+    icon: Hammer,
+    color: 'amber',
+    title: { nl: 'Website voor Timmerlieden', en: 'Website for Carpenters' },
+    subtitle: { nl: 'Toon je vakmanschap online', en: 'Show your craftsmanship online' },
+    description: {
+      nl: 'Mensen googlen voor een keuken, een dakkapel of maatwerk meubels. Met een professionele website vol projectfoto\'s ben jij de eerste keuze in de buurt.',
+      en: "People google for a kitchen, dormer window or custom furniture. With a professional website full of project photos, you are the first choice in the area."
+    },
+    benefits: {
+      nl: [
+        'Projecten portfolio',
+        'Voor en na foto\'s',
+        'Specialisaties vermeld',
+        'Offerte aanvragen',
+        'Klantreviews',
+        'Werkgebied en contactgegevens',
+      ],
+      en: [
+        'Projects portfolio',
+        'Before and after photos',
+        'Specializations listed',
+        'Request quotes',
+        'Customer reviews',
+        'Work area and contact details',
+      ],
+    },
+    examples: {
+      nl: ['Timmerbedrijven', 'Keukenmonteurs', 'Dakkapel specialisten', 'Maatwerk meubels'],
+      en: ['Carpentry companies', 'Kitchen installers', 'Dormer specialists', 'Custom furniture'],
+    },
+  },
+  dierenartsen: {
+    icon: Dog,
+    color: 'green',
+    title: { nl: 'Website voor Dierenartsen', en: 'Website for Veterinarians' },
+    subtitle: { nl: 'Baasjes vinden je makkelijker', en: 'Pet owners find you more easily' },
+    description: {
+      nl: 'Baasjes zoeken een dierenarts die ze vertrouwen. Een warme, professionele website met je team en diensten maakt dat ze voor jou kiezen.',
+      en: "Pet owners look for a vet they can trust. A warm, professional website with your team and services makes them choose you."
+    },
+    benefits: {
+      nl: [
+        'Team en praktijk voorgesteld',
+        'Diensten en behandelingen',
+        'Online afspraken plannen',
+        'Spoedcontact duidelijk',
+        'Patiëntreviews',
+        'Openingstijden en locatie',
+      ],
+      en: [
+        'Team and practice introduced',
+        'Services and treatments',
+        'Online appointment planning',
+        'Emergency contact clear',
+        'Patient reviews',
+        'Opening hours and location',
+      ],
+    },
+    examples: {
+      nl: ['Dierenkliniek', 'Huisdierenarts', 'Mobiele dierenarts', 'Exoten specialist'],
+      en: ['Animal clinic', 'Pet vet', 'Mobile vet', 'Exotic specialist'],
+    },
+  },
+  klusbedrijven: {
+    icon: Wrench,
+    color: 'gray',
+    title: { nl: 'Website voor Klusbedrijven', en: 'Website for Handymen' },
+    subtitle: { nl: 'Altijd gevonden bij de juiste klus', en: 'Always found for the right job' },
+    description: {
+      nl: 'Als klusbedrijf kom je bij mensen thuis. Vertrouwen is alles. Een professionele website met reviews en een duidelijk dienstenoverzicht zorgt dat klanten zonder twijfel contact opnemen.',
+      en: "As a handyman service you enter people\'s homes. Trust is everything. A professional website with reviews and a clear overview of services ensures clients contact you without hesitation."
+    },
+    benefits: {
+      nl: [
+        'Diensten helder omschreven',
+        'Werkgebied vermeld',
+        'Offerte aanvragen',
+        'Klantreviews voor vertrouwen',
+        'Contactgegevens prominent',
+        'Portfolio van uitgevoerd werk',
+      ],
+      en: [
+        'Services clearly described',
+        'Service area listed',
+        'Request quotes',
+        'Customer reviews for trust',
+        'Contact details prominent',
+        'Portfolio of completed work',
+      ],
+    },
+    examples: {
+      nl: ['Klusbedrijven', 'Allround klusser', 'Woningrenovatie', 'Kleine verbouwingen'],
+      en: ['Handyman services', 'All-round handyman', 'Home renovation', 'Small renovations'],
+    },
+  },
 };
 
 const DienstenPage = () => {
@@ -551,6 +853,376 @@ const DienstenPage = () => {
   const scrollToContact = () => {
     window.location.href = "/#contact";
   };
+
+  // Special Webdesign Page (comprehensive, like OnderhoudPage)
+  if (type === 'webdesign') {
+    const webdesignFeatures = [
+      {
+        icon: Monitor,
+        title: language === 'nl' ? 'Responsive Design' : 'Responsive Design',
+        description: language === 'nl'
+          ? 'Perfect op elk scherm: mobiel, tablet en desktop. Geen compromissen.'
+          : 'Perfect on every screen: mobile, tablet and desktop. No compromises.',
+      },
+      {
+        icon: Zap,
+        title: language === 'nl' ? 'Snelle Laadtijden' : 'Fast Loading Times',
+        description: language === 'nl'
+          ? 'Geoptimaliseerd voor snelheid. Bezoekers blijven — Google waardeert je hoger.'
+          : 'Optimized for speed. Visitors stay — Google ranks you higher.',
+      },
+      {
+        icon: Search,
+        title: language === 'nl' ? 'SEO-Vriendelijk' : 'SEO-Friendly',
+        description: language === 'nl'
+          ? 'Elke website heeft een solide technische basis zodat Google je goed kan indexeren.'
+          : 'Every website has a solid technical foundation so Google can index you well.',
+      },
+      {
+        icon: Shield,
+        title: language === 'nl' ? 'Veilig & Betrouwbaar' : 'Safe & Reliable',
+        description: language === 'nl'
+          ? 'SSL-certificaat, veilige hosting en een website die altijd online is.'
+          : 'SSL certificate, secure hosting and a website that is always online.',
+      },
+      {
+        icon: Globe,
+        title: language === 'nl' ? 'Mobielvriendelijk' : 'Mobile-Friendly',
+        description: language === 'nl'
+          ? 'Meer dan 60% van de bezoekers komt via mobiel. Jouw website is er klaar voor.'
+          : 'More than 60% of visitors come via mobile. Your website is ready for it.',
+      },
+      {
+        icon: Code,
+        title: language === 'nl' ? 'Schone Code' : 'Clean Code',
+        description: language === 'nl'
+          ? 'Geen bloated plugins of page builders. Pure, geoptimaliseerde code die razendsnel laadt.'
+          : 'No bloated plugins or page builders. Pure, optimized code that loads lightning fast.',
+      },
+    ];
+
+    const processSteps = [
+      {
+        step: '01',
+        title: language === 'nl' ? 'Intake gesprek' : 'Intake conversation',
+        description: language === 'nl'
+          ? 'We bespreken jouw bedrijf, doelen en wensen. Ik stel vragen, jij geeft antwoorden. Samen bepalen we de richting.'
+          : "We discuss your business, goals and wishes. I ask questions, you give answers. Together we determine the direction.",
+      },
+      {
+        step: '02',
+        title: language === 'nl' ? 'Ontwerp & Structuur' : 'Design & Structure',
+        description: language === 'nl'
+          ? 'Ik ontwerp de lay-out van je website. Je krijgt een preview te zien voordat ik ga bouwen.'
+          : 'I design the layout of your website. You get to see a preview before I start building.',
+      },
+      {
+        step: '03',
+        title: language === 'nl' ? 'Bouwen' : 'Building',
+        description: language === 'nl'
+          ? 'Ik bouw je website — snel, schoon en met aandacht voor elk detail. Jij levert de content aan.'
+          : "I build your website — fast, clean and with attention to every detail. You supply the content.",
+      },
+      {
+        step: '04',
+        title: language === 'nl' ? 'Feedback & Aanpassingen' : 'Feedback & Revisions',
+        description: language === 'nl'
+          ? 'Je krijgt de testversie te zien. Wijzigingen? Ik pas het aan. Je hebt 6 revisierondes.'
+          : 'You get to see the test version. Changes? I adjust it. You have 6 revision rounds.',
+      },
+      {
+        step: '05',
+        title: language === 'nl' ? 'Live zetten' : 'Going live',
+        description: language === 'nl'
+          ? 'Na jouw goedkeuring gaat je website online. Binnen 1-2 weken ben je live.'
+          : 'After your approval, your website goes live. Within 1-2 weeks you are live.',
+      },
+    ];
+
+    return (
+      <div className="min-h-screen bg-white">
+        <SEO page="/diensten/webdesign" />
+
+        <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+          <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+            <div className="flex items-center justify-between h-16 lg:h-20">
+              <Link to="/" className="flex items-center">
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              </Link>
+              <Link
+                to="/diensten"
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              >
+                ← {language === 'nl' ? 'Alle Diensten' : 'All Services'}
+              </Link>
+            </div>
+          </div>
+        </nav>
+
+        {/* Hero */}
+        <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+          <div className="absolute inset-0 bg-white/65" />
+          <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+                  {language === 'nl' ? 'Webdesign' : 'Web Design'}
+                </p>
+                <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900">
+                  {language === 'nl'
+                    ? 'Webdesign die werkt — niet alleen mooi is'
+                    : 'Web design that works — not just looks good'}
+                </h1>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  {language === 'nl'
+                    ? 'Een website is je 24/7 verkoper. Ik ontwerp websites die jouw bedrijf professioneel neerzetten, bezoekers omzetten in klanten en je helpen gevonden te worden op Google.'
+                    : "A website is your 24/7 salesperson. I design websites that position your business professionally, convert visitors into customers and help you get found on Google."}
+                </p>
+                <div className="flex items-baseline gap-2 mb-6">
+                  <span className="text-5xl font-black text-gray-900">€500</span>
+                  <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
+                  <span className="text-xs text-gray-400 ml-2">{language === 'nl' ? 'excl. BTW' : 'excl. VAT'}</span>
+                </div>
+                <div className="flex gap-3">
+                  <button
+                    onClick={scrollToContact}
+                    className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
+                  >
+                    {language === 'nl' ? 'Start Project' : 'Start Project'}
+                  </button>
+                  <Link
+                    to="/pakketten"
+                    className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 transition-colors"
+                  >
+                    {language === 'nl' ? 'Bekijk Pakketten' : 'View Packages'}
+                  </Link>
+                </div>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="relative">
+                <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl">
+                  <div className="space-y-4">
+                    {webdesignFeatures.slice(0, 4).map((feature, index) => (
+                      <div key={index} className="flex items-start gap-4">
+                        <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <feature.icon size={20} className="text-gray-700" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-sm text-gray-900">{feature.title}</p>
+                          <p className="text-gray-500 text-xs">{feature.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* All Features */}
+        <section className="py-20 bg-white">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+            <div className="text-center mb-12">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+                {language === 'nl' ? 'Wat je krijgt' : 'What you get'}
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+                {language === 'nl' ? 'Alles wat je nodig hebt' : 'Everything you need'}
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                {language === 'nl'
+                  ? 'Elke website die ik bouw is volledig op maat — geen templates, geen compromissen.'
+                  : "Every website I build is completely custom — no templates, no compromises."}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {webdesignFeatures.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-gray-50 rounded-3xl p-6"
+                >
+                  <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
+                    <feature.icon className="text-gray-600" size={24} />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Process Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-[900px] mx-auto px-6 lg:px-12">
+            <div className="text-center mb-12">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+                {language === 'nl' ? 'Hoe het werkt' : 'How it works'}
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
+                {language === 'nl' ? 'Van intake tot live' : 'From intake to live'}
+              </h2>
+            </div>
+            <div className="space-y-6">
+              {processSteps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex gap-6"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">{step.step}</span>
+                  </div>
+                  <div className="flex-1 bg-white rounded-2xl p-6 border border-gray-200">
+                    <h3 className="font-bold text-lg mb-2">{step.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Good Design Matters */}
+        <section className="py-20 bg-white">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+                  {language === 'nl' ? 'De Realiteit' : 'The Reality'}
+                </p>
+                <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+                  {language === 'nl'
+                    ? 'Je hebt 3 seconden om een eerste indruk te maken'
+                    : 'You have 3 seconds to make a first impression'}
+                </h2>
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  {language === 'nl'
+                    ? 'Bezoekers beslissen binnen 3 seconden of ze blijven of weggaan. Een amateuristisch design, trage laadtijden of een verwarrende navigatie en ze zijn weg — naar je concurrent.'
+                    : "Visitors decide within 3 seconds whether they stay or leave. An amateurish design, slow loading times or confusing navigation and they're gone — to your competitor."}
+                </p>
+                <p className="text-gray-500 leading-relaxed">
+                  {language === 'nl'
+                    ? 'Ik zorg voor een website die bezoekers vasthoudt, vertrouwen opbouwt en ze aanzet tot actie — contact opnemen, een afspraak maken of direct bellen.'
+                    : "I ensure a website that keeps visitors engaged, builds trust and prompts them to take action — get in touch, make an appointment or call directly."}
+                </p>
+              </div>
+              <div className="space-y-4">
+                {[
+                  { stat: '3s', label: language === 'nl' ? 'om een eerste indruk te maken' : 'to make a first impression' },
+                  { stat: '75%', label: language === 'nl' ? 'beoordeelt geloofwaardigheid op design' : 'judge credibility based on design' },
+                  { stat: '60%+', label: language === 'nl' ? 'bezoekt eerst via mobiel' : 'visits via mobile first' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-6 bg-gray-50 rounded-2xl p-6">
+                    <span className="text-4xl font-black text-gray-900 w-20 flex-shrink-0">{item.stat}</span>
+                    <p className="text-gray-600">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Future Plans Note */}
+        <section className="py-16 bg-gray-100">
+          <div className="max-w-[900px] mx-auto px-6 lg:px-12">
+            <div className="bg-white rounded-3xl p-8 border border-gray-200">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Layers size={24} className="text-gray-600" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl mb-3">
+                    {language === 'nl' ? 'Meer diensten in ontwikkeling' : 'More services in development'}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-2">
+                    {language === 'nl'
+                      ? 'Naast webdesign werk ik momenteel aan uitgebreidere diensten: van landingspagina\'s en webapplicaties tot e-commerce oplossingen.'
+                      : "Besides web design, I am currently working on more extensive services: from landing pages and web applications to e-commerce solutions."}
+                  </p>
+                  <p className="text-gray-500 text-sm">
+                    {language === 'nl'
+                      ? 'Heb je een specifieke wens? Neem contact op — ik denk graag met je mee over de beste oplossing voor jouw situatie.'
+                      : "Do you have a specific request? Get in touch — I am happy to think along with you about the best solution for your situation."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 bg-gray-50 text-gray-800">
+          <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+              {language === 'nl' ? 'Klaar voor een website die werkt?' : 'Ready for a website that works?'}
+            </h2>
+            <p className="text-gray-500 mb-8 max-w-md mx-auto">
+              {language === 'nl'
+                ? 'Vanaf €500 excl. BTW. Opgeleverd in 1-2 weken.'
+                : 'From €500 excl. VAT. Delivered in 1-2 weeks.'}
+            </p>
+            <div className="bg-white border border-gray-200 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
+              <div className="flex items-baseline justify-center gap-2 mb-4">
+                <span className="text-5xl font-black text-gray-800">€500</span>
+                <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
+              </div>
+              <ul className="space-y-2 text-sm text-gray-600 text-left">
+                {(language === 'nl' ? [
+                  'Responsive design',
+                  'SEO-vriendelijke opbouw',
+                  'Snelle laadtijden',
+                  'Contactformulier',
+                  '6 revisierondes',
+                ] : [
+                  'Responsive design',
+                  'SEO-friendly structure',
+                  'Fast loading times',
+                  'Contact form',
+                  '6 revision rounds',
+                ]).map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <Check size={14} className="text-green-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button
+                onClick={scrollToContact}
+                className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
+              >
+                {language === 'nl' ? 'Start Project' : 'Start Project'}
+              </button>
+              <Link
+                to="/calculator"
+                className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 transition-colors"
+              >
+                {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <footer className="py-8 bg-gray-50 border-t border-gray-200">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
+            <p className="text-xs text-gray-500">
+              © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
+            </p>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 
   // Service Detail Page
   if (isServicePage) {
@@ -877,7 +1549,7 @@ const DienstenPage = () => {
                 {language === 'nl' ? 'Beauty & Wellness' : 'Beauty & Wellness'}
               </h3>
               <div className="space-y-2">
-                {['kappers', 'nagelstylisten', 'interieurstylisten'].map((key) => {
+                {['kappers', 'nagelstylisten', 'interieurstylisten', 'schoonheidsspecialisten', 'masseurs'].map((key) => {
                   const nicheData = niches[key];
                   if (!nicheData) return null;
                   return (
@@ -906,7 +1578,7 @@ const DienstenPage = () => {
                 {language === 'nl' ? 'Zakelijke Diensten' : 'Business Services'}
               </h3>
               <div className="space-y-2">
-                {['coaches', 'zzp', 'fotografen', 'makelaars'].map((key) => {
+                {['coaches', 'zzp', 'fotografen', 'makelaars', 'fysiotherapeuten', 'accountants'].map((key) => {
                   const nicheData = niches[key];
                   if (!nicheData) return null;
                   return (
@@ -935,7 +1607,7 @@ const DienstenPage = () => {
                 {language === 'nl' ? 'Ambacht & Horeca' : 'Craft & Hospitality'}
               </h3>
               <div className="space-y-2">
-                {['loodgieters', 'restaurants', 'bloemisten', 'garages'].map((key) => {
+                {['loodgieters', 'restaurants', 'bloemisten', 'garages', 'electriciens', 'schilders'].map((key) => {
                   const nicheData = niches[key];
                   if (!nicheData) return null;
                   return (
@@ -965,7 +1637,7 @@ const DienstenPage = () => {
               {language === 'nl' ? 'Meer Branches' : 'More Industries'}
             </h3>
             <div className="flex flex-wrap justify-center gap-2">
-              {['personaltrainers', 'tandartsen', 'hondentrimmers'].map((key) => {
+              {['personaltrainers', 'tandartsen', 'hondentrimmers', 'timmerlieden', 'dierenartsen', 'klusbedrijven'].map((key) => {
                 const nicheData = niches[key];
                 if (!nicheData) return null;
                 return (

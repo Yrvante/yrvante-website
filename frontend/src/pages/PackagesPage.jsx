@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail,
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
+const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
+
 const PackagesPage = () => {
   const { language } = useLanguage();
 
@@ -70,7 +73,7 @@ const PackagesPage = () => {
         language === 'nl' ? 'Contactformulier' : 'Contact form',
         language === 'nl' ? 'Afspraaksysteem ingebouwd' : 'Booking system built-in',
         language === 'nl' ? 'Meertalige optie op je site' : 'Multi-language option on your site',
-        language === 'nl' ? 'Snellere reactietijd (binnen 12 uur)' : 'Faster response time (within 12 hours)',
+        language === 'nl' ? 'Snellere reactietijd (binnen 8 uur)' : 'Faster response time (within 8 hours)',
       ],
       notIncluded: [],
       idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals',
@@ -138,41 +141,46 @@ const PackagesPage = () => {
     <div className="min-h-screen bg-white">
       <SEO page="/pakketten" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
-              <ArrowLeft size={16} />
-              {language === 'nl' ? 'Terug' : 'Back'}
+      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+        <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            <Link to="/" className="flex items-center">
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
             </Link>
-            <Link to="/" className="font-heading text-xl font-bold">Yrvante</Link>
+            <Link 
+              to="/" 
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+            >
+              ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
+            </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-28 pb-16 px-6 md:px-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-white/70" />
+        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="py-12 md:py-20"
           >
-            <p className="font-mono text-sm uppercase tracking-widest text-gray-400 mb-4">
-              {language === 'nl' ? 'Transparante prijzen' : 'Transparent pricing'}
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+              {language === 'nl' ? 'Transparante Prijzen' : 'Transparent Pricing'}
             </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-6">
-              {language === 'nl' ? 'Website Pakketten' : 'Website Packages'}
+            <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6">
+              {language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing'}
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+            <p className="text-gray-600 max-w-2xl mx-auto mb-4">
               {language === 'nl' 
-                ? 'Kies het pakket dat bij uw bedrijf past. Alle prijzen zijn exclusief BTW.'
+                ? 'Kies het pakket dat bij je bedrijf past. Alle prijzen zijn exclusief BTW.'
                 : 'Choose the package that fits your business. All prices exclude VAT.'}
             </p>
-            <p className="text-sm text-gray-500 max-w-xl mx-auto">
+            <p className="text-sm text-gray-400 max-w-xl mx-auto">
               {language === 'nl'
-                ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door u aangeleverd.'
+                ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door jou aangeleverd.'
                 : '* Prices exclude copywriting and photos. Content is provided by you.'}
             </p>
           </motion.div>
@@ -180,7 +188,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Packages */}
-      <section className="py-20 px-6 md:px-12 -mt-16">
+      <section className="py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
@@ -473,9 +481,8 @@ const PackagesPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <span className="font-heading text-lg font-bold">Yrvante</span>
-          <span className="text-sm text-gray-400">Almelo, Nederland</span>
-          <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+          <span className="text-sm text-gray-400">© {new Date().getFullYear()} Yrvante</span>
         </div>
       </footer>
     </div>
