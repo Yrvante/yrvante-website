@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, TrendingUp, Users, Target, Doll
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/8x6unwe5_IMG_1958.png";
+const LOGO_URL = "/logo.png";
 
 const BlogPage = () => {
   const { language } = useLanguage();

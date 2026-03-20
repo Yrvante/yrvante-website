@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
+const LOGO_URL = "/logo-nav.png";
 
 const HeroAnimation = () => {
   const [started, setStarted] = useState(true);
