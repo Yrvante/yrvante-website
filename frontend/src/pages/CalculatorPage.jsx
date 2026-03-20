@@ -13,9 +13,9 @@ const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b
 
 // Which add-ons are already included per package (don't show as extra)
 const excludedAddOns = {
-  basic: [],
-  pro: ['extraForm'],        // Contact form already in Pro
-  premium: ['multiLanguage', 'bookingSystem', 'extraForm'] // All included in Premium
+  basic: ['googleReviews'],                                      // Te geavanceerd voor Basis
+  pro: ['extraForm'],                                            // Contactformulier zit al in Pro
+  premium: ['multiLanguage', 'bookingSystem', 'extraForm']       // Alles inbegrepen in Premium
 };
 
 // Interactive Booking System Preview
