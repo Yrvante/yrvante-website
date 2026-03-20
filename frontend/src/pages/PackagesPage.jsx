@@ -161,6 +161,109 @@ const BookingDemoWidget = ({ language }) => {
   );
 };
 
+// --- Pakket Demo Components (monochroom) ---
+
+const BasisPakketDemo = ({ isPopular, language }) => (
+  <div className={`mt-5 rounded-2xl overflow-hidden border ${isPopular ? 'border-gray-500' : 'border-gray-200'}`}>
+    <div className={`${isPopular ? 'bg-gray-800' : 'bg-gray-900'} px-3 py-2 flex items-center gap-3`}>
+      <div className="flex gap-1">
+        <div className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+        <div className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+        <div className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+      </div>
+      <div className="flex gap-1.5">
+        {['Home', language === 'nl' ? 'Over' : 'About', 'Contact'].map((page, i) => (
+          <span key={i} className={`text-xs px-2 py-0.5 rounded transition-all ${i === 0 ? 'bg-white/20 text-white font-medium' : 'text-gray-500'}`}>{page}</span>
+        ))}
+      </div>
+    </div>
+    <div className={`${isPopular ? 'bg-gray-700' : 'bg-gray-50'} p-4`}>
+      <div className={`h-2.5 w-32 mx-auto ${isPopular ? 'bg-gray-500' : 'bg-gray-300'} rounded-full mb-3`} />
+      <div className="space-y-1.5 mb-3">
+        <div className={`h-1.5 ${isPopular ? 'bg-gray-600' : 'bg-gray-200'} rounded-full`} />
+        <div className={`h-1.5 ${isPopular ? 'bg-gray-600' : 'bg-gray-200'} rounded-full w-4/5`} />
+        <div className={`h-1.5 ${isPopular ? 'bg-gray-600' : 'bg-gray-200'} rounded-full w-3/5`} />
+      </div>
+      <div className={`text-center text-xs pt-2 border-t ${isPopular ? 'border-gray-600 text-gray-400' : 'border-gray-100 text-gray-400'}`}>
+        {language === 'nl' ? 'Mobiel & Desktop' : 'Mobile & Desktop'}
+      </div>
+    </div>
+  </div>
+);
+
+const ProPakketDemo = ({ isPopular, language }) => {
+  const [sent, setSent] = useState(false);
+  if (sent) return (
+    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+      className={`mt-5 rounded-2xl border p-4 text-center ${isPopular ? 'border-gray-500 bg-gray-700' : 'border-gray-200 bg-gray-50'}`}>
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 ${isPopular ? 'bg-gray-500' : 'bg-gray-900'}`}>
+        <Check size={14} className="text-white" />
+      </div>
+      <p className={`text-xs font-bold ${isPopular ? 'text-white' : 'text-gray-800'}`}>{language === 'nl' ? 'Bericht ontvangen!' : 'Message received!'}</p>
+      <button onClick={(e) => { e.stopPropagation(); setSent(false); }} className={`text-xs underline mt-1 ${isPopular ? 'text-gray-400' : 'text-gray-400'}`}>{language === 'nl' ? 'opnieuw' : 'again'}</button>
+    </motion.div>
+  );
+  return (
+    <div className={`mt-5 rounded-2xl overflow-hidden border ${isPopular ? 'border-gray-500' : 'border-gray-200'}`}>
+      <div className={`${isPopular ? 'bg-gray-800' : 'bg-gray-900'} px-3 py-2 text-center`}>
+        <p className="text-xs text-gray-400">{language === 'nl' ? 'Contactformulier' : 'Contact form'}</p>
+      </div>
+      <div className={`${isPopular ? 'bg-gray-700' : 'bg-gray-50'} p-3 space-y-2`}>
+        <div className={`rounded-xl border px-3 py-2 ${isPopular ? 'border-gray-600 bg-gray-600' : 'border-gray-200 bg-white'}`}>
+          <p className={`text-xs ${isPopular ? 'text-gray-500' : 'text-gray-300'}`}>Naam...</p>
+        </div>
+        <div className={`rounded-xl border px-3 py-2 ${isPopular ? 'border-gray-600 bg-gray-600' : 'border-gray-200 bg-white'}`}>
+          <p className={`text-xs ${isPopular ? 'text-gray-500' : 'text-gray-300'}`}>Email...</p>
+        </div>
+        <div className={`rounded-xl border px-3 py-2 h-10 ${isPopular ? 'border-gray-600 bg-gray-600' : 'border-gray-200 bg-white'}`}>
+          <p className={`text-xs ${isPopular ? 'text-gray-500' : 'text-gray-300'}`}>Bericht...</p>
+        </div>
+        <button onClick={(e) => { e.stopPropagation(); setSent(true); }}
+          className={`w-full py-2 text-xs font-bold rounded-xl transition-colors ${isPopular ? 'bg-gray-500 text-white hover:bg-gray-400' : 'bg-gray-900 text-white hover:bg-gray-700'}`}>
+          {language === 'nl' ? 'Verstuur' : 'Send'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const PremiumPakketDemo = ({ isPopular, language }) => {
+  const [lang, setLang] = useState('nl');
+  const [selDay, setSelDay] = useState(1);
+  const texts = { nl: 'Welkom!', en: 'Welcome!', de: 'Willkommen!' };
+  const days = ['Ma', 'Di', 'Wo', 'Do', 'Vr'];
+  return (
+    <div className={`mt-5 rounded-2xl overflow-hidden border ${isPopular ? 'border-gray-500' : 'border-gray-200'}`}>
+      <div className={`${isPopular ? 'bg-gray-800' : 'bg-gray-900'} px-3 py-2 flex items-center justify-between`}>
+        <div className="flex gap-1">
+          {[['nl', 'NL'], ['en', 'EN'], ['de', 'DE']].map(([code, label]) => (
+            <button key={code} onClick={(e) => { e.stopPropagation(); setLang(code); }}
+              className={`text-xs px-2 py-0.5 rounded transition-all ${lang === code ? 'bg-white/20 text-white font-medium' : 'text-gray-500 hover:text-white'}`}>
+              {label}
+            </button>
+          ))}
+        </div>
+        <motion.span key={lang} initial={{ opacity: 0, x: 4 }} animate={{ opacity: 1, x: 0 }} className="text-xs text-gray-400">{texts[lang]}</motion.span>
+      </div>
+      <div className={`${isPopular ? 'bg-gray-700' : 'bg-gray-50'} p-3`}>
+        <p className={`text-xs text-center mb-2 ${isPopular ? 'text-gray-400' : 'text-gray-500'}`}>{language === 'nl' ? 'Afspraak maken' : 'Book appointment'}</p>
+        <div className="flex gap-1.5">
+          {days.map((d, i) => (
+            <button key={i} onClick={(e) => { e.stopPropagation(); setSelDay(i); }}
+              className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${
+                selDay === i
+                  ? isPopular ? 'bg-gray-500 text-white' : 'bg-gray-900 text-white'
+                  : isPopular ? 'bg-gray-600 text-gray-400' : 'bg-white border border-gray-200 text-gray-600'
+              }`}>
+              {d}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- Extra Mogelijkheden Demo Components ---
 
 const ExtraPagesDemo = ({ language }) => (
@@ -562,6 +665,10 @@ const PackagesPage = () => {
                     ))}
                   </div>
                 )}
+
+                {pkg.id === 'basic'   && <BasisPakketDemo   isPopular={pkg.popular} language={language} />}
+                {pkg.id === 'pro'     && <ProPakketDemo     isPopular={pkg.popular} language={language} />}
+                {pkg.id === 'premium' && <PremiumPakketDemo isPopular={pkg.popular} language={language} />}
 
                 <Link
                   to="/calculator"
