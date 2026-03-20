@@ -295,7 +295,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4"
           >
-            Smart Web & Software
+            {language === 'nl' ? 'Alles wat je nodig hebt is' : 'Everything you need is'}
           </motion.p>
           
           {/* Main Headline - BIG and prominent */}
@@ -328,8 +328,8 @@ const HeroSection = () => {
             className="text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-4"
           >
             {language === 'nl' 
-              ? 'Ik bouw geen website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen.'
-              : "I don't build websites — I make sure your business looks professional online so customers take you seriously."}
+              ? 'Ik bouw niet alleen je website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen en jij je rustig kan focussen op je bedrijf!'
+              : "I don't just build your website — I make sure your business looks professional online so customers take you seriously and you can focus on what you do best!"}
           </motion.p>
 
           {/* Stats - Inline with subtitle */}
