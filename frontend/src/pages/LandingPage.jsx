@@ -25,7 +25,9 @@ import {
 import DemoPreview from "../components/DemoPreview";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = BACKEND_URL ? `${BACKEND_URL}/api` : '';
+// On Vercel (production), use relative path for serverless functions
+// In development/preview, use the full backend URL
+const API = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
 
 const LOGO_URL = "/logo-nav.png";
 const BG_IMAGE = "/bg-pattern.jpg";

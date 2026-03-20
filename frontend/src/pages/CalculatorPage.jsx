@@ -8,7 +8,9 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
-const API_BASE = API_URL ? `${API_URL}/api` : '';
+// On Vercel (production), use relative path for serverless functions
+// In development/preview, use the full backend URL
+const API_BASE = API_URL ? `${API_URL}/api` : '/api';
 const BG_IMAGE = "/bg-pattern.jpg";
 const LOGO_URL = "/logo.png";
 
