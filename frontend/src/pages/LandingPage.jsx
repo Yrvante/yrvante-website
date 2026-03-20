@@ -328,8 +328,8 @@ const HeroSection = () => {
             className="text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-4"
           >
             {language === 'nl' 
-              ? 'Ik bouw niet alleen je website — ik zorg dat jouw bedrijf er online professioneel uitziet zodat klanten je serieus nemen en jij je rustig kan focussen op je bedrijf!'
-              : "I don't just build your website — I make sure your business looks professional online so customers take you seriously and you can focus on what you do best!"}
+              ? 'Ik bouw niet alleen je website — ik zorg dat jouw bedrijf online de indruk maakt die het verdient, zodat klanten je serieus nemen en jij met een gerust hart kunt doen waar je goed in bent.'
+              : "I don't just build your website — I make sure your business makes the impression it deserves online, so customers take you seriously and you can do what you're good at with peace of mind."}
           </motion.p>
 
           {/* Stats - Inline with subtitle */}
