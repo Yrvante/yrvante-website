@@ -2,7 +2,7 @@ const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const RECIPIENT = process.env.RECIPIENT_EMAIL || 'yvar@yrvante.com';
+const RECIPIENT = process.env.RECIPIENT_EMAIL || 'info@yrvante.com';
 const SENDER = process.env.SENDER_EMAIL || 'noreply@yrvante.com';
 
 module.exports = async function handler(req, res) {
