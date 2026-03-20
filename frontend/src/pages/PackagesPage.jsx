@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
@@ -161,6 +161,147 @@ const BookingDemoWidget = ({ language }) => {
   );
 };
 
+// --- Extra Mogelijkheden Demo Components ---
+
+const ExtraPagesDemo = ({ language }) => (
+  <div className="mt-4 rounded-xl overflow-hidden border border-gray-100">
+    <div className="bg-gray-900 px-3 py-2 flex items-center gap-2">
+      <div className="flex gap-1 flex-shrink-0">
+        <div className="w-2 h-2 rounded-full bg-red-400" /><div className="w-2 h-2 rounded-full bg-yellow-400" /><div className="w-2 h-2 rounded-full bg-green-400" />
+      </div>
+      <div className="flex gap-1.5 overflow-x-auto">
+        {['Home', 'Over', 'Diensten', 'Blog +', 'Portfolio +', 'FAQ +'].map((p, i) => (
+          <span key={i} className={`text-xs px-2 py-0.5 rounded whitespace-nowrap ${i >= 3 ? 'bg-green-500/25 text-green-400 font-semibold' : 'text-gray-500'}`}>{p}</span>
+        ))}
+      </div>
+    </div>
+    <div className="bg-gray-50 px-3 py-2 flex items-center gap-2">
+      <Check size={12} className="text-green-500 flex-shrink-0" />
+      <p className="text-xs text-green-700 font-medium">{language === 'nl' ? '3 extra pagina\'s toegevoegd' : '3 extra pages added'}</p>
+    </div>
+  </div>
+);
+
+const MultiLangDemo = ({ language }) => {
+  const [lang, setLang] = useState('nl');
+  const texts = {
+    nl: { g: 'Welkom op mijn website', s: 'Neem gerust contact op' },
+    en: { g: 'Welcome to my website', s: 'Feel free to contact me' },
+    de: { g: 'Willkommen auf meiner Website', s: 'Kontakt aufnehmen' },
+  };
+  return (
+    <div className="mt-4 rounded-xl border border-gray-100 overflow-hidden">
+      <div className="bg-gray-900 px-3 py-2 flex items-center justify-center gap-2">
+        {[['nl', '🇳🇱'], ['en', '🇬🇧'], ['de', '🇩🇪']].map(([code, flag]) => (
+          <button key={code} onClick={(e) => { e.stopPropagation(); setLang(code); }}
+            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${lang === code ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-white'}`}>
+            {flag} {code.toUpperCase()}
+          </button>
+        ))}
+      </div>
+      <div className="bg-gray-50 p-3 text-center">
+        <motion.p key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="text-xs font-semibold text-gray-800 mb-0.5">{texts[lang].g}</motion.p>
+        <p className="text-xs text-gray-400">{texts[lang].s}</p>
+      </div>
+    </div>
+  );
+};
+
+const ContactFormDemo = ({ language }) => {
+  const [sent, setSent] = useState(false);
+  if (sent) return (
+    <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+      className="mt-4 rounded-xl border border-green-200 bg-green-50 p-4 text-center">
+      <Check size={18} className="text-green-600 mx-auto mb-1" />
+      <p className="text-xs font-bold text-green-700">{language === 'nl' ? 'Bericht verzonden!' : 'Message sent!'}</p>
+      <button onClick={(e) => { e.stopPropagation(); setSent(false); }} className="text-xs text-green-500 underline mt-1">{language === 'nl' ? 'opnieuw' : 'again'}</button>
+    </motion.div>
+  );
+  return (
+    <div className="mt-4 rounded-xl border border-gray-100 overflow-hidden">
+      <div className="bg-gray-50 p-3 space-y-2">
+        <div className="bg-white rounded-lg border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw naam...' : 'Your name...'}</p></div>
+        <div className="bg-white rounded-lg border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'jij@email.nl' : 'you@email.com'}</p></div>
+        <div className="bg-white rounded-lg border border-gray-200 px-3 py-2 h-10"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw bericht...' : 'Your message...'}</p></div>
+        <button onClick={(e) => { e.stopPropagation(); setSent(true); }}
+          className="w-full py-2 bg-gray-900 text-white text-xs font-bold rounded-lg hover:bg-gray-700 transition-colors">
+          {language === 'nl' ? 'Verstuur bericht' : 'Send message'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const MaintenanceDemo = ({ language }) => (
+  <div className="mt-4 rounded-xl border border-gray-100 overflow-hidden">
+    <div className="bg-gray-900 px-3 py-2 flex items-center justify-between">
+      <p className="text-xs font-bold text-green-400">{language === 'nl' ? 'Alles Operationeel' : 'All Systems Go'}</p>
+      <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+    </div>
+    <div className="bg-gray-50 px-3 py-2 divide-y divide-gray-100">
+      {[language === 'nl' ? 'Server Online' : 'Server Online', 'SSL Certificaat', language === 'nl' ? 'Backup Vandaag' : 'Backup Today', language === 'nl' ? 'Updates: OK' : 'Updates: OK'].map((label, i) => (
+        <div key={i} className="flex items-center justify-between py-1.5">
+          <span className="text-xs text-gray-600">{label}</span>
+          <span className="text-xs text-green-600 font-bold flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> OK</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const BookingMiniDemo = ({ language }) => {
+  const [sel, setSel] = useState(1);
+  const days = ['Ma', 'Di', 'Wo', 'Do', 'Vr'];
+  return (
+    <div className="mt-4 rounded-xl border border-gray-100 overflow-hidden">
+      <div className="bg-gray-900 px-3 py-2">
+        <p className="text-xs text-gray-400 text-center">{language === 'nl' ? 'Afspraak maken' : 'Book appointment'}</p>
+      </div>
+      <div className="bg-gray-50 p-3">
+        <div className="flex gap-1.5 mb-2">
+          {days.map((d, i) => (
+            <button key={i} onClick={(e) => { e.stopPropagation(); setSel(i); }}
+              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-gray-400'}`}>
+              {d}
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-center text-gray-400">{language === 'nl' ? 'Kies een tijdslot →' : 'Choose a time slot →'}</p>
+      </div>
+    </div>
+  );
+};
+
+const FastDeliveryDemo = ({ language }) => {
+  const steps = [
+    { label: language === 'nl' ? 'Gesprek' : 'Consult', done: true },
+    { label: language === 'nl' ? 'Week 1' : 'Week 1', done: true },
+    { label: language === 'nl' ? 'Week 2' : 'Week 2', done: false, active: true },
+    { label: language === 'nl' ? 'Live!' : 'Live!', done: false },
+  ];
+  return (
+    <div className="mt-4 rounded-xl border border-gray-100 bg-gray-50 p-3">
+      <div className="flex items-center gap-1 mb-1.5">
+        {steps.map((s, i) => (
+          <React.Fragment key={i}>
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${s.done ? 'bg-gray-900 text-white' : s.active ? 'bg-gray-500 text-white' : 'bg-gray-200 text-gray-400'}`}>
+              {s.done ? <Check size={12} /> : i + 1}
+            </div>
+            {i < steps.length - 1 && <div className={`flex-1 h-0.5 ${s.done ? 'bg-gray-900' : 'bg-gray-200'}`} />}
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="flex justify-between">
+        {steps.map((s, i) => (
+          <span key={i} className={`text-xs flex-1 text-center ${s.active ? 'text-gray-900 font-bold' : s.done ? 'text-gray-500' : 'text-gray-300'}`}>{s.label}</span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// --- End Demo Components ---
+
 const PackagesPage = () => {
   const { language } = useLanguage();
 
@@ -247,13 +388,15 @@ const PackagesPage = () => {
   // Extra possibilities - no prices, just what's possible
   const extras = [
     {
-      icon: <Zap size={24} />,
+      key: 'pages',
+      icon: <FileText size={24} />,
       title: language === 'nl' ? 'Extra pagina\'s' : 'Extra pages',
       description: language === 'nl' 
         ? 'Diensten, blog artikelen, portfolio items, of extra informatiepagina\'s.'
         : 'Services, blog posts, portfolio items, or extra information pages.',
     },
     {
+      key: 'multilang',
       icon: <Globe size={24} />,
       title: language === 'nl' ? 'Meertalige website' : 'Multi-language website',
       description: language === 'nl'
@@ -261,6 +404,7 @@ const PackagesPage = () => {
         : 'Your website in multiple languages with a convenient language switcher.',
     },
     {
+      key: 'form',
       icon: <Mail size={24} />,
       title: language === 'nl' ? 'Extra contactformulieren' : 'Extra contact forms',
       description: language === 'nl'
@@ -268,6 +412,7 @@ const PackagesPage = () => {
         : 'Quote requests, appointment requests, or specific customer questions.',
     },
     {
+      key: 'maintenance',
       icon: <Shield size={24} />,
       title: language === 'nl' ? 'Website onderhoud' : 'Website maintenance',
       description: language === 'nl'
@@ -275,6 +420,7 @@ const PackagesPage = () => {
         : 'Hosting, updates, small changes and security. Everything taken care of.',
     },
     {
+      key: 'booking',
       icon: <Calendar size={24} />,
       title: language === 'nl' ? 'Online boekingssysteem' : 'Online booking system',
       description: language === 'nl'
@@ -282,6 +428,7 @@ const PackagesPage = () => {
         : 'Let customers book appointments directly online with automatic confirmations.',
     },
     {
+      key: 'delivery',
       icon: <Zap size={24} />,
       title: language === 'nl' ? 'Snelle levering' : 'Fast delivery',
       description: language === 'nl'
@@ -509,13 +656,21 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white p-6 rounded-3xl border border-gray-200 text-center hover:border-black hover:shadow-lg transition-all"
+                className="bg-white p-6 rounded-3xl border border-gray-200 hover:border-black hover:shadow-lg transition-all"
               >
-                <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  {extra.icon}
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-11 h-11 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    {extra.icon}
+                  </div>
+                  <h3 className="font-bold text-base">{extra.title}</h3>
                 </div>
-                <h3 className="font-bold text-lg mb-2">{extra.title}</h3>
-                <p className="text-sm text-gray-600">{extra.description}</p>
+                <p className="text-sm text-gray-600 mb-1">{extra.description}</p>
+                {extra.key === 'pages'       && <ExtraPagesDemo language={language} />}
+                {extra.key === 'multilang'   && <MultiLangDemo language={language} />}
+                {extra.key === 'form'        && <ContactFormDemo language={language} />}
+                {extra.key === 'maintenance' && <MaintenanceDemo language={language} />}
+                {extra.key === 'booking'     && <BookingMiniDemo language={language} />}
+                {extra.key === 'delivery'    && <FastDeliveryDemo language={language} />}
               </motion.div>
             ))}
           </div>

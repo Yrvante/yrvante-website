@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
-import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import axios from "axios";
@@ -104,6 +104,130 @@ const BookingSystemPreview = ({ language }) => {
     </motion.div>
   );
 };
+
+// Multi-language Preview
+const MultiLangPreview = ({ language }) => {
+  const [lang, setLang] = useState('nl');
+  const texts = { nl: 'Welkom!', en: 'Welcome!', de: 'Willkommen!' };
+  return (
+    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Globe size={16} className="text-gray-600" /></div>
+          <div>
+            <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Voorbeeld: Meertalige website' : 'Preview: Multi-language website'}</p>
+            <p className="text-xs text-gray-400">{language === 'nl' ? 'Bereik klanten in hun eigen taal' : 'Reach customers in their own language'}</p>
+          </div>
+        </div>
+        <div className="flex gap-2 mb-3">
+          {[['nl', '🇳🇱'], ['en', '🇬🇧'], ['de', '🇩🇪']].map(([code, flag]) => (
+            <button key={code} onClick={(e) => { e.stopPropagation(); setLang(code); }}
+              className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-center gap-1 ${lang === code ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              {flag} {code.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <motion.div key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="bg-gray-50 rounded-xl p-3 text-center">
+          <p className="text-sm font-bold text-gray-800">{texts[lang]}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{language === 'nl' ? 'Alle tekst automatisch vertaald' : 'All text auto-translated'}</p>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Contact Form Preview
+const ContactFormPreview = ({ language }) => {
+  const [sent, setSent] = useState(false);
+  return (
+    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Mail size={16} className="text-gray-600" /></div>
+          <div>
+            <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Voorbeeld: Contactformulier' : 'Preview: Contact form'}</p>
+            <p className="text-xs text-gray-400">{language === 'nl' ? 'Berichten direct in jouw inbox' : 'Messages directly in your inbox'}</p>
+          </div>
+        </div>
+        <AnimatePresence mode="wait">
+          {sent ? (
+            <motion.div key="sent" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-3">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2"><Check size={18} className="text-green-600" /></div>
+              <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Bericht ontvangen!' : 'Message received!'}</p>
+              <button onClick={(e) => { e.stopPropagation(); setSent(false); }} className="text-xs text-gray-400 underline mt-1">{language === 'nl' ? 'opnieuw' : 'again'}</button>
+            </motion.div>
+          ) : (
+            <motion.div key="form" className="space-y-2">
+              <div className="bg-gray-50 rounded-xl border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">Naam...</p></div>
+              <div className="bg-gray-50 rounded-xl border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">Email...</p></div>
+              <div className="bg-gray-50 rounded-xl border border-gray-200 px-3 py-2 h-10"><p className="text-xs text-gray-300">Bericht...</p></div>
+              <button onClick={(e) => { e.stopPropagation(); setSent(true); }} className="w-full py-2 bg-gray-900 text-white text-xs font-bold rounded-xl">
+                {language === 'nl' ? 'Verstuur' : 'Send'}
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+};
+
+// Maintenance Preview
+const MaintenancePreview = ({ language }) => (
+  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+    <div className="p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Shield size={16} className="text-gray-600" /></div>
+        <div>
+          <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Status: Alles Operationeel' : 'Status: All Systems Go'}</p>
+          <p className="text-xs text-gray-400">{language === 'nl' ? 'Ik houd alles voor je bij' : 'I keep track of everything for you'}</p>
+        </div>
+      </div>
+      <div className="space-y-2">
+        {[language === 'nl' ? 'Server Online' : 'Server Online', 'SSL Certificaat', language === 'nl' ? 'Backup Vandaag' : 'Backup Today', language === 'nl' ? 'Updates Geïnstalleerd' : 'Updates Installed'].map((label, i) => (
+          <div key={i} className="flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2">
+            <span className="text-xs text-gray-600">{label}</span>
+            <span className="flex items-center gap-1 text-xs text-green-600 font-bold"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> OK</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Google Reviews Preview
+const GoogleReviewsPreview = ({ language }) => (
+  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+    <div className="p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Star size={16} className="text-gray-600" /></div>
+        <div>
+          <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Voorbeeld: Google Reviews' : 'Preview: Google Reviews'}</p>
+          <p className="text-xs text-gray-400">{language === 'nl' ? 'Bouw vertrouwen met klantbeoordelingen' : 'Build trust with reviews'}</p>
+        </div>
+      </div>
+      <div className="space-y-2">
+        {[
+          { name: 'Anna de Vries', review: language === 'nl' ? 'Geweldige website, precies wat ik zocht!' : 'Amazing website, exactly what I needed!' },
+          { name: 'Thomas B.', review: language === 'nl' ? 'Snel geleverd en top kwaliteit.' : 'Fast delivery and top quality.' },
+        ].map((r, i) => (
+          <div key={i} className="bg-gray-50 rounded-xl p-3">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-600">{r.name[0]}</div>
+              <span className="text-xs font-bold text-gray-800">{r.name}</span>
+              <div className="flex gap-0.5">{[...Array(5)].map((_, j) => <Star key={j} size={10} className="text-yellow-400 fill-yellow-400" />)}</div>
+            </div>
+            <p className="text-xs text-gray-500">{r.review}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </motion.div>
+);
 
 const CalculatorPage = () => {
   const { language } = useLanguage();
@@ -711,11 +835,13 @@ const CalculatorPage = () => {
                         </div>
                       </div>
                     </div>
-                    {/* Show booking system preview when selected */}
+                    {/* Show preview when add-on is selected */}
                     <AnimatePresence>
-                      {key === 'bookingSystem' && addOns.bookingSystem && (
-                        <BookingSystemPreview language={language} />
-                      )}
+                      {key === 'bookingSystem'  && addOns.bookingSystem  && <BookingSystemPreview language={language} />}
+                      {key === 'multiLanguage'  && addOns.multiLanguage  && <MultiLangPreview language={language} />}
+                      {key === 'extraForm'      && addOns.extraForm      && <ContactFormPreview language={language} />}
+                      {key === 'maintenance'    && addOns.maintenance    && <MaintenancePreview language={language} />}
+                      {key === 'googleReviews'  && addOns.googleReviews  && <GoogleReviewsPreview language={language} />}
                     </AnimatePresence>
                   </div>
                 ))}
