@@ -295,7 +295,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4"
           >
-            {language === 'nl' ? 'Alles wat je nodig hebt is' : 'Everything you need is'}
+            {language === 'nl' ? 'Alles wat je nog nodig hebt is' : 'Everything you still need is'}
           </motion.p>
           
           {/* Main Headline - BIG and prominent */}
