@@ -1,11 +1,11 @@
-const { Resend } = require('resend');
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const RECIPIENT = process.env.RECIPIENT_EMAIL || 'info@yrvante.com';
 const SENDER = process.env.SENDER_EMAIL || 'noreply@yrvante.com';
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -102,4 +102,4 @@ module.exports = async function handler(req, res) {
     console.error('Resend error:', err);
     return res.status(500).json({ error: 'Verzenden mislukt. Probeer opnieuw.' });
   }
-};
+}
