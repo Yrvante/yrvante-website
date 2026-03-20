@@ -57,6 +57,9 @@ Bouw een professionele bedrijfswebsite voor "Yrvante", een webdesign/software st
 4. **Navigatie fix** - `Onderhoud & Hosting` gaat direct naar `/onderhoud`; redirect toegevoegd in App.js voor `/diensten/onderhoud` → `/onderhoud`
 5. **Testing** - iteration_16.json: 100% pass (12/12 tests)
 
+### Sessie 16b (Interactieve Boeking Demo - Maart 2026)
+6. **Live boekingsdemo op /pakketten** - `BookingDemoWidget` component toegevoegd aan "Online Boekingssysteem" sectie in `PackagesPage.jsx`: browser-mockup styling, dag-selector met beschikbaarheidsstatus, tijdsloten, animaties, bevestigingsstap met confetti-stijl ✓-check
+
 ## Bestanden Structuur
 ```
 /app/

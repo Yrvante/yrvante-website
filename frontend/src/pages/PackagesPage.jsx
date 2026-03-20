@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
 import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,6 +7,159 @@ import SEO from "../components/SEO";
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png";
+
+const BookingDemoWidget = ({ language }) => {
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [confirmed, setConfirmed] = useState(false);
+
+  const days = [
+    { day: 'Ma', date: '16', avail: true },
+    { day: 'Di', date: '17', avail: true },
+    { day: 'Wo', date: '18', avail: false },
+    { day: 'Do', date: '19', avail: true },
+    { day: 'Vr', date: '20', avail: true },
+  ];
+  const times = ['09:00', '10:30', '12:00', '14:00', '15:30'];
+
+  const reset = () => { setConfirmed(false); setSelectedDay(null); setSelectedTime(null); };
+
+  return (
+    <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
+      {/* App header bar */}
+      <div className="bg-gray-900 px-5 py-4 flex items-center gap-3">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400" />
+          <div className="w-3 h-3 rounded-full bg-yellow-400" />
+          <div className="w-3 h-3 rounded-full bg-green-400" />
+        </div>
+        <div className="flex-1 bg-gray-800 rounded-lg px-3 py-1.5 text-xs text-gray-400 text-center">
+          jouwbedrijf.nl/afspraken
+        </div>
+      </div>
+
+      {/* Booking content */}
+      <div className="p-5">
+        <AnimatePresence mode="wait">
+          {confirmed ? (
+            <motion.div
+              key="confirmed"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="py-6 text-center"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.1 }}
+                className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <Check size={28} className="text-green-600" />
+              </motion.div>
+              <p className="font-bold text-gray-900 text-lg mb-1">
+                {language === 'nl' ? 'Afspraak bevestigd!' : 'Appointment confirmed!'}
+              </p>
+              <p className="text-gray-500 text-sm mb-4">
+                {language === 'nl' ? 'Bevestiging verstuurd naar jouw email' : 'Confirmation sent to your email'}
+              </p>
+              <button onClick={reset} className="text-xs text-gray-400 hover:text-gray-700 underline transition-colors">
+                {language === 'nl' ? 'Nieuwe afspraak maken' : 'Make new appointment'}
+              </button>
+            </motion.div>
+          ) : (
+            <motion.div key="booking" initial={{ opacity: 1 }}>
+              <div className="flex items-center justify-between mb-4">
+                <p className="font-bold text-gray-900">
+                  {language === 'nl' ? 'Afspraak maken' : 'Book appointment'}
+                </p>
+                <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-lg">
+                  {language === 'nl' ? 'Feb 2026' : 'Feb 2026'}
+                </span>
+              </div>
+
+              {/* Day selector */}
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
+                {language === 'nl' ? 'Kies een dag' : 'Choose a day'}
+              </p>
+              <div className="flex gap-1.5 mb-4">
+                {days.map((d, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { if (d.avail) { setSelectedDay(i); setSelectedTime(null); } }}
+                    disabled={!d.avail}
+                    className={`flex-1 py-2.5 rounded-xl text-center transition-all ${
+                      selectedDay === i
+                        ? 'bg-gray-900 text-white shadow-lg'
+                        : d.avail
+                        ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-gray-50 text-gray-300 cursor-not-allowed line-through'
+                    }`}
+                  >
+                    <p className="text-xs font-medium leading-none mb-0.5">{d.day}</p>
+                    <p className="text-sm font-bold leading-none">{d.date}</p>
+                  </button>
+                ))}
+              </div>
+
+              {/* Time slots */}
+              <AnimatePresence>
+                {selectedDay !== null && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
+                      {language === 'nl' ? 'Kies een tijd' : 'Choose a time'}
+                    </p>
+                    <div className="grid grid-cols-3 gap-2 mb-4">
+                      {times.map((time, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedTime(i)}
+                          className={`py-2.5 rounded-xl text-sm font-medium transition-all ${
+                            selectedTime === i
+                              ? 'bg-gray-900 text-white shadow-md'
+                              : 'border border-gray-200 text-gray-600 hover:border-gray-500 hover:bg-gray-50'
+                          }`}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Confirm button */}
+              <AnimatePresence>
+                {selectedTime !== null && (
+                  <motion.button
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setConfirmed(true)}
+                    className="w-full py-3.5 bg-gray-900 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 hover:bg-gray-700 transition-colors mb-3"
+                  >
+                    <Check size={16} />
+                    {language === 'nl' ? 'Afspraak bevestigen' : 'Confirm appointment'}
+                  </motion.button>
+                )}
+              </AnimatePresence>
+
+              {selectedDay === null && (
+                <p className="text-xs text-center text-gray-400 py-2">
+                  {language === 'nl' ? 'Klik op een dag om te beginnen' : 'Click a day to get started'}
+                </p>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
 
 const PackagesPage = () => {
   const { language } = useLanguage();
@@ -384,59 +537,53 @@ const PackagesPage = () => {
         </div>
       </section>
 
-      {/* Booking System Detail */}
+      {/* Booking System Detail - with live interactive demo */}
       <section className="py-20 px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
           <div className="bg-gray-700 text-white rounded-3xl p-8 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
+                <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-green-400 mb-4">
+                  {language === 'nl' ? 'Interactieve Demo' : 'Interactive Demo'}
+                </span>
                 <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
                   {language === 'nl' ? 'Online Boekingssysteem' : 'Online Booking System'}
                 </h2>
                 <p className="text-gray-300 mb-8">
                   {language === 'nl'
-                    ? 'Laat klanten direct online afspraken maken. Perfect voor kappers, coaches, therapeuten en andere dienstverleners.'
-                    : 'Let customers book appointments directly online. Perfect for hairdressers, coaches, therapists and other service providers.'}
+                    ? 'Laat klanten direct online afspraken maken. Perfect voor kappers, coaches, therapeuten en andere dienstverleners. Probeer het zelf →'
+                    : 'Let customers book appointments directly online. Perfect for hairdressers, coaches, therapists and other service providers. Try it yourself →'}
                 </p>
+
+                <div className="space-y-3">
+                  {[
+                    language === 'nl' ? 'Klant kiest datum & tijd' : 'Customer chooses date & time',
+                    language === 'nl' ? 'Automatische bevestiging per email' : 'Automatic email confirmation',
+                    language === 'nl' ? 'Jij ziet alle afspraken in een overzicht' : 'You see all appointments in one overview',
+                    language === 'nl' ? 'Afwijzen of accepteren met één klik' : 'Reject or accept with one click',
+                    language === 'nl' ? '24/7 beschikbaar voor je klanten' : '24/7 available for your customers',
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-green-400" />
+                      </div>
+                      <span className="text-gray-300 text-sm">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-gray-600">
+                  <p className="text-gray-400 text-xs">
+                    {language === 'nl'
+                      ? 'Inbegrepen in Premium pakket of als add-on voor €250 eenmalig.'
+                      : 'Included in Premium package or as add-on for €250 one-time.'}
+                  </p>
+                </div>
               </div>
-              
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-bold mb-4 text-gray-400 text-sm uppercase tracking-wider">
-                    {language === 'nl' ? 'Voor bezoekers' : 'For visitors'}
-                  </h4>
-                  <ul className="space-y-3">
-                    {[
-                      language === 'nl' ? 'Datum en tijd kiezen' : 'Choose date and time',
-                      language === 'nl' ? 'Contactgegevens invullen' : 'Fill in contact details',
-                      language === 'nl' ? 'Afspraak aanvragen' : 'Request appointment',
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <Check size={16} className="text-green-400" />
-                        <span className="text-gray-300">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div>
-                  <h4 className="font-bold mb-4 text-gray-400 text-sm uppercase tracking-wider">
-                    {language === 'nl' ? 'Voor u (admin)' : 'For you (admin)'}
-                  </h4>
-                  <ul className="space-y-3">
-                    {[
-                      language === 'nl' ? 'Overzicht van alle afspraken' : 'Overview of all appointments',
-                      language === 'nl' ? 'Goedkeuren of afwijzen' : 'Approve or reject',
-                      language === 'nl' ? 'Email notificaties' : 'Email notifications',
-                      language === 'nl' ? 'Kalender overzicht' : 'Calendar overview',
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <Check size={16} className="text-green-400" />
-                        <span className="text-gray-300">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
+              {/* Live interactive demo */}
+              <div>
+                <BookingDemoWidget language={language} />
               </div>
             </div>
           </div>
