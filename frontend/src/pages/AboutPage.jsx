@@ -5,7 +5,7 @@ import { MapPin, ArrowLeft, Target, Wrench, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/8x6unwe5_IMG_1958.png";
 
 // Free to use code/tech images from Unsplash (no credit required for Unsplash license)
 const codeImages = [

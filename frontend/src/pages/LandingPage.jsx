@@ -54,8 +54,7 @@ const Navigation = () => {
   };
 
   const dienstenLinks = [
-    { to: '/pakketten', label: language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing' },
-    { to: '/calculator', label: language === 'nl' ? 'Prijscalculator' : 'Price Calculator' },
+    { to: '/pakketten', label: language === 'nl' ? 'Pakketten, Prijzen & Calculator' : 'Packages, Pricing & Calculator' },
     { divider: true },
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
     { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
