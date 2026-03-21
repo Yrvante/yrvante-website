@@ -12,6 +12,7 @@ import BlogPage from "./pages/BlogPage";
 import OverMijPage from "./pages/OverMijPage";
 import DienstenPage from "./pages/DienstenPage";
 import OnderhoudPage from "./pages/OnderhoudPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -259,6 +260,7 @@ function App() {
             <Route path="/diensten/onderhoud" element={<Navigate to="/onderhoud" replace />} />
             <Route path="/diensten/:type" element={<DienstenPage />} />
             <Route path="/voor/:niche" element={<DienstenPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>

@@ -1245,6 +1245,9 @@ const Footer = () => {
               <p className="text-xs text-gray-500 mt-1">
                 {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
               </p>
+              <Link to="/privacy" className="text-xs text-gray-500 hover:text-black transition-colors mt-2 inline-block">
+                {language === 'nl' ? 'Privacybeleid' : 'Privacy Policy'}
+              </Link>
             </div>
           </div>
         </div>
