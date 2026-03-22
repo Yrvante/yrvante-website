@@ -305,19 +305,19 @@ export default function App() {
                 </div>
 
                 <p className={`text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4 fade-in ${visible ? "fade-in-visible" : ""}`} style={{ transitionDelay: "0.2s" }}>
-                  Alles wat je nodig hebt om te groeien
+                  Intern tool — Yrvante
                 </p>
 
                 <h1 className={`text-[12vw] lg:text-[7.5vw] font-black leading-[0.92] tracking-tighter mb-8 fade-in ${visible ? "fade-in-visible" : ""}`}
                   style={{ transitionDelay: "0.3s" }} data-testid="hero-title">
                   <span className="flex flex-col">
-                    <span>VIND LEADS</span>
-                    <span className="text-gray-400">ZONDER WEBSITE</span>
+                    <span>VIND BEDRIJVEN</span>
+                    <span className="text-gray-400">ZONDER WEBSITE.</span>
                   </span>
                 </h1>
 
                 <p className={`text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-6 fade-in ${visible ? "fade-in-visible" : ""}`} style={{ transitionDelay: "0.35s" }}>
-                  Voer een branche en stad in. Wij zoeken welke bedrijven nog geen online aanwezigheid hebben — dat zijn jouw potentiële klanten.
+                  Selecteer een branche en vul een stad in — de app filtert automatisch wie nog geen online aanwezigheid heeft. Klaar om te bellen.
                 </p>
 
                 <div className={`fade-in ${visible ? "fade-in-visible" : ""}`} style={{ transitionDelay: "0.4s" }}>
