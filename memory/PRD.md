@@ -20,63 +20,81 @@ Build a Lead Finder tool for Yrvante. A webpage where the user can enter an indu
 6. Dutch language interface
 7. Exact Yrvante.com visual style
 8. No authentication required
+9. Lead opslaan (MongoDB) with status tracking
+10. Dashboard with statistics
+11. Social quick-search links (Facebook/Instagram via Google)
+12. KVK lookup link per lead
 
 ---
 
 ## Architecture
 
 ### Backend (FastAPI — /app/backend/server.py)
-- `POST /api/zoek` — accepts `{branche, stad}`, calls Google Places API, returns leads without websites
-- Fetches up to 3 pages (60 results max) from Google Places Text Search
-- Filters: only includes places where `websiteUri` is absent/empty
-- Returns: `{totaal_gevonden, leads: [{naam, adres, telefoonnummer, google_maps_url, place_id}]}`
-- API Key: stored in `backend/.env` as `GOOGLE_PLACES_API_KEY`
+- `POST /api/zoek` — zoek op branche + stad via Google Places API
+- `POST /api/leads` — sla lead op in MongoDB
+- `GET /api/leads` — haal opgeslagen leads op (met optioneel status filter)
+- `PUT /api/leads/{id}` — update status/notitie
+- `DELETE /api/leads/{id}` — verwijder lead
+- `GET /api/dashboard` — statistieken (totaal, status verdeling, recente zoekopdrachten)
+- `GET /api/sheets/status` — Google Sheets verbindingsstatus
+- `GET /api/sheets/login` — start Google OAuth flow (vereist credentials)
+- `GET /api/sheets/callback` — OAuth callback
+- `POST /api/sheets/spreadsheet` — sla spreadsheet ID op
+- `POST /api/sheets/append/{lead_id}` — stuur één lead naar Sheets
+- `POST /api/sheets/append-all` — stuur alle leads naar Sheets
 
-### Frontend (React — /app/frontend/src/)
-- Single page: hero + search form + results
-- Exact Yrvante.com style (Playfair Display serif, smoke background, gray-500 buttons, rounded-full pills)
-- CSV export via browser Blob download
+### Frontend (React — /app/frontend/src/App.js)
+- 3 tabs: **Zoeken** (hero + zoekformulier + resultaten), **Mijn Leads** (saved leads), **Dashboard** (stats + Sheets)
+- Per lead in resultaten: Maps, KVK, Facebook, Instagram, Opslaan buttons
+- Telefoons als `tel:` link (klikbaar)
+- Status dropdown: Nieuw/Gebeld/Offerte gestuurd/Klant geworden
+- Notities editen in-line
+- CSV export
+- Exact Yrvante.com stijl (Playfair Display, smoke bg, gray-500 buttons)
 
 ### External Services
-- Google Places API (New) — Text Search endpoint: `https://places.googleapis.com/v1/places:searchText`
+- Google Places API (New) — Text Search
+- Google Sheets API (OAuth 2.0 — requires user credentials)
 
 ---
 
-## What's Been Implemented (March 2026)
+## What's Been Implemented
 
-### ✅ MVP Complete
-- Backend: `POST /api/zoek` endpoint with Google Places API integration
-- Frontend: Full Yrvante.com-style UI (Playfair Display, smoke bg, nav, badge, serif hero)
-- Google Places: 3-page pagination (up to 60 results)
-- Filtering: only businesses without website returned
-- Results table: naam, adres, telefoonnummer, Maps link
-- CSV export: browser blob download with Dutch headers
-- Loading skeleton, error state, empty state, initial state
-- Responsive layout (mobile + desktop)
-- All data-testid attributes on interactive elements
+### MVP Complete (March 2026)
+- ✅ Google Places API search + website filtering
+- ✅ Results table: naam, adres, telefoon, Maps link
+- ✅ CSV export
+- ✅ Exact Yrvante.com visual style
+- ✅ Lead opslaan in MongoDB
+- ✅ Status tracking (Nieuw/Gebeld/Offerte gestuurd/Klant geworden)
+- ✅ Notities per lead
+- ✅ Dashboard (totaal, status verdeling, recente zoekopdrachten)
+- ✅ Social quick links: Facebook + Instagram via Google Search
+- ✅ KVK lookup link
+- ✅ Click-to-call telefoonnummers
+- ✅ Search history opslaan
+- ✅ Google Sheets backend (wacht op OAuth credentials)
+- ✅ 3-tab navigatie
 
-### Test Results (iteration 2)
-- Backend: 100% (10/10 tests pass)
-- Frontend: 100% (all flows working)
+### Test Results
+- Iteration 2: 100% (basic search)
+- Iteration 3: 100% backend (8/8) + 100% frontend
 
 ---
 
 ## Prioritized Backlog
 
 ### P0 — Done
-- ✅ Google Places API integration
-- ✅ Website filtering
-- ✅ CSV export
-- ✅ Yrvante brand UI
+- ✅ Alle bovenstaande features
 
-### P1 — Next Steps
-- [ ] Add pagination / "Laad meer" button (currently max 60 results)
-- [ ] Search history (save previous searches via MongoDB)
-- [ ] Phone number click-to-call links
-- [ ] Multiple cities support in one search
+### P1 — In Progress / Needs Action
+- [ ] Google Sheets OAuth: vereist GOOGLE_SHEETS_CLIENT_ID + GOOGLE_SHEETS_CLIENT_SECRET + SHEETS_REDIRECT_URI in backend/.env
+  - Setup: Google Cloud Console → Enable Sheets API → OAuth credentials
+  - Redirect URI: https://{app-url}/api/sheets/callback
 
 ### P2 — Future
-- [ ] Save leads to MongoDB with notes/status
-- [ ] Email leads directly from the tool
-- [ ] Whitelist/blacklist companies
-- [ ] Integration with CRM (e.g., HubSpot)
+- [ ] Pagination ("Laad meer") voor meer dan 60 resultaten
+- [ ] KVK realtime scraping (momenteel link button, JS-rendering blokkeert server-side scraping)
+- [ ] Filter resultaten per stad/branche in Mijn Leads
+- [ ] Bulk status update
+- [ ] Email leads rechtstreeks vanuit de tool
