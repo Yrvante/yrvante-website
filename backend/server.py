@@ -241,10 +241,19 @@ async def get_dashboard():
     offerte = await db.saved_leads.count_documents({"status": "Offerte gestuurd"})
     klant = await db.saved_leads.count_documents({"status": "Klant geworden"})
 
-    # Recent searches
-    recente_zoekopdrachten = await db.search_history.find(
-        {}, {"_id": 0}
-    ).sort("datum", -1).limit(5).to_list(5)
+    # Recent searches — deduplicated by branche+stad, most recent first
+    pipeline_history = [
+        {"$sort": {"datum": -1}},
+        {"$group": {
+            "_id": {"branche": "$branche", "stad": "$stad"},
+            "totaal": {"$first": "$totaal"},
+            "datum": {"$first": "$datum"}
+        }},
+        {"$sort": {"datum": -1}},
+        {"$limit": 5},
+        {"$project": {"_id": 0, "branche": "$_id.branche", "stad": "$_id.stad", "totaal": 1, "datum": 1}}
+    ]
+    recente_zoekopdrachten = await db.search_history.aggregate(pipeline_history).to_list(5)
 
     # Top branchen
     pipeline = [
