@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { 
   Search, Phone, MapPin, ExternalLink, Save, Trash2, Edit2, Check, X, 
   Download, ChevronDown, BarChart3, Users, Lock, ArrowLeft, Loader2, RefreshCw,
-  Bookmark, FileText, ArrowRight, Menu as MenuIcon
+  Bookmark, FileText, ArrowRight, Menu as MenuIcon, Mail
 } from "lucide-react";
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -46,6 +46,7 @@ const LeadFinderPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setAuthError('');
     try {
       const res = await fetch(`${API}/auth`, {
         method: 'POST',
@@ -61,7 +62,8 @@ const LeadFinderPage = () => {
         setAuthError('Ongeldig wachtwoord');
       }
     } catch (err) {
-      setAuthError('Verbindingsfout');
+      console.error('Auth error:', err);
+      setAuthError('Verbindingsfout - probeer opnieuw');
     }
   };
 
@@ -110,6 +112,7 @@ const LeadFinderPage = () => {
       setNextPageToken(data.nextPageToken || null);
       setTotaalGevonden(data.totaal_gevonden || 0);
       if (!useToken) toast.success(`${data.totaal_gevonden} bedrijven gevonden!`);
+      if (data.note) toast.info(data.note);
       if (autoSave && data.leads?.length) {
         for (const lead of data.leads) await saveLead(lead, true);
         toast.success(`${data.leads.length} leads opgeslagen`);
@@ -159,18 +162,22 @@ const LeadFinderPage = () => {
     return (lead.status || 'nieuw') === statusFilter;
   });
 
-  // Login Screen - Yrvante Style
+  // Login Screen - Same style as Yrvante homepage
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-          <div className="bg-white rounded-2xl border border-gray-200 p-8">
+      <div className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden">
+        {/* Background pattern like homepage */}
+        <div className="absolute inset-0 -z-10 opacity-30" style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.3) brightness(1.1)' }} />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-white/95 to-white/80" />
+        
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md relative z-10">
+          <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
             <div className="text-center mb-8">
               <Link to="/"><img src={LOGO_URL} alt="Yrvante" className="h-8 mx-auto mb-6" /></Link>
               <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-100">
                 <Lock className="text-gray-400" size={28} />
               </div>
-              <h1 className="font-heading text-3xl text-black mb-2">Admin Dashboard</h1>
+              <h1 className="text-4xl font-black tracking-tighter text-black mb-2">ADMIN</h1>
               <p className="text-gray-500">Voer het wachtwoord in</p>
             </div>
             <form onSubmit={handleLogin}>
@@ -179,11 +186,13 @@ const LeadFinderPage = () => {
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
                 placeholder="Wachtwoord" 
-                className="input-yrvante mb-4" 
+                className="w-full bg-white border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors mb-4" 
                 autoFocus 
               />
               {authError && <p className="text-red-500 text-sm mb-4">{authError}</p>}
-              <button type="submit" className="btn-primary w-full">Inloggen</button>
+              <button type="submit" className="w-full px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full">
+                Inloggen
+              </button>
             </form>
             <div className="text-center mt-6">
               <Link to="/" className="text-gray-500 text-sm hover:text-black flex items-center justify-center gap-2 transition-colors">
@@ -196,15 +205,15 @@ const LeadFinderPage = () => {
     );
   }
 
-  // Main App - Yrvante Style
+  // Main App - Same style as Yrvante homepage
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation - Yrvante Style */}
-      <nav className="sticky top-0 z-50 bg-black text-white">
-        <div className="container-yrvante">
+      {/* Navigation - Same as homepage */}
+      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-6 brightness-0 invert" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-6" />
             </Link>
             
             {/* Tabs */}
@@ -217,19 +226,26 @@ const LeadFinderPage = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeTab === tab.id ? 'bg-white text-black' : 'text-gray-300 hover:text-white'
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-[0.1em] transition-all ${
+                    activeTab === tab.id 
+                      ? 'bg-gray-500 text-white' 
+                      : 'text-gray-500 hover:text-black'
                   }`}
                 >
-                  <tab.icon size={16} />
+                  <tab.icon size={14} />
                   {tab.label}
                 </button>
               ))}
             </div>
             
-            <Link to="/" className="btn-primary py-2 px-5 text-sm">
-              START PROJECT <ArrowRight size={16} className="inline ml-1" />
-            </Link>
+            <div className="flex items-center gap-4">
+              <button onClick={logout} className="text-xs text-gray-500 hover:text-black transition-colors">
+                Uitloggen
+              </button>
+              <Link to="/" className="px-6 py-2.5 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-600 transition-all rounded-full">
+                START PROJECT →
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
@@ -239,113 +255,120 @@ const LeadFinderPage = () => {
         {/* ZOEKEN TAB */}
         {activeTab === 'zoeken' && (
           <motion.div key="zoeken" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            {/* Hero Section - Yrvante Style */}
-            <section className="relative min-h-[75vh] flex items-center overflow-hidden">
-              {/* Background */}
+            {/* Hero Section - Exact same style as homepage */}
+            <section className="min-h-[80vh] pt-24 relative overflow-hidden">
+              {/* Background - Same as homepage */}
               <div className="absolute inset-0 -z-10">
                 <div className="absolute inset-0" style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.3) brightness(1.1)' }} />
                 <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
               </div>
-              
-              {/* Watermark Logo */}
-              <div className="absolute right-12 top-1/2 -translate-y-1/2 opacity-[0.08] pointer-events-none hidden lg:block">
-                <img src={LOGO_URL} alt="" className="w-[350px] grayscale" />
-              </div>
 
-              <div className="container-yrvante py-20 w-full">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 mb-8">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                  <span className="text-sm text-gray-600">Lead Finder — Powered by Yrvante</span>
-                </div>
+              <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
+                <div className="min-h-[calc(80vh-120px)] flex flex-col justify-center">
+                  
+                  {/* Badge - Same style as homepage */}
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200" style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)' }}>
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-gray-500"></span>
+                      </span>
+                      <span className="text-sm text-gray-600">Lead Finder — Powered by Yrvante</span>
+                    </div>
+                  </motion.div>
 
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6">INTERN TOOL — YRVANTE</p>
+                  {/* Slogan - Same style as homepage */}
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4">
+                    INTERN TOOL — YRVANTE
+                  </motion.p>
 
-                {/* Big Typography - Playfair Display */}
-                <h1 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight mb-10">
-                  <span className="block text-black">VIND</span>
-                  <span className="block text-black">BEDRIJVEN</span>
-                  <span className="block text-gray-300">ZONDER</span>
-                  <span className="block text-gray-300">WEBSITE.</span>
-                </h1>
+                  {/* Main Headline - EXACT same style as homepage */}
+                  <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-[12vw] lg:text-[8vw] font-black leading-[0.95] tracking-tighter mb-10">
+                    <span className="block">VIND</span>
+                    <span className="block">BEDRIJVEN</span>
+                    <span className="block text-gray-400">ZONDER</span>
+                    <span className="block text-gray-400">WEBSITE</span>
+                  </motion.h1>
 
-                <p className="text-gray-600 max-w-lg mb-10 text-lg">
-                  Typ één of meerdere branches (gescheiden door komma) en een stad — de app filtert automatisch wie nog geen online aanwezigheid heeft.
-                </p>
+                  {/* Description - Same style */}
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-sm lg:text-base text-gray-500 max-w-lg leading-relaxed mb-8">
+                    Typ één of meerdere branches (gescheiden door komma) en een stad — de app filtert automatisch wie nog geen online aanwezigheid heeft.
+                  </motion.p>
 
-                {/* Search Form - Yrvante Style */}
-                <div className="flex flex-wrap gap-3 mb-8">
-                  <input
-                    value={branche}
-                    onChange={e => setBranche(e.target.value)}
-                    placeholder="Branch(es) — bijv. restaurant, kapper, bakkerij"
-                    className="input-yrvante flex-1 min-w-[280px]"
-                  />
-                  <input
-                    value={stad}
-                    onChange={e => setStad(e.target.value)}
-                    placeholder="Stad — bijv. Amsterdam"
-                    className="input-yrvante w-52"
-                  />
-                  <button
-                    onClick={() => zoekBedrijven(false)}
-                    disabled={loading}
-                    className="btn-primary disabled:opacity-50 flex items-center gap-2"
-                  >
-                    {loading ? <Loader2 size={18} className="animate-spin" /> : <Search size={18} />}
-                    ZOEKEN
-                  </button>
-                </div>
+                  {/* Search Form - Same button style as homepage */}
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="flex flex-wrap gap-3 mb-6">
+                    <input
+                      value={branche}
+                      onChange={e => setBranche(e.target.value)}
+                      placeholder="Branch(es) — bijv. restaurant, kapper"
+                      className="flex-1 min-w-[250px] bg-white border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors"
+                    />
+                    <input
+                      value={stad}
+                      onChange={e => setStad(e.target.value)}
+                      placeholder="Stad"
+                      className="w-40 bg-white border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors"
+                    />
+                    <button
+                      onClick={() => zoekBedrijven(false)}
+                      disabled={loading}
+                      className="group px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
+                      ZOEKEN
+                    </button>
+                  </motion.div>
 
-                {/* Feature Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {['Google Places API', 'Multi-Branche', 'CSV Export', 'Lead Opslaan', 'KVK / FB / IG'].map(tag => (
-                    <span key={tag} className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600">{tag}</span>
-                  ))}
-                  <label className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 cursor-pointer hover:border-black transition-colors">
-                    <input type="checkbox" checked={autoSave} onChange={e => setAutoSave(e.target.checked)} className="w-4 h-4 accent-black" />
-                    Auto-opslaan {autoSave ? 'aan' : 'uit'}
-                  </label>
+                  {/* Feature Tags - Same style */}
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex flex-wrap gap-2">
+                    {['Google Places API', 'Multi-Branche', 'CSV Export', 'Lead Opslaan'].map(tag => (
+                      <span key={tag} className="px-3 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-700">{tag}</span>
+                    ))}
+                    <label className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-700 cursor-pointer">
+                      <input type="checkbox" checked={autoSave} onChange={e => setAutoSave(e.target.checked)} className="w-3 h-3 accent-gray-500" />
+                      Auto-opslaan {autoSave ? 'AAN' : 'UIT'}
+                    </label>
+                  </motion.div>
                 </div>
               </div>
             </section>
 
             {/* Results Section */}
             {zoekResultaten.length > 0 && (
-              <section className="section-padding bg-gray-50">
-                <div className="container-yrvante">
+              <section className="py-20 md:py-28 bg-gray-50">
+                <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
                   <div className="flex justify-between items-center mb-8">
-                    <h2 className="font-heading text-3xl">{totaalGevonden} resultaten gevonden</h2>
-                    <button onClick={exportCSV} className="btn-secondary py-2 px-5 text-sm flex items-center gap-2">
-                      <Download size={16} /> CSV Export
+                    <h2 className="text-3xl font-black tracking-tighter">{totaalGevonden} RESULTATEN</h2>
+                    <button onClick={exportCSV} className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all rounded-full flex items-center gap-2">
+                      <Download size={14} /> CSV
                     </button>
                   </div>
                   <div className="grid gap-4">
                     {zoekResultaten.map((lead, i) => (
-                      <div key={lead.place_id || i} className="card-yrvante">
+                      <div key={lead.place_id || i} className="bg-white border border-gray-200 p-6 rounded-2xl hover:border-black transition-all">
                         <div className="flex justify-between">
                           <div>
-                            <h3 className="font-heading text-xl mb-2">{lead.naam}</h3>
+                            <h3 className="text-xl font-bold mb-2">{lead.naam}</h3>
                             <p className="text-gray-500 text-sm flex items-center gap-2 mb-1"><MapPin size={14} />{lead.adres}</p>
-                            {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-black font-medium text-sm flex items-center gap-2 hover:underline"><Phone size={14} />{lead.telefoonnummer}</a>}
+                            {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-gray-700 font-medium text-sm flex items-center gap-2 hover:text-black"><Phone size={14} />{lead.telefoonnummer}</a>}
                           </div>
                           <div className="flex gap-2">
-                            <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-3 border border-gray-200 rounded-full hover:border-black transition-colors"><ExternalLink size={18} className="text-gray-600" /></a>
-                            <button onClick={() => saveLead(lead)} className="p-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"><Save size={18} /></button>
+                            <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-3 border border-gray-200 rounded-full hover:border-black transition-colors"><ExternalLink size={18} /></a>
+                            <button onClick={() => saveLead(lead)} className="p-3 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors"><Save size={18} /></button>
                           </div>
                         </div>
                         <div className="flex gap-6 mt-4 pt-4 border-t border-gray-100">
-                          <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black transition-colors">KVK →</a>
-                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black transition-colors">Facebook →</a>
-                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black transition-colors">Instagram →</a>
+                          <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black">KVK →</a>
+                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black">Facebook →</a>
+                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black">Instagram →</a>
                         </div>
                       </div>
                     ))}
                   </div>
                   {nextPageToken && (
                     <div className="text-center mt-10">
-                      <button onClick={() => zoekBedrijven(true)} disabled={loading} className="btn-secondary flex items-center gap-2 mx-auto">
-                        {loading ? <Loader2 size={18} className="animate-spin" /> : <ChevronDown size={18} />} Meer laden
+                      <button onClick={() => zoekBedrijven(true)} disabled={loading} className="px-8 py-4 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white transition-all rounded-full flex items-center gap-2 mx-auto">
+                        {loading ? <Loader2 size={16} className="animate-spin" /> : <ChevronDown size={16} />} MEER LADEN
                       </button>
                     </div>
                   )}
@@ -353,99 +376,94 @@ const LeadFinderPage = () => {
               </section>
             )}
 
-            {/* How It Works - Yrvante Style */}
-            <section className="section-padding border-t border-gray-100">
-              <div className="container-yrvante">
-                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 text-center mb-12">HOE HET WERKT</p>
+            {/* How It Works */}
+            <section className="py-20 md:py-28 border-t border-gray-100">
+              <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+                <p className="text-xs uppercase tracking-[0.25em] text-gray-400 text-center mb-12">HOE HET WERKT</p>
                 <div className="grid md:grid-cols-3 gap-8">
                   {[
-                    { num: '01', title: 'Voer in', desc: 'Typ een of meerdere branches (komma-gescheiden) en een stad.' },
-                    { num: '02', title: 'Wij zoeken', desc: 'We doorzoeken Google Maps voor bedrijven zonder website.' },
-                    { num: '03', title: 'Bel & Sluit', desc: 'Sla leads op, check FB/IG/KVK, exporteer als CSV of Sheets.' }
+                    { num: '01', title: 'VOER IN', desc: 'Typ een of meerdere branches (komma-gescheiden) en een stad.' },
+                    { num: '02', title: 'WIJ ZOEKEN', desc: 'We doorzoeken Google Maps voor bedrijven zonder website.' },
+                    { num: '03', title: 'BEL & SLUIT', desc: 'Sla leads op, check FB/IG/KVK, exporteer als CSV.' }
                   ].map(step => (
-                    <div key={step.num} className="card-yrvante text-center">
+                    <div key={step.num} className="bg-white border border-gray-200 p-8 rounded-2xl text-center hover:border-black transition-all">
                       <p className="text-xs text-gray-400 mb-4 tracking-wider">{step.num}</p>
-                      <h3 className="font-heading text-2xl mb-3">{step.title}</h3>
+                      <h3 className="text-2xl font-black tracking-tighter mb-3">{step.title}</h3>
                       <p className="text-gray-500">{step.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
-
-            {/* Footer - Yrvante Style */}
-            <footer className="py-8 border-t border-gray-100">
-              <div className="container-yrvante flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <FileText size={16} /> Yrvante Lead Finder
-                </div>
-                <p className="text-sm text-gray-400">© 2026 Yrvante — Smart Web & Software</p>
-                <a href="https://yrvante.com" className="text-sm text-gray-400 hover:text-black transition-colors">yrvante.com →</a>
-              </div>
-            </footer>
           </motion.div>
         )}
 
         {/* MIJN LEADS TAB */}
         {activeTab === 'leads' && (
-          <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
-            <div className="container-yrvante section-padding">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">OPGESLAGEN</p>
+          <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen relative">
+            {/* Background */}
+            <div className="absolute inset-0 -z-10 opacity-20" style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', filter: 'saturate(0.2)' }} />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white/95 to-white/80" />
+            
+            <div className="max-w-[1800px] mx-auto px-6 lg:px-12 py-20">
+              <p className="text-xs uppercase tracking-[0.25em] text-gray-400 mb-4">OPGESLAGEN</p>
               <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
-                <h1 className="font-heading text-5xl md:text-6xl">Mijn Leads <span className="text-gray-300">{opgeslagenLeads.length}</span></h1>
+                <h1 className="text-[10vw] lg:text-[6vw] font-black leading-[0.95] tracking-tighter">
+                  MIJN<br/><span className="text-gray-400">LEADS</span> <span className="text-gray-300">{opgeslagenLeads.length}</span>
+                </h1>
                 <div className="flex flex-wrap items-center gap-2">
                   {['alle', 'nieuw', 'gebeld', 'offerte', 'klant'].map(status => (
                     <button
                       key={status}
                       onClick={() => setStatusFilter(status)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                        statusFilter === status ? 'bg-black text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-[0.1em] transition-all ${
+                        statusFilter === status ? 'bg-gray-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                       }`}
                     >
-                      {status === 'alle' ? 'Alle' : status === 'nieuw' ? 'Nieuw' : status === 'gebeld' ? 'Gebeld' : status === 'offerte' ? 'Offerte gestuurd' : 'Klant geworden'}
+                      {status === 'alle' ? 'Alle' : status}
                     </button>
                   ))}
                   <button onClick={loadLeads} className="p-2 border border-gray-200 rounded-full hover:border-black transition-colors">
-                    <RefreshCw size={18} className="text-gray-600" />
+                    <RefreshCw size={18} />
                   </button>
                 </div>
               </div>
 
               {filteredLeads.length === 0 ? (
-                <div className="card-yrvante text-center py-16">
+                <div className="bg-white border border-gray-200 p-16 rounded-2xl text-center">
                   <Bookmark size={48} className="mx-auto mb-4 text-gray-300" />
-                  <h3 className="font-heading text-2xl mb-2">Nog geen leads opgeslagen</h3>
+                  <h3 className="text-2xl font-black tracking-tighter mb-2">GEEN LEADS</h3>
                   <p className="text-gray-500 mb-6">Zoek bedrijven en sla ze op via de Zoeken tab.</p>
-                  <button onClick={() => setActiveTab('zoeken')} className="btn-primary">
+                  <button onClick={() => setActiveTab('zoeken')} className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full">
                     GA ZOEKEN
                   </button>
                 </div>
               ) : (
                 <div className="grid gap-4">
                   {filteredLeads.map(lead => (
-                    <div key={lead.id} className="card-yrvante">
+                    <div key={lead.id} className="bg-white border border-gray-200 p-6 rounded-2xl hover:border-black transition-all">
                       <div className="flex justify-between">
                         <div className="flex-1">
                           <div className="flex flex-wrap items-center gap-3 mb-2">
-                            <h3 className="font-heading text-xl">{lead.naam}</h3>
+                            <h3 className="text-xl font-bold">{lead.naam}</h3>
                             <select
                               value={lead.status || 'nieuw'}
                               onChange={e => updateLeadStatus(lead.id, e.target.value)}
-                              className="text-xs px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer focus:outline-none focus:border-black transition-colors"
+                              className="text-xs px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer focus:outline-none focus:border-black transition-colors font-bold uppercase"
                             >
                               <option value="nieuw">Nieuw</option>
                               <option value="gebeld">Gebeld</option>
-                              <option value="offerte">Offerte gestuurd</option>
-                              <option value="klant">Klant geworden</option>
+                              <option value="offerte">Offerte</option>
+                              <option value="klant">Klant</option>
                             </select>
                           </div>
                           <p className="text-gray-500 text-sm flex items-center gap-2 mb-1"><MapPin size={14} />{lead.adres}</p>
-                          {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-black font-medium text-sm flex items-center gap-2 hover:underline"><Phone size={14} />{lead.telefoonnummer}</a>}
+                          {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-gray-700 font-medium text-sm flex items-center gap-2 hover:text-black"><Phone size={14} />{lead.telefoonnummer}</a>}
                           <div className="mt-4">
                             {editingLead === lead.id ? (
                               <div className="flex gap-2">
-                                <input value={editNotitie} onChange={e => setEditNotitie(e.target.value)} placeholder="Notitie..." className="input-yrvante py-2 flex-1" autoFocus />
-                                <button onClick={() => updateLeadNotitie(lead.id)} className="p-2 bg-black text-white rounded-full"><Check size={16} /></button>
+                                <input value={editNotitie} onChange={e => setEditNotitie(e.target.value)} placeholder="Notitie..." className="flex-1 bg-white border border-gray-200 rounded-xl focus:border-black outline-none py-2 px-4 transition-colors text-sm" autoFocus />
+                                <button onClick={() => updateLeadNotitie(lead.id)} className="p-2 bg-gray-500 text-white rounded-full"><Check size={16} /></button>
                                 <button onClick={() => setEditingLead(null)} className="p-2 border border-gray-200 rounded-full hover:border-black"><X size={16} /></button>
                               </div>
                             ) : (
@@ -456,7 +474,7 @@ const LeadFinderPage = () => {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-3 border border-gray-200 rounded-full hover:border-black transition-colors"><ExternalLink size={18} className="text-gray-600" /></a>
+                          <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-3 border border-gray-200 rounded-full hover:border-black transition-colors"><ExternalLink size={18} /></a>
                           <button onClick={() => deleteLead(lead.id)} className="p-3 border border-red-200 rounded-full hover:border-red-400 hover:bg-red-50 text-red-500 transition-colors"><Trash2 size={18} /></button>
                         </div>
                       </div>
@@ -465,63 +483,53 @@ const LeadFinderPage = () => {
                 </div>
               )}
             </div>
-
-            {/* Background decoration */}
-            <div className="fixed bottom-0 left-0 right-0 h-64 pointer-events-none opacity-20" style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.2)' }} />
           </motion.div>
         )}
 
         {/* DASHBOARD TAB */}
         {activeTab === 'dashboard' && (
           <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
-            <div className="container-yrvante section-padding">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">OVERZICHT</p>
-              <h1 className="font-heading text-5xl md:text-6xl mb-12">Dashboard</h1>
+            <div className="max-w-[1800px] mx-auto px-6 lg:px-12 py-20">
+              <p className="text-xs uppercase tracking-[0.25em] text-gray-400 mb-4">OVERZICHT</p>
+              <h1 className="text-[10vw] lg:text-[6vw] font-black leading-[0.95] tracking-tighter mb-12">DASHBOARD</h1>
 
               {/* Stats Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                 {[
-                  { label: 'TOTAAL OPGESLAGEN', value: dashboardData?.totaal_leads || 0 },
+                  { label: 'TOTAAL', value: dashboardData?.totaal_leads || 0 },
                   { label: 'NIEUW', value: dashboardData?.status_verdeling?.nieuw || 0 },
                   { label: 'GEBELD', value: dashboardData?.status_verdeling?.gebeld || 0 },
-                  { label: 'KLANT GEWORDEN', value: dashboardData?.status_verdeling?.klant || 0 }
+                  { label: 'KLANT', value: dashboardData?.status_verdeling?.klant || 0 }
                 ].map((stat, i) => (
-                  <div key={i} className="card-yrvante">
+                  <div key={i} className="bg-white border border-gray-200 p-6 rounded-2xl hover:border-black transition-all">
                     <p className="text-xs uppercase tracking-[0.15em] text-gray-400 mb-4">{stat.label}</p>
-                    <p className="font-heading text-5xl">{stat.value}</p>
+                    <p className="text-5xl font-black tracking-tighter">{stat.value}</p>
                   </div>
                 ))}
               </div>
 
               {/* Two Column Layout */}
               <div className="grid md:grid-cols-2 gap-6 mb-10">
-                {/* Status Verdeling */}
-                <div className="card-yrvante">
+                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
                   <p className="text-xs uppercase tracking-[0.15em] text-gray-400 mb-6">STATUS VERDELING</p>
                   <div className="space-y-4">
-                    {[
-                      { label: 'Nieuw', key: 'nieuw' },
-                      { label: 'Gebeld', key: 'gebeld' },
-                      { label: 'Offerte gestuurd', key: 'offerte' },
-                      { label: 'Klant geworden', key: 'klant' }
-                    ].map(item => (
-                      <div key={item.key} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
-                        <span className="text-gray-700">{item.label}</span>
-                        <span className="text-gray-400 font-mono">{dashboardData?.status_verdeling?.[item.key] || 0}</span>
+                    {['nieuw', 'gebeld', 'offerte', 'klant'].map(key => (
+                      <div key={key} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
+                        <span className="text-gray-700 uppercase text-sm font-bold">{key}</span>
+                        <span className="text-gray-400 font-mono">{dashboardData?.status_verdeling?.[key] || 0}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Recente Zoekopdrachten */}
-                <div className="card-yrvante">
+                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
                   <p className="text-xs uppercase tracking-[0.15em] text-gray-400 mb-6">RECENTE ZOEKOPDRACHTEN</p>
                   {dashboardData?.recente_zoekopdrachten?.length > 0 ? (
                     <div className="space-y-4">
                       {dashboardData.recente_zoekopdrachten.slice(0, 5).map((z, i) => (
                         <div key={i} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
                           <span className="text-gray-700">{z.branche} — {z.stad}</span>
-                          <span className="text-gray-400 text-sm">{z.totaal} gevonden</span>
+                          <span className="text-gray-400 text-sm">{z.totaal}</span>
                         </div>
                       ))}
                     </div>
@@ -531,17 +539,17 @@ const LeadFinderPage = () => {
                 </div>
               </div>
 
-              {/* Google Sheets Integration */}
-              <div className="card-yrvante">
+              {/* Export */}
+              <div className="bg-white border border-gray-200 p-6 rounded-2xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center border border-green-100">
-                    <FileText size={20} className="text-green-600" />
+                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                    <FileText size={20} className="text-gray-600" />
                   </div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-gray-400">GOOGLE SHEETS INTEGRATIE</p>
+                  <p className="text-xs uppercase tracking-[0.15em] text-gray-400">EXPORT OPTIONS</p>
                 </div>
-                <p className="text-gray-600 mb-6">Verbind je Google account om leads direct naar Sheets te sturen.</p>
-                <button className="bg-green-600 text-white px-6 py-3 rounded-full font-medium hover:bg-green-700 transition-colors flex items-center gap-2">
-                  <FileText size={18} /> VERBIND MET GOOGLE SHEETS
+                <p className="text-gray-600 mb-6">Exporteer je leads als CSV bestand.</p>
+                <button onClick={exportCSV} className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full flex items-center gap-2">
+                  <Download size={16} /> EXPORT CSV
                 </button>
               </div>
             </div>

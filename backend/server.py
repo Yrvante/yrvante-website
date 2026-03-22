@@ -389,6 +389,126 @@ async def get_pageviews():
         "total": len(pageviews)
     }
 
+# =====================
+# Lead Finder Endpoints (for preview environment)
+# =====================
+
+class LeadFinderAuth(BaseModel):
+    password: str
+
+class LeadCreate(BaseModel):
+    naam: str
+    adres: Optional[str] = ""
+    telefoonnummer: Optional[str] = ""
+    google_maps_url: Optional[str] = ""
+    place_id: Optional[str] = ""
+    branche: Optional[str] = ""
+    stad: Optional[str] = ""
+
+class LeadUpdate(BaseModel):
+    status: Optional[str] = None
+    notitie: Optional[str] = None
+
+@api_router.post("/admin/leadfinder/auth")
+async def leadfinder_auth(data: LeadFinderAuth):
+    if data.password == ADMIN_PASSWORD:
+        return {"success": True}
+    return {"success": False, "error": "Ongeldig wachtwoord"}
+
+@api_router.post("/admin/leadfinder/zoek")
+async def leadfinder_zoek(request: Request):
+    """Search for businesses without websites using Google Places API"""
+    body = await request.json()
+    branche = body.get("branche", "")
+    stad = body.get("stad", "")
+    
+    if not branche or not stad:
+        raise HTTPException(status_code=400, detail="Branche en stad verplicht")
+    
+    # For preview, return mock data since we don't have Google API key here
+    # In production (Vercel), the /api/admin/leadfinder/zoek.js handles this
+    mock_leads = [
+        {
+            "place_id": f"mock_{uuid.uuid4().hex[:8]}",
+            "naam": f"Voorbeeld {branche.title()} {i+1}",
+            "adres": f"Voorbeeldstraat {i+1}, {stad}",
+            "telefoonnummer": f"+31 6 1234567{i}",
+            "google_maps_url": f"https://maps.google.com/?q={branche}+{stad}"
+        }
+        for i in range(3)
+    ]
+    
+    return {
+        "leads": mock_leads,
+        "totaal_gevonden": len(mock_leads),
+        "nextPageToken": None,
+        "note": "Dit zijn voorbeeldresultaten. Echte zoekresultaten werken na deployment op Vercel."
+    }
+
+@api_router.get("/admin/leadfinder/leads")
+async def get_leads():
+    leads = await db.leadfinder_leads.find().sort("opgeslagen_op", -1).to_list(1000)
+    for lead in leads:
+        lead["id"] = str(lead.pop("_id"))
+    return {"leads": leads}
+
+@api_router.post("/admin/leadfinder/leads")
+async def create_lead(lead: LeadCreate):
+    # Check if lead already exists
+    if lead.place_id:
+        existing = await db.leadfinder_leads.find_one({"place_id": lead.place_id})
+        if existing:
+            return {"error": "Lead bestaat al"}
+    
+    lead_doc = {
+        "naam": lead.naam,
+        "adres": lead.adres,
+        "telefoonnummer": lead.telefoonnummer,
+        "google_maps_url": lead.google_maps_url,
+        "place_id": lead.place_id,
+        "branche": lead.branche,
+        "stad": lead.stad,
+        "status": "nieuw",
+        "notitie": "",
+        "opgeslagen_op": datetime.now(timezone.utc)
+    }
+    result = await db.leadfinder_leads.insert_one(lead_doc)
+    return {"id": str(result.inserted_id)}
+
+@api_router.put("/admin/leadfinder/lead/{lead_id}")
+async def update_lead(lead_id: str, data: LeadUpdate):
+    from bson import ObjectId
+    update_doc = {}
+    if data.status is not None:
+        update_doc["status"] = data.status
+    if data.notitie is not None:
+        update_doc["notitie"] = data.notitie
+    
+    if update_doc:
+        await db.leadfinder_leads.update_one({"_id": ObjectId(lead_id)}, {"$set": update_doc})
+    return {"success": True}
+
+@api_router.delete("/admin/leadfinder/lead/{lead_id}")
+async def delete_lead(lead_id: str):
+    from bson import ObjectId
+    await db.leadfinder_leads.delete_one({"_id": ObjectId(lead_id)})
+    return {"success": True}
+
+@api_router.get("/admin/leadfinder/dashboard")
+async def leadfinder_dashboard():
+    leads = await db.leadfinder_leads.find().to_list(1000)
+    
+    status_verdeling = {}
+    for lead in leads:
+        status = lead.get("status", "nieuw")
+        status_verdeling[status] = status_verdeling.get(status, 0) + 1
+    
+    return {
+        "totaal_leads": len(leads),
+        "status_verdeling": status_verdeling,
+        "recente_zoekopdrachten": []
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
