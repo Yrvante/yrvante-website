@@ -143,12 +143,12 @@ async def zoek_leads(req: SearchRequest):
 
     # Save to search history only on first page (no page_token)
     if not req.page_token:
-        await db.search_history.insert_one({
-            "branche": branche,
-            "stad": stad,
-            "totaal": len(all_places),
-            "datum": datetime.now(timezone.utc).isoformat()
-        })
+        # Store only unique branche+stad combos (upsert by date)
+        await db.search_history.update_one(
+            {"branche": branche, "stad": stad},
+            {"$set": {"totaal": len(all_places), "datum": datetime.now(timezone.utc).isoformat()}},
+            upsert=True
+        )
 
     leads = []
     for place in all_places:

@@ -1,100 +1,72 @@
 # Yrvante Lead Finder — PRD
 
 ## Problem Statement
-Build a Lead Finder tool for Yrvante. A webpage where the user can enter an industry (branche) and city (stad). The backend uses Google Places API to find businesses without a website. Show name, address, phone number, and Google Maps link. White/gray design in exact Yrvante.com style. CSV export.
+Build a Lead Finder tool for Yrvante. A webpage where the user can enter an industry (branche) and city (stad). The backend uses Google Places API to find businesses without a website. Show name, address, phone number, and Google Maps link. White/gray design in exact Yrvante.com style.
 
 ---
 
 ## User Personas
-- **Sales professionals** at Yrvante who need leads for businesses without digital presence
-- **Marketing teams** looking for cold outreach targets in specific sectors and cities
-
----
-
-## Core Requirements (Static)
-1. Search form: branche + stad inputs
-2. Backend: Google Places API (New) Text Search + Place Details
-3. Filter: only show businesses WITHOUT a `websiteUri` field
-4. Display: naam, adres, telefoonnummer, Google Maps link
-5. CSV export functionality
-6. Dutch language interface
-7. Exact Yrvante.com visual style
-8. No authentication required
-9. Lead opslaan (MongoDB) with status tracking
-10. Dashboard with statistics
-11. Social quick-search links (Facebook/Instagram via Google)
-12. KVK lookup link per lead
+- **Sales professionals** at Yrvante: find cold-call leads
+- **Marketing teams**: outreach to businesses without digital presence
 
 ---
 
 ## Architecture
 
 ### Backend (FastAPI — /app/backend/server.py)
-- `POST /api/zoek` — zoek op branche + stad via Google Places API
-- `POST /api/leads` — sla lead op in MongoDB
-- `GET /api/leads` — haal opgeslagen leads op (met optioneel status filter)
-- `PUT /api/leads/{id}` — update status/notitie
-- `DELETE /api/leads/{id}` — verwijder lead
-- `GET /api/dashboard` — statistieken (totaal, status verdeling, recente zoekopdrachten)
-- `GET /api/sheets/status` — Google Sheets verbindingsstatus
-- `GET /api/sheets/login` — start Google OAuth flow (vereist credentials)
-- `GET /api/sheets/callback` — OAuth callback
-- `POST /api/sheets/spreadsheet` — sla spreadsheet ID op
-- `POST /api/sheets/append/{lead_id}` — stuur één lead naar Sheets
-- `POST /api/sheets/append-all` — stuur alle leads naar Sheets
+- `POST /api/zoek` — Google Places search with pagination (page_token)
+- `POST /api/leads`, `GET /api/leads`, `PUT /api/leads/{id}`, `DELETE /api/leads/{id}`
+- `GET /api/dashboard` — stats (totaal, status verdeling, recente zoekopdrachten)
+- `POST /api/share`, `GET /api/share/{token}` — shareable read-only report
+- `GET /api/sheets/status`, `GET /api/sheets/login`, `GET /api/sheets/callback`
+- `POST /api/sheets/spreadsheet`, `POST /api/sheets/append/{id}`, `POST /api/sheets/append-all`
 
 ### Frontend (React — /app/frontend/src/App.js)
-- 3 tabs: **Zoeken** (hero + zoekformulier + resultaten), **Mijn Leads** (saved leads), **Dashboard** (stats + Sheets)
-- Per lead in resultaten: Maps, KVK, Facebook, Instagram, Opslaan buttons
-- Telefoons als `tel:` link (klikbaar)
-- Status dropdown: Nieuw/Gebeld/Offerte gestuurd/Klant geworden
-- Notities editen in-line
-- CSV export
-- Exact Yrvante.com stijl (Playfair Display, smoke bg, gray-500 buttons)
+- 3 tabs: Zoeken | Mijn Leads | Dashboard
+- Exact Yrvante.com stijl (Playfair Display, smoke achtergrond, gray buttons)
 
 ### External Services
-- Google Places API (New) — Text Search
-- Google Sheets API (OAuth 2.0 — requires user credentials)
+- Google Places API (New) — key: AIzaSyDn1y6-aOzY8NXaTdJAPL0GqI_5rl5XMEM
+- Google Sheets API + OAuth 2.0 — Client ID: 1080002902278-vuti2bp60rhhda3e8v2tc5a755asti2k
 
 ---
 
 ## What's Been Implemented
 
-### MVP Complete (March 2026)
-- ✅ Google Places API search + website filtering
-- ✅ Results table: naam, adres, telefoon, Maps link
-- ✅ CSV export
-- ✅ Exact Yrvante.com visual style
-- ✅ Lead opslaan in MongoDB
-- ✅ Status tracking (Nieuw/Gebeld/Offerte gestuurd/Klant geworden)
-- ✅ Notities per lead
-- ✅ Dashboard (totaal, status verdeling, recente zoekopdrachten)
-- ✅ Social quick links: Facebook + Instagram via Google Search
-- ✅ KVK lookup link
-- ✅ Click-to-call telefoonnummers
-- ✅ Search history opslaan
-- ✅ Google Sheets backend (wacht op OAuth credentials)
-- ✅ 3-tab navigatie
+### Complete Feature Set (March 2026)
+- ✅ Google Places search (20 per page)
+- ✅ Paginatie: "Laad meer" button (nextPageToken)
+- ✅ Lead opslaan in MongoDB (status: Nieuw/Gebeld/Offerte gestuurd/Klant geworden)
+- ✅ Notities per lead (inline editen)
+- ✅ Status tracking
+- ✅ Dashboard (stats, status verdeling, recente zoekopdrachten)
+- ✅ CSV export (zoekresultaten + opgeslagen leads)
+- ✅ Deel rapport: shareable read-only URL (/share/{token})
+- ✅ Social links: Facebook + Instagram via Google Search
+- ✅ KVK lookup link (opens kvk.nl with search)
+- ✅ Click-to-call telefoonnummers (tel: links)
+- ✅ Google Sheets OAuth geconfigureerd (Client ID + Secret in .env)
+  - "Verbind met Google Sheets" button in Dashboard
+  - Per lead "Sheets" button (na verbinden)
+  - "Exporteer alle leads → Sheets" button
+- ✅ Exact Yrvante.com stijl
 
 ### Test Results
-- Iteration 2: 100% (basic search)
-- Iteration 3: 100% backend (8/8) + 100% frontend
+- Iteration 2: 100%
+- Iteration 3: 100%
+- Iteration 4: 100% backend (7/7) + 100% frontend
 
 ---
 
 ## Prioritized Backlog
 
-### P0 — Done
-- ✅ Alle bovenstaande features
-
-### P1 — In Progress / Needs Action
-- [ ] Google Sheets OAuth: vereist GOOGLE_SHEETS_CLIENT_ID + GOOGLE_SHEETS_CLIENT_SECRET + SHEETS_REDIRECT_URI in backend/.env
-  - Setup: Google Cloud Console → Enable Sheets API → OAuth credentials
-  - Redirect URI: https://{app-url}/api/sheets/callback
+### P1 — Volgende stappen
+- [ ] Google Sheets: gebruiker moet OAuth flow doorlopen (klik "Verbind" in Dashboard)
+- [ ] Spreadsheet ID instellen na OAuth verbinding
+- [ ] KVK realtime (technisch niet haalbaar zonder dedicated Playwright infrastructure)
 
 ### P2 — Future
-- [ ] Pagination ("Laad meer") voor meer dan 60 resultaten
-- [ ] KVK realtime scraping (momenteel link button, JS-rendering blokkeert server-side scraping)
-- [ ] Filter resultaten per stad/branche in Mijn Leads
 - [ ] Bulk status update
-- [ ] Email leads rechtstreeks vanuit de tool
+- [ ] Email leads direct vanuit de tool
+- [ ] Meer branchen tegelijk zoeken
+- [ ] Gedeeld rapport: notities tonen
