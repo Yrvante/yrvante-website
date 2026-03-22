@@ -1,0 +1,109 @@
+{
+  "project_name": "Yrvante Lead Finder",
+  "design_philosophy": {
+    "name": "Swiss Architectural Minimalism",
+    "core_principles": [
+      "Content is King: The data (leads) is the hero. Remove all distractions.",
+      "Strict Grid: Everything aligns perfectly. Use a 12-column grid.",
+      "High Contrast: Black text on White background. No soft grays for essential text.",
+      "Typography as UI: Font weight and size define hierarchy, not colored badges."
+    ],
+    "vibe": "Professional, Precise, Architectural, 'The Truth'"
+  },
+  "typography": {
+    "font_family_headings": "Playfair Display, serif",
+    "font_family_body": "Inter, sans-serif",
+    "font_family_mono": "JetBrains Mono, monospace",
+    "rules": [
+      "HEADINGS (Playfair Display): Use for H1, H2, and Hero text. Tracking: -0.02em. Weight: SemiBold (600) or Bold (700).",
+      "BODY (Inter): Use for all functional text, inputs, and tables. Tracking: Normal. Weight: Regular (400) or Medium (500).",
+      "DATA (Inter/Mono): Phone numbers and addresses should be tabular numerals."
+    ]
+  },
+  "colors": {
+    "theme": "light",
+    "palette": {
+      "background": "#FFFFFF",
+      "surface": "#F9FAFB",
+      "surface_hover": "#F3F4F6",
+      "border": "#E5E7EB",
+      "text_primary": "#111827",
+      "text_secondary": "#6B7280",
+      "text_tertiary": "#9CA3AF",
+      "primary": "#111827",
+      "primary_foreground": "#FFFFFF",
+      "accent": "#F3F4F6",
+      "destructive": "#EF4444",
+      "success": "#10B981",
+      "warning": "#F59E0B"
+    },
+    "usage": [
+      "NO GRADIENTS. Solid colors only.",
+      "Primary Action Button: Solid Black (#111827) with White Text.",
+      "Secondary Button: White with 1px Border (#E5E7EB) and Black Text.",
+      "Background: Pure White (#FFFFFF) for the main card/container, Light Gray (#F9FAFB) for the page background."
+    ]
+  },
+  "layout": {
+    "grid_system": "12-column grid, gap-4 or gap-8.",
+    "spacing_scale": "Tailwind standard (p-4, p-6, p-8). Use p-8+ for section padding.",
+    "container_width": "max-w-5xl mx-auto",
+    "radius": "rounded-none"
+  },
+  "components": {
+    "Logo": {
+      "type": "svg",
+      "icon": "code",
+      "shape": "circle",
+      "style": "Minimalist, stroke-width-2",
+      "instruction": "Create an SVG component. Circle with a '</>' icon inside. Black stroke, transparent fill."
+    },
+    "SearchForm": {
+      "style": "Hero-centered. Large input fields.",
+      "layout": "Vertical stack on mobile, Horizontal row on desktop.",
+      "input_height": "h-14",
+      "shadow": "shadow-sm"
+    },
+    "ResultsTable": {
+      "style": "Clean rows, no vertical borders.",
+      "header_style": "Uppercase, text-xs, tracking-wider, text-gray-500, font-medium.",
+      "row_style": "Hover: bg-gray-50. Border-b border-gray-100.",
+      "columns": ["Bedrijfsnaam", "Adres", "Telefoonnummer", "Acties"]
+    },
+    "EmptyState": {
+      "style": "Minimalist, architectural.",
+      "content": "Use abstract building imagery or simple geometric icons."
+    },
+    "Buttons": {
+      "style": "Sharp corners (rounded-none) or very tight (rounded-sm).",
+      "hover": "translate-y-[-1px] transition-transform"
+    }
+  },
+  "visual_enhancers": {
+    "noise_texture": "Add a subtle noise texture to the body background (opacity 0.03) to reduce digital sterility.",
+    "borders": "Use 1px borders for separation instead of shadows.",
+    "micro_interactions": "Smooth transitions on hover for table rows and buttons."
+  },
+  "images": {
+    "empty_state_bg": "https://images.unsplash.com/photo-1771337745629-e6296ea3cb7a?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "hero_bg_texture": "https://images.unsplash.com/photo-1760236365577-ae02e8524a74?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "instruction": "Use these images with grayscale filter or low opacity as background elements if needed."
+  },
+  "instructions_to_main_agent": [
+    "INSTALL 'lucide-react' for icons.",
+    "USE 'sonner' for toast notifications (loading, success, error).",
+    "SET UP Shadcn with 'slate' or 'gray' base color.",
+    "OVERRIDE Shadcn radius to '0' or '0.2rem' in tailwind.config.js for that 'strakke' look.",
+    "Ensure the interface is in DUTCH.",
+    "Implement the CSV Export logic using a simple 'blob' download function.",
+    "MOCK the Google Places API call for the MVP if no API key is provided, but structure the code to swap it easily.",
+    "The 'No Website' logic: The backend should filter results where 'website' field is missing."
+  ],
+  "universal_guidelines": [
+    "Don't make generic centered layouts. Use asymmetry where possible, though the Search Hero can be centered for focus.",
+    "Create depth through z-index and border-colors, not heavy shadows.",
+    "Use 'data-testid' on all interactive elements.",
+    "Do NOT use 'transition: all'. Animate specific properties.",
+    "Respect the 'No Auth' rule. The tool is open."
+  ]
+}
