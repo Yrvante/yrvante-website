@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import { 
   Search, Phone, MapPin, ExternalLink, Save, Trash2, Edit2, Check, X, 
   Download, ChevronDown, BarChart3, Users, Lock, ArrowLeft, Loader2, RefreshCw
@@ -8,31 +9,14 @@ import {
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api/admin/leadfinder`;
+const LOGO_URL = "/logo-nav.png";
 
 const statusColors = {
-  'nieuw': { bg: 'rgba(59, 130, 246, 0.15)', text: '#60a5fa', border: 'rgba(59, 130, 246, 0.3)' },
-  'gebeld': { bg: 'rgba(234, 179, 8, 0.15)', text: '#facc15', border: 'rgba(234, 179, 8, 0.3)' },
-  'offerte': { bg: 'rgba(168, 85, 247, 0.15)', text: '#c084fc', border: 'rgba(168, 85, 247, 0.3)' },
-  'klant': { bg: 'rgba(34, 197, 94, 0.15)', text: '#4ade80', border: 'rgba(34, 197, 94, 0.3)' },
-  'afgewezen': { bg: 'rgba(239, 68, 68, 0.15)', text: '#f87171', border: 'rgba(239, 68, 68, 0.3)' }
-};
-
-const s = {
-  container: { minHeight: '100vh', background: '#0a0a0a', color: '#fff', fontFamily: 'Inter, system-ui, sans-serif' },
-  nav: { position: 'sticky', top: 0, zIndex: 50, background: 'rgba(10,10,10,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.08)' },
-  navInner: { maxWidth: 1400, margin: '0 auto', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
-  tabs: { display: 'flex', gap: 8 },
-  tab: { padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', border: 'none' },
-  tabActive: { background: '#fff', color: '#000' },
-  tabInactive: { background: 'transparent', color: '#9ca3af', border: '1px solid rgba(255,255,255,0.1)' },
-  main: { maxWidth: 1400, margin: '0 auto', padding: '32px 24px' },
-  card: { background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.08)', padding: 24 },
-  input: { width: '100%', padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)', color: '#fff', fontSize: 15, outline: 'none' },
-  button: { padding: '14px 28px', borderRadius: 12, fontWeight: 600, fontSize: 15, cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center', border: 'none' },
-  buttonPrimary: { background: '#fff', color: '#000', border: 'none' },
-  buttonSecondary: { background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' },
-  heading: { fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1 },
-  label: { fontSize: 13, color: '#9ca3af', marginBottom: 8, display: 'block', textTransform: 'uppercase', letterSpacing: '0.05em' },
+  'nieuw': { bg: '#EBF5FF', text: '#2563eb', border: '#BFDBFE' },
+  'gebeld': { bg: '#FEF9C3', text: '#CA8A04', border: '#FDE047' },
+  'offerte': { bg: '#F3E8FF', text: '#9333EA', border: '#D8B4FE' },
+  'klant': { bg: '#DCFCE7', text: '#16A34A', border: '#86EFAC' },
+  'afgewezen': { bg: '#FEE2E2', text: '#DC2626', border: '#FECACA' }
 };
 
 const LeadFinderPage = () => {
@@ -77,7 +61,7 @@ const LeadFinderPage = () => {
       if (data.success) {
         setIsAuthenticated(true);
         localStorage.setItem('leadfinder_auth', 'true');
-        toast.success('Welkom bij Lead Finder!');
+        toast.success('Welkom!');
       } else {
         setAuthError('Ongeldig wachtwoord');
       }
@@ -175,151 +159,330 @@ const LeadFinderPage = () => {
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download = `leads_${new Date().toISOString().split('T')[0]}.csv`; a.click();
   };
 
+  // Login Screen - Yrvante Style
   if (!isAuthenticated) {
     return (
-      <div style={{...s.container, display:'flex', alignItems:'center', justifyContent:'center'}}>
-        <Toaster position="top-right" theme="dark" />
-        <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} style={{width:'100%',maxWidth:400,padding:24}}>
-          <div style={{textAlign:'center',marginBottom:40}}>
-            <Lock size={48} style={{color:'#9ca3af',marginBottom:16}} />
-            <h1 style={{...s.heading,fontSize:28,marginBottom:8}}>Lead Finder</h1>
-            <p style={{color:'#9ca3af',fontSize:14}}>Voer het wachtwoord in</p>
-          </div>
-          <form onSubmit={handleLogin}>
-            <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Wachtwoord" style={{...s.input,marginBottom:16}} autoFocus />
-            {authError && <p style={{color:'#f87171',fontSize:14,marginBottom:16}}>{authError}</p>}
-            <button type="submit" style={{...s.button,...s.buttonPrimary,width:'100%'}}>Inloggen</button>
-          </form>
-          <div style={{textAlign:'center',marginTop:24}}>
-            <a href="/" style={{color:'#9ca3af',fontSize:14,textDecoration:'none',display:'flex',alignItems:'center',justifyContent:'center',gap:8}}><ArrowLeft size={14} />Terug naar home</a>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md"
+        >
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+            <div className="text-center mb-8">
+              <Link to="/">
+                <img src={LOGO_URL} alt="Yrvante" className="h-8 mx-auto mb-6" />
+              </Link>
+              <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Lock className="text-gray-400" size={28} />
+              </div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+              <p className="text-gray-500 text-sm">Voer het wachtwoord in om door te gaan</p>
+            </div>
+            <form onSubmit={handleLogin}>
+              <input 
+                type="password" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                placeholder="Wachtwoord" 
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gray-400 focus:outline-none text-gray-900 mb-4"
+                autoFocus 
+              />
+              {authError && <p className="text-red-500 text-sm mb-4">{authError}</p>}
+              <button 
+                type="submit" 
+                className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"
+              >
+                Inloggen
+              </button>
+            </form>
+            <div className="text-center mt-6">
+              <Link to="/" className="text-gray-500 text-sm hover:text-gray-700 flex items-center justify-center gap-2">
+                <ArrowLeft size={14} />
+                Terug naar home
+              </Link>
+            </div>
           </div>
         </motion.div>
       </div>
     );
   }
 
+  // Main Dashboard - Yrvante Style
   return (
-    <div style={s.container}>
-      <Toaster position="top-right" theme="dark" />
-      <nav style={s.nav}>
-        <div style={s.navInner}>
-          <div style={{display:'flex',alignItems:'center',gap:16}}>
-            <h1 style={{...s.heading,fontSize:20}}>Lead Finder</h1>
-            <span style={{fontSize:12,color:'#6b7280',background:'rgba(255,255,255,0.05)',padding:'4px 8px',borderRadius:4}}>by Yrvante</span>
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link to="/">
+                <img src={LOGO_URL} alt="Yrvante" className="h-6" />
+              </Link>
+              <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">Admin Dashboard</span>
+            </div>
+            
+            {/* Tabs */}
+            <div className="flex gap-2">
+              {[
+                { id: 'zoeken', label: 'Zoeken', icon: Search },
+                { id: 'leads', label: 'Leads', icon: Users },
+                { id: 'dashboard', label: 'Overzicht', icon: BarChart3 }
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    activeTab === tab.id 
+                      ? 'bg-black text-white' 
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  <tab.icon size={16} />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            
+            <button 
+              onClick={logout}
+              className="text-sm text-gray-500 hover:text-gray-700 px-4 py-2 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+            >
+              Uitloggen
+            </button>
           </div>
-          <div style={s.tabs}>
-            {['zoeken','leads','dashboard'].map(tab=>(
-              <button key={tab} onClick={()=>setActiveTab(tab)} style={{...s.tab,...(activeTab===tab?s.tabActive:s.tabInactive)}}>
-                {tab==='zoeken'&&<Search size={16}/>}{tab==='leads'&&<Users size={16}/>}{tab==='dashboard'&&<BarChart3 size={16}/>}
-                <span style={{marginLeft:6,textTransform:'capitalize'}}>{tab}</span>
-              </button>
-            ))}
-          </div>
-          <button onClick={logout} style={{...s.button,...s.buttonSecondary,padding:'8px 16px'}}>Uitloggen</button>
         </div>
       </nav>
 
-      <main style={s.main}>
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-6 py-8">
         <AnimatePresence mode="wait">
-          {activeTab==='zoeken'&&(
-            <motion.div key="zoeken" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
-              <div style={{textAlign:'center',marginBottom:48}}>
-                <h2 style={{...s.heading,fontSize:48,marginBottom:16,lineHeight:0.9}}>
-                  <span style={{display:'block'}}>VIND</span><span style={{display:'block'}}>BEDRIJVEN</span>
-                  <span style={{display:'block',color:'#6b7280'}}>ZONDER</span><span style={{display:'block',color:'#6b7280'}}>WEBSITE.</span>
-                </h2>
+          {/* Search Tab */}
+          {activeTab === 'zoeken' && (
+            <motion.div key="zoeken" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              {/* Hero */}
+              <div className="text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  Vind Bedrijven<br />
+                  <span className="text-gray-400">Zonder Website</span>
+                </h1>
+                <p className="text-gray-500">Zoek potentiële klanten via Google Maps</p>
               </div>
-              <div style={{...s.card,maxWidth:600,margin:'0 auto 32px'}}>
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,marginBottom:16}}>
-                  <div><label style={s.label}>Branche</label><input value={branche} onChange={e=>setBranche(e.target.value)} placeholder="kapper, restaurant..." style={s.input}/></div>
-                  <div><label style={s.label}>Stad</label><input value={stad} onChange={e=>setStad(e.target.value)} placeholder="Amsterdam..." style={s.input}/></div>
+
+              {/* Search Form */}
+              <div className="bg-white rounded-2xl border border-gray-100 p-6 max-w-2xl mx-auto mb-8">
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 block">Branche</label>
+                    <input 
+                      value={branche} 
+                      onChange={e => setBranche(e.target.value)} 
+                      placeholder="kapper, restaurant..." 
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gray-400 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 block">Stad</label>
+                    <input 
+                      value={stad} 
+                      onChange={e => setStad(e.target.value)} 
+                      placeholder="Amsterdam..." 
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gray-400 focus:outline-none"
+                    />
+                  </div>
                 </div>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                  <label style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer'}}>
-                    <input type="checkbox" checked={autoSave} onChange={e=>setAutoSave(e.target.checked)} style={{width:18,height:18}}/>
-                    <span style={{fontSize:14,color:'#9ca3af'}}>Auto-opslaan</span>
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600">
+                    <input 
+                      type="checkbox" 
+                      checked={autoSave} 
+                      onChange={e => setAutoSave(e.target.checked)} 
+                      className="w-4 h-4 rounded"
+                    />
+                    Auto-opslaan
                   </label>
-                  <button onClick={()=>zoekBedrijven(false)} disabled={loading} style={{...s.button,...s.buttonPrimary}}>
-                    {loading?<Loader2 size={18} className="animate-spin"/>:<Search size={18}/>}Zoeken
+                  <button 
+                    onClick={() => zoekBedrijven(false)} 
+                    disabled={loading}
+                    className="flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-50"
+                  >
+                    {loading ? <Loader2 size={18} className="animate-spin" /> : <Search size={18} />}
+                    Zoeken
                   </button>
                 </div>
               </div>
-              {zoekResultaten.length>0&&(
+
+              {/* Results */}
+              {zoekResultaten.length > 0 && (
                 <div>
-                  <div style={{display:'flex',justifyContent:'space-between',marginBottom:16}}>
-                    <p style={{color:'#9ca3af'}}>{totaalGevonden} resultaten</p>
-                    <button onClick={exportCSV} style={{...s.button,...s.buttonSecondary,padding:'8px 16px'}}><Download size={16}/>CSV</button>
+                  <div className="flex justify-between items-center mb-4">
+                    <p className="text-gray-500">{totaalGevonden} resultaten zonder website</p>
+                    <button 
+                      onClick={exportCSV}
+                      className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+                    >
+                      <Download size={16} />
+                      Export CSV
+                    </button>
                   </div>
-                  <div style={{display:'grid',gap:12}}>
-                    {zoekResultaten.map((lead,i)=>(
-                      <div key={lead.place_id||i} style={s.card}>
-                        <div style={{display:'flex',justifyContent:'space-between'}}>
+                  <div className="grid gap-4">
+                    {zoekResultaten.map((lead, i) => (
+                      <div key={lead.place_id || i} className="bg-white rounded-xl border border-gray-100 p-5 hover:border-gray-200 transition-colors">
+                        <div className="flex justify-between">
                           <div>
-                            <h3 style={{fontWeight:600,fontSize:18,marginBottom:8}}>{lead.naam}</h3>
-                            <p style={{color:'#9ca3af',fontSize:14,display:'flex',alignItems:'center',gap:6}}><MapPin size={14}/>{lead.adres}</p>
-                            {lead.telefoonnummer&&<a href={`tel:${lead.telefoonnummer}`} style={{color:'#60a5fa',fontSize:14,display:'flex',alignItems:'center',gap:6,marginTop:4}}><Phone size={14}/>{lead.telefoonnummer}</a>}
+                            <h3 className="font-semibold text-gray-900 text-lg mb-2">{lead.naam}</h3>
+                            <p className="text-gray-500 text-sm flex items-center gap-2 mb-1">
+                              <MapPin size={14} />{lead.adres}
+                            </p>
+                            {lead.telefoonnummer && (
+                              <a href={`tel:${lead.telefoonnummer}`} className="text-blue-600 text-sm flex items-center gap-2">
+                                <Phone size={14} />{lead.telefoonnummer}
+                              </a>
+                            )}
                           </div>
-                          <div style={{display:'flex',gap:8}}>
-                            <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" style={{...s.button,...s.buttonSecondary,padding:'8px 12px'}}><ExternalLink size={16}/></a>
-                            <button onClick={()=>saveLead(lead)} style={{...s.button,...s.buttonPrimary,padding:'8px 12px'}}><Save size={16}/></button>
+                          <div className="flex gap-2">
+                            <a 
+                              href={lead.google_maps_url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="p-2 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+                            >
+                              <ExternalLink size={18} className="text-gray-600" />
+                            </a>
+                            <button 
+                              onClick={() => saveLead(lead)}
+                              className="p-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                            >
+                              <Save size={18} />
+                            </button>
                           </div>
                         </div>
-                        <div style={{display:'flex',gap:8,marginTop:12,paddingTop:12,borderTop:'1px solid rgba(255,255,255,0.08)'}}>
-                          <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:'#9ca3af',textDecoration:'none'}}>KVK →</a>
-                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam+' '+stad+' facebook')}`} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:'#9ca3af',textDecoration:'none'}}>Facebook →</a>
-                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam+' '+stad+' instagram')}`} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:'#9ca3af',textDecoration:'none'}}>Instagram →</a>
+                        <div className="flex gap-4 mt-4 pt-4 border-t border-gray-100">
+                          <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-gray-700">KVK →</a>
+                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' ' + stad + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-gray-700">Facebook →</a>
+                          <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' ' + stad + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-gray-700">Instagram →</a>
                         </div>
                       </div>
                     ))}
                   </div>
-                  {nextPageToken&&<div style={{textAlign:'center',marginTop:24}}><button onClick={()=>zoekBedrijven(true)} disabled={loading} style={{...s.button,...s.buttonSecondary}}>{loading?<Loader2 size={18}/>:<ChevronDown size={18}/>}Laad meer</button></div>}
+                  {nextPageToken && (
+                    <div className="text-center mt-6">
+                      <button 
+                        onClick={() => zoekBedrijven(true)} 
+                        disabled={loading}
+                        className="flex items-center gap-2 px-6 py-3 mx-auto border border-gray-200 rounded-xl hover:border-gray-300 transition-colors"
+                      >
+                        {loading ? <Loader2 size={18} className="animate-spin" /> : <ChevronDown size={18} />}
+                        Laad meer
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </motion.div>
           )}
 
-          {activeTab==='leads'&&(
-            <motion.div key="leads" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
-              <div style={{display:'flex',justifyContent:'space-between',marginBottom:24}}>
-                <h2 style={{...s.heading,fontSize:24}}>Opgeslagen Leads ({opgeslagenLeads.length})</h2>
-                <div style={{display:'flex',gap:8}}>
-                  <button onClick={exportCSV} style={{...s.button,...s.buttonSecondary,padding:'8px 16px'}}><Download size={16}/>CSV</button>
-                  <button onClick={loadLeads} style={{...s.button,...s.buttonSecondary,padding:'8px 16px'}}><RefreshCw size={16}/></button>
+          {/* Leads Tab */}
+          {activeTab === 'leads' && (
+            <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">Opgeslagen Leads ({opgeslagenLeads.length})</h2>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={exportCSV}
+                    className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-gray-300"
+                  >
+                    <Download size={16} />
+                    CSV
+                  </button>
+                  <button 
+                    onClick={loadLeads}
+                    className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-gray-300"
+                  >
+                    <RefreshCw size={16} />
+                  </button>
                 </div>
               </div>
-              {opgeslagenLeads.length===0?(
-                <div style={{...s.card,textAlign:'center',padding:48}}><Users size={48} style={{color:'#6b7280',marginBottom:16}}/><p style={{color:'#9ca3af'}}>Nog geen leads</p></div>
-              ):(
-                <div style={{display:'grid',gap:12}}>
-                  {opgeslagenLeads.map(lead=>(
-                    <div key={lead.id} style={s.card}>
-                      <div style={{display:'flex',justifyContent:'space-between'}}>
-                        <div style={{flex:1}}>
-                          <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:8}}>
-                            <h3 style={{fontWeight:600,fontSize:18}}>{lead.naam}</h3>
-                            <select value={lead.status||'nieuw'} onChange={e=>updateLeadStatus(lead.id,e.target.value)} style={{padding:'4px 8px',borderRadius:6,fontSize:12,border:`1px solid ${statusColors[lead.status||'nieuw'].border}`,background:statusColors[lead.status||'nieuw'].bg,color:statusColors[lead.status||'nieuw'].text,cursor:'pointer'}}>
-                              <option value="nieuw">Nieuw</option><option value="gebeld">Gebeld</option><option value="offerte">Offerte</option><option value="klant">Klant</option><option value="afgewezen">Afgewezen</option>
+
+              {opgeslagenLeads.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
+                  <Users size={48} className="text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500">Nog geen leads opgeslagen</p>
+                </div>
+              ) : (
+                <div className="grid gap-4">
+                  {opgeslagenLeads.map(lead => (
+                    <div key={lead.id} className="bg-white rounded-xl border border-gray-100 p-5">
+                      <div className="flex justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="font-semibold text-gray-900 text-lg">{lead.naam}</h3>
+                            <select 
+                              value={lead.status || 'nieuw'} 
+                              onChange={e => updateLeadStatus(lead.id, e.target.value)}
+                              className="text-xs px-2 py-1 rounded-lg border cursor-pointer"
+                              style={{
+                                backgroundColor: statusColors[lead.status || 'nieuw'].bg,
+                                borderColor: statusColors[lead.status || 'nieuw'].border,
+                                color: statusColors[lead.status || 'nieuw'].text
+                              }}
+                            >
+                              <option value="nieuw">Nieuw</option>
+                              <option value="gebeld">Gebeld</option>
+                              <option value="offerte">Offerte</option>
+                              <option value="klant">Klant</option>
+                              <option value="afgewezen">Afgewezen</option>
                             </select>
                           </div>
-                          <p style={{color:'#9ca3af',fontSize:14,display:'flex',alignItems:'center',gap:6}}><MapPin size={14}/>{lead.adres}</p>
-                          {lead.telefoonnummer&&<a href={`tel:${lead.telefoonnummer}`} style={{color:'#60a5fa',fontSize:14,display:'flex',alignItems:'center',gap:6,marginTop:4}}><Phone size={14}/>{lead.telefoonnummer}</a>}
-                          <div style={{marginTop:12}}>
-                            {editingLead===lead.id?(
-                              <div style={{display:'flex',gap:8}}>
-                                <input value={editNotitie} onChange={e=>setEditNotitie(e.target.value)} placeholder="Notitie..." style={{...s.input,padding:'8px 12px',fontSize:13}} autoFocus/>
-                                <button onClick={()=>updateLeadNotitie(lead.id)} style={{...s.button,...s.buttonPrimary,padding:'8px 12px'}}><Check size={16}/></button>
-                                <button onClick={()=>setEditingLead(null)} style={{...s.button,...s.buttonSecondary,padding:'8px 12px'}}><X size={16}/></button>
+                          <p className="text-gray-500 text-sm flex items-center gap-2 mb-1">
+                            <MapPin size={14} />{lead.adres}
+                          </p>
+                          {lead.telefoonnummer && (
+                            <a href={`tel:${lead.telefoonnummer}`} className="text-blue-600 text-sm flex items-center gap-2">
+                              <Phone size={14} />{lead.telefoonnummer}
+                            </a>
+                          )}
+                          
+                          {/* Notitie */}
+                          <div className="mt-3">
+                            {editingLead === lead.id ? (
+                              <div className="flex gap-2">
+                                <input 
+                                  value={editNotitie} 
+                                  onChange={e => setEditNotitie(e.target.value)} 
+                                  placeholder="Notitie..." 
+                                  className="flex-1 px-3 py-2 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-gray-400"
+                                  autoFocus
+                                />
+                                <button onClick={() => updateLeadNotitie(lead.id)} className="p-2 bg-black text-white rounded-lg"><Check size={16} /></button>
+                                <button onClick={() => setEditingLead(null)} className="p-2 border border-gray-200 rounded-lg"><X size={16} /></button>
                               </div>
-                            ):(
-                              <div onClick={()=>{setEditingLead(lead.id);setEditNotitie(lead.notitie||'')}} style={{fontSize:13,color:lead.notitie?'#d1d5db':'#6b7280',cursor:'pointer',display:'flex',alignItems:'center',gap:6}}>
-                                <Edit2 size={12}/>{lead.notitie||'Klik voor notitie...'}
+                            ) : (
+                              <div 
+                                onClick={() => { setEditingLead(lead.id); setEditNotitie(lead.notitie || ''); }}
+                                className="text-sm text-gray-500 cursor-pointer flex items-center gap-2 hover:text-gray-700"
+                              >
+                                <Edit2 size={12} />
+                                {lead.notitie || 'Klik voor notitie...'}
                               </div>
                             )}
                           </div>
                         </div>
-                        <div style={{display:'flex',gap:8}}>
-                          <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" style={{...s.button,...s.buttonSecondary,padding:'8px 12px'}}><ExternalLink size={16}/></a>
-                          <button onClick={()=>deleteLead(lead.id)} style={{...s.button,padding:'8px 12px',background:'rgba(239,68,68,0.1)',border:'1px solid rgba(239,68,68,0.3)',color:'#f87171'}}><Trash2 size={16}/></button>
+                        <div className="flex gap-2">
+                          <a 
+                            href={lead.google_maps_url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="p-2 border border-gray-200 rounded-lg hover:border-gray-300"
+                          >
+                            <ExternalLink size={18} className="text-gray-600" />
+                          </a>
+                          <button 
+                            onClick={() => deleteLead(lead.id)}
+                            className="p-2 border border-red-200 rounded-lg hover:border-red-300 text-red-500"
+                          >
+                            <Trash2 size={18} />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -329,21 +492,34 @@ const LeadFinderPage = () => {
             </motion.div>
           )}
 
-          {activeTab==='dashboard'&&(
-            <motion.div key="dashboard" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
-              <h2 style={{...s.heading,fontSize:24,marginBottom:24}}>Dashboard</h2>
-              {dashboardData&&(
-                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:16,marginBottom:32}}>
-                  <div style={s.card}><p style={{color:'#9ca3af',fontSize:12,textTransform:'uppercase',marginBottom:8}}>Totaal Leads</p><p style={{...s.heading,fontSize:36}}>{dashboardData.totaal_leads}</p></div>
-                  {Object.entries(dashboardData.status_verdeling||{}).map(([status,count])=>(
-                    <div key={status} style={s.card}><p style={{color:'#9ca3af',fontSize:12,textTransform:'uppercase',marginBottom:8}}>{status}</p><p style={{...s.heading,fontSize:36,color:statusColors[status]?.text||'#fff'}}>{count}</p></div>
+          {/* Dashboard Tab */}
+          {activeTab === 'dashboard' && (
+            <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Overzicht</h2>
+              
+              {dashboardData && (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+                  <div className="bg-white rounded-xl border border-gray-100 p-5">
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Totaal</p>
+                    <p className="text-3xl font-bold text-gray-900">{dashboardData.totaal_leads}</p>
+                  </div>
+                  {Object.entries(dashboardData.status_verdeling || {}).map(([status, count]) => (
+                    <div key={status} className="bg-white rounded-xl border border-gray-100 p-5">
+                      <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">{status}</p>
+                      <p className="text-3xl font-bold" style={{ color: statusColors[status]?.text || '#000' }}>{count}</p>
+                    </div>
                   ))}
                 </div>
               )}
-              {dashboardData?.recente_zoekopdrachten?.length>0&&(
-                <div style={s.card}><h3 style={{fontWeight:600,marginBottom:16}}>Recente Zoekopdrachten</h3>
-                  {dashboardData.recente_zoekopdrachten.slice(0,5).map((z,i)=>(
-                    <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid rgba(255,255,255,0.05)'}}><span>{z.branche} in {z.stad}</span><span style={{color:'#9ca3af'}}>{z.totaal} resultaten</span></div>
+
+              {dashboardData?.recente_zoekopdrachten?.length > 0 && (
+                <div className="bg-white rounded-xl border border-gray-100 p-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">Recente Zoekopdrachten</h3>
+                  {dashboardData.recente_zoekopdrachten.slice(0, 5).map((z, i) => (
+                    <div key={i} className="flex justify-between py-3 border-b border-gray-50 last:border-0">
+                      <span className="text-gray-700">{z.branche} in {z.stad}</span>
+                      <span className="text-gray-500">{z.totaal} resultaten</span>
+                    </div>
                   ))}
                 </div>
               )}
