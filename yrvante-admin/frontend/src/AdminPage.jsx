@@ -479,9 +479,11 @@ export default function AdminPage() {
           {/* Hero */}
           <div style={{ paddingTop: 48, paddingBottom: 48 }}>
             <p style={s.subLabel}>Intern tool — Yrvante</p>
-            <h1 style={{ ...s.heading, fontSize: 56, marginBottom: 16 }}>
-              VIND BEDRIJVEN<br />
-              <span style={{ color: '#9ca3af' }}>ZONDER WEBSITE.</span>
+            <h1 style={{ ...s.heading, fontSize: 56, marginBottom: 16, lineHeight: 0.9 }}>
+              <span style={{ display: 'block' }}>VIND</span>
+              <span style={{ display: 'block' }}>BEDRIJVEN</span>
+              <span style={{ display: 'block', color: '#9ca3af' }}>ZONDER</span>
+              <span style={{ display: 'block', color: '#9ca3af' }}>WEBSITE.</span>
             </h1>
             <p style={{ fontSize: 14, color: '#6b7280', maxWidth: 480, lineHeight: 1.7, marginBottom: 32 }}>
               Vul een branche en stad in — de tool filtert automatisch wie nog geen online aanwezigheid heeft. Klaar om te bellen.
