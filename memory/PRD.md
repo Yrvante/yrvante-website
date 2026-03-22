@@ -1,117 +1,176 @@
 # Yrvante Website - Product Requirements Document
 
-## Origineel Probleemstatement
-Bouw een professionele bedrijfswebsite voor "Yrvante", een webdesign/software studio voor MKB & ZZP'ers. De site moet: pakketten tonen, een prijscalculator bevatten, niche-specifieke landingspagina's hebben, een 'Over Mij' pagina en contactmogelijkheden.
+## Project Overview
+Professionele website voor Yrvante - een webdesign & development bedrijf gericht op ZZP'ers en MKB in Nederland.
 
-## Technische Stack
-- **Frontend:** React (Create React App), Tailwind CSS, Framer Motion, lucide-react
-- **Backend:** FastAPI (Python)
-- **Database:** Geen (statische content)
-- **Email:** Resend API (GEBLOKKEERD: DNS verificatie vereist)
-- **Analytics:** PostHog
-- **Calendly:** Integratie voor gratis gesprekken
+**Live Preview URL**: https://lead-discovery-7.preview.emergentagent.com
 
-## Kernfunctionaliteiten (Geïmplementeerd)
-- Homepage met hero, diensten-overzicht, pakkettenvergelijking, process-sectie en contactformulier
-- Pakketpagina met 3 pakketten (Basis €500, Pro €900, Premium €1400)
-- Interactieve prijscalculator
-- Niche-specifieke landingspagina's (/voor/[niche]) voor 23 branches
-- Uitgebreide webdesign-pagina (/diensten/webdesign)
-- Website onderhoud/hosting pagina (/onderhoud)
-- Over Mij pagina met nieuwe slogan en stats
-- Calendly integratie voor gratis gesprekken
+## Core Features (Implemented)
 
-## Design Principes
-- Cloud gray kleurenschema (bg-gray-500 als accent)
-- Abstract achtergrondpatroon (BG_IMAGE) op alle pagina's
-- Logo: black-background PNG met mix-blend-mode: screen
-- Rounded full buttons, anti-AI-slop esthetiek
-- Responsive (mobile-first)
+### 1. Landing Page
+- Hero section met grote typografie
+- Services sectie
+- Pricing pakketten (€500/€900/€1400)
+- FAQ sectie
+- Contact formulier met Resend email integratie
+- Footer met privacy link en verborgen admin toegang
 
-## Geïmplementeerde Wijzigingen (Chronologisch)
+### 2. Contact Formulier
+- Stuurt interne notificatie naar info@yrvante.com
+- Stuurt bevestigingsmail naar klant
+- Honeypot spam bescherming
+- Resend API integratie
 
-### Sessie 1-13 (Eerdere agents)
-- Site-brede kleurverandering van zwart/donkerblauw naar cloud gray
-- Logo transparantie opgelost via mix-blend-mode: screen
-- Navigatie vereenvoudigd naar "Diensten" dropdown
-- Homepage hero herontworpen (pill-shaped buttons, €500 VANAF badge, logo)
-- Testimonials en Google Reviews verwijderd
-- Grayscale filter op achtergrondafbeeldingen voor kleurconsistentie
-- Performance verbeterd op DienstenPage (animatievertraging verlaagd)
+### 3. Admin Dashboard / Lead Finder
+- Wachtwoord-beveiligde toegang via lock icoon in footer
+- Zoek bedrijven via Google Places API (alleen zonder website)
+- Lead management met status tracking
+- Dashboard met statistieken
+- CSV export functionaliteit
+- Multiple bronnen (Google Maps, KVK, Instagram, Facebook - alleen Google Maps actief)
 
-### Sessie 14-15 (Huidige batch - Februari 2026)
-1. WhatsApp-knop kleur → `bg-gray-500`
-2. Reactietijd "binnen 8 uur" in alle bestanden (LandingPage, PackagesPage, CalculatorPage - NL én EN)
-3. PackagesPage hero: donkere gradient → BG_IMAGE + bg-white/70, logo in nav
-4. Over Mij hero: nieuwe slogan "Geen bureau. Geen tussenlagen. Geen bullshit." + 3-kolom stats
-5. Webdesign pagina volledig herontworpen (hero, features, process, statistieken, "meer plannen" sectie)
-6. 9 nieuwe niches toegevoegd: schoonheidsspecialisten, masseurs, fysiotherapeuten, accountants, electriciens, schilders, timmerlieden, dierenartsen, klusbedrijven
-7. SEO data toegevoegd voor alle nieuwe niches en diensten
-8. Calendly "Plan een gratis gesprek" knop in contact sectie (CALENDLY_URL = https://calendly.com/yrvante)
-9. Centraal data-bestand aangemaakt: `/app/frontend/src/data/siteData.js`
+### 4. Extra Pagina's
+- `/privacy` - Privacybeleid pagina
+- `/pakketten` - Packages overzicht
+- `/calculator` - Website prijs calculator
+- `/diensten` - Diensten overzicht per branche
+- `/over-mij` - About pagina
+- `/blog` - Blog overzicht
+- `/onderhoud` - Onderhoud & hosting info
 
-### Sessie 16 (Huidige batch - Maart 2026)
-1. **Calculator achtergrond** - Doorlopende, continue achtergrond via fixed positioning (identiek aan homepage)
-2. **Boekingssysteem preview** - Interactieve `BookingSystemPreview` component direct zichtbaar wanneer add-on wordt geselecteerd (dagknoppen Ma/Di/Wo/Do/Vr + tijdsloten)
-3. **Dynamische add-ons per pakket** - `excludedAddOns` constant: basic=[], pro=['extraForm'], premium=['multiLanguage','bookingSystem','extraForm']; met "Al inbegrepen" melding + auto-reset bij pakketwisseling
-4. **Navigatie fix** - `Onderhoud & Hosting` gaat direct naar `/onderhoud`; redirect toegevoegd in App.js voor `/diensten/onderhoud` → `/onderhoud`
-5. **Testing** - iteration_16.json: 100% pass (12/12 tests)
+## Technical Architecture
 
-### Sessie 16b (Interactieve Boeking Demo - Maart 2026)
-6. **Live boekingsdemo op /pakketten** - `BookingDemoWidget` component toegevoegd aan "Online Boekingssysteem" sectie in `PackagesPage.jsx`: browser-mockup styling, dag-selector met beschikbaarheidsstatus, tijdsloten, animaties, bevestigingsstap met confetti-stijl ✓-check
+### Frontend (React)
+- React 18 met React Router
+- Tailwind CSS + Shadcn/UI componenten
+- Framer Motion animaties
+- Sonner toast notifications
+- Responsive design
 
-## Bestanden Structuur
+### Backend
+**Preview (Python/FastAPI)**:
+- MongoDB voor data opslag
+- Resend voor emails
+- Lead Finder endpoints voor lokale testing
+
+**Production (Vercel Serverless)**:
+- Node.js serverless functions in `/api/`
+- Vercel Postgres (Neon) database
+- Google Places API voor lead zoeken
+
+### Database Schema (Vercel Postgres)
+```sql
+-- leadfinder_leads
+id UUID PRIMARY KEY
+naam VARCHAR(255)
+adres TEXT
+telefoonnummer VARCHAR(50)
+google_maps_url TEXT
+place_id VARCHAR(255) UNIQUE
+branche VARCHAR(100)
+stad VARCHAR(100)
+status VARCHAR(50) DEFAULT 'nieuw'
+notitie TEXT
+opgeslagen_op TIMESTAMPTZ
+
+-- leadfinder_search_history
+id UUID PRIMARY KEY
+branche VARCHAR(100)
+stad VARCHAR(100)
+totaal INTEGER
+datum TIMESTAMPTZ
+```
+
+## Environment Variables
+
+### Preview Environment (backend/.env)
+```
+MONGO_URL=mongodb://localhost:27017
+DB_NAME=test_database
+CORS_ORIGINS=*
+RESEND_API_KEY=re_bfcpWKc6_HGvwamvGQ2xKWrbdNFFBoicc
+SENDER_EMAIL=noreply@yrvante.com
+RECIPIENT_EMAIL=info@yrvante.com
+```
+
+### Vercel Production (REQUIRED)
+```
+POSTGRES_URL=postgresql://neondb_owner:npg_H5ny1vCPFtKo@ep-steep-voice-agyfsguv-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+ADMIN_PASSWORD=Yv4r02!!yrvantebredewold
+GOOGLE_MAPS_API_KEY=AIzaSyDn1y6-aOzY8NXaTdJAPL0GqI_5rl5XMEM
+RESEND_API_KEY=re_bfcpWKc6_HGvwamvGQ2xKWrbdNFFBoicc
+SENDER_EMAIL=noreply@yrvante.com
+RECIPIENT_EMAIL=info@yrvante.com
+```
+
+## Deployment Status
+
+### What Works Now
+- [x] Homepage en alle pagina's
+- [x] Contact formulier met email
+- [x] Privacy pagina
+- [x] Lead Finder login (preview: yrvante2025)
+- [x] Lead Finder zoeken (mock data in preview)
+- [x] Lead opslaan en beheren
+
+### Vercel Deployment Checklist
+1. [ ] Environment variables instellen in Vercel Dashboard
+2. [ ] Deployen naar Vercel
+3. [ ] Database tabellen worden automatisch aangemaakt
+4. [ ] Testen met productie wachtwoord: `Yv4r02!!yrvantebredewold`
+
+## Key API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/contact` | POST | Contact form submission |
+| `/api/admin/leadfinder/auth` | POST | Lead Finder login |
+| `/api/admin/leadfinder/zoek` | POST | Search for businesses |
+| `/api/admin/leadfinder/leads` | GET/POST | List/Create leads |
+| `/api/admin/leadfinder/lead/[id]` | PUT/DELETE | Update/Delete lead |
+| `/api/admin/leadfinder/dashboard` | GET | Dashboard stats |
+
+## File Structure
 ```
 /app/
-├── backend/
-│   └── server.py                    # FastAPI + Resend email
+├── api/                          # Vercel serverless functions
+│   ├── contact.js                # Contact form handler
+│   └── admin/leadfinder/         # Lead Finder API
+├── backend/                      # Preview environment backend
+│   └── server.py
 ├── frontend/
-│   ├── public/
-│   │   └── index.html               # Calendly scripts/CSS toegevoegd
 │   └── src/
-│       ├── App.js                   # Routes, LanguageContext
-│       ├── App.css                  # Grayscale filter voor BG
-│       ├── data/
-│       │   └── siteData.js          # NIEUW: Gedeelde constanten & data
-│       ├── components/
-│       │   ├── SEO.jsx              # SEO voor alle pagina's (uitgebreid)
-│       │   └── DemoPreview.jsx
-│       └── pages/
-│           ├── LandingPage.jsx      # Homepage (groot component)
-│           ├── PackagesPage.jsx     # Pakketten & Prijzen (nieuwe hero)
-│           ├── CalculatorPage.jsx   # Interactieve prijscalculator
-│           ├── DienstenPage.jsx     # Diensten + 23 niches + webdesign page
-│           ├── OnderhoudPage.jsx    # Website onderhoud pagina
-│           ├── OverMijPage.jsx      # Over Mij (nieuwe slogan + stats)
-│           └── WhyWebsitePage.jsx   # Waarom een website pagina
+│       ├── App.js
+│       ├── pages/
+│       │   ├── LandingPage.jsx
+│       │   ├── LeadFinderPage.jsx
+│       │   ├── PrivacyPage.jsx
+│       │   └── ...
+│       └── components/
+├── vercel.json
+├── package.json
+└── .nvmrc
 ```
 
-## API Endpoints
-- `POST /api/contact` - Contactformulier (GEBLOKKEERD: DNS verificatie)
-- `POST /api/calculator` - Calculator verzoek (GEBLOKKEERD: zelfde reden)
+## Changelog
 
-## Kritieke Informatie voor Nieuwe Agent
-1. **Taal:** ALTIJD Nederlands antwoorden
-2. **Email (GEBLOKKEERD):** Resend API key aanwezig, maar domain `yrvante.com` heeft DNS records nodig (DKIM/SPF) bij domeinprovider
-3. **Calendly URL:** Moet door gebruiker gewijzigd worden naar hun eigen Calendly link (`https://calendly.com/yrvante` als placeholder)
-4. **Gebruiker:** Zeer iteratief, maakt kleine, precieze aanvragen
-5. **Logo URL:** `https://customer-assets.emergentagent.com/job_272a012d-c2c7-4b19-9d48-7e5cf3696f19/artifacts/rm7xz0dp_IMG_1929.png`
-6. **BG Image:** `https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/2a34d7236be4e054bd9f0732390c5f3d5391189a4b208e22a6d37de47cadbc9a.png`
+### December 2025
+- Lead Finder page restyled to match Yrvante homepage
+- Login functionality fixed for preview environment
+- Customer confirmation email added to contact form
+- Privacy policy page created
+- Vercel deployment configuration completed
 
-## Prioriteiten Backlog
+## Backlog
 
-### P0 - Blokkerende Issues
-- Email via contactformulier werkt niet (DNS records `yrvante.com` vereist)
+### P1 (High Priority)
+- [ ] SEO review across all pages
 
-### P1 - Komende Taken
-- SEO verificatie op dynamische niche pagina's (final sweep)
-- Calendly URL aanpassen naar echte Calendly account URL
+### P2 (Medium Priority)
+- [ ] Refactor DienstenPage.jsx (extract niches data)
+- [ ] Add case studies/success stories
 
-### P2 - Toekomstige Taken
-- `LandingPage.jsx` opsplitsen in sub-componenten (Navigation.jsx, HeroSection.jsx, ContactSection.jsx)
-- Content consolideren: package-definities verplaatsen naar `siteData.js`
-- Case studies / succesverhalen voor niche-pagina's
-
-## Geteste Iteraties
-- iteration_12.json - iteration_13.json - iteration_14.json - iteration_15.json (100% pass)
-- iteration_16.json (100% pass - 12/12 tests: calculator achtergrond, booking preview, dynamische add-ons, nav fix)
+### P3 (Low Priority)
+- [ ] Bulk CSV import for Lead Finder
+- [ ] WhatsApp templates integration
+- [ ] Email campaign feature
