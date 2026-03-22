@@ -51,6 +51,8 @@ const LeadFinderPage = () => {
   // Search states
   const [searchQuery, setSearchQuery] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
+  const [searchRadius, setSearchRadius] = useState(25);
+  const [searchAll, setSearchAll] = useState(false);
   const [searchFilters, setSearchFilters] = useState({
     onlyWithoutWebsite: true,
     onlyWithPhone: false,
@@ -60,6 +62,8 @@ const LeadFinderPage = () => {
   const [loading, setLoading] = useState(false);
   const [nextPageToken, setNextPageToken] = useState(null);
   const [totaalGevonden, setTotaalGevonden] = useState(0);
+  const [zoekgebied, setZoekgebied] = useState('');
+  const [bronnenDoorzocht, setBronnenDoorzocht] = useState([]);
   
   // Lead management states
   const [opgeslagenLeads, setOpgeslagenLeads] = useState([]);
@@ -136,8 +140,8 @@ const LeadFinderPage = () => {
   };
 
   const zoekBedrijven = async (useToken = false) => {
-    if (!searchQuery.trim() || !searchLocation.trim()) {
-      toast.error('Vul zoekterm en locatie in');
+    if (!searchLocation.trim()) {
+      toast.error('Vul een locatie in');
       return;
     }
     setLoading(true);
@@ -145,6 +149,8 @@ const LeadFinderPage = () => {
       const body = { 
         branche: searchQuery, 
         stad: searchLocation, 
+        radius: searchRadius,
+        searchAll: searchAll,
         source: activeSource,
         filters: searchFilters
       };
@@ -160,7 +166,7 @@ const LeadFinderPage = () => {
       
       const leadsWithSource = (data.leads || []).map(lead => ({
         ...lead,
-        source: activeSource
+        source: lead.source || activeSource
       }));
       
       if (useToken) {
@@ -170,10 +176,63 @@ const LeadFinderPage = () => {
       }
       setNextPageToken(data.nextPageToken || null);
       setTotaalGevonden(data.totaal_gevonden || 0);
-      if (!useToken) toast.success(`${data.totaal_gevonden} resultaten gevonden!`);
+      setZoekgebied(data.zoekgebied || '');
+      setBronnenDoorzocht(data.bronnen_doorzocht || []);
+      
+      if (!useToken) {
+        toast.success(`${data.totaal_gevonden} bedrijven zonder website gevonden!`);
+        if (data.zoekgebied) {
+          toast.info(`Zoekgebied: ${data.zoekgebied}`, { duration: 4000 });
+        }
+      }
       if (data.note) toast.info(data.note, { duration: 5000 });
     } catch (err) { toast.error('Zoekfout'); }
     finally { setLoading(false); }
+  };
+
+  // Quick search for "Zoek Alles" 
+  const zoekAlles = async () => {
+    if (!searchLocation.trim()) {
+      toast.error('Vul een locatie in');
+      return;
+    }
+    setSearchAll(true);
+    setLoading(true);
+    try {
+      const body = { 
+        branche: searchQuery || '', 
+        stad: searchLocation, 
+        radius: searchRadius,
+        searchAll: true,
+        filters: searchFilters
+      };
+      
+      const res = await fetch(`${API}/zoek`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      if (data.error) { toast.error(data.error); setLoading(false); return; }
+      
+      const leadsWithSource = (data.leads || []).map(lead => ({
+        ...lead,
+        source: lead.source || 'google'
+      }));
+      
+      setZoekResultaten(leadsWithSource);
+      setNextPageToken(data.nextPageToken || null);
+      setTotaalGevonden(data.totaal_gevonden || 0);
+      setZoekgebied(data.zoekgebied || '');
+      setBronnenDoorzocht(data.bronnen_doorzocht || []);
+      
+      toast.success(`${data.totaal_gevonden} ZZP'ers & bedrijven gevonden!`);
+      if (data.zoekgebied) {
+        toast.info(`Zoekgebied: ${data.zoekgebied}`, { duration: 4000 });
+      }
+      if (data.note) toast.info(data.note, { duration: 5000 });
+    } catch (err) { toast.error('Zoekfout'); }
+    finally { setLoading(false); setSearchAll(false); }
   };
 
   const saveLead = async (lead, silent = false) => {
@@ -423,51 +482,134 @@ const LeadFinderPage = () => {
         {activeTab === 'zoeken' && (
           <motion.div key="zoeken" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="max-w-[1800px] mx-auto px-6 py-8">
-              {/* Source Selector */}
-              <div className="grid grid-cols-4 gap-4 mb-8">
-                {Object.values(SEARCH_SOURCES).map(source => (
+              
+              {/* UNIFIED SEARCH BOX - Zoek Alles */}
+              <div className="bg-gradient-to-br from-black to-gray-800 rounded-3xl p-8 mb-8 text-white">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h2 className="font-bold text-2xl">ZOEK ALLES</h2>
+                    <p className="text-gray-400 text-sm">Vind alle ZZP'ers & bedrijven zonder website in één keer</p>
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-4 gap-4 mb-6">
+                  <div className="md:col-span-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 block">
+                      Branche (optioneel)
+                    </label>
+                    <input
+                      value={searchQuery}
+                      onChange={e => setSearchQuery(e.target.value)}
+                      placeholder="bijv. kapper, coach, schilder... of leeg voor ALLE branches"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl focus:border-white outline-none py-4 px-4 transition-colors text-white placeholder-gray-500"
+                      onKeyPress={e => e.key === 'Enter' && zoekAlles()}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 block">
+                      Locatie *
+                    </label>
+                    <input
+                      value={searchLocation}
+                      onChange={e => setSearchLocation(e.target.value)}
+                      placeholder="bijv. Almelo"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl focus:border-white outline-none py-4 px-4 transition-colors text-white placeholder-gray-500"
+                      onKeyPress={e => e.key === 'Enter' && zoekAlles()}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 block">
+                      Radius
+                    </label>
+                    <select
+                      value={searchRadius}
+                      onChange={e => setSearchRadius(Number(e.target.value))}
+                      className="w-full bg-white/10 border border-white/20 rounded-xl outline-none py-4 px-4 transition-colors text-white cursor-pointer"
+                    >
+                      <option value={5} className="text-black">+5 km</option>
+                      <option value={10} className="text-black">+10 km</option>
+                      <option value={15} className="text-black">+15 km</option>
+                      <option value={25} className="text-black">+25 km</option>
+                      <option value={50} className="text-black">+50 km</option>
+                      <option value={75} className="text-black">+75 km</option>
+                      <option value={100} className="text-black">+100 km</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Filters Row */}
+                <div className="flex flex-wrap items-center gap-4 mb-6 pb-6 border-b border-white/10">
+                  <span className="text-xs font-bold uppercase text-gray-500">Filters:</span>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={searchFilters.onlyWithPhone} 
+                      onChange={e => setSearchFilters({...searchFilters, onlyWithPhone: e.target.checked})}
+                      className="w-4 h-4 accent-white"
+                    />
+                    <span className="text-sm text-gray-300">Alleen met telefoonnummer</span>
+                  </label>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-400">
+                    <Zap size={14} className="inline mr-2" />
+                    Doorzoekt Google Maps, KVK, en ZZP databases in {searchLocation || '[locatie]'} + {searchRadius}km
+                  </div>
                   <button
-                    key={source.id}
-                    onClick={() => { setActiveSource(source.id); setZoekResultaten([]); }}
-                    className={`p-6 rounded-2xl border-2 transition-all ${
-                      activeSource === source.id 
-                        ? 'border-black bg-white shadow-lg' 
-                        : 'border-gray-200 bg-white hover:border-gray-300'
-                    }`}
+                    onClick={zoekAlles}
+                    disabled={loading || !searchLocation.trim()}
+                    className="px-10 py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-100 transition-all rounded-full disabled:opacity-50 flex items-center gap-2"
                   >
-                    <source.icon size={32} style={{ color: source.color }} className="mb-3" />
-                    <h3 className="font-bold text-lg mb-1">{source.name}</h3>
-                    <p className="text-sm text-gray-500">{source.description}</p>
+                    {loading ? <Loader2 size={16} className="animate-spin" /> : <Target size={16} />}
+                    ZOEK ALLE ZZP'ERS & BEDRIJVEN
                   </button>
-                ))}
+                </div>
               </div>
 
-              {/* Search Box */}
+              {/* Alternative: Search by Source */}
+              <div className="mb-8">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Of zoek per bron:</p>
+                <div className="grid grid-cols-4 gap-4">
+                  {Object.values(SEARCH_SOURCES).map(source => (
+                    <button
+                      key={source.id}
+                      onClick={() => { setActiveSource(source.id); }}
+                      className={`p-4 rounded-2xl border-2 transition-all ${
+                        activeSource === source.id 
+                          ? 'border-black bg-white shadow-lg' 
+                          : 'border-gray-200 bg-white hover:border-gray-300'
+                      }`}
+                    >
+                      <source.icon size={24} style={{ color: source.color }} className="mb-2" />
+                      <h3 className="font-bold text-sm">{source.name}</h3>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Standard Search Box */}
               <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
                 <div className="flex items-center gap-2 mb-4">
                   {React.createElement(SEARCH_SOURCES[activeSource].icon, { 
                     size: 20, 
                     style: { color: SEARCH_SOURCES[activeSource].color } 
                   })}
-                  <h2 className="font-bold text-lg">Zoek via {SEARCH_SOURCES[activeSource].name}</h2>
+                  <h2 className="font-bold text-lg">Zoek specifiek via {SEARCH_SOURCES[activeSource].name}</h2>
                 </div>
                 
-                <div className="grid md:grid-cols-3 gap-4 mb-4">
+                <div className="grid md:grid-cols-4 gap-4 mb-4">
                   <div className="md:col-span-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">
-                      {activeSource === 'kvk' ? 'Bedrijfsnaam of Branche' : 
-                       activeSource === 'instagram' ? 'Hashtag of Zoekterm' :
-                       activeSource === 'facebook' ? 'Bedrijfsnaam of Categorie' : 'Branche(s)'}
+                      Branche / Zoekterm
                     </label>
                     <input
                       value={searchQuery}
                       onChange={e => setSearchQuery(e.target.value)}
-                      placeholder={
-                        activeSource === 'kvk' ? 'bijv. kapper, tandarts, zzp...' :
-                        activeSource === 'instagram' ? 'bijv. #kappersamsterdam, schoonheidsspecialist...' :
-                        activeSource === 'facebook' ? 'bijv. restaurant, fitness, coach...' :
-                        'bijv. restaurant, kapper, bakkerij...'
-                      }
+                      placeholder="bijv. kapper, restaurant, coach..."
                       className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors"
                       onKeyPress={e => e.key === 'Enter' && zoekBedrijven(false)}
                     />
@@ -477,10 +619,26 @@ const LeadFinderPage = () => {
                     <input
                       value={searchLocation}
                       onChange={e => setSearchLocation(e.target.value)}
-                      placeholder="bijv. Amsterdam, Rotterdam..."
+                      placeholder="bijv. Almelo"
                       className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors"
                       onKeyPress={e => e.key === 'Enter' && zoekBedrijven(false)}
                     />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Radius</label>
+                    <select
+                      value={searchRadius}
+                      onChange={e => setSearchRadius(Number(e.target.value))}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl outline-none py-4 px-4 transition-colors cursor-pointer"
+                    >
+                      <option value={5}>+5 km</option>
+                      <option value={10}>+10 km</option>
+                      <option value={15}>+15 km</option>
+                      <option value={25}>+25 km</option>
+                      <option value={50}>+50 km</option>
+                      <option value={75}>+75 km</option>
+                      <option value={100}>+100 km</option>
+                    </select>
                   </div>
                 </div>
 
@@ -505,25 +663,16 @@ const LeadFinderPage = () => {
                     />
                     <span className="text-sm">Alleen met telefoonnummer</span>
                   </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={searchFilters.onlyWithEmail} 
-                      onChange={e => setSearchFilters({...searchFilters, onlyWithEmail: e.target.checked})}
-                      className="w-4 h-4 accent-black"
-                    />
-                    <span className="text-sm">Alleen met email</span>
-                  </label>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <Zap size={14} />
-                    <span>Tip: Gebruik komma's voor meerdere branches</span>
+                    <MapPin size={14} />
+                    <span>Zoekgebied: {searchLocation || '...'} + {searchRadius}km radius</span>
                   </div>
                   <button
                     onClick={() => zoekBedrijven(false)}
-                    disabled={loading}
+                    disabled={loading || !searchLocation.trim()}
                     className="px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-all rounded-full disabled:opacity-50 flex items-center gap-2"
                   >
                     {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
@@ -532,13 +681,23 @@ const LeadFinderPage = () => {
                 </div>
               </div>
 
-              {/* Results */}
+              {/* Results Header with Search Info */}
               {zoekResultaten.length > 0 && (
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-4">
                       <h3 className="font-bold text-xl">{totaalGevonden} Resultaten</h3>
-                      <span className="text-sm text-gray-500">via {SEARCH_SOURCES[activeSource].name}</span>
+                      {zoekgebied && (
+                        <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">
+                          <MapPin size={12} className="inline mr-1" />
+                          {zoekgebied}
+                        </span>
+                      )}
+                      {bronnenDoorzocht.length > 0 && (
+                        <span className="text-sm text-gray-500">
+                          Bronnen: {bronnenDoorzocht.join(', ')}
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-center gap-2">
                       <button onClick={saveAllResults} className="px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 flex items-center gap-2">

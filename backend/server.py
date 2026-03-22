@@ -5,6 +5,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 import asyncio
+import random
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List, Optional
@@ -421,28 +422,70 @@ async def leadfinder_zoek(request: Request):
     body = await request.json()
     branche = body.get("branche", "")
     stad = body.get("stad", "")
+    radius = body.get("radius", 25)
+    search_all = body.get("searchAll", False)
+    filters = body.get("filters", {})
     
-    if not branche or not stad:
-        raise HTTPException(status_code=400, detail="Branche en stad verplicht")
+    if not stad:
+        raise HTTPException(status_code=400, detail="Stad is verplicht")
     
-    # For preview, return mock data since we don't have Google API key here
-    # In production (Vercel), the /api/admin/leadfinder/zoek.js handles this
-    mock_leads = [
-        {
-            "place_id": f"mock_{uuid.uuid4().hex[:8]}",
-            "naam": f"Voorbeeld {branche.title()} {i+1}",
-            "adres": f"Voorbeeldstraat {i+1}, {stad}",
-            "telefoonnummer": f"+31 6 1234567{i}",
-            "google_maps_url": f"https://maps.google.com/?q={branche}+{stad}"
-        }
-        for i in range(3)
+    # ZZP branches voor mock data
+    zzp_branches = [
+        "Kapper", "Schoonheidsspecialist", "Nagelstudio", "Masseur",
+        "Fotograaf", "Grafisch Ontwerper", "Schilder", "Loodgieter",
+        "Elektricien", "Timmerman", "Tuinman", "Schoonmaker",
+        "Personal Trainer", "Yoga Instructeur", "Coach", "Boekhouder"
     ]
+    
+    # Steden in de buurt van de opgegeven stad (mock)
+    nearby_cities = {
+        "almelo": ["Wierden", "Vriezenveen", "Tubbergen", "Rijssen", "Borne", "Hengelo", "Oldenzaal"],
+        "amsterdam": ["Amstelveen", "Zaandam", "Haarlem", "Hoofddorp", "Diemen", "Ouderkerk"],
+        "rotterdam": ["Schiedam", "Vlaardingen", "Capelle", "Barendrecht", "Ridderkerk"],
+        "enschede": ["Hengelo", "Oldenzaal", "Haaksbergen", "Losser", "Gronau"],
+    }
+    
+    stad_lower = stad.lower()
+    extra_cities = nearby_cities.get(stad_lower, ["Omgeving " + stad])
+    
+    mock_leads = []
+    
+    if search_all:
+        # Generate more diverse mock results for "Zoek Alles"
+        for i, branch in enumerate(zzp_branches[:12]):
+            city = stad if i % 2 == 0 else extra_cities[i % len(extra_cities)]
+            mock_leads.append({
+                "place_id": f"mock_{uuid.uuid4().hex[:8]}",
+                "naam": f"{branch} {['Studio', 'Praktijk', 'Service', 'ZZP', ''][i % 5]} {city}".strip(),
+                "adres": f"Voorbeeldstraat {i+1}, {city}",
+                "telefoonnummer": f"+31 6 {random.randint(10000000, 99999999)}",
+                "google_maps_url": f"https://maps.google.com/?q={branch}+{city}",
+                "source": "google",
+                "types": ["establishment", "point_of_interest"],
+                "matchedQuery": branch.lower()
+            })
+    else:
+        # Standard search with branch
+        search_term = branche if branche else "bedrijf"
+        for i in range(5):
+            city = stad if i < 3 else extra_cities[i % len(extra_cities)]
+            mock_leads.append({
+                "place_id": f"mock_{uuid.uuid4().hex[:8]}",
+                "naam": f"{search_term.title()} {['De Vakman', 'Pro', 'Service', 'Plus', 'Expert'][i]} {city}",
+                "adres": f"Hoofdstraat {10 + i * 5}, {city}",
+                "telefoonnummer": f"+31 6 {random.randint(10000000, 99999999)}",
+                "google_maps_url": f"https://maps.google.com/?q={search_term}+{city}",
+                "source": "google",
+                "types": ["establishment"]
+            })
     
     return {
         "leads": mock_leads,
         "totaal_gevonden": len(mock_leads),
         "nextPageToken": None,
-        "note": "Dit zijn voorbeeldresultaten. Echte zoekresultaten werken na deployment op Vercel."
+        "zoekgebied": f"{stad} + {radius}km radius",
+        "bronnen_doorzocht": ["Google Maps (Mock)", "ZZP Database (Mock)"] if search_all else ["Google Maps (Mock)"],
+        "note": f"Dit zijn voorbeeldresultaten voor {stad} + {radius}km. Echte zoekresultaten werken na deployment op Vercel."
     }
 
 @api_router.get("/admin/leadfinder/leads")

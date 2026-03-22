@@ -21,13 +21,17 @@ Professionele website voor Yrvante - een webdesign & development bedrijf gericht
 - Honeypot spam bescherming
 - Resend API integratie
 
-### 3. Admin Dashboard / Lead Finder
+### 3. Admin Dashboard / Lead Finder (UPDATED)
 - Wachtwoord-beveiligde toegang via lock icoon in footer
-- Zoek bedrijven via Google Places API (alleen zonder website)
+- **NIEUW: "ZOEK ALLES" functie** - Zoek alle ZZP'ers en bedrijven in één keer
+- **NIEUW: Radius zoeken** - Configureerbaar van +5km tot +100km
+- **NIEUW: Uitgebreide bronnen** - Google Maps, KVK, Instagram, Facebook
+- **NIEUW: Nearby cities** - Automatisch omliggende steden doorzoeken (bijv. Almelo → ook Vriezenveen, Wierden, Hengelo, etc.)
 - Lead management met status tracking
 - Dashboard met statistieken
 - CSV export functionaliteit
-- Multiple bronnen (Google Maps, KVK, Instagram, Facebook - alleen Google Maps actief)
+- Multiple zoektermen: ZZP, freelancer, eenmanszaak, zelfstandig ondernemer
+- Common branches: kapper, coach, schilder, loodgieter, etc.
 
 ### 4. Extra Pagina's
 - `/privacy` - Privacybeleid pagina
