@@ -78,6 +78,10 @@ export default function App() {
   const [sheetsSpreadsheetId, setSheetsSpreadsheetId] = useState("");
   const [sheetsMsg, setSheetsMsg] = useState("");
 
+  // Auto-save toggle (persisted in localStorage)
+  const [autoSave, setAutoSave] = useState(() => localStorage.getItem('yrvante_autosave') === 'true');
+  const [autoSaveCount, setAutoSaveCount] = useState(0);
+
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
@@ -91,6 +95,27 @@ export default function App() {
     }).catch(() => {});
   }, []);
 
+  const toggleAutoSave = () => {
+    const next = !autoSave;
+    setAutoSave(next);
+    localStorage.setItem('yrvante_autosave', String(next));
+  };
+
+  const autoSaveLeads = useCallback(async (leads) => {
+    if (!leads.length) return;
+    let saved = 0;
+    for (const lead of leads) {
+      try {
+        await axios.post(`${API}/leads`, { ...lead, branche, stad });
+        setSavedIds(prev => new Set([...prev, lead.place_id]));
+        saved++;
+      } catch (err) {
+        // Already saved = fine
+      }
+    }
+    if (saved > 0) setAutoSaveCount(prev => prev + saved);
+  }, [branche, stad]);
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!branche.trim() || !stad.trim()) return;
@@ -101,6 +126,7 @@ export default function App() {
       setAllLeads(res.data.leads || []);
       setNextPageToken(res.data.next_page_token || null);
       setTotaalGevonden(res.data.totaal_gevonden || 0);
+      if (autoSave && res.data.leads?.length) autoSaveLeads(res.data.leads);
     } catch (err) {
       setError(err.response?.data?.detail || "Er is een fout opgetreden.");
     } finally {
@@ -119,6 +145,7 @@ export default function App() {
       setAllLeads(prev => [...prev, ...newLeads]);
       setNextPageToken(res.data.next_page_token || null);
       setTotaalGevonden(prev => prev + (res.data.totaal_gevonden || 0));
+      if (autoSave && newLeads.length) autoSaveLeads(newLeads);
     } catch (err) {
       setError("Fout bij laden van meer resultaten.");
     } finally {
@@ -344,6 +371,22 @@ export default function App() {
                   {["Google Places API", "CSV Export", "Lead Opslaan", "Social Links", "KVK Lookup"].map(f => (
                     <span key={f} className="px-3 py-1.5 bg-white/80 border border-gray-200 rounded-full text-xs text-gray-600">{f}</span>
                   ))}
+                  {/* Auto-save toggle */}
+                  <button
+                    onClick={toggleAutoSave}
+                    data-testid="autosave-toggle"
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
+                      autoSave
+                        ? "bg-green-50 border-green-300 text-green-700"
+                        : "bg-white/80 border-gray-200 text-gray-500 hover:border-gray-400"
+                    }`}
+                  >
+                    <span className={`w-2 h-2 rounded-full ${autoSave ? "bg-green-500" : "bg-gray-300"}`} />
+                    Auto-opslaan {autoSave ? "aan" : "uit"}
+                    {autoSave && autoSaveCount > 0 && (
+                      <span className="bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{autoSaveCount}</span>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
@@ -399,11 +442,19 @@ export default function App() {
                         </p>
                       </div>
                       {leads.length > 0 && (
-                        <button onClick={() => exportToCSV(leads.map(l => ({ ...l, branche, stad })), branche, stad)}
-                          data-testid="export-csv-button"
-                          className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors">
-                          <Download size={14} /> Exporteer CSV
-                        </button>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          {autoSave && leads.length > 0 && (
+                            <div className="flex items-center gap-1.5 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-xs text-green-700 font-medium" data-testid="autosave-active-banner">
+                              <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                              Auto-opslaan actief
+                            </div>
+                          )}
+                          <button onClick={() => exportToCSV(leads.map(l => ({ ...l, branche, stad })), branche, stad)}
+                            data-testid="export-csv-button"
+                            className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors">
+                            <Download size={14} /> Exporteer CSV
+                          </button>
+                        </div>
                       )}
                     </div>
 
