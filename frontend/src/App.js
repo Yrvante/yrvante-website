@@ -50,12 +50,18 @@ export default function App() {
   const [branche, setBranche] = useState("");
   const [stad, setStad] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [results, setResults] = useState(null);
+  const [allLeads, setAllLeads] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState(null);
+  const [totaalGevonden, setTotaalGevonden] = useState(0);
   const [error, setError] = useState(null);
   const [searched, setSearched] = useState(false);
   const [visible, setVisible] = useState(false);
   const [savedIds, setSavedIds] = useState(new Set());
   const [savingId, setSavingId] = useState(null);
+  const [shareUrl, setShareUrl] = useState(null);
+  const [shareLoading, setShareLoading] = useState(false);
 
   // Leads tab
   const [savedLeads, setSavedLeads] = useState([]);
@@ -88,14 +94,49 @@ export default function App() {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!branche.trim() || !stad.trim()) return;
-    setLoading(true); setError(null); setResults(null); setSearched(true);
+    setLoading(true); setError(null); setResults(null); setAllLeads([]); setNextPageToken(null); setSearched(true);
     try {
       const res = await axios.post(`${API}/zoek`, { branche: branche.trim(), stad: stad.trim() });
       setResults(res.data);
+      setAllLeads(res.data.leads || []);
+      setNextPageToken(res.data.next_page_token || null);
+      setTotaalGevonden(res.data.totaal_gevonden || 0);
     } catch (err) {
       setError(err.response?.data?.detail || "Er is een fout opgetreden.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleLoadMore = async () => {
+    if (!nextPageToken || loadingMore) return;
+    setLoadingMore(true);
+    try {
+      const res = await axios.post(`${API}/zoek`, {
+        branche: branche.trim(), stad: stad.trim(), page_token: nextPageToken
+      });
+      const newLeads = res.data.leads || [];
+      setAllLeads(prev => [...prev, ...newLeads]);
+      setNextPageToken(res.data.next_page_token || null);
+      setTotaalGevonden(prev => prev + (res.data.totaal_gevonden || 0));
+    } catch (err) {
+      setError("Fout bij laden van meer resultaten.");
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+
+  const handleCreateShare = async () => {
+    setShareLoading(true);
+    try {
+      const res = await axios.post(`${API}/share?titel=Leadoverzicht ${branche} ${stad}`);
+      const fullUrl = `${window.location.origin}/share/${res.data.token}`;
+      setShareUrl(fullUrl);
+      await navigator.clipboard.writeText(fullUrl).catch(() => {});
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setShareLoading(false);
     }
   };
 
@@ -204,10 +245,9 @@ export default function App() {
     }
   };
 
-  const leads = results?.leads || [];
-  const totaal = results?.totaal_gevonden || 0;
+  const leads = allLeads;
+  const totaal = totaalGevonden;
   const filteredLeads = filterStatus === "Alle" ? savedLeads : savedLeads.filter(l => l.status === filterStatus);
-
   return (
     <div className="min-h-screen relative overflow-x-hidden" data-testid="app-root">
       <div className="fixed inset-0 -z-10 bg-layer" />
@@ -435,6 +475,37 @@ export default function App() {
                         <p className="text-sm text-gray-400">Alle bedrijven hebben al een website. Probeer een andere branche of stad.</p>
                       </div>
                     )}
+
+                    {/* Laad meer + Deel rapport */}
+                    {(nextPageToken || leads.length > 0) && (
+                      <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                          {nextPageToken && (
+                            <button onClick={handleLoadMore} disabled={loadingMore}
+                              data-testid="load-more-button"
+                              className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:border-gray-500 disabled:opacity-50 transition-colors">
+                              {loadingMore ? <><span className="spinner-xs-dark" /> Laden...</> : <><RefreshCw size={13} /> Laad meer resultaten</>}
+                            </button>
+                          )}
+                        </div>
+                        {leads.length > 0 && (
+                          <div className="flex flex-col items-end gap-2">
+                            <button onClick={handleCreateShare} disabled={shareLoading}
+                              data-testid="share-report-button"
+                              className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:border-gray-500 transition-colors">
+                              {shareLoading ? <span className="spinner-xs-dark" /> : <ExternalLink size={13} />}
+                              Deel Rapport
+                            </button>
+                            {shareUrl && (
+                              <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-2xl px-4 py-2 text-xs text-green-700" data-testid="share-url">
+                                <span>Link gekopieerd:</span>
+                                <a href={shareUrl} target="_blank" rel="noreferrer" className="font-mono underline truncate max-w-[200px]">{shareUrl}</a>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -490,6 +561,13 @@ export default function App() {
                       data-testid="export-saved-csv"
                       className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors">
                       <Download size={13} /> CSV
+                    </button>
+                  )}
+                  {savedLeads.length > 0 && (
+                    <button onClick={handleCreateShare} disabled={shareLoading}
+                      data-testid="share-leads-button"
+                      className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:border-gray-500 transition-colors">
+                      <ExternalLink size={13} /> Deel
                     </button>
                   )}
                   <button onClick={loadSavedLeads} className="p-2 text-gray-500 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors">
@@ -579,6 +657,13 @@ export default function App() {
                         className="inline-flex items-center gap-1 px-2 py-1 bg-pink-50 hover:bg-pink-100 text-pink-700 text-xs rounded-full">
                         <Instagram size={10} /> IG
                       </a>
+                      {sheetsStatus?.connected && (
+                        <button onClick={() => handleAppendToSheets(lead.id)}
+                          data-testid={`sheets-append-${lead.id}`}
+                          className="inline-flex items-center gap-1 px-2 py-1 bg-green-50 hover:bg-green-100 text-green-700 text-xs rounded-full">
+                          <FileSpreadsheet size={10} /> Sheets
+                        </button>
+                      )}
                       <button onClick={() => handleDeleteLead(lead.id)}
                         data-testid={`delete-lead-${lead.id}`}
                         className="p-1 text-gray-300 hover:text-red-500 rounded-full hover:bg-red-50 transition-colors">
@@ -587,6 +672,13 @@ export default function App() {
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+            {/* Share URL feedback in Mijn Leads */}
+            {shareUrl && tab === "leads" && (
+              <div className="mt-4 flex items-center gap-2 bg-green-50 border border-green-200 rounded-2xl px-4 py-3 text-xs text-green-700" data-testid="share-url-leads">
+                <span className="font-medium">Rapport link gekopieerd!</span>
+                <a href={shareUrl} target="_blank" rel="noreferrer" className="underline truncate max-w-xs">{shareUrl}</a>
               </div>
             )}
           </div>

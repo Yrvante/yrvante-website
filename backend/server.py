@@ -44,6 +44,7 @@ logger = logging.getLogger(__name__)
 class SearchRequest(BaseModel):
     branche: str
     stad: str
+    page_token: Optional[str] = None  # for pagination
 
 
 class Lead(BaseModel):
@@ -57,6 +58,7 @@ class Lead(BaseModel):
 class SearchResponse(BaseModel):
     totaal_gevonden: int
     leads: List[Lead]
+    next_page_token: Optional[str] = None
 
 
 class SavedLead(BaseModel):
@@ -123,15 +125,15 @@ async def zoek_leads(req: SearchRequest):
 
     query = f"{branche} in {stad}"
     all_places = []
+    next_token = None
+
     try:
-        page_token = None
-        for _ in range(3):
-            data = await fetch_places_page(query, page_token)
-            places = data.get("places", [])
-            all_places.extend(places)
-            page_token = data.get("nextPageToken")
-            if not page_token:
-                break
+        # If page_token provided, fetch that page only
+        # Otherwise fetch first page only and return nextPageToken for "Laad meer"
+        data = await fetch_places_page(query, req.page_token)
+        places = data.get("places", [])
+        all_places.extend(places)
+        next_token = data.get("nextPageToken")
     except httpx.HTTPStatusError as e:
         logger.error(f"Places API error: {e.response.status_code}")
         raise HTTPException(status_code=502, detail=f"Google Places API fout: {e.response.status_code}")
@@ -139,13 +141,14 @@ async def zoek_leads(req: SearchRequest):
         logger.error(f"Search error: {str(e)}")
         raise HTTPException(status_code=500, detail="Zoekfout. Probeer opnieuw.")
 
-    # Save to search history
-    await db.search_history.insert_one({
-        "branche": branche,
-        "stad": stad,
-        "totaal": len(all_places),
-        "datum": datetime.now(timezone.utc).isoformat()
-    })
+    # Save to search history only on first page (no page_token)
+    if not req.page_token:
+        await db.search_history.insert_one({
+            "branche": branche,
+            "stad": stad,
+            "totaal": len(all_places),
+            "datum": datetime.now(timezone.utc).isoformat()
+        })
 
     leads = []
     for place in all_places:
@@ -159,7 +162,11 @@ async def zoek_leads(req: SearchRequest):
             place_id=place.get("id", ""),
         ))
 
-    return SearchResponse(totaal_gevonden=len(all_places), leads=leads)
+    return SearchResponse(
+        totaal_gevonden=len(all_places),
+        leads=leads,
+        next_page_token=next_token
+    )
 
 
 # ─── Saved Leads ───────────────────────────────────────────────────────────────
@@ -438,6 +445,39 @@ async def append_all_to_sheets():
         return {"message": f"{len(leads)} leads geëxporteerd naar Google Sheets"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Sheets fout: {str(e)}")
+
+
+# ─── Share Report ──────────────────────────────────────────────────────────────
+
+class ShareReport(BaseModel):
+    token: str
+    titel: str
+    leads: List[SavedLead]
+    aangemaakt_op: str
+    totaal: int
+
+
+@api_router.post("/share")
+async def create_share(titel: Optional[str] = "Leadoverzicht"):
+    token = str(uuid.uuid4().hex[:12])
+    leads = await db.saved_leads.find({}, {"_id": 0}).to_list(1000)
+    doc = {
+        "token": token,
+        "titel": titel,
+        "leads": leads,
+        "aangemaakt_op": datetime.now(timezone.utc).isoformat(),
+        "totaal": len(leads)
+    }
+    await db.share_reports.insert_one(doc)
+    return {"token": token, "url": f"/share/{token}"}
+
+
+@api_router.get("/share/{token}")
+async def get_share(token: str):
+    doc = await db.share_reports.find_one({"token": token}, {"_id": 0})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Rapport niet gevonden.")
+    return doc
 
 
 # ─── Misc ──────────────────────────────────────────────────────────────────────
