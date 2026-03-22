@@ -117,8 +117,8 @@ def test_sheets_status(session):
     data = res.json()
     assert "configured" in data
     assert "connected" in data
-    # Since no OAuth credentials, should be not configured
-    assert data["configured"] == False
+    # Google Sheets credentials are configured (client_id set in v3+)
+    assert data["configured"] == True
     print(f"PASS: sheets status - configured={data['configured']}, connected={data['connected']}")
 
 # Cleanup test data

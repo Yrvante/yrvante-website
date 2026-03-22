@@ -1,0 +1,12 @@
+{
+  "name": "yrvante-admin-module",
+  "version": "1.0.0",
+  "description": "Yrvante Lead Finder — Admin module voor Next.js / Vercel",
+  "private": true,
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0"
+  },
+  "engines": {
+    "node": ">=20.x"
+  }
+}
