@@ -94,7 +94,7 @@ export default function App() {
 
             {/* Badge */}
             <div className={`mb-6 fade-in ${visible ? "fade-in-visible" : ""}`} style={{ transitionDelay: "0.1s" }}>
-              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-gray-400 transition-all text-sm badge-glow">
+              <button data-testid="hero-badge" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-gray-400 transition-all text-sm badge-glow">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
