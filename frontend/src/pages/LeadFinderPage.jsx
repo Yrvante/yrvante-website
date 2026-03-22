@@ -8,7 +8,7 @@ import {
   Bookmark, FileText, ArrowRight, Menu as MenuIcon, Mail, Globe, Building2,
   Instagram, Facebook, Filter, SortAsc, CheckSquare, Square, MoreHorizontal,
   Target, TrendingUp, Calendar, Clock, Star, Tag, Copy, MessageSquare,
-  Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database
+  Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database, FileSpreadsheet
 } from "lucide-react";
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -331,6 +331,92 @@ const LeadFinderPage = () => {
     loadLeads();
     loadDashboard();
     toast.success(`${selectedLeads.length} leads verwijderd`);
+  };
+
+  // Google Sheets Export - Copy to clipboard in Google Sheets format
+  const exportToGoogleSheets = (data = null) => {
+    const exportData = data || (activeTab === 'zoeken' ? zoekResultaten : filteredLeads);
+    if (!exportData.length) { 
+      toast.error('Geen data om te exporteren'); 
+      return; 
+    }
+    
+    // Create tab-separated values (TSV) for Google Sheets
+    const headers = ['Naam', 'Adres', 'Telefoon', 'Bron', 'Google Maps', 'Instagram', 'Facebook', 'LinkedIn', 'Status', 'Notitie'];
+    const rows = exportData.map(l => [
+      l.naam || '',
+      l.adres || '',
+      l.telefoonnummer || '',
+      l.source || '',
+      l.google_maps_url || '',
+      l.instagram_url || '',
+      l.facebook_url || '',
+      l.linkedin_url || '',
+      l.status || 'nieuw',
+      l.notitie || ''
+    ].map(c => c.toString().replace(/\t/g, ' ').replace(/\n/g, ' ')).join('\t'));
+    
+    const tsv = [headers.join('\t'), ...rows].join('\n');
+    
+    navigator.clipboard.writeText(tsv).then(() => {
+      toast.success(
+        <div>
+          <strong>✅ Gekopieerd naar klembord!</strong>
+          <p className="text-sm mt-1">Open Google Sheets → Ctrl+V om te plakken</p>
+        </div>,
+        { duration: 5000 }
+      );
+    }).catch(() => {
+      // Fallback: create a textarea and copy
+      const textarea = document.createElement('textarea');
+      textarea.value = tsv;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      toast.success('Gekopieerd! Open Google Sheets en druk Ctrl+V');
+    });
+  };
+
+  // Open directly in Google Sheets (creates new sheet with data)
+  const openInGoogleSheets = (data = null) => {
+    const exportData = data || (activeTab === 'zoeken' ? zoekResultaten : filteredLeads);
+    if (!exportData.length) { 
+      toast.error('Geen data om te exporteren'); 
+      return; 
+    }
+    
+    // Create CSV content
+    const headers = ['Naam', 'Adres', 'Telefoon', 'Bron', 'Google Maps URL', 'Status'];
+    const csvContent = [
+      headers.join(','),
+      ...exportData.map(l => [
+        `"${(l.naam || '').replace(/"/g, '""')}"`,
+        `"${(l.adres || '').replace(/"/g, '""')}"`,
+        `"${(l.telefoonnummer || '').replace(/"/g, '""')}"`,
+        `"${(l.source || '').replace(/"/g, '""')}"`,
+        `"${(l.google_maps_url || '').replace(/"/g, '""')}"`,
+        `"${(l.status || 'nieuw').replace(/"/g, '""')}"`
+      ].join(','))
+    ].join('\n');
+    
+    // Create blob and download as CSV (Google Sheets can open CSV files)
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create download link
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `leads_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    
+    toast.success(
+      <div>
+        <strong>📊 CSV gedownload!</strong>
+        <p className="text-sm mt-1">Open in Google Sheets: File → Import → Upload</p>
+      </div>,
+      { duration: 5000 }
+    );
   };
 
   const exportCSV = (data = null) => {
@@ -703,6 +789,9 @@ const LeadFinderPage = () => {
                       <button onClick={saveAllResults} className="px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 flex items-center gap-2">
                         <Save size={14} /> ALLES OPSLAAN
                       </button>
+                      <button onClick={() => exportToGoogleSheets(zoekResultaten)} className="px-4 py-2 bg-emerald-500 text-white text-xs font-bold rounded-lg hover:bg-emerald-600 flex items-center gap-2">
+                        <FileSpreadsheet size={14} /> GOOGLE SHEETS
+                      </button>
                       <button onClick={() => exportCSV(zoekResultaten)} className="px-4 py-2 border border-gray-200 text-xs font-bold rounded-lg hover:bg-gray-50 flex items-center gap-2">
                         <Download size={14} /> CSV
                       </button>
@@ -820,8 +909,11 @@ const LeadFinderPage = () => {
                   <button onClick={loadLeads} className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50">
                     <RefreshCw size={18} />
                   </button>
+                  <button onClick={() => exportToGoogleSheets()} className="px-4 py-2 bg-emerald-500 text-white rounded-lg text-sm font-bold hover:bg-emerald-600 flex items-center gap-2">
+                    <FileSpreadsheet size={16} /> GOOGLE SHEETS
+                  </button>
                   <button onClick={() => exportCSV()} className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-bold hover:bg-gray-50 flex items-center gap-2">
-                    <Download size={16} /> EXPORT
+                    <Download size={16} /> CSV
                   </button>
                 </div>
               </div>
