@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import SEO from "../components/SEO";
@@ -21,6 +21,7 @@ import {
   MapPin,
   Clock,
   Send,
+  Lock,
 } from "lucide-react";
 import DemoPreview from "../components/DemoPreview";
 
@@ -1173,6 +1174,7 @@ const ContactSection = () => {
 const Footer = () => {
   const { language } = useLanguage();
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
 
   return (
     <footer className="py-16 bg-white border-t border-gray-200">
@@ -1245,9 +1247,18 @@ const Footer = () => {
               <p className="text-xs text-gray-500 mt-1">
                 {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
               </p>
-              <Link to="/privacy" className="text-xs text-gray-500 hover:text-black transition-colors mt-2 inline-block">
-                {language === 'nl' ? 'Privacybeleid' : 'Privacy Policy'}
-              </Link>
+              <div className="flex items-center gap-4 mt-2">
+                <Link to="/privacy" className="text-xs text-gray-500 hover:text-black transition-colors">
+                  {language === 'nl' ? 'Privacybeleid' : 'Privacy Policy'}
+                </Link>
+                <button 
+                  onClick={() => navigate('/leadfinder')}
+                  className="text-gray-300 hover:text-gray-500 transition-colors opacity-30 hover:opacity-100"
+                  title="Admin"
+                >
+                  <Lock size={12} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
