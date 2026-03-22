@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="10" time="2.153" timestamp="2026-03-22T09:40:28.394522+00:00" hostname="agent-env-781d8595-0f0b-440e-97ab-301956bce826"><testcase classname="backend.tests.test_zoek.TestHealthCheck" name="test_api_root" time="0.240" /><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_returns_200" time="0.325"><failure message="assert 502 == 200&#10; +  where 502 = &lt;Response [502]&gt;.status_code">backend/tests/test_zoek.py:22: in test_zoek_returns_200
+    assert r.status_code == 200
+E   assert 502 == 200
+E    +  where 502 = &lt;Response [502]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_response_structure" time="0.240"><failure message="assert 502 == 200&#10; +  where 502 = &lt;Response [502]&gt;.status_code">backend/tests/test_zoek.py:26: in test_zoek_response_structure
+    assert r.status_code == 200
+E   assert 502 == 200
+E    +  where 502 = &lt;Response [502]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_leads_fields" time="0.220"><failure message="assert 502 == 200&#10; +  where 502 = &lt;Response [502]&gt;.status_code">backend/tests/test_zoek.py:35: in test_zoek_leads_fields
+    assert r.status_code == 200
+E   assert 502 == 200
+E    +  where 502 = &lt;Response [502]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_no_website_filter" time="0.186"><failure message="assert 502 == 200&#10; +  where 502 = &lt;Response [502]&gt;.status_code">backend/tests/test_zoek.py:49: in test_zoek_no_website_filter
+    assert r.status_code == 200
+E   assert 502 == 200
+E    +  where 502 = &lt;Response [502]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_totaal_gte_leads" time="0.222"><failure message="assert 502 == 200&#10; +  where 502 = &lt;Response [502]&gt;.status_code">backend/tests/test_zoek.py:58: in test_zoek_totaal_gte_leads
+    assert r.status_code == 200
+E   assert 502 == 200
+E    +  where 502 = &lt;Response [502]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_empty_branche_returns_422" time="0.129" /><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_empty_stad_returns_422" time="0.175" /><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_missing_fields_returns_422" time="0.107" /><testcase classname="backend.tests.test_zoek.TestZoekEndpoint" name="test_zoek_google_maps_url_format" time="0.179"><failure message="assert 502 == 200&#10; +  where 502 = &lt;Response [502]&gt;.status_code">backend/tests/test_zoek.py:76: in test_zoek_google_maps_url_format
+    assert r.status_code == 200
+E   assert 502 == 200
+E    +  where 502 = &lt;Response [502]&gt;.status_code</failure></testcase></testsuite></testsuites>
