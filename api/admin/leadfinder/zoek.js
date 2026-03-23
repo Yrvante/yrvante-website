@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { initTables, CORS } from './_db.js';
 
-// Nederlandse steden met coördinaten voor radius zoeken
+// Nederlandse steden met coördinaten
 const STAD_COORDS = {
   'almelo': { lat: 52.3567, lng: 6.6625 },
   'amsterdam': { lat: 52.3676, lng: 4.9041 },
@@ -17,266 +17,65 @@ const STAD_COORDS = {
   'enschede': { lat: 52.2215, lng: 6.8937 },
   'haarlem': { lat: 52.3874, lng: 4.6462 },
   'arnhem': { lat: 51.9851, lng: 5.8987 },
-  'zaanstad': { lat: 52.4559, lng: 4.8286 },
-  'amersfoort': { lat: 52.1561, lng: 5.3878 },
-  'apeldoorn': { lat: 52.2112, lng: 5.9699 },
-  'hoofddorp': { lat: 52.3025, lng: 4.6889 },
-  'maastricht': { lat: 50.8514, lng: 5.6910 },
-  'leiden': { lat: 52.1601, lng: 4.4970 },
-  'dordrecht': { lat: 51.8133, lng: 4.6901 },
-  'zoetermeer': { lat: 52.0575, lng: 4.4931 },
   'zwolle': { lat: 52.5168, lng: 6.0830 },
   'deventer': { lat: 52.2549, lng: 6.1630 },
-  'delft': { lat: 52.0116, lng: 4.3571 },
   'hengelo': { lat: 52.2661, lng: 6.7927 },
-  'oss': { lat: 51.7649, lng: 5.5181 },
-  'helmond': { lat: 51.4792, lng: 5.6614 },
-  'hilversum': { lat: 52.2292, lng: 5.1669 },
+  'oldenzaal': { lat: 52.3133, lng: 6.9292 },
+  'borne': { lat: 52.3000, lng: 6.7500 },
+  'wierden': { lat: 52.3589, lng: 6.5917 },
+  'vriezenveen': { lat: 52.4083, lng: 6.6250 },
+  'tubbergen': { lat: 52.4044, lng: 6.7833 },
+  'rijssen': { lat: 52.3094, lng: 6.5181 },
+  'apeldoorn': { lat: 52.2112, lng: 5.9699 },
+  'leiden': { lat: 52.1601, lng: 4.4970 },
+  'maastricht': { lat: 50.8514, lng: 5.6910 },
+  'venlo': { lat: 51.3704, lng: 6.1724 },
+  'leeuwarden': { lat: 53.2012, lng: 5.7999 },
 };
 
-// ZZP/Freelancer zoektermen
-const ZZP_SEARCH_TERMS = [
-  'zzp', 'freelancer', 'zelfstandig', 'eenmanszaak', 'ondernemer',
-  'dienstverlening', 'advies', 'consultancy', 'studio', 'praktijk'
-];
+// Synoniemen voor branches - om meer resultaten te vinden
+const BRANCH_SYNONYMS = {
+  'kapper': ['kapper', 'kapsalon', 'hairdresser', 'hair salon', 'barbershop', 'barber', 'knippen', 'coiffeur', 'hairstylist', 'kapperszaak'],
+  'schoonheidsspecialist': ['schoonheidsspecialist', 'beauty salon', 'schoonheidssalon', 'beautysalon', 'huidverzorging', 'gezichtsbehandeling', 'beauty'],
+  'nagelstudio': ['nagelstudio', 'nail salon', 'nagelsalon', 'manicure', 'pedicure', 'nails', 'gelnagels'],
+  'masseur': ['masseur', 'massage', 'massagesalon', 'wellness', 'spa', 'ontspanning'],
+  'fotograaf': ['fotograaf', 'photographer', 'fotostudio', 'photography', 'foto'],
+  'schilder': ['schilder', 'painter', 'schildersbedrijf', 'verfwerk', 'huisschilder'],
+  'loodgieter': ['loodgieter', 'plumber', 'installateur', 'sanitair', 'cv monteur', 'verwarming'],
+  'elektricien': ['elektricien', 'electrician', 'elektrisch', 'elektra', 'elektrotechniek'],
+  'tuinman': ['tuinman', 'hovenier', 'gardener', 'tuinonderhoud', 'tuinaanleg', 'groenvoorziening'],
+  'coach': ['coach', 'coaching', 'life coach', 'business coach', 'loopbaancoach', 'mentor'],
+  'fysiotherapeut': ['fysiotherapeut', 'fysiotherapie', 'fysio', 'physiotherapy', 'manueel therapeut'],
+  'accountant': ['accountant', 'boekhouder', 'administratie', 'belastingadviseur', 'financieel adviseur'],
+  'personal trainer': ['personal trainer', 'pt', 'fitness trainer', 'sportcoach', 'fitnessinstructeur'],
+  'tandarts': ['tandarts', 'dentist', 'tandartspraktijk', 'mondzorg', 'dental'],
+  'restaurant': ['restaurant', 'eetcafe', 'bistro', 'brasserie', 'eten'],
+  'cafe': ['cafe', 'bar', 'kroeg', 'horeca', 'drink'],
+  'bakker': ['bakker', 'bakkerij', 'bakery', 'brood', 'patisserie'],
+  'slager': ['slager', 'slagerij', 'butcher', 'vlees'],
+  'garage': ['garage', 'automonteur', 'autobedrijf', 'car repair', 'autowerkplaats'],
+  'fietsenmaker': ['fietsenmaker', 'fietsenzaak', 'bike repair', 'fietsenwinkel'],
+  'bloemist': ['bloemist', 'bloemenwinkel', 'florist', 'bloemen'],
+  'schoonmaker': ['schoonmaker', 'cleaning', 'schoonmaakbedrijf', 'glazenwasser'],
+  'timmerman': ['timmerman', 'carpenter', 'houtbewerking', 'meubelmaker'],
+  'dierenarts': ['dierenarts', 'veterinarian', 'dierenkliniek', 'huisdier'],
+};
 
-// Branches
-const COMMON_BRANCHES = [
-  'kapper', 'schoonheidsspecialist', 'nagelstudio', 'masseur',
-  'fotograaf', 'grafisch ontwerper', 'schilder', 'loodgieter',
-  'elektricien', 'timmerman', 'tuinman', 'schoonmaker',
-  'personal trainer', 'yoga', 'fysiotherapeut', 'accountant',
-  'boekhouder', 'coach', 'trainer'
-];
+// Nearby Search types voor Google Places
+const PLACE_TYPES = {
+  'kapper': ['hair_care', 'beauty_salon'],
+  'schoonheidsspecialist': ['beauty_salon', 'spa'],
+  'nagelstudio': ['beauty_salon'],
+  'massage': ['spa', 'health'],
+  'fotograaf': ['photographer'],
+  'restaurant': ['restaurant', 'cafe', 'food'],
+  'garage': ['car_repair', 'car_dealer'],
+  'tandarts': ['dentist', 'health'],
+  'fysiotherapeut': ['physiotherapist', 'health'],
+  'dierenarts': ['veterinary_care'],
+};
 
-// ====== SCRAPER FUNCTIONS ======
-
-// Helper: Simple Google Search via scraping
-async function googleSearch(query, maxResults = 10) {
-  const results = [];
-  try {
-    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}&num=${maxResults}&hl=nl`;
-    const res = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'nl-NL,nl;q=0.9,en;q=0.8',
-      }
-    });
-    const html = await res.text();
-    
-    // Extract URLs from search results
-    const urlMatches = html.matchAll(/href="\/url\?q=([^&"]+)/g);
-    for (const match of urlMatches) {
-      const decodedUrl = decodeURIComponent(match[1]);
-      if (!decodedUrl.includes('google.com') && !decodedUrl.includes('youtube.com')) {
-        results.push(decodedUrl);
-      }
-    }
-  } catch (e) {
-    console.error('Google search error:', e);
-  }
-  return results.slice(0, maxResults);
-}
-
-// Instagram via Google Search
-async function scrapeInstagram(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:instagram.com "${branche}" "${stad}" OR "${branche}" netherlands`;
-    const urls = await googleSearch(query, 12);
-    
-    for (const url of urls) {
-      if (url.includes('instagram.com/') && !url.includes('/p/') && !url.includes('/reel/')) {
-        const usernameMatch = url.match(/instagram\.com\/([^\/\?]+)/);
-        if (usernameMatch) {
-          const username = usernameMatch[1];
-          if (!['explore', 'accounts', 'about', 'legal', 'privacy', 'directory'].includes(username)) {
-            leads.push({
-              plaats_id: `ig_${username}`,
-              naam: `@${username}`,
-              source: 'instagram',
-              instagram_url: url,
-              adres: stad,
-              google_maps_url: null,
-            });
-          }
-        }
-      }
-    }
-  } catch (e) {
-    console.error('Instagram scrape error:', e);
-  }
-  return leads;
-}
-
-// Facebook via Google Search
-async function scrapeFacebook(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:facebook.com "${branche}" "${stad}"`;
-    const urls = await googleSearch(query, 12);
-    
-    for (const url of urls) {
-      if (url.includes('facebook.com/') && !url.includes('/posts/') && !url.includes('/photos/')) {
-        const pageMatch = url.match(/facebook\.com\/([^\/\?]+)/);
-        if (pageMatch) {
-          const pageName = pageMatch[1];
-          if (!['watch', 'marketplace', 'groups', 'events', 'gaming', 'login', 'help', 'story.php'].includes(pageName)) {
-            leads.push({
-              plaats_id: `fb_${pageName}`,
-              naam: pageName.replace(/\./g, ' ').replace(/-/g, ' '),
-              source: 'facebook',
-              facebook_url: url,
-              adres: stad,
-              google_maps_url: null,
-            });
-          }
-        }
-      }
-    }
-  } catch (e) {
-    console.error('Facebook scrape error:', e);
-  }
-  return leads;
-}
-
-// LinkedIn via Google Search
-async function scrapeLinkedIn(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:linkedin.com/company "${branche}" "${stad}"`;
-    const urls = await googleSearch(query, 10);
-    
-    for (const url of urls) {
-      if (url.includes('linkedin.com/company/')) {
-        const companyMatch = url.match(/linkedin\.com\/company\/([^\/\?]+)/);
-        if (companyMatch) {
-          const companySlug = companyMatch[1];
-          leads.push({
-            plaats_id: `li_${companySlug}`,
-            naam: companySlug.replace(/-/g, ' '),
-            source: 'linkedin',
-            linkedin_url: url,
-            adres: stad,
-            google_maps_url: null,
-          });
-        }
-      }
-    }
-  } catch (e) {
-    console.error('LinkedIn scrape error:', e);
-  }
-  return leads;
-}
-
-// Telefoongids via Google Search
-async function scrapeTelefoongids(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:detelefoongids.nl "${branche}" "${stad}"`;
-    const urls = await googleSearch(query, 10);
-    
-    for (const url of urls) {
-      if (url.includes('detelefoongids.nl')) {
-        // Try to extract business name from URL
-        const pathMatch = url.match(/detelefoongids\.nl\/[^\/]+\/([^\/\?]+)/);
-        const businessName = pathMatch ? decodeURIComponent(pathMatch[1]).replace(/-/g, ' ') : `Telefoongids - ${branche}`;
-        leads.push({
-          plaats_id: `tg_${Math.random().toString(36).substr(2, 9)}`,
-          naam: businessName,
-          source: 'telefoongids',
-          telefoongids_url: url,
-          adres: stad,
-          google_maps_url: null,
-        });
-      }
-    }
-  } catch (e) {
-    console.error('Telefoongids scrape error:', e);
-  }
-  return leads;
-}
-
-// Gouden Gids via Google Search
-async function scrapeGoudenGids(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:goudengids.nl "${branche}" "${stad}"`;
-    const urls = await googleSearch(query, 10);
-    
-    for (const url of urls) {
-      if (url.includes('goudengids.nl')) {
-        const pathMatch = url.match(/goudengids\.nl\/[^\/]+\/([^\/\?]+)/);
-        const businessName = pathMatch ? decodeURIComponent(pathMatch[1]).replace(/-/g, ' ') : `Gouden Gids - ${branche}`;
-        leads.push({
-          plaats_id: `gg_${Math.random().toString(36).substr(2, 9)}`,
-          naam: businessName,
-          source: 'goudengids',
-          goudengids_url: url,
-          adres: stad,
-          google_maps_url: null,
-        });
-      }
-    }
-  } catch (e) {
-    console.error('Gouden Gids scrape error:', e);
-  }
-  return leads;
-}
-
-// Marktplaats via Google Search
-async function scrapeMarktplaats(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:marktplaats.nl/diensten "${branche}" "${stad}"`;
-    const urls = await googleSearch(query, 8);
-    
-    for (const url of urls) {
-      if (url.includes('marktplaats.nl')) {
-        leads.push({
-          plaats_id: `mp_${Math.random().toString(36).substr(2, 9)}`,
-          naam: `Marktplaats ZZP - ${branche}`,
-          source: 'marktplaats',
-          marktplaats_url: url,
-          adres: stad,
-          google_maps_url: null,
-        });
-      }
-    }
-  } catch (e) {
-    console.error('Marktplaats scrape error:', e);
-  }
-  return leads;
-}
-
-// KVK via Google Search
-async function scrapeKVK(branche, stad) {
-  const leads = [];
-  try {
-    const query = `site:kvk.nl "${branche}" "${stad}"`;
-    const urls = await googleSearch(query, 8);
-    
-    for (const url of urls) {
-      if (url.includes('kvk.nl')) {
-        leads.push({
-          plaats_id: `kvk_${Math.random().toString(36).substr(2, 9)}`,
-          naam: `KVK Bedrijf - ${branche}`,
-          source: 'kvk',
-          kvk_url: url,
-          adres: stad,
-          google_maps_url: null,
-        });
-      }
-    }
-  } catch (e) {
-    console.error('KVK scrape error:', e);
-  }
-  return leads;
-}
-
-// ====== GOOGLE PLACES API ======
-
+// Geocode stad naar coördinaten
 async function getCoordinates(stad, apiKey) {
   const stadLower = stad.toLowerCase().trim();
   if (STAD_COORDS[stadLower]) {
@@ -296,40 +95,77 @@ async function getCoordinates(stad, apiKey) {
   return null;
 }
 
-async function searchGooglePlaces(query, coords, radiusKm, apiKey, pageToken = null) {
-  const radiusMeters = radiusKm * 1000;
+// Text Search API - zoekt op tekst query
+async function textSearch(query, coords, radiusKm, apiKey, pageToken = null) {
+  const radiusMeters = Math.min(radiusKm * 1000, 50000); // Max 50km
   let url;
   
   if (pageToken) {
     url = `https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=${pageToken}&key=${apiKey}`;
-  } else if (coords) {
-    url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&location=${coords.lat},${coords.lng}&radius=${radiusMeters}&key=${apiKey}&language=nl`;
+    // Google vereist een kleine delay voor pagetoken
+    await new Promise(r => setTimeout(r, 300));
   } else {
-    url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}&language=nl`;
+    url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&location=${coords.lat},${coords.lng}&radius=${radiusMeters}&key=${apiKey}&language=nl&region=nl`;
   }
 
-  const placesRes = await fetch(url);
-  const placesData = await placesRes.json();
-  
-  if (placesData.status !== 'OK' && placesData.status !== 'ZERO_RESULTS') {
-    console.error('Google Places error:', placesData.status);
-    return { results: [], nextPageToken: null };
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (data.status === 'OK' || data.status === 'ZERO_RESULTS') {
+      return {
+        results: data.results || [],
+        nextPageToken: data.next_page_token || null,
+        status: data.status
+      };
+    } else {
+      console.error('Text Search error:', data.status, data.error_message);
+      return { results: [], nextPageToken: null, status: data.status };
+    }
+  } catch (e) {
+    console.error('Text Search fetch error:', e);
+    return { results: [], nextPageToken: null, status: 'ERROR' };
   }
-  
-  return {
-    results: placesData.results || [],
-    nextPageToken: placesData.next_page_token || null
-  };
 }
 
+// Nearby Search API - zoekt op type en locatie
+async function nearbySearch(coords, radiusKm, placeType, apiKey, pageToken = null) {
+  const radiusMeters = Math.min(radiusKm * 1000, 50000);
+  let url;
+  
+  if (pageToken) {
+    url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${pageToken}&key=${apiKey}`;
+    await new Promise(r => setTimeout(r, 300));
+  } else {
+    url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=${radiusMeters}&type=${placeType}&key=${apiKey}&language=nl`;
+  }
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (data.status === 'OK' || data.status === 'ZERO_RESULTS') {
+      return {
+        results: data.results || [],
+        nextPageToken: data.next_page_token || null
+      };
+    }
+    return { results: [], nextPageToken: null };
+  } catch (e) {
+    console.error('Nearby Search error:', e);
+    return { results: [], nextPageToken: null };
+  }
+}
+
+// Haal details op van een plaats (check of website bestaat)
 async function getPlaceDetails(placeId, apiKey) {
   try {
-    const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=website,formatted_phone_number,formatted_address,types,business_status&key=${apiKey}`;
-    const detailsRes = await fetch(detailsUrl);
-    const detailsData = await detailsRes.json();
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=website,formatted_phone_number,formatted_address,name,types,business_status,opening_hours,url&key=${apiKey}&language=nl`;
+    const res = await fetch(url);
+    const data = await res.json();
     
-    if (detailsData.status === 'OK') {
-      return detailsData.result;
+    if (data.status === 'OK') {
+      return data.result;
     }
   } catch (e) {
     console.error('Place details error:', e);
@@ -337,9 +173,9 @@ async function getPlaceDetails(placeId, apiKey) {
   return null;
 }
 
-// ====== MAIN HANDLER ======
-
+// Hoofdfunctie: Zoek leads
 export default async function handler(req, res) {
+  // CORS
   if (req.method === 'OPTIONS') {
     Object.entries(CORS).forEach(([k, v]) => res.setHeader(k, v));
     return res.status(200).end();
@@ -351,13 +187,12 @@ export default async function handler(req, res) {
   }
 
   const { 
-    branche, 
+    branche = '', 
     stad, 
     pageToken, 
     radius = 25,
     searchAll = false,
-    filters = {},
-    sources = ['google', 'instagram', 'facebook', 'linkedin', 'telefoongids', 'goudengids', 'marktplaats', 'kvk']
+    filters = {}
   } = req.body || {};
   
   if (!stad) {
@@ -365,204 +200,201 @@ export default async function handler(req, res) {
   }
   
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'Google Maps API key niet geconfigureerd' });
+  }
 
   try {
     await initTables();
     
-    let allLeads = [];
-    let nextToken = null;
-    const seenIds = new Set();
-    const scrapedSources = [];
-    const searchTerm = branche || 'zzp freelancer diensten';
-
-    // Get coordinates for radius search
-    const coords = apiKey ? await getCoordinates(stad, apiKey) : null;
+    const coords = await getCoordinates(stad, apiKey);
+    if (!coords) {
+      return res.status(400).json({ error: `Kon locatie "${stad}" niet vinden` });
+    }
     
-    if (pageToken && apiKey) {
-      // Continue with pagination (Google only)
-      const { results, nextPageToken } = await searchGooglePlaces('', null, radius, apiKey, pageToken);
+    const allLeads = [];
+    const seenPlaceIds = new Set();
+    let nextToken = null;
+    
+    // Als we een pageToken hebben, gebruik die voor volgende pagina
+    if (pageToken) {
+      const { results, nextPageToken } = await textSearch('', null, radius, apiKey, pageToken);
       nextToken = nextPageToken;
       
       for (const place of results) {
-        if (seenIds.has(place.place_id)) continue;
-        seenIds.add(place.place_id);
+        if (seenPlaceIds.has(place.place_id)) continue;
+        seenPlaceIds.add(place.place_id);
         
         const details = await getPlaceDetails(place.place_id, apiKey);
         if (details && !details.website) {
           allLeads.push({
             place_id: place.place_id,
             naam: place.name,
-            adres: details.formatted_address || place.formatted_address,
+            adres: details.formatted_address || place.formatted_address || place.vicinity,
             telefoonnummer: details.formatted_phone_number || null,
-            google_maps_url: `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
+            google_maps_url: details.url || `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
             source: 'google',
+            types: place.types || [],
+            business_status: details.business_status || place.business_status
           });
         }
       }
-      scrapedSources.push('Google Maps');
     } else {
-      // ====== PARALLEL SCRAPING OF ALL SOURCES ======
-      const scrapePromises = [];
+      // NIEUWE ZOEKOPDRACHT - gebruik meerdere strategieën
       
-      // 1. Google Places API (if key available)
-      if (apiKey && sources.includes('google')) {
-        scrapePromises.push((async () => {
-          const searchQueries = searchAll 
-            ? [searchTerm, ...COMMON_BRANCHES.slice(0, 5)] 
-            : [branche || 'bedrijven'];
-          
-          for (const query of searchQueries.slice(0, 3)) {
-            const fullQuery = `${query} in ${stad}`;
-            const { results, nextPageToken } = await searchGooglePlaces(fullQuery, coords, radius, apiKey);
-            if (!nextToken) nextToken = nextPageToken;
+      // 1. Bepaal zoektermen gebaseerd op branche
+      let searchTerms = [];
+      const brancheLower = branche.toLowerCase().trim();
+      
+      if (brancheLower && BRANCH_SYNONYMS[brancheLower]) {
+        // Gebruik alle synoniemen voor deze branche
+        searchTerms = BRANCH_SYNONYMS[brancheLower];
+      } else if (brancheLower) {
+        // Gebruik de ingevoerde term + variaties
+        searchTerms = [brancheLower, `${brancheLower} ${stad}`, `${brancheLower} nederland`];
+      } else {
+        // Geen branche - zoek algemeen naar lokale bedrijven
+        searchTerms = ['bedrijf', 'winkel', 'diensten', 'zakelijk'];
+      }
+      
+      // 2. Text Search voor elke zoekterm (maximaal 5 om rate limits te voorkomen)
+      const searchPromises = [];
+      const limitedTerms = searchTerms.slice(0, 6);
+      
+      for (const term of limitedTerms) {
+        const query = `${term} in ${stad}`;
+        searchPromises.push(
+          textSearch(query, coords, radius, apiKey).then(async ({ results, nextPageToken }) => {
+            // Bewaar de eerste nextPageToken
+            if (nextPageToken && !nextToken) {
+              nextToken = nextPageToken;
+            }
             
+            const leads = [];
             for (const place of results) {
-              if (seenIds.has(place.place_id)) continue;
-              seenIds.add(place.place_id);
+              if (seenPlaceIds.has(place.place_id)) continue;
+              seenPlaceIds.add(place.place_id);
               
+              // Haal details op om website te checken
               const details = await getPlaceDetails(place.place_id, apiKey);
+              
+              // Filter: alleen bedrijven ZONDER website
               if (details && !details.website) {
+                // Extra filter: alleen actieve bedrijven
+                if (details.business_status === 'CLOSED_PERMANENTLY') continue;
+                // Filter op telefoonnummer indien gewenst
                 if (filters.onlyWithPhone && !details.formatted_phone_number) continue;
                 
-                allLeads.push({
+                leads.push({
                   place_id: place.place_id,
                   naam: place.name,
-                  adres: details.formatted_address || place.formatted_address,
+                  adres: details.formatted_address || place.formatted_address || place.vicinity,
                   telefoonnummer: details.formatted_phone_number || null,
-                  google_maps_url: `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
+                  google_maps_url: details.url || `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
                   source: 'google',
+                  types: place.types || [],
+                  business_status: details.business_status || 'OPERATIONAL',
+                  zoekterm: term
                 });
               }
             }
+            return leads;
+          }).catch(e => {
+            console.error(`Search error for "${term}":`, e);
+            return [];
+          })
+        );
+      }
+      
+      // 3. Nearby Search als we een bekend type hebben
+      if (brancheLower && PLACE_TYPES[brancheLower]) {
+        for (const placeType of PLACE_TYPES[brancheLower]) {
+          searchPromises.push(
+            nearbySearch(coords, radius, placeType, apiKey).then(async ({ results }) => {
+              const leads = [];
+              for (const place of results) {
+                if (seenPlaceIds.has(place.place_id)) continue;
+                seenPlaceIds.add(place.place_id);
+                
+                const details = await getPlaceDetails(place.place_id, apiKey);
+                if (details && !details.website) {
+                  if (details.business_status === 'CLOSED_PERMANENTLY') continue;
+                  if (filters.onlyWithPhone && !details.formatted_phone_number) continue;
+                  
+                  leads.push({
+                    place_id: place.place_id,
+                    naam: place.name,
+                    adres: details.formatted_address || place.vicinity,
+                    telefoonnummer: details.formatted_phone_number || null,
+                    google_maps_url: details.url || `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
+                    source: 'google',
+                    types: place.types || [],
+                    business_status: details.business_status || 'OPERATIONAL',
+                    zoekterm: `nearby:${placeType}`
+                  });
+                }
+              }
+              return leads;
+            }).catch(e => {
+              console.error(`Nearby search error:`, e);
+              return [];
+            })
+          );
+        }
+      }
+      
+      // 4. Wacht op alle zoekopdrachten
+      const resultsArrays = await Promise.all(searchPromises);
+      for (const leads of resultsArrays) {
+        allLeads.push(...leads);
+      }
+      
+      // 5. Als we weinig resultaten hebben, probeer nog een paar extra zoekopdrachten
+      if (allLeads.length < 10 && brancheLower) {
+        // Zoek ook in nabijgelegen steden
+        const nearbyCities = ['hengelo', 'enschede', 'oldenzaal', 'borne', 'wierden'].filter(c => c !== stad.toLowerCase());
+        
+        for (const city of nearbyCities.slice(0, 2)) {
+          const cityCoords = STAD_COORDS[city];
+          if (!cityCoords) continue;
+          
+          const { results } = await textSearch(`${brancheLower} in ${city}`, cityCoords, 15, apiKey);
+          for (const place of results) {
+            if (seenPlaceIds.has(place.place_id)) continue;
+            seenPlaceIds.add(place.place_id);
+            
+            const details = await getPlaceDetails(place.place_id, apiKey);
+            if (details && !details.website) {
+              if (filters.onlyWithPhone && !details.formatted_phone_number) continue;
+              
+              allLeads.push({
+                place_id: place.place_id,
+                naam: place.name,
+                adres: details.formatted_address || place.vicinity,
+                telefoonnummer: details.formatted_phone_number || null,
+                google_maps_url: details.url || `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
+                source: 'google',
+                types: place.types || [],
+                zoekterm: `nearby_city:${city}`
+              });
+            }
           }
-          scrapedSources.push('Google Maps');
-        })());
+        }
       }
-      
-      // 2. Instagram
-      if (sources.includes('instagram')) {
-        scrapePromises.push(
-          scrapeInstagram(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('Instagram');
-          }).catch(e => console.error('Instagram error:', e))
-        );
-      }
-      
-      // 3. Facebook
-      if (sources.includes('facebook')) {
-        scrapePromises.push(
-          scrapeFacebook(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('Facebook');
-          }).catch(e => console.error('Facebook error:', e))
-        );
-      }
-      
-      // 4. LinkedIn
-      if (sources.includes('linkedin')) {
-        scrapePromises.push(
-          scrapeLinkedIn(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('LinkedIn');
-          }).catch(e => console.error('LinkedIn error:', e))
-        );
-      }
-      
-      // 5. Telefoongids
-      if (sources.includes('telefoongids')) {
-        scrapePromises.push(
-          scrapeTelefoongids(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('Telefoongids');
-          }).catch(e => console.error('Telefoongids error:', e))
-        );
-      }
-      
-      // 6. Gouden Gids
-      if (sources.includes('goudengids')) {
-        scrapePromises.push(
-          scrapeGoudenGids(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('Gouden Gids');
-          }).catch(e => console.error('Gouden Gids error:', e))
-        );
-      }
-      
-      // 7. Marktplaats
-      if (sources.includes('marktplaats')) {
-        scrapePromises.push(
-          scrapeMarktplaats(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('Marktplaats');
-          }).catch(e => console.error('Marktplaats error:', e))
-        );
-      }
-      
-      // 8. KVK
-      if (sources.includes('kvk')) {
-        scrapePromises.push(
-          scrapeKVK(searchTerm, stad).then(leads => {
-            leads.forEach(l => {
-              if (!seenIds.has(l.plaats_id)) {
-                seenIds.add(l.plaats_id);
-                allLeads.push(l);
-              }
-            });
-            if (leads.length > 0) scrapedSources.push('KVK');
-          }).catch(e => console.error('KVK error:', e))
-        );
-      }
-      
-      // Wait for all scrapes with timeout
-      await Promise.race([
-        Promise.all(scrapePromises),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 25000))
-      ]).catch(e => console.error('Scrape timeout:', e.message));
     }
 
-    // Save search history
+    // Sla zoekgeschiedenis op
     if (!pageToken) {
       try {
-        const searchLabel = searchAll ? `ALLES: ${branche || 'alle branches'}` : (branche || 'algemeen');
+        const searchLabel = branche || 'algemeen';
         await sql`
           INSERT INTO leadfinder_search_history (branche, stad, totaal) 
           VALUES (${searchLabel}, ${stad + ' +' + radius + 'km'}, ${allLeads.length}) 
           ON CONFLICT (branche, stad) 
           DO UPDATE SET totaal = ${allLeads.length}, datum = NOW()
         `;
-      } catch (historyError) {
-        console.error('Error saving search history:', historyError);
+      } catch (e) {
+        console.error('History save error:', e);
       }
     }
 
@@ -570,9 +402,9 @@ export default async function handler(req, res) {
       leads: allLeads, 
       totaal_gevonden: allLeads.length, 
       nextPageToken: nextToken,
-      zoekgebied: coords ? `${stad} + ${radius}km radius` : stad,
-      bronnen_doorzocht: scrapedSources,
-      zoekterm: searchTerm,
+      zoekgebied: `${stad} + ${radius}km radius`,
+      bronnen_doorzocht: ['Google Maps'],
+      zoektermen_gebruikt: branche ? (BRANCH_SYNONYMS[branche.toLowerCase()] || [branche]).slice(0, 5) : ['algemeen']
     });
   } catch (error) {
     console.error('Search error:', error);

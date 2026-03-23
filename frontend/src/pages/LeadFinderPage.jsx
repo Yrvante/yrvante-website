@@ -198,6 +198,8 @@ const LeadFinderPage = () => {
     }
     setSearchAll(true);
     setLoading(true);
+    setZoekResultaten([]); // Clear previous results
+    
     try {
       const body = { 
         branche: searchQuery || '', 
@@ -207,13 +209,22 @@ const LeadFinderPage = () => {
         filters: searchFilters
       };
       
+      toast.loading('Zoeken naar bedrijven zonder website...', { id: 'search' });
+      
       const res = await fetch(`${API}/zoek`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
       const data = await res.json();
-      if (data.error) { toast.error(data.error); setLoading(false); return; }
+      
+      toast.dismiss('search');
+      
+      if (data.error) { 
+        toast.error(data.error); 
+        setLoading(false); 
+        return; 
+      }
       
       const leadsWithSource = (data.leads || []).map(lead => ({
         ...lead,
@@ -226,12 +237,20 @@ const LeadFinderPage = () => {
       setZoekgebied(data.zoekgebied || '');
       setBronnenDoorzocht(data.bronnen_doorzocht || []);
       
-      toast.success(`${data.totaal_gevonden} ZZP'ers & bedrijven gevonden!`);
-      if (data.zoekgebied) {
-        toast.info(`Zoekgebied: ${data.zoekgebied}`, { duration: 4000 });
+      if (data.totaal_gevonden > 0) {
+        toast.success(`${data.totaal_gevonden} leads zonder website gevonden!`);
+      } else {
+        toast.info('Geen bedrijven zonder website gevonden. Probeer een andere branche of grotere radius.');
       }
-      if (data.note) toast.info(data.note, { duration: 5000 });
-    } catch (err) { toast.error('Zoekfout'); }
+      
+      if (data.zoektermen_gebruikt && data.zoektermen_gebruikt.length > 0) {
+        console.log('Zoektermen gebruikt:', data.zoektermen_gebruikt);
+      }
+    } catch (err) { 
+      toast.dismiss('search');
+      toast.error('Zoekfout - probeer opnieuw'); 
+      console.error('Search error:', err);
+    }
     finally { setLoading(false); setSearchAll(false); }
   };
 
