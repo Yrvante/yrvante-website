@@ -501,30 +501,37 @@ const LeadFinderPage = () => {
   // Login Screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden">
+      <div className="min-h-screen bg-white flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-30" style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.3) brightness(1.1)' }} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-white/95 to-white/80" />
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md relative z-10">
-          <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-            <div className="text-center mb-8">
-              <Link to="/"><img src={LOGO_URL} alt="Yrvante" className="h-8 mx-auto mb-6" /></Link>
-              <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-100">
-                <Database className="text-gray-400" size={28} />
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+            <div className="text-center mb-6 sm:mb-8">
+              <Link to="/"><img src={LOGO_URL} alt="Yrvante" className="h-7 sm:h-8 mx-auto mb-4 sm:mb-6" /></Link>
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-50 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-gray-100">
+                <Lock className="text-gray-400" size={24} />
               </div>
-              <h1 className="text-4xl font-black tracking-tighter text-black mb-2">LEAD FINDER</h1>
-              <p className="text-gray-500">Pro Suite — Yrvante</p>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-black mb-1">Admin Dashboard</h1>
+              <p className="text-gray-400 text-sm">Beveiligd gebied — Yrvante</p>
             </div>
             <form onSubmit={handleLogin}>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Wachtwoord" className="w-full bg-white border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors mb-4" autoFocus />
-              {authError && <p className="text-red-500 text-sm mb-4">{authError}</p>}
-              <button type="submit" className="w-full px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full">
+              <input 
+                type="password" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                placeholder="Wachtwoord" 
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black focus:bg-white outline-none py-3.5 sm:py-4 px-4 transition-all mb-4 text-base" 
+                autoFocus 
+              />
+              {authError && <p className="text-red-500 text-sm mb-4 text-center">{authError}</p>}
+              <button type="submit" className="w-full py-3.5 sm:py-4 bg-black text-white text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-all rounded-full">
                 Inloggen
               </button>
             </form>
-            <div className="text-center mt-6">
-              <Link to="/" className="text-gray-500 text-sm hover:text-black flex items-center justify-center gap-2 transition-colors">
-                <ArrowLeft size={14} />Terug naar home
+            <div className="text-center mt-5 sm:mt-6">
+              <Link to="/" className="text-gray-400 text-sm hover:text-black flex items-center justify-center gap-2 transition-colors">
+                <ArrowLeft size={14} />Terug naar website
               </Link>
             </div>
           </div>
