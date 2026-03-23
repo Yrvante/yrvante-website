@@ -515,10 +515,18 @@ const LeadFinderPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen relative">
+      {/* White Pattern Background - Same as Yrvante Homepage */}
+      <div className="fixed inset-0 -z-10" style={{
+        backgroundImage: `url(${BG_IMAGE})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        filter: 'saturate(0.55) brightness(1.02) contrast(1.05)'
+      }} />
+      
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
-        <div className="max-w-[1800px] mx-auto px-6">
+      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div className="max-w-[1600px] mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
               <Link to="/" className="flex items-center">
@@ -567,232 +575,133 @@ const LeadFinderPage = () => {
         {/* ZOEKEN TAB */}
         {activeTab === 'zoeken' && (
           <motion.div key="zoeken" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-6 py-8">
+            <div className="max-w-[1400px] mx-auto px-6 py-8">
               
-              {/* UNIFIED SEARCH BOX - Zoek Alles */}
-              <div className="bg-gradient-to-br from-black to-gray-800 rounded-3xl p-8 mb-8 text-white">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                    <Target size={24} />
-                  </div>
-                  <div>
-                    <h2 className="font-bold text-2xl">ZOEK ALLES</h2>
-                    <p className="text-gray-400 text-sm">Vind alle ZZP'ers & bedrijven zonder website in één keer</p>
+              {/* Main Search Card */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
+                {/* Header */}
+                <div className="bg-black text-white p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                      <Target size={20} />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-xl tracking-tight">Lead Finder Pro</h2>
+                      <p className="text-gray-400 text-sm">Vind ZZP'ers & bedrijven zonder website</p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="grid md:grid-cols-4 gap-4 mb-6">
-                  <div className="md:col-span-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 block">
-                      Branche (optioneel)
-                    </label>
-                    <input
-                      value={searchQuery}
-                      onChange={e => setSearchQuery(e.target.value)}
-                      placeholder="bijv. kapper, coach, schilder... of leeg voor ALLE branches"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl focus:border-white outline-none py-4 px-4 transition-colors text-white placeholder-gray-500"
-                      onKeyPress={e => e.key === 'Enter' && zoekAlles()}
-                    />
+                {/* Search Form */}
+                <div className="p-6">
+                  <div className="grid md:grid-cols-12 gap-4 mb-4">
+                    <div className="md:col-span-5">
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Branche (optioneel)</label>
+                      <input
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)}
+                        placeholder="bijv. kapper, coach, schilder..."
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black focus:bg-white outline-none py-3.5 px-4 transition-all"
+                        onKeyPress={e => e.key === 'Enter' && zoekAlles()}
+                      />
+                    </div>
+                    <div className="md:col-span-4">
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Locatie *</label>
+                      <input
+                        value={searchLocation}
+                        onChange={e => setSearchLocation(e.target.value)}
+                        placeholder="bijv. Almelo, Amsterdam..."
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black focus:bg-white outline-none py-3.5 px-4 transition-all"
+                        onKeyPress={e => e.key === 'Enter' && zoekAlles()}
+                      />
+                    </div>
+                    <div className="md:col-span-3">
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Radius</label>
+                      <select
+                        value={searchRadius}
+                        onChange={e => setSearchRadius(Number(e.target.value))}
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl outline-none py-3.5 px-4 transition-all cursor-pointer focus:border-black focus:bg-white"
+                      >
+                        <option value={5}>+5 km</option>
+                        <option value={10}>+10 km</option>
+                        <option value={15}>+15 km</option>
+                        <option value={25}>+25 km (aanbevolen)</option>
+                        <option value={50}>+50 km</option>
+                        <option value={75}>+75 km</option>
+                        <option value={100}>+100 km</option>
+                      </select>
+                    </div>
                   </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 block">
-                      Locatie *
-                    </label>
-                    <input
-                      value={searchLocation}
-                      onChange={e => setSearchLocation(e.target.value)}
-                      placeholder="bijv. Almelo"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl focus:border-white outline-none py-4 px-4 transition-colors text-white placeholder-gray-500"
-                      onKeyPress={e => e.key === 'Enter' && zoekAlles()}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 block">
-                      Radius
-                    </label>
-                    <select
-                      value={searchRadius}
-                      onChange={e => setSearchRadius(Number(e.target.value))}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl outline-none py-4 px-4 transition-colors text-white cursor-pointer"
-                    >
-                      <option value={5} className="text-black">+5 km</option>
-                      <option value={10} className="text-black">+10 km</option>
-                      <option value={15} className="text-black">+15 km</option>
-                      <option value={25} className="text-black">+25 km</option>
-                      <option value={50} className="text-black">+50 km</option>
-                      <option value={75} className="text-black">+75 km</option>
-                      <option value={100} className="text-black">+100 km</option>
-                    </select>
-                  </div>
-                </div>
 
-                {/* Filters Row */}
-                <div className="flex flex-wrap items-center gap-4 mb-6 pb-6 border-b border-white/10">
-                  <span className="text-xs font-bold uppercase text-gray-500">Filters:</span>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={searchFilters.onlyWithPhone} 
-                      onChange={e => setSearchFilters({...searchFilters, onlyWithPhone: e.target.checked})}
-                      className="w-4 h-4 accent-white"
-                    />
-                    <span className="text-sm text-gray-300">Alleen met telefoonnummer</span>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-400">
-                    <Zap size={14} className="inline mr-2" />
-                    Doorzoekt Google Maps, KVK, en ZZP databases in {searchLocation || '[locatie]'} + {searchRadius}km
-                  </div>
-                  <button
-                    onClick={zoekAlles}
-                    disabled={loading || !searchLocation.trim()}
-                    className="px-10 py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-100 transition-all rounded-full disabled:opacity-50 flex items-center gap-2"
-                  >
-                    {loading ? <Loader2 size={16} className="animate-spin" /> : <Target size={16} />}
-                    ZOEK ALLE ZZP'ERS & BEDRIJVEN
-                  </button>
-                </div>
-              </div>
-
-              {/* Alternative: Search by Source */}
-              <div className="mb-8">
-                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Of zoek per bron:</p>
-                <div className="grid grid-cols-4 gap-4">
-                  {Object.values(SEARCH_SOURCES).map(source => (
+                  {/* Filter & Search Row */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-6">
+                      <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 hover:text-black transition-colors">
+                        <input 
+                          type="checkbox" 
+                          checked={searchFilters.onlyWithPhone} 
+                          onChange={e => setSearchFilters({...searchFilters, onlyWithPhone: e.target.checked})}
+                          className="w-4 h-4 accent-black rounded"
+                        />
+                        Alleen met telefoonnummer
+                      </label>
+                      <span className="text-sm text-gray-400">
+                        <MapPin size={14} className="inline mr-1" />
+                        Zoekt in: {searchLocation || '...'} + {searchRadius}km
+                      </span>
+                    </div>
                     <button
-                      key={source.id}
-                      onClick={() => { setActiveSource(source.id); }}
-                      className={`p-4 rounded-2xl border-2 transition-all ${
-                        activeSource === source.id 
-                          ? 'border-black bg-white shadow-lg' 
-                          : 'border-gray-200 bg-white hover:border-gray-300'
-                      }`}
+                      onClick={zoekAlles}
+                      disabled={loading || !searchLocation.trim()}
+                      className="px-8 py-3.5 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-all rounded-full disabled:opacity-50 flex items-center gap-2"
                     >
-                      <source.icon size={24} style={{ color: source.color }} className="mb-2" />
-                      <h3 className="font-bold text-sm">{source.name}</h3>
+                      {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
+                      ZOEKEN
                     </button>
-                  ))}
+                  </div>
+                </div>
+
+                {/* Bronnen Info */}
+                <div className="bg-gray-50 px-6 py-3 border-t border-gray-100">
+                  <div className="flex items-center gap-6 text-xs text-gray-500">
+                    <span className="font-medium">Doorzoekt:</span>
+                    {Object.values(SEARCH_SOURCES).map(source => (
+                      <span key={source.id} className="flex items-center gap-1">
+                        <source.icon size={12} style={{ color: source.color }} />
+                        {source.name}
+                      </span>
+                    ))}
+                    <span className="flex items-center gap-1"><Database size={12} /> + Telefoongids, Gouden Gids, Marktplaats</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Standard Search Box */}
-              <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  {React.createElement(SEARCH_SOURCES[activeSource].icon, { 
-                    size: 20, 
-                    style: { color: SEARCH_SOURCES[activeSource].color } 
-                  })}
-                  <h2 className="font-bold text-lg">Zoek specifiek via {SEARCH_SOURCES[activeSource].name}</h2>
-                </div>
-                
-                <div className="grid md:grid-cols-4 gap-4 mb-4">
-                  <div className="md:col-span-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">
-                      Branche / Zoekterm
-                    </label>
-                    <input
-                      value={searchQuery}
-                      onChange={e => setSearchQuery(e.target.value)}
-                      placeholder="bijv. kapper, restaurant, coach..."
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors"
-                      onKeyPress={e => e.key === 'Enter' && zoekBedrijven(false)}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Locatie</label>
-                    <input
-                      value={searchLocation}
-                      onChange={e => setSearchLocation(e.target.value)}
-                      placeholder="bijv. Almelo"
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors"
-                      onKeyPress={e => e.key === 'Enter' && zoekBedrijven(false)}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Radius</label>
-                    <select
-                      value={searchRadius}
-                      onChange={e => setSearchRadius(Number(e.target.value))}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl outline-none py-4 px-4 transition-colors cursor-pointer"
-                    >
-                      <option value={5}>+5 km</option>
-                      <option value={10}>+10 km</option>
-                      <option value={15}>+15 km</option>
-                      <option value={25}>+25 km</option>
-                      <option value={50}>+50 km</option>
-                      <option value={75}>+75 km</option>
-                      <option value={100}>+100 km</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Filters */}
-                <div className="flex flex-wrap items-center gap-4 mb-4 pb-4 border-b border-gray-100">
-                  <span className="text-xs font-bold uppercase text-gray-400">Filters:</span>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={searchFilters.onlyWithoutWebsite} 
-                      onChange={e => setSearchFilters({...searchFilters, onlyWithoutWebsite: e.target.checked})}
-                      className="w-4 h-4 accent-black"
-                    />
-                    <span className="text-sm">Alleen zonder website</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={searchFilters.onlyWithPhone} 
-                      onChange={e => setSearchFilters({...searchFilters, onlyWithPhone: e.target.checked})}
-                      className="w-4 h-4 accent-black"
-                    />
-                    <span className="text-sm">Alleen met telefoonnummer</span>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <MapPin size={14} />
-                    <span>Zoekgebied: {searchLocation || '...'} + {searchRadius}km radius</span>
-                  </div>
-                  <button
-                    onClick={() => zoekBedrijven(false)}
-                    disabled={loading || !searchLocation.trim()}
-                    className="px-8 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 transition-all rounded-full disabled:opacity-50 flex items-center gap-2"
-                  >
-                    {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
-                    ZOEKEN
-                  </button>
-                </div>
-              </div>
-
-              {/* Results Header with Search Info */}
+              {/* Results */}
               {zoekResultaten.length > 0 && (
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-4">
                       <h3 className="font-bold text-xl">{totaalGevonden} Resultaten</h3>
                       {zoekgebied && (
-                        <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">
+                        <span className="px-3 py-1 bg-white rounded-full text-xs font-medium text-gray-600 border border-gray-200">
                           <MapPin size={12} className="inline mr-1" />
                           {zoekgebied}
                         </span>
                       )}
                       {bronnenDoorzocht.length > 0 && (
                         <span className="text-sm text-gray-500">
-                          Bronnen: {bronnenDoorzocht.join(', ')}
+                          {bronnenDoorzocht.join(', ')}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-2">
-                      <button onClick={saveAllResults} className="px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 flex items-center gap-2">
-                        <Save size={14} /> ALLES OPSLAAN
+                      <button onClick={saveAllResults} className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg hover:bg-gray-800 flex items-center gap-2">
+                        <Save size={14} /> OPSLAAN
                       </button>
                       <button onClick={() => exportToGoogleSheets(zoekResultaten)} className="px-4 py-2 bg-emerald-500 text-white text-xs font-bold rounded-lg hover:bg-emerald-600 flex items-center gap-2">
-                        <FileSpreadsheet size={14} /> GOOGLE SHEETS
+                        <FileSpreadsheet size={14} /> SHEETS
                       </button>
-                      <button onClick={() => exportCSV(zoekResultaten)} className="px-4 py-2 border border-gray-200 text-xs font-bold rounded-lg hover:bg-gray-50 flex items-center gap-2">
+                      <button onClick={() => exportCSV(zoekResultaten)} className="px-4 py-2 bg-white border border-gray-200 text-xs font-bold rounded-lg hover:bg-gray-50 flex items-center gap-2">
                         <Download size={14} /> CSV
                       </button>
                     </div>
@@ -800,71 +709,58 @@ const LeadFinderPage = () => {
 
                   <div className="grid gap-3">
                     {zoekResultaten.map((lead, i) => (
-                      <div key={lead.place_id || i} className="bg-white border border-gray-200 p-5 rounded-xl hover:border-black transition-all">
+                      <div key={lead.place_id || i} className="bg-white border border-gray-100 p-5 rounded-xl hover:shadow-md hover:border-gray-200 transition-all">
                         <div className="flex justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
                               <h3 className="font-bold text-lg">{lead.naam}</h3>
-                              <span className="px-2 py-1 rounded text-xs font-bold" style={{ 
-                                backgroundColor: SEARCH_SOURCES[lead.source || activeSource]?.color + '20',
+                              <span className="px-2 py-0.5 rounded text-xs font-medium" style={{ 
+                                backgroundColor: SEARCH_SOURCES[lead.source || activeSource]?.color + '15',
                                 color: SEARCH_SOURCES[lead.source || activeSource]?.color
                               }}>
-                                {SEARCH_SOURCES[lead.source || activeSource]?.name}
+                                {SEARCH_SOURCES[lead.source || activeSource]?.name || lead.source}
                               </span>
-                              {!lead.website && (
-                                <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">GEEN WEBSITE</span>
-                              )}
+                              <span className="px-2 py-0.5 bg-green-50 text-green-600 rounded text-xs font-medium">Geen website</span>
                             </div>
                             
-                            <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                            <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
                               {lead.adres && (
-                                <p className="text-gray-500 flex items-center gap-2"><MapPin size={14} />{lead.adres}</p>
+                                <span className="text-gray-500 flex items-center gap-1.5"><MapPin size={13} />{lead.adres}</span>
                               )}
                               {lead.telefoonnummer && (
-                                <a href={`tel:${lead.telefoonnummer}`} className="text-blue-600 flex items-center gap-2 hover:underline">
-                                  <Phone size={14} />{lead.telefoonnummer}
-                                  <button onClick={() => copyToClipboard(lead.telefoonnummer)} className="p-1 hover:bg-gray-100 rounded"><Copy size={12} /></button>
+                                <a href={`tel:${lead.telefoonnummer}`} className="text-black font-medium flex items-center gap-1.5 hover:underline">
+                                  <Phone size={13} />{lead.telefoonnummer}
+                                  <button onClick={(e) => { e.preventDefault(); copyToClipboard(lead.telefoonnummer); }} className="p-0.5 hover:bg-gray-100 rounded"><Copy size={11} /></button>
                                 </a>
-                              )}
-                              {lead.email && (
-                                <a href={`mailto:${lead.email}`} className="text-blue-600 flex items-center gap-2 hover:underline">
-                                  <Mail size={14} />{lead.email}
-                                </a>
-                              )}
-                              {lead.kvk_nummer && (
-                                <span className="text-gray-500 flex items-center gap-2"><Building2 size={14} />KVK: {lead.kvk_nummer}</span>
                               )}
                             </div>
 
-                            {/* Quick Links */}
-                            <div className="flex flex-wrap gap-2">
+                            {/* Quick Links - Compact */}
+                            <div className="flex flex-wrap gap-1.5">
                               {lead.google_maps_url && (
-                                <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium hover:bg-gray-200 flex items-center gap-1">
-                                  <MapPin size={12} /> Maps
+                                <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 bg-gray-50 rounded-lg text-xs font-medium hover:bg-gray-100 flex items-center gap-1 text-gray-600">
+                                  <MapPin size={11} /> Maps
                                 </a>
                               )}
-                              <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium hover:bg-gray-200 flex items-center gap-1">
-                                <Building2 size={12} /> KVK
+                              <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 bg-gray-50 rounded-lg text-xs font-medium hover:bg-gray-100 flex items-center gap-1 text-gray-600">
+                                <Building2 size={11} /> KVK
                               </a>
-                              <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' ' + searchLocation + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium hover:bg-gray-200 flex items-center gap-1">
-                                <Facebook size={12} /> Facebook
+                              <a href={`https://www.facebook.com/search/pages?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 bg-gray-50 rounded-lg text-xs font-medium hover:bg-gray-100 flex items-center gap-1 text-gray-600">
+                                <Facebook size={11} /> FB
                               </a>
-                              <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' ' + searchLocation + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium hover:bg-gray-200 flex items-center gap-1">
-                                <Instagram size={12} /> Instagram
-                              </a>
-                              <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' ' + searchLocation + ' site:linkedin.com')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium hover:bg-gray-200 flex items-center gap-1">
-                                <User size={12} /> LinkedIn
+                              <a href={`https://www.instagram.com/${lead.naam.toLowerCase().replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 bg-gray-50 rounded-lg text-xs font-medium hover:bg-gray-100 flex items-center gap-1 text-gray-600">
+                                <Instagram size={11} /> IG
                               </a>
                             </div>
                           </div>
                           
-                          <div className="flex flex-col gap-2 ml-4">
-                            <button onClick={() => saveLead(lead)} className="p-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-colors" title="Opslaan">
-                              <Save size={18} />
+                          <div className="flex items-center gap-2 ml-4">
+                            <button onClick={() => saveLead(lead)} className="p-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors" title="Opslaan">
+                              <Save size={16} />
                             </button>
                             {lead.google_maps_url && (
-                              <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-3 border border-gray-200 rounded-xl hover:border-black transition-colors" title="Open in Maps">
-                                <ExternalLink size={18} />
+                              <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-2.5 border border-gray-200 rounded-lg hover:border-black transition-colors" title="Open">
+                                <ExternalLink size={16} />
                               </a>
                             )}
                           </div>
@@ -885,10 +781,12 @@ const LeadFinderPage = () => {
 
               {/* Empty State */}
               {!loading && zoekResultaten.length === 0 && (
-                <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
-                  <Search size={48} className="mx-auto mb-4 text-gray-300" />
-                  <h3 className="text-2xl font-bold mb-2">Begin met zoeken</h3>
-                  <p className="text-gray-500 mb-6">Kies een bron, voer een zoekterm en locatie in</p>
+                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+                  <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Search size={28} className="text-gray-300" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Begin met zoeken</h3>
+                  <p className="text-gray-500 text-sm">Voer een locatie in en klik op zoeken</p>
                 </div>
               )}
             </div>
