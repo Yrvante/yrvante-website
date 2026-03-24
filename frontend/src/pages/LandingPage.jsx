@@ -992,7 +992,7 @@ const ContactSection = () => {
 
             <div className="space-y-4">
               <a 
-                href="https://wa.me/31642453859"
+                href="https://wa.me/31855055314"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-gray-500 hover:bg-gray-600 text-white rounded-2xl p-5 transition-colors group"

@@ -3,7 +3,7 @@
 
 export const LOGO_URL = "/logo-nav.png";
 export const BG_IMAGE = "/bg-pattern.jpg";
-export const WHATSAPP_URL = "https://wa.me/31642453859";
+export const WHATSAPP_URL = "https://wa.me/31855055314";
 export const EMAIL = "info@yrvante.com";
 export const CALENDLY_URL = "https://calendly.com/yrvante";
 export const PHONE = "+31 6 42453859";
