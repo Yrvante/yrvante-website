@@ -116,25 +116,13 @@ const OverMijPage = () => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className="relative flex items-center justify-center"
             >
-              <div className="relative">
-                <img 
-                  src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/3j9k5too_yrvante%20%28%3C%3A%3E%29%20logo%20style%202.webp" 
-                  alt="Yrvante Web Development" 
-                  className="w-full max-w-[500px] mx-auto drop-shadow-2xl"
-                />
-                {/* Floating badge */}
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
-                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
-                    {language === 'nl' ? 'Beschikbaar' : 'Available'}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    <span className="font-bold">{language === 'nl' ? 'Voor projecten' : 'For projects'}</span>
-                  </div>
-                </div>
-              </div>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/3j9k5too_yrvante%20%28%3C%3A%3E%29%20logo%20style%202.webp" 
+                alt="Yrvante Web Development" 
+                className="w-full max-w-[550px] lg:max-w-[600px]"
+              />
             </motion.div>
 
             {/* Right - Content */}
