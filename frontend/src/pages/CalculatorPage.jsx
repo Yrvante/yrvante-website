@@ -643,15 +643,16 @@ const CalculatorPage = () => {
       </nav>
 
       {/* Header */}
-      <section className="pt-28 pb-12 px-6 md:px-12 relative">
-        {/* Subtle Logo Video - positioned in corner */}
-        <div className="absolute top-24 right-8 lg:right-16 opacity-60 pointer-events-none hidden lg:block">
+      <section className="pt-28 pb-12 px-6 md:px-12 relative overflow-hidden">
+        {/* Logo Video Background - Transparent overlay */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <video 
             autoPlay 
             loop 
             muted 
             playsInline
-            className="w-32 lg:w-40"
+            className="w-[600px] lg:w-[800px] opacity-20"
+            onLoadedMetadata={(e) => { e.target.currentTime = 1.5; }}
           >
             <source src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/7xctio1x_Video%20from%20%28%3C%3A%3E%29%20logo%20geen%20watermark.mp4" type="video/mp4" />
           </video>
