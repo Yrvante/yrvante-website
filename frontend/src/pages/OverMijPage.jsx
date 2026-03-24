@@ -119,13 +119,11 @@ const OverMijPage = () => {
               className="relative"
             >
               <div className="relative">
-                <div className="w-full aspect-square bg-black rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl">
-                  <img 
-                    src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/3j9k5too_yrvante%20%28%3C%3A%3E%29%20logo%20style%202.webp" 
-                    alt="Yrvante Web Development" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/3j9k5too_yrvante%20%28%3C%3A%3E%29%20logo%20style%202.webp" 
+                  alt="Yrvante Web Development" 
+                  className="w-full max-w-[500px] mx-auto drop-shadow-2xl"
+                />
                 {/* Floating badge */}
                 <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
                   <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
