@@ -262,6 +262,19 @@ const HeroSection = () => {
 
   return (
     <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden">
+      {/* Background Logo Image - Right side with fade to left */}
+      <div 
+        className="absolute right-0 top-0 h-full w-[70%] lg:w-[60%] pointer-events-none z-0"
+        style={{
+          backgroundImage: 'url(https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/v3u01ust_20260324_1342_Image%20Generation_remix_01kmfxsprnex1vj2b7y3zhkw5y.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 100%)',
+          opacity: 0.85
+        }}
+      />
+      
       {/* Main Hero Content */}
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         
