@@ -129,19 +129,6 @@ const BasisDemo = ({ language }) => {
         </div>
       </div>
 
-      {/* Testimonial */}
-      <div className="mx-3 mb-2 bg-white rounded-xl p-2 shadow-sm border border-amber-100">
-        <div className="flex gap-0.5 mb-1">
-          {[1,2,3,4,5].map(i => <Star key={i} size={8} className="text-amber-500 fill-amber-500" />)}
-        </div>
-        <p className="text-amber-700 text-[6px] italic">
-          {language === 'nl' 
-            ? '"Max is altijd zo blij als ze langskomt! Aanrader!"' 
-            : '"Max is always so happy when she comes by! Recommended!"'}
-        </p>
-        <p className="text-amber-400 text-[6px] mt-1">- Lisa & Max</p>
-      </div>
-
       {/* Contact Footer */}
       <div className="bg-gradient-to-r from-amber-800 to-amber-900 text-white px-3 py-3">
         <div className="text-center mb-2">

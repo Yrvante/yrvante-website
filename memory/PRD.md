@@ -165,6 +165,14 @@ RECIPIENT_EMAIL=info@yrvante.com
 
 ## Changelog
 
+### Maart 2026
+- 5-sterren reviews verwijderd uit Basis pakket demo (Hondenwandelservice)
+- Google Reviews stat verwijderd uit Basis pakket demo
+- Homepage logo fade-effect en styling iteraties voltooid
+- Telefoonnummer en WhatsApp link sitewide bijgewerkt
+- Lead Finder V2: radius search, multi-source scraping, "Zoek Alles"
+- Lead Finder UI/UX: Google Sheets export, mobiele responsiviteit
+
 ### December 2025
 - Lead Finder page restyled to match Yrvante homepage
 - Login functionality fixed for preview environment
