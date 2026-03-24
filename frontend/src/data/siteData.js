@@ -6,7 +6,7 @@ export const BG_IMAGE = "/bg-pattern.jpg";
 export const WHATSAPP_URL = "https://wa.me/31855055314";
 export const EMAIL = "info@yrvante.com";
 export const CALENDLY_URL = "https://calendly.com/yrvante";
-export const PHONE = "+31 6 42453859";
+export const PHONE = "+31 85 505 5314";
 
 // Package pricing
 export const PACKAGE_PRICES = {

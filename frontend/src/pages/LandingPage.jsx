@@ -383,11 +383,11 @@ const HeroSection = () => {
             className="flex flex-wrap items-center gap-6"
           >
             <a 
-              href="tel:+31642543859" 
+              href="tel:+31855055314" 
               className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
             >
               <Phone size={14} />
-              <span>+31 6 42543859</span>
+              <span>+31 85 505 5314</span>
             </a>
             <a 
               href="mailto:info@yrvante.com" 
@@ -1031,7 +1031,7 @@ const ContactSection = () => {
 
               {/* Bellen */}
               <a
-                href="tel:+31642543859"
+                href="tel:+31855055314"
                 data-testid="contact-phone-link"
                 className="flex items-center gap-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-2xl p-5 transition-colors group"
               >
@@ -1039,7 +1039,7 @@ const ContactSection = () => {
                   <Phone size={22} className="text-gray-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-lg">+31 6 42543859</p>
+                  <p className="font-bold text-lg">+31 85 505 5314</p>
                   <p className="text-gray-500 text-sm">{language === 'nl' ? 'Bel me gerust!' : 'Feel free to call me!'}</p>
                 </div>
               </a>
