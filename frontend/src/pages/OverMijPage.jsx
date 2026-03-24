@@ -116,12 +116,12 @@ const OverMijPage = () => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative flex items-center justify-center"
+              className="relative flex items-center justify-center lg:-ml-12"
             >
               <img 
                 src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/3j9k5too_yrvante%20%28%3C%3A%3E%29%20logo%20style%202.webp" 
                 alt="Yrvante Web Development" 
-                className="w-full max-w-[550px] lg:max-w-[600px]"
+                className="w-full max-w-[650px] lg:max-w-[750px] lg:scale-110"
               />
             </motion.div>
 
