@@ -239,7 +239,6 @@ const ProDemo = ({ language }) => {
           { num: '500+', label: language === 'nl' ? 'Tevreden Klanten' : 'Happy Clients' },
           { num: '10+', label: language === 'nl' ? 'Jaar Ervaring' : 'Years Experience' },
           { num: '24/7', label: language === 'nl' ? 'Bereikbaar' : 'Available' },
-          { num: '5.0', label: 'Google Rating', icon: Star },
         ].map((stat, i) => (
           <div key={i} className="text-center">
             <p className="font-bold text-emerald-600 text-[11px] flex items-center justify-center gap-0.5">

@@ -273,7 +273,9 @@ const HeroSection = () => {
           width: '68%',
           height: 'calc(100% + 250px)',
           filter: 'brightness(0) saturate(100%)',
-          opacity: 0.8
+          opacity: 0.8,
+          maskImage: 'linear-gradient(to right, transparent 0%, transparent 5%, black 35%, black 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, transparent 5%, black 35%, black 100%)'
         }}
       />
       
