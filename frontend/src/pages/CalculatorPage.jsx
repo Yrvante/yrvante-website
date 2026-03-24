@@ -644,6 +644,19 @@ const CalculatorPage = () => {
 
       {/* Header */}
       <section className="pt-28 pb-12 px-6 md:px-12 relative">
+        {/* Subtle Logo Video - positioned in corner */}
+        <div className="absolute top-24 right-8 lg:right-16 opacity-60 pointer-events-none hidden lg:block">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="w-32 lg:w-40"
+          >
+            <source src="https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/7xctio1x_Video%20from%20%28%3C%3A%3E%29%20logo%20geen%20watermark.mp4" type="video/mp4" />
+          </video>
+        </div>
+        
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
