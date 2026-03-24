@@ -262,14 +262,18 @@ const HeroSection = () => {
 
   return (
     <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden">
-      {/* Background Logo Image - Right side, no overlap with text */}
+      {/* Background Logo Image - Right side, extends up and down, hidden on mobile */}
       <div 
-        className="absolute right-0 top-0 h-full w-[55%] lg:w-[50%] pointer-events-none z-0"
+        className="absolute right-0 -top-20 pointer-events-none z-0 hidden lg:block"
         style={{
           backgroundImage: 'url(https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/v3u01ust_20260324_1342_Image%20Generation_remix_01kmfxsprnex1vj2b7y3zhkw5y.png)',
           backgroundSize: 'contain',
           backgroundPosition: 'center right',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
+          width: '58%',
+          height: 'calc(100% + 150px)',
+          filter: 'brightness(0) saturate(100%)',
+          opacity: 0.85
         }}
       />
       
