@@ -110,7 +110,7 @@ const OverMijPage = () => {
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-white/70" />
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
             {/* Left - Photo/Visual */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
