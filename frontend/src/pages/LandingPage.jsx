@@ -262,16 +262,17 @@ const HeroSection = () => {
 
   return (
     <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden">
-      {/* Background Logo Image - Right side with fade to left */}
+      {/* Background Logo Image - Right side with fade on edges */}
       <div 
-        className="absolute right-0 top-0 h-full w-[70%] lg:w-[60%] pointer-events-none z-0"
+        className="absolute right-0 top-0 h-full w-[75%] lg:w-[65%] pointer-events-none z-0"
         style={{
           backgroundImage: 'url(https://customer-assets.emergentagent.com/job_b98c0d0c-fb8e-40fb-9730-82d2b9d337c9/artifacts/v3u01ust_20260324_1342_Image%20Generation_remix_01kmfxsprnex1vj2b7y3zhkw5y.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          maskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 100%)',
-          opacity: 0.85
+          backgroundSize: 'contain',
+          backgroundPosition: 'center right',
+          backgroundRepeat: 'no-repeat',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 85%, transparent 100%)',
+          opacity: 0.9
         }}
       />
       
@@ -414,23 +415,6 @@ const HeroSection = () => {
 
         {/* Logo - Transparent right side */}
       </div>
-
-      {/* Logo - Helder zichtbaar rechts */}
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-        className="hidden lg:flex absolute right-0 top-0 h-full items-center pointer-events-none"
-        style={{ width: '46%', zIndex: 2 }}
-      >
-        <img
-          src="/logo.png"
-          alt="Yrvante"
-          aria-hidden="true"
-          className="w-full h-auto object-contain"
-          style={{ mixBlendMode: 'screen', opacity: 1 }}
-        />
-      </motion.div>
     </section>
   );
 };
