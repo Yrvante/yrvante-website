@@ -316,26 +316,41 @@ const HeroSection = () => {
           </motion.p>
           
           {/* Main Headline - BIG and prominent */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter mb-10"
-          >
-            {language === 'nl' ? (
-              <span className="flex flex-col">
-                <span>JOUW</span>
-                <span>BEDRIJF</span>
-                <span className="text-gray-500">ONLINE</span>
-              </span>
-            ) : (
-              <span className="flex flex-col">
-                <span>YOUR</span>
-                <span>BUSINESS</span>
-                <span className="text-gray-500">ONLINE</span>
-              </span>
-            )}
-          </motion.h1>
+          <div className="flex items-start gap-6 lg:gap-10 mb-10">
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter"
+            >
+              {language === 'nl' ? (
+                <span className="flex flex-col">
+                  <span>JOUW</span>
+                  <span>BEDRIJF</span>
+                  <span className="text-gray-500">ONLINE</span>
+                </span>
+              ) : (
+                <span className="flex flex-col">
+                  <span>YOUR</span>
+                  <span>BUSINESS</span>
+                  <span className="text-gray-500">ONLINE</span>
+                </span>
+              )}
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="hidden lg:flex items-center justify-center flex-shrink-0 mt-8"
+            >
+              <img 
+                src="/yrvante-logo-code.png" 
+                alt="Yrvante" 
+                className="w-32 lg:w-44 h-auto object-contain opacity-90"
+               
+              />
+            </motion.div>
+          </div>
 
           {/* Value Prop */}
           <motion.p
@@ -458,7 +473,7 @@ const OnderhoudSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
                 {language === 'nl' ? 'ONDERHOUD' : 'MAINTENANCE'}
               </h2>
-            <img src="/icon-clock-gears.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" style={{ mixBlendMode: 'multiply' }} />
+            <img src="/icon-clock-gears.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
@@ -479,7 +494,7 @@ const OnderhoudSection = () => {
               className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
             >
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform overflow-hidden">
-                <img src={item.img} alt={item.title} className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+                <img src={item.img} alt={item.title} className="w-full h-full object-contain" />
               </div>
               <h3 className="text-lg font-bold mb-2">{item.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
@@ -518,7 +533,7 @@ const ProcessSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
             </h2>
-            <img src="/icon-rocket-launch.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" style={{ mixBlendMode: 'multiply' }} />
+            <img src="/icon-rocket-launch.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
           </div>
         </div>
 
@@ -533,7 +548,7 @@ const ProcessSection = () => {
                 className="flex-1 bg-white rounded-3xl p-6 text-center border border-gray-200 hover:border-gray-400 transition-colors group"
               >
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
-                  <img src={step.img} alt={step.label} className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+                  <img src={step.img} alt={step.label} className="w-full h-full object-contain" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 block mb-1">0{i + 1}</span>
                 <h3 className="font-bold text-base mb-1">{step.label}</h3>
@@ -590,7 +605,7 @@ const ExpertiseSection = () => {
                   className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform overflow-hidden">
-                    <img src={tech.img} alt={tech.name} className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+                    <img src={tech.img} alt={tech.name} className="w-full h-full object-contain" />
                   </div>
                   <h3 className="font-bold text-sm mb-1">{tech.name}</h3>
                   <p className="text-gray-500 text-xs">{tech.desc}</p>
@@ -616,7 +631,7 @@ const ExpertiseSection = () => {
                   className="flex items-start gap-5 bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
                   <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform overflow-hidden">
-                    <img src={v.img} alt={v.title} className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+                    <img src={v.img} alt={v.title} className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-base mb-1">{v.title}</h3>
@@ -655,7 +670,7 @@ const HostingSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
                 {language === 'nl' ? 'HOSTING' : 'HOSTING'}
               </h2>
-            <img src="/icon-cloud-server.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" style={{ mixBlendMode: 'multiply' }} />
+            <img src="/icon-cloud-server.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
@@ -676,7 +691,7 @@ const HostingSection = () => {
               className="bg-white rounded-3xl p-8 border border-gray-200 hover:border-gray-400 transition-colors group"
             >
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform overflow-hidden">
-                <img src={f.img} alt={f.title} className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+                <img src={f.img} alt={f.title} className="w-full h-full object-contain" />
               </div>
               <h3 className="text-lg font-bold mb-2">{f.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
@@ -777,7 +792,7 @@ const ServicesSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
             </h2>
-            <img src="/icon-laptop-webdev.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" style={{ mixBlendMode: 'multiply' }} />
+            <img src="/icon-laptop-webdev.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
           </div>
         </div>
 
@@ -793,7 +808,7 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
-                <img src="/icon-laptop-webdev.png" alt="" className="h-16 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
+                <img src="/icon-laptop-webdev.png" alt="" className="h-16 w-auto object-contain" />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Website Ontwikkeling' : 'Website Development'}
@@ -817,7 +832,7 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
-                <img src="/icon-cloud-server.png" alt="" className="h-16 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
+                <img src="/icon-cloud-server.png" alt="" className="h-16 w-auto object-contain" />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Web Applicaties' : 'Web Applications'}
@@ -879,7 +894,7 @@ const PricingSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
                 {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
               </h2>
-              <img src="/icon-package-box.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" style={{ mixBlendMode: 'multiply' }} />
+              <img src="/icon-package-box.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl' 

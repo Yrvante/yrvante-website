@@ -46,6 +46,13 @@ body {
     line-height: 1.6;
 }
 
+/* Consistent icon styling - transparent backgrounds */
+img[src*="icon-"],
+img[src*="yrvante-logo-code"] {
+    mix-blend-mode: multiply;
+    filter: contrast(1.1) brightness(0.95);
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
     font-weight: 400;
