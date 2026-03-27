@@ -425,22 +425,22 @@ const OnderhoudSection = () => {
 
   const items = [
     {
-      icon: Shield,
+      img: '/icon-clock-gears.png',
       title: language === 'nl' ? 'Beveiliging & Back-ups' : 'Security & Backups',
       desc: language === 'nl' ? 'Dagelijkse back-ups en beveiligingsupdates om jouw website beschermd te houden.' : 'Daily backups and security updates to keep your website protected.',
     },
     {
-      icon: Zap,
+      img: '/icon-gear-speed.png',
       title: language === 'nl' ? 'Snelheid Optimalisatie' : 'Speed Optimization',
       desc: language === 'nl' ? 'Continue monitoring en optimalisatie voor maximale laadsnelheid.' : 'Continuous monitoring and optimization for maximum loading speed.',
     },
     {
-      icon: RefreshCw,
+      img: '/icon-cloud-server.png',
       title: language === 'nl' ? 'Software Updates' : 'Software Updates',
       desc: language === 'nl' ? 'Alle technische updates worden automatisch bijgehouden.' : 'All technical updates are automatically maintained.',
     },
     {
-      icon: Clock,
+      img: '/icon-circle-arrow.png',
       title: language === 'nl' ? 'Uptime Monitoring' : 'Uptime Monitoring',
       desc: language === 'nl' ? '99.9% uptime garantie met 24/7 monitoring.' : '99.9% uptime guarantee with 24/7 monitoring.',
     },
@@ -458,7 +458,7 @@ const OnderhoudSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
                 {language === 'nl' ? 'ONDERHOUD' : 'MAINTENANCE'}
               </h2>
-              <img src="/icon-maintenance.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+              <img src="/icon-clock-gears.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
@@ -478,8 +478,8 @@ const OnderhoudSection = () => {
               transition={{ delay: i * 0.1 }}
               className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
             >
-              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform border border-gray-200">
-                <item.icon size={22} strokeWidth={1.5} className="text-gray-700" />
+              <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform border border-gray-200 overflow-hidden p-2">
+                <img src={item.img} alt={item.title} className="w-full h-full object-contain" />
               </div>
               <h3 className="text-lg font-bold mb-2">{item.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
@@ -502,11 +502,11 @@ const ProcessSection = () => {
   const { language } = useLanguage();
 
   const steps = [
-    { icon: Phone, label: language === 'nl' ? 'Kennismaking' : 'Introduction', desc: language === 'nl' ? 'Gratis gesprek over jouw wensen' : 'Free call about your wishes' },
-    { icon: ClipboardList, label: 'Planning', desc: language === 'nl' ? 'Duidelijk plan en tijdlijn' : 'Clear plan and timeline' },
-    { icon: FileCode, label: language === 'nl' ? 'Ontwerp & Code' : 'Design & Code', desc: language === 'nl' ? 'Jouw website wordt gebouwd' : 'Your website gets built' },
-    { icon: Rocket, label: language === 'nl' ? 'Implementatie' : 'Implementation', desc: language === 'nl' ? 'Testen en finetunen' : 'Testing and fine-tuning' },
-    { icon: Globe, label: 'Live!', desc: language === 'nl' ? 'Jouw website gaat online' : 'Your website goes live' },
+    { img: '/icon-circle-arrow.png', label: language === 'nl' ? 'Kennismaking' : 'Introduction', desc: language === 'nl' ? 'Gratis gesprek over jouw wensen' : 'Free call about your wishes' },
+    { img: '/icon-clipboard-plan.png', label: 'Planning', desc: language === 'nl' ? 'Duidelijk plan en tijdlijn' : 'Clear plan and timeline' },
+    { img: '/icon-laptop-webdev.png', label: language === 'nl' ? 'Ontwerp & Code' : 'Design & Code', desc: language === 'nl' ? 'Jouw website wordt gebouwd' : 'Your website gets built' },
+    { img: '/icon-rocket-launch.png', label: language === 'nl' ? 'Implementatie' : 'Implementation', desc: language === 'nl' ? 'Testen en finetunen' : 'Testing and fine-tuning' },
+    { img: '/icon-handshake.png', label: 'Live!', desc: language === 'nl' ? 'Jouw website gaat online' : 'Your website goes live' },
   ];
 
   return (
@@ -518,7 +518,7 @@ const ProcessSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
             </h2>
-            <img src="/icon-process.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+            <img src="/icon-rocket-launch.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
           </div>
         </div>
 
@@ -532,8 +532,8 @@ const ProcessSection = () => {
                 transition={{ delay: i * 0.12 }}
                 className="flex-1 bg-white rounded-3xl p-6 text-center border border-gray-200 hover:border-gray-400 transition-colors group"
               >
-                <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-200 transition-colors">
-                  <step.icon size={24} strokeWidth={1.5} className="text-gray-700" />
+                <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-200 transition-colors overflow-hidden p-2">
+                  <img src={step.img} alt={step.label} className="w-full h-full object-contain" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 block mb-1">0{i + 1}</span>
                 <h3 className="font-bold text-base mb-1">{step.label}</h3>
@@ -557,16 +557,16 @@ const ExpertiseSection = () => {
   const { language } = useLanguage();
 
   const technologies = [
-    { name: 'React', icon: '⚛', desc: language === 'nl' ? 'Moderne interfaces' : 'Modern interfaces' },
-    { name: 'Python', icon: null, lucideIcon: FileCode, desc: language === 'nl' ? 'Backend & automatisering' : 'Backend & automation' },
-    { name: 'Node.js', icon: null, lucideIcon: Server, desc: 'Serverless & API\'s' },
-    { name: language === 'nl' ? 'MKB Focus' : 'SMB Focus', icon: null, lucideIcon: Users, desc: language === 'nl' ? 'ZZP\'ers & kleine bedrijven' : 'Freelancers & small businesses' },
+    { name: 'React', img: '/icon-react.png', desc: language === 'nl' ? 'Moderne interfaces' : 'Modern interfaces' },
+    { name: 'Python', img: '/icon-python.png', desc: language === 'nl' ? 'Backend & automatisering' : 'Backend & automation' },
+    { name: 'Node.js', img: '/icon-cloud-server.png', desc: 'Serverless & API\'s' },
+    { name: language === 'nl' ? 'MKB Focus' : 'SMB Focus', img: '/icon-mkb-store.png', desc: language === 'nl' ? 'ZZP\'ers & kleine bedrijven' : 'Freelancers & small businesses' },
   ];
 
   const voordelen = [
-    { icon: Clock, title: language === 'nl' ? 'Uptime 99.9%' : 'Uptime 99.9%', desc: language === 'nl' ? 'Jouw website is altijd bereikbaar' : 'Your website is always accessible' },
-    { icon: Handshake, title: language === 'nl' ? 'Direct Contact' : 'Direct Contact', desc: language === 'nl' ? 'Rechtstreeks met de ontwikkelaar' : 'Directly with the developer' },
-    { icon: Award, title: language === 'nl' ? 'Code Eigendom' : 'Code Ownership', desc: language === 'nl' ? 'Jij bent 100% eigenaar' : 'You are 100% owner' },
+    { img: '/icon-gear-speed.png', title: language === 'nl' ? 'Uptime 99.9%' : 'Uptime 99.9%', desc: language === 'nl' ? 'Jouw website is altijd bereikbaar' : 'Your website is always accessible' },
+    { img: '/icon-handshake.png', title: language === 'nl' ? 'Direct Contact' : 'Direct Contact', desc: language === 'nl' ? 'Rechtstreeks met de ontwikkelaar' : 'Directly with the developer' },
+    { img: '/icon-lock-cert.png', title: language === 'nl' ? 'Code Eigendom' : 'Code Ownership', desc: language === 'nl' ? 'Jij bent 100% eigenaar' : 'You are 100% owner' },
   ];
 
   return (
@@ -589,12 +589,8 @@ const ExpertiseSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
-                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-3 border border-gray-200 group-hover:scale-110 transition-transform">
-                    {tech.icon ? (
-                      <span className="text-lg">{tech.icon}</span>
-                    ) : (
-                      <tech.lucideIcon size={20} strokeWidth={1.5} className="text-gray-700" />
-                    )}
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 border border-gray-200 group-hover:scale-110 transition-transform overflow-hidden p-1.5">
+                    <img src={tech.img} alt={tech.name} className="w-full h-full object-contain" />
                   </div>
                   <h3 className="font-bold text-sm mb-1">{tech.name}</h3>
                   <p className="text-gray-500 text-xs">{tech.desc}</p>
@@ -619,8 +615,8 @@ const ExpertiseSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start gap-5 bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200 group-hover:scale-110 transition-transform">
-                    <v.icon size={22} strokeWidth={1.5} className="text-gray-700" />
+                  <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200 group-hover:scale-110 transition-transform overflow-hidden p-2">
+                    <img src={v.img} alt={v.title} className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-base mb-1">{v.title}</h3>
@@ -641,10 +637,10 @@ const HostingSection = () => {
   const { language } = useLanguage();
 
   const features = [
-    { icon: Cloud, title: language === 'nl' ? 'Snelle Hosting' : 'Fast Hosting', desc: language === 'nl' ? 'Je website draait op razendsnelle servers.' : 'Your website runs on blazing fast servers.' },
-    { icon: Globe, title: language === 'nl' ? 'Domeinnaam' : 'Domain Name', desc: language === 'nl' ? 'Help bij het koppelen van jouw eigen domein.' : 'Help connecting your own domain.' },
-    { icon: Shield, title: 'SSL Certificaat', desc: language === 'nl' ? 'Gratis SSL voor een veilige verbinding.' : 'Free SSL for a secure connection.' },
-    { icon: Server, title: language === 'nl' ? 'Beheerd Platform' : 'Managed Platform', desc: language === 'nl' ? 'Ik regel alles, jij hoeft niks te doen.' : 'I handle everything, you don\'t have to do anything.' },
+    { img: '/icon-cloud-server.png', title: language === 'nl' ? 'Snelle Hosting' : 'Fast Hosting', desc: language === 'nl' ? 'Je website draait op razendsnelle servers.' : 'Your website runs on blazing fast servers.' },
+    { img: '/icon-circle-arrow.png', title: language === 'nl' ? 'Domeinnaam' : 'Domain Name', desc: language === 'nl' ? 'Help bij het koppelen van jouw eigen domein.' : 'Help connecting your own domain.' },
+    { img: '/icon-lock-cert.png', title: 'SSL Certificaat', desc: language === 'nl' ? 'Gratis SSL voor een veilige verbinding.' : 'Free SSL for a secure connection.' },
+    { img: '/icon-clock-gears.png', title: language === 'nl' ? 'Beheerd Platform' : 'Managed Platform', desc: language === 'nl' ? 'Ik regel alles, jij hoeft niks te doen.' : 'I handle everything, you don\'t have to do anything.' },
   ];
 
   return (
@@ -659,7 +655,7 @@ const HostingSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
                 {language === 'nl' ? 'HOSTING' : 'HOSTING'}
               </h2>
-              <img src="/icon-hosting.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+              <img src="/icon-cloud-server.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
@@ -679,8 +675,8 @@ const HostingSection = () => {
               transition={{ delay: i * 0.1 }}
               className="bg-white rounded-3xl p-8 border border-gray-200 hover:border-gray-400 transition-colors group"
             >
-              <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <f.icon size={22} strokeWidth={1.5} className="text-gray-700" />
+              <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform overflow-hidden p-2">
+                <img src={f.img} alt={f.title} className="w-full h-full object-contain" />
               </div>
               <h3 className="text-lg font-bold mb-2">{f.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
@@ -781,7 +777,7 @@ const ServicesSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
             </h2>
-            <img src="/icon-webdev.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+            <img src="/icon-laptop-webdev.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
           </div>
         </div>
 
@@ -797,7 +793,7 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
-                <Monitor size={24} strokeWidth={1} />
+                <img src="/icon-laptop-webdev.png" alt="" className="h-16 w-auto object-contain" />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Website Ontwikkeling' : 'Website Development'}
@@ -821,7 +817,7 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
-                <Code size={24} strokeWidth={1} />
+                <img src="/icon-cloud-server.png" alt="" className="h-16 w-auto object-contain" />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Web Applicaties' : 'Web Applications'}
@@ -879,9 +875,12 @@ const PricingSection = () => {
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
-              {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
-            </h2>
+            <div className="flex items-end gap-5">
+              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
+                {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
+              </h2>
+              <img src="/icon-package-box.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+            </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl' 
                 ? 'Transparante prijzen. Geen verborgen kosten. Jij levert teksten en foto\'s.'

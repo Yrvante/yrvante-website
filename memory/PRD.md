@@ -166,6 +166,7 @@ RECIPIENT_EMAIL=info@yrvante.com
 ## Changelog
 
 ### Maart 2026
+- Alle icons uit infographic gegenereerd en overal op homepage geplaatst (13 custom icons)
 - Homepage logo verwijderd naast "JOUW BEDRIJF ONLINE"
 - Nieuwe secties toegevoegd aan homepage: Onderhoud, Het Proces, Expertise & Voordelen, Hosting
 - 5-sterren reviews verwijderd uit Basis pakket demo (Hondenwandelservice)
