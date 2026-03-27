@@ -316,7 +316,7 @@ const HeroSection = () => {
           </motion.p>
           
           {/* Main Headline - BIG and prominent */}
-          <div className="flex items-start gap-6 lg:gap-10 mb-10">
+          <div className="relative mb-10">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -341,13 +341,12 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden lg:flex items-center justify-center flex-shrink-0 mt-8"
+              className="hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 items-center justify-center"
             >
               <img 
                 src="/yrvante-logo-code.png" 
                 alt="Yrvante" 
-                className="w-32 lg:w-44 h-auto object-contain opacity-90"
-               
+                className="w-48 h-auto object-contain opacity-80"
               />
             </motion.div>
           </div>
