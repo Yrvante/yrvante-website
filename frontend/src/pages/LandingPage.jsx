@@ -346,7 +346,7 @@ const HeroSection = () => {
               <img 
                 src="/yrvante-logo-code.png" 
                 alt="Yrvante" 
-                className="w-64 h-auto object-contain opacity-80"
+                className="w-72 h-auto object-contain opacity-80"
               />
             </motion.div>
           </div>
