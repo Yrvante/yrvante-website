@@ -166,6 +166,8 @@ RECIPIENT_EMAIL=info@yrvante.com
 ## Changelog
 
 ### Maart 2026
+- Homepage logo verwijderd naast "JOUW BEDRIJF ONLINE"
+- Nieuwe secties toegevoegd aan homepage: Onderhoud, Het Proces, Expertise & Voordelen, Hosting
 - 5-sterren reviews verwijderd uit Basis pakket demo (Hondenwandelservice)
 - Google Reviews stat verwijderd uit Basis pakket demo
 - Homepage logo fade-effect en styling iteraties voltooid
