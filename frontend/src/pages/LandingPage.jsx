@@ -473,7 +473,7 @@ const OnderhoudSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
                 {language === 'nl' ? 'ONDERHOUD' : 'MAINTENANCE'}
               </h2>
-            <img src="/icon-clock-gears.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
+            <img src="/icon-clock-gears.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
@@ -493,8 +493,8 @@ const OnderhoudSection = () => {
               transition={{ delay: i * 0.1 }}
               className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
             >
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform overflow-hidden">
-                <img src={item.img} alt={item.title} className="w-full h-full object-contain" />
+              <div className="w-12 h-12 flex items-center justify-center mb-5">
+                <img src={item.img} alt={item.title} className="w-10 h-10 object-contain" />
               </div>
               <h3 className="text-lg font-bold mb-2">{item.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
@@ -533,7 +533,7 @@ const ProcessSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
             </h2>
-            <img src="/icon-rocket-launch.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
+            <img src="/icon-rocket-launch.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
           </div>
         </div>
 
@@ -547,8 +547,8 @@ const ProcessSection = () => {
                 transition={{ delay: i * 0.12 }}
                 className="flex-1 bg-white rounded-3xl p-6 text-center border border-gray-200 hover:border-gray-400 transition-colors group"
               >
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
-                  <img src={step.img} alt={step.label} className="w-full h-full object-contain" />
+                <div className="w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                  <img src={step.img} alt={step.label} className="w-12 h-12 object-contain" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 block mb-1">0{i + 1}</span>
                 <h3 className="font-bold text-base mb-1">{step.label}</h3>
@@ -604,8 +604,8 @@ const ExpertiseSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform overflow-hidden">
-                    <img src={tech.img} alt={tech.name} className="w-full h-full object-contain" />
+                  <div className="w-10 h-10 flex items-center justify-center mb-3">
+                    <img src={tech.img} alt={tech.name} className="w-8 h-8 object-contain" />
                   </div>
                   <h3 className="font-bold text-sm mb-1">{tech.name}</h3>
                   <p className="text-gray-500 text-xs">{tech.desc}</p>
@@ -630,8 +630,8 @@ const ExpertiseSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start gap-5 bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform overflow-hidden">
-                    <img src={v.img} alt={v.title} className="w-full h-full object-contain" />
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                    <img src={v.img} alt={v.title} className="w-10 h-10 object-contain" />
                   </div>
                   <div>
                     <h3 className="font-bold text-base mb-1">{v.title}</h3>
@@ -670,7 +670,7 @@ const HostingSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
                 {language === 'nl' ? 'HOSTING' : 'HOSTING'}
               </h2>
-            <img src="/icon-cloud-server.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
+            <img src="/icon-cloud-server.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
@@ -690,8 +690,8 @@ const HostingSection = () => {
               transition={{ delay: i * 0.1 }}
               className="bg-white rounded-3xl p-8 border border-gray-200 hover:border-gray-400 transition-colors group"
             >
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform overflow-hidden">
-                <img src={f.img} alt={f.title} className="w-full h-full object-contain" />
+              <div className="w-12 h-12 flex items-center justify-center mb-5">
+                <img src={f.img} alt={f.title} className="w-10 h-10 object-contain" />
               </div>
               <h3 className="text-lg font-bold mb-2">{f.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
@@ -792,7 +792,7 @@ const ServicesSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
             </h2>
-            <img src="/icon-laptop-webdev.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
+            <img src="/icon-laptop-webdev.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
           </div>
         </div>
 
@@ -808,7 +808,7 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
-                <img src="/icon-laptop-webdev.png" alt="" className="h-16 w-auto object-contain" />
+                <img src="/icon-laptop-webdev.png" alt="" className="h-12 w-auto object-contain" />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Website Ontwikkeling' : 'Website Development'}
@@ -832,7 +832,7 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
-                <img src="/icon-cloud-server.png" alt="" className="h-16 w-auto object-contain" />
+                <img src="/icon-cloud-server.png" alt="" className="h-12 w-auto object-contain" />
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Web Applicaties' : 'Web Applications'}
@@ -894,7 +894,7 @@ const PricingSection = () => {
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
                 {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
               </h2>
-              <img src="/icon-package-box.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-80" />
+              <img src="/icon-package-box.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
             </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl' 
