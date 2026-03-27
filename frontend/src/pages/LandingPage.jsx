@@ -454,9 +454,12 @@ const OnderhoudSection = () => {
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">(02)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-              {language === 'nl' ? 'ONDERHOUD' : 'MAINTENANCE'}
-            </h2>
+            <div className="flex items-end gap-6">
+              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+                {language === 'nl' ? 'ONDERHOUD' : 'MAINTENANCE'}
+              </h2>
+              <img src="/icon-maintenance.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+            </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
                 ? 'Jouw website blijft altijd veilig, snel en up-to-date. Zonder dat jij er naar hoeft om te kijken.'
@@ -511,9 +514,12 @@ const ProcessSection = () => {
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">(03)</p>
-          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-            {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
-          </h2>
+          <div className="flex items-center justify-center gap-5">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+              {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
+            </h2>
+            <img src="/icon-process.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+          </div>
         </div>
 
         <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 lg:gap-0 max-w-5xl mx-auto">
@@ -649,9 +655,12 @@ const HostingSection = () => {
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">(05)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-              {language === 'nl' ? 'HOSTING' : 'HOSTING'}
-            </h2>
+            <div className="flex items-end gap-6">
+              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+                {language === 'nl' ? 'HOSTING' : 'HOSTING'}
+              </h2>
+              <img src="/icon-hosting.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
+            </div>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
                 ? 'Betrouwbare hosting en domeinnaam begeleiding. Alles wat je nodig hebt om online te zijn.'
@@ -768,10 +777,11 @@ const ServicesSection = () => {
               (01)
             </p>
           </div>
-          <div className="col-span-12 lg:col-span-8">
+          <div className="col-span-12 lg:col-span-8 flex items-end gap-6">
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
             </h2>
+            <img src="/icon-webdev.png" alt="" className="hidden lg:block h-20 w-auto object-contain opacity-70" />
           </div>
         </div>
 
