@@ -341,7 +341,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden lg:flex absolute right-0 top-[40%] -translate-y-1/2 items-center justify-center w-1/3"
+              className="hidden lg:flex absolute right-0 inset-y-0 items-center justify-center w-1/3"
             >
               <img 
                 src="/yrvante-logo-code.png" 
