@@ -446,7 +446,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section data-testid="process-section" className="py-24 lg:py-32 bg-gray-50">
+    <section data-testid="process-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">(02)</p>
@@ -503,7 +503,7 @@ const ExpertiseSection = () => {
   ];
 
   return (
-    <section data-testid="expertise-section" className="py-24 lg:py-32 bg-white">
+    <section data-testid="expertise-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-12 lg:gap-20">
           {/* Expertise */}
@@ -577,7 +577,7 @@ const HostingSection = () => {
   ];
 
   return (
-    <section data-testid="hosting-section" className="py-24 lg:py-32 bg-gray-50">
+    <section data-testid="hosting-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
@@ -798,7 +798,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 lg:py-32 bg-gray-50">
+    <section id="pricing" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="grid grid-cols-12 gap-4 mb-16">
@@ -922,7 +922,7 @@ const TestimonialsSection = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-16 bg-gray-100 text-gray-800">
+    <section id="testimonials" className="py-16 text-gray-800">
       <div className="container-yrvante">
         <motion.div
           className="text-center mb-12"
@@ -1070,7 +1070,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-24 lg:py-32 bg-white">
+    <section id="faq" className="py-24 lg:py-32">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         {/* Section Header - Centered */}
         <div className="text-center mb-16">
@@ -1174,7 +1174,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 bg-gray-50">
+    <section id="contact" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Left - Info */}
