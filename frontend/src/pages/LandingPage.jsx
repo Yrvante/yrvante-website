@@ -763,6 +763,19 @@ const ServicesSection = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Binnenkort meer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100/80 rounded-full text-sm text-gray-500">
+            <Clock size={14} strokeWidth={1.5} />
+            {language === 'nl' ? 'Meer diensten binnenkort in behandeling' : 'More services coming soon'}
+          </span>
+        </motion.div>
       </div>
     </section>
   );
