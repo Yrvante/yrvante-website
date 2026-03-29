@@ -433,107 +433,26 @@ const HeroSection = () => {
   );
 };
 
-// Onderhoud & Updates Section
-const OnderhoudSection = () => {
-  const { language } = useLanguage();
-
-  const items = [
-    {
-      img: '/icon-clock-gears.png',
-      title: language === 'nl' ? 'Beveiliging & Back-ups' : 'Security & Backups',
-      desc: language === 'nl' ? 'Dagelijkse back-ups en beveiligingsupdates om jouw website beschermd te houden.' : 'Daily backups and security updates to keep your website protected.',
-    },
-    {
-      img: '/icon-gear-speed.png',
-      title: language === 'nl' ? 'Snelheid Optimalisatie' : 'Speed Optimization',
-      desc: language === 'nl' ? 'Continue monitoring en optimalisatie voor maximale laadsnelheid.' : 'Continuous monitoring and optimization for maximum loading speed.',
-    },
-    {
-      img: '/icon-cloud-server.png',
-      title: language === 'nl' ? 'Software Updates' : 'Software Updates',
-      desc: language === 'nl' ? 'Alle technische updates worden automatisch bijgehouden.' : 'All technical updates are automatically maintained.',
-    },
-    {
-      img: '/icon-circle-arrow.png',
-      title: language === 'nl' ? 'Uptime Monitoring' : 'Uptime Monitoring',
-      desc: language === 'nl' ? '99.9% uptime garantie met 24/7 monitoring.' : '99.9% uptime guarantee with 24/7 monitoring.',
-    },
-  ];
-
-  return (
-    <section data-testid="onderhoud-section" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-12 gap-4 mb-12">
-          <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">(02)</p>
-          </div>
-          <div className="col-span-12 lg:col-span-8">
-            <div className="flex items-end gap-6">
-              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-                {language === 'nl' ? 'ONDERHOUD' : 'MAINTENANCE'}
-              </h2>
-            <img src="/icon-clock-gears.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
-            </div>
-            <p className="text-gray-500 mt-4 max-w-lg">
-              {language === 'nl'
-                ? 'Jouw website blijft altijd veilig, snel en up-to-date. Zonder dat jij er naar hoeft om te kijken.'
-                : 'Your website always stays safe, fast and up-to-date. Without you having to worry about it.'}
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
-            >
-              <div className="w-12 h-12 flex items-center justify-center mb-5">
-                <img src={item.img} alt={item.title} className="w-10 h-10 object-contain" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <Link to="/onderhoud" className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors">
-            {language === 'nl' ? 'Bekijk onderhoudspakketten →' : 'View maintenance packages →'}
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 // Het Proces Section
 const ProcessSection = () => {
   const { language } = useLanguage();
 
   const steps = [
-    { img: '/icon-circle-arrow.png', label: language === 'nl' ? 'Kennismaking' : 'Introduction', desc: language === 'nl' ? 'Gratis gesprek over jouw wensen' : 'Free call about your wishes' },
-    { img: '/icon-clipboard-plan.png', label: 'Planning', desc: language === 'nl' ? 'Duidelijk plan en tijdlijn' : 'Clear plan and timeline' },
-    { img: '/icon-laptop-webdev.png', label: language === 'nl' ? 'Ontwerp & Code' : 'Design & Code', desc: language === 'nl' ? 'Jouw website wordt gebouwd' : 'Your website gets built' },
-    { img: '/icon-rocket-launch.png', label: language === 'nl' ? 'Implementatie' : 'Implementation', desc: language === 'nl' ? 'Testen en finetunen' : 'Testing and fine-tuning' },
-    { img: '/icon-handshake.png', label: 'Live!', desc: language === 'nl' ? 'Jouw website gaat online' : 'Your website goes live' },
+    { icon: Phone, label: language === 'nl' ? 'Kennismaking' : 'Introduction', desc: language === 'nl' ? 'Gratis gesprek over jouw wensen' : 'Free call about your wishes' },
+    { icon: ClipboardList, label: 'Planning', desc: language === 'nl' ? 'Duidelijk plan en tijdlijn' : 'Clear plan and timeline' },
+    { icon: Code, label: language === 'nl' ? 'Ontwerp & Code' : 'Design & Code', desc: language === 'nl' ? 'Jouw website wordt gebouwd' : 'Your website gets built' },
+    { icon: Rocket, label: language === 'nl' ? 'Implementatie' : 'Implementation', desc: language === 'nl' ? 'Testen en finetunen' : 'Testing and fine-tuning' },
+    { icon: Globe, label: 'Live!', desc: language === 'nl' ? 'Jouw website gaat online' : 'Your website goes live' },
   ];
 
   return (
     <section data-testid="process-section" className="py-24 lg:py-32 bg-gray-50">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">(03)</p>
-          <div className="flex items-center justify-center gap-5">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-              {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
-            </h2>
-            <img src="/icon-rocket-launch.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
-          </div>
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">(02)</p>
+          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+            {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
+          </h2>
         </div>
 
         <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 lg:gap-0 max-w-5xl mx-auto">
@@ -546,8 +465,8 @@ const ProcessSection = () => {
                 transition={{ delay: i * 0.12 }}
                 className="flex-1 bg-white rounded-3xl p-6 text-center border border-gray-200 hover:border-gray-400 transition-colors group"
               >
-                <div className="w-14 h-14 flex items-center justify-center mx-auto mb-4">
-                  <img src={step.img} alt={step.label} className="w-12 h-12 object-contain" />
+                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <step.icon size={22} strokeWidth={1.5} className="text-gray-500" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 block mb-1">0{i + 1}</span>
                 <h3 className="font-bold text-base mb-1">{step.label}</h3>
@@ -571,16 +490,16 @@ const ExpertiseSection = () => {
   const { language } = useLanguage();
 
   const technologies = [
-    { name: 'React', img: '/icon-react.png', desc: language === 'nl' ? 'Moderne interfaces' : 'Modern interfaces' },
-    { name: 'Python', img: '/icon-python.png', desc: language === 'nl' ? 'Backend & automatisering' : 'Backend & automation' },
-    { name: 'Node.js', img: '/icon-cloud-server.png', desc: 'Serverless & API\'s' },
-    { name: language === 'nl' ? 'MKB Focus' : 'SMB Focus', img: '/icon-mkb-store.png', desc: language === 'nl' ? 'ZZP\'ers & kleine bedrijven' : 'Freelancers & small businesses' },
+    { name: 'React', icon: Code, desc: language === 'nl' ? 'Moderne interfaces' : 'Modern interfaces' },
+    { name: 'Python', icon: FileCode, desc: language === 'nl' ? 'Backend & automatisering' : 'Backend & automation' },
+    { name: 'Node.js', icon: Server, desc: 'Serverless & API\'s' },
+    { name: language === 'nl' ? 'MKB Focus' : 'SMB Focus', icon: Users, desc: language === 'nl' ? 'ZZP\'ers & kleine bedrijven' : 'Freelancers & small businesses' },
   ];
 
   const voordelen = [
-    { img: '/icon-gear-speed.png', title: language === 'nl' ? 'Uptime 99.9%' : 'Uptime 99.9%', desc: language === 'nl' ? 'Jouw website is altijd bereikbaar' : 'Your website is always accessible' },
-    { img: '/icon-handshake.png', title: language === 'nl' ? 'Direct Contact' : 'Direct Contact', desc: language === 'nl' ? 'Rechtstreeks met de ontwikkelaar' : 'Directly with the developer' },
-    { img: '/icon-lock-cert.png', title: language === 'nl' ? 'Code Eigendom' : 'Code Ownership', desc: language === 'nl' ? 'Jij bent 100% eigenaar' : 'You are 100% owner' },
+    { icon: Zap, title: language === 'nl' ? 'Uptime 99.9%' : 'Uptime 99.9%', desc: language === 'nl' ? 'Jouw website is altijd bereikbaar' : 'Your website is always accessible' },
+    { icon: Handshake, title: language === 'nl' ? 'Direct Contact' : 'Direct Contact', desc: language === 'nl' ? 'Rechtstreeks met de ontwikkelaar' : 'Directly with the developer' },
+    { icon: Lock, title: language === 'nl' ? 'Code Eigendom' : 'Code Ownership', desc: language === 'nl' ? 'Jij bent 100% eigenaar' : 'You are 100% owner' },
   ];
 
   return (
@@ -589,7 +508,7 @@ const ExpertiseSection = () => {
         <div className="grid grid-cols-12 gap-12 lg:gap-20">
           {/* Expertise */}
           <div className="col-span-12 lg:col-span-6">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">(04)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">(03)</p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter mb-8">
               {language === 'nl' ? 'EXPERTISE' : 'EXPERTISE'}
             </h2>
@@ -603,8 +522,8 @@ const ExpertiseSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
-                  <div className="w-10 h-10 flex items-center justify-center mb-3">
-                    <img src={tech.img} alt={tech.name} className="w-8 h-8 object-contain" />
+                  <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                    <tech.icon size={20} strokeWidth={1.5} className="text-gray-500" />
                   </div>
                   <h3 className="font-bold text-sm mb-1">{tech.name}</h3>
                   <p className="text-gray-500 text-xs">{tech.desc}</p>
@@ -629,8 +548,8 @@ const ExpertiseSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start gap-5 bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
                 >
-                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <img src={v.img} alt={v.title} className="w-10 h-10 object-contain" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <v.icon size={22} strokeWidth={1.5} className="text-gray-500" />
                   </div>
                   <div>
                     <h3 className="font-bold text-base mb-1">{v.title}</h3>
@@ -651,10 +570,10 @@ const HostingSection = () => {
   const { language } = useLanguage();
 
   const features = [
-    { img: '/icon-cloud-server.png', title: language === 'nl' ? 'Snelle Hosting' : 'Fast Hosting', desc: language === 'nl' ? 'Je website draait op razendsnelle servers.' : 'Your website runs on blazing fast servers.' },
-    { img: '/icon-circle-arrow.png', title: language === 'nl' ? 'Domeinnaam' : 'Domain Name', desc: language === 'nl' ? 'Help bij het koppelen van jouw eigen domein.' : 'Help connecting your own domain.' },
-    { img: '/icon-lock-cert.png', title: 'SSL Certificaat', desc: language === 'nl' ? 'Gratis SSL voor een veilige verbinding.' : 'Free SSL for a secure connection.' },
-    { img: '/icon-clock-gears.png', title: language === 'nl' ? 'Beheerd Platform' : 'Managed Platform', desc: language === 'nl' ? 'Ik regel alles, jij hoeft niks te doen.' : 'I handle everything, you don\'t have to do anything.' },
+    { icon: Cloud, title: language === 'nl' ? 'Snelle Hosting' : 'Fast Hosting', desc: language === 'nl' ? 'Je website draait op razendsnelle servers.' : 'Your website runs on blazing fast servers.' },
+    { icon: Globe, title: language === 'nl' ? 'Domeinnaam' : 'Domain Name', desc: language === 'nl' ? 'Help bij het koppelen van jouw eigen domein.' : 'Help connecting your own domain.' },
+    { icon: Shield, title: 'SSL Certificaat', desc: language === 'nl' ? 'Gratis SSL voor een veilige verbinding.' : 'Free SSL for a secure connection.' },
+    { icon: Settings, title: language === 'nl' ? 'Beheerd Platform' : 'Managed Platform', desc: language === 'nl' ? 'Ik regel alles, jij hoeft niks te doen.' : 'I handle everything, you don\'t have to do anything.' },
   ];
 
   return (
@@ -662,15 +581,12 @@ const HostingSection = () => {
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">(05)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">(04)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <div className="flex items-end gap-6">
-              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
-                {language === 'nl' ? 'HOSTING' : 'HOSTING'}
-              </h2>
-            <img src="/icon-cloud-server.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
-            </div>
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+              {language === 'nl' ? 'HOSTING' : 'HOSTING'}
+            </h2>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl'
                 ? 'Betrouwbare hosting en domeinnaam begeleiding. Alles wat je nodig hebt om online te zijn.'
@@ -689,8 +605,8 @@ const HostingSection = () => {
               transition={{ delay: i * 0.1 }}
               className="bg-white rounded-3xl p-8 border border-gray-200 hover:border-gray-400 transition-colors group"
             >
-              <div className="w-12 h-12 flex items-center justify-center mb-5">
-                <img src={f.img} alt={f.title} className="w-10 h-10 object-contain" />
+              <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                <f.icon size={22} strokeWidth={1.5} className="text-gray-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{f.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
@@ -724,7 +640,7 @@ const WhyExpensiveSection = () => {
             className="col-span-12 lg:col-span-7"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-6">
-              (06)
+              (05)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8">
               {language === 'nl' 
@@ -791,7 +707,6 @@ const ServicesSection = () => {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
               {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
             </h2>
-            <img src="/icon-laptop-webdev.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
           </div>
         </div>
 
@@ -807,7 +722,9 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
-                <img src="/icon-laptop-webdev.png" alt="" className="h-12 w-auto object-contain" />
+                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center">
+                  <Monitor size={22} strokeWidth={1.5} className="text-gray-500" />
+                </div>
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Website Ontwikkeling' : 'Website Development'}
@@ -831,7 +748,9 @@ const ServicesSection = () => {
             <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
-                <img src="/icon-cloud-server.png" alt="" className="h-12 w-auto object-contain" />
+                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center">
+                  <Smartphone size={22} strokeWidth={1.5} className="text-gray-500" />
+                </div>
               </div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 {language === 'nl' ? 'Web Applicaties' : 'Web Applications'}
@@ -885,16 +804,13 @@ const PricingSection = () => {
         <div className="grid grid-cols-12 gap-4 mb-16">
           <div className="col-span-12 lg:col-span-4">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
-              (07)
+              (06)
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <div className="flex items-end gap-5">
-              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
-                {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
-              </h2>
-              <img src="/icon-package-box.png" alt="" className="hidden lg:block h-16 w-auto object-contain opacity-80" />
-            </div>
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
+              {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
+            </h2>
             <p className="text-gray-500 mt-4 max-w-lg">
               {language === 'nl' 
                 ? 'Transparante prijzen. Geen verborgen kosten. Jij levert teksten en foto\'s.'
@@ -1159,7 +1075,7 @@ const FAQSection = () => {
         {/* Section Header - Centered */}
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">
-            (08)
+            (07)
           </p>
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
             FAQ
@@ -1269,7 +1185,7 @@ const ContactSection = () => {
             className="col-span-12 lg:col-span-5"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6">
-              (09)
+              (08)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter mb-8">
               {language === 'nl' ? 'CONTACT' : 'CONTACT'}
@@ -1569,7 +1485,6 @@ const LandingPage = () => {
         <Navigation />
         <HeroSection />
         <ServicesSection />
-        <OnderhoudSection />
         <ProcessSection />
         <ExpertiseSection />
         <HostingSection />
