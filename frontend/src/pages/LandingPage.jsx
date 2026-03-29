@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../App";
+import { useTheme } from "../App";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
@@ -36,6 +37,8 @@ import {
   FileCode,
   Users,
   Award,
+  Moon,
+  Sun,
 } from "lucide-react";
 import DemoPreview from "../components/DemoPreview";
 
@@ -51,6 +54,7 @@ const CALENDLY_URL = "https://calendly.com/yvar-yrvante/30min";
 // Navigation - Brutalist with Dropdown Menus
 const Navigation = () => {
   const { language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -92,7 +96,7 @@ const Navigation = () => {
     <nav
       data-testid="navigation"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white border-b border-black" : "bg-white"
+        scrolled ? "bg-white dark:bg-neutral-900 border-b border-black dark:border-neutral-700" : "bg-white dark:bg-neutral-900"
       }`}
     >
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
@@ -118,7 +122,7 @@ const Navigation = () => {
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <button
-                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors flex items-center gap-1 py-4"
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 py-4"
               >
                 {language === 'nl' ? 'Diensten' : 'Services'}
                 <ChevronDown size={12} className={`transition-transform ${openDropdown === 'diensten' ? 'rotate-180' : ''}`} />
@@ -130,16 +134,16 @@ const Navigation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 bg-white border border-gray-200 rounded-2xl shadow-xl py-3 min-w-[220px]"
+                    className="absolute top-full left-0 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl shadow-xl py-3 min-w-[220px]"
                   >
                     {dienstenLinks.map((link, index) => (
                       link.divider ? (
-                        <div key={index} className="border-t border-gray-100 my-1" />
+                        <div key={index} className="border-t border-gray-100 dark:border-neutral-700 my-1" />
                       ) : (
                         <Link
                           key={index}
                           to={link.to}
-                          className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors rounded-lg mx-1"
+                          className="block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-colors rounded-lg mx-1"
                         >
                           {link.label}
                         </Link>
@@ -152,19 +156,19 @@ const Navigation = () => {
 
             <Link
               to="/over-mij"
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               {language === 'nl' ? 'Over' : 'About'}
             </Link>
 
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               Contact
             </button>
             
-            <div className="w-px h-4 bg-gray-300" />
+            <div className="w-px h-4 bg-gray-300 dark:bg-neutral-600" />
             
             <button
               onClick={() => scrollToSection("contact")}
@@ -173,27 +177,36 @@ const Navigation = () => {
               Start Project
             </button>
 
-            <div className="flex text-xs font-mono">
+            <div className="flex items-center gap-2 text-xs font-mono">
               <button
                 onClick={() => setLanguage("nl")}
-                className={`px-2 py-1 ${language === "nl" ? "text-black" : "text-gray-400"}`}
+                className={`px-2 py-1 ${language === "nl" ? "text-black dark:text-white" : "text-gray-400"}`}
               >
                 NL
               </button>
-              <span className="text-gray-300">/</span>
+              <span className="text-gray-300 dark:text-neutral-600">/</span>
               <button
                 onClick={() => setLanguage("en")}
-                className={`px-2 py-1 ${language === "en" ? "text-black" : "text-gray-400"}`}
+                className={`px-2 py-1 ${language === "en" ? "text-black dark:text-white" : "text-gray-400"}`}
               >
                 EN
               </button>
             </div>
+
+            <button
+              data-testid="theme-toggle"
+              onClick={toggleTheme}
+              className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-neutral-700/60 dark:hover:bg-neutral-800 transition-colors"
+              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            >
+              {theme === 'dark' ? <Sun size={18} className="text-yellow-400" /> : <Moon size={18} className="text-gray-500" />}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 text-black dark:text-white"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -207,7 +220,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-gray-200 overflow-hidden"
+            className="lg:hidden bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 overflow-hidden"
           >
             <div className="px-6 py-4 space-y-1">
               {dienstenLinks.filter(l => !l.divider).map((link, index) => (
@@ -215,7 +228,7 @@ const Navigation = () => {
                   key={index}
                   to={link.to}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-3 text-sm text-gray-700 hover:text-black border-b border-gray-100 last:border-0 transition-colors"
+                  className="block py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white border-b border-gray-100 dark:border-neutral-800 last:border-0 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -223,13 +236,13 @@ const Navigation = () => {
               <Link
                 to="/over-mij"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-3 text-sm text-gray-700 hover:text-black border-b border-gray-100 transition-colors"
+                className="block py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white border-b border-gray-100 dark:border-neutral-800 transition-colors"
               >
                 {language === 'nl' ? 'Over Mij' : 'About Me'}
               </Link>
               <button
                 onClick={() => { scrollToSection("contact"); setMobileMenuOpen(false); }}
-                className="block w-full text-left py-3 text-sm text-gray-700 hover:text-black border-b border-gray-100 transition-colors"
+                className="block w-full text-left py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white border-b border-gray-100 dark:border-neutral-800 transition-colors"
               >
                 Contact
               </button>
@@ -243,19 +256,26 @@ const Navigation = () => {
                 </button>
               </div>
 
-              <div className="flex justify-center gap-4 pt-2 pb-4">
+              <div className="flex justify-center items-center gap-4 pt-2 pb-4">
                 <button
                   onClick={() => setLanguage("nl")}
-                  className={`text-sm ${language === "nl" ? "text-black font-bold" : "text-gray-400"}`}
+                  className={`text-sm ${language === "nl" ? "text-black dark:text-white font-bold" : "text-gray-400"}`}
                 >
                   NL
                 </button>
-                <span className="text-gray-300">|</span>
+                <span className="text-gray-300 dark:text-neutral-600">|</span>
                 <button
                   onClick={() => setLanguage("en")}
-                  className={`text-sm ${language === "en" ? "text-black font-bold" : "text-gray-400"}`}
+                  className={`text-sm ${language === "en" ? "text-black dark:text-white font-bold" : "text-gray-400"}`}
                 >
                   EN
+                </button>
+                <span className="text-gray-300 dark:text-neutral-600">|</span>
+                <button
+                  onClick={toggleTheme}
+                  className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700/60 dark:hover:bg-neutral-800 transition-colors"
+                >
+                  {theme === 'dark' ? <Sun size={16} className="text-yellow-400" /> : <Moon size={16} className="text-gray-500" />}
                 </button>
               </div>
             </div>
@@ -290,7 +310,7 @@ const HeroSection = () => {
           >
             <button 
               onClick={scrollToContact}
-              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-gray-400 transition-all duration-300 text-sm"
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 text-sm"
               style={{
                 boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
               }}
@@ -327,13 +347,13 @@ const HeroSection = () => {
                 <span className="flex flex-col">
                   <span>JOUW</span>
                   <span>BEDRIJF</span>
-                  <span className="text-gray-500">ONLINE</span>
+                  <span className="text-gray-500 dark:text-gray-400">ONLINE</span>
                 </span>
               ) : (
                 <span className="flex flex-col">
                   <span>YOUR</span>
                   <span>BUSINESS</span>
-                  <span className="text-gray-500">ONLINE</span>
+                  <span className="text-gray-500 dark:text-gray-400">ONLINE</span>
                 </span>
               )}
             </motion.h1>
@@ -412,14 +432,14 @@ const HeroSection = () => {
           >
             <a 
               href="tel:+31855055314" 
-              className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               <Phone size={14} />
               <span>+31 85 505 5314</span>
             </a>
             <a 
               href="mailto:info@yrvante.com" 
-              className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               <Mail size={14} />
               <span>info@yrvante.com</span>
@@ -449,8 +469,8 @@ const ProcessSection = () => {
     <section data-testid="process-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">(02)</p>
-          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">(02)</p>
+          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
             {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
           </h2>
         </div>
@@ -463,14 +483,14 @@ const ProcessSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12 }}
-                className="flex-1 bg-white rounded-3xl p-6 text-center border border-gray-200 hover:border-gray-400 transition-colors group"
+                className="flex-1 bg-white dark:bg-neutral-800 rounded-3xl p-6 text-center border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
               >
-                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <step.icon size={22} strokeWidth={1.5} className="text-gray-500" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 block mb-1">0{i + 1}</span>
-                <h3 className="font-bold text-base mb-1">{step.label}</h3>
-                <p className="text-gray-500 text-xs">{step.desc}</p>
+                <h3 className="font-bold dark:text-white text-base mb-1">{step.label}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs">{step.desc}</p>
               </motion.div>
               {i < steps.length - 1 && (
                 <div className="hidden lg:flex items-center justify-center px-2">
@@ -508,8 +528,8 @@ const ExpertiseSection = () => {
         <div className="grid grid-cols-12 gap-12 lg:gap-20">
           {/* Expertise */}
           <div className="col-span-12 lg:col-span-6">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">(03)</p>
-            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter mb-8">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">(03)</p>
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'EXPERTISE' : 'EXPERTISE'}
             </h2>
             <div className="grid grid-cols-2 gap-4">
@@ -520,13 +540,13 @@ const ExpertiseSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
+                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
                 >
-                  <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                  <div className="w-10 h-10 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center mb-3">
                     <tech.icon size={20} strokeWidth={1.5} className="text-gray-500" />
                   </div>
-                  <h3 className="font-bold text-sm mb-1">{tech.name}</h3>
-                  <p className="text-gray-500 text-xs">{tech.desc}</p>
+                  <h3 className="font-bold dark:text-white text-sm mb-1">{tech.name}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs">{tech.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -534,8 +554,8 @@ const ExpertiseSection = () => {
 
           {/* Voordelen */}
           <div className="col-span-12 lg:col-span-6">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">&nbsp;</p>
-            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter mb-8">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">&nbsp;</p>
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'VOORDELEN' : 'BENEFITS'}
             </h2>
             <div className="space-y-4">
@@ -546,14 +566,14 @@ const ExpertiseSection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex items-start gap-5 bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-gray-400 transition-colors group"
+                  className="flex items-start gap-5 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center flex-shrink-0">
                     <v.icon size={22} strokeWidth={1.5} className="text-gray-500" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-base mb-1">{v.title}</h3>
-                    <p className="text-gray-500 text-sm">{v.desc}</p>
+                    <h3 className="font-bold dark:text-white text-base mb-1">{v.title}</h3>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">{v.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -581,13 +601,13 @@ const HostingSection = () => {
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">(04)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">(04)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
               {language === 'nl' ? 'HOSTING' : 'HOSTING'}
             </h2>
-            <p className="text-gray-500 mt-4 max-w-lg">
+            <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-lg">
               {language === 'nl'
                 ? 'Betrouwbare hosting en domeinnaam begeleiding. Alles wat je nodig hebt om online te zijn.'
                 : 'Reliable hosting and domain name guidance. Everything you need to be online.'}
@@ -603,19 +623,19 @@ const HostingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white rounded-3xl p-8 border border-gray-200 hover:border-gray-400 transition-colors group"
+              className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
             >
-              <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+              <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-5">
                 <f.icon size={22} strokeWidth={1.5} className="text-gray-500" />
               </div>
-              <h3 className="text-lg font-bold mb-2">{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="text-lg font-bold dark:text-white mb-2">{f.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </div>
 
         <div className="mt-8 text-center">
-          <Link to="/onderhoud" className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors">
+          <Link to="/onderhoud" className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
             {language === 'nl' ? 'Meer over hosting →' : 'More about hosting →'}
           </Link>
         </div>
@@ -639,7 +659,7 @@ const WhyExpensiveSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-7"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-6">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-6">
               (05)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8">
@@ -647,7 +667,7 @@ const WhyExpensiveSection = () => {
                 ? 'WAAROM BEN IK GOEDKOPER?' 
                 : 'WHY AM I MORE AFFORDABLE?'}
             </h2>
-            <p className="text-gray-500 leading-relaxed max-w-xl mb-8">
+            <p className="text-gray-500 dark:text-gray-400 leading-relaxed max-w-xl mb-8">
               {language === 'nl'
                 ? 'Veel webdesignbureaus rekenen €3.000 tot €8.000 voor een simpele website. Je betaalt voor overhead, managers en vergaderingen — niet voor je website.'
                 : 'Many web design agencies charge €3,000 to €8,000 for a simple website. You pay for overhead, managers and meetings — not for your website.'}
@@ -699,12 +719,12 @@ const ServicesSection = () => {
         {/* Section Header - Asymmetric */}
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">
               (01)
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8 flex items-end gap-6">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
               {language === 'nl' ? 'DIENSTEN' : 'SERVICES'}
             </h2>
           </div>
@@ -719,17 +739,17 @@ const ServicesSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-6 group"
           >
-            <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
-                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
                   <Monitor size={22} strokeWidth={1.5} className="text-gray-500" />
                 </div>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4">
+              <h3 className="text-2xl lg:text-3xl font-bold dark:text-white mb-4">
                 {language === 'nl' ? 'Website Ontwikkeling' : 'Website Development'}
               </h3>
-              <p className="text-gray-500 leading-relaxed">
+              <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
                 {language === 'nl' 
                   ? 'Moderne, snelle websites die perfect werken op elk apparaat. Van simpele landingspagina tot complete bedrijfswebsite.'
                   : 'Modern, fast websites that work perfectly on any device. From simple landing page to complete business website.'}
@@ -745,17 +765,17 @@ const ServicesSection = () => {
             transition={{ delay: 0.1 }}
             className="col-span-12 lg:col-span-6 group"
           >
-            <div className="bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
-                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
                   <Smartphone size={22} strokeWidth={1.5} className="text-gray-500" />
                 </div>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4">
+              <h3 className="text-2xl lg:text-3xl font-bold dark:text-white mb-4">
                 {language === 'nl' ? 'Web Applicaties' : 'Web Applications'}
               </h3>
-              <p className="text-gray-500 leading-relaxed">
+              <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
                 {language === 'nl'
                   ? 'Boekingssystemen, klantportalen en op maat gemaakte oplossingen voor jouw specifieke bedrijfsbehoeften.'
                   : 'Booking systems, client portals and custom solutions for your specific business needs.'}
@@ -771,7 +791,7 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="mt-8 text-center"
         >
-          <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100/80 rounded-full text-sm text-gray-500">
+          <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100/80 dark:bg-neutral-800/80 rounded-full text-sm text-gray-500">
             <Clock size={14} strokeWidth={1.5} />
             {language === 'nl' ? 'Meer diensten binnenkort in behandeling' : 'More services coming soon'}
           </span>
@@ -816,15 +836,15 @@ const PricingSection = () => {
         {/* Section Header */}
         <div className="grid grid-cols-12 gap-4 mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">
               (06)
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black">
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black dark:text-white">
               {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
             </h2>
-            <p className="text-gray-500 mt-4 max-w-lg">
+            <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-lg">
               {language === 'nl' 
                 ? 'Transparante prijzen. Geen verborgen kosten. Jij levert teksten en foto\'s.'
                 : 'Transparent pricing. No hidden costs. You provide texts and photos.'}
@@ -841,8 +861,8 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white hover:bg-gray-100 hover:text-gray-900 hover:border-gray-400 ${
-                pkg.popular ? 'border-gray-400' : 'border-gray-200'
+              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white dark:bg-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-700/60 hover:text-gray-900 hover:border-gray-400 ${
+                pkg.popular ? 'border-gray-400 dark:border-neutral-500' : 'border-gray-200 dark:border-neutral-700'
               }`}
             >
               {/* Populair Badge */}
@@ -889,7 +909,7 @@ const PricingSection = () => {
         <div className="mt-12 text-center">
           <Link
             to="/pakketten"
-            className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
+            className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
           >
             {language === 'nl' ? 'Bekijk alle details →' : 'View all details →'}
           </Link>
@@ -1087,10 +1107,10 @@ const FAQSection = () => {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         {/* Section Header - Centered */}
         <div className="text-center mb-16">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-4">
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">
             (07)
           </p>
-          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter">
+          <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
             FAQ
           </h2>
         </div>
@@ -1104,7 +1124,7 @@ const FAQSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="bg-gray-50 rounded-3xl border border-gray-200 hover:border-gray-300 transition-colors"
+              className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl border border-gray-200 hover:border-gray-300 transition-colors"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -1116,7 +1136,7 @@ const FAQSection = () => {
                     <span className="text-xs text-gray-400 uppercase tracking-[0.2em] block mb-2">
                       {index + 1 < 10 ? `0${index + 1}` : index + 1}
                     </span>
-                    <span className="font-bold text-base block">{faq.q}</span>
+                    <span className="font-bold dark:text-white text-base block">{faq.q}</span>
                   </div>
                   <ChevronDown 
                     className={`flex-shrink-0 transform transition-transform mt-1 text-gray-400 ${openIndex === index ? 'rotate-180' : ''}`} 
@@ -1131,7 +1151,7 @@ const FAQSection = () => {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <p className="text-gray-500 text-sm mt-4 leading-relaxed whitespace-pre-line">{faq.a}</p>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm mt-4 leading-relaxed whitespace-pre-line">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -1197,13 +1217,13 @@ const ContactSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-5"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 mb-6">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-6">
               (08)
             </p>
-            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter mb-8">
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'CONTACT' : 'CONTACT'}
             </h2>
-            <p className="text-gray-500 leading-relaxed mb-12 max-w-md">
+            <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-12 max-w-md">
               {language === 'nl' 
                 ? 'Heb je vragen of wil je weten wat ik voor je kan betekenen? Stuur een bericht — ik reageer binnen 2 uur.'
                 : 'Have questions or want to know what I can do for you? Send a message — I respond within 2 hours.'}
@@ -1222,7 +1242,7 @@ const ContactSection = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-bold text-lg">WhatsApp Business</p>
+                  <p className="font-bold dark:text-white text-lg">WhatsApp Business</p>
                   <p className="text-gray-300 text-sm">{language === 'nl' ? 'Snel antwoord op je vragen' : 'Quick answers to your questions'}</p>
                 </div>
               </a>
@@ -1237,14 +1257,14 @@ const ContactSection = () => {
                     window.open(CALENDLY_URL, '_blank');
                   }
                 }}
-                className="w-full flex items-center gap-4 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 rounded-2xl p-5 transition-colors group text-left"
+                className="w-full flex items-center gap-4 bg-white dark:bg-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-700 text-gray-900 dark:text-white border border-gray-200 dark:border-neutral-700 rounded-2xl p-5 transition-colors group text-left"
               >
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <Clock size={22} className="text-gray-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-lg">{language === 'nl' ? 'Plan een gratis gesprek' : 'Schedule a free call'}</p>
-                  <p className="text-gray-500 text-sm">{language === 'nl' ? '15 minuten kennismaking' : '15-minute intro call'}</p>
+                  <p className="font-bold dark:text-white text-lg">{language === 'nl' ? 'Plan een gratis gesprek' : 'Schedule a free call'}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{language === 'nl' ? '15 minuten kennismaking' : '15-minute intro call'}</p>
                 </div>
               </button>
 
@@ -1252,35 +1272,35 @@ const ContactSection = () => {
               <a
                 href="tel:+31855055314"
                 data-testid="contact-phone-link"
-                className="flex items-center gap-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-2xl p-5 transition-colors group"
+                className="flex items-center gap-4 bg-white dark:bg-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-700 border border-gray-200 dark:border-neutral-700 rounded-2xl p-5 transition-colors group"
               >
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <Phone size={22} className="text-gray-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-lg">+31 85 505 5314</p>
-                  <p className="text-gray-500 text-sm">{language === 'nl' ? 'Bel me gerust!' : 'Feel free to call me!'}</p>
+                  <p className="font-bold dark:text-white text-lg">+31 85 505 5314</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{language === 'nl' ? 'Bel me gerust!' : 'Feel free to call me!'}</p>
                 </div>
               </a>
 
-              <div className="bg-white rounded-2xl p-5">
+              <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
-                <a href="mailto:info@yrvante.com" className="text-lg hover:underline underline-offset-4">
+                <a href="mailto:info@yrvante.com" className="dark:text-white text-lg hover:underline underline-offset-4">
                   info@yrvante.com
                 </a>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-2xl p-5">
+                <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5">
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {language === 'nl' ? 'Locatie' : 'Location'}
                   </p>
-                  <p className="text-base font-medium">Nederland</p>
+                  <p className="text-base font-medium dark:text-white">Nederland</p>
                 </div>
-                <div className="bg-white rounded-2xl p-5">
+                <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5">
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {language === 'nl' ? 'Reactietijd' : 'Response'}
                   </p>
-                  <p className="text-base font-medium">{language === 'nl' ? 'binnen 2 uur' : 'within 2 hours'}</p>
+                  <p className="text-base font-medium dark:text-white">{language === 'nl' ? 'binnen 2 uur' : 'within 2 hours'}</p>
                 </div>
               </div>
             </div>
@@ -1294,11 +1314,11 @@ const ContactSection = () => {
             className="col-span-12 lg:col-span-7"
           >
             {submitted ? (
-              <div className="bg-white p-12 text-center rounded-3xl border border-gray-200">
+              <div className="bg-white dark:bg-neutral-800 p-12 text-center rounded-3xl border border-gray-200 dark:border-neutral-700">
                 <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                   <Check size={32} className="text-green-500" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">
+                <h3 className="text-2xl font-bold dark:text-white mb-2">
                   {language === 'nl' ? 'Bericht verzonden' : 'Message sent'}
                 </h3>
                 <p className="text-gray-500">
@@ -1308,7 +1328,7 @@ const ContactSection = () => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white p-8 lg:p-12 rounded-3xl border border-gray-200">
+              <form onSubmit={handleSubmit} className="bg-white dark:bg-neutral-800 p-8 lg:p-12 rounded-3xl border border-gray-200 dark:border-neutral-700">
                 <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
@@ -1322,7 +1342,7 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors"
+                      className="w-full px-4 py-4 bg-gray-50 dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 rounded-2xl focus:border-black dark:focus:border-white dark:text-white focus:outline-none transition-colors"
                       placeholder={language === 'nl' ? 'Je naam' : 'Your name'}
                     />
                   </div>
@@ -1336,7 +1356,7 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors"
+                      className="w-full px-4 py-4 bg-gray-50 dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 rounded-2xl focus:border-black dark:focus:border-white dark:text-white focus:outline-none transition-colors"
                       placeholder={language === 'nl' ? 'je@email.nl' : 'your@email.com'}
                     />
                   </div>
@@ -1351,7 +1371,7 @@ const ContactSection = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors"
+                    className="w-full px-4 py-4 bg-gray-50 dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 rounded-2xl focus:border-black dark:focus:border-white dark:text-white focus:outline-none transition-colors"
                     placeholder="06 12345678"
                   />
                 </div>
@@ -1366,7 +1386,7 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:border-black focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-4 bg-gray-50 dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 rounded-2xl focus:border-black dark:focus:border-white dark:text-white focus:outline-none transition-colors resize-none"
                     placeholder={language === 'nl' ? 'Vertel over je project...' : 'Tell me about your project...'}
                   />
                 </div>
@@ -1396,7 +1416,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <footer className="py-16 bg-white border-t border-gray-200">
+    <footer className="py-16 border-t border-gray-200 dark:border-neutral-800">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-8">
           {/* Logo & Info */}
@@ -1406,7 +1426,7 @@ const Footer = () => {
               alt="Yrvante" 
               className="h-12 w-auto object-contain"
             />
-            <p className="text-xs text-gray-500 mt-4 max-w-xs leading-relaxed">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 max-w-xs leading-relaxed">
               {language === 'nl'
                 ? 'Professionele websites voor ZZP\'ers en MKB. Betaalbaar en resultaatgericht.'
                 : 'Professional websites for freelancers and SMBs. Affordable and result-driven.'}
@@ -1415,49 +1435,49 @@ const Footer = () => {
 
           {/* Diensten Links */}
           <div className="col-span-6 lg:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Diensten' : 'Services'}
             </p>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/diensten/webdesign" className="text-gray-600 hover:text-black transition-colors">Webdesign</Link></li>
-              <li><Link to="/onderhoud" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting'}</Link></li>
+              <li><Link to="/diensten/webdesign" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">Webdesign</Link></li>
+              <li><Link to="/onderhoud" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting'}</Link></li>
             </ul>
           </div>
 
           {/* Voor Links */}
           <div className="col-span-6 lg:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Websites voor' : 'Websites for'}
             </p>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/voor/kappers" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Kappers' : 'Hairdressers'}</Link></li>
-              <li><Link to="/voor/nagelstylisten" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Nagelstylisten' : 'Nail Technicians'}</Link></li>
-              <li><Link to="/voor/restaurants" className="text-gray-600 hover:text-black transition-colors">Restaurants</Link></li>
-              <li><Link to="/voor/coaches" className="text-gray-600 hover:text-black transition-colors">Coaches</Link></li>
-              <li><Link to="/diensten" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Meer →' : 'More →'}</Link></li>
+              <li><Link to="/voor/kappers" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Kappers' : 'Hairdressers'}</Link></li>
+              <li><Link to="/voor/nagelstylisten" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Nagelstylisten' : 'Nail Technicians'}</Link></li>
+              <li><Link to="/voor/restaurants" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">Restaurants</Link></li>
+              <li><Link to="/voor/coaches" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">Coaches</Link></li>
+              <li><Link to="/diensten" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Meer →' : 'More →'}</Link></li>
             </ul>
           </div>
 
           {/* Pagina's Links */}
           <div className="col-span-6 lg:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Pagina\'s' : 'Pages'}
             </p>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/pakketten" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
-              <li><Link to="/calculator" className="text-gray-600 hover:text-black transition-colors">Calculator</Link></li>
-              <li><Link to="/over-mij" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Over Mij' : 'About Me'}</Link></li>
-              <li><Link to="/waarom-website" className="text-gray-600 hover:text-black transition-colors">{language === 'nl' ? 'Waarom?' : 'Why?'}</Link></li>
-              <li><Link to="/blog" className="text-gray-600 hover:text-black transition-colors">Blog</Link></li>
+              <li><Link to="/pakketten" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Pakketten' : 'Packages'}</Link></li>
+              <li><Link to="/calculator" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">Calculator</Link></li>
+              <li><Link to="/over-mij" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Over Mij' : 'About Me'}</Link></li>
+              <li><Link to="/waarom-website" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{language === 'nl' ? 'Waarom?' : 'Why?'}</Link></li>
+              <li><Link to="/blog" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div className="col-span-6 lg:col-span-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">Contact</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-4">Contact</p>
             <ul className="space-y-2 text-sm">
-              <li><a href="mailto:info@yrvante.com" className="text-gray-600 hover:text-black transition-colors">info@yrvante.com</a></li>
-              <li className="text-gray-600">Nederland</li>
+              <li><a href="mailto:info@yrvante.com" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">info@yrvante.com</a></li>
+              <li className="text-gray-600 dark:text-gray-400">Nederland</li>
             </ul>
             <div className="mt-6">
               <p className="text-xs text-gray-500">
@@ -1467,7 +1487,7 @@ const Footer = () => {
                 {language === 'nl' ? 'Alle rechten voorbehouden' : 'All rights reserved'}
               </p>
               <div className="flex items-center gap-4 mt-2">
-                <Link to="/privacy" className="text-xs text-gray-500 hover:text-black transition-colors">
+                <Link to="/privacy" className="text-xs text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
                   {language === 'nl' ? 'Privacybeleid' : 'Privacy Policy'}
                 </Link>
                 <button 
@@ -1488,11 +1508,23 @@ const Footer = () => {
 
 // Main Landing Page - Brutalist Editorial with flowing background
 const LandingPage = () => {
+  const { theme } = useTheme();
   return (
     <div data-testid="landing-page" className="min-h-screen relative">
       {/* Background - betere kwaliteit, minder desaturatie */}
-      <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.55) brightness(1.02) contrast(1.05)'}} />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/15 to-white/25 lg:from-white/55 lg:via-white/60 lg:to-white/70 pointer-events-none" />
+      <div className="fixed inset-0 -z-10" style={{
+        backgroundImage: `url(${BG_IMAGE})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        filter: theme === 'dark' 
+          ? 'saturate(0.3) brightness(0.15) contrast(1.1)' 
+          : 'saturate(0.55) brightness(1.02) contrast(1.05)'
+      }} />
+      <div className={`absolute inset-0 pointer-events-none ${
+        theme === 'dark'
+          ? 'bg-gradient-to-b from-neutral-900/60 via-neutral-900/70 to-neutral-900/80 lg:from-neutral-900/75 lg:via-neutral-900/80 lg:to-neutral-900/85'
+          : 'bg-gradient-to-b from-white/10 via-white/15 to-white/25 lg:from-white/55 lg:via-white/60 lg:to-white/70'
+      }`} />
       <div className="relative z-10">
         <SEO page="/" />
         <Navigation />

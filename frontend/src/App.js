@@ -24,6 +24,11 @@ const LanguageContext = createContext();
 
 export const useLanguage = () => useContext(LanguageContext);
 
+// Theme Context
+const ThemeContext = createContext();
+
+export const useTheme = () => useContext(ThemeContext);
+
 // Generate or get visitor ID
 const getVisitorId = () => {
   let visitorId = localStorage.getItem("visitor_id");
@@ -237,7 +242,21 @@ const translations = {
 
 function App() {
   const [language, setLanguage] = useState("nl");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
   const t = translations[language];
+
+  // Apply theme class to html element
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === "light" ? "dark" : "light");
 
   // Track page view on mount
   useEffect(() => {
@@ -245,6 +264,7 @@ function App() {
   }, []);
 
   return (
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <div className="App">
         <BrowserRouter>
@@ -269,6 +289,7 @@ function App() {
         <Toaster position="bottom-right" />
       </div>
     </LanguageContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 

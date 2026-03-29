@@ -27,6 +27,28 @@
     --radius: 0px;
 }
 
+.dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 95%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -44,6 +66,13 @@ body {
     background-color: #FFFFFF;
     color: #000000;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body,
+html.dark body {
+    background-color: #121212;
+    color: #f0f0f0;
 }
 
 /* Consistent icon styling - transparent backgrounds */
@@ -51,6 +80,12 @@ img[src*="icon-"],
 img[src*="yrvante-logo-code"] {
     mix-blend-mode: multiply;
     filter: contrast(1.1) brightness(0.95);
+}
+
+html.dark img[src*="icon-"],
+html.dark img[src*="yrvante-logo-code"] {
+    mix-blend-mode: screen;
+    filter: contrast(1.1) brightness(1.1) invert(1);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -78,6 +113,11 @@ code {
     color: #FFFFFF;
 }
 
+html.dark ::selection {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
 /* Premium scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
@@ -97,47 +137,71 @@ code {
     background: #333333;
 }
 
+html.dark ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+    background: #555555;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #777777;
+}
+
 /* Focus styles */
 *:focus-visible {
     outline: 2px solid #000000;
     outline-offset: 2px;
 }
 
+html.dark *:focus-visible {
+    outline-color: #FFFFFF;
+}
+
 /* Premium button styles */
 .btn-primary {
     @apply bg-black text-white px-8 py-4 font-medium transition-all duration-300 rounded-full;
 }
+html.dark .btn-primary { @apply bg-white text-black; }
 
 .btn-primary:hover {
     @apply bg-gray-800 transform scale-105;
 }
+html.dark .btn-primary:hover { @apply bg-gray-200; }
 
 .btn-secondary {
     @apply bg-transparent text-black border-2 border-black hover:bg-black hover:text-white transition-all px-8 py-4 rounded-full;
 }
+html.dark .btn-secondary { @apply text-white border-white hover:bg-white hover:text-black; }
 
 /* Card styles */
 .card-yrvante {
     @apply bg-white border border-gray-200 p-8 rounded-2xl transition-all duration-300;
 }
+html.dark .card-yrvante { @apply bg-neutral-900 border-neutral-700; }
 
 .card-yrvante:hover {
     @apply border-black shadow-lg;
 }
+html.dark .card-yrvante:hover { @apply border-white; }
 
 /* Premium input styles */
 .input-yrvante {
     @apply bg-white border border-gray-200 rounded-xl focus:border-black outline-none py-4 px-4 transition-colors w-full;
 }
+html.dark .input-yrvante { @apply bg-neutral-800 border-neutral-600 text-white focus:border-white; }
 
 .input-yrvante::placeholder {
     @apply text-gray-400;
 }
+html.dark .input-yrvante::placeholder { @apply text-neutral-500; }
 
 /* Navigation link */
 .nav-link {
     @apply relative text-gray-600 hover:text-black transition-colors;
 }
+html.dark .nav-link { @apply text-gray-400 hover:text-white; }
 
 /* Section spacing */
 .section-padding {
@@ -172,12 +236,21 @@ code {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+html.dark .gradient-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #CCCCCC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
 /* Glass effect */
 .glass {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+html.dark .glass {
+    background: rgba(18, 18, 18, 0.95);
 }
 
 /* Mobile menu */
