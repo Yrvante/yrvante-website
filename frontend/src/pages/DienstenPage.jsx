@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { Link, useParams } from "react-router-dom";
 import SEO from "../components/SEO";
 import {
@@ -1188,18 +1188,18 @@ const DienstenPage = () => {
     ];
 
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-neutral-950">
         <SEO page="/diensten/webdesign" />
 
-        <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
             <div className="flex items-center justify-between h-16 lg:h-20">
               <Link to="/" className="flex items-center">
-                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
               </Link>
               <Link
                 to="/diensten"
-                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               >
                 ← {language === 'nl' ? 'Alle Diensten' : 'All Services'}
               </Link>
@@ -1213,7 +1213,7 @@ const DienstenPage = () => {
           <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
-                <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                   {language === 'nl' ? 'Webdesign' : 'Web Design'}
                 </p>
                 <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900">
@@ -1240,7 +1240,7 @@ const DienstenPage = () => {
                   </button>
                   <Link
                     to="/pakketten"
-                    className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 transition-colors"
+                    className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
                   >
                     {language === 'nl' ? 'Bekijk Pakketten' : 'View Packages'}
                   </Link>
@@ -1248,7 +1248,7 @@ const DienstenPage = () => {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="relative">
-                <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl">
+                <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 shadow-xl">
                   <div className="space-y-4">
                     {webdesignFeatures.slice(0, 4).map((feature, index) => (
                       <div key={index} className="flex items-start gap-4">
@@ -1272,7 +1272,7 @@ const DienstenPage = () => {
         <section className="py-20 bg-white">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-12">
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Wat je krijgt' : 'What you get'}
               </p>
               <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
@@ -1292,7 +1292,7 @@ const DienstenPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-gray-50 rounded-3xl p-6"
+                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
                 >
                   <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
                     <feature.icon className="text-gray-600" size={24} />
@@ -1309,7 +1309,7 @@ const DienstenPage = () => {
         <section className="py-20 bg-gray-50">
           <div className="max-w-[900px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-12">
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Hoe het werkt' : 'How it works'}
               </p>
               <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
@@ -1329,7 +1329,7 @@ const DienstenPage = () => {
                   <div className="flex-shrink-0 w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center">
                     <span className="text-white text-xs font-bold">{step.step}</span>
                   </div>
-                  <div className="flex-1 bg-white rounded-2xl p-6 border border-gray-200">
+                  <div className="flex-1 bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-200 dark:border-neutral-700">
                     <h3 className="font-bold text-lg mb-2">{step.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
                   </div>
@@ -1344,7 +1344,7 @@ const DienstenPage = () => {
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                   {language === 'nl' ? 'De Realiteit' : 'The Reality'}
                 </p>
                 <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
@@ -1369,9 +1369,9 @@ const DienstenPage = () => {
                   { stat: '75%', label: language === 'nl' ? 'beoordeelt geloofwaardigheid op design' : 'judge credibility based on design' },
                   { stat: '60%+', label: language === 'nl' ? 'bezoekt eerst via mobiel' : 'visits via mobile first' },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-6 bg-gray-50 rounded-2xl p-6">
+                  <div key={i} className="flex items-center gap-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-6">
                     <span className="text-4xl font-black text-gray-900 w-20 flex-shrink-0">{item.stat}</span>
-                    <p className="text-gray-600">{item.label}</p>
+                    <p className="text-gray-600 dark:text-gray-400">{item.label}</p>
                   </div>
                 ))}
               </div>
@@ -1382,7 +1382,7 @@ const DienstenPage = () => {
         {/* Future Plans Note */}
         <section className="py-16 bg-gray-100">
           <div className="max-w-[900px] mx-auto px-6 lg:px-12">
-            <div className="bg-white rounded-3xl p-8 border border-gray-200">
+            <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <Layers size={24} className="text-gray-600" />
@@ -1408,19 +1408,19 @@ const DienstenPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gray-50 text-gray-800">
+        <section className="py-20 bg-gray-50 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
               {language === 'nl' ? 'Klaar voor een website die werkt?' : 'Ready for a website that works?'}
             </h2>
-            <p className="text-gray-500 mb-8 max-w-md mx-auto">
+            <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
               {language === 'nl'
                 ? 'Vanaf €500 excl. BTW. Opgeleverd in 1-2 weken.'
                 : 'From €500 excl. VAT. Delivered in 1-2 weeks.'}
             </p>
-            <div className="bg-white border border-gray-200 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
+            <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
               <div className="flex items-baseline justify-center gap-2 mb-4">
-                <span className="text-5xl font-black text-gray-800">€500</span>
+                <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€500</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
               </div>
               <ul className="space-y-2 text-sm text-gray-600 text-left">
@@ -1453,7 +1453,7 @@ const DienstenPage = () => {
               </button>
               <Link
                 to="/calculator"
-                className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 transition-colors"
+                className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -1476,18 +1476,18 @@ const DienstenPage = () => {
   if (isServicePage) {
     const service = services[type];
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-neutral-950">
         <SEO page={`/diensten/${type}`} />
         
-        <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
             <div className="flex items-center justify-between h-16 lg:h-20">
               <Link to="/" className="flex items-center">
-                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
               </Link>
               <Link 
                 to="/diensten" 
-                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               >
                 ← {language === 'nl' ? 'Alle Diensten' : 'All Services'}
               </Link>
@@ -1496,7 +1496,7 @@ const DienstenPage = () => {
         </nav>
 
         <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-          <div className="absolute inset-0 bg-white/80" />
+          <div className="absolute inset-0 bg-white/80 dark:bg-neutral-950/85" />
           <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1532,7 +1532,7 @@ const DienstenPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 bg-gray-50 rounded-2xl p-4"
+                  className="flex items-center gap-3 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4"
                 >
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
@@ -1544,12 +1544,12 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100 text-gray-800">
+        <section className="py-16 bg-gray-100 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? `${service.title[language]} nodig?` : `Need ${service.title[language]}?`}
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-6">
               {language === 'nl' ? `Vanaf ${service.price} excl. BTW` : `From ${service.price} excl. VAT`}
             </p>
             <div className="flex justify-center gap-4">
@@ -1561,7 +1561,7 @@ const DienstenPage = () => {
               </button>
               <Link
                 to="/calculator"
-                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
+                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -1584,18 +1584,18 @@ const DienstenPage = () => {
   if (isNichePage) {
     const nicheData = niches[niche];
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-neutral-950">
         <SEO page={`/voor/${niche}`} />
         
-        <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
             <div className="flex items-center justify-between h-16 lg:h-20">
               <Link to="/" className="flex items-center">
-                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
               </Link>
               <Link 
                 to="/diensten" 
-                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               >
                 ← {language === 'nl' ? 'Alle Websites' : 'All Websites'}
               </Link>
@@ -1604,7 +1604,7 @@ const DienstenPage = () => {
         </nav>
 
         <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-          <div className="absolute inset-0 bg-white/80" />
+          <div className="absolute inset-0 bg-white/80 dark:bg-neutral-950/85" />
           <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1636,7 +1636,7 @@ const DienstenPage = () => {
               {nicheData.benefits[language].map((benefit, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 bg-gray-50 rounded-2xl p-4 hover:bg-gray-100 transition-colors"
+                  className="flex items-center gap-3 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 hover:bg-gray-100 transition-colors"
                 >
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
@@ -1657,7 +1657,7 @@ const DienstenPage = () => {
               {nicheData.examples[language].map((example, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-white rounded-full text-sm text-gray-700 border border-gray-200"
+                  className="px-4 py-2 bg-white dark:bg-neutral-800 rounded-full text-sm text-gray-700 border border-gray-200 dark:border-neutral-700"
                 >
                   {example}
                 </span>
@@ -1666,12 +1666,12 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100 text-gray-800">
+        <section className="py-16 bg-gray-100 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-6">
               {language === 'nl' ? 'Vanaf €500 excl. BTW' : 'From €500 excl. VAT'}
             </p>
             <div className="flex justify-center gap-4">
@@ -1683,7 +1683,7 @@ const DienstenPage = () => {
               </button>
               <Link
                 to="/calculator"
-                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
+                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -1704,18 +1704,18 @@ const DienstenPage = () => {
 
   // Main Services Overview Page
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/diensten" />
       
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+      <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
             <Link 
               to="/" 
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
             </Link>
@@ -1725,13 +1725,13 @@ const DienstenPage = () => {
 
       {/* Hero with Background */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/85" />
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Diensten' : 'Services'}
             </p>
             <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6">
@@ -1757,9 +1757,9 @@ const DienstenPage = () => {
               <div key={key}>
                 <Link
                   to={`/diensten/${key}`}
-                  className="block bg-gray-50 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
+                  className="block bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
                 >
-                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                  <div className="w-14 h-14 bg-white dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
                     <service.icon size={28} className="text-gray-700" />
                   </div>
                   <h3 className="font-bold text-2xl mb-2">{service.title[language]}</h3>
@@ -1793,7 +1793,7 @@ const DienstenPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Column 1: Beauty & Wellness */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 pb-2 border-b border-gray-200">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
                 {language === 'nl' ? 'Beauty & Wellness' : 'Beauty & Wellness'}
               </h3>
               <div className="space-y-2">
@@ -1804,9 +1804,9 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                     >
-                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
@@ -1822,7 +1822,7 @@ const DienstenPage = () => {
 
             {/* Column 2: Zakelijke Diensten */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 pb-2 border-b border-gray-200">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
                 {language === 'nl' ? 'Zakelijke Diensten' : 'Business Services'}
               </h3>
               <div className="space-y-2">
@@ -1833,9 +1833,9 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                     >
-                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
@@ -1851,7 +1851,7 @@ const DienstenPage = () => {
 
             {/* Column 3: Ambacht & Horeca */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 pb-2 border-b border-gray-200">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200 dark:border-neutral-700">
                 {language === 'nl' ? 'Ambacht & Horeca' : 'Craft & Hospitality'}
               </h3>
               <div className="space-y-2">
@@ -1862,9 +1862,9 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                     >
-                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
@@ -1889,7 +1889,7 @@ const DienstenPage = () => {
             { label: { nl: 'Vakmanschap', en: 'Craftsmanship' }, keys: ['stukadoors', 'dakdekkers', 'tuiniers', 'schoonmakers', 'chauffeurs'] },
           ].map((group) => (
             <div key={group.label.nl} className="mt-8 pt-8 border-t border-gray-200">
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 text-center">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-4 text-center">
                 {group.label[language]}
               </h3>
               <div className="flex flex-wrap justify-center gap-2">
@@ -1900,7 +1900,7 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-2 px-4 py-2 bg-white rounded-full hover:shadow-md transition-all border border-gray-200 group"
+                      className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-800 rounded-full hover:shadow-md transition-all border border-gray-200 dark:border-neutral-700 group"
                     >
                       <nicheData.icon size={14} className="text-gray-500" />
                       <span className="text-sm text-gray-600 group-hover:text-black">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>
@@ -1914,12 +1914,12 @@ const DienstenPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gray-100 text-gray-800">
+      <section className="py-16 bg-gray-100 text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl font-bold mb-4">
             {language === 'nl' ? 'Jouw branche niet gevonden?' : "Didn't find your industry?"}
           </h2>
-          <p className="text-gray-500 mb-6">
+          <p className="text-gray-500 dark:text-gray-400 mb-6">
             {language === 'nl'
               ? 'Geen probleem! Ik maak websites voor elke branche. Neem contact op en we bespreken jouw wensen.'
               : "No problem! I create websites for any industry. Get in touch and we'll discuss your needs."}

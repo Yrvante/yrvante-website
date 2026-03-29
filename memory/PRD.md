@@ -167,6 +167,8 @@ RECIPIENT_EMAIL=info@yrvante.com
 
 ### Maart 2026
 - Dark mode optie toegevoegd over de hele website (ThemeContext, CSS variabelen, localStorage)
+- Dark mode op alle pagina's: Over Mij, Pakketten, Diensten, Calculator, Blog, Onderhoud, etc.
+- Logo wordt automatisch wit in dark mode (CSS invert filter)
 - Alle icons uit infographic gegenereerd en overal op homepage geplaatst (13 custom icons)
 - Homepage logo verwijderd naast "JOUW BEDRIJF ONLINE"
 - Nieuwe secties toegevoegd aan homepage: Onderhoud, Het Proces, Expertise & Voordelen, Hosting

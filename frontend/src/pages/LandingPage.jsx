@@ -109,7 +109,7 @@ const Navigation = () => {
             <img 
               src={LOGO_URL} 
               alt="Yrvante" 
-              className="h-10 lg:h-12 w-auto object-contain"
+              className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200"
             />
           </motion.a>
 

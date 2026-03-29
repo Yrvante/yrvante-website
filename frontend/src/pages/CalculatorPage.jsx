@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -35,7 +35,7 @@ const BookingSystemPreview = ({ language }) => {
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm"
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm"
     >
       <div className="p-4">
         <div className="flex items-center gap-2 mb-4">
@@ -43,7 +43,7 @@ const BookingSystemPreview = ({ language }) => {
             <Calendar size={16} className="text-gray-600" />
           </div>
           <div>
-            <p className="text-xs font-bold text-gray-800">
+            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">
               {language === 'nl' ? 'Voorbeeld: Boekingssysteem' : 'Preview: Booking System'}
             </p>
             <p className="text-xs text-gray-400">
@@ -76,7 +76,7 @@ const BookingSystemPreview = ({ language }) => {
               className={`py-2 rounded-xl text-xs transition-all ${
                 selectedTime === i
                   ? 'bg-gray-900 text-white'
-                  : 'bg-gray-50 border border-gray-200 text-gray-600 hover:border-gray-400'
+                  : 'bg-gray-50 border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-400'
               }`}
             >
               {time}
@@ -114,12 +114,12 @@ const MultiLangPreview = ({ language }) => {
   const texts = { nl: 'Welkom!', en: 'Welcome!', de: 'Willkommen!' };
   return (
     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Globe size={16} className="text-gray-600" /></div>
           <div>
-            <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Voorbeeld: Meertalige website' : 'Preview: Multi-language website'}</p>
+            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Voorbeeld: Meertalige website' : 'Preview: Multi-language website'}</p>
             <p className="text-xs text-gray-400">{language === 'nl' ? 'Bereik klanten in hun eigen taal' : 'Reach customers in their own language'}</p>
           </div>
         </div>
@@ -131,8 +131,8 @@ const MultiLangPreview = ({ language }) => {
             </button>
           ))}
         </div>
-        <motion.div key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="bg-gray-50 rounded-xl p-3 text-center">
-          <p className="text-sm font-bold text-gray-800">{texts[lang]}</p>
+        <motion.div key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl p-3 text-center">
+          <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{texts[lang]}</p>
           <p className="text-xs text-gray-400 mt-0.5">{language === 'nl' ? 'Alle tekst automatisch vertaald' : 'All text auto-translated'}</p>
         </motion.div>
       </div>
@@ -145,12 +145,12 @@ const ContactFormPreview = ({ language }) => {
   const [sent, setSent] = useState(false);
   return (
     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Mail size={16} className="text-gray-600" /></div>
           <div>
-            <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Voorbeeld: Contactformulier' : 'Preview: Contact form'}</p>
+            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Voorbeeld: Contactformulier' : 'Preview: Contact form'}</p>
             <p className="text-xs text-gray-400">{language === 'nl' ? 'Berichten direct in jouw inbox' : 'Messages directly in your inbox'}</p>
           </div>
         </div>
@@ -158,14 +158,14 @@ const ContactFormPreview = ({ language }) => {
           {sent ? (
             <motion.div key="sent" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-3">
               <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2"><Check size={18} className="text-green-600" /></div>
-              <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Bericht ontvangen!' : 'Message received!'}</p>
+              <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Bericht ontvangen!' : 'Message received!'}</p>
               <button onClick={(e) => { e.stopPropagation(); setSent(false); }} className="text-xs text-gray-400 underline mt-1">{language === 'nl' ? 'opnieuw' : 'again'}</button>
             </motion.div>
           ) : (
             <motion.div key="form" className="space-y-2">
-              <div className="bg-gray-50 rounded-xl border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">Naam...</p></div>
-              <div className="bg-gray-50 rounded-xl border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">Email...</p></div>
-              <div className="bg-gray-50 rounded-xl border border-gray-200 px-3 py-2 h-10"><p className="text-xs text-gray-300">Bericht...</p></div>
+              <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">Naam...</p></div>
+              <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">Email...</p></div>
+              <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-200 dark:border-neutral-700 px-3 py-2 h-10"><p className="text-xs text-gray-300">Bericht...</p></div>
               <button onClick={(e) => { e.stopPropagation(); setSent(true); }} className="w-full py-2 bg-gray-900 text-white text-xs font-bold rounded-xl">
                 {language === 'nl' ? 'Verstuur' : 'Send'}
               </button>
@@ -180,19 +180,19 @@ const ContactFormPreview = ({ language }) => {
 // Maintenance Preview
 const MaintenancePreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
     <div className="p-4">
       <div className="flex items-center gap-2 mb-3">
         <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Shield size={16} className="text-gray-600" /></div>
         <div>
-          <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Status: Alles Operationeel' : 'Status: All Systems Go'}</p>
+          <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Status: Alles Operationeel' : 'Status: All Systems Go'}</p>
           <p className="text-xs text-gray-400">{language === 'nl' ? 'Ik houd alles voor je bij' : 'I keep track of everything for you'}</p>
         </div>
       </div>
       <div className="space-y-2">
         {[language === 'nl' ? 'Server Online' : 'Server Online', 'SSL Certificaat', language === 'nl' ? 'Backup Vandaag' : 'Backup Today', language === 'nl' ? 'Updates Geïnstalleerd' : 'Updates Installed'].map((label, i) => (
-          <div key={i} className="flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2">
-            <span className="text-xs text-gray-600">{label}</span>
+          <div key={i} className="flex items-center justify-between bg-gray-50 dark:bg-neutral-800/60 rounded-xl px-3 py-2">
+            <span className="text-xs text-gray-600 dark:text-gray-400">{label}</span>
             <span className="flex items-center gap-1 text-xs text-green-600 font-bold"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> OK</span>
           </div>
         ))}
@@ -204,12 +204,12 @@ const MaintenancePreview = ({ language }) => (
 // Google Reviews Preview
 const GoogleReviewsPreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
     <div className="p-4">
       <div className="flex items-center gap-2 mb-3">
         <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Star size={16} className="text-gray-600" /></div>
         <div>
-          <p className="text-xs font-bold text-gray-800">{language === 'nl' ? 'Voorbeeld: Google Reviews' : 'Preview: Google Reviews'}</p>
+          <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Voorbeeld: Google Reviews' : 'Preview: Google Reviews'}</p>
           <p className="text-xs text-gray-400">{language === 'nl' ? 'Bouw vertrouwen met klantbeoordelingen' : 'Build trust with reviews'}</p>
         </div>
       </div>
@@ -218,10 +218,10 @@ const GoogleReviewsPreview = ({ language }) => (
           { name: 'Anna de Vries', review: language === 'nl' ? 'Geweldige website, precies wat ik zocht!' : 'Amazing website, exactly what I needed!' },
           { name: 'Thomas B.', review: language === 'nl' ? 'Snel geleverd en top kwaliteit.' : 'Fast delivery and top quality.' },
         ].map((r, i) => (
-          <div key={i} className="bg-gray-50 rounded-xl p-3">
+          <div key={i} className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl p-3">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-600">{r.name[0]}</div>
-              <span className="text-xs font-bold text-gray-800">{r.name}</span>
+              <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400">{r.name[0]}</div>
+              <span className="text-xs font-bold text-gray-800 dark:text-gray-200">{r.name}</span>
               <div className="flex gap-0.5">{[...Array(5)].map((_, j) => <Star key={j} size={10} className="text-yellow-400 fill-yellow-400" />)}</div>
             </div>
             <p className="text-xs text-gray-500">{r.review}</p>
@@ -628,15 +628,15 @@ const CalculatorPage = () => {
       <div className="fixed inset-0 -z-10 bg-white/62" />
       <SEO page="/calculator" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
+            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               <ArrowLeft size={16} />
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
           </div>
         </div>
@@ -655,7 +655,7 @@ const CalculatorPage = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 text-gray-900">
               {t.title}
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               {t.subtitle}
             </p>
           </motion.div>
@@ -708,7 +708,7 @@ const CalculatorPage = () => {
                     
                     <ul className="space-y-2">
                       {pkg.includes.map((item, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                        <li key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                           <Check size={14} className="text-green-500 flex-shrink-0" />
                           {item}
                         </li>
@@ -729,28 +729,28 @@ const CalculatorPage = () => {
               <p className="text-gray-500 text-sm mb-6">{t.optional}</p>
               
               {/* Losse prijzen overzicht */}
-              <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-3xl">
+              <div className="mb-8 p-6 bg-gray-50 border border-gray-200 dark:border-neutral-700 rounded-3xl">
                 <h3 className="font-bold text-lg mb-4">
                   {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
                     <p className="text-2xl font-bold">€50</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
                     <p className="text-2xl font-bold">€200</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
                     <p className="text-2xl font-bold">€80</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
                     <p className="text-2xl font-bold">€25<span className="text-sm text-gray-500">/pm</span></p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 rounded-2xl">
+                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
                     <p className="text-2xl font-bold">€250</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
                   </div>
@@ -766,7 +766,7 @@ const CalculatorPage = () => {
               
               <div className="space-y-4">
                 {/* Extra Pages */}
-                <div className="p-5 bg-gray-50 rounded-2xl border border-gray-200">
+                <div className="p-5 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl border border-gray-200 dark:border-neutral-700">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <h4 className="font-medium">{t.addOns.extraPages.title}</h4>
@@ -777,14 +777,14 @@ const CalculatorPage = () => {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => adjustExtraPages(-1)}
-                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-500 hover:bg-gray-500 hover:text-white transition-all"
+                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white transition-all"
                         >
                           <Minus size={16} />
                         </button>
                         <span className="w-10 text-center font-mono font-bold text-lg">{addOns.extraPages}</span>
                         <button
                           onClick={() => adjustExtraPages(1)}
-                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-500 hover:bg-gray-500 hover:text-white transition-all"
+                          className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white transition-all"
                         >
                           <Plus size={16} />
                         </button>
@@ -865,20 +865,20 @@ const CalculatorPage = () => {
                 
                 {/* Package */}
                 <div className="flex justify-between items-center py-3 border-b border-gray-300">
-                  <span className="text-gray-600">{t.packages[selectedPackage].name}</span>
+                  <span className="text-gray-600 dark:text-gray-400">{t.packages[selectedPackage].name}</span>
                   <span className="font-bold">€{prices[selectedPackage]}</span>
                 </div>
 
                 {/* Add-ons */}
                 {addOns.extraPages > 0 && (
                   <div className="flex justify-between items-center py-3 border-b border-gray-300">
-                    <span className="text-gray-600">{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
+                    <span className="text-gray-600 dark:text-gray-400">{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
                     <span>€{addOns.extraPages * prices.extraPages}</span>
                   </div>
                 )}
                 {Object.entries(addOns).filter(([key, value]) => key !== 'extraPages' && key !== 'maintenance' && value).map(([key]) => (
                   <div key={key} className="flex justify-between items-center py-3 border-b border-gray-300">
-                    <span className="text-gray-600">{t.addOns[key].title}</span>
+                    <span className="text-gray-600 dark:text-gray-400">{t.addOns[key].title}</span>
                     <span>€{prices[key]}</span>
                   </div>
                 ))}
@@ -909,7 +909,7 @@ const CalculatorPage = () => {
               </div>
 
               {/* Note */}
-              <div className="mt-4 p-4 bg-gray-50 rounded-2xl border border-gray-200">
+              <div className="mt-4 p-4 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl border border-gray-200 dark:border-neutral-700">
                 <div className="flex gap-3">
                   <Info size={16} className="text-gray-400 flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-gray-500">{t.note}</p>
@@ -934,7 +934,7 @@ const CalculatorPage = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              className="bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
             >
               {submitted ? (
                 // Success State
@@ -943,7 +943,7 @@ const CalculatorPage = () => {
                     <Check size={40} className="text-green-500" />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{t.successTitle}</h3>
-                  <p className="text-gray-500 mb-8">{t.successMessage}</p>
+                  <p className="text-gray-500 dark:text-gray-400 mb-8">{t.successMessage}</p>
                   <button
                     onClick={() => {
                       setShowQuoteForm(false);
@@ -972,45 +972,45 @@ const CalculatorPage = () => {
                   </div>
 
                   {/* Selection Summary */}
-                  <div className="bg-gray-50 rounded-2xl p-4 mb-6">
-                    <p className="text-xs uppercase tracking-wider text-gray-500 mb-3">{t.yourSelection}</p>
+                  <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 mb-6">
+                    <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">{t.yourSelection}</p>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="font-medium">{t.packages[selectedPackage].name}</span>
                         <span>€{prices[selectedPackage]}</span>
                       </div>
                       {addOns.extraPages > 0 && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
                           <span>€{addOns.extraPages * prices.extraPages}</span>
                         </div>
                       )}
                       {addOns.multiLanguage && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.multiLanguage.title}</span>
                           <span>€{prices.multiLanguage}</span>
                         </div>
                       )}
                       {addOns.extraForm && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.extraForm.title}</span>
                           <span>€{prices.extraForm}</span>
                         </div>
                       )}
                       {addOns.bookingSystem && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.bookingSystem.title}</span>
                           <span>€{prices.bookingSystem}</span>
                         </div>
                       )}
                       {addOns.googleReviews && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.googleReviews.title}</span>
                           <span>€{prices.googleReviews}</span>
                         </div>
                       )}
                       {addOns.maintenance && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.maintenance.title}</span>
                           <span>€{prices.maintenance}/mnd</span>
                         </div>
@@ -1020,7 +1020,7 @@ const CalculatorPage = () => {
                         <span>€{totals.oneTime}</span>
                       </div>
                       {addOns.maintenance && (
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.monthly}</span>
                           <span>€{totals.monthly}/mnd</span>
                         </div>
@@ -1040,7 +1040,7 @@ const CalculatorPage = () => {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder={t.namePlaceholder}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors"
                         />
                       </div>
                     </div>
@@ -1055,7 +1055,7 @@ const CalculatorPage = () => {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder={t.emailPlaceholder}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors"
                         />
                       </div>
                     </div>
@@ -1069,7 +1069,7 @@ const CalculatorPage = () => {
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder={t.phonePlaceholder}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors"
                         />
                       </div>
                     </div>
@@ -1083,7 +1083,7 @@ const CalculatorPage = () => {
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder={t.messagePlaceholder}
                           rows={3}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-black transition-colors resize-none"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors resize-none"
                         />
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import {
@@ -149,19 +149,19 @@ const OnderhoudPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/onderhoud" />
       
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+      <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
             <Link 
               to="/" 
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
             </Link>
@@ -178,7 +178,7 @@ const OnderhoudPage = () => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Maandelijks Onderhoud' : 'Monthly Maintenance'}
               </p>
               <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900">
@@ -212,7 +212,7 @@ const OnderhoudPage = () => {
               transition={{ delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl">
+              <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 shadow-xl">
                 <div className="space-y-4">
                   {maintenanceFeatures.slice(0, 4).map((feature, index) => (
                     <div key={index} className="flex items-start gap-4">
@@ -236,7 +236,7 @@ const OnderhoudPage = () => {
       <section className="py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'De Waarheid' : 'The Truth'}
             </p>
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
@@ -259,7 +259,7 @@ const OnderhoudPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-3xl p-6"
+                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -323,7 +323,7 @@ const OnderhoudPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-red-200"
+                className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-red-200"
               >
                 <h3 className="font-bold text-lg mb-2 text-red-700">{horror.title}</h3>
                 <p className="text-gray-600 text-sm">{horror.description}</p>
@@ -344,7 +344,7 @@ const OnderhoudPage = () => {
             </h2>
           </div>
 
-          <div className="bg-gray-50 rounded-3xl overflow-hidden">
+          <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl overflow-hidden">
             <div className="grid grid-cols-3 bg-gray-200 text-gray-800 py-4 px-6">
               <div className="font-bold">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
               <div className="font-bold text-center text-green-400">
@@ -376,10 +376,10 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Agency Comparison */}
-      <section className="py-20 bg-gray-100 text-gray-800">
+      <section className="py-20 bg-gray-100 text-gray-800 dark:text-gray-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Even Vergelijken' : 'Just Comparing'}
             </p>
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
@@ -395,8 +395,8 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200">
-              <p className="text-xs uppercase tracking-wider text-gray-500 mb-2">
+            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200 dark:border-neutral-700">
+              <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 {language === 'nl' ? 'Klein Bureau' : 'Small Agency'}
               </p>
               <p className="text-3xl font-black text-red-500 mb-2">€100-250</p>
@@ -408,8 +408,8 @@ const OnderhoudPage = () => {
               </div>
             </div>
 
-            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200">
-              <p className="text-xs uppercase tracking-wider text-gray-500 mb-2">
+            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200 dark:border-neutral-700">
+              <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 {language === 'nl' ? 'Middelgroot Bureau' : 'Medium Agency'}
               </p>
               <p className="text-3xl font-black text-red-500 mb-2">€250-500</p>
@@ -422,12 +422,12 @@ const OnderhoudPage = () => {
             </div>
 
             <div className="bg-white text-black rounded-3xl p-6 ring-4 ring-green-500">
-              <p className="text-xs uppercase tracking-wider text-gray-500 mb-2">
+              <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 Yrvante
               </p>
               <p className="text-3xl font-black text-green-600 mb-2">€25</p>
               <p className="text-sm text-gray-400">/ {language === 'nl' ? 'maand' : 'month'}</p>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-600">
+              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-600 dark:text-gray-400">
                 {language === 'nl'
                   ? 'Alles inclusief. Geen verrassingen.'
                   : 'Everything included. No surprises.'}
@@ -454,7 +454,7 @@ const OnderhoudPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-3xl p-6"
+                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
               >
                 <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
                   <feature.icon className="text-gray-600" size={24} />
@@ -468,22 +468,22 @@ const OnderhoudPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50 text-gray-800">
+      <section className="py-20 bg-gray-50 text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
             {language === 'nl' 
               ? 'Nooit meer zorgen over je website' 
               : 'Never worry about your website again'}
           </h2>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
+          <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
             {language === 'nl'
               ? 'Voor €25 per maand regel ik alles. Jij focust op je klanten, ik focus op je website.'
               : "For €25 per month I handle everything. You focus on your customers, I focus on your website."}
           </p>
           
-          <div className="bg-white border border-gray-200 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
+          <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
             <div className="flex items-baseline justify-center gap-2 mb-4">
-              <span className="text-5xl font-black text-gray-800">€25</span>
+              <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€25</span>
               <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
             </div>
             <ul className="space-y-2 text-sm text-gray-600 text-left">

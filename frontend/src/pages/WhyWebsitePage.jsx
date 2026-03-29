@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { ArrowRight, Search, Clock, TrendingUp, Shield, Zap, Globe, Users, CheckCircle, X, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -170,10 +170,10 @@ const WhyWebsitePage = () => {
   const t = content[language] || content.nl;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/waarom-website" />
       {/* Navigation - matching homepage style */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="flex items-center">
@@ -182,7 +182,7 @@ const WhyWebsitePage = () => {
             <div className="flex items-center gap-4">
               <Link 
                 to="/pakketten" 
-                className="hidden md:inline-flex text-sm text-gray-600 hover:text-black transition-colors"
+                className="hidden md:inline-flex text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               >
                 {language === 'nl' ? 'Pakketten' : 'Packages'}
               </Link>
@@ -324,14 +324,14 @@ const WhyWebsitePage = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200"
+              className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-neutral-700"
             >
               <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">{t.traditional.title}</p>
               <p className="text-4xl font-heading font-bold text-red-600 mb-2">{t.traditional.price}</p>
-              <p className="text-gray-500 mb-8">{t.traditional.extra}</p>
+              <p className="text-gray-500 dark:text-gray-400 mb-8">{t.traditional.extra}</p>
               <ul className="space-y-4">
                 {t.traditional.points.map((point, index) => (
-                  <li key={index} className="flex items-center gap-3 text-gray-600">
+                  <li key={index} className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
                     <X size={18} className="text-red-500 flex-shrink-0" />
                     {point.text}
                   </li>
@@ -352,7 +352,7 @@ const WhyWebsitePage = () => {
               </div>
               <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">{t.yrvante.title}</p>
               <p className="text-4xl font-heading font-bold text-green-400 mb-2">{t.yrvante.price}</p>
-              <p className="text-gray-400 mb-8">{t.yrvante.extra}</p>
+              <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-8">{t.yrvante.extra}</p>
               <ul className="space-y-4">
                 {t.yrvante.points.map((point, index) => (
                   <li key={index} className="flex items-center gap-3 text-gray-300">
@@ -388,7 +388,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 4 - Features */}
-      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-100 text-gray-800">
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-100 text-gray-800 dark:text-gray-200">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -407,12 +407,12 @@ const WhyWebsitePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-8 bg-white rounded-3xl border border-gray-200 hover:bg-gray-50 transition-all shadow-sm"
+                className="text-center p-8 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:bg-gray-50 dark:hover:bg-neutral-700 transition-all shadow-sm"
               >
                 <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-heading font-bold mb-3 text-gray-800">{feature.title}</h3>
+                <h3 className="text-xl font-heading font-bold mb-3 text-gray-800 dark:text-gray-200">{feature.title}</h3>
                 <p className="text-gray-500">{feature.text}</p>
               </motion.div>
             ))}
@@ -473,7 +473,7 @@ const WhyWebsitePage = () => {
                 className={`p-8 rounded-3xl text-center transition-all ${
                 index === 1
                   ? 'bg-gray-600 text-white scale-105 shadow-2xl' 
-                    : 'bg-white border border-gray-200'
+                    : 'bg-white border border-gray-200 dark:border-neutral-700'
                 }`}
               >
                 <p className={`text-sm uppercase tracking-wider mb-2 ${index === 1 ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -513,7 +513,7 @@ const WhyWebsitePage = () => {
               </Link>
               <Link
                 to="/calculator"
-                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-medium hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all"
+                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-medium hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-all"
               >
                 {t.ctaCalculator}
               </Link>

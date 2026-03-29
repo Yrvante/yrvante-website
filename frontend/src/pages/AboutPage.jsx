@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { MapPin, ArrowLeft, Target, Wrench, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -92,18 +92,18 @@ const AboutPage = () => {
   const t = content[language];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/about" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-100 dark:border-neutral-800">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
+            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               <ArrowLeft size={16} />
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
           </div>
         </div>
@@ -117,10 +117,10 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">
+            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-6">
               {t.subtitle}
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-thin mb-4">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-thin dark:text-white mb-4">
               {t.title}
             </h1>
           </motion.div>
@@ -138,14 +138,14 @@ const AboutPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="lg:col-span-7 space-y-8"
             >
-              <p className="text-xl md:text-2xl leading-relaxed text-gray-800 font-light">
+              <p className="text-xl md:text-2xl leading-relaxed text-gray-800 dark:text-gray-200 font-light">
                 {t.intro}
               </p>
               <div className="w-16 h-px bg-black"></div>
-              <p className="text-lg leading-relaxed text-gray-600">
+              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-400">
                 {t.goal}
               </p>
-              <p className="text-lg leading-relaxed text-gray-600">
+              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-400">
                 {t.approach}
               </p>
               
@@ -194,7 +194,7 @@ const AboutPage = () => {
       <section className="py-24 px-6 md:px-12 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
-            className="text-3xl md:text-4xl font-heading font-thin mb-16"
+            className="text-3xl md:text-4xl font-heading font-thin dark:text-white mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -212,7 +212,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="bg-white p-8 rounded-3xl border border-gray-200 h-full transition-all duration-300 hover:border-black hover:shadow-lg">
+                <div className="bg-white p-8 rounded-3xl border border-gray-200 dark:border-neutral-700 h-full transition-all duration-300 hover:border-black hover:shadow-lg">
                   <div className="mb-6 text-gray-400 group-hover:text-black transition-colors">{value.icon}</div>
                   <h3 className="text-xl font-heading mb-4">{value.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{value.description}</p>
@@ -232,7 +232,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="bg-gray-700 text-white rounded-3xl p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-heading font-thin mb-8">
+            <h2 className="text-3xl md:text-5xl font-heading font-thin dark:text-white mb-8">
               {language === 'nl' ? 'Klaar om te beginnen?' : 'Ready to start?'}
             </h2>
             <Link

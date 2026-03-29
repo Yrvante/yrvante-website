@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -25,7 +25,7 @@ const BookingDemoWidget = ({ language }) => {
   const reset = () => { setConfirmed(false); setSelectedDay(null); setSelectedTime(null); };
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
+    <div className="bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-2xl">
       {/* App header bar */}
       <div className="bg-gray-900 px-5 py-4 flex items-center gap-3">
         <div className="flex gap-1.5">
@@ -121,7 +121,7 @@ const BookingDemoWidget = ({ language }) => {
                           className={`py-2.5 rounded-xl text-sm font-medium transition-all ${
                             selectedTime === i
                               ? 'bg-gray-900 text-white shadow-md'
-                              : 'border border-gray-200 text-gray-600 hover:border-gray-500 hover:bg-gray-50'
+                              : 'border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-700'
                           }`}
                         >
                           {time}
@@ -253,7 +253,7 @@ const PremiumPakketDemo = ({ isPopular, language }) => {
               className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${
                 selDay === i
                   ? isPopular ? 'bg-gray-500 text-white' : 'bg-gray-900 text-white'
-                  : isPopular ? 'bg-gray-600 text-gray-400' : 'bg-white border border-gray-200 text-gray-600'
+                  : isPopular ? 'bg-gray-600 text-gray-400' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600'
               }`}>
               {d}
             </button>
@@ -323,9 +323,9 @@ const ContactFormDemo = ({ language }) => {
   return (
     <div className="mt-4 rounded-xl border border-gray-100 overflow-hidden">
       <div className="bg-gray-50 p-3 space-y-2">
-        <div className="bg-white rounded-lg border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw naam...' : 'Your name...'}</p></div>
-        <div className="bg-white rounded-lg border border-gray-200 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'jij@email.nl' : 'you@email.com'}</p></div>
-        <div className="bg-white rounded-lg border border-gray-200 px-3 py-2 h-10"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw bericht...' : 'Your message...'}</p></div>
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw naam...' : 'Your name...'}</p></div>
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'jij@email.nl' : 'you@email.com'}</p></div>
+        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2 h-10"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw bericht...' : 'Your message...'}</p></div>
         <button onClick={(e) => { e.stopPropagation(); setSent(true); }}
           className="w-full py-2 bg-gray-900 text-white text-xs font-bold rounded-lg hover:bg-gray-700 transition-colors">
           {language === 'nl' ? 'Verstuur bericht' : 'Send message'}
@@ -344,7 +344,7 @@ const MaintenanceDemo = ({ language }) => (
     <div className="bg-gray-50 px-3 py-2 divide-y divide-gray-100">
       {[language === 'nl' ? 'Server Online' : 'Server Online', 'SSL Certificaat', language === 'nl' ? 'Backup Vandaag' : 'Backup Today', language === 'nl' ? 'Updates: OK' : 'Updates: OK'].map((label, i) => (
         <div key={i} className="flex items-center justify-between py-1.5">
-          <span className="text-xs text-gray-600">{label}</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400">{label}</span>
           <span className="text-xs text-green-600 font-bold flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> OK</span>
         </div>
       ))}
@@ -364,7 +364,7 @@ const BookingMiniDemo = ({ language }) => {
         <div className="flex gap-1.5 mb-2">
           {days.map((d, i) => (
             <button key={i} onClick={(e) => { e.stopPropagation(); setSel(i); }}
-              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-gray-400'}`}>
+              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 text-white' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-400'}`}>
               {d}
             </button>
           ))}
@@ -541,18 +541,18 @@ const PackagesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/pakketten" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+      <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
             <Link 
               to="/" 
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
             </Link>
@@ -562,7 +562,7 @@ const PackagesPage = () => {
 
       {/* Hero */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/85" />
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -570,7 +570,7 @@ const PackagesPage = () => {
             transition={{ duration: 0.8 }}
             className="py-12 md:py-20"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Transparante Prijzen' : 'Transparent Pricing'}
             </p>
             <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6">
@@ -603,7 +603,7 @@ const PackagesPage = () => {
                 className={`relative rounded-3xl p-8 ${
                   pkg.popular 
                     ? 'bg-gray-600 text-white scale-105 shadow-2xl z-10' 
-                    : 'bg-white border border-gray-200 shadow-lg'
+                    : 'bg-white border border-gray-200 dark:border-neutral-700 shadow-lg'
                 }`}
               >
                 {pkg.popular && (
@@ -713,7 +713,7 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="text-center p-5 bg-white rounded-3xl border border-gray-200"
+                className="text-center p-5 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700"
               >
                 <p className="text-2xl font-bold mb-1">{item.price}</p>
                 <p className="text-sm text-gray-500">{item.name}</p>
@@ -763,7 +763,7 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white p-6 rounded-3xl border border-gray-200 hover:border-black hover:shadow-lg transition-all"
+                className="bg-white p-6 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:border-black hover:shadow-lg transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-11 h-11 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -878,7 +878,7 @@ const PackagesPage = () => {
               </Link>
               <Link
                 to="/#contact"
-                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-bold hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all"
+                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-bold hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-all"
               >
                 {language === 'nl' ? 'Neem contact op' : 'Contact me'}
               </Link>

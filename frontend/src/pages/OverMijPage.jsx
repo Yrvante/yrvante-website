@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import {
@@ -86,19 +86,19 @@ const OverMijPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/over-mij" />
       
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+      <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
             <Link 
               to="/" 
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
             </Link>
@@ -108,7 +108,7 @@ const OverMijPage = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/85" />
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
             {/* Left - Photo/Visual */}
@@ -131,7 +131,7 @@ const OverMijPage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Over Mij' : 'About Me'}
               </p>
               <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
@@ -148,7 +148,7 @@ const OverMijPage = () => {
               </p>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 mb-8 p-5 bg-white/80 rounded-2xl border border-gray-100">
+              <div className="grid grid-cols-3 gap-4 mb-8 p-5 bg-white/80 dark:bg-neutral-950/85 rounded-2xl border border-gray-100">
                 <div className="text-center">
                   <p className="text-3xl font-black text-gray-900">1</p>
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'aanspreekpunt' : 'point of contact'}</p>
@@ -173,7 +173,7 @@ const OverMijPage = () => {
                 </button>
                 <a
                   href="mailto:info@yrvante.com"
-                  className="px-6 py-3 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 transition-colors flex items-center gap-2"
+                  className="px-6 py-3 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors flex items-center gap-2"
                 >
                   <Mail size={14} />
                   info@yrvante.com
@@ -188,7 +188,7 @@ const OverMijPage = () => {
       <section className="py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Mijn Aanpak' : 'My Approach'}
             </p>
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
@@ -204,7 +204,7 @@ const OverMijPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-3xl p-6 hover:bg-gray-100 transition-colors"
+                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6 hover:bg-gray-100 transition-colors"
               >
                 <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
                   <value.icon className="text-gray-600" size={24} />
@@ -221,7 +221,7 @@ const OverMijPage = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-[900px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Mijn Verhaal' : 'My Story'}
             </p>
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
@@ -244,7 +244,7 @@ const OverMijPage = () => {
                     {item.year}
                   </span>
                 </div>
-                <div className="flex-1 bg-white rounded-2xl p-6 border border-gray-200">
+                <div className="flex-1 bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-200 dark:border-neutral-700">
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
                 </div>
@@ -255,11 +255,11 @@ const OverMijPage = () => {
       </section>
 
       {/* Why Not Big Agencies Section */}
-      <section className="py-20 bg-gray-100 text-gray-800">
+      <section className="py-20 bg-gray-100 text-gray-800 dark:text-gray-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 mb-4">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Eerlijk Gezegd' : 'Honestly'}
               </p>
               <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
@@ -330,7 +330,7 @@ const OverMijPage = () => {
             </button>
             <Link
               to="/calculator"
-              className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 transition-colors"
+              className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
             >
               {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
             </Link>

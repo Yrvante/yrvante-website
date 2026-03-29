@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { ArrowLeft, ArrowRight, Calendar, Clock, TrendingUp, Users, Target, DollarSign, Search, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -248,18 +248,18 @@ const BlogPage = () => {
   const t = content[language] || content.nl;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/blog" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors">
+            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               <ArrowLeft size={16} />
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
             </Link>
           </div>
         </div>
@@ -318,7 +318,7 @@ const BlogPage = () => {
           <h2 className="text-3xl font-heading font-bold mb-8">{t.section1.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.section1.points.map((point, index) => (
-              <div key={index} className="p-6 bg-gray-50 rounded-2xl">
+              <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
                 <div className="w-12 h-12 bg-gray-200 text-gray-700 rounded-xl flex items-center justify-center mb-4">
                   {point.icon}
                 </div>
@@ -340,13 +340,13 @@ const BlogPage = () => {
           <p className="text-lg text-gray-600 mb-8">{t.section2.intro}</p>
           <div className="space-y-6">
             {t.section2.reasons.map((reason, index) => (
-              <div key={index} className="flex gap-4 p-6 border border-gray-200 rounded-2xl">
+              <div key={index} className="flex gap-4 p-6 border border-gray-200 dark:border-neutral-700 rounded-2xl">
                 <div className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 font-bold">
                   {index + 1}
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">{reason.title}</h3>
-                  <p className="text-gray-600">{reason.text}</p>
+                  <p className="text-gray-600 dark:text-gray-400">{reason.text}</p>
                 </div>
               </div>
             ))}
@@ -363,12 +363,12 @@ const BlogPage = () => {
           <h2 className="text-3xl font-heading font-bold mb-8 text-center">{t.comparison.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Traditional */}
-            <div className="p-8 border border-gray-200 rounded-2xl">
+            <div className="p-8 border border-gray-200 dark:border-neutral-700 rounded-2xl">
               <h3 className="font-bold text-xl mb-2">{t.comparison.traditional.title}</h3>
               <p className="text-3xl font-heading font-bold text-red-600 mb-6">{t.comparison.traditional.price}</p>
               <ul className="space-y-3">
                 {t.comparison.traditional.points.map((point, i) => (
-                  <li key={i} className="flex items-center gap-3 text-gray-600">
+                  <li key={i} className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
                     <span className="w-5 h-5 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs">✕</span>
                     {point}
                   </li>
@@ -402,9 +402,9 @@ const BlogPage = () => {
           <p className="text-lg text-gray-600 mb-8">{t.section3.intro}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {t.section3.points.map((point, index) => (
-              <div key={index} className="p-6 bg-gray-50 rounded-2xl">
+              <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
                 <h3 className="font-bold text-lg mb-2">{point.title}</h3>
-                <p className="text-gray-600">{point.text}</p>
+                <p className="text-gray-600 dark:text-gray-400">{point.text}</p>
               </div>
             ))}
           </div>

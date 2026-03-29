@@ -263,6 +263,62 @@ html.dark .glass {
     transform: translateX(0);
 }
 
+/* ============================================
+   GLOBAL DARK MODE - Applies to ALL pages
+   ============================================ */
+
+/* Main backgrounds */
+html.dark {
+    color-scheme: dark;
+}
+
+html.dark body {
+    background-color: #121212 !important;
+    color: #f0f0f0 !important;
+}
+
+/* Form inputs */
+html.dark input, html.dark textarea, html.dark select {
+    background-color: #2a2a2a !important;
+    color: #f0f0f0 !important;
+    border-color: #444 !important;
+}
+html.dark input:focus, html.dark textarea:focus, html.dark select:focus {
+    border-color: #888 !important;
+}
+html.dark input::placeholder, html.dark textarea::placeholder {
+    color: #666 !important;
+}
+
+/* Navigation on ALL pages */
+html.dark nav {
+    background-color: #1a1a1a !important;
+    border-color: #333 !important;
+}
+html.dark nav a, html.dark nav button {
+    color: #ccc;
+}
+html.dark nav a:hover, html.dark nav button:hover {
+    color: #fff;
+}
+
+/* Logo invert in dark mode (all pages) */
+html.dark img[src*="logo"] {
+    filter: invert(1) brightness(2) !important;
+    mix-blend-mode: normal !important;
+}
+
+/* Shadows in dark */
+html.dark [class*="shadow"] {
+    --tw-shadow-color: rgba(0,0,0,0.5);
+}
+
+/* Dark mode utility overrides via Tailwind layer */
+@layer utilities {
+    html.dark .dark\:dm-bg { background-color: #1a1a1a; }
+}
+
+
 @layer base {
     * {
         @apply border-border;

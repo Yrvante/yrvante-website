@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../App";
+import { useLanguage, useTheme } from "../App";
 import { ArrowLeft, Shield, Mail, Lock, Cookie, Eye, Database, UserCheck } from "lucide-react";
 import SEO from "../components/SEO";
 
@@ -290,7 +290,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
   };
 
   return (
-    <div data-testid="privacy-page" className="min-h-screen bg-white">
+    <div data-testid="privacy-page" className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO 
         page="/privacy"
         customTitle={`${t.title} | Yrvante`}
@@ -298,7 +298,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
       />
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-100 dark:border-neutral-800">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-3">
@@ -306,7 +306,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             </Link>
             <Link 
               to="/" 
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               <ArrowLeft size={16} />
               {t.backHome}
@@ -318,7 +318,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
       {/* Header */}
       <header className="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-full text-sm mb-6">
             <Shield size={16} />
             {t.title}
           </div>
@@ -349,7 +349,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             {t.sections.map((section, index) => {
               const Icon = section.icon;
               return (
-                <section key={index} className="bg-gray-50 rounded-2xl p-8">
+                <section key={index} className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-8">
                   <div className="flex items-start gap-4 mb-6">
                     <div className="p-3 bg-black rounded-xl">
                       <Icon className="text-white" size={24} />
@@ -358,7 +358,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
                       {section.title}
                     </h2>
                   </div>
-                  <div className="text-gray-700 leading-relaxed pl-0 md:pl-16">
+                  <div className="text-gray-700 dark:text-gray-300 leading-relaxed pl-0 md:pl-16">
                     {formatContent(section.content)}
                   </div>
                 </section>
@@ -366,7 +366,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             })}
 
             {/* Contact Section */}
-            <section className="bg-black text-white rounded-2xl p-8">
+            <section className="bg-black dark:bg-white text-white dark:text-black rounded-2xl p-8">
               <h2 className="text-2xl font-bold mb-4">{t.contact.title}</h2>
               <p className="text-gray-300 mb-6">{t.contact.content}</p>
               <a 
@@ -379,7 +379,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             </section>
 
             {/* Changes Section */}
-            <section className="border border-gray-200 rounded-2xl p-8">
+            <section className="border border-gray-200 dark:border-neutral-700 rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-black mb-4">{t.changes.title}</h2>
               <p className="text-gray-700">{t.changes.content}</p>
             </section>
@@ -397,10 +397,10 @@ We never sell your data to third parties and do not use it for unsolicited marke
             © {currentYear} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
           </p>
           <div className="mt-4 flex items-center justify-center gap-6 text-sm">
-            <Link to="/" className="text-gray-600 hover:text-black transition-colors">
+            <Link to="/" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               Home
             </Link>
-            <Link to="/pakketten" className="text-gray-600 hover:text-black transition-colors">
+            <Link to="/pakketten" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               {language === 'nl' ? 'Pakketten' : 'Packages'}
             </Link>
             <Link to="/privacy" className="text-black font-medium">
