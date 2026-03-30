@@ -240,6 +240,8 @@ const translations = {
   },
 };
 
+import ThemeChooser from "./components/ThemeChooser";
+
 function App() {
   const [language, setLanguage] = useState("nl");
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
@@ -267,6 +269,7 @@ function App() {
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <div className="App">
+        <ThemeChooser />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
