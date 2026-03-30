@@ -14,6 +14,7 @@ import DienstenPage from "./pages/DienstenPage";
 import OnderhoudPage from "./pages/OnderhoudPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import LeadFinderPage from "./pages/LeadFinderPage";
+import ThemeTestPage from "./pages/ThemeTestPage";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -287,6 +288,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/leadfinder" element={<LeadFinderPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/theme-test" element={<ThemeTestPage />} />
           </Routes>
         </BrowserRouter>
         <Toaster position="bottom-right" />
