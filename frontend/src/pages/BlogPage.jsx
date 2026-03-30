@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 
 const BlogPage = () => {
   const { language } = useLanguage();
@@ -259,7 +260,7 @@ const BlogPage = () => {
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
           </div>
         </div>
@@ -319,7 +320,7 @@ const BlogPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.section1.points.map((point, index) => (
               <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
-                <div className="w-12 h-12 bg-gray-200 text-gray-700 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 text-gray-700 dark:text-gray-300 rounded-xl flex items-center justify-center mb-4">
                   {point.icon}
                 </div>
                 <h3 className="font-bold text-lg mb-2">{point.title}</h3>
@@ -415,7 +416,7 @@ const BlogPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 py-12 px-8 bg-gray-100 text-gray-800 rounded-3xl"
+          className="mb-16 py-12 px-8 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200 rounded-3xl"
         >
           <h2 className="text-2xl font-heading font-bold mb-8 text-center">{t.stats.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -450,7 +451,7 @@ const BlogPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400">Almelo, Nederland</span>
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>

@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 const BG_IMAGE = "/bg-pattern.jpg";
 
 const OverMijPage = () => {
@@ -94,7 +95,7 @@ const OverMijPage = () => {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
             <Link 
               to="/" 
@@ -150,15 +151,15 @@ const OverMijPage = () => {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 mb-8 p-5 bg-white/80 dark:bg-neutral-950/85 rounded-2xl border border-gray-100">
                 <div className="text-center">
-                  <p className="text-3xl font-black text-gray-900">1</p>
+                  <p className="text-3xl font-black text-gray-900 dark:text-gray-100">1</p>
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'aanspreekpunt' : 'point of contact'}</p>
                 </div>
                 <div className="text-center border-x border-gray-200">
-                  <p className="text-3xl font-black text-gray-900">0</p>
+                  <p className="text-3xl font-black text-gray-900 dark:text-gray-100">0</p>
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'verrassingen' : 'surprises'}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-3xl font-black text-gray-900">∞</p>
+                  <p className="text-3xl font-black text-gray-900 dark:text-gray-100">∞</p>
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">{language === 'nl' ? 'directe lijn' : 'direct line'}</p>
                 </div>
               </div>
@@ -173,7 +174,7 @@ const OverMijPage = () => {
                 </button>
                 <a
                   href="mailto:info@yrvante.com"
-                  className="px-6 py-3 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors flex items-center gap-2"
+                  className="px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors flex items-center gap-2"
                 >
                   <Mail size={14} />
                   info@yrvante.com
@@ -204,7 +205,7 @@ const OverMijPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6 hover:bg-gray-100 transition-colors"
+                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
               >
                 <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
                   <value.icon className="text-gray-600" size={24} />
@@ -255,7 +256,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Why Not Big Agencies Section */}
-      <section className="py-20 bg-gray-100 text-gray-800 dark:text-gray-200">
+      <section className="py-20 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -330,7 +331,7 @@ const OverMijPage = () => {
             </button>
             <Link
               to="/calculator"
-              className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
+              className="px-8 py-4 border border-gray-300 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
             >
               {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
             </Link>
@@ -339,10 +340,10 @@ const OverMijPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-50 border-t border-gray-200">
+      <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
             </p>

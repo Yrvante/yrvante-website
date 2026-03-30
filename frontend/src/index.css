@@ -302,11 +302,7 @@ html.dark nav a:hover, html.dark nav button:hover {
     color: #fff;
 }
 
-/* Logo invert in dark mode (all pages) */
-html.dark img[src*="logo"] {
-    filter: invert(1) brightness(2) !important;
-    mix-blend-mode: normal !important;
-}
+/* Logo in dark mode - handled via separate white logo image */
 
 /* Shadows in dark */
 html.dark [class*="shadow"] {

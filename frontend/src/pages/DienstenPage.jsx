@@ -61,6 +61,7 @@ import {
 } from "lucide-react";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 const BG_IMAGE = "https://static.prod-images.emergentagent.com/jobs/44213466-a228-4a52-8cfe-b2e9737ed3f4/images/bd9ccb92eb46d5ed1a97a900c245c5b7666be86f56e6b6623a1e1da2f4bf67d5.png";
 
 // Service data - Only Webdesign and Onderhoud
@@ -1195,7 +1196,7 @@ const DienstenPage = () => {
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
             <div className="flex items-center justify-between h-16 lg:h-20">
               <Link to="/" className="flex items-center">
-                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
               </Link>
               <Link
                 to="/diensten"
@@ -1216,7 +1217,7 @@ const DienstenPage = () => {
                 <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                   {language === 'nl' ? 'Webdesign' : 'Web Design'}
                 </p>
-                <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900">
+                <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900 dark:text-gray-100">
                   {language === 'nl'
                     ? 'Webdesign die werkt — niet alleen mooi is'
                     : 'Web design that works — not just looks good'}
@@ -1227,7 +1228,7 @@ const DienstenPage = () => {
                     : "A website is your 24/7 salesperson. I design websites that position your business professionally, convert visitors into customers and help you get found on Google."}
                 </p>
                 <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-5xl font-black text-gray-900">€500</span>
+                  <span className="text-5xl font-black text-gray-900 dark:text-gray-100">€500</span>
                   <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
                   <span className="text-xs text-gray-400 ml-2">{language === 'nl' ? 'excl. BTW' : 'excl. VAT'}</span>
                 </div>
@@ -1240,7 +1241,7 @@ const DienstenPage = () => {
                   </button>
                   <Link
                     to="/pakketten"
-                    className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
+                    className="px-8 py-4 border border-gray-300 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
                   >
                     {language === 'nl' ? 'Bekijk Pakketten' : 'View Packages'}
                   </Link>
@@ -1253,10 +1254,10 @@ const DienstenPage = () => {
                     {webdesignFeatures.slice(0, 4).map((feature, index) => (
                       <div key={index} className="flex items-start gap-4">
                         <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                          <feature.icon size={20} className="text-gray-700" />
+                          <feature.icon size={20} className="text-gray-700 dark:text-gray-300" />
                         </div>
                         <div>
-                          <p className="font-bold text-sm text-gray-900">{feature.title}</p>
+                          <p className="font-bold text-sm text-gray-900 dark:text-gray-100">{feature.title}</p>
                           <p className="text-gray-500 text-xs">{feature.description}</p>
                         </div>
                       </div>
@@ -1370,7 +1371,7 @@ const DienstenPage = () => {
                   { stat: '60%+', label: language === 'nl' ? 'bezoekt eerst via mobiel' : 'visits via mobile first' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-6">
-                    <span className="text-4xl font-black text-gray-900 w-20 flex-shrink-0">{item.stat}</span>
+                    <span className="text-4xl font-black text-gray-900 dark:text-gray-100 w-20 flex-shrink-0">{item.stat}</span>
                     <p className="text-gray-600 dark:text-gray-400">{item.label}</p>
                   </div>
                 ))}
@@ -1418,7 +1419,7 @@ const DienstenPage = () => {
                 ? 'Vanaf €500 excl. BTW. Opgeleverd in 1-2 weken.'
                 : 'From €500 excl. VAT. Delivered in 1-2 weeks.'}
             </p>
-            <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
+            <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
               <div className="flex items-baseline justify-center gap-2 mb-4">
                 <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€500</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
@@ -1453,7 +1454,7 @@ const DienstenPage = () => {
               </button>
               <Link
                 to="/calculator"
-                className="px-8 py-4 border border-gray-300 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
+                className="px-8 py-4 border border-gray-300 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -1461,7 +1462,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 border-t border-gray-200">
+        <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -1483,7 +1484,7 @@ const DienstenPage = () => {
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
             <div className="flex items-center justify-between h-16 lg:h-20">
               <Link to="/" className="flex items-center">
-                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
               </Link>
               <Link 
                 to="/diensten" 
@@ -1504,7 +1505,7 @@ const DienstenPage = () => {
               className="text-center max-w-3xl mx-auto"
             >
               <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <service.icon size={32} className="text-gray-700" />
+                <service.icon size={32} className="text-gray-700 dark:text-gray-300" />
               </div>
               <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4">
                 {service.title[language]}
@@ -1537,14 +1538,14 @@ const DienstenPage = () => {
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
                   </div>
-                  <span className="text-gray-700">{feature}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100 text-gray-800 dark:text-gray-200">
+        <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? `${service.title[language]} nodig?` : `Need ${service.title[language]}?`}
@@ -1561,7 +1562,7 @@ const DienstenPage = () => {
               </button>
               <Link
                 to="/calculator"
-                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-colors"
+                className="px-6 py-3 border border-gray-400 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -1569,7 +1570,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 border-t border-gray-200">
+        <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -1591,7 +1592,7 @@ const DienstenPage = () => {
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
             <div className="flex items-center justify-between h-16 lg:h-20">
               <Link to="/" className="flex items-center">
-                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+                <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
               </Link>
               <Link 
                 to="/diensten" 
@@ -1612,7 +1613,7 @@ const DienstenPage = () => {
               className="text-center max-w-3xl mx-auto"
             >
               <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <nicheData.icon size={32} className="text-gray-700" />
+                <nicheData.icon size={32} className="text-gray-700 dark:text-gray-300" />
               </div>
               <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4">
                 {nicheData.title[language]}
@@ -1636,12 +1637,12 @@ const DienstenPage = () => {
               {nicheData.benefits[language].map((benefit, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 hover:bg-gray-100 transition-colors"
+                  className="flex items-center gap-3 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
                 >
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
                   </div>
-                  <span className="text-gray-700">{benefit}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -1657,7 +1658,7 @@ const DienstenPage = () => {
               {nicheData.examples[language].map((example, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-white dark:bg-neutral-800 rounded-full text-sm text-gray-700 border border-gray-200 dark:border-neutral-700"
+                  className="px-4 py-2 bg-white dark:bg-neutral-800 rounded-full text-sm text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700"
                 >
                   {example}
                 </span>
@@ -1666,7 +1667,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100 text-gray-800 dark:text-gray-200">
+        <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
@@ -1683,7 +1684,7 @@ const DienstenPage = () => {
               </button>
               <Link
                 to="/calculator"
-                className="px-6 py-3 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-colors"
+                className="px-6 py-3 border border-gray-400 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-colors"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Calculate Price'}
               </Link>
@@ -1691,7 +1692,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 border-t border-gray-200">
+        <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -1711,7 +1712,7 @@ const DienstenPage = () => {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
             <Link 
               to="/" 
@@ -1757,10 +1758,10 @@ const DienstenPage = () => {
               <div key={key}>
                 <Link
                   to={`/diensten/${key}`}
-                  className="block bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 transition-colors group"
+                  className="block bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors group"
                 >
-                  <div className="w-14 h-14 bg-white dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
-                    <service.icon size={28} className="text-gray-700" />
+                  <div className="w-14 h-14 bg-white dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-neutral-900">
+                    <service.icon size={28} className="text-gray-700 dark:text-gray-300" />
                   </div>
                   <h3 className="font-bold text-2xl mb-2">{service.title[language]}</h3>
                   <p className="text-gray-600 mb-4">{service.subtitle[language]}</p>
@@ -1806,7 +1807,7 @@ const DienstenPage = () => {
                       to={`/voor/${key}`}
                       className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                     >
-                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
@@ -1835,7 +1836,7 @@ const DienstenPage = () => {
                       to={`/voor/${key}`}
                       className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                     >
-                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
@@ -1864,7 +1865,7 @@ const DienstenPage = () => {
                       to={`/voor/${key}`}
                       className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                     >
-                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
@@ -1888,7 +1889,7 @@ const DienstenPage = () => {
             { label: { nl: 'Consultancy & Training', en: 'Consultancy & Training' }, keys: ['consultants', 'trainers', 'financieel_adviseurs', 'recruiters', 'marketing_specialisten'] },
             { label: { nl: 'Vakmanschap', en: 'Craftsmanship' }, keys: ['stukadoors', 'dakdekkers', 'tuiniers', 'schoonmakers', 'chauffeurs'] },
           ].map((group) => (
-            <div key={group.label.nl} className="mt-8 pt-8 border-t border-gray-200">
+            <div key={group.label.nl} className="mt-8 pt-8 border-t border-gray-200 dark:border-neutral-800">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-4 text-center">
                 {group.label[language]}
               </h3>
@@ -1914,7 +1915,7 @@ const DienstenPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gray-100 text-gray-800 dark:text-gray-200">
+      <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl font-bold mb-4">
             {language === 'nl' ? 'Jouw branche niet gevonden?' : "Didn't find your industry?"}
@@ -1933,7 +1934,7 @@ const DienstenPage = () => {
         </div>
       </section>
 
-      <footer className="py-8 bg-gray-50 border-t border-gray-200">
+      <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}

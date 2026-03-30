@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 
 const WhyWebsitePage = () => {
   const { language } = useLanguage();
@@ -324,7 +325,7 @@ const WhyWebsitePage = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-neutral-700"
+              className="bg-white dark:bg-neutral-900 p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-neutral-700"
             >
               <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">{t.traditional.title}</p>
               <p className="text-4xl font-heading font-bold text-red-600 mb-2">{t.traditional.price}</p>
@@ -388,7 +389,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 4 - Features */}
-      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-100 text-gray-800 dark:text-gray-200">
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -407,7 +408,7 @@ const WhyWebsitePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-8 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:bg-gray-50 dark:hover:bg-neutral-700 transition-all shadow-sm"
+                className="text-center p-8 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:bg-gray-50 dark:hover:bg-neutral-700 transition-all shadow-sm dark:shadow-neutral-900"
               >
                 <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   {feature.icon}
@@ -513,7 +514,7 @@ const WhyWebsitePage = () => {
               </Link>
               <Link
                 to="/calculator"
-                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-medium hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-all"
+                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-full font-medium hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-all"
               >
                 {t.ctaCalculator}
               </Link>
@@ -523,12 +524,12 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 md:px-12 bg-gray-100 text-gray-700">
+      <footer className="py-12 px-6 md:px-12 bg-gray-100 text-gray-700 dark:text-gray-300">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
             <div className="flex items-center gap-8 text-sm text-gray-500">
-              <a href="mailto:info@yrvante.com" className="hover:text-gray-700 transition-colors flex items-center gap-2">
+              <a href="mailto:info@yrvante.com" className="hover:text-gray-700 dark:text-gray-300 transition-colors flex items-center gap-2">
                 <Mail size={16} />
                 info@yrvante.com
               </a>

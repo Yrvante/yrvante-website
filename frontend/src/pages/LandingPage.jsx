@@ -48,6 +48,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
 
 const LOGO_URL = "/logo-nav.png";
+const LOGO_URL_WHITE = "/logo-nav-white.png";
 const BG_IMAGE = "/bg-pattern.jpg";
 const CALENDLY_URL = "https://calendly.com/yvar-yrvante/30min";
 
@@ -106,11 +107,8 @@ const Navigation = () => {
             whileHover={{ scale: 1.08, rotate: -3 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
-            <img 
-              src={LOGO_URL} 
-              alt="Yrvante" 
-              className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200"
-            />
+            <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" />
+            <img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
           </motion.a>
 
           {/* Desktop Navigation - Simplified */}
@@ -1421,11 +1419,8 @@ const Footer = () => {
         <div className="grid grid-cols-12 gap-8">
           {/* Logo & Info */}
           <div className="col-span-12 lg:col-span-3">
-            <img 
-              src={LOGO_URL} 
-              alt="Yrvante" 
-              className="h-12 w-auto object-contain"
-            />
+            <img src={LOGO_URL} alt="Yrvante" className="h-12 w-auto object-contain dark:hidden" />
+            <img src={LOGO_URL_WHITE} alt="Yrvante" className="h-12 w-auto object-contain hidden dark:block" />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 max-w-xs leading-relaxed">
               {language === 'nl'
                 ? 'Professionele websites voor ZZP\'ers en MKB. Betaalbaar en resultaatgericht.'

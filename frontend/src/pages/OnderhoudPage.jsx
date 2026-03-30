@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 const BG_IMAGE = "/bg-pattern.jpg";
 
 const OnderhoudPage = () => {
@@ -157,7 +158,7 @@ const OnderhoudPage = () => {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
             <Link 
               to="/" 
@@ -181,7 +182,7 @@ const OnderhoudPage = () => {
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Maandelijks Onderhoud' : 'Monthly Maintenance'}
               </p>
-              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900">
+              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900 dark:text-gray-100">
                 {language === 'nl' 
                   ? 'Jij runt je bedrijf. Ik regel je website.' 
                   : 'You run your business. I handle your website.'}
@@ -193,7 +194,7 @@ const OnderhoudPage = () => {
               </p>
 
               <div className="flex items-baseline gap-2 mb-6">
-                <span className="text-5xl font-black text-gray-900">€25</span>
+                <span className="text-5xl font-black text-gray-900 dark:text-gray-100">€25</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
                 <span className="text-xs text-gray-400 ml-2">{language === 'nl' ? 'excl. BTW' : 'excl. VAT'}</span>
               </div>
@@ -220,7 +221,7 @@ const OnderhoudPage = () => {
                         <feature.icon size={20} className="text-green-600" />
                       </div>
                       <div>
-                        <p className="font-bold text-sm text-gray-900">{feature.title}</p>
+                        <p className="font-bold text-sm text-gray-900 dark:text-gray-100">{feature.title}</p>
                         <p className="text-gray-500 text-xs">{feature.description}</p>
                       </div>
                     </div>
@@ -376,7 +377,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Agency Comparison */}
-      <section className="py-20 bg-gray-100 text-gray-800 dark:text-gray-200">
+      <section className="py-20 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
@@ -401,7 +402,7 @@ const OnderhoudPage = () => {
               </p>
               <p className="text-3xl font-black text-red-500 mb-2">€100-250</p>
               <p className="text-sm text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</p>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-500">
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-neutral-800 text-xs text-gray-500">
                 {language === 'nl' 
                   ? 'Vaak alleen hosting + "support op aanvraag"'
                   : 'Often just hosting + "support on request"'}
@@ -414,7 +415,7 @@ const OnderhoudPage = () => {
               </p>
               <p className="text-3xl font-black text-red-500 mb-2">€250-500</p>
               <p className="text-sm text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</p>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-500">
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-neutral-800 text-xs text-gray-500">
                 {language === 'nl'
                   ? 'Inclusief "X uur support per maand"'
                   : 'Including "X hours support per month"'}
@@ -427,7 +428,7 @@ const OnderhoudPage = () => {
               </p>
               <p className="text-3xl font-black text-green-600 mb-2">€25</p>
               <p className="text-sm text-gray-400">/ {language === 'nl' ? 'maand' : 'month'}</p>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-600 dark:text-gray-400">
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-neutral-800 text-xs text-gray-600 dark:text-gray-400">
                 {language === 'nl'
                   ? 'Alles inclusief. Geen verrassingen.'
                   : 'Everything included. No surprises.'}
@@ -481,7 +482,7 @@ const OnderhoudPage = () => {
               : "For €25 per month I handle everything. You focus on your customers, I focus on your website."}
           </p>
           
-          <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm">
+          <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
             <div className="flex items-baseline justify-center gap-2 mb-4">
               <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€25</span>
               <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
@@ -518,10 +519,10 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-50 border-t border-gray-200">
+      <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
             </p>

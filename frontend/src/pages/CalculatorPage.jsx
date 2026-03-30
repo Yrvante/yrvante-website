@@ -13,6 +13,7 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 const API_BASE = API_URL ? `${API_URL}/api` : '/api';
 const BG_IMAGE = "/bg-pattern.jpg";
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 
 // Which add-ons are already included per package (don't show as extra)
 const excludedAddOns = {
@@ -35,7 +36,7 @@ const BookingSystemPreview = ({ language }) => {
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm"
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900"
     >
       <div className="p-4">
         <div className="flex items-center gap-2 mb-4">
@@ -59,7 +60,7 @@ const BookingSystemPreview = ({ language }) => {
               key={i}
               onClick={(e) => { e.stopPropagation(); setSelectedDay(i); setSelectedTime(null); }}
               className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${
-                selectedDay === i ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                selectedDay === i ? 'bg-gray-900 dark:bg-neutral-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
               {day}
@@ -75,7 +76,7 @@ const BookingSystemPreview = ({ language }) => {
               onClick={(e) => { e.stopPropagation(); setSelectedTime(i); }}
               className={`py-2 rounded-xl text-xs transition-all ${
                 selectedTime === i
-                  ? 'bg-gray-900 text-white'
+                  ? 'bg-gray-900 dark:bg-neutral-800 text-white'
                   : 'bg-gray-50 border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-400'
               }`}
             >
@@ -92,7 +93,7 @@ const BookingSystemPreview = ({ language }) => {
               exit={{ opacity: 0, y: 5 }}
               className="mb-3"
             >
-              <button className="w-full py-2.5 bg-gray-900 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2">
+              <button className="w-full py-2.5 bg-gray-900 dark:bg-neutral-800 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2">
                 <Check size={14} />
                 {language === 'nl' ? 'Afspraak bevestigen' : 'Confirm Appointment'}
               </button>
@@ -114,7 +115,7 @@ const MultiLangPreview = ({ language }) => {
   const texts = { nl: 'Welkom!', en: 'Welcome!', de: 'Willkommen!' };
   return (
     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Globe size={16} className="text-gray-600" /></div>
@@ -126,7 +127,7 @@ const MultiLangPreview = ({ language }) => {
         <div className="flex gap-2 mb-3">
           {[['nl', '🇳🇱'], ['en', '🇬🇧'], ['de', '🇩🇪']].map(([code, flag]) => (
             <button key={code} onClick={(e) => { e.stopPropagation(); setLang(code); }}
-              className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-center gap-1 ${lang === code ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-center gap-1 ${lang === code ? 'bg-gray-900 dark:bg-neutral-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
               {flag} {code.toUpperCase()}
             </button>
           ))}
@@ -145,7 +146,7 @@ const ContactFormPreview = ({ language }) => {
   const [sent, setSent] = useState(false);
   return (
     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Mail size={16} className="text-gray-600" /></div>
@@ -166,7 +167,7 @@ const ContactFormPreview = ({ language }) => {
               <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">Naam...</p></div>
               <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">Email...</p></div>
               <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-200 dark:border-neutral-700 px-3 py-2 h-10"><p className="text-xs text-gray-300">Bericht...</p></div>
-              <button onClick={(e) => { e.stopPropagation(); setSent(true); }} className="w-full py-2 bg-gray-900 text-white text-xs font-bold rounded-xl">
+              <button onClick={(e) => { e.stopPropagation(); setSent(true); }} className="w-full py-2 bg-gray-900 dark:bg-neutral-800 text-white text-xs font-bold rounded-xl">
                 {language === 'nl' ? 'Verstuur' : 'Send'}
               </button>
             </motion.div>
@@ -180,7 +181,7 @@ const ContactFormPreview = ({ language }) => {
 // Maintenance Preview
 const MaintenancePreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
     <div className="p-4">
       <div className="flex items-center gap-2 mb-3">
         <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Shield size={16} className="text-gray-600" /></div>
@@ -204,7 +205,7 @@ const MaintenancePreview = ({ language }) => (
 // Google Reviews Preview
 const GoogleReviewsPreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm">
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
     <div className="p-4">
       <div className="flex items-center gap-2 mb-3">
         <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Star size={16} className="text-gray-600" /></div>
@@ -636,7 +637,7 @@ const CalculatorPage = () => {
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
           </div>
         </div>
@@ -652,7 +653,7 @@ const CalculatorPage = () => {
             className="py-12 md:py-16 text-center"
           >
             <Calculator className="mx-auto mb-6 text-gray-600" size={48} strokeWidth={1.5} />
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 text-gray-900">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 text-gray-900 dark:text-gray-100">
               {t.title}
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400">
@@ -860,24 +861,24 @@ const CalculatorPage = () => {
               transition={{ delay: 0.6 }}
               className="sticky top-28"
             >
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-900 p-8 rounded-3xl shadow-xl border border-gray-300" data-testid="price-summary">
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-900 dark:text-gray-100 p-8 rounded-3xl shadow-xl border border-gray-300" data-testid="price-summary">
                 <h3 className="font-heading text-xl font-bold mb-6">{t.summary}</h3>
                 
                 {/* Package */}
-                <div className="flex justify-between items-center py-3 border-b border-gray-300">
+                <div className="flex justify-between items-center py-3 border-b border-gray-300 dark:border-neutral-700">
                   <span className="text-gray-600 dark:text-gray-400">{t.packages[selectedPackage].name}</span>
                   <span className="font-bold">€{prices[selectedPackage]}</span>
                 </div>
 
                 {/* Add-ons */}
                 {addOns.extraPages > 0 && (
-                  <div className="flex justify-between items-center py-3 border-b border-gray-300">
+                  <div className="flex justify-between items-center py-3 border-b border-gray-300 dark:border-neutral-700">
                     <span className="text-gray-600 dark:text-gray-400">{t.addOns.extraPages.title} (x{addOns.extraPages})</span>
                     <span>€{addOns.extraPages * prices.extraPages}</span>
                   </div>
                 )}
                 {Object.entries(addOns).filter(([key, value]) => key !== 'extraPages' && key !== 'maintenance' && value).map(([key]) => (
-                  <div key={key} className="flex justify-between items-center py-3 border-b border-gray-300">
+                  <div key={key} className="flex justify-between items-center py-3 border-b border-gray-300 dark:border-neutral-700">
                     <span className="text-gray-600 dark:text-gray-400">{t.addOns[key].title}</span>
                     <span>€{prices[key]}</span>
                   </div>
@@ -1015,7 +1016,7 @@ const CalculatorPage = () => {
                           <span>€{prices.maintenance}/mnd</span>
                         </div>
                       )}
-                      <div className="border-t border-gray-200 pt-2 mt-2 flex justify-between font-bold">
+                      <div className="border-t border-gray-200 dark:border-neutral-800 pt-2 mt-2 flex justify-between font-bold">
                         <span>{t.oneTime}</span>
                         <span>€{totals.oneTime}</span>
                       </div>
@@ -1116,7 +1117,7 @@ const CalculatorPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>
       </footer>

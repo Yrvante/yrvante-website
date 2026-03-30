@@ -5,6 +5,7 @@ import { ArrowLeft, Shield, Mail, Lock, Cookie, Eye, Database, UserCheck } from 
 import SEO from "../components/SEO";
 
 const LOGO_URL = "/logo-nav.png";
+const LOGO_URL_WHITE = "/logo-nav-white.png";
 
 const PrivacyPage = () => {
   const { language } = useLanguage();
@@ -302,7 +303,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-3">
-              <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
             </Link>
             <Link 
               to="/" 
@@ -339,7 +340,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
         <div className="max-w-4xl mx-auto px-6">
           {/* Intro */}
           <div className="prose prose-lg max-w-none mb-12">
-            <p className="text-gray-700 text-lg leading-relaxed">
+            <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
               {t.intro}
             </p>
           </div>
@@ -371,7 +372,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
               <p className="text-gray-300 mb-6">{t.contact.content}</p>
               <a 
                 href={`mailto:${t.contact.email}`}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
               >
                 <Mail size={18} />
                 {t.contact.email}
@@ -381,7 +382,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             {/* Changes Section */}
             <section className="border border-gray-200 dark:border-neutral-700 rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-black mb-4">{t.changes.title}</h2>
-              <p className="text-gray-700">{t.changes.content}</p>
+              <p className="text-gray-700 dark:text-gray-300">{t.changes.content}</p>
             </section>
           </div>
         </div>
@@ -391,7 +392,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
       <footer className="bg-gray-50 border-t border-gray-100 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Link to="/" className="inline-block mb-4">
-            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto mx-auto" />
+            <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto mx-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto mx-auto hidden dark:block" />
           </Link>
           <p className="text-sm text-gray-500">
             © {currentYear} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -403,7 +404,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             <Link to="/pakketten" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               {language === 'nl' ? 'Pakketten' : 'Packages'}
             </Link>
-            <Link to="/privacy" className="text-black font-medium">
+            <Link to="/privacy" className="text-black dark:text-white font-medium">
               {language === 'nl' ? 'Privacy' : 'Privacy'}
             </Link>
           </div>

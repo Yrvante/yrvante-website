@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 
 // Free to use code/tech images from Unsplash (no credit required for Unsplash license)
 const codeImages = [
@@ -103,7 +104,7 @@ const AboutPage = () => {
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
           </div>
         </div>
@@ -212,7 +213,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="bg-white p-8 rounded-3xl border border-gray-200 dark:border-neutral-700 h-full transition-all duration-300 hover:border-black hover:shadow-lg">
+                <div className="bg-white dark:bg-neutral-900 p-8 rounded-3xl border border-gray-200 dark:border-neutral-700 h-full transition-all duration-300 hover:border-black hover:shadow-lg">
                   <div className="mb-6 text-gray-400 group-hover:text-black transition-colors">{value.icon}</div>
                   <h3 className="text-xl font-heading mb-4">{value.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{value.description}</p>
@@ -237,7 +238,7 @@ const AboutPage = () => {
             </h2>
             <Link
               to="/#contact"
-              className="inline-block bg-white text-black px-10 py-4 rounded-2xl font-mono text-sm uppercase tracking-widest hover:bg-gray-100 transition-colors"
+              className="inline-block bg-white text-black px-10 py-4 rounded-2xl font-mono text-sm uppercase tracking-widest hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
             >
               {t.cta}
             </Link>
@@ -248,7 +249,7 @@ const AboutPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>
         </div>
       </footer>

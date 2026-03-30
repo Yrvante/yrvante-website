@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
 const LOGO_URL = "/logo.png";
+const LOGO_URL_WHITE = "/logo-white.png";
 const BG_IMAGE = "/bg-pattern.jpg";
 
 const BookingDemoWidget = ({ language }) => {
@@ -56,20 +57,20 @@ const BookingDemoWidget = ({ language }) => {
               >
                 <Check size={28} className="text-green-600" />
               </motion.div>
-              <p className="font-bold text-gray-900 text-lg mb-1">
+              <p className="font-bold text-gray-900 dark:text-gray-100 text-lg mb-1">
                 {language === 'nl' ? 'Afspraak bevestigd!' : 'Appointment confirmed!'}
               </p>
               <p className="text-gray-500 text-sm mb-4">
                 {language === 'nl' ? 'Bevestiging verstuurd naar jouw email' : 'Confirmation sent to your email'}
               </p>
-              <button onClick={reset} className="text-xs text-gray-400 hover:text-gray-700 underline transition-colors">
+              <button onClick={reset} className="text-xs text-gray-400 hover:text-gray-700 dark:text-gray-300 underline transition-colors">
                 {language === 'nl' ? 'Nieuwe afspraak maken' : 'Make new appointment'}
               </button>
             </motion.div>
           ) : (
             <motion.div key="booking" initial={{ opacity: 1 }}>
               <div className="flex items-center justify-between mb-4">
-                <p className="font-bold text-gray-900">
+                <p className="font-bold text-gray-900 dark:text-gray-100">
                   {language === 'nl' ? 'Afspraak maken' : 'Book appointment'}
                 </p>
                 <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-lg">
@@ -89,9 +90,9 @@ const BookingDemoWidget = ({ language }) => {
                     disabled={!d.avail}
                     className={`flex-1 py-2.5 rounded-xl text-center transition-all ${
                       selectedDay === i
-                        ? 'bg-gray-900 text-white shadow-lg'
+                        ? 'bg-gray-900 dark:bg-neutral-800 text-white shadow-lg'
                         : d.avail
-                        ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-gray-100 text-gray-700 dark:text-gray-300 hover:bg-gray-200'
                         : 'bg-gray-50 text-gray-300 cursor-not-allowed line-through'
                     }`}
                   >
@@ -120,7 +121,7 @@ const BookingDemoWidget = ({ language }) => {
                           onClick={() => setSelectedTime(i)}
                           className={`py-2.5 rounded-xl text-sm font-medium transition-all ${
                             selectedTime === i
-                              ? 'bg-gray-900 text-white shadow-md'
+                              ? 'bg-gray-900 dark:bg-neutral-800 text-white shadow-md'
                               : 'border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-700'
                           }`}
                         >
@@ -140,7 +141,7 @@ const BookingDemoWidget = ({ language }) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     onClick={() => setConfirmed(true)}
-                    className="w-full py-3.5 bg-gray-900 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 hover:bg-gray-700 transition-colors mb-3"
+                    className="w-full py-3.5 bg-gray-900 dark:bg-neutral-800 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 hover:bg-gray-700 transition-colors mb-3"
                   >
                     <Check size={16} />
                     {language === 'nl' ? 'Afspraak bevestigen' : 'Confirm appointment'}
@@ -219,7 +220,7 @@ const ProPakketDemo = ({ isPopular, language }) => {
           <p className={`text-xs ${isPopular ? 'text-gray-500' : 'text-gray-300'}`}>Bericht...</p>
         </div>
         <button onClick={(e) => { e.stopPropagation(); setSent(true); }}
-          className={`w-full py-2 text-xs font-bold rounded-xl transition-colors ${isPopular ? 'bg-gray-500 text-white hover:bg-gray-400' : 'bg-gray-900 text-white hover:bg-gray-700'}`}>
+          className={`w-full py-2 text-xs font-bold rounded-xl transition-colors ${isPopular ? 'bg-gray-500 text-white hover:bg-gray-400' : 'bg-gray-900 dark:bg-neutral-800 text-white hover:bg-gray-700'}`}>
           {language === 'nl' ? 'Verstuur' : 'Send'}
         </button>
       </div>
@@ -252,7 +253,7 @@ const PremiumPakketDemo = ({ isPopular, language }) => {
             <button key={i} onClick={(e) => { e.stopPropagation(); setSelDay(i); }}
               className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${
                 selDay === i
-                  ? isPopular ? 'bg-gray-500 text-white' : 'bg-gray-900 text-white'
+                  ? isPopular ? 'bg-gray-500 text-white' : 'bg-gray-900 dark:bg-neutral-800 text-white'
                   : isPopular ? 'bg-gray-600 text-gray-400' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600'
               }`}>
               {d}
@@ -297,7 +298,7 @@ const MultiLangDemo = ({ language }) => {
       <div className="bg-gray-900 px-3 py-2 flex items-center justify-center gap-2">
         {[['nl', '🇳🇱'], ['en', '🇬🇧'], ['de', '🇩🇪']].map(([code, flag]) => (
           <button key={code} onClick={(e) => { e.stopPropagation(); setLang(code); }}
-            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${lang === code ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-white'}`}>
+            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${lang === code ? 'bg-white text-gray-900 dark:text-gray-100' : 'text-gray-400 hover:text-white'}`}>
             {flag} {code.toUpperCase()}
           </button>
         ))}
@@ -327,7 +328,7 @@ const ContactFormDemo = ({ language }) => {
         <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'jij@email.nl' : 'you@email.com'}</p></div>
         <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2 h-10"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw bericht...' : 'Your message...'}</p></div>
         <button onClick={(e) => { e.stopPropagation(); setSent(true); }}
-          className="w-full py-2 bg-gray-900 text-white text-xs font-bold rounded-lg hover:bg-gray-700 transition-colors">
+          className="w-full py-2 bg-gray-900 dark:bg-neutral-800 text-white text-xs font-bold rounded-lg hover:bg-gray-700 transition-colors">
           {language === 'nl' ? 'Verstuur bericht' : 'Send message'}
         </button>
       </div>
@@ -364,7 +365,7 @@ const BookingMiniDemo = ({ language }) => {
         <div className="flex gap-1.5 mb-2">
           {days.map((d, i) => (
             <button key={i} onClick={(e) => { e.stopPropagation(); setSel(i); }}
-              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 text-white' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-400'}`}>
+              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 dark:bg-neutral-800 text-white' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-400'}`}>
               {d}
             </button>
           ))}
@@ -387,7 +388,7 @@ const FastDeliveryDemo = ({ language }) => {
       <div className="flex items-center gap-1 mb-1.5">
         {steps.map((s, i) => (
           <React.Fragment key={i}>
-            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${s.done ? 'bg-gray-900 text-white' : s.active ? 'bg-gray-500 text-white' : 'bg-gray-200 text-gray-400'}`}>
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${s.done ? 'bg-gray-900 dark:bg-neutral-800 text-white' : s.active ? 'bg-gray-500 text-white' : 'bg-gray-200 text-gray-400'}`}>
               {s.done ? <Check size={12} /> : i + 1}
             </div>
             {i < steps.length - 1 && <div className={`flex-1 h-0.5 ${s.done ? 'bg-gray-900' : 'bg-gray-200'}`} />}
@@ -396,7 +397,7 @@ const FastDeliveryDemo = ({ language }) => {
       </div>
       <div className="flex justify-between">
         {steps.map((s, i) => (
-          <span key={i} className={`text-xs flex-1 text-center ${s.active ? 'text-gray-900 font-bold' : s.done ? 'text-gray-500' : 'text-gray-300'}`}>{s.label}</span>
+          <span key={i} className={`text-xs flex-1 text-center ${s.active ? 'text-gray-900 dark:text-gray-100 font-bold' : s.done ? 'text-gray-500' : 'text-gray-300'}`}>{s.label}</span>
         ))}
       </div>
     </div>
@@ -548,7 +549,7 @@ const PackagesPage = () => {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:invert dark:brightness-200" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
             <Link 
               to="/" 
@@ -636,7 +637,7 @@ const PackagesPage = () => {
                   <p className={`text-xs uppercase tracking-wider mb-2 ${pkg.popular ? 'text-gray-400' : 'text-gray-400'}`}>
                     {language === 'nl' ? 'Ideaal voor' : 'Ideal for'}
                   </p>
-                  <p className={`font-medium ${pkg.popular ? 'text-gray-200' : 'text-gray-700'}`}>
+                  <p className={`font-medium ${pkg.popular ? 'text-gray-200' : 'text-gray-700 dark:text-gray-300'}`}>
                     {pkg.idealFor}
                   </p>
                 </div>
@@ -674,7 +675,7 @@ const PackagesPage = () => {
                   to="/calculator"
                   className={`block w-full text-center py-4 rounded-full font-bold transition-all ${
                     pkg.popular
-                      ? 'bg-white text-gray-900 hover:bg-gray-100'
+                      ? 'bg-white text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800'
                       : 'bg-gray-500 text-white hover:bg-gray-600'
                   }`}
                 >
@@ -763,7 +764,7 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white p-6 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:border-black hover:shadow-lg transition-all"
+                className="bg-white dark:bg-neutral-900 p-6 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:border-black hover:shadow-lg transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-11 h-11 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -790,7 +791,7 @@ const PackagesPage = () => {
           >
             <Link
               to="/calculator"
-              className="inline-flex items-center gap-2 text-black font-medium hover:underline"
+              className="inline-flex items-center gap-2 text-black dark:text-white font-medium hover:underline"
             >
               {language === 'nl' ? 'Bekijk alle prijzen in de calculator' : 'View all prices in the calculator'}
               <ArrowRight size={16} />
@@ -878,7 +879,7 @@ const PackagesPage = () => {
               </Link>
               <Link
                 to="/#contact"
-                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 px-8 py-4 rounded-full font-bold hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-all"
+                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-full font-bold hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white hover:border-gray-500 transition-all"
               >
                 {language === 'nl' ? 'Neem contact op' : 'Contact me'}
               </Link>
@@ -890,7 +891,7 @@ const PackagesPage = () => {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto" />
+          <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400">© {new Date().getFullYear()} Yrvante</span>
         </div>
       </footer>

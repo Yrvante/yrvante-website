@@ -14,6 +14,7 @@ import {
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api/admin/leadfinder`;
 const LOGO_URL = "/logo-nav.png";
+const LOGO_URL_WHITE = "/logo-nav-white.png";
 const BG_IMAGE = "/bg-pattern.jpg";
 
 // Search source configurations
