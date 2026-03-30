@@ -12,7 +12,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch web design co
 ## Key Pages
 - LandingPage.jsx — Homepage with hero, process, services (3 incl. Rebranding), pricing (4 tiers), testimonials, FAQ, contact
 - PackagesPage.jsx — Detailed pricing: Rebranding €349, Basis €500, Pro €900, Premium €1400
-- CalculatorPage.jsx — Interactive price calculator
+- CalculatorPage.jsx — Interactive price calculator with 4 packages, add-ons, and quote submission
 - DienstenPage.jsx — Services overview + 17+ niche detail pages
 - OverMijPage.jsx — About me (mobile-first redesign)
 - WhyWebsitePage.jsx — Why you need a website
@@ -23,18 +23,18 @@ Build and iteratively develop the Yrvante web platform — a Dutch web design co
 - Admin Dashboard (Lead Finder) — Password protected
 
 ## Completed (Latest Session - Feb 2026)
-- Added Rebranding package (€349) to PackagesPage and LandingPage
-- Fixed dark mode text contrast on ALL pages (black on light, white on dark)
-- Redesigned OverMijPage: mobile-first with 2x2 values grid, stacked timeline, compact hero
+- Added Rebranding package (€349) to PackagesPage, LandingPage, and CalculatorPage
+- CalculatorPage: All 4 packages selectable with correct pricing, add-ons, and quote form
+- Fixed dark mode text contrast on ALL pages (no black text on dark backgrounds)
+- Fixed PrivacyPage dark mode: text-black → dark:text-white
+- Fixed PackagesPage check icons: dark:text-white for non-popular packages
+- Fixed CalculatorPage background overlay for dark mode
+- Quote/offerte submission via POST /api/contact working end-to-end
+- ThemeChooser popup for first-time visitors
+- All pages iPhone-friendly (390x844 viewport)
+- Redesigned OverMijPage: mobile-first
 - Removed duplicate /about page → redirects to /over-mij
-- Made ALL pages iPhone-friendly (390x844 viewport):
-  - Compact navbars (h-14 on mobile)
-  - Reduced hero padding (pt-20 on mobile)
-  - Full-width CTA buttons on mobile
-  - Responsive text sizes (text-2xl/3xl on mobile)
-  - Proper content padding (px-4 on mobile)
-  - Pages: Homepage, Packages, Calculator, Onderhoud, Blog, WhyWebsite, OverMij, Diensten, Privacy
-- All 10 mobile tests passed (100% success rate) - iteration_19
+- Testing: 100% pass rate on iteration_20 (15/15 frontend, 10/10 backend)
 
 ## Pending Issues
 - P0: Vercel Production env vars (POSTGRES_URL, ADMIN_PASSWORD, GOOGLE_MAPS_API_KEY) — BLOCKED on user
