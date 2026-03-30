@@ -317,45 +317,45 @@ We never sell your data to third parties and do not use it for unsolicited marke
       </nav>
 
       {/* Header */}
-      <header className="pt-32 pb-16 bg-gradient-to-b from-gray-50 dark:from-neutral-900 to-white dark:to-neutral-950">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-full text-sm mb-6">
-            <Shield size={16} />
+      <header className="pt-20 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-16 bg-gradient-to-b from-gray-50 dark:from-neutral-900 to-white dark:to-neutral-950">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs sm:text-sm mb-4 sm:mb-6">
+            <Shield size={14} />
             {t.title}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-black dark:text-white mb-3 sm:mb-4">
             {t.title}
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
             {t.subtitle}
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs sm:text-sm text-gray-500">
             {t.lastUpdated}: {lastUpdated}
           </p>
         </div>
       </header>
 
       {/* Content */}
-      <main className="py-16">
-        <div className="max-w-4xl mx-auto px-6">
+      <main className="py-8 sm:py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Intro */}
-          <div className="prose prose-lg max-w-none mb-12">
-            <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+          <div className="prose prose-lg max-w-none mb-8 sm:mb-12">
+            <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed">
               {t.intro}
             </p>
           </div>
 
           {/* Sections */}
-          <div className="space-y-12">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-12">
             {t.sections.map((section, index) => {
               const Icon = section.icon;
               return (
-                <section key={index} className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 bg-black rounded-xl">
-                      <Icon className="text-white" size={24} />
+                <section key={index} className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 sm:p-6 lg:p-8">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                    <div className="p-2 sm:p-3 bg-black rounded-xl flex-shrink-0">
+                      <Icon className="text-white" size={20} />
                     </div>
-                    <h2 className="text-2xl font-bold text-black dark:text-white pt-2">
+                    <h2 className="text-lg sm:text-2xl font-bold text-black dark:text-white pt-1 sm:pt-2">
                       {section.title}
                     </h2>
                   </div>

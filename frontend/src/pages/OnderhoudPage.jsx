@@ -154,54 +154,54 @@ const OnderhoudPage = () => {
       <SEO page="/onderhoud" />
       
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+      <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-gray-200 dark:border-neutral-700">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
             <Link 
               to="/" 
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
-              ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
+              ← {language === 'nl' ? 'Terug' : 'Back'}
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <section className="pt-20 sm:pt-28 lg:pt-36 pb-10 sm:pb-16 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-white/60 dark:bg-neutral-950/80" />
-        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
+              <p className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-2 sm:mb-4">
                 {language === 'nl' ? 'Maandelijks Onderhoud' : 'Monthly Maintenance'}
               </p>
-              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 text-gray-900 dark:text-gray-100">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 {language === 'nl' 
                   ? 'Jij runt je bedrijf. Ik regel je website.' 
                   : 'You run your business. I handle your website.'}
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-5 sm:mb-8">
                 {language === 'nl'
                   ? 'Een website bouwen is één ding. Hem online houden, veilig houden en werkend houden is iets heel anders. Met het onderhoudspakket hoef jij je daar geen zorgen over te maken.'
                   : "Building a website is one thing. Keeping it online, secure and working is something else entirely. With the maintenance plan, you don't have to worry about any of that."}
               </p>
 
-              <div className="flex items-baseline gap-2 mb-6">
-                <span className="text-5xl font-black text-gray-900 dark:text-gray-100">€25</span>
+              <div className="flex items-baseline gap-2 mb-4 sm:mb-6">
+                <span className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-gray-100">€25</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
                 <span className="text-xs text-gray-400 ml-2">{language === 'nl' ? 'excl. BTW' : 'excl. VAT'}</span>
               </div>
 
               <button
                 onClick={scrollToContact}
-                className="px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 transition-colors"
+                className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] rounded-full hover:bg-gray-600 active:scale-[0.98] transition-all"
               >
                 {language === 'nl' ? 'Start Onderhoudspakket' : 'Start Maintenance Plan'}
               </button>
@@ -234,13 +234,13 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Why Maintenance Section */}
-      <section className="py-20 bg-white dark:bg-neutral-950">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-neutral-950">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'De Waarheid' : 'The Truth'}
             </p>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3 sm:mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Een website is nooit "klaar"' 
                 : 'A website is never "finished"'}
@@ -278,13 +278,13 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Horror Stories Section */}
-      <section className="py-20 bg-red-50 dark:bg-red-950/30">
+      <section className="py-12 sm:py-16 lg:py-20 bg-red-50 dark:bg-red-950/30">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <AlertTriangle size={32} className="text-red-600" />
             </div>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3 sm:mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Wat er mis kan gaan (zonder onderhoud)' 
                 : 'What can go wrong (without maintenance)'}
@@ -338,7 +338,7 @@ const OnderhoudPage = () => {
       <section className="py-20 bg-white dark:bg-neutral-950">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3 sm:mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Met vs. Zonder Onderhoudspakket' 
                 : 'With vs. Without Maintenance Plan'}
@@ -439,10 +439,10 @@ const OnderhoudPage = () => {
       </section>
 
       {/* All Features */}
-      <section className="py-20 bg-white dark:bg-neutral-950">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-neutral-950">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3 sm:mb-4 dark:text-white">
               {language === 'nl' ? 'Alles wat je krijgt' : 'Everything you get'}
             </h2>
           </div>
@@ -469,9 +469,9 @@ const OnderhoudPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50 dark:bg-neutral-900 text-gray-800 dark:text-gray-200">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50 dark:bg-neutral-900 text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
-          <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-4 sm:mb-6 dark:text-white">
             {language === 'nl' 
               ? 'Nooit meer zorgen over je website' 
               : 'Never worry about your website again'}

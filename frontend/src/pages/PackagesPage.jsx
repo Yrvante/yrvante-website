@@ -596,44 +596,44 @@ const PackagesPage = () => {
     <div className="min-h-screen bg-white dark:bg-neutral-950">
       <SEO page="/pakketten" />
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+      <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-gray-200 dark:border-neutral-700">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
             <Link 
               to="/" 
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
-              ← {language === 'nl' ? 'Terug naar Home' : 'Back to Home'}
+              ← {language === 'nl' ? 'Terug' : 'Back'}
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <section className="pt-20 sm:pt-28 lg:pt-36 pb-8 sm:pb-12 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/85" />
-        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="py-12 md:py-20"
+            className="py-6 sm:py-10 md:py-20"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
+            <p className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-2 sm:mb-4">
               {language === 'nl' ? 'Transparante Prijzen' : 'Transparent Pricing'}
             </p>
-            <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight mb-3 sm:mb-6 dark:text-white">
               {language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing'}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-4">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-2 sm:mb-4">
               {language === 'nl' 
                 ? 'Kies het pakket dat bij je bedrijf past. Alle prijzen zijn exclusief BTW.'
                 : 'Choose the package that fits your business. All prices exclude VAT.'}
             </p>
-            <p className="text-sm text-gray-400 max-w-xl mx-auto">
+            <p className="text-xs text-gray-400 max-w-xl mx-auto">
               {language === 'nl'
                 ? '* Prijzen zijn exclusief tekstschrijven en foto\'s. Content wordt door jou aangeleverd.'
                 : '* Prices exclude copywriting and photos. Content is provided by you.'}
@@ -643,7 +643,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Packages */}
-      <section className="py-20 px-6 md:px-12">
+      <section className="py-10 sm:py-14 lg:py-20 px-4 sm:px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {packages.map((pkg, index) => (
@@ -740,7 +740,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Losse Prijzen Section */}
-      <section className="py-16 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -790,15 +790,15 @@ const PackagesPage = () => {
       </section>
 
       {/* Extra possibilities - centered, no prices */}
-      <section className="py-20 px-6 md:px-12 bg-white dark:bg-neutral-950 border-t border-gray-100 dark:border-neutral-800">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-neutral-950 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-heading font-bold mb-4 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold mb-3 sm:mb-4 dark:text-white">
               {language === 'nl' ? 'Extra Mogelijkheden' : 'Extra Possibilities'}
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -853,7 +853,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Booking System Detail - with live interactive demo */}
-      <section className="py-20 px-6 md:px-12 dark:bg-neutral-950">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-12 dark:bg-neutral-950">
         <div className="max-w-5xl mx-auto">
           <div className="bg-gray-700 text-white rounded-3xl p-8 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -941,7 +941,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
+      <footer className="py-6 sm:py-8 px-4 sm:px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400">© {new Date().getFullYear()} Yrvante</span>

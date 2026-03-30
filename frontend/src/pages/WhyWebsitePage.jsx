@@ -175,21 +175,21 @@ const WhyWebsitePage = () => {
       <SEO page="/waarom-website" />
       {/* Navigation - matching homepage style */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 w-auto hidden dark:block" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-8 sm:h-10 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 sm:h-10 w-auto hidden dark:block" />
             </Link>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               <Link 
                 to="/pakketten" 
-                className="hidden md:inline-flex text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+                className="hidden sm:inline-flex text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               >
                 {language === 'nl' ? 'Pakketten' : 'Packages'}
               </Link>
               <Link 
                 to="/calculator" 
-                className="px-5 py-2.5 bg-gray-500 text-white text-sm font-medium rounded-full hover:bg-gray-600 transition-all"
+                className="px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-500 text-white text-xs sm:text-sm font-medium rounded-full hover:bg-gray-600 transition-all"
               >
                 {language === 'nl' ? 'Bereken Prijs' : 'Get Quote'}
               </Link>
@@ -199,9 +199,9 @@ const WhyWebsitePage = () => {
       </nav>
 
       {/* Hero Section - Premium style */}
-      <section className="pt-20">
+      <section className="pt-14 sm:pt-16 lg:pt-20">
         <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-32">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -212,19 +212,19 @@ const WhyWebsitePage = () => {
                 {t.heroTag}
               </span>
               
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-4 sm:mb-6">
                 {t.heroTitle}<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">
                   {t.heroTitleHighlight}
                 </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+              <p className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12">
                 {t.heroSubtitle}
               </p>
 
               {/* Stats */}
-              <div className="flex justify-center gap-8 md:gap-16">
+              <div className="flex justify-center gap-6 sm:gap-8 md:gap-16">
                 {t.stats.map((stat, index) => (
                   <motion.div
                     key={index}
@@ -233,8 +233,8 @@ const WhyWebsitePage = () => {
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className="text-center"
                   >
-                    <p className="text-3xl md:text-4xl font-heading font-bold">{stat.value}</p>
-                    <p className="text-sm text-gray-500">{stat.label}</p>
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold">{stat.value}</p>
+                    <p className="text-[10px] sm:text-sm text-gray-500">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>
@@ -244,7 +244,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 1 - The Problem */}
-      <section className="py-20 md:py-28 px-6 md:px-12">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -299,7 +299,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 2 - The Myth & Comparison */}
-      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -368,7 +368,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 3 - Solution */}
-      <section className="py-20 md:py-28 px-6 md:px-12">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -389,7 +389,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 4 - Features */}
-      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -422,7 +422,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 5 - Goal */}
-      <section className="py-20 md:py-28 px-6 md:px-12">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -460,7 +460,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-16 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-10 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.packages.map((pkg, index) => (
@@ -491,7 +491,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-28 px-6 md:px-12">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -524,7 +524,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 md:px-12 bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300">
+      <footer className="py-8 sm:py-12 px-4 sm:px-6 md:px-12 bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 w-auto hidden dark:block" />

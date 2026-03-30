@@ -100,15 +100,15 @@ const Navigation = () => {
         scrolled ? "bg-white dark:bg-neutral-900 border-b border-black dark:border-neutral-700" : "bg-white dark:bg-neutral-900"
       }`}
     >
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <motion.a href="/" data-testid="nav-logo" className="flex items-center"
             whileHover={{ scale: 1.08, rotate: -3 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
-            <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" />
-            <img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
+            <img src={LOGO_URL} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain dark:hidden" />
+            <img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain hidden dark:block" />
           </motion.a>
 
           {/* Desktop Navigation - Simplified */}
@@ -293,22 +293,22 @@ const HeroSection = () => {
   };
 
   return (
-    <section data-testid="hero-section" className="min-h-screen pt-24 relative overflow-hidden">
+    <section data-testid="hero-section" className="min-h-screen pt-16 sm:pt-20 lg:pt-24 relative overflow-hidden">
       {/* Main Hero Content */}
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
-        <div className="min-h-[calc(100vh-120px)] flex flex-col justify-center relative">
+        <div className="min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-120px)] flex flex-col justify-center relative">
           
           {/* Availability Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
           >
             <button 
               onClick={scrollToContact}
-              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 text-sm"
+              className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 text-xs sm:text-sm"
               style={{
                 boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
               }}
@@ -328,18 +328,18 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 dark:text-gray-400 mb-4"
+            className="text-[11px] sm:text-sm font-medium uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gray-600 dark:text-gray-400 mb-3 sm:mb-4"
           >
             {language === 'nl' ? 'Alles wat je nog nodig hebt is' : 'Everything you still need is'}
           </motion.p>
           
           {/* Main Headline - BIG and prominent */}
-          <div className="relative mb-10">
+          <div className="relative mb-6 sm:mb-10">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter dark:text-white"
+              className="text-[16vw] sm:text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter dark:text-white"
             >
               {language === 'nl' ? (
                 <span className="flex flex-col">
@@ -404,18 +404,18 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-4 items-center mb-8"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center mb-6 sm:mb-8"
           >
             <button
               onClick={scrollToContact}
-              className="group px-8 py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 transition-all rounded-full"
+              className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 active:scale-[0.98] transition-all rounded-full text-center"
             >
               {language === 'nl' ? 'Start Project' : 'Start Project'}
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <Link
               to="/pakketten"
-              className="px-8 py-4 border border-gray-400 dark:border-neutral-600 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all rounded-full"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 border border-gray-400 dark:border-neutral-600 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 active:scale-[0.98] transition-all rounded-full text-center"
             >
               {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
             </Link>
@@ -426,18 +426,18 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap items-center gap-6"
+            className="flex flex-wrap items-center gap-4 sm:gap-6"
           >
             <a 
               href="tel:+31855055314" 
-              className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               <Phone size={14} />
               <span>+31 85 505 5314</span>
             </a>
             <a 
               href="mailto:info@yrvante.com" 
-              className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
             >
               <Mail size={14} />
               <span>info@yrvante.com</span>

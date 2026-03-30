@@ -630,40 +630,40 @@ const CalculatorPage = () => {
       <SEO page="/calculator" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-              <ArrowLeft size={16} />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+            <Link to="/" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+              <ArrowLeft size={14} />
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Header */}
-      <section className="pt-28 pb-12 px-6 md:px-12 relative">
+      <section className="pt-20 sm:pt-24 lg:pt-28 pb-6 sm:pb-8 lg:pb-12 px-4 sm:px-6 md:px-12 relative">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="py-12 md:py-16 text-center"
+            className="py-4 sm:py-8 md:py-16 text-center"
           >
-            <Calculator className="mx-auto mb-6 text-gray-600" size={48} strokeWidth={1.5} />
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 text-gray-900 dark:text-gray-100">
+            <Calculator className="mx-auto mb-4 sm:mb-6 text-gray-600" size={36} strokeWidth={1.5} />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 text-gray-900 dark:text-gray-100">
               {t.title}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-sm sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400">
               {t.subtitle}
             </p>
           </motion.div>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12 lg:py-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Left column - Selections */}
           <div className="lg:col-span-2 space-y-12">

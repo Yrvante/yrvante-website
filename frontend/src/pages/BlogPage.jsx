@@ -253,43 +253,43 @@ const BlogPage = () => {
       <SEO page="/blog" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-              <ArrowLeft size={16} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+            <Link to="/" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+              <ArrowLeft size={14} />
               {t.back}
             </Link>
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 lg:h-12 w-auto object-contain hidden dark:block" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 sm:h-10 lg:h-12 w-auto object-contain hidden dark:block" />
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-28 pb-16 px-6 md:px-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+      <section className="pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 md:px-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="py-12 md:py-20"
+            className="py-6 sm:py-10 md:py-20"
           >
-            <div className="flex items-center gap-4 mb-6">
-              <span className="px-3 py-1 bg-white/10 rounded-full text-sm">{t.hero.tag}</span>
-              <span className="text-gray-400 text-sm flex items-center gap-2">
-                <Calendar size={14} />
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+              <span className="px-3 py-1 bg-white/10 rounded-full text-xs sm:text-sm">{t.hero.tag}</span>
+              <span className="text-gray-400 text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
+                <Calendar size={12} />
                 {t.hero.date}
               </span>
-              <span className="text-gray-400 text-sm flex items-center gap-2">
-                <Clock size={14} />
+              <span className="text-gray-400 text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
+                <Clock size={12} />
                 {t.hero.readTime}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 leading-tight">
               {t.hero.title}
             </h1>
-            <p className="text-xl text-gray-400">
+            <p className="text-sm sm:text-lg lg:text-xl text-gray-400">
               {t.hero.subtitle}
             </p>
           </motion.div>
@@ -297,7 +297,7 @@ const BlogPage = () => {
       </section>
 
       {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-6 md:px-12 py-16">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-12 lg:py-16">
         {/* Intro */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -449,7 +449,7 @@ const BlogPage = () => {
       </article>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
+      <footer className="py-6 sm:py-8 px-4 sm:px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400">Almelo, Nederland</span>
