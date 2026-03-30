@@ -81,8 +81,6 @@ const Navigation = () => {
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
     { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
     { divider: true },
-    { to: '/over-mij', label: language === 'nl' ? 'Over Mij' : 'About Me' },
-    { divider: true },
     { to: '/diensten', label: language === 'nl' ? 'Alle Branches →' : 'All Industries →' },
   ];
 
