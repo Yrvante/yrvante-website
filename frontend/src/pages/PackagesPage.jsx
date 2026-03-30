@@ -699,7 +699,7 @@ const PackagesPage = () => {
                   </p>
                   {pkg.includes.map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-1.5">
-                      <Check size={16} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black'}`} />
+                      <Check size={16} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black dark:text-white'}`} />
                       <span className={`text-sm ${pkg.popular ? 'text-gray-200' : 'text-gray-600 dark:text-gray-400'}`}>{item}</span>
                     </div>
                   ))}

@@ -270,7 +270,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
   const formatContent = (text) => {
     return text.split('\n').map((line, i) => {
       if (line.startsWith('**') && line.endsWith('**')) {
-        return <p key={i} className="font-semibold text-black mt-4 mb-2">{line.replace(/\*\*/g, '')}</p>;
+        return <p key={i} className="font-semibold text-black dark:text-white mt-4 mb-2">{line.replace(/\*\*/g, '')}</p>;
       }
       if (line.startsWith('- **')) {
         const parts = line.replace('- **', '').split(':**');

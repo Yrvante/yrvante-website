@@ -652,7 +652,7 @@ const CalculatorPage = () => {
     <div className="min-h-screen relative" data-testid="calculator-page">
       {/* Fixed Background - Continuous flowing pattern */}
       <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.5) brightness(1.02) contrast(1.05)'}} />
-      <div className="fixed inset-0 -z-10 bg-white/62" />
+      <div className="fixed inset-0 -z-10 bg-white/62 dark:bg-neutral-950/90" />
       <SEO page="/calculator" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
