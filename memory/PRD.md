@@ -1,201 +1,57 @@
 # Yrvante Website - Product Requirements Document
 
-## Project Overview
-Professionele website voor Yrvante - een webdesign & development bedrijf gericht op ZZP'ers en MKB in Nederland.
+## Original Problem Statement
+Build and iteratively develop the Yrvante web platform — a Dutch web design company website. Focus on pixel-perfect UI, brand consistency, responsive design, and dark/light mode support.
 
-**Live Preview URL**: https://pricing-refresh-5.preview.emergentagent.com
+## Architecture
+- **Frontend**: React + Tailwind CSS (Shadcn UI components)
+- **Backend**: FastAPI (Preview), Node.js (Vercel Production)
+- **Database**: MongoDB (Preview), Vercel Postgres (Production)
+- **Styling**: Tailwind with `dark:` variants, ThemeContext, LanguageContext (NL/EN)
 
-## Core Features (Implemented)
+## Key Pages
+- LandingPage.jsx — Homepage with hero, process, services, pricing, testimonials, FAQ, contact
+- PackagesPage.jsx — Detailed pricing with 4 packages (Rebranding, Basis, Pro, Premium)
+- CalculatorPage.jsx — Interactive price calculator
+- DienstenPage.jsx — Services overview + niche detail pages
+- OverMijPage.jsx — About me page
+- WhyWebsitePage.jsx — Why you need a website
+- BlogPage.jsx — Blog article
+- OnderhoudPage.jsx — Maintenance plan
+- PrivacyPage.jsx — Privacy policy
+- AboutPage.jsx — About/values page
+- Admin Dashboard (Lead Finder) — Password protected
 
-### 1. Landing Page
-- Hero section met grote typografie
-- Services sectie
-- Pricing pakketten (€500/€900/€1400)
-- FAQ sectie
-- Contact formulier met Resend email integratie
-- Footer met privacy link en verborgen admin toegang
+## What's Been Implemented
+- Full homepage with editorial design
+- 4-tier pricing: Rebranding (349), Basis (500), Pro (900), Premium (1400)
+- Global Dark/Light mode toggle with proper text contrast on ALL pages
+- Rebranding service added to services section and pricing
+- SEO component across all pages
+- Admin Lead Finder dashboard
+- Contact form integration
+- Price calculator with quote request
+- 17+ niche-specific landing pages (kappers, restaurants, etc.)
+- Multilingual support (NL/EN)
 
-### 2. Contact Formulier
-- Stuurt interne notificatie naar info@yrvante.com
-- Stuurt bevestigingsmail naar klant
-- Honeypot spam bescherming
-- Resend API integratie
+## Completed (Latest Session - Feb 2026)
+- Added Rebranding package (349 EUR) to PackagesPage and LandingPage pricing
+- Added Rebranding service card to LandingPage services section
+- Fixed dark mode text contrast on ALL pages (black text in light, white text in dark)
+- Pages fixed: LandingPage, PackagesPage, CalculatorPage, DienstenPage, OverMijPage, WhyWebsitePage, BlogPage, OnderhoudPage, PrivacyPage, AboutPage
+- All 12 automated tests passed (100% success rate)
 
-### 3. Admin Dashboard / Lead Finder (MASSIVELY UPDATED)
-- Wachtwoord-beveiligde toegang via lock icoon in footer
-- **"ZOEK ALLES" functie** - Zoek alle ZZP'ers en bedrijven in één keer
-- **Radius zoeken** - Configureerbaar van +5km tot +100km
-- **8 BRONNEN geïntegreerd:**
-  1. **Google Maps** - Places API met radius zoeken
-  2. **KVK** - Via Google site search
-  3. **Instagram** - Accounts zonder website in bio
-  4. **Facebook** - Pagina's zonder website
-  5. **LinkedIn** - Company pages
-  6. **Telefoongids.nl** - Traditionele bedrijven
-  7. **Gouden Gids** - Oude bedrijven zonder website
-  8. **Marktplaats Diensten** - ZZP'ers die adverteren
-- **Nearby cities** - Automatisch omliggende steden doorzoeken
-- Lead management met status tracking (nieuw/warm/koud/contact/klant)
-- Dashboard met statistieken
-- CSV export functionaliteit
-- Bulk acties (selecteer meerdere leads)
+## Pending Issues
+- P0: Vercel Production env vars (POSTGRES_URL, ADMIN_PASSWORD, GOOGLE_MAPS_API_KEY) — BLOCKED on user
+- P1: Web scraping in production — depends on P0
+- P1: Resend DNS configuration for email delivery
 
-### 4. Extra Pagina's
-- `/privacy` - Privacybeleid pagina
-- `/pakketten` - Packages overzicht
-- `/calculator` - Website prijs calculator
-- `/diensten` - Diensten overzicht per branche
-- `/over-mij` - About pagina
-- `/blog` - Blog overzicht
-- `/onderhoud` - Onderhoud & hosting info
+## Upcoming Tasks
+- P1: SEO metadata review across all pages
+- P2: Case studies / success stories for niche pages
+- P2: Refactor DienstenPage.jsx (move niches data to separate file)
+- P2: Google Sheets API integration for lead export
 
-## Technical Architecture
-
-### Frontend (React)
-- React 18 met React Router
-- Tailwind CSS + Shadcn/UI componenten
-- Framer Motion animaties
-- Sonner toast notifications
-- Responsive design
-
-### Backend
-**Preview (Python/FastAPI)**:
-- MongoDB voor data opslag
-- Resend voor emails
-- Lead Finder endpoints voor lokale testing
-
-**Production (Vercel Serverless)**:
-- Node.js serverless functions in `/api/`
-- Vercel Postgres (Neon) database
-- Google Places API voor lead zoeken
-
-### Database Schema (Vercel Postgres)
-```sql
--- leadfinder_leads
-id UUID PRIMARY KEY
-naam VARCHAR(255)
-adres TEXT
-telefoonnummer VARCHAR(50)
-google_maps_url TEXT
-place_id VARCHAR(255) UNIQUE
-branche VARCHAR(100)
-stad VARCHAR(100)
-status VARCHAR(50) DEFAULT 'nieuw'
-notitie TEXT
-opgeslagen_op TIMESTAMPTZ
-
--- leadfinder_search_history
-id UUID PRIMARY KEY
-branche VARCHAR(100)
-stad VARCHAR(100)
-totaal INTEGER
-datum TIMESTAMPTZ
-```
-
-## Environment Variables
-
-### Preview Environment (backend/.env)
-```
-MONGO_URL=mongodb://localhost:27017
-DB_NAME=test_database
-CORS_ORIGINS=*
-RESEND_API_KEY=re_bfcpWKc6_HGvwamvGQ2xKWrbdNFFBoicc
-SENDER_EMAIL=noreply@yrvante.com
-RECIPIENT_EMAIL=info@yrvante.com
-```
-
-### Vercel Production (REQUIRED)
-```
-POSTGRES_URL=postgresql://neondb_owner:npg_H5ny1vCPFtKo@ep-steep-voice-agyfsguv-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-ADMIN_PASSWORD=Yv4r02!!yrvantebredewold
-GOOGLE_MAPS_API_KEY=AIzaSyDn1y6-aOzY8NXaTdJAPL0GqI_5rl5XMEM
-RESEND_API_KEY=re_bfcpWKc6_HGvwamvGQ2xKWrbdNFFBoicc
-SENDER_EMAIL=noreply@yrvante.com
-RECIPIENT_EMAIL=info@yrvante.com
-```
-
-## Deployment Status
-
-### What Works Now
-- [x] Homepage en alle pagina's
-- [x] Contact formulier met email
-- [x] Privacy pagina
-- [x] Lead Finder login (preview: yrvante2025)
-- [x] Lead Finder zoeken (mock data in preview)
-- [x] Lead opslaan en beheren
-
-### Vercel Deployment Checklist
-1. [ ] Environment variables instellen in Vercel Dashboard
-2. [ ] Deployen naar Vercel
-3. [ ] Database tabellen worden automatisch aangemaakt
-4. [ ] Testen met productie wachtwoord: `Yv4r02!!yrvantebredewold`
-
-## Key API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/contact` | POST | Contact form submission |
-| `/api/admin/leadfinder/auth` | POST | Lead Finder login |
-| `/api/admin/leadfinder/zoek` | POST | Search for businesses |
-| `/api/admin/leadfinder/leads` | GET/POST | List/Create leads |
-| `/api/admin/leadfinder/lead/[id]` | PUT/DELETE | Update/Delete lead |
-| `/api/admin/leadfinder/dashboard` | GET | Dashboard stats |
-
-## File Structure
-```
-/app/
-├── api/                          # Vercel serverless functions
-│   ├── contact.js                # Contact form handler
-│   └── admin/leadfinder/         # Lead Finder API
-├── backend/                      # Preview environment backend
-│   └── server.py
-├── frontend/
-│   └── src/
-│       ├── App.js
-│       ├── pages/
-│       │   ├── LandingPage.jsx
-│       │   ├── LeadFinderPage.jsx
-│       │   ├── PrivacyPage.jsx
-│       │   └── ...
-│       └── components/
-├── vercel.json
-├── package.json
-└── .nvmrc
-```
-
-## Changelog
-
-### Maart 2026
-- Dark mode optie toegevoegd over de hele website (ThemeContext, CSS variabelen, localStorage)
-- Dark mode op alle pagina's: Over Mij, Pakketten, Diensten, Calculator, Blog, Onderhoud, etc.
-- Logo wordt automatisch wit in dark mode (CSS invert filter)
-- Alle icons uit infographic gegenereerd en overal op homepage geplaatst (13 custom icons)
-- Homepage logo verwijderd naast "JOUW BEDRIJF ONLINE"
-- Nieuwe secties toegevoegd aan homepage: Onderhoud, Het Proces, Expertise & Voordelen, Hosting
-- 5-sterren reviews verwijderd uit Basis pakket demo (Hondenwandelservice)
-- Google Reviews stat verwijderd uit Basis pakket demo
-- Homepage logo fade-effect en styling iteraties voltooid
-- Telefoonnummer en WhatsApp link sitewide bijgewerkt
-- Lead Finder V2: radius search, multi-source scraping, "Zoek Alles"
-- Lead Finder UI/UX: Google Sheets export, mobiele responsiviteit
-
-### December 2025
-- Lead Finder page restyled to match Yrvante homepage
-- Login functionality fixed for preview environment
-- Customer confirmation email added to contact form
-- Privacy policy page created
-- Vercel deployment configuration completed
-
-## Backlog
-
-### P1 (High Priority)
-- [ ] SEO review across all pages
-
-### P2 (Medium Priority)
-- [ ] Refactor DienstenPage.jsx (extract niches data)
-- [ ] Add case studies/success stories
-
-### P3 (Low Priority)
-- [ ] Bulk CSV import for Lead Finder
-- [ ] WhatsApp templates integration
-- [ ] Email campaign feature
+## Credentials
+- Admin Dashboard (Preview): password `yrvante2025`
+- Admin Dashboard (Production): set via env var
