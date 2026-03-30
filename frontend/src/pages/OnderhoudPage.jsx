@@ -347,7 +347,7 @@ const OnderhoudPage = () => {
 
           <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl overflow-hidden">
             <div className="grid grid-cols-3 bg-gray-200 dark:bg-neutral-700 text-gray-800 dark:text-gray-200 py-4 px-6">
-              <div className="font-bold">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
+              <div className="font-bold dark:text-white">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
               <div className="font-bold text-center text-green-400">
                 {language === 'nl' ? 'Met Pakket (€25/m)' : 'With Plan (€25/m)'}
               </div>
@@ -383,7 +383,7 @@ const OnderhoudPage = () => {
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Even Vergelijken' : 'Just Comparing'}
             </p>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Wat bureaus rekenen voor onderhoud' 
                 : 'What agencies charge for maintenance'}

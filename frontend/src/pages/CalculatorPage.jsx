@@ -17,6 +17,7 @@ const LOGO_URL_WHITE = "/logo-white.png";
 
 // Which add-ons are already included per package (don't show as extra)
 const excludedAddOns = {
+  rebranding: ['multiLanguage', 'bookingSystem', 'extraForm', 'googleReviews'], // Rebranding = alleen design opfrisbeurt
   basic: ['googleReviews'],                                      // Te geavanceerd voor Basis
   pro: ['extraForm'],                                            // Contactformulier zit al in Pro
   premium: ['multiLanguage', 'bookingSystem', 'extraForm']       // Alles inbegrepen in Premium
@@ -279,6 +280,18 @@ const CalculatorPage = () => {
       step2: "Stap 2: Voeg extra's toe (optioneel)",
       
       packages: {
+        rebranding: {
+          name: "Rebranding Pakket",
+          price: 349,
+          description: "Bestaande website een nieuw uiterlijk",
+          includes: [
+            "Compleet nieuw design",
+            "Moderne layout & styling",
+            "Responsive optimalisatie",
+            "Verbeterde gebruikservaring",
+            "Snelheidsoptimalisatie"
+          ]
+        },
         basic: {
           name: "Basis Pakket",
           price: 500,
@@ -399,6 +412,18 @@ const CalculatorPage = () => {
       step2: "Step 2: Add extras (optional)",
       
       packages: {
+        rebranding: {
+          name: "Rebranding Package",
+          price: 349,
+          description: "Give your existing website a new look",
+          includes: [
+            "Complete new design",
+            "Modern layout & styling",
+            "Responsive optimization",
+            "Improved user experience",
+            "Speed optimization"
+          ]
+        },
         basic: {
           name: "Basic Package",
           price: 500,
@@ -517,6 +542,7 @@ const CalculatorPage = () => {
   const t = content[language] || content.nl;
 
   const prices = {
+    rebranding: 349,
     basic: 500,
     pro: 900,
     premium: 1400,
@@ -674,7 +700,7 @@ const CalculatorPage = () => {
               transition={{ delay: 0.2 }}
             >
               <h2 className="text-2xl font-heading font-bold mb-6 dark:text-white">{t.step1}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {Object.entries(t.packages).map(([key, pkg]) => (
                   <div
                     key={key}
@@ -862,7 +888,7 @@ const CalculatorPage = () => {
               className="sticky top-28"
             >
               <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-neutral-800 dark:to-neutral-900 text-gray-900 dark:text-gray-100 p-8 rounded-3xl shadow-xl border border-gray-300 dark:border-neutral-700" data-testid="price-summary">
-                <h3 className="font-heading text-xl font-bold mb-6">{t.summary}</h3>
+                <h3 className="font-heading text-xl font-bold mb-6 dark:text-white">{t.summary}</h3>
                 
                 {/* Package */}
                 <div className="flex justify-between items-center py-3 border-b border-gray-300 dark:border-neutral-700">
@@ -888,12 +914,12 @@ const CalculatorPage = () => {
                 <div className="mt-6 space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-medium">{t.oneTime}</span>
-                    <span className="text-4xl font-heading font-bold" data-testid="total-onetime">€{totals.oneTime}</span>
+                    <span className="text-4xl font-heading font-bold dark:text-white" data-testid="total-onetime">€{totals.oneTime}</span>
                   </div>
                   {addOns.maintenance && (
                     <div className="flex justify-between items-center text-gray-500">
                       <span>{t.monthly}</span>
-                      <span className="text-xl font-bold" data-testid="total-monthly">€{totals.monthly}/mnd</span>
+                      <span className="text-xl font-bold dark:text-white" data-testid="total-monthly">€{totals.monthly}/mnd</span>
                     </div>
                   )}
                 </div>

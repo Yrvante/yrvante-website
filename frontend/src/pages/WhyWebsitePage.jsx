@@ -395,7 +395,7 @@ const WhyWebsitePage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-heading font-bold text-center mb-16"
+            className="text-3xl md:text-4xl font-heading font-bold text-center mb-16 dark:text-white"
           >
             {t.featuresTitle}
           </motion.h2>

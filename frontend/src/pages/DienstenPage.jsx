@@ -1547,7 +1547,7 @@ const DienstenPage = () => {
 
         <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4 dark:text-white">
               {language === 'nl' ? `${service.title[language]} nodig?` : `Need ${service.title[language]}?`}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mb-6">
@@ -1669,7 +1669,7 @@ const DienstenPage = () => {
 
         <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4 dark:text-white">
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mb-6">

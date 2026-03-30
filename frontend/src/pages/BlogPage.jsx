@@ -378,7 +378,7 @@ const BlogPage = () => {
             </div>
             {/* Yrvante */}
             <div className="p-8 bg-gray-700 text-white rounded-2xl">
-              <h3 className="font-bold text-xl mb-2">{t.comparison.yrvante.title}</h3>
+              <h3 className="font-bold text-xl mb-2 dark:text-white">{t.comparison.yrvante.title}</h3>
               <p className="text-3xl font-heading font-bold text-green-400 mb-6">{t.comparison.yrvante.price}</p>
               <ul className="space-y-3">
                 {t.comparison.yrvante.points.map((point, i) => (
@@ -418,11 +418,11 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="mb-16 py-12 px-8 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200 rounded-3xl"
         >
-          <h2 className="text-2xl font-heading font-bold mb-8 text-center">{t.stats.title}</h2>
+          <h2 className="text-2xl font-heading font-bold mb-8 text-center dark:text-white">{t.stats.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {t.stats.items.map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-5xl font-heading font-bold mb-2">{stat.value}</p>
+                <p className="text-5xl font-heading font-bold mb-2 dark:text-white">{stat.value}</p>
                 <p className="text-gray-400 text-sm">{stat.label}</p>
               </div>
             ))}

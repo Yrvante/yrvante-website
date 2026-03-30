@@ -228,7 +228,7 @@ const ProPakketDemo = ({ isPopular, language }) => {
       <div className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 ${isPopular ? 'bg-gray-500' : 'bg-gray-900'}`}>
         <Check size={14} className="text-white" />
       </div>
-      <p className={`text-xs font-bold ${isPopular ? 'text-white' : 'text-gray-800'}`}>{language === 'nl' ? 'Bericht ontvangen!' : 'Message received!'}</p>
+      <p className={`text-xs font-bold ${isPopular ? 'text-white' : 'text-gray-800 dark:text-gray-200'}`}>{language === 'nl' ? 'Bericht ontvangen!' : 'Message received!'}</p>
       <button onClick={(e) => { e.stopPropagation(); setSent(false); }} className={`text-xs underline mt-1 ${isPopular ? 'text-gray-400' : 'text-gray-400'}`}>{language === 'nl' ? 'opnieuw' : 'again'}</button>
     </motion.div>
   );
@@ -332,7 +332,7 @@ const MultiLangDemo = ({ language }) => {
         ))}
       </div>
       <div className="bg-gray-50 p-3 text-center">
-        <motion.p key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="text-xs font-semibold text-gray-800 mb-0.5">{texts[lang].g}</motion.p>
+        <motion.p key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="text-xs font-semibold text-gray-800 dark:text-gray-200 mb-0.5">{texts[lang].g}</motion.p>
         <p className="text-xs text-gray-400">{texts[lang].s}</p>
       </div>
     </div>
@@ -666,14 +666,14 @@ const PackagesPage = () => {
                 )}
 
                 <div className="mb-6">
-                  <h2 className="text-2xl font-heading font-bold mb-2">{pkg.name}</h2>
+                  <h2 className="text-2xl font-heading font-bold mb-2 dark:text-white">{pkg.name}</h2>
                   <p className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}>
                     {pkg.description}
                   </p>
                 </div>
 
                 <div className="mb-6">
-                  <span className="text-5xl font-heading font-bold">€{pkg.price}</span>
+                  <span className="text-5xl font-heading font-bold dark:text-white">€{pkg.price}</span>
                   <span className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}> excl. BTW</span>
                 </div>
 
@@ -700,7 +700,7 @@ const PackagesPage = () => {
                   {pkg.includes.map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-1.5">
                       <Check size={16} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black'}`} />
-                      <span className={`text-sm ${pkg.popular ? 'text-gray-200' : 'text-gray-600'}`}>{item}</span>
+                      <span className={`text-sm ${pkg.popular ? 'text-gray-200' : 'text-gray-600 dark:text-gray-400'}`}>{item}</span>
                     </div>
                   ))}
                 </div>

@@ -368,7 +368,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
 
             {/* Contact Section */}
             <section className="bg-black dark:bg-white text-white dark:text-black rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-4">{t.contact.title}</h2>
+              <h2 className="text-2xl font-bold mb-4 dark:text-white">{t.contact.title}</h2>
               <p className="text-gray-300 mb-6">{t.contact.content}</p>
               <a 
                 href={`mailto:${t.contact.email}`}
