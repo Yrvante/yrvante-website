@@ -317,16 +317,16 @@ We never sell your data to third parties and do not use it for unsolicited marke
       </nav>
 
       {/* Header */}
-      <header className="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
+      <header className="pt-32 pb-16 bg-gradient-to-b from-gray-50 dark:from-neutral-900 to-white dark:to-neutral-950">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-full text-sm mb-6">
             <Shield size={16} />
             {t.title}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4">
             {t.title}
           </h1>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
             {t.subtitle}
           </p>
           <p className="text-sm text-gray-500">
@@ -355,7 +355,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
                     <div className="p-3 bg-black rounded-xl">
                       <Icon className="text-white" size={24} />
                     </div>
-                    <h2 className="text-2xl font-bold text-black pt-2">
+                    <h2 className="text-2xl font-bold text-black dark:text-white pt-2">
                       {section.title}
                     </h2>
                   </div>
@@ -381,7 +381,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
 
             {/* Changes Section */}
             <section className="border border-gray-200 dark:border-neutral-700 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-black mb-4">{t.changes.title}</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">{t.changes.title}</h2>
               <p className="text-gray-700 dark:text-gray-300">{t.changes.content}</p>
             </section>
           </div>
@@ -389,7 +389,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-100 py-12">
+      <footer className="bg-gray-50 dark:bg-neutral-900 border-t border-gray-100 dark:border-neutral-800 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Link to="/" className="inline-block mb-4">
             <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto mx-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto mx-auto hidden dark:block" />

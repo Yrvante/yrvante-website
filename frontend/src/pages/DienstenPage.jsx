@@ -1270,16 +1270,16 @@ const DienstenPage = () => {
         </section>
 
         {/* All Features */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-neutral-950">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-12">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Wat je krijgt' : 'What you get'}
               </p>
-              <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
                 {language === 'nl' ? 'Alles wat je nodig hebt' : 'Everything you need'}
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 {language === 'nl'
                   ? 'Elke website die ik bouw is volledig op maat — geen templates, geen compromissen.'
                   : "Every website I build is completely custom — no templates, no compromises."}
@@ -1295,11 +1295,11 @@ const DienstenPage = () => {
                   transition={{ delay: index * 0.1 }}
                   className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
                 >
-                  <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
-                    <feature.icon className="text-gray-600" size={24} />
+                  <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-4">
+                    <feature.icon className="text-gray-600 dark:text-gray-400" size={24} />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                  <h3 className="font-bold text-lg mb-2 dark:text-white">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -1307,13 +1307,13 @@ const DienstenPage = () => {
         </section>
 
         {/* Process Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gray-50 dark:bg-neutral-900">
           <div className="max-w-[900px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-12">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Hoe het werkt' : 'How it works'}
               </p>
-              <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tight dark:text-white">
                 {language === 'nl' ? 'Van intake tot live' : 'From intake to live'}
               </h2>
             </div>
@@ -1331,8 +1331,8 @@ const DienstenPage = () => {
                     <span className="text-white text-xs font-bold">{step.step}</span>
                   </div>
                   <div className="flex-1 bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-200 dark:border-neutral-700">
-                    <h3 className="font-bold text-lg mb-2">{step.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                    <h3 className="font-bold text-lg mb-2 dark:text-white">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{step.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -1341,19 +1341,19 @@ const DienstenPage = () => {
         </section>
 
         {/* Why Good Design Matters */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-neutral-950">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                   {language === 'nl' ? 'De Realiteit' : 'The Reality'}
                 </p>
-                <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+                <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
                   {language === 'nl'
                     ? 'Je hebt 3 seconden om een eerste indruk te maken'
                     : 'You have 3 seconds to make a first impression'}
                 </h2>
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                   {language === 'nl'
                     ? 'Bezoekers beslissen binnen 3 seconden of ze blijven of weggaan. Een amateuristisch design, trage laadtijden of een verwarrende navigatie en ze zijn weg — naar je concurrent.'
                     : "Visitors decide within 3 seconds whether they stay or leave. An amateurish design, slow loading times or confusing navigation and they're gone — to your competitor."}
@@ -1381,18 +1381,18 @@ const DienstenPage = () => {
         </section>
 
         {/* Future Plans Note */}
-        <section className="py-16 bg-gray-100">
+        <section className="py-16 bg-gray-100 dark:bg-neutral-900">
           <div className="max-w-[900px] mx-auto px-6 lg:px-12">
             <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Layers size={24} className="text-gray-600" />
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Layers size={24} className="text-gray-600 dark:text-gray-400" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl mb-3">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white">
                     {language === 'nl' ? 'Meer diensten in ontwikkeling' : 'More services in development'}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-2">
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
                     {language === 'nl'
                       ? 'Naast webdesign werk ik momenteel aan uitgebreidere diensten: van landingspagina\'s en webapplicaties tot e-commerce oplossingen.'
                       : "Besides web design, I am currently working on more extensive services: from landing pages and web applications to e-commerce solutions."}
@@ -1409,9 +1409,9 @@ const DienstenPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gray-50 text-gray-800 dark:text-gray-200">
+        <section className="py-20 bg-gray-50 dark:bg-neutral-900 text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
               {language === 'nl' ? 'Klaar voor een website die werkt?' : 'Ready for a website that works?'}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
@@ -1419,12 +1419,12 @@ const DienstenPage = () => {
                 ? 'Vanaf €500 excl. BTW. Opgeleverd in 1-2 weken.'
                 : 'From €500 excl. VAT. Delivered in 1-2 weeks.'}
             </p>
-            <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
+            <div className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
               <div className="flex items-baseline justify-center gap-2 mb-4">
                 <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€500</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
               </div>
-              <ul className="space-y-2 text-sm text-gray-600 text-left">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400 text-left">
                 {(language === 'nl' ? [
                   'Responsive design',
                   'SEO-vriendelijke opbouw',
@@ -1462,7 +1462,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
+        <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -1507,10 +1507,10 @@ const DienstenPage = () => {
               <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <service.icon size={32} className="text-gray-700 dark:text-gray-300" />
               </div>
-              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4">
+              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 dark:text-white">
                 {service.title[language]}
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
                 {service.subtitle[language]}
               </p>
               <p className="text-gray-500 leading-relaxed">
@@ -1520,9 +1520,9 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white dark:bg-neutral-950">
           <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
-            <h2 className="text-2xl font-bold text-center mb-10">
+            <h2 className="text-2xl font-bold text-center mb-10 dark:text-white">
               {language === 'nl' ? 'Wat je krijgt' : 'What you get'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1570,7 +1570,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
+        <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -1615,10 +1615,10 @@ const DienstenPage = () => {
               <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <nicheData.icon size={32} className="text-gray-700 dark:text-gray-300" />
               </div>
-              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4">
+              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 dark:text-white">
                 {nicheData.title[language]}
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
                 {nicheData.subtitle[language]}
               </p>
               <p className="text-gray-500 leading-relaxed">
@@ -1628,9 +1628,9 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white dark:bg-neutral-950">
           <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
-            <h2 className="text-2xl font-bold text-center mb-10">
+            <h2 className="text-2xl font-bold text-center mb-10 dark:text-white">
               {language === 'nl' ? 'Wat een website je oplevert' : 'What a website delivers'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1649,9 +1649,9 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-gray-50 dark:bg-neutral-900">
           <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
-            <h2 className="text-2xl font-bold mb-6">
+            <h2 className="text-2xl font-bold mb-6 dark:text-white">
               {language === 'nl' ? 'Perfect voor' : 'Perfect for'}
             </h2>
             <div className="flex flex-wrap justify-center gap-2">
@@ -1692,7 +1692,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
+        <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -1735,10 +1735,10 @@ const DienstenPage = () => {
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Diensten' : 'Services'}
             </p>
-            <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6">
+            <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6 dark:text-white">
               {language === 'nl' ? 'Wat ik voor je kan doen' : 'What I can do for you'}
             </h1>
-            <p className="text-gray-600 max-w-xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
               {language === 'nl'
                 ? 'Van webdesign tot complete website oplossingen — alles wat je nodig hebt om online te groeien.'
                 : 'From web design to complete website solutions — everything you need to grow online.'}
@@ -1748,9 +1748,9 @@ const DienstenPage = () => {
       </section>
 
       {/* Services Grid - Without Branding */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-neutral-950">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
-          <h2 className="text-2xl font-bold mb-8">
+          <h2 className="text-2xl font-bold mb-8 dark:text-white">
             {language === 'nl' ? 'Diensten' : 'Services'}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1763,8 +1763,8 @@ const DienstenPage = () => {
                   <div className="w-14 h-14 bg-white dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-neutral-900">
                     <service.icon size={28} className="text-gray-700 dark:text-gray-300" />
                   </div>
-                  <h3 className="font-bold text-2xl mb-2">{service.title[language]}</h3>
-                  <p className="text-gray-600 mb-4">{service.subtitle[language]}</p>
+                  <h3 className="font-bold text-2xl mb-2 dark:text-white">{service.title[language]}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{service.subtitle[language]}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-400">
                       {language === 'nl' ? 'Vanaf' : 'From'} {service.price}
@@ -1779,10 +1779,10 @@ const DienstenPage = () => {
       </section>
 
       {/* Niches Grid - Organized in 3 columns */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-2">
+            <h2 className="text-3xl font-bold mb-2 dark:text-white">
               {language === 'nl' ? 'Websites voor' : 'Websites for'}
             </h2>
             <p className="text-gray-500">
@@ -1805,13 +1805,13 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 dark:border-neutral-700 group"
                     >
                       <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-sm">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
+                        <h4 className="font-semibold text-sm dark:text-white">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
                         <p className="text-gray-400 text-xs truncate">{nicheData.subtitle[language]}</p>
                       </div>
                       <ArrowRight size={14} className="text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 transition-all" />
@@ -1834,13 +1834,13 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 dark:border-neutral-700 group"
                     >
                       <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-sm">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
+                        <h4 className="font-semibold text-sm dark:text-white">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
                         <p className="text-gray-400 text-xs truncate">{nicheData.subtitle[language]}</p>
                       </div>
                       <ArrowRight size={14} className="text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 transition-all" />
@@ -1863,13 +1863,13 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 group"
+                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 dark:border-neutral-700 group"
                     >
                       <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-sm">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
+                        <h4 className="font-semibold text-sm dark:text-white">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</h4>
                         <p className="text-gray-400 text-xs truncate">{nicheData.subtitle[language]}</p>
                       </div>
                       <ArrowRight size={14} className="text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 transition-all" />
@@ -1904,7 +1904,7 @@ const DienstenPage = () => {
                       className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-800 rounded-full hover:shadow-md transition-all border border-gray-200 dark:border-neutral-700 group"
                     >
                       <nicheData.icon size={14} className="text-gray-500" />
-                      <span className="text-sm text-gray-600 group-hover:text-black">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>
                     </Link>
                   );
                 })}
@@ -1934,7 +1934,7 @@ const DienstenPage = () => {
         </div>
       </section>
 
-      <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
+      <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}

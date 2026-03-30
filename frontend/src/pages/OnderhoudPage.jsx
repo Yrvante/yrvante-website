@@ -172,7 +172,7 @@ const OnderhoudPage = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/60" />
+        <div className="absolute inset-0 bg-white/60 dark:bg-neutral-950/80" />
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -187,7 +187,7 @@ const OnderhoudPage = () => {
                   ? 'Jij runt je bedrijf. Ik regel je website.' 
                   : 'You run your business. I handle your website.'}
               </h1>
-              <p className="text-gray-600 leading-relaxed mb-8">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
                 {language === 'nl'
                   ? 'Een website bouwen is één ding. Hem online houden, veilig houden en werkend houden is iets heel anders. Met het onderhoudspakket hoef jij je daar geen zorgen over te maken.'
                   : "Building a website is one thing. Keeping it online, secure and working is something else entirely. With the maintenance plan, you don't have to worry about any of that."}
@@ -234,18 +234,18 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Why Maintenance Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-neutral-950">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'De Waarheid' : 'The Truth'}
             </p>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Een website is nooit "klaar"' 
                 : 'A website is never "finished"'}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {language === 'nl'
                 ? 'De meeste mensen denken: website gebouwd = klaar. Maar de realiteit is anders. Technologie verandert constant, en zonder onderhoud gaat je website langzaam kapot.'
                 : 'Most people think: website built = done. But reality is different. Technology changes constantly, and without maintenance your website slowly breaks down.'}
@@ -267,8 +267,8 @@ const OnderhoudPage = () => {
                     <issue.icon size={24} className="text-red-600" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-2">{issue.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{issue.description}</p>
+                    <h3 className="font-bold text-lg mb-2 dark:text-white">{issue.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{issue.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -278,13 +278,13 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Horror Stories Section */}
-      <section className="py-20 bg-red-50">
+      <section className="py-20 bg-red-50 dark:bg-red-950/30">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <AlertTriangle size={32} className="text-red-600" />
             </div>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Wat er mis kan gaan (zonder onderhoud)' 
                 : 'What can go wrong (without maintenance)'}
@@ -326,8 +326,8 @@ const OnderhoudPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-red-200"
               >
-                <h3 className="font-bold text-lg mb-2 text-red-700">{horror.title}</h3>
-                <p className="text-gray-600 text-sm">{horror.description}</p>
+                <h3 className="font-bold text-lg mb-2 text-red-700 dark:text-red-400">{horror.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{horror.description}</p>
               </motion.div>
             ))}
           </div>
@@ -335,10 +335,10 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-neutral-950">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
               {language === 'nl' 
                 ? 'Met vs. Zonder Onderhoudspakket' 
                 : 'With vs. Without Maintenance Plan'}
@@ -346,7 +346,7 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl overflow-hidden">
-            <div className="grid grid-cols-3 bg-gray-200 text-gray-800 py-4 px-6">
+            <div className="grid grid-cols-3 bg-gray-200 dark:bg-neutral-700 text-gray-800 dark:text-gray-200 py-4 px-6">
               <div className="font-bold">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
               <div className="font-bold text-center text-green-400">
                 {language === 'nl' ? 'Met Pakket (€25/m)' : 'With Plan (€25/m)'}
@@ -359,9 +359,9 @@ const OnderhoudPage = () => {
             {comparisonData.map((row, index) => (
               <div 
                 key={index} 
-                className={`grid grid-cols-3 py-4 px-6 items-center ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                className={`grid grid-cols-3 py-4 px-6 items-center ${index % 2 === 0 ? 'bg-gray-50 dark:bg-neutral-800/40' : 'bg-white dark:bg-neutral-800/60'}`}
               >
-                <div className="font-medium">{row.feature}</div>
+                <div className="font-medium dark:text-white">{row.feature}</div>
                 <div className="text-center">
                   <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                     <Check size={16} className="text-green-600" />
@@ -396,7 +396,7 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="bg-gray-100 dark:bg-neutral-700 rounded-3xl p-6 border border-gray-200 dark:border-neutral-600">
               <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 {language === 'nl' ? 'Klein Bureau' : 'Small Agency'}
               </p>
@@ -409,7 +409,7 @@ const OnderhoudPage = () => {
               </div>
             </div>
 
-            <div className="bg-gray-100 rounded-3xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="bg-gray-100 dark:bg-neutral-700 rounded-3xl p-6 border border-gray-200 dark:border-neutral-600">
               <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 {language === 'nl' ? 'Middelgroot Bureau' : 'Medium Agency'}
               </p>
@@ -422,7 +422,7 @@ const OnderhoudPage = () => {
               </div>
             </div>
 
-            <div className="bg-white text-black rounded-3xl p-6 ring-4 ring-green-500">
+            <div className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-3xl p-6 ring-4 ring-green-500">
               <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 Yrvante
               </p>
@@ -439,10 +439,10 @@ const OnderhoudPage = () => {
       </section>
 
       {/* All Features */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-neutral-950">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4 dark:text-white">
               {language === 'nl' ? 'Alles wat je krijgt' : 'Everything you get'}
             </h2>
           </div>
@@ -457,11 +457,11 @@ const OnderhoudPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
               >
-                <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
-                  <feature.icon className="text-gray-600" size={24} />
+                <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-4">
+                  <feature.icon className="text-gray-600 dark:text-gray-400" size={24} />
                 </div>
-                <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="font-bold text-lg mb-2 dark:text-white">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -469,9 +469,9 @@ const OnderhoudPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50 text-gray-800 dark:text-gray-200">
+      <section className="py-20 bg-gray-50 dark:bg-neutral-900 text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
-          <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+          <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
             {language === 'nl' 
               ? 'Nooit meer zorgen over je website' 
               : 'Never worry about your website again'}
@@ -482,12 +482,12 @@ const OnderhoudPage = () => {
               : "For €25 per month I handle everything. You focus on your customers, I focus on your website."}
           </p>
           
-          <div className="bg-white border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
+          <div className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
             <div className="flex items-baseline justify-center gap-2 mb-4">
               <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€25</span>
               <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
             </div>
-            <ul className="space-y-2 text-sm text-gray-600 text-left">
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400 text-left">
               {[
                 language === 'nl' ? 'Hosting inclusief' : 'Hosting included',
                 language === 'nl' ? 'SSL & beveiliging' : 'SSL & security',
@@ -519,7 +519,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
+      <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />

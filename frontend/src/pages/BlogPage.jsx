@@ -305,8 +305,8 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-heading font-bold mb-6">{t.intro.title}</h2>
-          <p className="text-lg text-gray-600 leading-relaxed">{t.intro.text}</p>
+          <h2 className="text-3xl font-heading font-bold mb-6 dark:text-white">{t.intro.title}</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">{t.intro.text}</p>
         </motion.section>
 
         {/* Section 1 - Everyone searches online */}
@@ -316,15 +316,15 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-heading font-bold mb-8">{t.section1.title}</h2>
+          <h2 className="text-3xl font-heading font-bold mb-8 dark:text-white">{t.section1.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.section1.points.map((point, index) => (
               <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
-                <div className="w-12 h-12 bg-gray-200 text-gray-700 dark:text-gray-300 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-xl flex items-center justify-center mb-4">
                   {point.icon}
                 </div>
-                <h3 className="font-bold text-lg mb-2">{point.title}</h3>
-                <p className="text-gray-600 text-sm">{point.text}</p>
+                <h3 className="font-bold text-lg mb-2 dark:text-white">{point.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{point.text}</p>
               </div>
             ))}
           </div>
@@ -337,8 +337,8 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-heading font-bold mb-4">{t.section2.title}</h2>
-          <p className="text-lg text-gray-600 mb-8">{t.section2.intro}</p>
+          <h2 className="text-3xl font-heading font-bold mb-4 dark:text-white">{t.section2.title}</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">{t.section2.intro}</p>
           <div className="space-y-6">
             {t.section2.reasons.map((reason, index) => (
               <div key={index} className="flex gap-4 p-6 border border-gray-200 dark:border-neutral-700 rounded-2xl">
@@ -346,7 +346,7 @@ const BlogPage = () => {
                   {index + 1}
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg mb-1">{reason.title}</h3>
+                  <h3 className="font-bold text-lg mb-1 dark:text-white">{reason.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400">{reason.text}</p>
                 </div>
               </div>
@@ -361,11 +361,11 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-heading font-bold mb-8 text-center">{t.comparison.title}</h2>
+          <h2 className="text-3xl font-heading font-bold mb-8 text-center dark:text-white">{t.comparison.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Traditional */}
             <div className="p-8 border border-gray-200 dark:border-neutral-700 rounded-2xl">
-              <h3 className="font-bold text-xl mb-2">{t.comparison.traditional.title}</h3>
+              <h3 className="font-bold text-xl mb-2 dark:text-white">{t.comparison.traditional.title}</h3>
               <p className="text-3xl font-heading font-bold text-red-600 mb-6">{t.comparison.traditional.price}</p>
               <ul className="space-y-3">
                 {t.comparison.traditional.points.map((point, i) => (
@@ -399,12 +399,12 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-heading font-bold mb-4">{t.section3.title}</h2>
-          <p className="text-lg text-gray-600 mb-8">{t.section3.intro}</p>
+          <h2 className="text-3xl font-heading font-bold mb-4 dark:text-white">{t.section3.title}</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">{t.section3.intro}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {t.section3.points.map((point, index) => (
               <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
-                <h3 className="font-bold text-lg mb-2">{point.title}</h3>
+                <h3 className="font-bold text-lg mb-2 dark:text-white">{point.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{point.text}</p>
               </div>
             ))}
@@ -436,8 +436,8 @@ const BlogPage = () => {
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h2 className="text-3xl font-heading font-bold mb-4">{t.conclusion.title}</h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">{t.conclusion.text}</p>
+          <h2 className="text-3xl font-heading font-bold mb-4 dark:text-white">{t.conclusion.title}</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">{t.conclusion.text}</p>
           <Link
             to="/pakketten"
             className="inline-flex items-center justify-center gap-3 bg-gray-500 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-600 transition-all"
@@ -449,7 +449,7 @@ const BlogPage = () => {
       </article>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
+      <footer className="py-8 px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400">Almelo, Nederland</span>

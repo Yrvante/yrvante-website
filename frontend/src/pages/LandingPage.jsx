@@ -317,7 +317,7 @@ const HeroSection = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-gray-500"></span>
               </span>
-              <span className="text-gray-600 group-hover:text-gray-800 transition-colors">
+              <span className="text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-white transition-colors">
                 {language === 'nl' ? 'Beschikbaar voor nieuwe projecten' : 'Available for new projects'}
               </span>
             </button>
@@ -328,7 +328,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 mb-4"
+            className="text-sm font-medium uppercase tracking-[0.25em] text-gray-600 dark:text-gray-400 mb-4"
           >
             {language === 'nl' ? 'Alles wat je nog nodig hebt is' : 'Everything you still need is'}
           </motion.p>
@@ -339,7 +339,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter"
+              className="text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter dark:text-white"
             >
               {language === 'nl' ? (
                 <span className="flex flex-col">
@@ -388,12 +388,12 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.45 }}
             className="flex items-center gap-4 mb-8"
           >
-            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-700">
-              <span>€500</span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-bold text-gray-700 dark:text-gray-300">
+              <span>€349</span>
               <span className="text-gray-400 font-normal">{language === 'nl' ? 'VANAF' : 'FROM'}</span>
             </span>
-            <span className="w-1 h-1 bg-gray-300 rounded-full" />
-            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-700">
+            <span className="w-1 h-1 bg-gray-300 dark:bg-neutral-600 rounded-full" />
+            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-bold text-gray-700 dark:text-gray-300">
               <span>1-2</span>
               <span className="text-gray-400 font-normal">{language === 'nl' ? 'WEKEN' : 'WEEKS'}</span>
             </span>
@@ -415,7 +415,7 @@ const HeroSection = () => {
             </button>
             <Link
               to="/pakketten"
-              className="px-8 py-4 border border-gray-400 text-gray-700 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all rounded-full"
+              className="px-8 py-4 border border-gray-400 dark:border-neutral-600 text-gray-700 dark:text-gray-300 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-all rounded-full"
             >
               {language === 'nl' ? 'Bekijk Werk' : 'View Work'}
             </Link>
@@ -660,7 +660,7 @@ const WhyExpensiveSection = () => {
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-6">
               (05)
             </p>
-            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8">
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 dark:text-white">
               {language === 'nl' 
                 ? 'WAAROM BEN IK GOEDKOPER?' 
                 : 'WHY AM I MORE AFFORDABLE?'}
@@ -672,7 +672,7 @@ const WhyExpensiveSection = () => {
             </p>
             <Link
               to="/waarom-website"
-              className="text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4"
+              className="text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4 dark:text-gray-300"
             >
               {language === 'nl' ? 'Lees meer →' : 'Read more →'}
             </Link>
@@ -685,17 +685,17 @@ const WhyExpensiveSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-5"
           >
-            <div className="border-t border-black pt-8 mb-8">
+            <div className="border-t border-black dark:border-white pt-8 mb-8">
               <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">
                 {language === 'nl' ? 'Bureaus' : 'Agencies'}
               </p>
-              <p className="text-5xl font-black line-through decoration-gray-300">€3.000+</p>
+              <p className="text-5xl font-black line-through decoration-gray-300 dark:text-white">€3.000+</p>
             </div>
-            <div className="border-t border-black pt-8">
+            <div className="border-t border-black dark:border-white pt-8">
               <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">
                 Yrvante
               </p>
-              <p className="text-5xl font-black">€500</p>
+              <p className="text-5xl font-black dark:text-white">€500</p>
               <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-2">
                 {language === 'nl' ? 'Vanaf' : 'Starting from'}
               </p>
@@ -735,9 +735,9 @@ const ServicesSection = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="col-span-12 lg:col-span-6 group"
+            className="col-span-12 lg:col-span-4 group"
           >
-            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors h-full">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
@@ -761,9 +761,9 @@ const ServicesSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="col-span-12 lg:col-span-6 group"
+            className="col-span-12 lg:col-span-4 group"
           >
-            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors h-full">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
@@ -780,19 +780,44 @@ const ServicesSection = () => {
               </p>
             </div>
           </motion.div>
+
+          {/* Service 3 - Rebranding */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="col-span-12 lg:col-span-4 group"
+          >
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors h-full">
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-500">03</span>
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
+                  <RefreshCw size={22} strokeWidth={1.5} className="text-gray-500" />
+                </div>
+              </div>
+              <h3 className="text-2xl lg:text-3xl font-bold dark:text-white mb-4">
+                {language === 'nl' ? 'Rebranding' : 'Rebranding'}
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
+                {language === 'nl'
+                  ? 'Heeft je website een opfrisbeurt nodig? Ik geef je bestaande site een compleet nieuw uiterlijk en betere gebruikservaring.'
+                  : 'Does your website need a refresh? I give your existing site a completely new look and improved user experience.'}
+              </p>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Binnenkort meer */}
+        {/* Bekijk alle diensten */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="mt-8 text-center"
         >
-          <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100/80 dark:bg-neutral-800/80 rounded-full text-sm text-gray-500">
-            <Clock size={14} strokeWidth={1.5} />
-            {language === 'nl' ? 'Meer diensten binnenkort in behandeling' : 'More services coming soon'}
-          </span>
+          <Link to="/diensten" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+            {language === 'nl' ? 'Bekijk alle branches →' : 'View all industries →'}
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -804,6 +829,13 @@ const PricingSection = () => {
   const { language } = useLanguage();
 
   const packages = [
+    {
+      name: language === 'nl' ? 'REBRANDING' : 'REBRANDING',
+      price: '349',
+      features: language === 'nl' 
+        ? ['Bestaande website vernieuwen', 'Modern nieuw design', 'Responsive optimalisatie', 'Verbeterde UX']
+        : ['Existing website refresh', 'Modern new design', 'Responsive optimization', 'Improved UX'],
+    },
     {
       name: language === 'nl' ? 'BASIS' : 'BASIC',
       price: '500',
@@ -851,7 +883,7 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
@@ -871,14 +903,14 @@ const PricingSection = () => {
               )}
 
               <div className="flex justify-between items-start mb-10 pt-2">
-                <h3 className="text-xl font-bold tracking-tight">{pkg.name}</h3>
+                <h3 className="text-xl font-bold tracking-tight dark:text-white">{pkg.name}</h3>
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-400 group-hover:text-gray-500">
                   0{index + 1}
                 </span>
               </div>
 
               <div className="mb-10">
-                <span className="text-5xl lg:text-6xl font-black">€{pkg.price}</span>
+                <span className="text-5xl lg:text-6xl font-black dark:text-white">€{pkg.price}</span>
                 <p className="text-xs uppercase tracking-[0.2em] mt-2 text-gray-500 group-hover:text-gray-400">
                   {language === 'nl' ? 'Excl. BTW' : 'Excl. VAT'}
                 </p>
@@ -886,7 +918,7 @@ const PricingSection = () => {
 
               <ul className="space-y-3 mb-10">
                 {pkg.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm">
+                  <li key={i} className="flex items-center gap-3 text-sm dark:text-gray-300">
                     <Check size={14} className="text-green-500" />
                     {feature}
                   </li>
@@ -953,7 +985,7 @@ const TestimonialsSection = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-16 text-gray-800">
+    <section id="testimonials" className="py-16 text-gray-800 dark:text-white">
       <div className="container-yrvante">
         <motion.div
           className="text-center mb-12"
@@ -961,7 +993,7 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold dark:text-white">
             {language === 'nl' ? 'Wat klanten zeggen' : 'What clients say'}
           </h2>
         </motion.div>
@@ -992,7 +1024,7 @@ const TestimonialsSection = () => {
           <div className="flex justify-center gap-4 mt-10">
             <button
               onClick={prev}
-              className="p-3 border border-gray-300 rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
+              className="p-3 border border-gray-300 dark:border-neutral-600 rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
             >
               <ChevronLeft size={20} />
             </button>
@@ -1002,14 +1034,14 @@ const TestimonialsSection = () => {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    i === current ? 'w-6 bg-gray-500' : 'bg-gray-300'
+                    i === current ? 'w-6 bg-gray-500' : 'bg-gray-300 dark:bg-neutral-600'
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={next}
-              className="p-3 border border-gray-300 rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
+              className="p-3 border border-gray-300 dark:border-neutral-600 rounded-full hover:bg-gray-500 hover:text-white hover:border-gray-500 transition-colors"
             >
               <ChevronRight size={20} />
             </button>

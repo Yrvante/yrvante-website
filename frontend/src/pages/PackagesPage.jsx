@@ -162,6 +162,34 @@ const BookingDemoWidget = ({ language }) => {
   );
 };
 
+const RebrandingPakketDemo = ({ isPopular, language }) => (
+  <div className={`mt-5 rounded-2xl overflow-hidden border ${isPopular ? 'border-gray-500' : 'border-gray-200 dark:border-neutral-700'}`}>
+    <div className={`${isPopular ? 'bg-gray-800' : 'bg-gray-900'} px-3 py-2 flex items-center justify-between`}>
+      <p className="text-xs text-gray-400">{language === 'nl' ? 'Voor' : 'Before'}</p>
+      <ArrowRight size={12} className="text-gray-500" />
+      <p className="text-xs text-green-400 font-medium">{language === 'nl' ? 'Na' : 'After'}</p>
+    </div>
+    <div className="grid grid-cols-2">
+      <div className={`${isPopular ? 'bg-gray-700' : 'bg-gray-100 dark:bg-neutral-800'} p-3 border-r ${isPopular ? 'border-gray-600' : 'border-gray-200 dark:border-neutral-700'}`}>
+        <div className="space-y-1.5 opacity-50">
+          <div className={`h-2 w-16 ${isPopular ? 'bg-gray-500' : 'bg-gray-300 dark:bg-neutral-600'} rounded-full`} />
+          <div className={`h-1.5 ${isPopular ? 'bg-gray-600' : 'bg-gray-200 dark:bg-neutral-700'} rounded-full`} />
+          <div className={`h-1.5 ${isPopular ? 'bg-gray-600' : 'bg-gray-200 dark:bg-neutral-700'} rounded-full w-4/5`} />
+          <div className={`h-6 ${isPopular ? 'bg-gray-600' : 'bg-gray-200 dark:bg-neutral-700'} rounded mt-2`} />
+        </div>
+      </div>
+      <div className={`${isPopular ? 'bg-gray-700' : 'bg-gray-50 dark:bg-neutral-800'} p-3`}>
+        <div className="space-y-1.5">
+          <div className={`h-2 w-16 ${isPopular ? 'bg-gray-400' : 'bg-gray-900 dark:bg-white'} rounded-full`} />
+          <div className={`h-1.5 ${isPopular ? 'bg-gray-500' : 'bg-gray-400 dark:bg-neutral-400'} rounded-full`} />
+          <div className={`h-1.5 ${isPopular ? 'bg-gray-500' : 'bg-gray-400 dark:bg-neutral-400'} rounded-full w-4/5`} />
+          <div className={`h-6 ${isPopular ? 'bg-green-600' : 'bg-gray-900 dark:bg-white'} rounded mt-2`} />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 // --- Pakket Demo Components (monochroom) ---
 
 const BasisPakketDemo = ({ isPopular, language }) => (
@@ -411,6 +439,29 @@ const PackagesPage = () => {
 
   const packages = [
     {
+      id: 'rebranding',
+      name: language === 'nl' ? 'Rebranding Pakket' : 'Rebranding Package',
+      price: 349,
+      description: language === 'nl' 
+        ? 'Heeft je website een opfrisbeurt nodig? Ik geef je bestaande site een compleet nieuw uiterlijk.'
+        : 'Does your website need a refresh? I give your existing site a completely new look.',
+      includes: [
+        language === 'nl' ? 'Compleet nieuw design voor bestaande website' : 'Complete new design for existing website',
+        language === 'nl' ? 'Moderne layout & styling' : 'Modern layout & styling',
+        language === 'nl' ? 'Responsive optimalisatie (mobiel, tablet, desktop)' : 'Responsive optimization (mobile, tablet, desktop)',
+        language === 'nl' ? 'Verbeterde gebruikservaring (UX)' : 'Improved user experience (UX)',
+        language === 'nl' ? 'Snelheidsoptimalisatie' : 'Speed optimization',
+      ],
+      notIncluded: [
+        language === 'nl' ? 'Extra pagina\'s toevoegen' : 'Adding extra pages',
+        language === 'nl' ? 'SEO-optimalisatie' : 'SEO optimization',
+        language === 'nl' ? 'Nieuwe content / teksten schrijven' : 'New content / copywriting',
+      ],
+      idealFor: language === 'nl' ? 'Bestaande bedrijven, Website vernieuwing' : 'Existing businesses, Website renewal',
+      deliveryTime: language === 'nl' ? '~ 1 week' : '~ 1 week',
+      popular: false,
+    },
+    {
       id: 'basic',
       name: language === 'nl' ? 'Basis Website Pakket' : 'Basic Website Package',
       price: 500,
@@ -577,7 +628,7 @@ const PackagesPage = () => {
             <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-6">
               {language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing'}
             </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto mb-4">
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-4">
               {language === 'nl' 
                 ? 'Kies het pakket dat bij je bedrijf past. Alle prijzen zijn exclusief BTW.'
                 : 'Choose the package that fits your business. All prices exclude VAT.'}
@@ -594,17 +645,17 @@ const PackagesPage = () => {
       {/* Packages */}
       <section className="py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative rounded-3xl p-8 ${
+                className={`relative rounded-3xl p-7 ${
                   pkg.popular 
-                    ? 'bg-gray-600 text-white scale-105 shadow-2xl z-10' 
-                    : 'bg-white border border-gray-200 dark:border-neutral-700 shadow-lg'
+                    ? 'bg-gray-600 text-white shadow-2xl z-10' 
+                    : 'bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 shadow-lg'
                 }`}
               >
                 {pkg.popular && (
@@ -667,6 +718,7 @@ const PackagesPage = () => {
                   </div>
                 )}
 
+                {pkg.id === 'rebranding' && <RebrandingPakketDemo isPopular={pkg.popular} language={language} />}
                 {pkg.id === 'basic'   && <BasisPakketDemo   isPopular={pkg.popular} language={language} />}
                 {pkg.id === 'pro'     && <ProPakketDemo     isPopular={pkg.popular} language={language} />}
                 {pkg.id === 'premium' && <PremiumPakketDemo isPopular={pkg.popular} language={language} />}
@@ -688,7 +740,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Losse Prijzen Section */}
-      <section className="py-16 px-6 md:px-12 bg-gray-50">
+      <section className="py-16 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -696,10 +748,10 @@ const PackagesPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 dark:text-white">
               {language === 'nl' ? 'Losse Extra\'s Toevoegen' : 'Add Individual Extras'}
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
+            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
               {language === 'nl'
                 ? 'Wil je iets extra\'s bij je pakket? Hier zijn de losse prijzen.'
                 : 'Want to add something extra to your package? Here are the individual prices.'}
@@ -716,19 +768,19 @@ const PackagesPage = () => {
                 transition={{ delay: index * 0.05 }}
                 className="text-center p-5 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700"
               >
-                <p className="text-2xl font-bold mb-1">{item.price}</p>
+                <p className="text-2xl font-bold mb-1 dark:text-white">{item.price}</p>
                 <p className="text-sm text-gray-500">{item.name}</p>
               </motion.div>
             ))}
           </div>
 
           <motion.div
-            className="bg-yellow-50 border border-yellow-200 rounded-3xl p-6 text-center"
+            className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-3xl p-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-lg text-yellow-800">
+            <p className="text-lg text-yellow-800 dark:text-yellow-200">
               <span className="font-bold">💡 Tip:</span> {language === 'nl' 
                 ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
                 : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
@@ -738,7 +790,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Extra possibilities - centered, no prices */}
-      <section className="py-20 px-6 md:px-12 bg-white border-t border-gray-100">
+      <section className="py-20 px-6 md:px-12 bg-white dark:bg-neutral-950 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -746,10 +798,10 @@ const PackagesPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-heading font-bold mb-4">
+            <h2 className="text-4xl font-heading font-bold mb-4 dark:text-white">
               {language === 'nl' ? 'Extra Mogelijkheden' : 'Extra Possibilities'}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {language === 'nl'
                 ? 'Breid uw website uit met deze handige opties. Vraag naar de mogelijkheden.'
                 : 'Expand your website with these useful options. Ask about the possibilities.'}
@@ -770,9 +822,9 @@ const PackagesPage = () => {
                   <div className="w-11 h-11 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">
                     {extra.icon}
                   </div>
-                  <h3 className="font-bold text-base">{extra.title}</h3>
+                  <h3 className="font-bold text-base dark:text-white">{extra.title}</h3>
                 </div>
-                <p className="text-sm text-gray-600 mb-1">{extra.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{extra.description}</p>
                 {extra.key === 'pages'       && <ExtraPagesDemo language={language} />}
                 {extra.key === 'multilang'   && <MultiLangDemo language={language} />}
                 {extra.key === 'form'        && <ContactFormDemo language={language} />}
@@ -801,7 +853,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Booking System Detail - with live interactive demo */}
-      <section className="py-20 px-6 md:px-12">
+      <section className="py-20 px-6 md:px-12 dark:bg-neutral-950">
         <div className="max-w-5xl mx-auto">
           <div className="bg-gray-700 text-white rounded-3xl p-8 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -854,17 +906,17 @@ const PackagesPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 md:px-12 bg-white border-t border-gray-100">
+      <section className="py-20 px-6 md:px-12 bg-white dark:bg-neutral-950 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 dark:text-white">
               {language === 'nl' ? 'Vragen? Neem contact op' : 'Questions? Get in touch'}
             </h2>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
               {language === 'nl'
                 ? 'Ik help je graag bij het kiezen van het juiste pakket. Bel of mail mij — vrijblijvend en zonder verplichtingen.'
                 : 'I\'d be happy to help you choose the right package. Call or email me — no obligations.'}
@@ -889,7 +941,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
+      <footer className="py-8 px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400">© {new Date().getFullYear()} Yrvante</span>

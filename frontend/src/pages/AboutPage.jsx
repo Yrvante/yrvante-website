@@ -142,7 +142,7 @@ const AboutPage = () => {
               <p className="text-xl md:text-2xl leading-relaxed text-gray-800 dark:text-gray-200 font-light">
                 {t.intro}
               </p>
-              <div className="w-16 h-px bg-black"></div>
+              <div className="w-16 h-px bg-black dark:bg-white"></div>
               <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-400">
                 {t.goal}
               </p>
@@ -192,7 +192,7 @@ const AboutPage = () => {
       </section>
 
       {/* Values */}
-      <section className="py-24 px-6 md:px-12 bg-gray-50">
+      <section className="py-24 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             className="text-3xl md:text-4xl font-heading font-thin dark:text-white mb-16"
@@ -213,10 +213,10 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="bg-white dark:bg-neutral-900 p-8 rounded-3xl border border-gray-200 dark:border-neutral-700 h-full transition-all duration-300 hover:border-black hover:shadow-lg">
-                  <div className="mb-6 text-gray-400 group-hover:text-black transition-colors">{value.icon}</div>
-                  <h3 className="text-xl font-heading mb-4">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <div className="bg-white dark:bg-neutral-900 p-8 rounded-3xl border border-gray-200 dark:border-neutral-700 h-full transition-all duration-300 hover:border-black dark:hover:border-neutral-500 hover:shadow-lg">
+                  <div className="mb-6 text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">{value.icon}</div>
+                  <h3 className="text-xl font-heading mb-4 dark:text-white">{value.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{value.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -225,7 +225,7 @@ const AboutPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 md:px-12 bg-gray-50">
+      <section className="py-24 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -247,7 +247,7 @@ const AboutPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
+      <footer className="py-8 px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>

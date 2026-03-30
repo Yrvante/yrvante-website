@@ -673,7 +673,7 @@ const CalculatorPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <h2 className="text-2xl font-heading font-bold mb-6">{t.step1}</h2>
+              <h2 className="text-2xl font-heading font-bold mb-6 dark:text-white">{t.step1}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {Object.entries(t.packages).map(([key, pkg]) => (
                   <div
@@ -682,8 +682,8 @@ const CalculatorPage = () => {
                     onClick={() => handlePackageChange(key)}
                     className={`relative cursor-pointer p-6 rounded-3xl border-2 transition-all ${
                       selectedPackage === key 
-                        ? 'border-black bg-gray-50 shadow-lg' 
-                        : 'border-gray-200 hover:border-gray-400'
+                        ? 'border-black dark:border-white bg-gray-50 dark:bg-neutral-800 shadow-lg' 
+                        : 'border-gray-200 dark:border-neutral-700 hover:border-gray-400'
                     }`}
                   >
                     {pkg.popular && (
@@ -695,7 +695,7 @@ const CalculatorPage = () => {
                     
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="font-bold">{pkg.name}</h3>
+                        <h3 className="font-bold dark:text-white">{pkg.name}</h3>
                         <p className="text-gray-500 text-sm mt-1">{pkg.description}</p>
                       </div>
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
@@ -705,7 +705,7 @@ const CalculatorPage = () => {
                       </div>
                     </div>
                     
-                    <p className="text-3xl font-heading font-bold mb-4">€{pkg.price}</p>
+                    <p className="text-3xl font-heading font-bold mb-4 dark:text-white">€{pkg.price}</p>
                     
                     <ul className="space-y-2">
                       {pkg.includes.map((item, i) => (
@@ -726,38 +726,38 @@ const CalculatorPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <h2 className="text-2xl font-heading font-bold mb-2">{t.step2}</h2>
+              <h2 className="text-2xl font-heading font-bold mb-2 dark:text-white">{t.step2}</h2>
               <p className="text-gray-500 text-sm mb-6">{t.optional}</p>
               
               {/* Losse prijzen overzicht */}
-              <div className="mb-8 p-6 bg-gray-50 border border-gray-200 dark:border-neutral-700 rounded-3xl">
-                <h3 className="font-bold text-lg mb-4">
+              <div className="mb-8 p-6 bg-gray-50 dark:bg-neutral-800/60 border border-gray-200 dark:border-neutral-700 rounded-3xl">
+                <h3 className="font-bold text-lg mb-4 dark:text-white">
                   {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
-                    <p className="text-2xl font-bold">€50</p>
+                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                    <p className="text-2xl font-bold dark:text-white">€50</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
-                    <p className="text-2xl font-bold">€200</p>
+                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                    <p className="text-2xl font-bold dark:text-white">€200</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
-                    <p className="text-2xl font-bold">€80</p>
+                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                    <p className="text-2xl font-bold dark:text-white">€80</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
-                    <p className="text-2xl font-bold">€25<span className="text-sm text-gray-500">/pm</span></p>
+                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                    <p className="text-2xl font-bold dark:text-white">€25<span className="text-sm text-gray-500">/pm</span></p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white border border-gray-200 dark:border-neutral-700 rounded-2xl">
-                    <p className="text-2xl font-bold">€250</p>
+                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                    <p className="text-2xl font-bold dark:text-white">€250</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
                   </div>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
-                  <p className="text-sm text-yellow-800">
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-2xl p-4">
+                  <p className="text-sm text-yellow-800 dark:text-yellow-200">
                     <span className="font-bold">💡 Tip:</span> {language === 'nl' 
                       ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
                       : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
@@ -770,7 +770,7 @@ const CalculatorPage = () => {
                 <div className="p-5 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl border border-gray-200 dark:border-neutral-700">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h4 className="font-medium">{t.addOns.extraPages.title}</h4>
+                      <h4 className="font-medium dark:text-white">{t.addOns.extraPages.title}</h4>
                       <p className="text-sm text-gray-500">{t.addOns.extraPages.description}</p>
                     </div>
                     <div className="flex items-center gap-4">
@@ -782,7 +782,7 @@ const CalculatorPage = () => {
                         >
                           <Minus size={16} />
                         </button>
-                        <span className="w-10 text-center font-mono font-bold text-lg">{addOns.extraPages}</span>
+                        <span className="w-10 text-center font-mono font-bold text-lg dark:text-white">{addOns.extraPages}</span>
                         <button
                           onClick={() => adjustExtraPages(1)}
                           className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-xl hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-7000 hover:text-white transition-all"
@@ -820,17 +820,17 @@ const CalculatorPage = () => {
                       onClick={() => toggleAddOn(key)}
                       className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                         addOns[key] 
-                          ? 'border-black bg-gray-50 shadow-md' 
-                          : 'border-gray-200 bg-white hover:border-gray-400'
+                          ? 'border-black dark:border-white bg-gray-50 dark:bg-neutral-800 shadow-md' 
+                          : 'border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:border-gray-400'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
-                          <h4 className="font-medium">{addon.title}</h4>
+                          <h4 className="font-medium dark:text-white">{addon.title}</h4>
                           <p className="text-sm text-gray-500">{addon.description}</p>
                         </div>
                         <div className="flex items-center gap-4">
-                          <span className="text-sm font-mono font-bold">€{addon.price} <span className="font-normal text-gray-400">{addon.unit}</span></span>
+                          <span className="text-sm font-mono font-bold dark:text-white">€{addon.price} <span className="font-normal text-gray-400">{addon.unit}</span></span>
                           <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
                             addOns[key] ? 'border-gray-500 bg-gray-500' : 'border-gray-300'
                           }`}>
@@ -861,7 +861,7 @@ const CalculatorPage = () => {
               transition={{ delay: 0.6 }}
               className="sticky top-28"
             >
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-900 dark:text-gray-100 p-8 rounded-3xl shadow-xl border border-gray-300" data-testid="price-summary">
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-neutral-800 dark:to-neutral-900 text-gray-900 dark:text-gray-100 p-8 rounded-3xl shadow-xl border border-gray-300 dark:border-neutral-700" data-testid="price-summary">
                 <h3 className="font-heading text-xl font-bold mb-6">{t.summary}</h3>
                 
                 {/* Package */}
@@ -943,7 +943,7 @@ const CalculatorPage = () => {
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check size={40} className="text-green-500" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">{t.successTitle}</h3>
+                  <h3 className="text-2xl font-bold mb-2 dark:text-white">{t.successTitle}</h3>
                   <p className="text-gray-500 dark:text-gray-400 mb-8">{t.successMessage}</p>
                   <button
                     onClick={() => {
@@ -961,12 +961,12 @@ const CalculatorPage = () => {
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h3 className="text-2xl font-bold">{t.formTitle}</h3>
+                      <h3 className="text-2xl font-bold dark:text-white">{t.formTitle}</h3>
                       <p className="text-gray-500 text-sm mt-1">{t.formSubtitle}</p>
                     </div>
                     <button
                       onClick={() => setShowQuoteForm(false)}
-                      className="text-gray-400 hover:text-black transition-colors p-2"
+                      className="text-gray-400 hover:text-black dark:hover:text-white transition-colors p-2"
                     >
                       ✕
                     </button>
@@ -1032,7 +1032,7 @@ const CalculatorPage = () => {
                   {/* Form */}
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">{t.nameLabel} *</label>
+                      <label className="block text-sm font-medium mb-2 dark:text-white">{t.nameLabel} *</label>
                       <div className="relative">
                         <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
@@ -1041,13 +1041,13 @@ const CalculatorPage = () => {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder={t.namePlaceholder}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black dark:focus:border-white dark:bg-neutral-800 dark:text-white transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">{t.emailLabel} *</label>
+                      <label className="block text-sm font-medium mb-2 dark:text-white">{t.emailLabel} *</label>
                       <div className="relative">
                         <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
@@ -1056,13 +1056,13 @@ const CalculatorPage = () => {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder={t.emailPlaceholder}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black dark:focus:border-white dark:bg-neutral-800 dark:text-white transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">{t.phoneLabel}</label>
+                      <label className="block text-sm font-medium mb-2 dark:text-white">{t.phoneLabel}</label>
                       <div className="relative">
                         <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
@@ -1070,13 +1070,13 @@ const CalculatorPage = () => {
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder={t.phonePlaceholder}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black dark:focus:border-white dark:bg-neutral-800 dark:text-white transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">{t.messageLabel}</label>
+                      <label className="block text-sm font-medium mb-2 dark:text-white">{t.messageLabel}</label>
                       <div className="relative">
                         <MessageSquare size={18} className="absolute left-4 top-4 text-gray-400" />
                         <textarea
@@ -1084,7 +1084,7 @@ const CalculatorPage = () => {
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder={t.messagePlaceholder}
                           rows={3}
-                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black transition-colors resize-none"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-neutral-700 rounded-2xl focus:outline-none focus:border-black dark:focus:border-white dark:bg-neutral-800 dark:text-white transition-colors resize-none"
                         />
                       </div>
                     </div>
@@ -1115,7 +1115,7 @@ const CalculatorPage = () => {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 border-t border-gray-100">
+      <footer className="py-8 px-6 md:px-12 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
           <span className="text-sm text-gray-400 font-mono">© {new Date().getFullYear()}</span>

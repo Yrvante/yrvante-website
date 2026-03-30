@@ -178,7 +178,7 @@ const WhyWebsitePage = () => {
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="flex items-center">
-              <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
+              <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 w-auto hidden dark:block" />
             </Link>
             <div className="flex items-center gap-4">
               <Link 
@@ -252,17 +252,17 @@ const WhyWebsitePage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center mb-8">
-                <Search size={28} className="text-gray-600" />
+              <div className="w-16 h-16 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-8">
+                <Search size={28} className="text-gray-600 dark:text-gray-400" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 dark:text-white">
                 {t.section1Title}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
                 {t.section1Text}
               </p>
-              <div className="p-6 bg-red-50 border-l-4 border-red-500 rounded-r-2xl">
-                <p className="text-red-800 font-medium">
+              <div className="p-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded-r-2xl">
+                <p className="text-red-800 dark:text-red-300 font-medium">
                   {t.section1Warning}
                 </p>
               </div>
@@ -299,7 +299,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 2 - The Myth & Comparison */}
-      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-50">
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -307,10 +307,10 @@ const WhyWebsitePage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 dark:text-white">
               {t.mythTitle}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {t.mythText}
             </p>
           </motion.div>
@@ -375,13 +375,13 @@ const WhyWebsitePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8 dark:text-white">
               {t.solutionTitle}
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed mb-4">
+            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
               {t.solutionText}
             </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
               {t.solutionText2}
             </p>
           </motion.div>
@@ -430,16 +430,16 @@ const WhyWebsitePage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 dark:text-white">
                 {t.goalTitle}<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600">
                   {t.goalHighlight}
                 </span>
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                 {t.goalText}
               </p>
-              <p className="text-2xl font-heading font-bold">
+              <p className="text-2xl font-heading font-bold dark:text-white">
                 {t.goalTagline}
               </p>
             </motion.div>
@@ -450,7 +450,7 @@ const WhyWebsitePage = () => {
               viewport={{ once: true }}
               className="text-center lg:text-right"
             >
-              <p className="text-6xl md:text-8xl font-heading font-bold text-gray-100 leading-tight">
+              <p className="text-6xl md:text-8xl font-heading font-bold text-gray-100 dark:text-neutral-800 leading-tight">
                 {language === 'nl' ? 'Zichtbaar' : 'Being'}<br />
                 {language === 'nl' ? 'zijn.' : 'visible.'}
               </p>
@@ -460,7 +460,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-16 px-6 md:px-12 bg-gray-50">
+      <section className="py-16 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.packages.map((pkg, index) => (
@@ -480,7 +480,7 @@ const WhyWebsitePage = () => {
                 <p className={`text-sm uppercase tracking-wider mb-2 ${index === 1 ? 'text-gray-400' : 'text-gray-500'}`}>
                   {pkg.name}
                 </p>
-                <p className="text-4xl font-heading font-bold mb-2">{pkg.price}</p>
+                <p className="text-4xl font-heading font-bold mb-2 dark:text-white">{pkg.price}</p>
                 <p className={`text-sm ${index === 1 ? 'text-gray-400' : 'text-gray-500'}`}>
                   {pkg.desc}
                 </p>
@@ -498,10 +498,10 @@ const WhyWebsitePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 dark:text-white">
               {t.ctaTitle}
             </h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
               {t.ctaText}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -524,10 +524,10 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 md:px-12 bg-gray-100 text-gray-700 dark:text-gray-300">
+      <footer className="py-12 px-6 md:px-12 bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto" />
+            <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 w-auto hidden dark:block" />
             <div className="flex items-center gap-8 text-sm text-gray-500">
               <a href="mailto:info@yrvante.com" className="hover:text-gray-700 dark:text-gray-300 transition-colors flex items-center gap-2">
                 <Mail size={16} />

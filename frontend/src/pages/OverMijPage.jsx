@@ -135,14 +135,14 @@ const OverMijPage = () => {
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Over Mij' : 'About Me'}
               </p>
-              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
+              <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight dark:text-white">
                 {language === 'nl' ? (
                   <>Geen bureau.<br/>Geen tussenlagen.<br/><span className="text-gray-400">Geen bullshit.</span></>
                 ) : (
                   <>No agency.<br/>No middlemen.<br/><span className="text-gray-400">No bullshit.</span></>
                 )}
               </h1>
-              <p className="text-gray-600 leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                 {language === 'nl'
                   ? 'Ik ben Yvar, de oprichter van Yrvante. Bij mij werk je rechtstreeks met de persoon die jouw website bouwt — geen account managers, geen vergaderingen, geen verrassingen.'
                   : "I'm Yvar, the founder of Yrvante. With me you work directly with the person who builds your website — no account managers, no meetings, no surprises."}
@@ -186,13 +186,13 @@ const OverMijPage = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-neutral-950">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Mijn Aanpak' : 'My Approach'}
             </p>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight dark:text-white">
               {language === 'nl' ? 'Waar ik voor sta' : 'What I stand for'}
             </h2>
           </div>
@@ -207,11 +207,11 @@ const OverMijPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
               >
-                <div className="w-12 h-12 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
-                  <value.icon className="text-gray-600" size={24} />
+                <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-4">
+                  <value.icon className="text-gray-600 dark:text-gray-400" size={24} />
                 </div>
-                <h3 className="font-bold text-lg mb-2">{value.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
+                <h3 className="font-bold text-lg mb-2 dark:text-white">{value.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -219,13 +219,13 @@ const OverMijPage = () => {
       </section>
 
       {/* Timeline / Story Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-[900px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
               {language === 'nl' ? 'Mijn Verhaal' : 'My Story'}
             </p>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight dark:text-white">
               {language === 'nl' ? 'Van precisie naar pixels' : 'From precision to pixels'}
             </h2>
           </div>
@@ -246,8 +246,8 @@ const OverMijPage = () => {
                   </span>
                 </div>
                 <div className="flex-1 bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-200 dark:border-neutral-700">
-                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                  <h3 className="font-bold text-lg mb-2 dark:text-white">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -263,12 +263,12 @@ const OverMijPage = () => {
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
                 {language === 'nl' ? 'Eerlijk Gezegd' : 'Honestly'}
               </p>
-              <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
                 {language === 'nl' 
                   ? 'Waarom ik goedkoper ben dan bureaus' 
                   : 'Why I am cheaper than agencies'}
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                 {language === 'nl'
                   ? 'Bij een groot bureau betaal je voor overhead, kantoorruimte, account managers, projectmanagers en vergaderingen over vergaderingen. Al die kosten worden doorberekend in jouw factuur.'
                   : 'At a big agency you pay for overhead, office space, account managers, project managers and meetings about meetings. All those costs are passed on in your invoice.'}
@@ -281,9 +281,9 @@ const OverMijPage = () => {
             </div>
 
             <div className="space-y-4">
-              <div className="bg-gray-200 rounded-2xl p-6 border border-gray-300">
+              <div className="bg-gray-200 dark:bg-neutral-700 rounded-2xl p-6 border border-gray-300 dark:border-neutral-600">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-600 text-sm">{language === 'nl' ? 'Gemiddeld bureau' : 'Average agency'}</span>
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">{language === 'nl' ? 'Gemiddeld bureau' : 'Average agency'}</span>
                   <span className="text-red-500 text-2xl font-black line-through">€3.000 - €8.000</span>
                 </div>
                 <div className="text-xs text-gray-500">
@@ -293,9 +293,9 @@ const OverMijPage = () => {
                 </div>
               </div>
 
-              <div className="bg-white text-black rounded-2xl p-6">
+              <div className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl p-6">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-600 text-sm">Yrvante</span>
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">Yrvante</span>
                   <span className="text-green-600 text-2xl font-black">{language === 'nl' ? 'Vanaf' : 'From'} €500</span>
                 </div>
                 <div className="text-xs text-gray-500">
@@ -310,14 +310,14 @@ const OverMijPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-neutral-950">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
-          <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+          <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
             {language === 'nl' 
               ? 'Klaar om samen te werken?' 
               : 'Ready to work together?'}
           </h2>
-          <p className="text-gray-600 mb-8 max-w-md mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto">
             {language === 'nl'
               ? 'Laten we in gesprek gaan over jouw project. Geen verplichtingen, gewoon een eerlijk advies.'
               : "Let's talk about your project. No obligations, just honest advice."}
@@ -340,7 +340,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-50 border-t border-gray-200 dark:border-neutral-800">
+      <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />
