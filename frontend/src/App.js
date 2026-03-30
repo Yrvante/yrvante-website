@@ -270,7 +270,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/about" element={<AboutPage />} />
+            <Route path="/about" element={<Navigate to="/over-mij" replace />} />
             <Route path="/over-mij" element={<OverMijPage />} />
             <Route path="/waarom-website" element={<WhyWebsitePage />} />
             <Route path="/calculator" element={<CalculatorPage />} />
