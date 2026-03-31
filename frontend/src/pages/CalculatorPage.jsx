@@ -11,7 +11,6 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 // On Vercel (production), use relative path for serverless functions
 // In development/preview, use the full backend URL
 const API_BASE = API_URL ? `${API_URL}/api` : '/api';
-const BG_IMAGE = "/bg-pattern.jpg";
 const LOGO_URL = "/logo.png";
 const LOGO_URL_WHITE = "/logo-white.png";
 
@@ -649,10 +648,7 @@ const CalculatorPage = () => {
   };
 
   return (
-    <div className="min-h-screen relative" data-testid="calculator-page">
-      {/* Fixed Background - Continuous flowing pattern */}
-      <div className="fixed inset-0 -z-10" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'saturate(0.5) brightness(1.02) contrast(1.05)'}} />
-      <div className="fixed inset-0 -z-10 bg-white/62 dark:bg-neutral-950/95" />
+    <div className="min-h-screen relative bg-gray-50 dark:bg-neutral-950" data-testid="calculator-page">
       <SEO page="/calculator" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">

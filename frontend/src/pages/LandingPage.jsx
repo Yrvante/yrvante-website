@@ -681,7 +681,7 @@ const WhyExpensiveSection = () => {
             className="col-span-12 lg:col-span-7"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-6">
-              (03)
+              (02)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 dark:text-white">
               {language === 'nl' 
@@ -884,7 +884,7 @@ const PricingSection = () => {
         {/* Header */}
         <div className="grid grid-cols-12 gap-4 mb-12 sm:mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">(02)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">(03)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-black dark:text-white">
@@ -1635,9 +1635,9 @@ const LandingPage = () => {
         <SEO page="/" />
         <Navigation />
         <HeroSection />
+        <WhyExpensiveSection />
         <PricingSection />
         <GoogleReviews />
-        <WhyExpensiveSection />
         <ServicesSection />
         <ProcessSection />
         <ExpertiseSection />
