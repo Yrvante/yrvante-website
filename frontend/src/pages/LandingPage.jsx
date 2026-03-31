@@ -846,124 +846,153 @@ const ServicesSection = () => {
   );
 };
 
-// Pricing Section - Brutalist Editorial
+// Pricing Section - Comparison Table
 const PricingSection = () => {
   const { language } = useLanguage();
 
-  const packages = [
-    {
-      name: language === 'nl' ? 'REBRANDING WEBSITE' : 'REBRANDING WEBSITE',
-      price: '349',
-      features: language === 'nl' 
-        ? ['Bestaande website vernieuwen', 'Modern nieuw design', 'Responsive optimalisatie', 'Verbeterde UX']
-        : ['Existing website refresh', 'Modern new design', 'Responsive optimization', 'Improved UX'],
-    },
-    {
-      name: language === 'nl' ? 'BASIS WEBSITE' : 'BASIC WEBSITE',
-      price: '500',
-      features: language === 'nl' 
-        ? ['Tot 3 pagina\'s', 'Responsive design', 'Snelle hosting', 'Basis contact']
-        : ['Up to 3 pages', 'Responsive design', 'Fast hosting', 'Basic contact'],
-    },
-    {
-      name: 'PRO WEBSITE',
-      price: '900',
-      popular: true,
-      features: language === 'nl'
-        ? ['Tot 10 pagina\'s', 'SEO optimalisatie', 'Blog & Portfolio', 'Contactformulier']
-        : ['Up to 10 pages', 'SEO optimization', 'Blog & Portfolio', 'Contact form'],
-    },
-    {
-      name: 'PREMIUM WEBSITE',
-      price: '1400',
-      features: language === 'nl'
-        ? ['Tot 15 pagina\'s', 'Boekingssysteem', 'Meertalig', 'Priority support']
-        : ['Up to 15 pages', 'Booking system', 'Multi-language', 'Priority support'],
-    }
+  const pkgs = [
+    { key: 'rebranding', name: language === 'nl' ? 'Rebranding' : 'Rebranding', price: '349', pages: language === 'nl' ? 'Bestaand' : 'Existing' },
+    { key: 'basis', name: language === 'nl' ? 'Basis' : 'Basic', price: '500', pages: '1-3' },
+    { key: 'pro', name: 'Pro', price: '900', popular: true, pages: '1-10' },
+    { key: 'premium', name: 'Premium', price: '1400', pages: '1-15' },
   ];
+
+  const features = [
+    { label: language === 'nl' ? 'Responsive design' : 'Responsive design', r: true, b: true, p: true, pr: true },
+    { label: language === 'nl' ? 'Aantal pagina\'s' : 'Number of pages', r: 'pages', b: 'pages', p: 'pages', pr: 'pages' },
+    { label: language === 'nl' ? 'Hosting & SSL' : 'Hosting & SSL', r: true, b: true, p: true, pr: true },
+    { label: language === 'nl' ? 'Contactformulier' : 'Contact form', r: false, b: true, p: true, pr: true },
+    { label: language === 'nl' ? 'SEO optimalisatie' : 'SEO optimization', r: false, b: false, p: true, pr: true },
+    { label: language === 'nl' ? 'Blog / Portfolio' : 'Blog / Portfolio', r: false, b: false, p: true, pr: true },
+    { label: language === 'nl' ? 'Boekingssysteem' : 'Booking system', r: false, b: false, p: false, pr: true },
+    { label: language === 'nl' ? 'Meertalig' : 'Multi-language', r: false, b: false, p: false, pr: true },
+    { label: language === 'nl' ? 'Priority support' : 'Priority support', r: false, b: false, p: false, pr: true },
+    { label: language === 'nl' ? 'Nieuw design' : 'New design', r: true, b: true, p: true, pr: true },
+  ];
+
+  const getVal = (feat, pkgIdx) => {
+    const keys = ['r', 'b', 'p', 'pr'];
+    const val = feat[keys[pkgIdx]];
+    if (val === 'pages') return pkgs[pkgIdx].pages;
+    return val;
+  };
 
   return (
     <section id="pricing" className="py-24 lg:py-32">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        {/* Section Header */}
-        <div className="grid grid-cols-12 gap-4 mb-16">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
+        {/* Header */}
+        <div className="grid grid-cols-12 gap-4 mb-12 sm:mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">
-              (06)
-            </p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">(06)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-black dark:text-white">
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-black dark:text-white">
               {language === 'nl' ? 'PAKKETTEN' : 'PACKAGES'}
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-lg">
-              {language === 'nl' 
-                ? 'Transparante prijzen. Geen verborgen kosten. Jij levert teksten en foto\'s.'
-                : 'Transparent pricing. No hidden costs. You provide texts and photos.'}
+            <p className="text-gray-500 dark:text-gray-400 mt-3 sm:mt-4 max-w-lg text-sm sm:text-base">
+              {language === 'nl'
+                ? 'Transparante prijzen. Geen verborgen kosten. Kies het pakket dat bij jou past.'
+                : 'Transparent pricing. No hidden costs. Choose the package that suits you.'}
             </p>
           </div>
         </div>
 
-        {/* Pricing Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {packages.map((pkg, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`group relative p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 cursor-pointer bg-white dark:bg-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-700/60 hover:text-gray-900 hover:border-gray-400 ${
-                pkg.popular ? 'border-gray-400 dark:border-neutral-500' : 'border-gray-200 dark:border-neutral-700'
-              }`}
-            >
-              {/* Populair Badge */}
-              {pkg.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
-                  {language === 'nl' ? 'Populair' : 'Popular'}
-                </div>
-              )}
+        {/* Comparison Table */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-white dark:bg-neutral-900 rounded-3xl border border-gray-200 dark:border-neutral-800 overflow-hidden shadow-sm"
+          data-testid="pricing-comparison-table"
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px]">
+              {/* Table Header - Package names + prices */}
+              <thead>
+                <tr className="border-b border-gray-100 dark:border-neutral-800">
+                  <th className="text-left py-6 sm:py-8 px-5 sm:px-8 w-[180px] sm:w-[220px]">
+                    <span className="text-xs uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
+                      {language === 'nl' ? 'Vergelijk' : 'Compare'}
+                    </span>
+                  </th>
+                  {pkgs.map((pkg, i) => (
+                    <th key={i} className="text-center py-6 sm:py-8 px-3 sm:px-5 relative">
+                      {pkg.popular && (
+                        <span className="absolute -top-0 left-1/2 -translate-x-1/2 bg-green-500 text-white px-3 py-1 rounded-b-lg text-[10px] font-bold uppercase tracking-wider">
+                          {language === 'nl' ? 'Populair' : 'Popular'}
+                        </span>
+                      )}
+                      <p className="text-xs uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500 mb-1">{pkg.name}</p>
+                      <p className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">€{pkg.price}</p>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
 
-              <div className="flex justify-between items-start mb-10 pt-2">
-                <h3 className="text-xl font-bold tracking-tight dark:text-white">{pkg.name}</h3>
-                <span className="text-xs uppercase tracking-[0.2em] text-gray-400 group-hover:text-gray-500">
-                  0{index + 1}
-                </span>
-              </div>
-
-              <div className="mb-10">
-                <span className="text-5xl lg:text-6xl font-black dark:text-white">€{pkg.price}</span>
-                <p className="text-xs uppercase tracking-[0.2em] mt-2 text-gray-500 group-hover:text-gray-400">
-                  {language === 'nl' ? 'Excl. BTW' : 'Excl. VAT'}
-                </p>
-              </div>
-
-              <ul className="space-y-3 mb-10">
-                {pkg.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm dark:text-gray-300">
-                    <Check size={14} className="text-green-500" />
-                    {feature}
-                  </li>
+              {/* Feature rows */}
+              <tbody>
+                {features.map((feat, fi) => (
+                  <tr key={fi} className={`border-b border-gray-50 dark:border-neutral-800/50 ${fi % 2 === 0 ? 'bg-gray-50/50 dark:bg-neutral-800/20' : ''}`}>
+                    <td className="py-4 px-5 sm:px-8">
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{feat.label}</span>
+                    </td>
+                    {pkgs.map((pkg, pi) => {
+                      const val = getVal(feat, pi);
+                      return (
+                        <td key={pi} className={`text-center py-4 px-3 sm:px-5 ${pkg.popular ? 'bg-green-500/[0.03] dark:bg-green-500/[0.05]' : ''}`}>
+                          {typeof val === 'string' ? (
+                            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{val}</span>
+                          ) : val ? (
+                            <Check size={18} className="inline-block text-green-500" />
+                          ) : (
+                            <X size={18} className="inline-block text-gray-300 dark:text-neutral-600" />
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
                 ))}
-              </ul>
+              </tbody>
 
-              <Link
-                to="/calculator"
-                className="block w-full py-4 text-center text-xs font-bold uppercase tracking-[0.15em] rounded-2xl transition-all duration-300 bg-gray-500 text-white group-hover:bg-gray-600"
-              >
-                {language === 'nl' ? 'Selecteer' : 'Select'}
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+              {/* CTA Row */}
+              <tfoot>
+                <tr>
+                  <td className="py-6 sm:py-8 px-5 sm:px-8"></td>
+                  {pkgs.map((pkg, i) => (
+                    <td key={i} className="text-center py-6 sm:py-8 px-3 sm:px-5">
+                      <Link
+                        to="/calculator"
+                        className={`inline-block w-full max-w-[140px] py-3 text-center text-[11px] font-bold uppercase tracking-[0.12em] rounded-xl transition-all duration-300 ${
+                          pkg.popular
+                            ? 'bg-green-500 text-white hover:bg-green-600 shadow-md shadow-green-500/20'
+                            : 'bg-gray-500 text-white hover:bg-gray-600'
+                        }`}
+                        data-testid={`pricing-cta-${pkg.key}`}
+                      >
+                        {language === 'nl' ? 'Selecteer' : 'Select'}
+                      </Link>
+                    </td>
+                  ))}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </motion.div>
 
-        {/* Extra Link */}
-        <div className="mt-12 text-center">
+        {/* Extra Links */}
+        <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
           <Link
             to="/pakketten"
             className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
           >
             {language === 'nl' ? 'Bekijk alle details →' : 'View all details →'}
+          </Link>
+          <Link
+            to="/calculator"
+            className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+          >
+            {language === 'nl' ? 'Bereken je prijs →' : 'Calculate your price →'}
           </Link>
         </div>
 
