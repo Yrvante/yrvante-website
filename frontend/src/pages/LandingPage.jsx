@@ -490,7 +490,7 @@ const ProcessSection = () => {
     <section data-testid="process-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">(02)</p>
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">(05)</p>
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
             {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
           </h2>
@@ -549,7 +549,7 @@ const ExpertiseSection = () => {
         <div className="grid grid-cols-12 gap-8 sm:gap-12 lg:gap-20">
           {/* Expertise */}
           <div className="col-span-12 lg:col-span-6">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">(03)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">(06)</p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'EXPERTISE' : 'EXPERTISE'}
             </h2>
@@ -622,7 +622,7 @@ const HostingSection = () => {
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">(04)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">(07)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
@@ -681,7 +681,7 @@ const WhyExpensiveSection = () => {
             className="col-span-12 lg:col-span-7"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-6">
-              (05)
+              (03)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 dark:text-white">
               {language === 'nl' 
@@ -741,7 +741,7 @@ const ServicesSection = () => {
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">
-              (01)
+              (04)
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8 flex items-end gap-6">
@@ -884,7 +884,7 @@ const PricingSection = () => {
         {/* Header */}
         <div className="grid grid-cols-12 gap-4 mb-12 sm:mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">(06)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">(02)</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-black dark:text-white">
@@ -1216,7 +1216,7 @@ const FAQSection = () => {
         {/* Section Header - Centered */}
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">
-            (07)
+            (08)
           </p>
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
             FAQ
@@ -1326,7 +1326,7 @@ const ContactSection = () => {
             className="col-span-12 lg:col-span-5"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-6">
-              (08)
+              (09)
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'CONTACT' : 'CONTACT'}
@@ -1635,13 +1635,13 @@ const LandingPage = () => {
         <SEO page="/" />
         <Navigation />
         <HeroSection />
+        <PricingSection />
+        <GoogleReviews />
+        <WhyExpensiveSection />
         <ServicesSection />
         <ProcessSection />
         <ExpertiseSection />
         <HostingSection />
-        <WhyExpensiveSection />
-        <PricingSection />
-        <GoogleReviews />
         <FAQSection />
         <ContactSection />
         <Footer />
