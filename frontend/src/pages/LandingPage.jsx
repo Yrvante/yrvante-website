@@ -545,14 +545,14 @@ const ExpertiseSection = () => {
   return (
     <section data-testid="expertise-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-12 gap-12 lg:gap-20">
+        <div className="grid grid-cols-12 gap-8 sm:gap-12 lg:gap-20">
           {/* Expertise */}
           <div className="col-span-12 lg:col-span-6">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">(03)</p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'EXPERTISE' : 'EXPERTISE'}
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden">
               {technologies.map((tech, i) => (
                 <motion.div
                   key={i}
@@ -560,13 +560,13 @@ const ExpertiseSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
+                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 sm:p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group min-w-0"
                 >
-                  <div className="w-10 h-10 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center mb-3">
-                    <tech.icon size={20} strokeWidth={1.5} className="text-gray-500" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center mb-2 sm:mb-3">
+                    <tech.icon size={18} strokeWidth={1.5} className="text-gray-500" />
                   </div>
-                  <h3 className="font-bold dark:text-white text-sm mb-1">{tech.name}</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-xs">{tech.desc}</p>
+                  <h3 className="font-bold dark:text-white text-xs sm:text-sm mb-0.5 sm:mb-1 truncate">{tech.name}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-[10px] sm:text-xs leading-tight truncate">{tech.desc}</p>
                 </motion.div>
               ))}
             </div>
