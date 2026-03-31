@@ -12,6 +12,7 @@ from typing import List, Optional
 import uuid
 from datetime import datetime, timezone, timedelta
 import resend
+import httpx
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -28,6 +29,13 @@ RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', 'yvar@yrvante.com')
 
 # Admin password (simple for now)
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'yrvante2025')
+
+# Google Places API
+GOOGLE_PLACES_API_KEY = os.environ.get('GOOGLE_PLACES_API_KEY')
+GOOGLE_PLACE_ID = os.environ.get('GOOGLE_PLACE_ID')
+
+# In-memory cache for reviews
+_reviews_cache = {"data": None, "fetched_at": None}
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -756,6 +764,71 @@ async def leadfinder_dashboard():
         "status_verdeling": status_verdeling,
         "recente_zoekopdrachten": []
     }
+
+# ========== Google Reviews API ==========
+
+CACHE_DURATION = timedelta(hours=1)
+
+@api_router.get("/reviews")
+async def get_google_reviews():
+    """Fetch Google Reviews with 1-hour cache."""
+    now = datetime.now(timezone.utc)
+
+    # Return cached data if fresh
+    if _reviews_cache["data"] and _reviews_cache["fetched_at"]:
+        if now - _reviews_cache["fetched_at"] < CACHE_DURATION:
+            return _reviews_cache["data"]
+
+    if not GOOGLE_PLACES_API_KEY or not GOOGLE_PLACE_ID:
+        raise HTTPException(status_code=500, detail="Google Places not configured")
+
+    url = (
+        f"https://maps.googleapis.com/maps/api/place/details/json"
+        f"?place_id={GOOGLE_PLACE_ID}"
+        f"&fields=name,rating,user_ratings_total,reviews,url"
+        f"&key={GOOGLE_PLACES_API_KEY}"
+        f"&language=nl"
+        f"&reviews_sort=newest"
+    )
+
+    try:
+        async with httpx.AsyncClient(timeout=10) as client_http:
+            resp = await client_http.get(url)
+            data = resp.json()
+
+        if data.get("status") != "OK":
+            logger.error(f"Google Places API error: {data.get('status')}")
+            raise HTTPException(status_code=502, detail="Google Places API error")
+
+        result = data["result"]
+        reviews = []
+        for r in result.get("reviews", []):
+            reviews.append({
+                "author_name": r.get("author_name", ""),
+                "profile_photo_url": r.get("profile_photo_url", ""),
+                "rating": r.get("rating", 5),
+                "text": r.get("text", ""),
+                "relative_time_description": r.get("relative_time_description", ""),
+                "time": r.get("time", 0),
+            })
+
+        response = {
+            "name": result.get("name", "Yrvante"),
+            "rating": result.get("rating", 5),
+            "total_reviews": result.get("user_ratings_total", 0),
+            "google_url": result.get("url", ""),
+            "reviews": reviews,
+        }
+
+        _reviews_cache["data"] = response
+        _reviews_cache["fetched_at"] = now
+        return response
+
+    except httpx.RequestError as e:
+        logger.error(f"Google Places request failed: {e}")
+        if _reviews_cache["data"]:
+            return _reviews_cache["data"]
+        raise HTTPException(status_code=502, detail="Could not fetch reviews")
 
 # Include the router in the main app
 app.include_router(api_router)

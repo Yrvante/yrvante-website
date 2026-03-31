@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import SEO from "../components/SEO";
+import GoogleReviews from "../components/GoogleReviews";
 import {
   Monitor,
   Code,
@@ -1560,6 +1561,7 @@ const LandingPage = () => {
         <HostingSection />
         <WhyExpensiveSection />
         <PricingSection />
+        <GoogleReviews />
         <FAQSection />
         <ContactSection />
         <Footer />
