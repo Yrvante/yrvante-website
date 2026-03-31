@@ -440,7 +440,7 @@ const PackagesPage = () => {
   const packages = [
     {
       id: 'rebranding',
-      name: language === 'nl' ? 'Rebranding Pakket' : 'Rebranding Package',
+      name: language === 'nl' ? 'Rebranding Website' : 'Rebranding Website',
       price: 349,
       description: language === 'nl' 
         ? 'Heeft je website een opfrisbeurt nodig? Ik geef je bestaande site een compleet nieuw uiterlijk.'
@@ -463,7 +463,7 @@ const PackagesPage = () => {
     },
     {
       id: 'basic',
-      name: language === 'nl' ? 'Basis Website Pakket' : 'Basic Website Package',
+      name: language === 'nl' ? 'Basis Website' : 'Basic Website',
       price: 500,
       description: language === 'nl' 
         ? 'Perfect voor startende ondernemers die een professionele online aanwezigheid willen.'
@@ -486,13 +486,13 @@ const PackagesPage = () => {
     },
     {
       id: 'pro',
-      name: language === 'nl' ? 'Pro Website Pakket' : 'Pro Website Package',
+      name: language === 'nl' ? 'Pro Website' : 'Pro Website',
       price: 900,
       description: language === 'nl'
         ? 'Mijn meest gekozen optie voor groeiende bedrijven die meer functionaliteit nodig hebben.'
         : 'My most chosen option for growing businesses that need more functionality.',
       includes: [
-        language === 'nl' ? 'Alles uit Basis Website Pakket' : 'Everything from Basic Website Package',
+        language === 'nl' ? 'Alles uit Basis Website' : 'Everything from Basic Website',
         language === 'nl' ? 'Basis SEO-optimalisatie (zoekwoordenonderzoek + on-page SEO)' : 'Basic SEO optimization (keyword research + on-page SEO)',
         language === 'nl' ? 'Tot 10 pagina\'s' : 'Up to 10 pages',
         language === 'nl' ? 'Complexere layout / extra secties' : 'Complex layout / extra sections',
@@ -510,13 +510,13 @@ const PackagesPage = () => {
     },
     {
       id: 'premium',
-      name: language === 'nl' ? 'Premium Website Pakket' : 'Premium Website Package',
+      name: language === 'nl' ? 'Premium Website' : 'Premium Website',
       price: 1400,
       description: language === 'nl'
         ? 'Complete oplossing met alle mogelijkheden voor ambitieuze bedrijven.'
         : 'Complete solution with all possibilities for ambitious businesses.',
       includes: [
-        language === 'nl' ? 'Alles uit Basis + Pro Website Pakket' : 'Everything from Basic + Pro Website Package',
+        language === 'nl' ? 'Alles uit Basis + Pro Website' : 'Everything from Basic + Pro Website',
         language === 'nl' ? 'Tot 15 pagina\'s' : 'Up to 15 pages',
         language === 'nl' ? 'Blog' : 'Blog',
         language === 'nl' ? 'Contactformulier' : 'Contact form',

@@ -828,21 +828,21 @@ const PricingSection = () => {
 
   const packages = [
     {
-      name: language === 'nl' ? 'REBRANDING' : 'REBRANDING',
+      name: language === 'nl' ? 'REBRANDING WEBSITE' : 'REBRANDING WEBSITE',
       price: '349',
       features: language === 'nl' 
         ? ['Bestaande website vernieuwen', 'Modern nieuw design', 'Responsive optimalisatie', 'Verbeterde UX']
         : ['Existing website refresh', 'Modern new design', 'Responsive optimization', 'Improved UX'],
     },
     {
-      name: language === 'nl' ? 'BASIS' : 'BASIC',
+      name: language === 'nl' ? 'BASIS WEBSITE' : 'BASIC WEBSITE',
       price: '500',
       features: language === 'nl' 
         ? ['Tot 3 pagina\'s', 'Responsive design', 'Snelle hosting', 'Basis contact']
         : ['Up to 3 pages', 'Responsive design', 'Fast hosting', 'Basic contact'],
     },
     {
-      name: 'PRO',
+      name: 'PRO WEBSITE',
       price: '900',
       popular: true,
       features: language === 'nl'
@@ -850,7 +850,7 @@ const PricingSection = () => {
         : ['Up to 10 pages', 'SEO optimization', 'Blog & Portfolio', 'Contact form'],
     },
     {
-      name: 'PREMIUM',
+      name: 'PREMIUM WEBSITE',
       price: '1400',
       features: language === 'nl'
         ? ['Tot 15 pagina\'s', 'Boekingssysteem', 'Meertalig', 'Priority support']

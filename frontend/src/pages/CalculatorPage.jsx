@@ -281,7 +281,7 @@ const CalculatorPage = () => {
       
       packages: {
         rebranding: {
-          name: "Rebranding Pakket",
+          name: "Rebranding Website",
           price: 349,
           description: "Bestaande website een nieuw uiterlijk",
           includes: [
@@ -293,7 +293,7 @@ const CalculatorPage = () => {
           ]
         },
         basic: {
-          name: "Basis Pakket",
+          name: "Basis Website",
           price: 500,
           description: "Perfect voor startende ondernemers",
           includes: [
@@ -305,7 +305,7 @@ const CalculatorPage = () => {
           ]
         },
         pro: {
-          name: "Pro Pakket",
+          name: "Pro Website",
           price: 900,
           description: "Meest gekozen door groeiende bedrijven",
           popular: true,
@@ -320,7 +320,7 @@ const CalculatorPage = () => {
           ]
         },
         premium: {
-          name: "Premium Pakket",
+          name: "Premium Website",
           price: 1400,
           description: "Complete oplossing voor ambitieuze bedrijven",
           includes: [
@@ -413,7 +413,7 @@ const CalculatorPage = () => {
       
       packages: {
         rebranding: {
-          name: "Rebranding Package",
+          name: "Rebranding Website",
           price: 349,
           description: "Give your existing website a new look",
           includes: [
@@ -425,7 +425,7 @@ const CalculatorPage = () => {
           ]
         },
         basic: {
-          name: "Basic Package",
+          name: "Basic Website",
           price: 500,
           description: "Perfect for starting entrepreneurs",
           includes: [
@@ -438,7 +438,7 @@ const CalculatorPage = () => {
           ]
         },
         pro: {
-          name: "Pro Package",
+          name: "Pro Website",
           price: 900,
           description: "Most chosen by growing businesses",
           popular: true,
@@ -453,7 +453,7 @@ const CalculatorPage = () => {
           ]
         },
         premium: {
-          name: "Premium Package",
+          name: "Premium Website",
           price: 1400,
           description: "Complete solution for ambitious businesses",
           includes: [
