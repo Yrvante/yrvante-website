@@ -267,7 +267,7 @@ const BlogPage = () => {
       </nav>
 
       {/* Hero */}
-      <section className="pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 md:px-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+      <section className="pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -276,20 +276,20 @@ const BlogPage = () => {
             className="py-6 sm:py-10 md:py-20"
           >
             <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
-              <span className="px-3 py-1 bg-white/10 rounded-full text-xs sm:text-sm">{t.hero.tag}</span>
-              <span className="text-gray-400 text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
+              <span className="px-3 py-1 bg-gray-200 dark:bg-neutral-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300">{t.hero.tag}</span>
+              <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
                 <Calendar size={12} />
                 {t.hero.date}
               </span>
-              <span className="text-gray-400 text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
+              <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
                 <Clock size={12} />
                 {t.hero.readTime}
               </span>
             </div>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 leading-tight text-gray-900 dark:text-white">
               {t.hero.title}
             </h1>
-            <p className="text-sm sm:text-lg lg:text-xl text-gray-400">
+            <p className="text-sm sm:text-lg lg:text-xl text-gray-500 dark:text-gray-400">
               {t.hero.subtitle}
             </p>
           </motion.div>

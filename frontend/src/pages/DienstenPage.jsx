@@ -1327,8 +1327,8 @@ const DienstenPage = () => {
                   transition={{ delay: index * 0.1 }}
                   className="flex gap-6"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">{step.step}</span>
+                  <div className="flex-shrink-0 w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
+                    <span className="text-gray-700 dark:text-white text-xs font-bold">{step.step}</span>
                   </div>
                   <div className="flex-1 bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-200 dark:border-neutral-700">
                     <h3 className="font-bold text-lg mb-2 dark:text-white">{step.title}</h3>

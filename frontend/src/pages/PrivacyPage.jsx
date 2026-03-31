@@ -352,8 +352,8 @@ We never sell your data to third parties and do not use it for unsolicited marke
               return (
                 <section key={index} className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 sm:p-6 lg:p-8">
                   <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
-                    <div className="p-2 sm:p-3 bg-black rounded-xl flex-shrink-0">
-                      <Icon className="text-white" size={20} />
+                    <div className="p-2 sm:p-3 bg-gray-200 dark:bg-neutral-700 rounded-xl flex-shrink-0">
+                      <Icon className="text-gray-700 dark:text-white" size={20} />
                     </div>
                     <h2 className="text-lg sm:text-2xl font-bold text-black dark:text-white pt-1 sm:pt-2">
                       {section.title}

@@ -200,7 +200,7 @@ const WhyWebsitePage = () => {
 
       {/* Hero Section - Premium style */}
       <section className="pt-14 sm:pt-16 lg:pt-20">
-        <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
+        <div className="bg-gray-50 dark:bg-neutral-900">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -208,18 +208,18 @@ const WhyWebsitePage = () => {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-gray-300 mb-8">
+              <span className="inline-block px-4 py-2 bg-gray-200 dark:bg-neutral-800 rounded-full text-sm text-gray-600 dark:text-gray-300 mb-8">
                 {t.heroTag}
               </span>
               
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-4 sm:mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-4 sm:mb-6 text-gray-900 dark:text-white">
                 {t.heroTitle}<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">
+                <span className="text-gray-500 dark:text-gray-400">
                   {t.heroTitleHighlight}
                 </span>
               </h1>
               
-              <p className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12">
+              <p className="text-sm sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12">
                 {t.heroSubtitle}
               </p>
 
@@ -233,7 +233,7 @@ const WhyWebsitePage = () => {
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className="text-center"
                   >
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold">{stat.value}</p>
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white">{stat.value}</p>
                     <p className="text-[10px] sm:text-sm text-gray-500">{stat.label}</p>
                   </motion.div>
                 ))}
