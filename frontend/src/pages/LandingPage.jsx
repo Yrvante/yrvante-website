@@ -981,19 +981,45 @@ const PricingSection = () => {
           </div>
         </motion.div>
 
-        {/* Extra Links */}
-        <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
+        {/* Calculator CTA directly under table */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-8 sm:mt-12"
+        >
+          <Link to="/calculator" className="block group" data-testid="pricing-calculator-cta">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gray-900 dark:bg-white p-6 sm:p-10 md:p-12 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-900/20 dark:hover:shadow-white/10">
+              <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+              <div className="relative flex flex-col sm:flex-row items-center gap-5 sm:gap-8">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 dark:bg-gray-900/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                  <Calculator size={28} className="text-white dark:text-gray-900" />
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-xl sm:text-2xl font-black text-white dark:text-gray-900 mb-1 tracking-tight">
+                    {language === 'nl' ? 'Bereken direct je prijs' : 'Calculate your price now'}
+                  </h3>
+                  <p className="text-sm text-gray-400 dark:text-gray-500">
+                    {language === 'nl' ? 'Kies je pakket, voeg opties toe en ontvang meteen een offerte.' : 'Choose your package, add options and get a quote instantly.'}
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-xs font-bold uppercase tracking-[0.1em] rounded-xl group-hover:bg-gray-100 dark:group-hover:bg-gray-800 transition-colors flex-shrink-0">
+                  {language === 'nl' ? 'Start calculator' : 'Start calculator'}
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Extra Link */}
+        <div className="mt-6 text-center">
           <Link
             to="/pakketten"
             className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
           >
-            {language === 'nl' ? 'Bekijk alle details →' : 'View all details →'}
-          </Link>
-          <Link
-            to="/calculator"
-            className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-          >
-            {language === 'nl' ? 'Bereken je prijs →' : 'Calculate your price →'}
+            {language === 'nl' ? 'Bekijk alle pakketdetails →' : 'View all package details →'}
           </Link>
         </div>
 
@@ -1616,52 +1642,6 @@ const LandingPage = () => {
         <WhyExpensiveSection />
         <PricingSection />
         <GoogleReviews />
-
-        {/* Calculator Promo Banner */}
-        <section className="py-6 sm:py-10 px-4 sm:px-6 md:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <Link to="/calculator" className="block group" data-testid="calculator-promo-banner">
-              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gray-900 dark:bg-white p-8 sm:p-12 md:p-16 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-900/20 dark:hover:shadow-white/10">
-                {/* Background pattern */}
-                <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-                
-                <div className="relative flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-                  {/* Icon */}
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 dark:bg-gray-900/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <Calculator size={32} className="text-white dark:text-gray-900" />
-                  </div>
-
-                  {/* Text */}
-                  <div className="flex-1 text-center sm:text-left">
-                    <h3 className="text-2xl sm:text-3xl font-black text-white dark:text-gray-900 mb-2 tracking-tight">
-                      {language === 'nl' ? 'Bereken direct je prijs' : 'Calculate your price now'}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-400 dark:text-gray-500">
-                      {language === 'nl'
-                        ? 'Kies je pakket, voeg extra opties toe en ontvang meteen een transparante offerte. Geheel vrijblijvend.'
-                        : 'Choose your package, add extra options and receive a transparent quote instantly. No obligations.'}
-                    </p>
-                  </div>
-
-                  {/* CTA */}
-                  <div className="flex-shrink-0">
-                    <span className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-xs sm:text-sm font-bold uppercase tracking-[0.1em] rounded-xl group-hover:bg-gray-100 dark:group-hover:bg-gray-800 transition-colors">
-                      {language === 'nl' ? 'Start calculator' : 'Start calculator'}
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        </section>
-
         <FAQSection />
         <ContactSection />
         <Footer />

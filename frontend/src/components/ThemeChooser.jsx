@@ -46,7 +46,7 @@ const ThemeChooser = () => {
           >
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 w-full max-w-[320px] pointer-events-auto">
               {/* Header gradient */}
-              <div className="h-1 bg-gradient-to-r from-amber-300 via-gray-300 to-indigo-400" />
+              <div className="h-1 bg-gradient-to-r from-amber-300 via-gray-300 to-gray-500" />
 
               <div className="px-6 pt-6 pb-2 text-center">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-400 mb-2">
@@ -80,10 +80,10 @@ const ThemeChooser = () => {
                 {/* Dark */}
                 <button
                   onClick={() => choose("dark")}
-                  className="flex-1 group relative rounded-2xl border-2 border-gray-200 hover:border-indigo-400 bg-gradient-to-b from-gray-900 to-gray-800 p-4 transition-all duration-200 active:scale-[0.97]"
+                  className="flex-1 group relative rounded-2xl border-2 border-gray-200 hover:border-gray-500 bg-gradient-to-b from-gray-900 to-gray-800 p-4 transition-all duration-200 active:scale-[0.97]"
                 >
-                  <div className="w-10 h-10 mx-auto mb-2.5 rounded-xl bg-indigo-950 border border-indigo-800 flex items-center justify-center group-hover:bg-indigo-900 transition-colors">
-                    <Moon size={20} className="text-indigo-300" />
+                  <div className="w-10 h-10 mx-auto mb-2.5 rounded-xl bg-neutral-800 border border-neutral-700 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+                    <Moon size={20} className="text-gray-300" />
                   </div>
                   <p className="text-xs font-bold text-gray-200 tracking-wide">
                     {language === "nl" ? "Donker" : "Dark"}

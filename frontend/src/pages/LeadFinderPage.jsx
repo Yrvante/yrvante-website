@@ -996,12 +996,12 @@ const LeadFinderPage = () => {
                           <div className="flex flex-wrap gap-4 text-sm mb-3">
                             {lead.adres && <span className="text-gray-500 flex items-center gap-1"><MapPin size={14} />{lead.adres}</span>}
                             {lead.telefoonnummer && (
-                              <a href={`tel:${lead.telefoonnummer}`} className="text-blue-600 flex items-center gap-1 hover:underline">
+                              <a href={`tel:${lead.telefoonnummer}`} className="text-gray-600 flex items-center gap-1 hover:underline">
                                 <Phone size={14} />{lead.telefoonnummer}
                               </a>
                             )}
                             {lead.email && (
-                              <a href={`mailto:${lead.email}`} className="text-blue-600 flex items-center gap-1 hover:underline">
+                              <a href={`mailto:${lead.email}`} className="text-gray-600 flex items-center gap-1 hover:underline">
                                 <Mail size={14} />{lead.email}
                               </a>
                             )}
@@ -1188,8 +1188,8 @@ const LeadFinderPage = () => {
 
                 {/* Bulk Import */}
                 <div className="bg-white rounded-xl border border-gray-200 p-6">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                    <FileText size={24} className="text-blue-600" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                    <FileText size={24} className="text-gray-600" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">Bulk Import</h3>
                   <p className="text-gray-500 text-sm mb-4">Importeer leads vanuit een CSV bestand. Handig voor migratie van andere systemen.</p>
