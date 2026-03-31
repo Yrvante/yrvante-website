@@ -45,7 +45,7 @@ const NotFoundPage = () => {
           filter: "saturate(0.4) brightness(1.02)",
         }}
       />
-      <div className="fixed inset-0 -z-10 bg-white/70 dark:bg-neutral-950/90" />
+      <div className="fixed inset-0 -z-10 bg-white/70 dark:bg-neutral-950/95" />
 
       {/* Nav */}
       <nav className="w-full bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">

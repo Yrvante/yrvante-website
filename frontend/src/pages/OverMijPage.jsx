@@ -108,7 +108,7 @@ const OverMijPage = () => {
 
       {/* Hero Section - Mobile First */}
       <section className="pt-20 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/75 dark:bg-neutral-950/85" />
+        <div className="absolute inset-0 bg-white/75 dark:bg-neutral-950/95" />
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center">
             {/* Visual - Hidden on small mobile, compact on larger */}

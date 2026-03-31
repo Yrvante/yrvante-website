@@ -1497,7 +1497,7 @@ const DienstenPage = () => {
         </nav>
 
         <section className="pt-20 sm:pt-28 lg:pt-36 pb-10 sm:pb-16 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-          <div className="absolute inset-0 bg-white/80 dark:bg-neutral-950/85" />
+          <div className="absolute inset-0 bg-white/80 dark:bg-neutral-950/95" />
           <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1605,7 +1605,7 @@ const DienstenPage = () => {
         </nav>
 
         <section className="pt-20 sm:pt-28 lg:pt-36 pb-10 sm:pb-16 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-          <div className="absolute inset-0 bg-white/80 dark:bg-neutral-950/85" />
+          <div className="absolute inset-0 bg-white/80 dark:bg-neutral-950/95" />
           <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1726,7 +1726,7 @@ const DienstenPage = () => {
 
       {/* Hero with Background */}
       <section className="pt-20 sm:pt-28 lg:pt-36 pb-8 sm:pb-12 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/85" />
+        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/95" />
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

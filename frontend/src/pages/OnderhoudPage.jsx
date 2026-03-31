@@ -172,7 +172,7 @@ const OnderhoudPage = () => {
 
       {/* Hero Section */}
       <section className="pt-20 sm:pt-28 lg:pt-36 pb-10 sm:pb-16 lg:pb-24 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/60 dark:bg-neutral-950/80" />
+        <div className="absolute inset-0 bg-white/60 dark:bg-neutral-950/95" />
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div

@@ -1623,12 +1623,12 @@ const LandingPage = () => {
         backgroundSize: 'cover', 
         backgroundPosition: 'center', 
         filter: theme === 'dark' 
-          ? 'saturate(0.3) brightness(0.15) contrast(1.1)' 
+          ? 'saturate(0) brightness(0.08)' 
           : 'saturate(0.55) brightness(1.02) contrast(1.05)'
       }} />
-      <div className={`absolute inset-0 pointer-events-none ${
+      <div className={`fixed inset-0 -z-10 pointer-events-none ${
         theme === 'dark'
-          ? 'bg-gradient-to-b from-neutral-900/60 via-neutral-900/70 to-neutral-900/80 lg:from-neutral-900/75 lg:via-neutral-900/80 lg:to-neutral-900/85'
+          ? 'bg-neutral-950/95'
           : 'bg-gradient-to-b from-white/10 via-white/15 to-white/25 lg:from-white/55 lg:via-white/60 lg:to-white/70'
       }`} />
       <div className="relative z-10">
