@@ -1,20 +1,23 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, createContext, useContext, useEffect, lazy, Suspense } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
-import AdminDashboard from "./pages/AdminDashboard";
-import AboutPage from "./pages/AboutPage";
-import WhyWebsitePage from "./pages/WhyWebsitePage";
-import CalculatorPage from "./pages/CalculatorPage";
-import PackagesPage from "./pages/PackagesPage";
-import BlogPage from "./pages/BlogPage";
-import OverMijPage from "./pages/OverMijPage";
-import DienstenPage from "./pages/DienstenPage";
-import OnderhoudPage from "./pages/OnderhoudPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import LeadFinderPage from "./pages/LeadFinderPage";
 import axios from "axios";
+
+// Lazy-loaded pages for better performance
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const WhyWebsitePage = lazy(() => import("./pages/WhyWebsitePage"));
+const CalculatorPage = lazy(() => import("./pages/CalculatorPage"));
+const PackagesPage = lazy(() => import("./pages/PackagesPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const OverMijPage = lazy(() => import("./pages/OverMijPage"));
+const DienstenPage = lazy(() => import("./pages/DienstenPage"));
+const OnderhoudPage = lazy(() => import("./pages/OnderhoudPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const LeadFinderPage = lazy(() => import("./pages/LeadFinderPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -241,6 +244,14 @@ const translations = {
 };
 
 import ThemeChooser from "./components/ThemeChooser";
+import CookieBanner from "./components/CookieBanner";
+
+// Minimal loading fallback
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white dark:bg-neutral-950">
+    <div className="w-6 h-6 border-2 border-gray-300 dark:border-neutral-700 border-t-gray-600 dark:border-t-neutral-400 rounded-full animate-spin" />
+  </div>
+);
 
 function App() {
   const [language, setLanguage] = useState("nl");
@@ -271,6 +282,8 @@ function App() {
       <div className="App">
         <ThemeChooser />
         <BrowserRouter>
+          <CookieBanner />
+          <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/about" element={<Navigate to="/over-mij" replace />} />
@@ -287,7 +300,9 @@ function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/leadfinder" element={<LeadFinderPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          </Suspense>
         </BrowserRouter>
         <Toaster position="bottom-right" />
       </div>
