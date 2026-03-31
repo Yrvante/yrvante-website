@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useLanguage, useTheme } from "../App";
+import SEO from "../components/SEO";
 
 const LOGO_URL = "/logo-nav.png";
 const LOGO_URL_WHITE = "/logo-nav-white.png";
@@ -33,6 +34,7 @@ const NotFoundPage = () => {
 
   return (
     <div className="min-h-screen relative flex flex-col" data-testid="not-found-page">
+      <SEO page="/404" noindex />
       {/* Background */}
       <div
         className="fixed inset-0 -z-10"

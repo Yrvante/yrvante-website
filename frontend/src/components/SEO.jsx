@@ -9,15 +9,20 @@ const seoData = {
       description: 'Yrvante bouwt moderne, professionele websites voor ZZP\'ers en MKB. Vanaf €500 een complete website. Snel, betaalbaar en resultaatgericht.',
       keywords: 'website laten maken, webdesign Nederland, ZZP website, MKB website, goedkope website, professionele website'
     },
+    '/404': {
+      title: '404 - Pagina Niet Gevonden | Yrvante',
+      description: 'De pagina die je zoekt bestaat niet of is verplaatst. Ga terug naar de homepage van Yrvante.',
+      keywords: '404, pagina niet gevonden, yrvante'
+    },
     '/pakketten': {
       title: 'Website Pakketten & Prijzen | Yrvante',
-      description: 'Bekijk onze website pakketten: Basis (€500), Pro (€900) en Premium (€1400). Transparante prijzen, geen verborgen kosten. Inclusief hosting en support.',
-      keywords: 'website pakket, website prijzen, website kosten, webdesign prijzen, ZZP website prijs'
+      description: 'Bekijk onze website pakketten: Rebranding (€349), Basis (€500), Pro (€900) en Premium (€1400). Transparante prijzen, geen verborgen kosten.',
+      keywords: 'website pakket, website prijzen, website kosten, webdesign prijzen, ZZP website prijs, rebranding website'
     },
     '/calculator': {
       title: 'Website Prijscalculator | Bereken Je Website Kosten | Yrvante',
-      description: 'Bereken direct wat jouw website kost met onze prijscalculator. Kies je pakket en extra opties voor een transparante prijsindicatie.',
-      keywords: 'website calculator, website prijs berekenen, website kosten calculator, webdesign offerte'
+      description: 'Bereken direct wat jouw website kost. Kies uit 4 pakketten: Rebranding (€349), Basis (€500), Pro (€900) of Premium (€1400) en ontvang een transparante offerte.',
+      keywords: 'website calculator, website prijs berekenen, website kosten calculator, webdesign offerte, rebranding website'
     },
     '/waarom-website': {
       title: 'Waarom Heb Je Een Website Nodig? | Yrvante',
@@ -191,15 +196,20 @@ const seoData = {
       description: 'Yrvante builds modern, professional websites for freelancers and SMBs. Complete website from €500. Fast, affordable and result-driven.',
       keywords: 'website design, web development Netherlands, freelancer website, SMB website, affordable website'
     },
+    '/404': {
+      title: '404 - Page Not Found | Yrvante',
+      description: 'The page you are looking for does not exist or has been moved. Go back to the Yrvante homepage.',
+      keywords: '404, page not found, yrvante'
+    },
     '/pakketten': {
       title: 'Website Packages & Pricing | Yrvante',
-      description: 'View our website packages: Basic (€500), Pro (€900) and Premium (€1400). Transparent pricing, no hidden costs. Including hosting and support.',
-      keywords: 'website package, website pricing, website costs, web design prices'
+      description: 'View our website packages: Rebranding (€349), Basic (€500), Pro (€900) and Premium (€1400). Transparent pricing, no hidden costs.',
+      keywords: 'website package, website pricing, website costs, web design prices, website rebranding'
     },
     '/calculator': {
       title: 'Website Price Calculator | Calculate Your Website Cost | Yrvante',
-      description: 'Calculate your website cost instantly with our price calculator. Choose your package and extras for a transparent quote.',
-      keywords: 'website calculator, website price calculator, website cost estimate, web design quote'
+      description: 'Calculate your website cost instantly. Choose from 4 packages: Rebranding (€349), Basic (€500), Pro (€900) or Premium (€1400) and get a transparent quote.',
+      keywords: 'website calculator, website price calculator, website cost estimate, web design quote, website rebranding'
     },
     '/waarom-website': {
       title: 'Why Do You Need A Website? | Yrvante',
@@ -304,7 +314,7 @@ const seoData = {
   }
 };
 
-const SEO = ({ page }) => {
+const SEO = ({ page, noindex }) => {
   const { language } = useLanguage();
   
   useEffect(() => {
@@ -325,6 +335,18 @@ const SEO = ({ page }) => {
       metaKeywords.setAttribute('content', data.keywords);
     }
     
+    // Update robots meta for noindex pages (404, admin)
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) {
+      metaRobots.setAttribute('content', noindex ? 'noindex, nofollow' : 'index, follow');
+    }
+    
+    // Update canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', `https://yrvante.com${page || '/'}`);
+    }
+    
     // Update Open Graph tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) {
@@ -334,6 +356,11 @@ const SEO = ({ page }) => {
     let ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) {
       ogDescription.setAttribute('content', data.description);
+    }
+    
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', `https://yrvante.com${page || '/'}`);
     }
     
     // Update Twitter tags
@@ -356,7 +383,7 @@ const SEO = ({ page }) => {
       ogLocale.setAttribute('content', language === 'en' ? 'en_US' : 'nl_NL');
     }
     
-  }, [page, language]);
+  }, [page, language, noindex]);
   
   return null; // This component doesn't render anything
 };
