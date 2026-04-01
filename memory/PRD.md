@@ -12,61 +12,54 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 ## What's Been Implemented
 
 ### Phase 1 - Core Website (Complete)
-- Landing page with hero, services, process, expertise, hosting, FAQ, contact sections
-- Admin Dashboard (Lead Finder) with search, filtering, and lead management
-- Calculator page with live pricing for 4 packages (Rebranding €349, Basis €500, Pro €900, Premium €1400)
-- Dark/Light mode with ThemeContext and white logo variants
-- Cookie Banner, 404 page, lazy loading
-- SEO (sitemap, schema.org, canonical URLs)
-- Google Reviews integration via Places API
+- Landing page with hero, services, process, expertise, hosting, FAQ, contact
+- Admin Dashboard (Lead Finder)
+- Calculator with live pricing (Rebranding €349, Basis €500, Pro €900, Premium €1400)
+- Dark/Light mode, Cookie Banner, 404, lazy loading, SEO, Google Reviews
 
 ### Phase 2 - Conversion Features (Complete - Feb 2026)
-- **Exit-Intent Popup**: YRVA10 discount code (10% off), localStorage 24h cooldown
-- **YRVA10 Discount Code**: Calculator input + URL param support (?code=YRVA10)
-- **Package Quiz**: 5-question wizard recommending packages
-- **Trust Badges**: KVK, 100% Tevredenheid, Reactie < 2 uur, Op Maat Gemaakt
+- Exit-Intent Popup (YRVA10 discount code, localStorage 24h cooldown)
+- YRVA10 Discount Code in Calculator (input + URL params)
+- Package Quiz (5-question wizard)
+- Trust Badges (KVK, Tevredenheid, Reactietijd, Maatwerk)
 
 ### Phase 3 - UI Redesign (Complete - Feb 2026)
-- **Compact Pricing Cards**: Replaced wide comparison table with 4 compact cards with icons (RefreshCw, Monitor, Zap, Award). Pro card highlighted in dark. Each links to /calculator?package={key}
-- **Combined Live Examples ("BEKIJK WAT JE KRIJGT")**: Merged live preview + features panel side by side. Left shows browser-chrome preview per industry, right shows included features with icons per tier. Premium shows booking system preview, Pro shows blog preview.
-- **Before & After Slider**: Dramatically redesigned — "Before" has gradient nav, Comic Sans, yellow marquee, visitor counter, ugly table. "After" has sleek modern design with stats cards, green availability dot, dual CTAs.
-- **Competitor Comparison moved**: Removed from homepage, placed on /pakketten page for better context.
-- **Rebranding in navigation**: Added to Diensten dropdown menu.
-- **Dark mode background**: Reduced overlay from 95% to 80% for more visible texture/pattern.
-- **Rebranding Page**: Standalone at /rebranding — hero, feature cards, included/not-included lists, "Is dit iets voor mij?" checklist.
-- **Micro-animations**: Hover lift on cards, parallax dots on process section.
+- Compact Pricing Cards with icons (no more comparison table on homepage)
+- Combined Live Examples ("BEKIJK WAT JE KRIJGT") — preview + features panel
+- Before & After Slider (ugly → beautiful)
+- Competitor Comparison moved to /pakketten page
+- Rebranding Page at /rebranding
+- Dark mode background opacity 80% (more visible texture)
+
+### Phase 4 - UI Polish (Complete - Feb 2026)
+- **Section numbers removed** — No more (03), (04), etc.
+- **Pro card unified** — Same white/transparent theme, "Meest gekozen" neutral badge
+- **Premium promotes boekingssysteem** — "incl. boekingssysteem" in description
+- **"Meer" dropdown** — Navigation has DIENSTEN + MEER. Meer contains: Over Mij, Waarom een Website?, Blog, Pakketten & Prijzen, Privacybeleid
+- **Parallax scrolling** — Subtle dot/line patterns on WhyExpensive, Services, Process, Expertise, Hosting, FAQ sections via Framer Motion whileInView
+- **Micro-animations** — hover:-translate-y-1 + hover:shadow-lg on all cards (services, hosting, expertise, pricing, voordelen)
+- **Section order optimized** — Hero > TrustBadges > WhyExpensive > Pakketten > BekijkWatJeKrijgt > Quiz > VoorNa > Reviews > Services > Process > Expertise > Hosting > FAQ > Contact
+- **Mobile menu updated** — Includes "Meer" section with all hidden page links
 
 ## Page Structure
-- `/` - Landing page (hero, trust badges, pricing cards, live examples, reviews, quiz, services, before/after, process, expertise, hosting, FAQ, contact)
-- `/calculator` - Live price calculator with YRVA10 discount code support
-- `/rebranding` - Dedicated rebranding service page
-- `/pakketten` - Packages overview + Competitor Comparison table
-- `/onderhoud` - Maintenance/hosting page
-- `/diensten` and `/diensten/:type` - Services pages
-- `/over-mij` - About page
+- `/` - Landing page
+- `/calculator` - Price calculator with YRVA10 discount
+- `/rebranding` - Rebranding service page
+- `/pakketten` - Packages overview + Competitor Comparison
+- `/onderhoud` - Hosting page
+- `/diensten` / `/diensten/:type` - Services
+- `/over-mij` - About
+- `/waarom-website` - Why a Website?
 - `/blog` - Blog
-- `/privacy` - Privacy policy
-- `/leadfinder` and `/admin` - Admin tools
-
-## Key Files
-- `/app/frontend/src/pages/LandingPage.jsx` - Main homepage
-- `/app/frontend/src/pages/CalculatorPage.jsx` - Calculator with discount codes
-- `/app/frontend/src/pages/RebrandingPage.jsx` - Rebranding service page
-- `/app/frontend/src/pages/PackagesPage.jsx` - Packages + Competitor Comparison
-- `/app/frontend/src/components/LiveExamples.jsx` - Combined preview + features
-- `/app/frontend/src/components/BeforeAfterSlider.jsx` - Dramatic before/after
-- `/app/frontend/src/components/ExitIntentPopup.jsx`
-- `/app/frontend/src/components/PackageQuiz.jsx`
-- `/app/frontend/src/components/CompetitorComparison.jsx`
-- `/app/frontend/src/components/TrustBadges.jsx`
-- `/app/backend/server.py`
+- `/privacy` - Privacy
+- `/leadfinder` / `/admin` - Admin tools
 
 ## Credentials
 - Admin Dashboard Password (Preview): `yrvante2025`
 
 ## Backlog (P2)
-- Refactor `LandingPage.jsx` — extract sections to separate component files
-- Refactor `DienstenPage.jsx` — move large niches data to separate data file
-- Google Sheets API integration for lead export
-- Vercel production environment configuration (requires user to set env vars)
-- Resend email DNS configuration (requires user DKIM/SPF setup)
+- Refactor LandingPage.jsx (extract sections to components)
+- Refactor DienstenPage.jsx (data to separate file)
+- Google Sheets API for lead export
+- Vercel production env vars (user action needed)
+- Resend email DNS config (user action needed)
