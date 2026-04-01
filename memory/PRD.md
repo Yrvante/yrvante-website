@@ -1,62 +1,67 @@
 # Yrvante Website - Product Requirements Document
 
 ## Original Problem Statement
-Build and iteratively develop the Yrvante web platform — a Dutch web design company website. Focus on pixel-perfect UI, brand consistency, responsive design, dark/light mode support, and mobile-first experience.
+Build and iteratively develop the Yrvante web platform — a Dutch freelance web design agency website. Focus on pixel-perfect UI, brand consistency, and conversion-optimized features with a strict neutral/gray/glassmorphism aesthetic. NO blue or navy colors.
 
-## Architecture
-- **Frontend**: React + Tailwind CSS (Shadcn UI components)
-- **Backend**: FastAPI (Preview), Node.js (Vercel Production)
-- **Database**: MongoDB (Preview), Vercel Postgres (Production)
-- **Styling**: Tailwind with `dark:` variants, ThemeContext, LanguageContext (NL/EN)
-- **Performance**: React.lazy() code splitting, optimized font loading
+## Core Architecture
+- **Frontend**: React + Tailwind CSS + Framer Motion
+- **Backend**: FastAPI (preview) + Node.js (Vercel production)
+- **Database**: Vercel Postgres (production), MongoDB available (preview)
+- **Styling**: Strict neutral gray palette, glassmorphism, dark/light mode via ThemeContext
 
-## Key Pages
-- LandingPage.jsx — Homepage with Google Reviews section
-- PackagesPage.jsx — Pricing: Rebranding Website €349, Basis Website €500, Pro Website €900, Premium Website €1400
-- CalculatorPage.jsx — Interactive price calculator with 4 packages + quote form
-- DienstenPage.jsx — Services + 17+ niche detail pages
-- OverMijPage.jsx — About me (mobile-first)
-- NotFoundPage.jsx — Custom 404 page (noindex)
-- Admin Dashboard (Lead Finder) — Password protected
+## What's Been Implemented
 
-## Key Components
-- GoogleReviews.jsx — Auto-refreshing Google Reviews (via Places API, 1hr cache)
-- ThemeChooser.jsx — First-visit light/dark mode selector
-- CookieBanner.jsx — GDPR-compliant cookie consent
-- SEO.jsx — Per-page meta tags, canonical URLs, noindex support
+### Phase 1 - Core Website (Complete)
+- Landing page with hero, services, process, expertise, hosting, FAQ, contact sections
+- Admin Dashboard (Lead Finder) with search, filtering, and lead management
+- Calculator page with live pricing for 4 packages (Rebranding €349, Basis €500, Pro €900, Premium €1400)
+- Dark/Light mode with ThemeContext and white logo variants
+- Cookie Banner, 404 page, lazy loading
+- SEO (sitemap, schema.org, canonical URLs)
+- Google Reviews integration via Places API
 
-## Completed (Mar 31, 2026)
-### Google Reviews Integration
-- Backend: GET /api/reviews with 1-hour in-memory cache
-- Google Places API with Place ID: ChIJ5XkLWE8HuEcRItzZPcgtM-8
-- Frontend: GoogleReviews.jsx with star ratings, author info, review text
-- Responsive grid (1-3 columns), dark mode support
-- "Bekijk op Google" + "Laat een review achter" CTA buttons
-- Auto-refreshes: new Google reviews appear within 1 hour
+### Phase 2 - Conversion Features (Complete - Feb 2026)
+- **Exit-Intent Popup**: Shows YRVA10 discount code (10% off) when user tries to leave. localStorage prevents re-showing for 24h.
+- **YRVA10 Discount Code**: Works in Calculator page. Input field + URL param support (?code=YRVA10). Shows strikethrough original price.
+- **Package Quiz**: 5-question wizard ("Welk pakket past bij mij?") that recommends Rebranding/Basis/Pro/Premium based on answers. Links to calculator with pre-selected package.
+- **Live Examples**: Interactive industry switcher (Kapper, Loodgieter, Coach, Restaurant) x tier (Basis/Pro/Premium) x view mode (desktop/mobile). Shows browser-chrome preview of what the website would look like.
+- **Before & After Slider**: Draggable slider showing old (Times New Roman, ugly) vs new (modern, clean) website mockup.
+- **Competitor Comparison Table**: Groot bureau vs Yrvante vs Goedkope freelancer — comparing price, speed, custom code, SEO, direct contact, etc.
+- **Trust Badges**: KVK Geregistreerd, 100% Tevredenheid, Reactie < 2 uur, Op Maat Gemaakt.
+- **Rebranding Page**: Standalone page at /rebranding with hero, features, included/not-included lists, "Is dit iets voor mij?" section, and CTA to calculator.
+- **Glassmorphism CTA Banner**: Calculator CTA on homepage replaced from dark navy to transparent glass (bg-white/60 backdrop-blur-xl).
+- **Micro-animations**: Hover lift effects on service cards, parallax background dots on process section.
 
-### Package Renaming
-- All packages renamed: Rebranding Website, Basis Website, Pro Website, Premium Website
+## Page Structure
+- `/` - Landing page (hero, trust badges, pricing, reviews, quiz, live examples, services, before/after, process, competitor comparison, expertise, hosting, FAQ, contact)
+- `/calculator` - Live price calculator with discount code support
+- `/rebranding` - Dedicated rebranding service page
+- `/pakketten` - Packages overview
+- `/onderhoud` - Maintenance/hosting page
+- `/diensten` and `/diensten/:type` - Services pages
+- `/over-mij` - About page
+- `/blog` - Blog
+- `/privacy` - Privacy policy
+- `/leadfinder` and `/admin` - Admin tools
 
-### SEO Optimization
-- Sitemap.xml: 34 URLs, Schema.org with all 4 packages, canonical URLs, noindex on 404
-
-### Cookie Banner + 404 + Performance
-- GDPR cookie banner, custom 404 page, React.lazy() code splitting
-
-## API Keys (Backend .env)
-- GOOGLE_PLACES_API_KEY — Google Places API for reviews
-- GOOGLE_PLACE_ID — ChIJ5XkLWE8HuEcRItzZPcgtM-8
-- RESEND_API_KEY — Email delivery
-
-## Pending Issues
-- P0: Vercel Production env vars — BLOCKED on user
-- P1: Web scraping in production — depends on P0
-- P1: Resend DNS configuration
-
-## Upcoming Tasks
-- P2: Case studies / success stories for niche pages
-- P2: Refactor DienstenPage.jsx (move data to separate file)
-- P2: Google Sheets API integration for lead export
+## Key Files
+- `/app/frontend/src/pages/LandingPage.jsx` (~1700 lines, houses all homepage sections)
+- `/app/frontend/src/pages/CalculatorPage.jsx` (discount code + URL params)
+- `/app/frontend/src/pages/RebrandingPage.jsx` (standalone rebranding page)
+- `/app/frontend/src/components/ExitIntentPopup.jsx`
+- `/app/frontend/src/components/PackageQuiz.jsx`
+- `/app/frontend/src/components/BeforeAfterSlider.jsx`
+- `/app/frontend/src/components/LiveExamples.jsx`
+- `/app/frontend/src/components/CompetitorComparison.jsx`
+- `/app/frontend/src/components/TrustBadges.jsx`
+- `/app/backend/server.py`
 
 ## Credentials
-- Admin Dashboard (Preview): password `yrvante2025`
+- Admin Dashboard Password (Preview): `yrvante2025`
+
+## Backlog (P2)
+- Refactor `LandingPage.jsx` — extract sections to separate component files
+- Refactor `DienstenPage.jsx` — move large niches data to separate data file
+- Google Sheets API integration for lead export
+- Vercel production environment configuration (requires user to set env vars)
+- Resend email DNS configuration (requires user DKIM/SPF setup)

@@ -1,7 +1,10 @@
 # Test Credentials
 
 ## Admin Dashboard
-- **Preview Password**: `yrvante2025`
-- **Production Password**: Set via Vercel env var `ADMIN_PASSWORD`
+- **URL**: /admin
+- **Password**: `yrvante2025`
 
-## No user auth system - public website with admin-only dashboard
+## Preview Environment
+- **URL**: https://pricing-refresh-5.preview.emergentagent.com
+
+## No user auth system — the site is public with an admin password for the dashboard.

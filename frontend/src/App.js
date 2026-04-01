@@ -18,6 +18,7 @@ const OnderhoudPage = lazy(() => import("./pages/OnderhoudPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const LeadFinderPage = lazy(() => import("./pages/LeadFinderPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const RebrandingPage = lazy(() => import("./pages/RebrandingPage"));
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -298,6 +299,7 @@ function App() {
             <Route path="/diensten/:type" element={<DienstenPage />} />
             <Route path="/voor/:niche" element={<DienstenPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/rebranding" element={<RebrandingPage />} />
             <Route path="/leadfinder" element={<LeadFinderPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFoundPage />} />
