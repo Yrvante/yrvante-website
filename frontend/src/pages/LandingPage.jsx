@@ -43,6 +43,12 @@ import {
   Calculator,
 } from "lucide-react";
 import DemoPreview from "../components/DemoPreview";
+import ExitIntentPopup from "../components/ExitIntentPopup";
+import PackageQuiz from "../components/PackageQuiz";
+import BeforeAfterSlider from "../components/BeforeAfterSlider";
+import LiveExamples from "../components/LiveExamples";
+import CompetitorComparison from "../components/CompetitorComparison";
+import TrustBadges from "../components/TrustBadges";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 // On Vercel (production), use relative path for serverless functions
@@ -487,8 +493,17 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section data-testid="process-section" className="py-24 lg:py-32">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section data-testid="process-section" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Parallax background dots */}
+      <motion.div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }}
+        initial={{ y: 0 }}
+        whileInView={{ y: -20 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">(05)</p>
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
@@ -760,7 +775,7 @@ const ServicesSection = () => {
             viewport={{ once: true }}
             className="col-span-12 lg:col-span-4 group"
           >
-            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors h-full">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-all duration-300 h-full hover:-translate-y-1 hover:shadow-lg">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">01</span>
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
@@ -786,7 +801,7 @@ const ServicesSection = () => {
             transition={{ delay: 0.1 }}
             className="col-span-12 lg:col-span-4 group"
           >
-            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors h-full">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-all duration-300 h-full hover:-translate-y-1 hover:shadow-lg">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">02</span>
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
@@ -812,7 +827,7 @@ const ServicesSection = () => {
             transition={{ delay: 0.2 }}
             className="col-span-12 lg:col-span-4 group"
           >
-            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-colors h-full">
+            <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-all duration-300 h-full hover:-translate-y-1 hover:shadow-lg">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-xs uppercase tracking-[0.2em] text-gray-500">03</span>
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
@@ -990,21 +1005,21 @@ const PricingSection = () => {
           className="mt-8 sm:mt-12"
         >
           <Link to="/calculator" className="block group" data-testid="pricing-calculator-cta">
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gray-900 dark:bg-white p-6 sm:p-10 md:p-12 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-900/20 dark:hover:shadow-white/10">
-              <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white/60 dark:bg-neutral-800/60 backdrop-blur-xl border border-gray-200 dark:border-neutral-700 p-6 sm:p-10 md:p-12 transition-all duration-300 hover:shadow-2xl hover:border-gray-400 dark:hover:border-neutral-500">
+              <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
               <div className="relative flex flex-col sm:flex-row items-center gap-5 sm:gap-8">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 dark:bg-gray-900/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Calculator size={28} className="text-white dark:text-gray-900" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                  <Calculator size={28} className="text-gray-600 dark:text-gray-300" />
                 </div>
                 <div className="flex-1 text-center sm:text-left">
-                  <h3 className="text-xl sm:text-2xl font-black text-white dark:text-gray-900 mb-1 tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-1 tracking-tight">
                     {language === 'nl' ? 'Bereken direct je prijs' : 'Calculate your price now'}
                   </h3>
-                  <p className="text-sm text-gray-400 dark:text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     {language === 'nl' ? 'Kies je pakket, voeg opties toe en ontvang meteen een offerte.' : 'Choose your package, add options and get a quote instantly.'}
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-xs font-bold uppercase tracking-[0.1em] rounded-xl group-hover:bg-gray-100 dark:group-hover:bg-gray-800 transition-colors flex-shrink-0">
+                <span className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.1em] rounded-xl group-hover:bg-gray-600 transition-colors flex-shrink-0">
                   {language === 'nl' ? 'Start calculator' : 'Start calculator'}
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -1635,16 +1650,22 @@ const LandingPage = () => {
         <SEO page="/" />
         <Navigation />
         <HeroSection />
+        <TrustBadges />
         <WhyExpensiveSection />
         <PricingSection />
         <GoogleReviews />
+        <PackageQuiz />
+        <LiveExamples />
         <ServicesSection />
+        <BeforeAfterSlider />
         <ProcessSection />
+        <CompetitorComparison />
         <ExpertiseSection />
         <HostingSection />
         <FAQSection />
         <ContactSection />
         <Footer />
+        <ExitIntentPopup />
       </div>
     </div>
   );

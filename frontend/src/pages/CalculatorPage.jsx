@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage, useTheme } from "../App";
-import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star, Tag, X } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
 import SEO from "../components/SEO";
 import axios from "axios";
 import { toast } from "sonner";
@@ -233,8 +233,13 @@ const GoogleReviewsPreview = ({ language }) => (
   </motion.div>
 );
 
+const VALID_DISCOUNT_CODES = {
+  YRVA10: { discount: 0.10, label: "10% korting", labelEn: "10% discount" },
+};
+
 const CalculatorPage = () => {
   const { language } = useLanguage();
+  const [searchParams] = useSearchParams();
   
   const [selectedPackage, setSelectedPackage] = useState('pro');
   const [addOns, setAddOns] = useState({
@@ -245,6 +250,42 @@ const CalculatorPage = () => {
     bookingSystem: false,
     googleReviews: false,
   });
+  const [discountCode, setDiscountCode] = useState('');
+  const [appliedDiscount, setAppliedDiscount] = useState(null);
+  const [discountError, setDiscountError] = useState('');
+
+  // Read package from URL params (from quiz)
+  useEffect(() => {
+    const pkg = searchParams.get('package');
+    if (pkg && ['rebranding', 'basic', 'pro', 'premium'].includes(pkg)) {
+      setSelectedPackage(pkg);
+    }
+    const code = searchParams.get('code');
+    if (code) {
+      setDiscountCode(code.toUpperCase());
+      const valid = VALID_DISCOUNT_CODES[code.toUpperCase()];
+      if (valid) setAppliedDiscount({ code: code.toUpperCase(), ...valid });
+    }
+  }, [searchParams]);
+
+  const applyDiscountCode = () => {
+    const code = discountCode.trim().toUpperCase();
+    const valid = VALID_DISCOUNT_CODES[code];
+    if (valid) {
+      setAppliedDiscount({ code, ...valid });
+      setDiscountError('');
+      toast.success(language === 'nl' ? `Kortingscode ${code} toegepast!` : `Discount code ${code} applied!`);
+    } else {
+      setDiscountError(language === 'nl' ? 'Ongeldige kortingscode' : 'Invalid discount code');
+      setAppliedDiscount(null);
+    }
+  };
+
+  const removeDiscount = () => {
+    setAppliedDiscount(null);
+    setDiscountCode('');
+    setDiscountError('');
+  };
 
   const handlePackageChange = (key) => {
     setSelectedPackage(key);
@@ -564,7 +605,13 @@ const CalculatorPage = () => {
     if (addOns.googleReviews) oneTime += prices.googleReviews;
     if (addOns.maintenance) monthly = prices.maintenance;
 
-    return { oneTime, monthly };
+    let discountAmount = 0;
+    if (appliedDiscount) {
+      discountAmount = Math.round(oneTime * appliedDiscount.discount);
+      oneTime = oneTime - discountAmount;
+    }
+
+    return { oneTime, monthly, discountAmount };
   };
 
   const totals = calculateTotal();
@@ -610,12 +657,16 @@ const CalculatorPage = () => {
     }
     
     if (extras.length > 0) {
-      summary += `➕ EXTRA'S:\n${extras.join('\n')}\n\n`;
+      summary += `Extra's:\n${extras.join('\n')}\n\n`;
     }
     
-    summary += `💰 TOTAAL EENMALIG: €${totals.oneTime}`;
+    if (appliedDiscount) {
+      summary += `KORTINGSCODE: ${appliedDiscount.code} (-${Math.round(appliedDiscount.discount * 100)}%)\nKorting: -€${totals.discountAmount}\n\n`;
+    }
+    
+    summary += `TOTAAL EENMALIG: €${totals.oneTime}`;
     if (addOns.maintenance) {
-      summary += `\n💳 MAANDELIJKS: €${totals.monthly}/maand`;
+      summary += `\nMAANDELIJKS: €${totals.monthly}/maand`;
     }
     
     return summary;
@@ -906,11 +957,58 @@ const CalculatorPage = () => {
                   </div>
                 ))}
 
+                {/* Discount code + Totals */}
+                {appliedDiscount && (
+                  <div className="flex justify-between items-center py-3 border-b border-gray-300 dark:border-neutral-700">
+                    <div className="flex items-center gap-2">
+                      <Tag size={14} className="text-green-600" />
+                      <span className="text-green-600 font-medium text-sm">{appliedDiscount.code}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-green-600 font-bold">-€{totals.discountAmount}</span>
+                      <button onClick={removeDiscount} className="text-gray-400 hover:text-red-500 transition-colors">
+                        <X size={14} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Discount code input */}
+                {!appliedDiscount && (
+                  <div className="mt-4">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={discountCode}
+                        onChange={(e) => { setDiscountCode(e.target.value.toUpperCase()); setDiscountError(''); }}
+                        placeholder={language === 'nl' ? 'Kortingscode' : 'Discount code'}
+                        className="flex-1 px-4 py-2.5 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-xl text-sm focus:outline-none focus:border-gray-500 dark:text-white"
+                        data-testid="discount-code-input"
+                      />
+                      <button
+                        onClick={applyDiscountCode}
+                        className="px-4 py-2.5 bg-gray-500 text-white text-xs font-bold rounded-xl hover:bg-gray-600 transition-colors"
+                        data-testid="apply-discount-btn"
+                      >
+                        {language === 'nl' ? 'Toepassen' : 'Apply'}
+                      </button>
+                    </div>
+                    {discountError && (
+                      <p className="text-red-500 text-xs mt-1">{discountError}</p>
+                    )}
+                  </div>
+                )}
+
                 {/* Totals */}
                 <div className="mt-6 space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-medium">{t.oneTime}</span>
-                    <span className="text-4xl font-heading font-bold dark:text-white" data-testid="total-onetime">€{totals.oneTime}</span>
+                    <div className="text-right">
+                      {appliedDiscount && (
+                        <span className="text-sm text-gray-400 line-through mr-2">€{totals.oneTime + totals.discountAmount}</span>
+                      )}
+                      <span className="text-4xl font-heading font-bold dark:text-white" data-testid="total-onetime">€{totals.oneTime}</span>
+                    </div>
                   </div>
                   {addOns.maintenance && (
                     <div className="flex justify-between items-center text-gray-500">
@@ -1038,9 +1136,17 @@ const CalculatorPage = () => {
                           <span>€{prices.maintenance}/mnd</span>
                         </div>
                       )}
-                      <div className="border-t border-gray-200 dark:border-neutral-800 pt-2 mt-2 flex justify-between font-bold">
-                        <span>{t.oneTime}</span>
-                        <span>€{totals.oneTime}</span>
+                      <div className="border-t border-gray-200 dark:border-neutral-800 pt-2 mt-2">
+                        {appliedDiscount && (
+                          <div className="flex justify-between text-green-600 mb-1">
+                            <span className="flex items-center gap-1"><Tag size={12} /> {appliedDiscount.code}</span>
+                            <span>-€{totals.discountAmount}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between font-bold">
+                          <span>{t.oneTime}</span>
+                          <span>€{totals.oneTime}</span>
+                        </div>
                       </div>
                       {addOns.maintenance && (
                         <div className="flex justify-between text-gray-600 dark:text-gray-400">
