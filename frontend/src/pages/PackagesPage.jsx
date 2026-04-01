@@ -538,6 +538,7 @@ const PackagesPage = () => {
     { name: language === 'nl' ? 'Extra pagina' : 'Extra page', price: '€50' },
     { name: language === 'nl' ? 'Meertalig' : 'Multi-language', price: '€200' },
     { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€80' },
+    { name: language === 'nl' ? 'Dark mode' : 'Dark mode', price: '€80' },
     { name: language === 'nl' ? 'Onderhoud' : 'Maintenance', price: '€25/pm' },
     { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€250' },
   ];
@@ -656,12 +657,12 @@ const PackagesPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className={`relative rounded-3xl p-7 ${
                   pkg.popular 
-                    ? 'bg-gray-600 text-white shadow-2xl z-10' 
+                    ? 'bg-gray-100 dark:bg-neutral-800 border-2 border-gray-300 dark:border-neutral-600 shadow-2xl z-10' 
                     : 'bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 shadow-lg'
                 }`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-200 px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 border border-gray-300 dark:border-neutral-600">
                     <Star size={16} className="fill-current" />
                     {language === 'nl' ? 'Meest Gekozen' : 'Most Popular'}
                   </div>
@@ -669,52 +670,52 @@ const PackagesPage = () => {
 
                 <div className="mb-6">
                   <h2 className="text-2xl font-heading font-bold mb-2 dark:text-white">{pkg.name}</h2>
-                  <p className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}>
+                  <p className={`text-sm ${pkg.popular ? 'text-gray-500 dark:text-gray-400' : 'text-gray-500'}`}>
                     {pkg.description}
                   </p>
                 </div>
 
                 <div className="mb-6">
                   <span className="text-5xl font-heading font-bold dark:text-white">€{pkg.price}</span>
-                  <span className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}> excl. BTW</span>
+                  <span className={`text-sm ${pkg.popular ? 'text-gray-500 dark:text-gray-400' : 'text-gray-500'}`}> excl. BTW</span>
                 </div>
 
                 <div className="mb-4 flex items-center gap-2">
-                  <Clock size={16} className={pkg.popular ? 'text-gray-400' : 'text-gray-400'} />
-                  <span className={`text-sm ${pkg.popular ? 'text-gray-300' : 'text-gray-500'}`}>
+                  <Clock size={16} className="text-gray-400" />
+                  <span className={`text-sm ${pkg.popular ? 'text-gray-500 dark:text-gray-400' : 'text-gray-500'}`}>
                     {language === 'nl' ? 'Levertijd:' : 'Delivery:'} {pkg.deliveryTime}
                   </span>
                 </div>
 
                 <div className="mb-4">
-                  <p className={`text-xs uppercase tracking-wider mb-2 ${pkg.popular ? 'text-gray-400' : 'text-gray-400'}`}>
+                  <p className="text-xs uppercase tracking-wider mb-2 text-gray-400">
                     {language === 'nl' ? 'Ideaal voor' : 'Ideal for'}
                   </p>
-                  <p className={`font-medium ${pkg.popular ? 'text-gray-200' : 'text-gray-700 dark:text-gray-300'}`}>
+                  <p className={`font-medium ${pkg.popular ? 'text-gray-700 dark:text-gray-300' : 'text-gray-700 dark:text-gray-300'}`}>
                     {pkg.idealFor}
                   </p>
                 </div>
 
                 <div className="space-y-1 mb-4">
-                  <p className={`text-xs uppercase tracking-wider mb-3 ${pkg.popular ? 'text-gray-400' : 'text-gray-400'}`}>
+                  <p className="text-xs uppercase tracking-wider mb-3 text-gray-400">
                     {language === 'nl' ? 'Inclusief' : 'Included'}
                   </p>
                   {pkg.includes.map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-1.5">
-                      <Check size={16} className={`flex-shrink-0 mt-0.5 ${pkg.popular ? 'text-white' : 'text-black dark:text-white'}`} />
-                      <span className={`text-sm ${pkg.popular ? 'text-gray-200' : 'text-gray-600 dark:text-gray-400'}`}>{item}</span>
+                      <Check size={16} className="flex-shrink-0 mt-0.5 text-black dark:text-white" />
+                      <span className={`text-sm ${pkg.popular ? 'text-gray-600 dark:text-gray-400' : 'text-gray-600 dark:text-gray-400'}`}>{item}</span>
                     </div>
                   ))}
                 </div>
 
                 {pkg.notIncluded && pkg.notIncluded.length > 0 && (
-                  <div className="space-y-1 mb-6 pt-4 border-t border-dashed ${pkg.popular ? 'border-gray-700' : 'border-gray-200'}">
-                    <p className={`text-xs uppercase tracking-wider mb-3 ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>
+                  <div className="space-y-1 mb-6 pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700">
+                    <p className="text-xs uppercase tracking-wider mb-3 text-gray-400">
                       {language === 'nl' ? 'Niet inbegrepen (apart te kopen)' : 'Not included (available separately)'}
                     </p>
                     {pkg.notIncluded.map((item, i) => (
                       <div key={i} className="flex items-start gap-3 py-1">
-                        <span className={`text-sm ${pkg.popular ? 'text-gray-500' : 'text-gray-400'}`}>• {item}</span>
+                        <span className="text-sm text-gray-400">• {item}</span>
                       </div>
                     ))}
                   </div>
@@ -727,11 +728,7 @@ const PackagesPage = () => {
 
                 <Link
                   to="/calculator"
-                  className={`block w-full text-center py-4 rounded-full font-bold transition-all ${
-                    pkg.popular
-                      ? 'bg-white text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-neutral-800'
-                      : 'bg-gray-500 text-white hover:bg-gray-600'
-                  }`}
+                  className="block w-full text-center py-4 rounded-full font-bold transition-all bg-gray-500 text-white hover:bg-gray-600"
                 >
                   {language === 'nl' ? 'Selecteer Pakket' : 'Select Package'}
                 </Link>

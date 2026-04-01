@@ -249,6 +249,7 @@ const CalculatorPage = () => {
     maintenance: false,
     bookingSystem: false,
     googleReviews: false,
+    darkMode: false,
   });
   const [discountCode, setDiscountCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(null);
@@ -410,6 +411,12 @@ const CalculatorPage = () => {
           price: 120,
           unit: "eenmalig",
           hidden: true
+        },
+        darkMode: {
+          title: "Dark mode",
+          description: "Licht/donker modus schakelaar op je website",
+          price: 80,
+          unit: "eenmalig"
         }
       },
       
@@ -543,6 +550,12 @@ const CalculatorPage = () => {
           price: 120,
           unit: "one-time",
           hidden: true
+        },
+        darkMode: {
+          title: "Dark mode",
+          description: "Light/dark mode toggle on your website",
+          price: 80,
+          unit: "one-time"
         }
       },
       
@@ -591,7 +604,8 @@ const CalculatorPage = () => {
     extraForm: 80,
     maintenance: 25,
     bookingSystem: 250,
-    googleReviews: 120
+    googleReviews: 120,
+    darkMode: 80,
   };
 
   const calculateTotal = () => {
@@ -603,6 +617,7 @@ const CalculatorPage = () => {
     if (addOns.extraForm) oneTime += prices.extraForm;
     if (addOns.bookingSystem) oneTime += prices.bookingSystem;
     if (addOns.googleReviews) oneTime += prices.googleReviews;
+    if (addOns.darkMode) oneTime += prices.darkMode;
     if (addOns.maintenance) monthly = prices.maintenance;
 
     let discountAmount = 0;
@@ -651,6 +666,9 @@ const CalculatorPage = () => {
     }
     if (addOns.googleReviews) {
       extras.push(`• ${t.addOns.googleReviews.title} - €${prices.googleReviews}`);
+    }
+    if (addOns.darkMode) {
+      extras.push(`• ${t.addOns.darkMode.title} - €${prices.darkMode}`);
     }
     if (addOns.maintenance) {
       extras.push(`• ${t.addOns.maintenance.title} - €${prices.maintenance}/maand`);

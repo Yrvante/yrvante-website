@@ -41,6 +41,7 @@ import {
   Moon,
   Sun,
   Calculator,
+  ShoppingCart,
 } from "lucide-react";
 import ExitIntentPopup from "../components/ExitIntentPopup";
 import PackageQuiz from "../components/PackageQuiz";
@@ -205,6 +206,16 @@ const Navigation = () => {
             </button>
             
             <div className="w-px h-4 bg-gray-300 dark:bg-neutral-600" />
+
+            {/* Shopping cart - link to calculator */}
+            <Link
+              to="/calculator"
+              className="relative p-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              title={language === 'nl' ? 'Wat kost jouw website?' : 'What does your website cost?'}
+              data-testid="nav-cart-icon"
+            >
+              <ShoppingCart size={18} />
+            </Link>
             
             <button
               onClick={() => scrollToSection("contact")}
@@ -1715,9 +1726,9 @@ const LandingPage = () => {
         <PricingSection />
         <LiveExamples />
         <PackageQuiz />
-        <GoogleReviews />
         <ServicesSection />
         <ProcessSection />
+        <GoogleReviews />
         <ExpertiseSection />
         <HostingSection />
         <FAQSection />

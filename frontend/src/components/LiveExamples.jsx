@@ -125,16 +125,80 @@ const KapperPreview = ({ tier, lang, mobile }) => (
     )}
     {/* Booking for premium */}
     {tier === "premium" && (
-      <div className="mx-5 mb-3 bg-white dark:bg-[#1a1412] rounded-xl p-3 border border-[#e8d5c4] dark:border-[#2a2018]">
-        <p className="text-[9px] font-bold text-[#3a2a1a] dark:text-[#e8d5c4] mb-2" style={{ fontFamily: "Georgia, serif" }}>
-          {lang === "nl" ? "Online reserveren" : "Book online"}
-        </p>
+      <div className="mx-5 mb-3 bg-white dark:bg-[#1a1412]/60 rounded-xl p-3 border border-[#e8d5c4] dark:border-[#2a2018]">
+        <div className="flex items-center gap-2 mb-2">
+          <Calendar size={10} className="text-[#c4a882]" />
+          <span className="text-[9px] font-bold text-[#3a2a1a] dark:text-[#e8d5c4]" style={{ fontFamily: "Georgia, serif" }}>
+            {lang === "nl" ? "Online reserveren" : "Book online"}
+          </span>
+        </div>
         <div className="flex gap-1">
           {(lang === "nl" ? ["Ma", "Di", "Wo", "Do", "Vr", "Za"] : ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]).map((d, i) => (
             <div key={d} className={`flex-1 text-center py-1.5 rounded text-[8px] ${i === 2 ? "bg-[#c4a882] text-white" : "bg-[#f9ece2] dark:bg-[#1a1412] text-[#8a6d52]"}`}>{d}</div>
           ))}
         </div>
       </div>
+    )}
+    {/* Premium extras: reviews, team, blog, FAQ, CTA banner, multi-language */}
+    {tier === "premium" && (
+      <>
+        {/* Google Reviews */}
+        <div className="mx-5 mb-3">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#a08870] mb-2 text-center">
+            {lang === "nl" ? "Wat klanten zeggen" : "What clients say"}
+          </p>
+          <div className="flex gap-2">
+            {[
+              { name: "Lisa M.", text: lang === "nl" ? "Super tevreden met mijn nieuwe look!" : "So happy with my new look!" },
+              { name: "Anna K.", text: lang === "nl" ? "Beste kapper van de stad" : "Best hairdresser in town" },
+            ].map((r, i) => (
+              <div key={i} className="flex-1 bg-white/70 dark:bg-[#1a1412]/60 rounded-xl p-2.5 border border-[#e8d5c4] dark:border-[#2a2018]">
+                <div className="flex gap-0.5 mb-1">{[...Array(5)].map((_, j) => <Star key={j} size={7} fill="#c4a882" className="text-[#c4a882]" />)}</div>
+                <p className="text-[7px] text-[#8a6d52] italic mb-1">"{r.text}"</p>
+                <p className="text-[7px] text-[#a08870] font-bold">{r.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Team section */}
+        <div className="mx-5 mb-3 text-center">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#a08870] mb-2">{lang === "nl" ? "Ons team" : "Our team"}</p>
+          <div className="flex gap-2 justify-center">
+            {["Bella", "Sophie", "Emma"].map((n, i) => (
+              <div key={i} className="text-center">
+                <div className="w-10 h-10 rounded-full mx-auto mb-1" style={{ background: `linear-gradient(${135 + i * 40}deg, #e8d5c4, #c4a882)` }} />
+                <p className="text-[8px] text-[#3a2a1a] dark:text-[#e8d5c4] font-bold">{n}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Blog posts */}
+        <div className="mx-5 mb-3">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#a08870] mb-2 text-center">Blog</p>
+          <div className="space-y-1.5">
+            {[lang === "nl" ? "5 trends voor deze zomer" : "5 trends this summer", lang === "nl" ? "Hoe onderhoud je krullen?" : "How to maintain curls?"].map((t, i) => (
+              <div key={i} className="flex items-center gap-2 bg-white/50 dark:bg-[#1a1412]/50 rounded-lg p-2 border border-[#e8d5c4]/50 dark:border-[#2a2018]/50">
+                <div className="w-6 h-6 rounded bg-gradient-to-br from-[#e8d5c4] to-[#c4a882] flex-shrink-0" />
+                <p className="text-[8px] text-[#3a2a1a] dark:text-[#e8d5c4]">{t}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* CTA banner */}
+        <div className="mx-5 mb-3 bg-[#3a2a1a] rounded-xl p-4 text-center">
+          <p className="text-[9px] text-[#c4a882] font-bold mb-1">{lang === "nl" ? "Eerste bezoek? 15% korting!" : "First visit? 15% off!"}</p>
+          <div className="px-4 py-1.5 bg-[#c4a882] text-[#3a2a1a] text-[8px] font-bold rounded-full inline-block">
+            {lang === "nl" ? "Boek nu" : "Book now"}
+          </div>
+        </div>
+        {/* Multi-language */}
+        <div className="mx-5 mb-3 flex items-center justify-center gap-2">
+          <Globe size={9} className="text-[#a08870]" />
+          <span className="text-[8px] text-[#a08870]">NL</span>
+          <span className="text-[8px] text-[#c4a882] font-bold">EN</span>
+          <span className="text-[8px] text-[#a08870]">DE</span>
+        </div>
+      </>
     )}
     {/* Footer */}
     <div className="px-5 py-2 border-t border-[#e8d5c4] dark:border-[#2a2018] flex justify-between items-center">
@@ -259,6 +323,63 @@ const LoodgieterPreview = ({ tier, lang, mobile }) => (
         </div>
       </div>
     )}
+    {/* Premium extras: reviews, service areas, certifications, FAQ, CTA */}
+    {tier === "premium" && (
+      <>
+        {/* Google Reviews */}
+        <div className="mx-5 mb-2">
+          <p className="text-[9px] uppercase tracking-wider text-gray-400 mb-2 font-bold">{lang === "nl" ? "Klantbeoordelingen" : "Customer reviews"}</p>
+          <div className="flex gap-2">
+            {[
+              { name: "Jan D.", text: lang === "nl" ? "Snel en vakkundig!" : "Fast and professional!" },
+              { name: "Peter V.", text: lang === "nl" ? "Lekkage in 30 min opgelost" : "Leak fixed in 30 min" },
+            ].map((r, i) => (
+              <div key={i} className="flex-1 bg-[#f0f4f8] dark:bg-[#1a2332] rounded-lg p-2 border border-gray-200 dark:border-[#2a3342]">
+                <div className="flex gap-0.5 mb-1">{[...Array(5)].map((_, j) => <Star key={j} size={7} fill="#4dabf7" className="text-[#4dabf7]" />)}</div>
+                <p className="text-[7px] text-gray-500 italic">"{r.text}"</p>
+                <p className="text-[7px] text-gray-600 dark:text-gray-400 font-bold">{r.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Service area map */}
+        <div className="mx-5 mb-2 bg-[#f0f4f8] dark:bg-[#1a2332] rounded-xl p-3 border border-gray-200 dark:border-[#2a3342]">
+          <div className="flex items-center gap-2 mb-1">
+            <MapPin size={10} className="text-[#4dabf7]" />
+            <span className="text-[9px] font-bold text-[#1a2332] dark:text-white">{lang === "nl" ? "Werkgebied" : "Service area"}</span>
+          </div>
+          <div className="flex gap-1 flex-wrap">
+            {["Amsterdam", "Haarlem", "Amstelveen", "Zaandam"].map((c) => (
+              <span key={c} className="px-2 py-0.5 bg-white dark:bg-[#0c1117] text-[7px] text-gray-500 rounded">{c}</span>
+            ))}
+          </div>
+        </div>
+        {/* Certifications */}
+        <div className="mx-5 mb-2 flex gap-2">
+          {[lang === "nl" ? "Gecertificeerd" : "Certified", lang === "nl" ? "Verzekerd" : "Insured", "KVK"].map((c, i) => (
+            <div key={i} className="flex-1 bg-[#1a2332] rounded-lg p-2 text-center">
+              <p className="text-[8px] text-[#4dabf7] font-bold">{c}</p>
+            </div>
+          ))}
+        </div>
+        {/* FAQ preview */}
+        <div className="mx-5 mb-2">
+          <p className="text-[9px] uppercase tracking-wider text-gray-400 mb-1.5 font-bold">FAQ</p>
+          {[lang === "nl" ? "Hoe snel kunt u er zijn?" : "How fast can you arrive?", lang === "nl" ? "Wat kost een uurloon?" : "What's the hourly rate?"].map((q, i) => (
+            <div key={i} className="flex items-center gap-2 py-1.5 border-b border-gray-100 dark:border-[#2a3342] last:border-0">
+              <p className="text-[8px] text-[#1a2332] dark:text-gray-300">{q}</p>
+            </div>
+          ))}
+        </div>
+        {/* Multi-language */}
+        <div className="mx-5 mb-2 flex items-center justify-center gap-2">
+          <Globe size={9} className="text-gray-400" />
+          <span className="text-[8px] text-gray-600 dark:text-gray-400 font-bold">NL</span>
+          <span className="text-[8px] text-[#4dabf7]">EN</span>
+          <span className="text-[8px] text-gray-400">PL</span>
+        </div>
+      </>
+    )}
     {/* Footer */}
     <div className="px-5 py-2 border-t border-gray-200 dark:border-[#1a2332] flex justify-between items-center mt-auto">
       <span className="text-[8px] text-gray-400">© Jansen Loodgieters</span>
@@ -350,6 +471,51 @@ const CoachPreview = ({ tier, lang, mobile }) => (
         </div>
       </div>
     )}
+    {/* Premium extras */}
+    {tier === "premium" && (
+      <>
+        {/* Testimonials extended */}
+        <div className="mx-5 mb-3">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#6b8f7e] mb-2 text-center">{lang === "nl" ? "Ervaringen" : "Experiences"}</p>
+          <div className="space-y-2">
+            {[
+              { name: "Anne, 34", text: lang === "nl" ? "Lisa heeft mij geholpen om weer rust te vinden" : "Lisa helped me find peace again" },
+              { name: "Mark, 42", text: lang === "nl" ? "Beste investering in mezelf ooit" : "Best investment in myself ever" },
+            ].map((r, i) => (
+              <div key={i} className="bg-white/50 dark:bg-[#0f1a15] rounded-xl p-2.5 border border-[#d4e8dc] dark:border-[#1a3a2a] text-center">
+                <div className="flex justify-center gap-0.5 mb-1">{[...Array(5)].map((_, j) => <Star key={j} size={7} fill="#7bc4a5" className="text-[#7bc4a5]" />)}</div>
+                <p className="text-[7px] text-[#6b8f7e] italic">"{r.text}"</p>
+                <p className="text-[7px] text-[#6b8f7e] font-bold mt-0.5">{r.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* About me section */}
+        <div className="mx-5 mb-3 flex gap-3 items-center bg-white/50 dark:bg-[#0f1a15] rounded-2xl p-3 border border-[#d4e8dc] dark:border-[#1a3a2a]">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#7bc4a5] to-[#2d5a45] flex-shrink-0" />
+          <div>
+            <p className="text-[9px] font-bold text-[#2d5a45] dark:text-[#7bc4a5]">Lisa van den Berg</p>
+            <p className="text-[7px] text-[#6b8f7e] leading-relaxed">
+              {lang === "nl" ? "10+ jaar ervaring in coaching. Gecertificeerd NLP & mindfulness trainer." : "10+ years coaching experience. Certified NLP & mindfulness trainer."}
+            </p>
+          </div>
+        </div>
+        {/* Newsletter */}
+        <div className="mx-5 mb-3 bg-[#2d5a45] rounded-2xl p-3 text-center">
+          <p className="text-[8px] text-[#7bc4a5] font-bold mb-1">{lang === "nl" ? "Gratis mindfulness gids" : "Free mindfulness guide"}</p>
+          <div className="flex gap-1 max-w-[200px] mx-auto">
+            <div className="flex-1 bg-[#1a3a2a] rounded-lg px-2 py-1 text-[7px] text-[#6b8f7e]">email@...</div>
+            <div className="px-2 py-1 bg-[#7bc4a5] text-[#0a100e] rounded-lg text-[7px] font-bold">{lang === "nl" ? "Ontvang" : "Get"}</div>
+          </div>
+        </div>
+        {/* Multi-language */}
+        <div className="mx-5 mb-3 flex items-center justify-center gap-2">
+          <Globe size={9} className="text-[#6b8f7e]" />
+          <span className="text-[8px] text-[#2d5a45] dark:text-[#7bc4a5] font-bold">NL</span>
+          <span className="text-[8px] text-[#6b8f7e]">EN</span>
+        </div>
+      </>
+    )}
     {/* Footer */}
     <div className="px-5 py-3 text-center">
       <p className="text-[8px] text-[#6b8f7e] tracking-widest uppercase">© Coach Lisa — {lang === "nl" ? "Groei begint bij jou" : "Growth starts with you"}</p>
@@ -435,6 +601,60 @@ const RestaurantPreview = ({ tier, lang, mobile }) => (
           ))}
         </div>
       </div>
+    )}
+    {/* Premium extras */}
+    {tier === "premium" && (
+      <>
+        {/* Google Reviews */}
+        <div className="mx-5 mb-3">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#a0866a] mb-2 text-center">{lang === "nl" ? "Beoordelingen" : "Reviews"}</p>
+          <div className="flex gap-2">
+            {[
+              { name: "Maria R.", text: lang === "nl" ? "Alsof je in Italië zit!" : "Like being in Italy!" },
+              { name: "Thomas B.", text: lang === "nl" ? "Perfecte date-night plek" : "Perfect date-night spot" },
+            ].map((r, i) => (
+              <div key={i} className="flex-1 bg-white/50 dark:bg-[#120e0a]/50 rounded-lg p-2 border border-[#e8ddd0] dark:border-[#2c1810]">
+                <div className="flex gap-0.5 mb-1">{[...Array(5)].map((_, j) => <Star key={j} size={7} fill="#d4a574" className="text-[#d4a574]" />)}</div>
+                <p className="text-[7px] text-[#a0866a] italic">"{r.text}"</p>
+                <p className="text-[7px] text-[#a0866a] font-bold">{r.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Photo gallery */}
+        <div className="mx-5 mb-3">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#a0866a] mb-2 text-center">{lang === "nl" ? "Sfeerbeelden" : "Gallery"}</p>
+          <div className="grid grid-cols-4 gap-1">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="aspect-square rounded-lg" style={{ background: `linear-gradient(${120 + i * 30}deg, #d4a574, #8a6040)` }} />
+            ))}
+          </div>
+        </div>
+        {/* Catering / Events */}
+        <div className="mx-5 mb-3 bg-[#2c1810] rounded-xl p-3">
+          <p className="text-[9px] text-[#d4a574] font-bold mb-1 text-center" style={{ fontFamily: "Georgia, serif" }}>
+            {lang === "nl" ? "Catering & Evenementen" : "Catering & Events"}
+          </p>
+          <p className="text-[7px] text-[#a0866a] text-center">
+            {lang === "nl" ? "Bruiloften, feesten, bedrijfsdiners" : "Weddings, parties, corporate dinners"}
+          </p>
+        </div>
+        {/* Chef section */}
+        <div className="mx-5 mb-3 flex gap-3 items-center bg-white/50 dark:bg-[#120e0a]/50 rounded-xl p-3 border border-[#e8ddd0] dark:border-[#2c1810]">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#d4a574] to-[#8a6040] flex-shrink-0" />
+          <div>
+            <p className="text-[8px] font-bold text-[#2c1810] dark:text-[#d4a574]" style={{ fontFamily: "Georgia, serif" }}>Chef Marco Napoli</p>
+            <p className="text-[7px] text-[#a0866a]">{lang === "nl" ? "30 jaar ervaring in de Italiaanse keuken" : "30 years of Italian culinary experience"}</p>
+          </div>
+        </div>
+        {/* Multi-language + newsletter */}
+        <div className="mx-5 mb-3 flex items-center justify-center gap-2">
+          <Globe size={9} className="text-[#a0866a]" />
+          <span className="text-[8px] text-[#2c1810] dark:text-[#d4a574] font-bold">NL</span>
+          <span className="text-[8px] text-[#a0866a]">EN</span>
+          <span className="text-[8px] text-[#a0866a]">IT</span>
+        </div>
+      </>
     )}
     {/* Footer */}
     <div className="px-5 py-2 border-t border-[#e8ddd0] dark:border-[#2c1810] flex justify-between items-center mt-auto">
