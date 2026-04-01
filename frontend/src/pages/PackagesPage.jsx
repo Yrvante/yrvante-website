@@ -4,6 +4,7 @@ import { useLanguage, useTheme } from "../App";
 import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import CompetitorComparison from "../components/CompetitorComparison";
 
 const LOGO_URL = "/logo.png";
 const LOGO_URL_WHITE = "/logo-white.png";
@@ -904,6 +905,9 @@ const PackagesPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Competitor Comparison */}
+      <CompetitorComparison />
 
       {/* CTA */}
       <section className="py-20 px-6 md:px-12 bg-white dark:bg-neutral-950 border-t border-gray-100 dark:border-neutral-800">

@@ -87,6 +87,7 @@ const Navigation = () => {
     { to: '/pakketten', label: language === 'nl' ? 'Pakketten, Prijzen & Calculator' : 'Packages, Pricing & Calculator' },
     { divider: true },
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
+    { to: '/rebranding', label: 'Rebranding' },
     { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
     { divider: true },
     { to: '/diensten', label: language === 'nl' ? 'Alle Branches →' : 'All Industries →' },
@@ -862,36 +863,61 @@ const ServicesSection = () => {
   );
 };
 
-// Pricing Section - Comparison Table
+// Pricing Section - Compact Package Cards with Icons
 const PricingSection = () => {
   const { language } = useLanguage();
 
   const pkgs = [
-    { key: 'rebranding', name: language === 'nl' ? 'Rebranding' : 'Rebranding', price: '349', pages: language === 'nl' ? 'Bestaand' : 'Existing' },
-    { key: 'basis', name: language === 'nl' ? 'Basis' : 'Basic', price: '500', pages: '1-3' },
-    { key: 'pro', name: 'Pro', price: '900', popular: true, pages: '1-10' },
-    { key: 'premium', name: 'Premium', price: '1400', pages: '1-15' },
+    {
+      key: 'rebranding',
+      name: 'Rebranding',
+      price: '349',
+      icon: RefreshCw,
+      desc: language === 'nl' ? 'Bestaande website, nieuw design' : 'Existing website, new design',
+      features: [
+        language === 'nl' ? 'Nieuw modern design' : 'New modern design',
+        language === 'nl' ? 'Responsive optimalisatie' : 'Responsive optimization',
+        language === 'nl' ? 'Hosting & SSL' : 'Hosting & SSL',
+      ],
+    },
+    {
+      key: 'basis',
+      name: language === 'nl' ? 'Basis' : 'Basic',
+      price: '500',
+      icon: Monitor,
+      desc: language === 'nl' ? '1-3 pagina\'s, ideaal om te starten' : '1-3 pages, ideal to start',
+      features: [
+        language === 'nl' ? 'Responsive design' : 'Responsive design',
+        language === 'nl' ? 'Contactformulier' : 'Contact form',
+        language === 'nl' ? 'Hosting & SSL' : 'Hosting & SSL',
+      ],
+    },
+    {
+      key: 'pro',
+      name: 'Pro',
+      price: '900',
+      icon: Zap,
+      popular: true,
+      desc: language === 'nl' ? 'Tot 10 pagina\'s, voor groei' : 'Up to 10 pages, for growth',
+      features: [
+        language === 'nl' ? 'SEO optimalisatie' : 'SEO optimization',
+        language === 'nl' ? 'Blog / Portfolio' : 'Blog / Portfolio',
+        language === 'nl' ? 'Contactformulier + meer' : 'Contact form + more',
+      ],
+    },
+    {
+      key: 'premium',
+      name: 'Premium',
+      price: '1400',
+      icon: Award,
+      desc: language === 'nl' ? 'Alles inbegrepen, geen limieten' : 'Everything included, no limits',
+      features: [
+        language === 'nl' ? 'Boekingssysteem' : 'Booking system',
+        language === 'nl' ? 'Meertalig' : 'Multi-language',
+        language === 'nl' ? 'Priority support' : 'Priority support',
+      ],
+    },
   ];
-
-  const features = [
-    { label: language === 'nl' ? 'Responsive design' : 'Responsive design', r: true, b: true, p: true, pr: true },
-    { label: language === 'nl' ? 'Aantal pagina\'s' : 'Number of pages', r: 'pages', b: 'pages', p: 'pages', pr: 'pages' },
-    { label: language === 'nl' ? 'Hosting & SSL' : 'Hosting & SSL', r: true, b: true, p: true, pr: true },
-    { label: language === 'nl' ? 'Contactformulier' : 'Contact form', r: false, b: true, p: true, pr: true },
-    { label: language === 'nl' ? 'SEO optimalisatie' : 'SEO optimization', r: false, b: false, p: true, pr: true },
-    { label: language === 'nl' ? 'Blog / Portfolio' : 'Blog / Portfolio', r: false, b: false, p: true, pr: true },
-    { label: language === 'nl' ? 'Boekingssysteem' : 'Booking system', r: false, b: false, p: false, pr: true },
-    { label: language === 'nl' ? 'Meertalig' : 'Multi-language', r: false, b: false, p: false, pr: true },
-    { label: language === 'nl' ? 'Priority support' : 'Priority support', r: false, b: false, p: false, pr: true },
-    { label: language === 'nl' ? 'Nieuw design' : 'New design', r: true, b: true, p: true, pr: true },
-  ];
-
-  const getVal = (feat, pkgIdx) => {
-    const keys = ['r', 'b', 'p', 'pr'];
-    const val = feat[keys[pkgIdx]];
-    if (val === 'pages') return pkgs[pkgIdx].pages;
-    return val;
-  };
 
   return (
     <section id="pricing" className="py-24 lg:py-32">
@@ -907,139 +933,113 @@ const PricingSection = () => {
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mt-3 sm:mt-4 max-w-lg text-sm sm:text-base">
               {language === 'nl'
-                ? 'Transparante prijzen. Geen verborgen kosten. Kies het pakket dat bij jou past.'
-                : 'Transparent pricing. No hidden costs. Choose the package that suits you.'}
+                ? 'Transparante prijzen. Geen verborgen kosten.'
+                : 'Transparent pricing. No hidden costs.'}
             </p>
           </div>
         </div>
 
-        {/* Comparison Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-white dark:bg-neutral-900 rounded-3xl border border-gray-200 dark:border-neutral-800 overflow-hidden shadow-sm"
-          data-testid="pricing-comparison-table"
-        >
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px]">
-              {/* Table Header - Package names + prices */}
-              <thead>
-                <tr className="border-b border-gray-100 dark:border-neutral-800">
-                  <th className="text-left py-6 sm:py-8 px-5 sm:px-8 w-[180px] sm:w-[220px]">
-                    <span className="text-xs uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
-                      {language === 'nl' ? 'Vergelijk' : 'Compare'}
-                    </span>
-                  </th>
-                  {pkgs.map((pkg, i) => (
-                    <th key={i} className="text-center py-6 sm:py-8 px-3 sm:px-5 relative">
-                      {pkg.popular && (
-                        <span className="absolute -top-0 left-1/2 -translate-x-1/2 bg-green-500 text-white px-3 py-1 rounded-b-lg text-[10px] font-bold uppercase tracking-wider">
-                          {language === 'nl' ? 'Populair' : 'Popular'}
-                        </span>
-                      )}
-                      <p className="text-xs uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500 mb-1">{pkg.name}</p>
-                      <p className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">€{pkg.price}</p>
-                    </th>
+        {/* Package Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-testid="pricing-comparison-table">
+          {pkgs.map((pkg, i) => (
+            <motion.div
+              key={pkg.key}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+            >
+              <Link
+                to={`/calculator?package=${pkg.key}`}
+                className={`block h-full p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group ${
+                  pkg.popular
+                    ? 'bg-gray-800 dark:bg-neutral-100 border-gray-700 dark:border-gray-200'
+                    : 'bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500'
+                }`}
+                data-testid={`pricing-cta-${pkg.key}`}
+              >
+                {pkg.popular && (
+                  <span className={`inline-block text-[10px] font-bold uppercase tracking-wider mb-3 px-2.5 py-1 rounded-full ${
+                    'bg-green-500 text-white'
+                  }`}>
+                    {language === 'nl' ? 'Populair' : 'Popular'}
+                  </span>
+                )}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    pkg.popular
+                      ? 'bg-white/10 dark:bg-gray-800/20'
+                      : 'bg-gray-100 dark:bg-neutral-700'
+                  }`}>
+                    <pkg.icon size={18} strokeWidth={1.5} className={
+                      pkg.popular ? 'text-gray-300 dark:text-gray-600' : 'text-gray-500'
+                    } />
+                  </div>
+                  <div>
+                    <p className={`text-xs uppercase tracking-wider ${
+                      pkg.popular ? 'text-gray-400 dark:text-gray-500' : 'text-gray-400'
+                    }`}>{pkg.name}</p>
+                    <p className={`text-2xl font-black ${
+                      pkg.popular ? 'text-white dark:text-gray-900' : 'text-gray-900 dark:text-white'
+                    }`}>€{pkg.price}</p>
+                  </div>
+                </div>
+                <p className={`text-sm mb-4 ${
+                  pkg.popular ? 'text-gray-400 dark:text-gray-500' : 'text-gray-500 dark:text-gray-400'
+                }`}>{pkg.desc}</p>
+                <ul className="space-y-2 mb-5">
+                  {pkg.features.map((f, fi) => (
+                    <li key={fi} className="flex items-center gap-2">
+                      <Check size={14} className={pkg.popular ? 'text-green-400' : 'text-green-500'} />
+                      <span className={`text-xs ${
+                        pkg.popular ? 'text-gray-300 dark:text-gray-600' : 'text-gray-600 dark:text-gray-400'
+                      }`}>{f}</span>
+                    </li>
                   ))}
-                </tr>
-              </thead>
+                </ul>
+                <div className={`flex items-center gap-1 text-xs font-bold uppercase tracking-wider ${
+                  pkg.popular ? 'text-gray-300 dark:text-gray-600' : 'text-gray-400'
+                } group-hover:gap-2 transition-all`}>
+                  {language === 'nl' ? 'Selecteer' : 'Select'}
+                  <ArrowRight size={14} />
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
 
-              {/* Feature rows */}
-              <tbody>
-                {features.map((feat, fi) => (
-                  <tr key={fi} className={`border-b border-gray-50 dark:border-neutral-800/50 ${fi % 2 === 0 ? 'bg-gray-50/50 dark:bg-neutral-800/20' : ''}`}>
-                    <td className="py-4 px-5 sm:px-8">
-                      <span className="text-sm text-gray-700 dark:text-gray-300">{feat.label}</span>
-                    </td>
-                    {pkgs.map((pkg, pi) => {
-                      const val = getVal(feat, pi);
-                      return (
-                        <td key={pi} className={`text-center py-4 px-3 sm:px-5 ${pkg.popular ? 'bg-green-500/[0.03] dark:bg-green-500/[0.05]' : ''}`}>
-                          {typeof val === 'string' ? (
-                            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{val}</span>
-                          ) : val ? (
-                            <Check size={18} className="inline-block text-green-500" />
-                          ) : (
-                            <X size={18} className="inline-block text-gray-300 dark:text-neutral-600" />
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-
-              {/* CTA Row */}
-              <tfoot>
-                <tr>
-                  <td className="py-6 sm:py-8 px-5 sm:px-8"></td>
-                  {pkgs.map((pkg, i) => (
-                    <td key={i} className="text-center py-6 sm:py-8 px-3 sm:px-5">
-                      <Link
-                        to="/calculator"
-                        className={`inline-block w-full max-w-[140px] py-3 text-center text-[11px] font-bold uppercase tracking-[0.12em] rounded-xl transition-all duration-300 ${
-                          pkg.popular
-                            ? 'bg-green-500 text-white hover:bg-green-600 shadow-md shadow-green-500/20'
-                            : 'bg-gray-500 text-white hover:bg-gray-600'
-                        }`}
-                        data-testid={`pricing-cta-${pkg.key}`}
-                      >
-                        {language === 'nl' ? 'Selecteer' : 'Select'}
-                      </Link>
-                    </td>
-                  ))}
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </motion.div>
-
-        {/* Calculator CTA directly under table */}
+        {/* Calculator CTA directly under cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 sm:mt-12"
+          className="mt-8 sm:mt-10"
         >
           <Link to="/calculator" className="block group" data-testid="pricing-calculator-cta">
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white/60 dark:bg-neutral-800/60 backdrop-blur-xl border border-gray-200 dark:border-neutral-700 p-6 sm:p-10 md:p-12 transition-all duration-300 hover:shadow-2xl hover:border-gray-400 dark:hover:border-neutral-500">
-              <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-              <div className="relative flex flex-col sm:flex-row items-center gap-5 sm:gap-8">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Calculator size={28} className="text-gray-600 dark:text-gray-300" />
+            <div className="relative overflow-hidden rounded-2xl bg-white/60 dark:bg-neutral-800/60 backdrop-blur-xl border border-gray-200 dark:border-neutral-700 p-5 sm:p-8 transition-all duration-300 hover:shadow-xl hover:border-gray-400 dark:hover:border-neutral-500">
+              <div className="relative flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Calculator size={22} className="text-gray-600 dark:text-gray-300" />
                 </div>
                 <div className="flex-1 text-center sm:text-left">
-                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-1 tracking-tight">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-0.5">
                     {language === 'nl' ? 'Bereken direct je prijs' : 'Calculate your price now'}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     {language === 'nl' ? 'Kies je pakket, voeg opties toe en ontvang meteen een offerte.' : 'Choose your package, add options and get a quote instantly.'}
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.1em] rounded-xl group-hover:bg-gray-600 transition-colors flex-shrink-0">
+                <span className="inline-flex items-center gap-2 px-6 py-3 bg-gray-500 text-white text-xs font-bold uppercase tracking-wider rounded-full group-hover:bg-gray-600 transition-colors flex-shrink-0">
                   {language === 'nl' ? 'Start calculator' : 'Start calculator'}
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </div>
             </div>
           </Link>
         </motion.div>
 
-        {/* Extra Link */}
-        <div className="mt-6 text-center">
-          <Link
-            to="/pakketten"
-            className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-          >
-            {language === 'nl' ? 'Bekijk alle pakketdetails →' : 'View all package details →'}
-          </Link>
-        </div>
-
-        {/* Demo Previews */}
-        <DemoPreview language={language} />
+        {/* Demo Previews - Removed: replaced by LiveExamples component */}
       </div>
     </section>
   );
@@ -1643,7 +1643,7 @@ const LandingPage = () => {
       }} />
       <div className={`fixed inset-0 -z-10 pointer-events-none ${
         theme === 'dark'
-          ? 'bg-neutral-950/95'
+          ? 'bg-neutral-950/80'
           : 'bg-gradient-to-b from-white/10 via-white/15 to-white/25 lg:from-white/55 lg:via-white/60 lg:to-white/70'
       }`} />
       <div className="relative z-10">
@@ -1653,13 +1653,12 @@ const LandingPage = () => {
         <TrustBadges />
         <WhyExpensiveSection />
         <PricingSection />
+        <LiveExamples />
         <GoogleReviews />
         <PackageQuiz />
-        <LiveExamples />
         <ServicesSection />
         <BeforeAfterSlider />
         <ProcessSection />
-        <CompetitorComparison />
         <ExpertiseSection />
         <HostingSection />
         <FAQSection />

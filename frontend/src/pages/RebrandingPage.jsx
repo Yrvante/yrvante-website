@@ -91,7 +91,7 @@ const RebrandingPage = () => {
       }} />
       <div className={`fixed inset-0 -z-10 pointer-events-none ${
         theme === "dark"
-          ? "bg-neutral-950/95"
+          ? "bg-neutral-950/80"
           : "bg-gradient-to-b from-white/55 via-white/60 to-white/70"
       }`} />
 
