@@ -188,6 +188,16 @@ const seoData = {
       title: 'Website voor Klusbedrijven | Yrvante',
       description: 'Altijd gevonden bij de juiste klus. Professionele website voor klusbedrijven met portfolio. Vanaf €500.',
       keywords: 'website klusbedrijf, handyman website, woningrenovatie website'
+    },
+    '/rebranding': {
+      title: 'Website Rebranding | Nieuwe Look voor Je Site | Yrvante',
+      description: 'Geef je bestaande website een compleet nieuw uiterlijk. Rebranding vanaf €349 — modern design, betere conversie en een frisse uitstraling.',
+      keywords: 'website rebranding, website vernieuwen, website redesign, website opfrissen, site restylen'
+    },
+    '/privacy': {
+      title: 'Privacybeleid | Yrvante',
+      description: 'Lees hoe Yrvante omgaat met uw persoonsgegevens. Transparant privacybeleid conform de AVG.',
+      keywords: 'privacybeleid, privacy, AVG, persoonsgegevens, yrvante privacy'
     }
   },
   en: {
@@ -310,6 +320,76 @@ const seoData = {
       title: 'Website for Handymen | Yrvante',
       description: 'Always found for the right job. Professional website for handyman services. From €500.',
       keywords: 'handyman website, home renovation website'
+    },
+    '/voor/nagelstudios': {
+      title: 'Website for Nail Studios | Yrvante',
+      description: 'Let your nail studio shine online. Professional website with gallery and online booking. From €500.',
+      keywords: 'nail studio website, nail salon website'
+    },
+    '/voor/interieurstylisten': {
+      title: 'Website for Interior Designers | Yrvante',
+      description: 'Show your portfolio to potential clients. Elegant website for interior designers. From €500.',
+      keywords: 'interior designer website, home staging website'
+    },
+    '/voor/bloemisten': {
+      title: 'Website for Florists | Yrvante',
+      description: 'Let your flowers bloom online. Website with catalogue and seasonal offers. From €500.',
+      keywords: 'florist website, flower shop website'
+    },
+    '/voor/personaltrainers': {
+      title: 'Website for Personal Trainers | Yrvante',
+      description: 'Inspire clients to get started. Website with transformation photos and online booking. From €500.',
+      keywords: 'personal trainer website, fitness coach website'
+    },
+    '/voor/fotografen': {
+      title: 'Website for Photographers | Yrvante',
+      description: 'Your portfolio deserves a stage. Fast-loading website for photographers. From €500.',
+      keywords: 'photographer website, photography portfolio website'
+    },
+    '/voor/makelaars': {
+      title: 'Website for Real Estate Agents | Yrvante',
+      description: 'Stand out from large agencies. Personal real estate website with property listings. From €500.',
+      keywords: 'real estate agent website, property website'
+    },
+    '/voor/tandartsen': {
+      title: 'Website for Dentists | Yrvante',
+      description: 'New patients with confidence. Warm, professional website for dentists with online appointments. From €500.',
+      keywords: 'dentist website, dental practice website'
+    },
+    '/voor/garages': {
+      title: 'Website for Auto Garages | Yrvante',
+      description: 'More customers for your workshop. Clear website with services and reviews. From €500.',
+      keywords: 'auto garage website, car repair website'
+    },
+    '/voor/hondentrimmers': {
+      title: 'Website for Dog Groomers | Yrvante',
+      description: 'Show how beautiful you make them. Website with before-and-after photos and online booking. From €500.',
+      keywords: 'dog groomer website, pet grooming website'
+    },
+    '/voor/schoonheidsspecialisten': {
+      title: 'Website for Beauty Specialists | Yrvante',
+      description: 'Let your expertise shine. Website with treatments, gallery and online booking. From €500.',
+      keywords: 'beauty specialist website, beauty salon website'
+    },
+    '/voor/masseurs': {
+      title: 'Website for Massage Therapists | Yrvante',
+      description: 'Calm and professionalism online. Website for massage practices with services and online booking. From €500.',
+      keywords: 'massage therapist website, wellness salon website'
+    },
+    '/diensten/onderhoud': {
+      title: 'Website Maintenance & Hosting | Yrvante',
+      description: 'Monthly maintenance for your website. Hosting, updates, bug fixes and support for €25/month.',
+      keywords: 'website maintenance, website hosting, website management'
+    },
+    '/rebranding': {
+      title: 'Website Rebranding | A Fresh Look for Your Site | Yrvante',
+      description: 'Give your existing website a completely new look. Rebranding from €349 — modern design, better conversion and a fresh appearance.',
+      keywords: 'website rebranding, website redesign, website refresh, site restyling'
+    },
+    '/privacy': {
+      title: 'Privacy Policy | Yrvante',
+      description: 'Read how Yrvante handles your personal data. Transparent privacy policy compliant with GDPR.',
+      keywords: 'privacy policy, GDPR, personal data, yrvante privacy'
     }
   }
 };
