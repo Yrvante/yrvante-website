@@ -32,14 +32,27 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - Dark mode background opacity 80% (more visible texture)
 
 ### Phase 4 - UI Polish (Complete - Feb 2026)
-- **Section numbers removed** — No more (03), (04), etc.
-- **Pro card unified** — Same white/transparent theme, "Meest gekozen" neutral badge
-- **Premium promotes boekingssysteem** — "incl. boekingssysteem" in description
-- **"Meer" dropdown** — Navigation has DIENSTEN + MEER. Meer contains: Over Mij, Waarom een Website?, Blog, Pakketten & Prijzen, Privacybeleid
-- **Parallax scrolling** — Subtle dot/line patterns on WhyExpensive, Services, Process, Expertise, Hosting, FAQ sections via Framer Motion whileInView
-- **Micro-animations** — hover:-translate-y-1 + hover:shadow-lg on all cards (services, hosting, expertise, pricing, voordelen)
-- **Section order optimized** — Hero > TrustBadges > WhyExpensive > Pakketten > BekijkWatJeKrijgt > Quiz > VoorNa > Reviews > Services > Process > Expertise > Hosting > FAQ > Contact
-- **Mobile menu updated** — Includes "Meer" section with all hidden page links
+- Section numbers removed — No more (03), (04), etc.
+- Pro card unified — Same white/transparent theme, "Meest gekozen" neutral badge
+- Premium promotes boekingssysteem — "incl. boekingssysteem" in description
+- "Meer" dropdown — Navigation has DIENSTEN + MEER
+- Parallax scrolling — Subtle patterns via Framer Motion
+- Micro-animations — hover:-translate-y-1 + hover:shadow-lg on all cards
+- Section order optimized
+- Mobile menu updated
+
+### Phase 5 - Final Polish (Complete - Apr 2026)
+- Shopping cart icon in navigation header linking to /calculator
+- Dark Mode as global €80 add-on in Calculator
+- Massively expanded Premium layout preview in LiveExamples
+- Google Reviews repositioned lower on homepage
+- Pro card on /pakketten uses grey Yrvante-style (not dark)
+
+### Phase 6 - SEO & Refactoring (Complete - Apr 2026)
+- **SEO**: Added missing entries for /rebranding and /privacy in both NL and EN
+- **SEO**: Added ~15 missing English niche page translations
+- **Refactoring**: DienstenPage.jsx reduced from 1949 to 880 lines by extracting data to /data/dienstenData.js
+- **Testing**: All 27 test iterations passed, 100% success rate
 
 ## Page Structure
 - `/` - Landing page
@@ -48,6 +61,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - `/pakketten` - Packages overview + Competitor Comparison
 - `/onderhoud` - Hosting page
 - `/diensten` / `/diensten/:type` - Services
+- `/voor/:niche` - Niche pages (40+ industries)
 - `/over-mij` - About
 - `/waarom-website` - Why a Website?
 - `/blog` - Blog
@@ -59,7 +73,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 
 ## Backlog (P2)
 - Refactor LandingPage.jsx (extract sections to components)
-- Refactor DienstenPage.jsx (data to separate file)
 - Google Sheets API for lead export
 - Vercel production env vars (user action needed)
 - Resend email DNS config (user action needed)
+- Add case studies/success stories for niche pages
