@@ -24,7 +24,7 @@ const LandingPage = () => {
 
       {/* Background pattern */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.04]' : 'opacity-[0.08]'}`} style={{ backgroundImage: `url(${BG_IMAGE})` }} />
+        <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`} style={{ backgroundImage: `url(${BG_IMAGE})` }} />
       </div>
 
       <div className="relative z-10">

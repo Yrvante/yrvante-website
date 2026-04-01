@@ -24,7 +24,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 lg:py-32">
+    <section id="pricing" className="py-24 lg:py-32 bg-gray-50/80 dark:bg-neutral-900/50">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
         <div className="grid grid-cols-12 gap-4 mb-12 sm:mb-16">

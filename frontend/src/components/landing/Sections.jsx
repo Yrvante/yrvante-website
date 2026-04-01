@@ -15,8 +15,8 @@ export const ProcessSection = () => {
   ];
 
   return (
-    <section data-testid="process-section" className="py-24 lg:py-32 relative overflow-hidden">
-      <motion.div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }} initial={{ y: 0 }} whileInView={{ y: -20 }} viewport={{ once: false }} transition={{ duration: 1.5, ease: "easeOut" }} />
+    <section data-testid="process-section" className="py-24 lg:py-32 relative overflow-hidden bg-gray-50/80 dark:bg-neutral-900/50">
+      <motion.div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }} initial={{ y: 0 }} whileInView={{ y: -20 }} viewport={{ once: false }} transition={{ duration: 1.5, ease: "easeOut" }} />
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">&nbsp;</p>
@@ -56,7 +56,7 @@ export const ExpertiseSection = () => {
 
   return (
     <section data-testid="expertise-section" className="py-24 lg:py-32 relative overflow-hidden">
-      <motion.div className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(45deg, currentColor 1px, transparent 1px), linear-gradient(-45deg, currentColor 1px, transparent 1px)', backgroundSize: '60px 60px' }} initial={{ y: 0 }} whileInView={{ y: -15 }} viewport={{ once: false }} transition={{ duration: 2, ease: "easeOut" }} />
+      <motion.div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(45deg, currentColor 1px, transparent 1px), linear-gradient(-45deg, currentColor 1px, transparent 1px)', backgroundSize: '60px 60px' }} initial={{ y: 0 }} whileInView={{ y: -15 }} viewport={{ once: false }} transition={{ duration: 2, ease: "easeOut" }} />
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-8 sm:gap-12 lg:gap-20">
           <div className="col-span-12 lg:col-span-6">
@@ -100,7 +100,7 @@ export const HostingSection = () => {
   ];
 
   return (
-    <section data-testid="hosting-section" className="py-24 lg:py-32 relative overflow-hidden">
+    <section data-testid="hosting-section" className="py-24 lg:py-32 relative overflow-hidden bg-gray-50/80 dark:bg-neutral-900/50">
       <motion.div className="absolute inset-0 opacity-[0.015] dark:opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '48px 48px' }} initial={{ y: 0 }} whileInView={{ y: -20 }} viewport={{ once: false }} transition={{ duration: 1.8, ease: "easeOut" }} />
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-4 mb-12">
@@ -253,7 +253,7 @@ export const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-24 lg:py-32 relative overflow-hidden">
+    <section id="faq" className="py-24 lg:py-32 relative overflow-hidden bg-gray-50/80 dark:bg-neutral-900/50">
       <motion.div className="absolute inset-0 opacity-[0.01] dark:opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '36px 36px' }} initial={{ y: 0 }} whileInView={{ y: -10 }} viewport={{ once: false }} transition={{ duration: 1.5, ease: "easeOut" }} />
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center mb-16">
