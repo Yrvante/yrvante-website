@@ -139,7 +139,7 @@ const Navigation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl shadow-xl py-3 min-w-[220px]"
+                    className="absolute top-full left-0 bg-white/70 dark:bg-neutral-800/70 backdrop-blur-xl border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl shadow-xl py-3 min-w-[220px]"
                   >
                     {dienstenLinks.map((link, index) => (
                       link.divider ? (
@@ -178,7 +178,7 @@ const Navigation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full right-0 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl shadow-xl py-3 min-w-[220px]"
+                    className="absolute top-full right-0 bg-white/70 dark:bg-neutral-800/70 backdrop-blur-xl border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl shadow-xl py-3 min-w-[220px]"
                   >
                     {overLinks.map((link, index) => (
                       link.divider ? (
@@ -250,13 +250,22 @@ const Navigation = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-black dark:text-white"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Cart + Menu Button */}
+          <div className="lg:hidden flex items-center gap-2">
+            <Link
+              to="/calculator"
+              className="p-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              data-testid="mobile-cart-icon"
+            >
+              <ShoppingCart size={22} />
+            </Link>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-black dark:text-white"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -267,7 +276,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 overflow-hidden"
+            className="lg:hidden bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-t border-gray-200/50 dark:border-neutral-700/50 overflow-hidden"
           >
             <div className="px-6 py-4 space-y-1">
               {dienstenLinks.filter(l => !l.divider).map((link, index) => (
@@ -373,7 +382,7 @@ const HeroSection = () => {
           >
             <button 
               onClick={scrollToContact}
-              className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 text-xs sm:text-sm"
+              className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 text-xs sm:text-sm"
               style={{
                 boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)'
               }}
@@ -569,7 +578,7 @@ const ProcessSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12 }}
-                className="flex-1 bg-white dark:bg-neutral-800 rounded-3xl p-6 text-center border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
+                className="flex-1 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-6 text-center border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
               >
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <step.icon size={22} strokeWidth={1.5} className="text-gray-500" />
@@ -725,7 +734,7 @@ const HostingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 group hover:-translate-y-1 hover:shadow-lg"
+              className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 group hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-5">
                 <f.icon size={22} strokeWidth={1.5} className="text-gray-500" />
@@ -1451,7 +1460,7 @@ const ContactSection = () => {
                     window.open(CALENDLY_URL, '_blank');
                   }
                 }}
-                className="w-full flex items-center gap-4 bg-white dark:bg-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-700 text-gray-900 dark:text-white border border-gray-200 dark:border-neutral-700 rounded-2xl p-5 transition-colors group text-left"
+                className="w-full flex items-center gap-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-neutral-700/60 text-gray-900 dark:text-white border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl p-5 transition-colors group text-left"
               >
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <Clock size={22} className="text-gray-600" />
@@ -1466,7 +1475,7 @@ const ContactSection = () => {
               <a
                 href="tel:+31855055314"
                 data-testid="contact-phone-link"
-                className="flex items-center gap-4 bg-white dark:bg-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-700 border border-gray-200 dark:border-neutral-700 rounded-2xl p-5 transition-colors group"
+                className="flex items-center gap-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-neutral-700/60 border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl p-5 transition-colors group"
               >
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <Phone size={22} className="text-gray-600" />
@@ -1477,20 +1486,20 @@ const ContactSection = () => {
                 </div>
               </a>
 
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5">
+              <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
                 <a href="mailto:info@yrvante.com" className="dark:text-white text-lg hover:underline underline-offset-4">
                   info@yrvante.com
                 </a>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5">
+                <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-5">
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {language === 'nl' ? 'Locatie' : 'Location'}
                   </p>
                   <p className="text-base font-medium dark:text-white">Nederland</p>
                 </div>
-                <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5">
+                <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-5">
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {language === 'nl' ? 'Reactietijd' : 'Response'}
                   </p>
@@ -1508,7 +1517,7 @@ const ContactSection = () => {
             className="col-span-12 lg:col-span-7"
           >
             {submitted ? (
-              <div className="bg-white dark:bg-neutral-800 p-12 text-center rounded-3xl border border-gray-200 dark:border-neutral-700">
+              <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm p-12 text-center rounded-3xl border border-gray-200/50 dark:border-neutral-700/50">
                 <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                   <Check size={32} className="text-green-500" />
                 </div>
@@ -1522,7 +1531,7 @@ const ContactSection = () => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white dark:bg-neutral-800 p-8 lg:p-12 rounded-3xl border border-gray-200 dark:border-neutral-700">
+              <form onSubmit={handleSubmit} className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm p-8 lg:p-12 rounded-3xl border border-gray-200/50 dark:border-neutral-700/50">
                 <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">

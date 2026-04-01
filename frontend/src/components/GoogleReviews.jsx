@@ -91,7 +91,7 @@ const GoogleReviews = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white dark:bg-neutral-900 rounded-2xl border border-gray-100 dark:border-neutral-800 p-6 hover:shadow-lg transition-shadow"
+                className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-100/50 dark:border-neutral-800/50 p-6 hover:shadow-lg transition-shadow"
                 data-testid={`review-card-${i}`}
               >
                 {/* Author */}

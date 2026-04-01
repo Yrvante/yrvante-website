@@ -209,7 +209,7 @@ const RebrandingPage = () => {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700"
+                className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50"
               >
                 <h3 className="text-xl font-bold dark:text-white mb-6">
                   {language === "nl" ? "Wat is inbegrepen" : "What's included"}
@@ -231,7 +231,7 @@ const RebrandingPage = () => {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700"
+                className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50"
               >
                 <h3 className="text-xl font-bold dark:text-white mb-3">
                   {language === "nl" ? "Niet inbegrepen" : "Not included"}

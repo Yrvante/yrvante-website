@@ -325,7 +325,7 @@ const WhyWebsitePage = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-neutral-900 p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-neutral-700"
+              className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-8 md:p-10 rounded-3xl border border-gray-200/50 dark:border-neutral-700/50"
             >
               <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">{t.traditional.title}</p>
               <p className="text-4xl font-heading font-bold text-red-600 mb-2">{t.traditional.price}</p>
@@ -408,7 +408,7 @@ const WhyWebsitePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-8 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:bg-gray-50 dark:hover:bg-neutral-700 transition-all shadow-sm dark:shadow-neutral-900"
+                className="text-center p-8 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-700/60 transition-all shadow-sm dark:shadow-neutral-900"
               >
                 <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   {feature.icon}
@@ -474,7 +474,7 @@ const WhyWebsitePage = () => {
                 className={`p-8 rounded-3xl text-center transition-all ${
                 index === 1
                   ? 'bg-gray-600 text-white scale-105 shadow-2xl' 
-                    : 'bg-white border border-gray-200 dark:border-neutral-700'
+                    : 'bg-white/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50'
                 }`}
               >
                 <p className={`text-sm uppercase tracking-wider mb-2 ${index === 1 ? 'text-gray-400' : 'text-gray-500'}`}>

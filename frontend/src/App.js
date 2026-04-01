@@ -244,8 +244,7 @@ const translations = {
   },
 };
 
-import ThemeChooser from "./components/ThemeChooser";
-import CookieBanner from "./components/CookieBanner";
+// ThemeChooser and CookieBanner removed per user request
 
 // Minimal loading fallback
 const PageLoader = () => (
@@ -281,9 +280,7 @@ function App() {
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <div className="App">
-        <ThemeChooser />
         <BrowserRouter>
-          <CookieBanner />
           <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<LandingPage />} />

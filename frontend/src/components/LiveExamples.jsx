@@ -760,7 +760,7 @@ const LiveExamples = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.3 }}
-                className={`bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-2xl overflow-hidden shadow-lg mx-auto ${
+                className={`bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl overflow-hidden shadow-lg mx-auto ${
                   viewMode === "mobile" ? "max-w-[320px]" : "w-full"
                 }`}
                 data-testid="live-example-preview"
@@ -790,7 +790,7 @@ const LiveExamples = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25 }}
-                className="bg-white dark:bg-neutral-800 rounded-2xl border border-gray-200 dark:border-neutral-700 p-6 h-full"
+                className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 p-6 h-full"
               >
                 <div className="flex items-center justify-between mb-5">
                   <div>

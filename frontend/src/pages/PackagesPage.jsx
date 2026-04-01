@@ -28,7 +28,7 @@ const BookingDemoWidget = ({ language }) => {
   const reset = () => { setConfirmed(false); setSelectedDay(null); setSelectedTime(null); };
 
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-2xl">
+    <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl overflow-hidden shadow-2xl">
       {/* App header bar */}
       <div className="bg-gray-900 px-5 py-4 flex items-center gap-3">
         <div className="flex gap-1.5">
@@ -657,8 +657,8 @@ const PackagesPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className={`relative rounded-3xl p-7 ${
                   pkg.popular 
-                    ? 'bg-gray-100 dark:bg-neutral-800 border-2 border-gray-300 dark:border-neutral-600 shadow-2xl z-10' 
-                    : 'bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 shadow-lg'
+                    ? 'bg-gray-100/60 dark:bg-neutral-800/60 backdrop-blur-sm border-2 border-gray-300/50 dark:border-neutral-600/50 shadow-2xl z-10' 
+                    : 'bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 shadow-lg'
                 }`}
               >
                 {pkg.popular && (
@@ -765,7 +765,7 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="text-center p-5 bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700"
+                className="text-center p-5 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-neutral-700/50"
               >
                 <p className="text-2xl font-bold mb-1 dark:text-white">{item.price}</p>
                 <p className="text-sm text-gray-500">{item.name}</p>
@@ -815,7 +815,7 @@ const PackagesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white dark:bg-neutral-900 p-6 rounded-3xl border border-gray-200 dark:border-neutral-700 hover:border-black hover:shadow-lg transition-all"
+                className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-6 rounded-3xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-black hover:shadow-lg transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-11 h-11 bg-gray-100 rounded-2xl flex items-center justify-center flex-shrink-0">

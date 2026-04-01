@@ -86,7 +86,7 @@ const ExitIntentPopup = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-gray-200 dark:border-neutral-800"
+            className="relative bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-gray-200/50 dark:border-neutral-800/50"
           >
             {/* Close button */}
             <button

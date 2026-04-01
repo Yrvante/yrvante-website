@@ -180,7 +180,7 @@ const DienstenPage = () => {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="relative">
-                <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 shadow-xl">
+                <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50 shadow-xl">
                   <div className="space-y-4">
                     {webdesignFeatures.slice(0, 4).map((feature, index) => (
                       <div key={index} className="flex items-start gap-4">
@@ -261,7 +261,7 @@ const DienstenPage = () => {
                   <div className="flex-shrink-0 w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center">
                     <span className="text-gray-700 dark:text-white text-xs font-bold">{step.step}</span>
                   </div>
-                  <div className="flex-1 bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-200 dark:border-neutral-700">
+                  <div className="flex-1 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 dark:border-neutral-700/50">
                     <h3 className="font-bold text-lg mb-2 dark:text-white">{step.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{step.description}</p>
                   </div>
@@ -314,7 +314,7 @@ const DienstenPage = () => {
         {/* Future Plans Note */}
         <section className="py-16 bg-gray-100 dark:bg-neutral-900">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700">
+            <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <Layers size={24} className="text-gray-600 dark:text-gray-400" />
@@ -350,7 +350,7 @@ const DienstenPage = () => {
                 ? 'Vanaf €500 excl. BTW. Opgeleverd in 1-2 weken.'
                 : 'From €500 excl. VAT. Delivered in 1-2 weeks.'}
             </p>
-            <div className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
+            <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
               <div className="flex items-baseline justify-center gap-2 mb-4">
                 <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€500</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
@@ -589,7 +589,7 @@ const DienstenPage = () => {
               {nicheData.examples[language].map((example, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-white dark:bg-neutral-800 rounded-full text-sm text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700"
+                  className="px-4 py-2 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-full text-sm text-gray-700 dark:text-gray-300 border border-gray-200/50 dark:border-neutral-700/50"
                 >
                   {example}
                 </span>
@@ -691,7 +691,7 @@ const DienstenPage = () => {
                   to={`/diensten/${key}`}
                   className="block bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors group"
                 >
-                  <div className="w-14 h-14 bg-white dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-neutral-900">
+                  <div className="w-14 h-14 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-neutral-900">
                     <service.icon size={28} className="text-gray-700 dark:text-gray-300" />
                   </div>
                   <h3 className="font-bold text-2xl mb-2 dark:text-white">{service.title[language]}</h3>
@@ -736,7 +736,7 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 dark:border-neutral-700 group"
+                      className="flex items-center gap-3 p-3 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-xl hover:shadow-md transition-all border border-gray-100/50 dark:border-neutral-700/50 group"
                     >
                       <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
@@ -765,7 +765,7 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 dark:border-neutral-700 group"
+                      className="flex items-center gap-3 p-3 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-xl hover:shadow-md transition-all border border-gray-100/50 dark:border-neutral-700/50 group"
                     >
                       <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
@@ -794,7 +794,7 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-xl hover:shadow-md transition-all border border-gray-100 dark:border-neutral-700 group"
+                      className="flex items-center gap-3 p-3 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-xl hover:shadow-md transition-all border border-gray-100/50 dark:border-neutral-700/50 group"
                     >
                       <div className="w-10 h-10 bg-gray-50 dark:bg-neutral-800/60 rounded-lg flex items-center justify-center group-hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                         <nicheData.icon size={18} className="text-gray-600" />
@@ -832,7 +832,7 @@ const DienstenPage = () => {
                     <Link
                       key={key}
                       to={`/voor/${key}`}
-                      className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-800 rounded-full hover:shadow-md transition-all border border-gray-200 dark:border-neutral-700 group"
+                      className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-full hover:shadow-md transition-all border border-gray-200/50 dark:border-neutral-700/50 group"
                     >
                       <nicheData.icon size={14} className="text-gray-500" />
                       <span className="text-sm text-gray-600 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white">{nicheData.title[language].replace('Website voor ', '').replace('Website for ', '')}</span>

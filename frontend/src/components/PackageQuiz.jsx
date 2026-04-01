@@ -271,7 +271,7 @@ const PackageQuiz = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white dark:bg-neutral-800 rounded-3xl border border-gray-200 dark:border-neutral-700 p-8 text-center shadow-xl"
+              className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-neutral-700/50 p-8 text-center shadow-xl"
               data-testid="quiz-result"
             >
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -349,7 +349,7 @@ const PackageQuiz = () => {
                   <button
                     key={i}
                     onClick={() => handleAnswer(opt.value)}
-                    className="w-full text-left p-5 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl hover:border-gray-500 dark:hover:border-neutral-500 transition-all group"
+                    className="w-full text-left p-5 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl hover:border-gray-500 dark:hover:border-neutral-500 transition-all group"
                     data-testid={`quiz-option-${i}`}
                   >
                     <div className="flex items-center justify-between">

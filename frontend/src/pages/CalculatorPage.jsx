@@ -36,7 +36,7 @@ const BookingSystemPreview = ({ language }) => {
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900"
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900"
     >
       <div className="p-4">
         <div className="flex items-center gap-2 mb-4">
@@ -115,7 +115,7 @@ const MultiLangPreview = ({ language }) => {
   const texts = { nl: 'Welkom!', en: 'Welcome!', de: 'Willkommen!' };
   return (
     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Globe size={16} className="text-gray-600" /></div>
@@ -146,7 +146,7 @@ const ContactFormPreview = ({ language }) => {
   const [sent, setSent] = useState(false);
   return (
     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-      className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Mail size={16} className="text-gray-600" /></div>
@@ -826,23 +826,23 @@ const CalculatorPage = () => {
                   {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
                     <p className="text-2xl font-bold dark:text-white">€50</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
                     <p className="text-2xl font-bold dark:text-white">€200</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
                     <p className="text-2xl font-bold dark:text-white">€80</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
                     <p className="text-2xl font-bold dark:text-white">€25<span className="text-sm text-gray-500">/pm</span></p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
                   </div>
-                  <div className="text-center p-4 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl">
+                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
                     <p className="text-2xl font-bold dark:text-white">€250</p>
                     <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
                   </div>
@@ -912,7 +912,7 @@ const CalculatorPage = () => {
                       className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                         addOns[key] 
                           ? 'border-black dark:border-white bg-gray-50 dark:bg-neutral-800 shadow-md' 
-                          : 'border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:border-gray-400'
+                          : 'border-gray-200/50 dark:border-neutral-700/50 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm hover:border-gray-400'
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -1073,7 +1073,7 @@ const CalculatorPage = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
             >
               {submitted ? (
                 // Success State

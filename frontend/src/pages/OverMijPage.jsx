@@ -240,7 +240,7 @@ const OverMijPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white dark:bg-neutral-800 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-neutral-700"
+                className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-gray-200/50 dark:border-neutral-700/50"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-900 dark:bg-white rounded-xl flex items-center justify-center flex-shrink-0">
@@ -289,7 +289,7 @@ const OverMijPage = () => {
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 ring-2 ring-green-500">
+              <div className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 ring-2 ring-green-500">
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Yrvante</span>
                   <span className="text-green-600 text-xl sm:text-2xl font-black">{language === 'nl' ? 'Vanaf' : 'From'} €349</span>

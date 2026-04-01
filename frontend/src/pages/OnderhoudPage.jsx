@@ -213,7 +213,7 @@ const OnderhoudPage = () => {
               transition={{ delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 shadow-xl">
+              <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50 shadow-xl">
                 <div className="space-y-4">
                   {maintenanceFeatures.slice(0, 4).map((feature, index) => (
                     <div key={index} className="flex items-start gap-4">
@@ -324,7 +324,7 @@ const OnderhoudPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-red-200"
+                className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-6 border border-red-200/50"
               >
                 <h3 className="font-bold text-lg mb-2 text-red-700 dark:text-red-400">{horror.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">{horror.description}</p>
@@ -422,7 +422,7 @@ const OnderhoudPage = () => {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-3xl p-6 ring-4 ring-green-500">
+            <div className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm text-black dark:text-white rounded-3xl p-6 ring-4 ring-green-500">
               <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 Yrvante
               </p>
@@ -482,7 +482,7 @@ const OnderhoudPage = () => {
               : "For €25 per month I handle everything. You focus on your customers, I focus on your website."}
           </p>
           
-          <div className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
+          <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
             <div className="flex items-baseline justify-center gap-2 mb-4">
               <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€25</span>
               <span className="text-gray-500">/ {language === 'nl' ? 'maand' : 'month'}</span>
