@@ -26,7 +26,7 @@ const BeforeAfterSlider = () => {
     <section data-testid="before-after-section" className="py-24 lg:py-32">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-10">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">(06)</p>
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">&nbsp;</p>
           <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter dark:text-white mb-3">
             {language === "nl" ? "VOOR & NA" : "BEFORE & AFTER"}
           </h2>

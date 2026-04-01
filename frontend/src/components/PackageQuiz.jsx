@@ -238,7 +238,7 @@ const PackageQuiz = () => {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">
-              (10)
+              &nbsp;
             </p>
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter dark:text-white mb-4">
               {language === "nl" ? "WELK PAKKET?" : "WHICH PACKAGE?"}

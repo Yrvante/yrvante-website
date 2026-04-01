@@ -42,12 +42,10 @@ import {
   Sun,
   Calculator,
 } from "lucide-react";
-import DemoPreview from "../components/DemoPreview";
 import ExitIntentPopup from "../components/ExitIntentPopup";
 import PackageQuiz from "../components/PackageQuiz";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
 import LiveExamples from "../components/LiveExamples";
-import CompetitorComparison from "../components/CompetitorComparison";
 import TrustBadges from "../components/TrustBadges";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -96,8 +94,10 @@ const Navigation = () => {
   const overLinks = [
     { to: '/over-mij', label: language === 'nl' ? 'Over Mij' : 'About Me' },
     { to: '/waarom-website', label: language === 'nl' ? 'Waarom een Website?' : 'Why a Website?' },
-    { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
     { to: '/blog', label: 'Blog' },
+    { divider: true },
+    { to: '/pakketten', label: language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing' },
+    { to: '/privacy', label: language === 'nl' ? 'Privacybeleid' : 'Privacy Policy' },
   ];
 
   return (
@@ -159,12 +159,44 @@ const Navigation = () => {
               </AnimatePresence>
             </div>
 
-            <Link
-              to="/over-mij"
-              className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+            {/* Meer Dropdown - Hidden pages */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setOpenDropdown('meer')}
+              onMouseLeave={() => setOpenDropdown(null)}
             >
-              {language === 'nl' ? 'Over' : 'About'}
-            </Link>
+              <button
+                className="text-xs font-medium uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 py-4"
+              >
+                {language === 'nl' ? 'Meer' : 'More'}
+                <ChevronDown size={12} className={`transition-transform ${openDropdown === 'meer' ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {openDropdown === 'meer' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl shadow-xl py-3 min-w-[220px]"
+                  >
+                    {overLinks.map((link, index) => (
+                      link.divider ? (
+                        <div key={index} className="border-t border-gray-100 dark:border-neutral-700 my-1" />
+                      ) : (
+                        <Link
+                          key={index}
+                          to={link.to}
+                          className="block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-colors rounded-lg mx-1"
+                        >
+                          {link.label}
+                        </Link>
+                      )
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <button
               onClick={() => scrollToSection("contact")}
@@ -238,13 +270,20 @@ const Navigation = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/over-mij"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white border-b border-gray-100 dark:border-neutral-800 transition-colors"
-              >
-                {language === 'nl' ? 'Over Mij' : 'About Me'}
-              </Link>
+
+              <div className="pt-2 pb-1">
+                <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">{language === 'nl' ? 'Meer' : 'More'}</p>
+              </div>
+              {overLinks.filter(l => !l.divider).map((link, index) => (
+                <Link
+                  key={`meer-${index}`}
+                  to={link.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white border-b border-gray-100 dark:border-neutral-800 last:border-0 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
               <button
                 onClick={() => { scrollToSection("contact"); setMobileMenuOpen(false); }}
                 className="block w-full text-left py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white border-b border-gray-100 dark:border-neutral-800 transition-colors"
@@ -506,7 +545,7 @@ const ProcessSection = () => {
       />
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center mb-16">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">(05)</p>
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">&nbsp;</p>
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
             {language === 'nl' ? 'HET PROCES' : 'THE PROCESS'}
           </h2>
@@ -560,12 +599,20 @@ const ExpertiseSection = () => {
   ];
 
   return (
-    <section data-testid="expertise-section" className="py-24 lg:py-32">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section data-testid="expertise-section" className="py-24 lg:py-32 relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'linear-gradient(45deg, currentColor 1px, transparent 1px), linear-gradient(-45deg, currentColor 1px, transparent 1px)', backgroundSize: '60px 60px' }}
+        initial={{ y: 0 }}
+        whileInView={{ y: -15 }}
+        viewport={{ once: false }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-8 sm:gap-12 lg:gap-20">
           {/* Expertise */}
           <div className="col-span-12 lg:col-span-6">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">(06)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">&nbsp;</p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'EXPERTISE' : 'EXPERTISE'}
             </h2>
@@ -577,7 +624,7 @@ const ExpertiseSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 sm:p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group min-w-0"
+                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 sm:p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 group min-w-0 hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center mb-2 sm:mb-3">
                     <tech.icon size={18} strokeWidth={1.5} className="text-gray-500" />
@@ -603,7 +650,7 @@ const ExpertiseSection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex items-start gap-5 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
+                  className="flex items-start gap-5 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-5 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 group hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-xl flex items-center justify-center flex-shrink-0">
                     <v.icon size={22} strokeWidth={1.5} className="text-gray-500" />
@@ -634,11 +681,19 @@ const HostingSection = () => {
   ];
 
   return (
-    <section data-testid="hosting-section" className="py-24 lg:py-32">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section data-testid="hosting-section" className="py-24 lg:py-32 relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.025] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '48px 48px' }}
+        initial={{ y: 0 }}
+        whileInView={{ y: -20 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
+      />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">(07)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">&nbsp;</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
@@ -660,7 +715,7 @@ const HostingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group"
+              className="bg-white dark:bg-neutral-800 rounded-3xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 group hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="w-12 h-12 bg-gray-100 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-5">
                 <f.icon size={22} strokeWidth={1.5} className="text-gray-500" />
@@ -686,8 +741,16 @@ const WhyExpensiveSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="py-16 lg:py-20 relative">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section className="py-16 lg:py-20 relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'linear-gradient(0deg, currentColor 1px, transparent 1px)', backgroundSize: '100% 80px' }}
+        initial={{ y: 0 }}
+        whileInView={{ y: -25 }}
+        viewport={{ once: false }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Left - Big Statement */}
           <motion.div
@@ -697,7 +760,7 @@ const WhyExpensiveSection = () => {
             className="col-span-12 lg:col-span-7"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-6">
-              (02)
+              &nbsp;
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 dark:text-white">
               {language === 'nl' 
@@ -751,13 +814,22 @@ const ServicesSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section id="services" data-testid="services-section" className="py-16 lg:py-20 relative">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
+    <section id="services" data-testid="services-section" className="py-16 lg:py-20 relative overflow-hidden">
+      {/* Parallax background */}
+      <motion.div
+        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }}
+        initial={{ y: 0 }}
+        whileInView={{ y: -30 }}
+        viewport={{ once: false }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      />
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header - Asymmetric */}
         <div className="grid grid-cols-12 gap-4 mb-12">
           <div className="col-span-12 lg:col-span-4">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">
-              (04)
+              &nbsp;
             </p>
           </div>
           <div className="col-span-12 lg:col-span-8 flex items-end gap-6">
@@ -910,9 +982,9 @@ const PricingSection = () => {
       name: 'Premium',
       price: '1400',
       icon: Award,
-      desc: language === 'nl' ? 'Alles inbegrepen, geen limieten' : 'Everything included, no limits',
+      desc: language === 'nl' ? 'Alles inbegrepen, incl. boekingssysteem' : 'Everything included, incl. booking system',
       features: [
-        language === 'nl' ? 'Boekingssysteem' : 'Booking system',
+        language === 'nl' ? 'Boekingssysteem inbegrepen' : 'Booking system included',
         language === 'nl' ? 'Meertalig' : 'Multi-language',
         language === 'nl' ? 'Priority support' : 'Priority support',
       ],
@@ -925,7 +997,7 @@ const PricingSection = () => {
         {/* Header */}
         <div className="grid grid-cols-12 gap-4 mb-12 sm:mb-16">
           <div className="col-span-12 lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">(03)</p>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">&nbsp;</p>
           </div>
           <div className="col-span-12 lg:col-span-8">
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-black dark:text-white">
@@ -951,55 +1023,37 @@ const PricingSection = () => {
             >
               <Link
                 to={`/calculator?package=${pkg.key}`}
-                className={`block h-full p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group ${
+                className={`block h-full p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm ${
                   pkg.popular
-                    ? 'bg-gray-800 dark:bg-neutral-100 border-gray-700 dark:border-gray-200'
-                    : 'bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500'
+                    ? 'border-gray-400 dark:border-neutral-500 ring-1 ring-gray-200 dark:ring-neutral-600'
+                    : 'border-gray-200 dark:border-neutral-700 hover:border-gray-400 dark:hover:border-neutral-500'
                 }`}
                 data-testid={`pricing-cta-${pkg.key}`}
               >
                 {pkg.popular && (
-                  <span className={`inline-block text-[10px] font-bold uppercase tracking-wider mb-3 px-2.5 py-1 rounded-full ${
-                    'bg-green-500 text-white'
-                  }`}>
-                    {language === 'nl' ? 'Populair' : 'Popular'}
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider mb-3 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-neutral-700 text-gray-600 dark:text-gray-300">
+                    {language === 'nl' ? 'Meest gekozen' : 'Most popular'}
                   </span>
                 )}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                    pkg.popular
-                      ? 'bg-white/10 dark:bg-gray-800/20'
-                      : 'bg-gray-100 dark:bg-neutral-700'
-                  }`}>
-                    <pkg.icon size={18} strokeWidth={1.5} className={
-                      pkg.popular ? 'text-gray-300 dark:text-gray-600' : 'text-gray-500'
-                    } />
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gray-100 dark:bg-neutral-700">
+                    <pkg.icon size={18} strokeWidth={1.5} className="text-gray-500" />
                   </div>
                   <div>
-                    <p className={`text-xs uppercase tracking-wider ${
-                      pkg.popular ? 'text-gray-400 dark:text-gray-500' : 'text-gray-400'
-                    }`}>{pkg.name}</p>
-                    <p className={`text-2xl font-black ${
-                      pkg.popular ? 'text-white dark:text-gray-900' : 'text-gray-900 dark:text-white'
-                    }`}>€{pkg.price}</p>
+                    <p className="text-xs uppercase tracking-wider text-gray-400">{pkg.name}</p>
+                    <p className="text-2xl font-black text-gray-900 dark:text-white">€{pkg.price}</p>
                   </div>
                 </div>
-                <p className={`text-sm mb-4 ${
-                  pkg.popular ? 'text-gray-400 dark:text-gray-500' : 'text-gray-500 dark:text-gray-400'
-                }`}>{pkg.desc}</p>
+                <p className="text-sm mb-4 text-gray-500 dark:text-gray-400">{pkg.desc}</p>
                 <ul className="space-y-2 mb-5">
                   {pkg.features.map((f, fi) => (
                     <li key={fi} className="flex items-center gap-2">
-                      <Check size={14} className={pkg.popular ? 'text-green-400' : 'text-green-500'} />
-                      <span className={`text-xs ${
-                        pkg.popular ? 'text-gray-300 dark:text-gray-600' : 'text-gray-600 dark:text-gray-400'
-                      }`}>{f}</span>
+                      <Check size={14} className="text-green-500" />
+                      <span className="text-xs text-gray-600 dark:text-gray-400">{f}</span>
                     </li>
                   ))}
                 </ul>
-                <div className={`flex items-center gap-1 text-xs font-bold uppercase tracking-wider ${
-                  pkg.popular ? 'text-gray-300 dark:text-gray-600' : 'text-gray-400'
-                } group-hover:gap-2 transition-all`}>
+                <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-400 group-hover:gap-2 transition-all">
                   {language === 'nl' ? 'Selecteer' : 'Select'}
                   <ArrowRight size={14} />
                 </div>
@@ -1039,7 +1093,6 @@ const PricingSection = () => {
           </Link>
         </motion.div>
 
-        {/* Demo Previews - Removed: replaced by LiveExamples component */}
       </div>
     </section>
   );
@@ -1226,12 +1279,20 @@ const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-24 lg:py-32">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <section id="faq" className="py-24 lg:py-32 relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 opacity-[0.01] dark:opacity-[0.02] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '36px 36px' }}
+        initial={{ y: 0 }}
+        whileInView={{ y: -10 }}
+        viewport={{ once: false }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      />
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header - Centered */}
         <div className="text-center mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-4">
-            (08)
+            &nbsp;
           </p>
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">
             FAQ
@@ -1341,7 +1402,7 @@ const ContactSection = () => {
             className="col-span-12 lg:col-span-5"
           >
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-6">
-              (09)
+              &nbsp;
             </p>
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter dark:text-white mb-8">
               {language === 'nl' ? 'CONTACT' : 'CONTACT'}
@@ -1654,10 +1715,10 @@ const LandingPage = () => {
         <WhyExpensiveSection />
         <PricingSection />
         <LiveExamples />
-        <GoogleReviews />
         <PackageQuiz />
-        <ServicesSection />
         <BeforeAfterSlider />
+        <GoogleReviews />
+        <ServicesSection />
         <ProcessSection />
         <ExpertiseSection />
         <HostingSection />
