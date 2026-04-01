@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail,
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import CompetitorComparison from "../components/CompetitorComparison";
+import BeforeAfterSlider from "../components/BeforeAfterSlider";
 
 const LOGO_URL = "/logo.png";
 const LOGO_URL_WHITE = "/logo-white.png";
@@ -905,6 +906,9 @@ const PackagesPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Before & After */}
+      <BeforeAfterSlider />
 
       {/* Competitor Comparison */}
       <CompetitorComparison />

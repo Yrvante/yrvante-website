@@ -44,7 +44,6 @@ import {
 } from "lucide-react";
 import ExitIntentPopup from "../components/ExitIntentPopup";
 import PackageQuiz from "../components/PackageQuiz";
-import BeforeAfterSlider from "../components/BeforeAfterSlider";
 import LiveExamples from "../components/LiveExamples";
 import TrustBadges from "../components/TrustBadges";
 
@@ -1716,7 +1715,6 @@ const LandingPage = () => {
         <PricingSection />
         <LiveExamples />
         <PackageQuiz />
-        <BeforeAfterSlider />
         <GoogleReviews />
         <ServicesSection />
         <ProcessSection />
