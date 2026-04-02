@@ -51,9 +51,6 @@ const HeroSection = () => {
                 <span className="flex flex-col"><span>YOUR</span><span>BUSINESS</span><span className="text-gray-500 dark:text-gray-400">ONLINE</span></span>
               )}
             </motion.h1>
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 0.3, scale: 1 }} transition={{ duration: 0.8, delay: 0.4 }} className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 items-center justify-center pointer-events-none">
-              <img src="/yrvante-logo-code.png" alt="" className="w-56 h-auto object-contain" />
-            </motion.div>
           </div>
 
           {/* Value Prop */}
@@ -124,6 +121,11 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="hidden lg:flex flex-col items-center justify-center relative"
         >
+          {/* Logo watermark centered behind devices */}
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 0.25, scale: 1 }} transition={{ duration: 0.8, delay: 0.5 }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <img src="/yrvante-logo-code.png" alt="" className="w-80 h-auto object-contain" />
+          </motion.div>
+
           {/* MacBook Frame */}
           <div className="relative w-[420px]">
             <div className="bg-gray-200 dark:bg-neutral-700 rounded-t-xl pt-2 px-2">
