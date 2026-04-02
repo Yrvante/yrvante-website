@@ -145,11 +145,37 @@ export const WhyExpensiveSection = () => {
               <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">{language === 'nl' ? 'Bureaus' : 'Agencies'}</p>
               <p className="text-5xl font-black line-through decoration-gray-300 dark:text-white">€3.000+</p>
             </div>
-            <div className="border-t border-black dark:border-white pt-8">
+            <div className="border-t border-black dark:border-white pt-8 mb-8">
               <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4">Yrvante</p>
               <p className="text-5xl font-black dark:text-white">€500</p>
               <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-2">{language === 'nl' ? 'Vanaf' : 'Starting from'}</p>
             </div>
+            {/* Mini MacBook preview */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="mt-4">
+              <div className="bg-gray-200 dark:bg-neutral-700 rounded-t-lg pt-1.5 px-1.5">
+                <div className="flex items-center gap-1 px-2 py-1">
+                  <div className="w-2 h-2 rounded-full bg-red-400/60" /><div className="w-2 h-2 rounded-full bg-yellow-400/60" /><div className="w-2 h-2 rounded-full bg-green-400/60" />
+                </div>
+                <div className="bg-white dark:bg-neutral-900 rounded-t-sm overflow-hidden p-3">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-12 h-2 bg-gray-800 dark:bg-white rounded-sm" />
+                    <div className="flex gap-2"><div className="w-6 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full" /><div className="w-6 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full" /></div>
+                  </div>
+                  <div className="space-y-1 mb-2">
+                    <div className="h-2 bg-gray-900 dark:bg-white rounded w-2/3" />
+                    <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-full" />
+                    <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-4/5" />
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="px-3 py-1 bg-gray-800 dark:bg-white rounded-full"><div className="w-6 h-0.5 bg-white dark:bg-gray-900 rounded" /></div>
+                    <div className="px-3 py-1 border border-gray-300 dark:border-neutral-600 rounded-full"><div className="w-6 h-0.5 bg-gray-400 rounded" /></div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-300 dark:bg-neutral-600 h-2 rounded-b-md mx-4" />
+              <div className="bg-gray-200 dark:bg-neutral-700 h-1 rounded-b-lg mx-10" />
+              <p className="text-[10px] text-center text-gray-400 mt-2">{language === 'nl' ? 'Zelfde kwaliteit, eerlijke prijs' : 'Same quality, fair price'}</p>
+            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -169,9 +195,61 @@ export const ServicesSection = () => {
         </div>
         <div className="grid grid-cols-12 gap-8 lg:gap-12">
           {[
-            { num: '01', icon: Monitor, title: language === 'nl' ? 'Website Ontwikkeling' : 'Website Development', desc: language === 'nl' ? 'Moderne, snelle websites die perfect werken op elk apparaat. Van simpele landingspagina tot complete bedrijfswebsite.' : 'Modern, fast websites that work perfectly on any device. From simple landing page to complete business website.' },
-            { num: '02', icon: Smartphone, title: language === 'nl' ? 'Web Applicaties' : 'Web Applications', desc: language === 'nl' ? 'Boekingssystemen, klantportalen en op maat gemaakte oplossingen voor jouw specifieke bedrijfsbehoeften.' : 'Booking systems, client portals and custom solutions for your specific business needs.' },
-            { num: '03', icon: RefreshCw, title: 'Rebranding', desc: language === 'nl' ? 'Heeft je website een opfrisbeurt nodig? Ik geef je bestaande site een compleet nieuw uiterlijk en betere gebruikservaring.' : 'Does your website need a refresh? I give your existing site a completely new look and improved user experience.' },
+            { num: '01', icon: Monitor, title: language === 'nl' ? 'Website Ontwikkeling' : 'Website Development', desc: language === 'nl' ? 'Moderne, snelle websites die perfect werken op elk apparaat. Van simpele landingspagina tot complete bedrijfswebsite.' : 'Modern, fast websites that work perfectly on any device. From simple landing page to complete business website.',
+              mini: (
+                <div className="mt-4 rounded-xl overflow-hidden border border-gray-200/50 dark:border-neutral-600/50 bg-white dark:bg-neutral-900">
+                  <div className="flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-neutral-800">
+                    <div className="w-1.5 h-1.5 rounded-full bg-red-300" /><div className="w-1.5 h-1.5 rounded-full bg-yellow-300" /><div className="w-1.5 h-1.5 rounded-full bg-green-300" />
+                    <span className="text-[7px] text-gray-400 ml-1">jouwsite.nl</span>
+                  </div>
+                  <div className="p-2.5 space-y-1.5">
+                    <div className="h-1.5 bg-gray-800 dark:bg-white rounded w-1/2" />
+                    <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-full" />
+                    <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-3/4" />
+                    <div className="flex gap-1.5 mt-2"><div className="h-5 flex-1 bg-gray-100 dark:bg-neutral-800 rounded" /><div className="h-5 flex-1 bg-gray-100 dark:bg-neutral-800 rounded" /><div className="h-5 flex-1 bg-gray-100 dark:bg-neutral-800 rounded" /></div>
+                  </div>
+                </div>
+              )
+            },
+            { num: '02', icon: Smartphone, title: language === 'nl' ? 'Web Applicaties' : 'Web Applications', desc: language === 'nl' ? 'Boekingssystemen, klantportalen en op maat gemaakte oplossingen voor jouw specifieke bedrijfsbehoeften.' : 'Booking systems, client portals and custom solutions for your specific business needs.',
+              mini: (
+                <div className="mt-4 flex justify-center">
+                  <div className="w-20 bg-gray-900 dark:bg-neutral-700 rounded-[12px] p-1 shadow-lg">
+                    <div className="bg-white dark:bg-neutral-900 rounded-[9px] overflow-hidden">
+                      <div className="h-2 flex items-center justify-center"><div className="w-6 h-0.5 bg-gray-200 dark:bg-neutral-700 rounded-full" /></div>
+                      <div className="px-1.5 pb-1.5 space-y-1">
+                        <div className="h-1 bg-gray-800 dark:bg-white rounded w-3/4" />
+                        <div className="h-0.5 bg-gray-200 dark:bg-neutral-700 rounded w-full" />
+                        <div className="bg-gray-100 dark:bg-neutral-800 rounded p-1 text-center"><div className="h-0.5 bg-gray-400 rounded w-2/3 mx-auto" /></div>
+                        <div className="bg-gray-100 dark:bg-neutral-800 rounded p-1 text-center"><div className="h-0.5 bg-gray-400 rounded w-1/2 mx-auto" /></div>
+                        <div className="h-3 bg-gray-800 dark:bg-white rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            },
+            { num: '03', icon: RefreshCw, title: 'Rebranding', desc: language === 'nl' ? 'Heeft je website een opfrisbeurt nodig? Ik geef je bestaande site een compleet nieuw uiterlijk en betere gebruikservaring.' : 'Does your website need a refresh? I give your existing site a completely new look and improved user experience.',
+              mini: (
+                <div className="mt-4 flex gap-2 items-center">
+                  <div className="flex-1 rounded-lg border border-gray-200/50 dark:border-neutral-600/50 overflow-hidden opacity-50">
+                    <div className="p-1.5 bg-white dark:bg-neutral-900 space-y-1">
+                      <div className="h-1 bg-gray-300 dark:bg-neutral-600 rounded w-1/2" />
+                      <div className="h-0.5 bg-gray-200 dark:bg-neutral-700 rounded w-full" />
+                      <div className="h-4 bg-gray-100 dark:bg-neutral-800 rounded" />
+                    </div>
+                  </div>
+                  <ArrowRight size={12} className="text-gray-400 flex-shrink-0" />
+                  <div className="flex-1 rounded-lg border border-gray-300 dark:border-neutral-500 overflow-hidden shadow-sm">
+                    <div className="p-1.5 bg-white dark:bg-neutral-900 space-y-1">
+                      <div className="h-1 bg-gray-800 dark:bg-white rounded w-1/2" />
+                      <div className="h-0.5 bg-gray-200 dark:bg-neutral-700 rounded w-full" />
+                      <div className="h-4 bg-gradient-to-r from-gray-100 to-gray-50 dark:from-neutral-800 dark:to-neutral-700 rounded" />
+                    </div>
+                  </div>
+                </div>
+              )
+            },
           ].map((svc, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="col-span-12 lg:col-span-4 group">
               <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-700/60 transition-all duration-300 h-full hover:-translate-y-1 hover:shadow-lg">
@@ -181,6 +259,7 @@ export const ServicesSection = () => {
                 </div>
                 <h3 className="text-2xl lg:text-3xl font-bold dark:text-white mb-4">{svc.title}</h3>
                 <p className="text-gray-500 dark:text-gray-400 leading-relaxed">{svc.desc}</p>
+                {svc.mini}
               </div>
             </motion.div>
           ))}

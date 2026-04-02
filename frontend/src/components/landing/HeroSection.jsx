@@ -22,7 +22,8 @@ const HeroSection = () => {
   return (
     <section data-testid="hero-section" className="min-h-screen pt-16 sm:pt-20 lg:pt-24 relative overflow-hidden">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-120px)] flex flex-col justify-center relative">
+        <div className="min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-120px)] grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative">
+          <div className="flex flex-col justify-center">
           {/* Availability Badge */}
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-4 sm:mb-6">
             <button onClick={scrollToContact} className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 text-xs sm:text-sm" style={{ boxShadow: '0 0 20px rgba(34, 197, 94, 0.25), 0 2px 10px rgba(0, 0, 0, 0.03)' }}>
@@ -114,6 +115,110 @@ const HeroSection = () => {
             <a href="tel:+31855055314" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"><Phone size={14} /><span>+31 85 505 5314</span></a>
             <a href="mailto:info@yrvante.com" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"><Mail size={14} /><span>info@yrvante.com</span></a>
           </motion.div>
+        </div>
+
+        {/* Device Mockups - Desktop right side */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="hidden lg:flex flex-col items-center justify-center relative"
+        >
+          {/* MacBook Frame */}
+          <div className="relative w-[420px]">
+            <div className="bg-gray-200 dark:bg-neutral-700 rounded-t-xl pt-2 px-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+                <div className="flex-1 mx-4 bg-white/50 dark:bg-neutral-600 rounded-md px-3 py-0.5 text-center">
+                  <span className="text-[9px] text-gray-400">jouwbedrijf.nl</span>
+                </div>
+              </div>
+              {/* Mini website content */}
+              <div className="bg-white dark:bg-neutral-900 rounded-t-md overflow-hidden">
+                <div className="px-5 py-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-16 h-3 bg-gray-800 dark:bg-white rounded-sm" />
+                    <div className="flex gap-3">
+                      <div className="w-8 h-1.5 bg-gray-200 dark:bg-neutral-700 rounded-full" />
+                      <div className="w-8 h-1.5 bg-gray-200 dark:bg-neutral-700 rounded-full" />
+                      <div className="w-8 h-1.5 bg-gray-200 dark:bg-neutral-700 rounded-full" />
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    <div className="h-2.5 bg-gray-900 dark:bg-white rounded w-3/4 mb-1.5" />
+                    <div className="h-2.5 bg-gray-300 dark:bg-neutral-600 rounded w-1/2" />
+                  </div>
+                  <div className="h-1.5 bg-gray-100 dark:bg-neutral-800 rounded w-full mb-1" />
+                  <div className="h-1.5 bg-gray-100 dark:bg-neutral-800 rounded w-4/5 mb-3" />
+                  <div className="flex gap-2 mb-4">
+                    <div className="px-4 py-1.5 bg-gray-800 dark:bg-white rounded-full">
+                      <div className="w-10 h-1 bg-white dark:bg-gray-900 rounded" />
+                    </div>
+                    <div className="px-4 py-1.5 border border-gray-300 dark:border-neutral-600 rounded-full">
+                      <div className="w-10 h-1 bg-gray-400 rounded" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-16" />
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-16" />
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-16" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-300 dark:bg-neutral-600 h-3 rounded-b-lg mx-6" />
+            <div className="bg-gray-200 dark:bg-neutral-700 h-1.5 rounded-b-xl mx-14" />
+          </div>
+
+          {/* iPhone Frame - Floating overlay */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="absolute -bottom-4 -left-8 w-[120px]"
+          >
+            <div className="bg-gray-900 dark:bg-neutral-800 rounded-[20px] p-1.5 shadow-2xl border border-gray-700">
+              <div className="bg-white dark:bg-neutral-900 rounded-[16px] overflow-hidden">
+                <div className="h-4 flex items-center justify-center">
+                  <div className="w-12 h-1.5 bg-gray-200 dark:bg-neutral-700 rounded-full" />
+                </div>
+                <div className="px-2 pb-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="w-8 h-1.5 bg-gray-800 dark:bg-white rounded-sm" />
+                    <div className="w-3 h-3 bg-gray-100 dark:bg-neutral-800 rounded" />
+                  </div>
+                  <div className="h-1.5 bg-gray-900 dark:bg-white rounded w-3/4 mb-1" />
+                  <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-full mb-0.5" />
+                  <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-2/3 mb-2" />
+                  <div className="w-full py-1 bg-gray-800 dark:bg-white rounded-full mb-2">
+                    <div className="h-1 bg-white dark:bg-gray-900 rounded mx-auto w-8" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-1">
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded h-8" />
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded h-8" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Floating badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className="absolute -top-2 -right-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-700 px-3 py-2"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                <svg className="w-3 h-3 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span className="text-[10px] font-bold text-gray-700 dark:text-gray-300">{language === 'nl' ? 'Website live!' : 'Website live!'}</span>
+            </div>
+          </motion.div>
+        </motion.div>
         </div>
       </div>
     </section>
