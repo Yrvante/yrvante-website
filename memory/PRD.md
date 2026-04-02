@@ -14,11 +14,11 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 /app/
 ├── frontend/src/
 │   ├── pages/
-│   │   ├── LandingPage.jsx (48 lines - imports all sections)
+│   │   ├── LandingPage.jsx (container - imports sections)
 │   │   ├── CalculatorPage.jsx
-│   │   ├── PackagesPage.jsx
-│   │   ├── DienstenPage.jsx (880 lines - data in /data/dienstenData.js)
-│   │   ├── RebrandingPage.jsx
+│   │   ├── PackagesPage.jsx (with Dark Mode section)
+│   │   ├── DienstenPage.jsx (data in /data/dienstenData.js)
+│   │   ├── RebrandingPage.jsx (with BeforeAfterSlider)
 │   │   ├── OverMijPage.jsx
 │   │   ├── OnderhoudPage.jsx
 │   │   ├── WhyWebsitePage.jsx
@@ -36,19 +36,14 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 │   │   ├── TrustBadges.jsx, CompetitorComparison.jsx
 │   │   └── SEO.jsx
 │   ├── data/
-│   │   └── dienstenData.js
+│   │   └── dienstenData.js (Webdesign + Rebranding + Onderhoud + niches)
 │   └── App.js (ThemeContext, LanguageContext, Routing)
 ├── api/ (Vercel Serverless Functions - Production)
 │   ├── _db.js (Shared Postgres init)
-│   ├── contact.js (Contact form + Resend email)
-│   ├── reviews.js (Google Reviews via Places API)
-│   ├── analytics/pageview.js (Page view tracking)
-│   ├── admin/login.js (Admin auth)
-│   ├── admin/stats.js (Dashboard stats)
-│   ├── admin/contacts.js (List contacts)
-│   ├── admin/contacts/[id].js (Delete contact)
-│   ├── admin/contacts/[id]/read.js (Mark read)
-│   ├── admin/pageviews.js (Analytics data)
+│   ├── contact.js, reviews.js
+│   ├── analytics/pageview.js
+│   ├── admin/login.js, stats.js, contacts.js, pageviews.js
+│   ├── admin/contacts/[id].js, admin/contacts/[id]/read.js
 │   └── admin/leadfinder/ (Lead Finder endpoints)
 ├── backend/server.py (Preview FastAPI backend)
 └── vercel.json
@@ -61,38 +56,39 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - Admin Dashboard (Lead Finder), Calculator with YRVA10 discount
 - Dark/Light mode, Exit-Intent Popup, Package Quiz, Trust Badges
 - Live Examples, Before/After Slider, Competitor Comparison
-- Parallax scrolling, micro-animations
 
-### Phase 6 - SEO & Refactoring (Complete - Apr 2026)
-- SEO entries for /rebranding, /privacy + ~15 missing EN niche translations
-- DienstenPage.jsx: 1949 → 880 lines (data to /data/dienstenData.js)
+### Phase 6 - SEO & Refactoring (Complete)
+- SEO entries for all pages
+- DienstenPage.jsx data extracted to dienstenData.js
 
-### Phase 7 - Glassmorphism & Cleanup (Complete - Apr 2026)
-- Cookie Banner + Theme Chooser removed (no popups)
-- Global glassmorphism on all card elements across ALL pages
-- Mobile shopping cart icon in header
+### Phase 7 - Glassmorphism & Cleanup (Complete)
+- Cookie Banner + Theme Chooser removed
+- Global glassmorphism on all card elements
 
-### Phase 8 - LandingPage Refactoring + Extras (Complete - Apr 2026)
-- **LandingPage.jsx**: 1753 → 48 lines — all sections extracted to /components/landing/
-- **Extra's & Add-ons pricing grid**: 6 items
-- All 27 tests passed (iteration 29)
+### Phase 8 - LandingPage Refactoring + Extras (Complete)
+- LandingPage split into modular components
+- Extra's & Add-ons pricing grid
 
 ### Phase 9 - Production Deployment Fix (Complete - Apr 2026)
-- Fixed `REACT_APP_BACKEND_URL` fallback in App.js, AdminDashboard, GoogleReviews, HeroSection (was `undefined` on Vercel → now falls back to relative `/api` paths)
-- Created ALL missing Vercel serverless functions: reviews, analytics/pageview, admin/login, admin/stats, admin/contacts, admin/contacts/[id], admin/contacts/[id]/read, admin/pageviews
-- Created shared `_db.js` for Vercel Postgres table initialization
-- CI=true build passes (Vercel-compatible)
-- 36/36 frontend tests passed (iteration 30)
+- Fixed REACT_APP_BACKEND_URL fallback (was undefined on Vercel)
+- Created ALL missing Vercel serverless functions
+- CI=true build passes
+
+### Phase 10 - Mobile + Content Updates (Complete - Apr 2026)
+- **Rebranding on Diensten page**: Added as 3rd service (Webdesign, Rebranding, Onderhoud)
+- **BeforeAfterSlider on Rebranding page**: "VOOR & NA" section added
+- **Dark Mode section on Packages page**: Feature highlight with €80 price and visual demo
+- **Mobile section ordering**: Expertise/Voordelen/Hosting moved to bottom on mobile (hidden/block CSS), stays at top on desktop
+- 17/17 tests passed (iteration 31)
 
 ## Vercel Environment Variables Required
-The user MUST set these in the Vercel Dashboard (Settings → Environment Variables):
 - `POSTGRES_URL` — Vercel Postgres connection string
 - `ADMIN_PASSWORD` — Admin dashboard password
 - `GOOGLE_PLACES_API_KEY` — For Google Reviews
 - `GOOGLE_PLACE_ID` — Yrvante's Google Business Place ID
 - `RESEND_API_KEY` — For email delivery
-- `SENDER_EMAIL` — Sender email (e.g., noreply@yrvante.com)
-- `RECIPIENT_EMAIL` — Where contact forms go (e.g., info@yrvante.com)
+- `SENDER_EMAIL` — noreply@yrvante.com
+- `RECIPIENT_EMAIL` — info@yrvante.com
 
 ## Credentials
 - Admin Dashboard Password (Preview): `yrvante2025`
@@ -102,3 +98,4 @@ The user MUST set these in the Vercel Dashboard (Settings → Environment Variab
 - Case studies/success stories for niche pages
 - Split LiveExamples.jsx into separate component files
 - Resend email DNS config (DKIM/SPF for yrvante.com)
+- Dark mode edge cases review on all subpages

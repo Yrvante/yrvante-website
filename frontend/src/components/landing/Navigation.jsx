@@ -128,7 +128,7 @@ const Navigation = () => {
           {/* Mobile Cart + Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
             <Link to="/calculator" className="p-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" data-testid="mobile-cart-icon"><ShoppingCart size={22} /></Link>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-black dark:text-white">
+            <button data-testid="mobile-menu-button" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-black dark:text-white">
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
