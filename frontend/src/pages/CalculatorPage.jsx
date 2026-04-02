@@ -181,7 +181,7 @@ const ContactFormPreview = ({ language }) => {
 // Maintenance Preview
 const MaintenancePreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
     <div className="p-4">
       <div className="flex items-center gap-2 mb-3">
         <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Shield size={16} className="text-gray-600" /></div>
@@ -205,7 +205,7 @@ const MaintenancePreview = ({ language }) => (
 // Google Reviews Preview
 const GoogleReviewsPreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-    className="mt-3 rounded-2xl overflow-hidden border border-gray-200 dark:border-neutral-700 bg-white shadow-sm dark:shadow-neutral-900">
+    className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
     <div className="p-4">
       <div className="flex items-center gap-2 mb-3">
         <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Star size={16} className="text-gray-600" /></div>

@@ -284,7 +284,7 @@ const PremiumPakketDemo = ({ isPopular, language }) => {
               className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${
                 selDay === i
                   ? isPopular ? 'bg-gray-500 text-white' : 'bg-gray-900 dark:bg-neutral-800 text-white'
-                  : isPopular ? 'bg-gray-600 text-gray-400' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600'
+                  : isPopular ? 'bg-gray-600 text-gray-400' : 'bg-white/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 text-gray-600'
               }`}>
               {d}
             </button>
@@ -395,7 +395,7 @@ const BookingMiniDemo = ({ language }) => {
         <div className="flex gap-1.5 mb-2">
           {days.map((d, i) => (
             <button key={i} onClick={(e) => { e.stopPropagation(); setSel(i); }}
-              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 dark:bg-neutral-800 text-white' : 'bg-white border border-gray-200 dark:border-neutral-700 text-gray-600 hover:border-gray-400'}`}>
+              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${sel === i ? 'bg-gray-900 dark:bg-neutral-800 text-white' : 'bg-white/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 text-gray-600 hover:border-gray-400'}`}>
               {d}
             </button>
           ))}

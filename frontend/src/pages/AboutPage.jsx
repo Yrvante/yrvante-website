@@ -213,7 +213,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="bg-white dark:bg-neutral-900 p-8 rounded-3xl border border-gray-200 dark:border-neutral-700 h-full transition-all duration-300 hover:border-black dark:hover:border-neutral-500 hover:shadow-lg">
+                <div className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-8 rounded-3xl border border-gray-200/50 dark:border-neutral-700/50 h-full transition-all duration-300 hover:border-black dark:hover:border-neutral-500 hover:shadow-lg">
                   <div className="mb-6 text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">{value.icon}</div>
                   <h3 className="text-xl font-heading mb-4 dark:text-white">{value.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{value.description}</p>

@@ -123,7 +123,7 @@ const DienstenPage = () => {
       <div className="min-h-screen bg-white dark:bg-neutral-950">
         <SEO page="/diensten/webdesign" />
 
-        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
+        <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-neutral-700/50">
           <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
               <Link to="/" className="flex items-center">
@@ -411,7 +411,7 @@ const DienstenPage = () => {
       <div className="min-h-screen bg-white dark:bg-neutral-950">
         <SEO page={`/diensten/${type}`} />
         
-        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
+        <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-neutral-700/50">
           <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
               <Link to="/" className="flex items-center">
@@ -519,7 +519,7 @@ const DienstenPage = () => {
       <div className="min-h-screen bg-white dark:bg-neutral-950">
         <SEO page={`/voor/${niche}`} />
         
-        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-700">
+        <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-neutral-700/50">
           <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
               <Link to="/" className="flex items-center">

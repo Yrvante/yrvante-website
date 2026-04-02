@@ -50,7 +50,7 @@ const Navigation = () => {
     <nav
       data-testid="navigation"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white dark:bg-neutral-900 border-b border-black dark:border-neutral-700" : "bg-white dark:bg-neutral-900"
+        scrolled ? "bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-black/10 dark:border-neutral-700/50" : "bg-white/60 dark:bg-neutral-900/60 backdrop-blur-xl"
       }`}
     >
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">

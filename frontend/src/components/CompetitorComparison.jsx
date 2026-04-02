@@ -121,7 +121,7 @@ const CompetitorComparison = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto bg-white dark:bg-neutral-900 rounded-3xl border border-gray-200 dark:border-neutral-800 overflow-hidden shadow-sm"
+          className="max-w-3xl mx-auto bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-neutral-800/50 overflow-hidden shadow-sm"
         >
           <div className="overflow-x-auto">
             <table className="w-full min-w-[500px]">
