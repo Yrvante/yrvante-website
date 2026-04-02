@@ -151,7 +151,7 @@ const OnderhoudPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-transparent">
       <SEO page="/onderhoud" />
       
       {/* Navigation */}
@@ -239,7 +239,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Why Maintenance Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-neutral-950">
+      <section className="py-12 sm:py-16 lg:py-20 bg-transparent">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
@@ -340,7 +340,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-20 bg-white dark:bg-neutral-950">
+      <section className="py-20 bg-transparent">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3 sm:mb-4 dark:text-white">
@@ -364,7 +364,7 @@ const OnderhoudPage = () => {
             {comparisonData.map((row, index) => (
               <div 
                 key={index} 
-                className={`grid grid-cols-3 py-4 px-6 items-center ${index % 2 === 0 ? 'bg-gray-50 dark:bg-neutral-800/40' : 'bg-white dark:bg-neutral-800/60'}`}
+                className={`grid grid-cols-3 py-4 px-6 items-center ${index % 2 === 0 ? 'bg-white/30 dark:bg-neutral-800/40' : 'bg-white/50 dark:bg-neutral-800/60'}`}
               >
                 <div className="font-medium dark:text-white">{row.feature}</div>
                 <div className="text-center">
@@ -382,7 +382,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Agency Comparison */}
-      <section className="py-20 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
+      <section className="py-20 bg-gray-100/50 dark:bg-neutral-800/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
@@ -444,7 +444,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* All Features */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-neutral-950">
+      <section className="py-12 sm:py-16 lg:py-20 bg-transparent">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3 sm:mb-4 dark:text-white">
@@ -474,7 +474,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50 dark:bg-neutral-900 text-gray-800 dark:text-gray-200">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-4 sm:mb-6 dark:text-white">
             {language === 'nl' 
@@ -524,7 +524,7 @@ const OnderhoudPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
+      <footer className="py-8 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto hidden dark:block" />

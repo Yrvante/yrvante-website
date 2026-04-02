@@ -172,7 +172,7 @@ const WhyWebsitePage = () => {
   const t = content[language] || content.nl;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen">
       <SEO page="/waarom-website" />
       {/* Navigation - matching homepage style */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
@@ -319,7 +319,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 2 - The Myth & Comparison */}
-      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -409,7 +409,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Section 4 - Features */}
-      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
+      <section className="py-12 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-gray-100/50 dark:bg-neutral-800/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -480,7 +480,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-10 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-10 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-12 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.packages.map((pkg, index) => (
@@ -544,7 +544,7 @@ const WhyWebsitePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 sm:py-12 px-4 sm:px-6 md:px-12 bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300">
+      <footer className="py-8 sm:py-12 px-4 sm:px-6 md:px-12 bg-gray-100/50 dark:bg-neutral-900/50 backdrop-blur-sm text-gray-700 dark:text-gray-300">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <img src={LOGO_URL} alt="Yrvante" className="h-10 w-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-10 w-auto hidden dark:block" />

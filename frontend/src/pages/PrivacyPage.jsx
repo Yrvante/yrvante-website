@@ -291,7 +291,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
   };
 
   return (
-    <div data-testid="privacy-page" className="min-h-screen bg-white dark:bg-neutral-950">
+    <div data-testid="privacy-page" className="min-h-screen">
       <SEO 
         page="/privacy"
         customTitle={`${t.title} | Yrvante`}
@@ -350,7 +350,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
             {t.sections.map((section, index) => {
               const Icon = section.icon;
               return (
-                <section key={index} className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 sm:p-6 lg:p-8">
+                <section key={index} className="bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8">
                   <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
                     <div className="p-2 sm:p-3 bg-gray-200 dark:bg-neutral-700 rounded-xl flex-shrink-0">
                       <Icon className="text-gray-700 dark:text-white" size={20} />
@@ -389,7 +389,7 @@ We never sell your data to third parties and do not use it for unsolicited marke
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-50 dark:bg-neutral-900 border-t border-gray-100 dark:border-neutral-800 py-12">
+      <footer className="bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-100 dark:border-neutral-800 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Link to="/" className="inline-block mb-4">
             <img src={LOGO_URL} alt="Yrvante" className="h-8 w-auto mx-auto dark:hidden" /><img src={LOGO_URL_WHITE} alt="Yrvante" className="h-8 w-auto mx-auto hidden dark:block" />

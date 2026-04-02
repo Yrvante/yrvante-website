@@ -248,7 +248,7 @@ const translations = {
 
 // Minimal loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white dark:bg-neutral-950">
+  <div className="min-h-screen flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-gray-300 dark:border-neutral-700 border-t-gray-600 dark:border-t-neutral-400 rounded-full animate-spin" />
   </div>
 );
@@ -279,7 +279,12 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <div className="App">
+      <div className="App relative">
+        {/* Global background pattern - visible on ALL pages */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`} style={{ backgroundImage: `url(/bg-pattern.jpg)` }} />
+        </div>
+        <div className="relative z-10">
         <BrowserRouter>
           <Suspense fallback={<PageLoader />}>
           <Routes>
@@ -303,6 +308,7 @@ function App() {
           </Routes>
           </Suspense>
         </BrowserRouter>
+        </div>
         <Toaster position="bottom-right" />
       </div>
     </LanguageContext.Provider>

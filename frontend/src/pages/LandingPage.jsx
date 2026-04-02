@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { BG_IMAGE } from "../components/landing/constants";
 import Navigation from "../components/landing/Navigation";
 import HeroSection from "../components/landing/HeroSection";
 import PricingSection from "../components/landing/PricingSection";
@@ -21,15 +20,10 @@ const LandingPage = () => {
   const { theme } = useTheme();
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black'}`}>
+    <div className={`min-h-screen ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
       <SEO page="/" />
 
-      {/* Background pattern */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`} style={{ backgroundImage: `url(${BG_IMAGE})` }} />
-      </div>
-
-      <div className="relative z-10 flex flex-col">
+      <div className="relative flex flex-col">
         <Navigation />
         <HeroSection />
         <ProcessSection />

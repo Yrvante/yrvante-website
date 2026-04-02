@@ -718,7 +718,7 @@ const CalculatorPage = () => {
   };
 
   return (
-    <div className="min-h-screen relative bg-gray-50 dark:bg-neutral-950" data-testid="calculator-page">
+    <div className="min-h-screen relative bg-gray-50/0 dark:bg-neutral-950/0" data-testid="calculator-page">
       <SEO page="/calculator" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">

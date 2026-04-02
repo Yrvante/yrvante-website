@@ -93,7 +93,7 @@ const AboutPage = () => {
   const t = content[language];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen">
       <SEO page="/about" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-100 dark:border-neutral-800">
@@ -192,7 +192,7 @@ const AboutPage = () => {
       </section>
 
       {/* Values */}
-      <section className="py-24 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-24 px-6 md:px-12 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             className="text-3xl md:text-4xl font-heading font-thin dark:text-white mb-16"
@@ -225,7 +225,7 @@ const AboutPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-24 px-6 md:px-12 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

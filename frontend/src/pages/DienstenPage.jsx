@@ -120,7 +120,7 @@ const DienstenPage = () => {
     ];
 
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-950">
+      <div className="min-h-screen bg-transparent">
         <SEO page="/diensten/webdesign" />
 
         <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-neutral-700/50">
@@ -201,7 +201,7 @@ const DienstenPage = () => {
         </section>
 
         {/* All Features */}
-        <section className="py-20 bg-white dark:bg-neutral-950">
+        <section className="py-20 bg-transparent">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
@@ -238,7 +238,7 @@ const DienstenPage = () => {
         </section>
 
         {/* Process Section */}
-        <section className="py-20 bg-gray-50 dark:bg-neutral-900">
+        <section className="py-20 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-4">
@@ -272,7 +272,7 @@ const DienstenPage = () => {
         </section>
 
         {/* Why Good Design Matters */}
-        <section className="py-20 bg-white dark:bg-neutral-950">
+        <section className="py-20 bg-transparent">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -301,7 +301,7 @@ const DienstenPage = () => {
                   { stat: '75%', label: language === 'nl' ? 'beoordeelt geloofwaardigheid op design' : 'judge credibility based on design' },
                   { stat: '60%+', label: language === 'nl' ? 'bezoekt eerst via mobiel' : 'visits via mobile first' },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-6">
+                  <div key={i} className="flex items-center gap-6 bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-2xl p-6">
                     <span className="text-4xl font-black text-gray-900 dark:text-gray-100 w-20 flex-shrink-0">{item.stat}</span>
                     <p className="text-gray-600 dark:text-gray-400">{item.label}</p>
                   </div>
@@ -312,7 +312,7 @@ const DienstenPage = () => {
         </section>
 
         {/* Future Plans Note */}
-        <section className="py-16 bg-gray-100 dark:bg-neutral-900">
+        <section className="py-16 bg-gray-100/50 dark:bg-neutral-900/50 backdrop-blur-sm">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-12">
             <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50">
               <div className="flex items-start gap-4">
@@ -340,7 +340,7 @@ const DienstenPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gray-50 dark:bg-neutral-900 text-gray-800 dark:text-gray-200">
+        <section className="py-20 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-6 dark:text-white">
               {language === 'nl' ? 'Klaar voor een website die werkt?' : 'Ready for a website that works?'}
@@ -393,7 +393,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
+        <footer className="py-8 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -408,7 +408,7 @@ const DienstenPage = () => {
   if (isServicePage) {
     const service = services[type];
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-950">
+      <div className="min-h-screen bg-transparent">
         <SEO page={`/diensten/${type}`} />
         
         <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-neutral-700/50">
@@ -451,7 +451,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-white dark:bg-neutral-950">
+        <section className="py-16 bg-transparent">
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="text-2xl font-bold text-center mb-10 dark:text-white">
               {language === 'nl' ? 'Wat je krijgt' : 'What you get'}
@@ -464,7 +464,7 @@ const DienstenPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4"
+                  className="flex items-center gap-3 bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-2xl p-4"
                 >
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
@@ -476,7 +476,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
+        <section className="py-16 bg-gray-100/50 dark:bg-neutral-800/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4 dark:text-white">
               {language === 'nl' ? `${service.title[language]} nodig?` : `Need ${service.title[language]}?`}
@@ -501,7 +501,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
+        <footer className="py-8 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -516,7 +516,7 @@ const DienstenPage = () => {
   if (isNichePage) {
     const nicheData = niches[niche];
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-950">
+      <div className="min-h-screen bg-transparent">
         <SEO page={`/voor/${niche}`} />
         
         <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-neutral-700/50">
@@ -559,7 +559,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-white dark:bg-neutral-950">
+        <section className="py-16 bg-transparent">
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="text-2xl font-bold text-center mb-10 dark:text-white">
               {language === 'nl' ? 'Wat een website je oplevert' : 'What a website delivers'}
@@ -568,7 +568,7 @@ const DienstenPage = () => {
               {nicheData.benefits[language].map((benefit, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
+                  className="flex items-center gap-3 bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-2xl p-4 hover:bg-white/60 dark:hover:bg-neutral-800/60 transition-colors"
                 >
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-green-600" />
@@ -580,7 +580,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-50 dark:bg-neutral-900">
+        <section className="py-16 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
             <h2 className="text-2xl font-bold mb-6 dark:text-white">
               {language === 'nl' ? 'Perfect voor' : 'Perfect for'}
@@ -598,7 +598,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
+        <section className="py-16 bg-gray-100/50 dark:bg-neutral-800/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
             <h2 className="text-3xl font-bold mb-4 dark:text-white">
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
@@ -623,7 +623,7 @@ const DienstenPage = () => {
           </div>
         </section>
 
-        <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
+        <footer className="py-8 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-200 dark:border-neutral-800">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}
@@ -636,7 +636,7 @@ const DienstenPage = () => {
 
   // Main Services Overview Page
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-transparent">
       <SEO page="/diensten" />
       
       <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-gray-200 dark:border-neutral-700">
@@ -679,7 +679,7 @@ const DienstenPage = () => {
       </section>
 
       {/* Services Grid - Without Branding */}
-      <section className="py-16 bg-white dark:bg-neutral-950">
+      <section className="py-16 bg-transparent">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <h2 className="text-2xl font-bold mb-8 dark:text-white">
             {language === 'nl' ? 'Diensten' : 'Services'}
@@ -689,7 +689,7 @@ const DienstenPage = () => {
               <div key={key}>
                 <Link
                   to={`/diensten/${key}`}
-                  className="block bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-8 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors group"
+                  className="block bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/60 dark:hover:bg-neutral-800/60 transition-colors group"
                 >
                   <div className="w-14 h-14 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm dark:shadow-neutral-900">
                     <service.icon size={28} className="text-gray-700 dark:text-gray-300" />
@@ -710,7 +710,7 @@ const DienstenPage = () => {
       </section>
 
       {/* Niches Grid - Organized in 3 columns */}
-      <section className="py-16 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-16 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2 dark:text-white">
@@ -846,7 +846,7 @@ const DienstenPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200">
+      <section className="py-16 bg-gray-100/50 dark:bg-neutral-800/50 backdrop-blur-sm text-gray-800 dark:text-gray-200">
         <div className="max-w-[800px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl font-bold mb-4">
             {language === 'nl' ? 'Jouw branche niet gevonden?' : "Didn't find your industry?"}
@@ -865,7 +865,7 @@ const DienstenPage = () => {
         </div>
       </section>
 
-      <footer className="py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
+      <footer className="py-8 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} Yrvante. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}

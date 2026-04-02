@@ -86,7 +86,7 @@ const OverMijPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950" data-testid="over-mij-page">
+    <div className="min-h-screen" data-testid="over-mij-page">
       <SEO page="/over-mij" />
       
       {/* Navigation */}
@@ -189,7 +189,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Values Section - 2x2 grid on mobile */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-neutral-950">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-8 sm:mb-12">
             <p className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-2 sm:mb-4">
@@ -222,7 +222,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Timeline / Story Section - Stacked on mobile */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50 dark:bg-neutral-900">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-8 sm:mb-12">
             <p className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-2 sm:mb-4">
@@ -260,7 +260,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Price Comparison Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-100 dark:bg-neutral-800">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-100/50 dark:bg-neutral-800/50 backdrop-blur-sm">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-center">
             <div className="lg:flex-1">
@@ -309,7 +309,7 @@ const OverMijPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-neutral-950">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-4 sm:mb-6 dark:text-white">
             {language === 'nl' 
@@ -339,7 +339,7 @@ const OverMijPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 sm:py-8 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800">
+      <footer className="py-6 sm:py-8 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border-t border-gray-200 dark:border-neutral-800">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <img src={LOGO_URL} alt="Yrvante" className="h-7 sm:h-8 w-auto dark:hidden" />

@@ -249,7 +249,7 @@ const BlogPage = () => {
   const t = content[language] || content.nl;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen">
       <SEO page="/blog" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-gray-100 dark:border-neutral-800">
@@ -267,7 +267,7 @@ const BlogPage = () => {
       </nav>
 
       {/* Hero */}
-      <section className="pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
+      <section className="pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 md:px-12 bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -319,7 +319,7 @@ const BlogPage = () => {
           <h2 className="text-3xl font-heading font-bold mb-8 dark:text-white">{t.section1.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.section1.points.map((point, index) => (
-              <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
+              <div key={index} className="p-6 bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-2xl">
                 <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-xl flex items-center justify-center mb-4">
                   {point.icon}
                 </div>
@@ -403,7 +403,7 @@ const BlogPage = () => {
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">{t.section3.intro}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {t.section3.points.map((point, index) => (
-              <div key={index} className="p-6 bg-gray-50 dark:bg-neutral-800/60 rounded-2xl">
+              <div key={index} className="p-6 bg-white/40 dark:bg-neutral-800/40 backdrop-blur-sm rounded-2xl">
                 <h3 className="font-bold text-lg mb-2 dark:text-white">{point.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{point.text}</p>
               </div>

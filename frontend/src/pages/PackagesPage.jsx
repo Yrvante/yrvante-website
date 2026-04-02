@@ -595,7 +595,7 @@ const PackagesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen">
       <SEO page="/pakketten" />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-gray-200 dark:border-neutral-700">
@@ -616,7 +616,7 @@ const PackagesPage = () => {
 
       {/* Hero */}
       <section className="pt-20 sm:pt-28 lg:pt-36 pb-8 sm:pb-12 lg:pb-20 relative" style={{backgroundImage: `url(${BG_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-950/95" />
+        <div className="absolute inset-0 bg-white/50 dark:bg-neutral-950/90 backdrop-blur-sm" />
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -906,7 +906,7 @@ const PackagesPage = () => {
       </section>
 
       {/* Booking System Detail - with live interactive demo */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-12 dark:bg-neutral-950">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
           <div className="bg-gray-700 text-white rounded-3xl p-8 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

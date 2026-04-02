@@ -277,29 +277,21 @@ html.dark body {
     color: #f0f0f0 !important;
 }
 
-/* Form inputs */
+/* Form inputs - base dark styles (can be overridden by Tailwind) */
 html.dark input, html.dark textarea, html.dark select {
-    background-color: #2a2a2a !important;
-    color: #f0f0f0 !important;
-    border-color: #444 !important;
+    color: #f0f0f0;
+    border-color: #444;
 }
 html.dark input:focus, html.dark textarea:focus, html.dark select:focus {
-    border-color: #888 !important;
+    border-color: #888;
 }
 html.dark input::placeholder, html.dark textarea::placeholder {
-    color: #666 !important;
+    color: #666;
 }
 
-/* Navigation on ALL pages */
+/* Navigation on ALL pages - allow glassmorphism */
 html.dark nav {
-    background-color: #1a1a1a !important;
-    border-color: #333 !important;
-}
-html.dark nav a, html.dark nav button {
-    color: #ccc;
-}
-html.dark nav a:hover, html.dark nav button:hover {
-    color: #fff;
+    border-color: #333;
 }
 
 /* Logo in dark mode - handled via separate white logo image */

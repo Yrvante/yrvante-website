@@ -121,13 +121,18 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="hidden lg:flex flex-col items-center justify-center relative"
         >
-          {/* Logo watermark centered behind devices */}
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 0.25, scale: 1 }} transition={{ duration: 0.8, delay: 0.5 }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-            <img src="/yrvante-logo-code.png" alt="" className="w-80 h-auto object-contain" />
+          {/* Logo - prominent, above the MacBook */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-6 pointer-events-none"
+          >
+            <img src="/yrvante-logo-code.png" alt="Yrvante" className="w-56 h-auto object-contain mx-auto" />
           </motion.div>
 
-          {/* MacBook Frame */}
-          <div className="relative w-[420px]">
+          {/* MacBook Frame - pushed down */}
+          <div className="relative w-[400px]">
             <div className="bg-gray-200 dark:bg-neutral-700 rounded-t-xl pt-2 px-2">
               <div className="flex items-center gap-1.5 px-3 py-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
@@ -163,9 +168,9 @@ const HeroSection = () => {
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-2">
-                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-16" />
-                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-16" />
-                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-16" />
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-14" />
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-14" />
+                    <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-2 h-14" />
                   </div>
                 </div>
               </div>
@@ -179,7 +184,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="absolute -bottom-4 -left-8 w-[120px]"
+            className="absolute bottom-0 -left-6 w-[110px]"
           >
             <div className="bg-gray-900 dark:bg-neutral-800 rounded-[20px] p-1.5 shadow-2xl border border-gray-700">
               <div className="bg-white dark:bg-neutral-900 rounded-[16px] overflow-hidden">
@@ -211,7 +216,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 1 }}
-            className="absolute -top-2 -right-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-700 px-3 py-2"
+            className="absolute top-16 -right-4 bg-white/70 dark:bg-neutral-800/70 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 dark:border-neutral-700 px-3 py-2"
           >
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
