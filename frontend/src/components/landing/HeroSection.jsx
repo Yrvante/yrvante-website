@@ -84,6 +84,21 @@ const HeroSection = () => {
             )}
           </motion.div>
 
+          {/* Trust badges - mobile compact */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.48 }} className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-6 sm:mb-8 lg:hidden">
+            {[
+              { icon: '✓', text: language === 'nl' ? 'KVK Geregistreerd' : 'Chamber of Commerce' },
+              { icon: '✓', text: language === 'nl' ? '100% Tevredenheid' : '100% Satisfaction' },
+              { icon: '✓', text: language === 'nl' ? 'Reactie < 2 uur' : 'Response < 2h' },
+              { icon: '✓', text: language === 'nl' ? '100% Maatwerk' : '100% Custom' },
+            ].map((b, i) => (
+              <span key={i} className="flex items-center gap-1 text-[10px] text-gray-400 dark:text-gray-500">
+                <span className="text-gray-400">{b.icon}</span>
+                <span>{b.text}</span>
+              </span>
+            ))}
+          </motion.div>
+
           {/* CTA Buttons */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center mb-6 sm:mb-8">
             <button onClick={scrollToContact} className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-gray-500 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-600 active:scale-[0.98] transition-all rounded-full text-center">
