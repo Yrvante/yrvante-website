@@ -50,7 +50,7 @@ const AdminDashboard = () => {
       const [statsRes, contactsRes, pageviewsRes] = await Promise.all([
         axios.get(`${API}/admin/stats`),
         axios.get(`${API}/admin/contacts`),
-        axios.get(`${API}/admin/pageviews`)
+        axios.get(`${API}/admin/stats?type=pageviews`)
       ]);
       setStats(statsRes.data);
       setContacts(contactsRes.data);
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
 
   const markAsRead = async (contactId) => {
     try {
-      await axios.put(`${API}/admin/contacts/${contactId}/read`);
+      await axios.put(`${API}/admin/contacts?id=${contactId}&action=read`);
       setContacts(contacts.map(c => 
         c.id === contactId ? { ...c, read: true } : c
       ));
@@ -78,7 +78,7 @@ const AdminDashboard = () => {
   const deleteContact = async (contactId) => {
     if (!window.confirm("Weet je zeker dat je dit bericht wilt verwijderen?")) return;
     try {
-      await axios.delete(`${API}/admin/contacts/${contactId}`);
+      await axios.delete(`${API}/admin/contacts?id=${contactId}`);
       setContacts(contacts.filter(c => c.id !== contactId));
       setStats(prev => ({ ...prev, total_contacts: prev.total_contacts - 1 }));
       toast.success("Bericht verwijderd");
