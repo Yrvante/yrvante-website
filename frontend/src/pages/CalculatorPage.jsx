@@ -820,40 +820,13 @@ const CalculatorPage = () => {
               <h2 className="text-2xl font-heading font-bold mb-2 dark:text-white">{t.step2}</h2>
               <p className="text-gray-500 text-sm mb-6">{t.optional}</p>
               
-              {/* Losse prijzen overzicht */}
-              <div className="mb-8 p-6 bg-gray-50 dark:bg-neutral-800/60 border border-gray-200 dark:border-neutral-700 rounded-3xl">
-                <h3 className="font-bold text-lg mb-4 dark:text-white">
-                  {language === 'nl' ? 'Losse prijzen voor extra\'s' : 'Individual prices for extras'}
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
-                    <p className="text-2xl font-bold dark:text-white">€50</p>
-                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra pagina' : 'Extra page'}</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
-                    <p className="text-2xl font-bold dark:text-white">€200</p>
-                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Meertalig' : 'Multi-language'}</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
-                    <p className="text-2xl font-bold dark:text-white">€80</p>
-                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Extra formulier' : 'Extra form'}</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
-                    <p className="text-2xl font-bold dark:text-white">€25<span className="text-sm text-gray-500">/pm</span></p>
-                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Onderhoud' : 'Maintenance'}</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl">
-                    <p className="text-2xl font-bold dark:text-white">€250</p>
-                    <p className="text-sm text-gray-500">{language === 'nl' ? 'Boekingssysteem' : 'Booking system'}</p>
-                  </div>
-                </div>
-                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-2xl p-4">
-                  <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                    <span className="font-bold">💡 Tip:</span> {language === 'nl' 
-                      ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
-                      : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
-                  </p>
-                </div>
+              {/* Tip */}
+              <div className="mb-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-2xl">
+                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                  <span className="font-bold">Tip:</span> {language === 'nl' 
+                    ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
+                    : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
+                </p>
               </div>
               
               <div className="space-y-4">
