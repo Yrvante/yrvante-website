@@ -4,6 +4,7 @@ import { useLanguage, useTheme } from "../App";
 import { ArrowRight, Search, Clock, TrendingUp, Shield, Zap, Globe, Users, CheckCircle, X, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { MacBookMockup, IPhoneMockup, MiniWebsite } from "../components/DeviceMockups";
 
 const LOGO_URL = "/logo.png";
 const LOGO_URL_WHITE = "/logo-white.png";
@@ -274,7 +275,26 @@ const WhyWebsitePage = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="absolute -inset-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-3xl opacity-50 blur-2xl"></div>
+              {/* MacBook showing a website */}
+              <MacBookMockup url="google.nl" className="max-w-sm mx-auto mb-6">
+                <div className="p-3">
+                  <div className="flex items-center gap-2 mb-3 bg-gray-100 dark:bg-neutral-800 rounded-full px-3 py-1.5">
+                    <Search size={10} className="text-gray-400" />
+                    <div className="h-1.5 bg-gray-300 dark:bg-neutral-600 rounded w-24" />
+                  </div>
+                  <div className="space-y-3">
+                    {[1,2,3].map(i => (
+                      <div key={i} className={`p-2 rounded-lg border ${i === 1 ? 'border-gray-300 dark:border-neutral-600 bg-gray-50 dark:bg-neutral-800' : 'border-transparent'}`}>
+                        <div className="h-1.5 bg-blue-600/60 rounded w-2/3 mb-1" />
+                        <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-full" />
+                        <div className="h-1 bg-gray-200 dark:bg-neutral-700 rounded w-4/5 mt-0.5" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </MacBookMockup>
+
+              <div className="absolute -inset-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-3xl opacity-50 blur-2xl -z-10"></div>
               <div className="relative bg-gray-700 text-white p-10 rounded-3xl">
                 <h3 className="text-2xl font-heading font-bold mb-6">
                   {t.benefitsTitle}

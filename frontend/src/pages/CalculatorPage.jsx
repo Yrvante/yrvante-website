@@ -4,6 +4,7 @@ import { useLanguage, useTheme } from "../App";
 import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star, Tag, X } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import SEO from "../components/SEO";
+import { IPhoneMockup, MiniWebsite } from "../components/DeviceMockups";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -1037,6 +1038,17 @@ const CalculatorPage = () => {
                 <div className="flex gap-3">
                   <Info size={16} className="text-gray-400 flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-gray-500">{t.note}</p>
+                </div>
+              </div>
+
+              {/* Mini preview of what you're building */}
+              <div className="mt-6 hidden lg:flex justify-center gap-4">
+                <IPhoneMockup className="w-24">
+                  <MiniWebsite variant="mobile-app" />
+                </IPhoneMockup>
+                <div className="self-center text-center">
+                  <p className="text-[10px] text-gray-400 font-medium">{language === 'nl' ? 'Jouw website' : 'Your website'}</p>
+                  <p className="text-[9px] text-gray-300 dark:text-gray-500">{language === 'nl' ? 'op elk apparaat' : 'on any device'}</p>
                 </div>
               </div>
             </motion.div>

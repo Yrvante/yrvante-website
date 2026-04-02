@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage, useTheme } from "../App";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { MacBookMockup, IPhoneMockup, MiniWebsite } from "../components/DeviceMockups";
 import {
   Heart,
   Target,
@@ -279,6 +280,10 @@ const OverMijPage = () => {
             </div>
 
             <div className="w-full lg:flex-1 space-y-3 sm:space-y-4">
+              {/* Device mockup showing website quality */}
+              <MacBookMockup url="jouwbedrijf.nl" className="mb-4 hidden lg:block">
+                <MiniWebsite variant="default" />
+              </MacBookMockup>
               <div className="bg-gray-200 dark:bg-neutral-700 rounded-2xl p-4 sm:p-6 border border-gray-300 dark:border-neutral-600">
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">{language === 'nl' ? 'Gemiddeld bureau' : 'Average agency'}</span>

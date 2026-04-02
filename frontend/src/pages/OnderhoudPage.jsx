@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage, useTheme } from "../App";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { MacBookMockup, MiniWebsite } from "../components/DeviceMockups";
 import {
   Shield,
   Zap,
@@ -213,7 +214,11 @@ const OnderhoudPage = () => {
               transition={{ delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50 shadow-xl">
+              <MacBookMockup url={language === 'nl' ? 'jouwsite.nl/status' : 'yoursite.com/status'}>
+                <MiniWebsite variant="status" />
+              </MacBookMockup>
+
+              <div className="mt-6 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-neutral-700/50 shadow-xl">
                 <div className="space-y-4">
                   {maintenanceFeatures.slice(0, 4).map((feature, index) => (
                     <div key={index} className="flex items-start gap-4">
