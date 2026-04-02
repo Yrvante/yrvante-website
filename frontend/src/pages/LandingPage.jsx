@@ -38,8 +38,8 @@ const LandingPage = () => {
         <Suspense fallback={null}><PackageQuiz /></Suspense>
         <Suspense fallback={null}><TrustBadges /></Suspense>
         <FAQSection />
-        <ContactSection />
         <Suspense fallback={null}><GoogleReviews /></Suspense>
+        <ContactSection />
         <Footer />
       </div>
       <Suspense fallback={null}><ExitIntentPopup /></Suspense>
