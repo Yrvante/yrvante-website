@@ -737,56 +737,6 @@ const PackagesPage = () => {
         </div>
       </section>
 
-      {/* Losse Prijzen Section */}
-      <section className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-12 bg-gray-50 dark:bg-neutral-900">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 dark:text-white">
-              {language === 'nl' ? 'Losse Extra\'s Toevoegen' : 'Add Individual Extras'}
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-              {language === 'nl'
-                ? 'Wil je iets extra\'s bij je pakket? Hier zijn de losse prijzen.'
-                : 'Want to add something extra to your package? Here are the individual prices.'}
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-            {loosePrices.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="text-center p-5 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-neutral-700/50"
-              >
-                <p className="text-2xl font-bold mb-1 dark:text-white">{item.price}</p>
-                <p className="text-sm text-gray-500">{item.name}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-3xl p-6 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-lg text-yellow-800 dark:text-yellow-200">
-              <span className="font-bold">💡 Tip:</span> {language === 'nl' 
-                ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
-                : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Dark Mode Feature Section */}
       <section className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
@@ -926,6 +876,19 @@ const PackagesPage = () => {
           </div>
 
           <motion.div
+            className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-3xl p-6 text-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-lg text-yellow-800 dark:text-yellow-200">
+              <span className="font-bold">Tip:</span> {language === 'nl' 
+                ? 'Combineer je 2 of meer extra\'s? Dan is een hoger pakket vaak voordeliger. Ik adviseer je graag vrijblijvend.'
+                : 'Combining 2 or more extras? A higher package is often more advantageous. I\'d be happy to advise you without obligation.'}
+            </p>
+          </motion.div>
+
+          <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1040,7 +1003,7 @@ const PackagesPage = () => {
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
                   {language === 'nl' ? 'Aangeraden providers' : 'Recommended providers'}
                 </p>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <a href="https://www.transip.nl/domeinnaam/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group">
                     <div>
                       <p className="font-bold text-sm dark:text-white group-hover:underline">TransIP</p>
@@ -1052,6 +1015,27 @@ const PackagesPage = () => {
                     <div>
                       <p className="font-bold text-sm dark:text-white group-hover:underline">Antagonist</p>
                       <p className="text-xs text-gray-400">{language === 'nl' ? 'Nederlands, goede support' : 'Dutch, great support'}</p>
+                    </div>
+                    <ArrowRight size={14} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <a href="https://www.versio.nl/domeinnamen" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group">
+                    <div>
+                      <p className="font-bold text-sm dark:text-white group-hover:underline">Versio</p>
+                      <p className="text-xs text-gray-400">{language === 'nl' ? 'Voordelig, veel extensies' : 'Affordable, many extensions'}</p>
+                    </div>
+                    <ArrowRight size={14} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <a href="https://www.mijndomein.nl" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group">
+                    <div>
+                      <p className="font-bold text-sm dark:text-white group-hover:underline">Mijn Domein</p>
+                      <p className="text-xs text-gray-400">{language === 'nl' ? 'Makkelijk voor beginners' : 'Easy for beginners'}</p>
+                    </div>
+                    <ArrowRight size={14} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <a href="https://www.hostinger.nl/domeinnaam-checker" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group">
+                    <div>
+                      <p className="font-bold text-sm dark:text-white group-hover:underline">Hostinger</p>
+                      <p className="text-xs text-gray-400">{language === 'nl' ? 'Internationaal, scherpe prijzen' : 'International, competitive prices'}</p>
                     </div>
                     <ArrowRight size={14} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
                   </a>

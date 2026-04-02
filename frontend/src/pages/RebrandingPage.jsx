@@ -201,6 +201,9 @@ const RebrandingPage = () => {
           </div>
         </section>
 
+        {/* Before & After */}
+        <BeforeAfterSlider />
+
         {/* Included / Not Included */}
         <section className="py-16 lg:py-24">
           <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
@@ -294,9 +297,6 @@ const RebrandingPage = () => {
             </div>
           </div>
         </section>
-
-        {/* Before & After */}
-        <BeforeAfterSlider />
 
         {/* Footer */}
         <footer className="py-8 px-6 lg:px-12 border-t border-gray-100 dark:border-neutral-800">
