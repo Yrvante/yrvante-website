@@ -36,7 +36,6 @@ const LandingPage = () => {
         <Suspense fallback={null}><LiveExamples /></Suspense>
         <PricingSection />
         <Suspense fallback={null}><PackageQuiz /></Suspense>
-        <Suspense fallback={null}><TrustBadges /></Suspense>
         <FAQSection />
         <Suspense fallback={null}><GoogleReviews /></Suspense>
         <ContactSection />
