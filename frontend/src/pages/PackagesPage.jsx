@@ -353,9 +353,9 @@ const ContactFormDemo = ({ language }) => {
   return (
     <div className="mt-4 rounded-xl border border-gray-100 overflow-hidden">
       <div className="bg-gray-50 p-3 space-y-2">
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw naam...' : 'Your name...'}</p></div>
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'jij@email.nl' : 'you@email.com'}</p></div>
-        <div className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 px-3 py-2 h-10"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw bericht...' : 'Your message...'}</p></div>
+        <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-lg border border-gray-200/50 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw naam...' : 'Your name...'}</p></div>
+        <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-lg border border-gray-200/50 dark:border-neutral-700 px-3 py-2"><p className="text-xs text-gray-300">{language === 'nl' ? 'jij@email.nl' : 'you@email.com'}</p></div>
+        <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm rounded-lg border border-gray-200/50 dark:border-neutral-700 px-3 py-2 h-10"><p className="text-xs text-gray-300">{language === 'nl' ? 'Jouw bericht...' : 'Your message...'}</p></div>
         <button onClick={(e) => { e.stopPropagation(); setSent(true); }}
           className="w-full py-2 bg-gray-900 dark:bg-neutral-800 text-white text-xs font-bold rounded-lg hover:bg-gray-700 transition-colors">
           {language === 'nl' ? 'Verstuur bericht' : 'Send message'}

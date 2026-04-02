@@ -44,7 +44,7 @@ const ThemeChooser = () => {
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
             className="fixed z-[10000] inset-0 flex items-center justify-center pointer-events-none px-5"
           >
-            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 w-full max-w-[320px] pointer-events-auto">
+            <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-gray-100/50 dark:border-neutral-800 w-full max-w-[320px] pointer-events-auto">
               {/* Header gradient */}
               <div className="h-1 bg-gradient-to-r from-amber-300 via-gray-300 to-gray-500" />
 

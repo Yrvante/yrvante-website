@@ -51,8 +51,8 @@ const HeroSection = () => {
                 <span className="flex flex-col"><span>YOUR</span><span>BUSINESS</span><span className="text-gray-500 dark:text-gray-400">ONLINE</span></span>
               )}
             </motion.h1>
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 0.15, scale: 1 }} transition={{ duration: 0.8, delay: 0.4 }} className="hidden lg:flex absolute -right-8 inset-y-0 items-center justify-center w-1/4 pointer-events-none -z-10">
-              <img src="/yrvante-logo-code.png" alt="" className="w-52 h-auto object-contain" />
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 0.3, scale: 1 }} transition={{ duration: 0.8, delay: 0.4 }} className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 items-center justify-center pointer-events-none">
+              <img src="/yrvante-logo-code.png" alt="" className="w-56 h-auto object-contain" />
             </motion.div>
           </div>
 

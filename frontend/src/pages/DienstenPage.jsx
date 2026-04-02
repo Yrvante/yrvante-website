@@ -224,7 +224,7 @@ const DienstenPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
+                  className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-6"
                 >
                   <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-4">
                     <feature.icon className="text-gray-600 dark:text-gray-400" size={24} />

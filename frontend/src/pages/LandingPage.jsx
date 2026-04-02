@@ -14,6 +14,8 @@ const LiveExamples = lazy(() => import("../components/LiveExamples"));
 const TrustBadges = lazy(() => import("../components/TrustBadges"));
 const GoogleReviews = lazy(() => import("../components/GoogleReviews"));
 const ExitIntentPopup = lazy(() => import("../components/ExitIntentPopup"));
+const CookieBanner = lazy(() => import("../components/CookieBanner"));
+const ThemeChooser = lazy(() => import("../components/ThemeChooser"));
 
 const LandingPage = () => {
   const { theme } = useTheme();
@@ -42,6 +44,8 @@ const LandingPage = () => {
         <Footer />
       </div>
       <Suspense fallback={null}><ExitIntentPopup /></Suspense>
+      <Suspense fallback={null}><CookieBanner /></Suspense>
+      <Suspense fallback={null}><ThemeChooser /></Suspense>
     </div>
   );
 };

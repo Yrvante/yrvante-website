@@ -265,7 +265,7 @@ const OnderhoudPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
+                className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-6"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -350,7 +350,7 @@ const OnderhoudPage = () => {
             </h2>
           </div>
 
-          <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl overflow-hidden">
+          <div className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl overflow-hidden">
             <div className="grid grid-cols-3 bg-gray-200 dark:bg-neutral-700 text-gray-800 dark:text-gray-200 py-4 px-6">
               <div className="font-bold dark:text-white">{language === 'nl' ? 'Onderdeel' : 'Item'}</div>
               <div className="font-bold text-center text-green-400">
@@ -401,7 +401,7 @@ const OnderhoudPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-100 dark:bg-neutral-700 rounded-3xl p-6 border border-gray-200 dark:border-neutral-600">
+            <div className="bg-white/50 dark:bg-neutral-700/60 backdrop-blur-sm rounded-3xl p-6 border border-gray-200/50 dark:border-neutral-600">
               <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 {language === 'nl' ? 'Klein Bureau' : 'Small Agency'}
               </p>
@@ -414,7 +414,7 @@ const OnderhoudPage = () => {
               </div>
             </div>
 
-            <div className="bg-gray-100 dark:bg-neutral-700 rounded-3xl p-6 border border-gray-200 dark:border-neutral-600">
+            <div className="bg-white/50 dark:bg-neutral-700/60 backdrop-blur-sm rounded-3xl p-6 border border-gray-200/50 dark:border-neutral-600">
               <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
                 {language === 'nl' ? 'Middelgroot Bureau' : 'Medium Agency'}
               </p>
@@ -460,7 +460,7 @@ const OnderhoudPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl p-6"
+                className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-3xl p-6"
               >
                 <div className="w-12 h-12 bg-gray-200 dark:bg-neutral-700 rounded-2xl flex items-center justify-center mb-4">
                   <feature.icon className="text-gray-600 dark:text-gray-400" size={24} />

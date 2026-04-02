@@ -51,7 +51,7 @@ const CookieBanner = () => {
           className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-[9000] sm:max-w-[380px]"
           data-testid="cookie-banner"
         >
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-neutral-800 overflow-hidden">
+          <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-neutral-800 overflow-hidden">
             {/* Top accent */}
             <div className="h-[2px] bg-gradient-to-r from-gray-300 via-gray-500 to-gray-300 dark:from-neutral-700 dark:via-neutral-500 dark:to-neutral-700" />
 

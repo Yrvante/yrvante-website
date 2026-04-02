@@ -208,7 +208,7 @@ const OverMijPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
+                className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:bg-white/60 dark:hover:bg-neutral-800 transition-colors"
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 dark:bg-neutral-700 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4">
                   <value.icon className="text-gray-600 dark:text-gray-400" size={20} />

@@ -133,7 +133,7 @@ const MultiLangPreview = ({ language }) => {
             </button>
           ))}
         </div>
-        <motion.div key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl p-3 text-center">
+        <motion.div key={lang} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-xl p-3 text-center">
           <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{texts[lang]}</p>
           <p className="text-xs text-gray-400 mt-0.5">{language === 'nl' ? 'Alle tekst automatisch vertaald' : 'All text auto-translated'}</p>
         </motion.div>
@@ -220,7 +220,7 @@ const GoogleReviewsPreview = ({ language }) => (
           { name: 'Anna de Vries', review: language === 'nl' ? 'Geweldige website, precies wat ik zocht!' : 'Amazing website, exactly what I needed!' },
           { name: 'Thomas B.', review: language === 'nl' ? 'Snel geleverd en top kwaliteit.' : 'Fast delivery and top quality.' },
         ].map((r, i) => (
-          <div key={i} className="bg-gray-50 dark:bg-neutral-800/60 rounded-xl p-3">
+          <div key={i} className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-xl p-3">
             <div className="flex items-center gap-2 mb-1">
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400">{r.name[0]}</div>
               <span className="text-xs font-bold text-gray-800 dark:text-gray-200">{r.name}</span>
@@ -1108,7 +1108,7 @@ const CalculatorPage = () => {
                   </div>
 
                   {/* Selection Summary */}
-                  <div className="bg-gray-50 dark:bg-neutral-800/60 rounded-2xl p-4 mb-6">
+                  <div className="bg-white/40 dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl p-4 mb-6">
                     <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">{t.yourSelection}</p>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">

@@ -201,7 +201,7 @@ const WhyWebsitePage = () => {
 
       {/* Hero Section - Premium style */}
       <section className="pt-14 sm:pt-16 lg:pt-20">
-        <div className="bg-gray-50 dark:bg-neutral-900">
+        <div className="bg-white/40 dark:bg-neutral-900/60 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
