@@ -13,6 +13,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 ```
 /app/
 ├── frontend/src/
+│   ├── App.js (ThemeContext, LanguageContext, Global BG pattern, Routing)
 │   ├── pages/
 │   │   ├── LandingPage.jsx (container - imports sections)
 │   │   ├── CalculatorPage.jsx
@@ -34,16 +35,16 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 │   │   ├── LiveExamples.jsx, PackageQuiz.jsx
 │   │   ├── GoogleReviews.jsx, BeforeAfterSlider.jsx
 │   │   ├── TrustBadges.jsx, CompetitorComparison.jsx
+│   │   ├── DeviceMockups.jsx
 │   │   └── SEO.jsx
 │   ├── data/
-│   │   └── dienstenData.js (Webdesign + Rebranding + Onderhoud + niches)
-│   └── App.js (ThemeContext, LanguageContext, Routing)
-├── api/ (Vercel Serverless Functions - Production)
+│   │   └── dienstenData.js
+│   └── index.css (Global styles, dark mode)
+├── api/ (Vercel Serverless Functions - MAX 12 allowed)
 │   ├── _db.js (Shared Postgres init)
 │   ├── contact.js, reviews.js
 │   ├── analytics/pageview.js
-│   ├── admin/login.js, stats.js, contacts.js, pageviews.js
-│   ├── admin/contacts/[id].js, admin/contacts/[id]/read.js
+│   ├── admin/login.js, stats.js, contacts.js
 │   └── admin/leadfinder/ (Lead Finder endpoints)
 ├── backend/server.py (Preview FastAPI backend)
 └── vercel.json
@@ -62,7 +63,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - DienstenPage.jsx data extracted to dienstenData.js
 
 ### Phase 7 - Glassmorphism & Cleanup (Complete)
-- Cookie Banner + Theme Chooser removed
+- Cookie Banner + Theme Chooser popups
 - Global glassmorphism on all card elements
 
 ### Phase 8 - LandingPage Refactoring + Extras (Complete)
@@ -75,11 +76,19 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - CI=true build passes
 
 ### Phase 10 - Mobile + Content Updates (Complete - Apr 2026)
-- **Rebranding on Diensten page**: Added as 3rd service (Webdesign, Rebranding, Onderhoud)
-- **BeforeAfterSlider on Rebranding page**: "VOOR & NA" section added
-- **Dark Mode section on Packages page**: Feature highlight with €80 price and visual demo
-- **Mobile section ordering**: Expertise/Voordelen/Hosting moved to bottom on mobile (hidden/block CSS), stays at top on desktop
+- Rebranding on Diensten page as 3rd service
+- BeforeAfterSlider on Rebranding page
+- Dark Mode section on Packages page
+- Mobile section ordering optimization
 - 17/17 tests passed (iteration 31)
+
+### Phase 11 - Global Glassmorphism + Hero Redesign (Complete - Apr 2026)
+- **Global BG Pattern**: Moved from LandingPage to App.js so ALL pages show the bg-pattern.jpg
+- **All page wrappers transparent**: Removed solid `bg-white dark:bg-neutral-950` from all public pages
+- **Section backgrounds**: Converted all `bg-gray-50`, `bg-gray-100` sections to semi-transparent with `backdrop-blur-sm`
+- **Hero logo redesign**: Logo placed prominently ABOVE MacBook mockup on desktop
+- **Mobile logo-in-text**: On mobile/iPhone, the "O" in "JOUW" is replaced with the round Yrvante logo (since desktop right-side mockups are hidden on mobile)
+- **CSS cleanup**: Removed `!important` overrides from dark mode that blocked glassmorphism
 
 ## Vercel Environment Variables Required
 - `POSTGRES_URL` — Vercel Postgres connection string
@@ -99,3 +108,10 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - Split LiveExamples.jsx into separate component files
 - Resend email DNS config (DKIM/SPF for yrvante.com)
 - Dark mode edge cases review on all subpages
+- SEO verification on all pages
+
+## Critical Design Rules
+- **Glassmorphism**: Use `bg-white/40 backdrop-blur-sm` (NOT solid `bg-white`)
+- **Dark mode logos**: Use white `.png` variants (NOT CSS `invert`)
+- **Vercel API limit**: MAX 12 serverless functions. Merge before adding.
+- **No blue/navy**: Strictly neutral gray palette
