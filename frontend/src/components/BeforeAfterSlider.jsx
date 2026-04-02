@@ -50,92 +50,111 @@ const BeforeAfterSlider = () => {
             onTouchEnd={onMouseUp}
             data-testid="before-after-slider"
           >
-            {/* === AFTER - Extremely beautiful modern website (full background) === */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+            {/* === AFTER - Professional, expanded modern website === */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5] dark:from-[#0a0a0a] dark:via-[#111] dark:to-[#0a0a0a]">
               <div className="h-full flex flex-col">
-                {/* Modern sleek navigation */}
-                <div className="flex items-center justify-between px-6 sm:px-10 py-4 border-b border-gray-100 dark:border-neutral-800">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 flex items-center justify-center">
-                      <span className="text-white dark:text-gray-900 text-[10px] font-black">DV</span>
+                {/* Premium navigation */}
+                <div className="flex items-center justify-between px-6 sm:px-10 py-3.5 bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-gray-100/80 dark:border-white/5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                      <span className="text-white text-[11px] font-black tracking-tight">DV</span>
                     </div>
-                    <span className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">DeVries</span>
-                    <span className="text-sm text-gray-400 font-light">Bouw</span>
+                    <div className="flex flex-col">
+                      <span className="text-[13px] font-bold tracking-tight text-gray-900 dark:text-white leading-none">DeVries</span>
+                      <span className="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium uppercase tracking-[0.15em]">Bouwgroep</span>
+                    </div>
                   </div>
-                  <div className="hidden sm:flex items-center gap-5">
-                    {(language === "nl" ? ["Home", "Projecten", "Over ons", "Contact"] : ["Home", "Projects", "About", "Contact"]).map((t) => (
-                      <span key={t} className="text-[11px] text-gray-500 hover:text-gray-900 dark:hover:text-white cursor-default transition-colors">{t}</span>
+                  <div className="hidden sm:flex items-center gap-6">
+                    {(language === "nl" ? ["Projecten", "Diensten", "Over ons", "Blog"] : ["Projects", "Services", "About", "Blog"]).map((t) => (
+                      <span key={t} className="text-[11px] text-gray-500 dark:text-gray-400 font-medium cursor-default">{t}</span>
                     ))}
-                    <div className="px-4 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-[10px] font-bold rounded-full">
-                      {language === "nl" ? "Offerte" : "Quote"}
+                    <div className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded-full shadow-lg shadow-emerald-600/25 transition-all">
+                      {language === "nl" ? "Gratis offerte" : "Free quote"}
                     </div>
                   </div>
                 </div>
 
-                {/* Modern hero section */}
-                <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 py-6">
-                  <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                    <div className="lg:flex-1">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-[9px] uppercase tracking-[0.2em] text-gray-500">
-                          {language === "nl" ? "Beschikbaar voor projecten" : "Available for projects"}
+                {/* Hero with image grid */}
+                <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 py-5">
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-5">
+                    <div className="lg:flex-1 lg:max-w-[55%]">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-500/10 rounded-full mb-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[9px] uppercase tracking-[0.15em] text-emerald-700 dark:text-emerald-400 font-semibold">
+                          {language === "nl" ? "Nu beschikbaar" : "Now available"}
                         </span>
                       </div>
-                      <h3 className="text-xl sm:text-2xl lg:text-4xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight mb-3">
+                      <h3 className="text-xl sm:text-2xl lg:text-[2.5rem] font-black text-gray-900 dark:text-white leading-[1.05] tracking-tight mb-3">
                         {language === "nl" ? (
-                          <><span className="block">Vakmanschap</span><span className="block text-gray-400">sinds 1998</span></>
+                          <><span className="block">Wij bouwen jouw</span><span className="block bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">droomproject.</span></>
                         ) : (
-                          <><span className="block">Craftsmanship</span><span className="block text-gray-400">since 1998</span></>
+                          <><span className="block">We build your</span><span className="block bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">dream project.</span></>
                         )}
                       </h3>
-                      <p className="text-xs text-gray-500 max-w-xs mb-4 leading-relaxed">
+                      <p className="text-[11px] text-gray-500 dark:text-gray-400 max-w-xs mb-4 leading-relaxed">
                         {language === "nl"
-                          ? "Van renovatie tot nieuwbouw. Wij bouwen met oog voor detail en passie voor kwaliteit."
-                          : "From renovation to new builds. We build with attention to detail and passion for quality."}
+                          ? "Al 25+ jaar de betrouwbare partner voor nieuwbouw, renovatie en verbouwingen in heel Nederland."
+                          : "For 25+ years the reliable partner for new builds, renovations and remodeling across the Netherlands."}
                       </p>
                       <div className="flex gap-2">
-                        <div className="px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-[10px] font-bold rounded-full">
+                        <div className="px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-[10px] font-bold rounded-full shadow-lg">
                           {language === "nl" ? "Bekijk projecten" : "View projects"}
                         </div>
-                        <div className="px-5 py-2 border border-gray-300 dark:border-neutral-600 text-[10px] font-bold rounded-full text-gray-600 dark:text-gray-400">
+                        <div className="px-5 py-2 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-[10px] font-bold rounded-full text-gray-700 dark:text-gray-300 shadow-sm">
                           {language === "nl" ? "Neem contact op" : "Get in touch"}
                         </div>
                       </div>
+                      {/* Trust bar */}
+                      <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100 dark:border-white/5">
+                        <div className="flex -space-x-2">
+                          {["bg-emerald-400", "bg-teal-400", "bg-cyan-400", "bg-sky-400"].map((c, i) => (
+                            <div key={i} className={`w-6 h-6 rounded-full ${c} border-2 border-white dark:border-gray-900`} />
+                          ))}
+                        </div>
+                        <div>
+                          <div className="flex gap-0.5">
+                            {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-[10px]">&#9733;</span>)}
+                          </div>
+                          <p className="text-[8px] text-gray-400">
+                            {language === "nl" ? "350+ tevreden klanten" : "350+ satisfied clients"}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    {/* Stats cards */}
-                    <div className="hidden lg:grid grid-cols-2 gap-2 max-w-[200px]">
+                    {/* Project showcase grid */}
+                    <div className="hidden lg:grid grid-cols-2 gap-2 lg:flex-1">
                       {[
-                        { n: "250+", l: language === "nl" ? "Projecten" : "Projects" },
-                        { n: "15+", l: language === "nl" ? "Jaar" : "Years" },
-                        { n: "4.9", l: "Google" },
-                        { n: "100%", l: language === "nl" ? "Garantie" : "Guarantee" },
-                      ].map((s) => (
-                        <div key={s.l} className="bg-gray-50 dark:bg-neutral-800 rounded-xl p-3 text-center">
-                          <p className="text-lg font-black text-gray-900 dark:text-white leading-none">{s.n}</p>
-                          <p className="text-[8px] text-gray-400 mt-0.5 uppercase tracking-wider">{s.l}</p>
+                        { bg: "from-amber-100 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/20", label: language === "nl" ? "Villa Bloemendaal" : "Villa Bloemendaal", tag: language === "nl" ? "Nieuwbouw" : "New Build" },
+                        { bg: "from-sky-100 to-blue-50 dark:from-sky-900/30 dark:to-blue-900/20", label: language === "nl" ? "Kantoor Amsterdam" : "Office Amsterdam", tag: language === "nl" ? "Renovatie" : "Renovation" },
+                        { bg: "from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20", label: language === "nl" ? "Woning Utrecht" : "Home Utrecht", tag: "Verbouwing" },
+                        { bg: "from-purple-100 to-violet-50 dark:from-purple-900/30 dark:to-violet-900/20", label: language === "nl" ? "Penthouse Den Haag" : "Penthouse The Hague", tag: "Aanbouw" },
+                      ].map((p, i) => (
+                        <div key={i} className={`bg-gradient-to-br ${p.bg} rounded-2xl p-3 border border-white/50 dark:border-white/5`}>
+                          <div className="w-full aspect-[4/3] bg-white/40 dark:bg-white/5 rounded-xl mb-2" />
+                          <p className="text-[10px] font-bold text-gray-800 dark:text-gray-200 leading-none">{p.label}</p>
+                          <span className="text-[8px] text-gray-500 dark:text-gray-500">{p.tag}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                {/* Modern services bar */}
-                <div className="flex gap-2 px-6 sm:px-10 pb-6">
+                {/* Services bar */}
+                <div className="grid grid-cols-4 gap-2 px-6 sm:px-10 pb-5">
                   {(language === "nl"
-                    ? ["Nieuwbouw", "Renovatie", "Verbouwing", "Aanbouw"]
-                    : ["New Build", "Renovation", "Extension", "Remodel"]
+                    ? [{ t: "Nieuwbouw", s: "Vanaf ontwerp" }, { t: "Renovatie", s: "Met garantie" }, { t: "Verduurzaming", s: "Energielabel A" }, { t: "Interieur", s: "Totaalconcept" }]
+                    : [{ t: "New Build", s: "From design" }, { t: "Renovation", s: "Guaranteed" }, { t: "Sustainability", s: "Energy label A" }, { t: "Interior", s: "Full concept" }]
                   ).map((s, i) => (
-                    <div key={i} className="flex-1 bg-gray-50 dark:bg-neutral-800/80 backdrop-blur-sm rounded-xl p-3 border border-gray-100 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-500 transition-colors">
-                      <p className="text-[10px] font-bold text-gray-800 dark:text-gray-200">{s}</p>
-                      <div className="h-1 w-1/2 bg-gray-200 dark:bg-neutral-600 rounded mt-1.5" />
+                    <div key={i} className="bg-white/60 dark:bg-white/[0.03] backdrop-blur-sm rounded-xl p-3 border border-gray-100/80 dark:border-white/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors group">
+                      <p className="text-[10px] font-bold text-gray-800 dark:text-gray-200 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{s.t}</p>
+                      <p className="text-[8px] text-gray-400 mt-0.5">{s.s}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* After label */}
-                <div className="absolute bottom-3 right-3 px-3 py-1 bg-green-500 text-white text-[10px] font-bold rounded-full uppercase tracking-wider shadow-lg">
-                  {language === "nl" ? "Na — Yrvante" : "After — Yrvante"}
+                <div className="absolute bottom-3 right-3 px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold rounded-full uppercase tracking-wider shadow-lg shadow-emerald-500/30">
+                  {language === "nl" ? "Na — Professioneel" : "After — Professional"}
                 </div>
               </div>
             </div>
