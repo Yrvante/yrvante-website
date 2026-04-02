@@ -5,7 +5,7 @@ import HeroSection from "../components/landing/HeroSection";
 import PricingSection from "../components/landing/PricingSection";
 import ContactSection from "../components/landing/ContactSection";
 import Footer from "../components/landing/Footer";
-import { ProcessSection, ExpertiseSection, HostingSection, WhyExpensiveSection, ServicesSection, TestimonialsSection, FAQSection } from "../components/landing/Sections";
+import { ProcessSection, WhyExpensiveSection, ServicesSection, FAQSection } from "../components/landing/Sections";
 import SEO from "../components/SEO";
 import { useTheme } from "../App";
 
@@ -31,13 +31,6 @@ const LandingPage = () => {
         <Navigation />
         <HeroSection />
         <ProcessSection />
-        
-        {/* Expertise/Hosting: show at original position on desktop, hidden on mobile */}
-        <div className="hidden lg:block">
-          <ExpertiseSection />
-          <HostingSection />
-        </div>
-        
         <WhyExpensiveSection />
         <ServicesSection />
         <Suspense fallback={null}><LiveExamples /></Suspense>
@@ -47,14 +40,6 @@ const LandingPage = () => {
         <FAQSection />
         <ContactSection />
         <Suspense fallback={null}><GoogleReviews /></Suspense>
-        <TestimonialsSection />
-        
-        {/* Expertise/Hosting: show at bottom on mobile, hidden on desktop */}
-        <div className="block lg:hidden">
-          <ExpertiseSection />
-          <HostingSection />
-        </div>
-        
         <Footer />
       </div>
       <Suspense fallback={null}><ExitIntentPopup /></Suspense>
