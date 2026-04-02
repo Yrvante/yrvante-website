@@ -27,12 +27,17 @@ const LandingPage = () => {
         <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`} style={{ backgroundImage: `url(${BG_IMAGE})` }} />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col">
         <Navigation />
         <HeroSection />
         <ProcessSection />
-        <ExpertiseSection />
-        <HostingSection />
+        
+        {/* Expertise/Hosting: show at original position on desktop, hidden on mobile */}
+        <div className="hidden lg:block">
+          <ExpertiseSection />
+          <HostingSection />
+        </div>
+        
         <WhyExpensiveSection />
         <ServicesSection />
         <Suspense fallback={null}><LiveExamples /></Suspense>
@@ -43,6 +48,13 @@ const LandingPage = () => {
         <ContactSection />
         <Suspense fallback={null}><GoogleReviews /></Suspense>
         <TestimonialsSection />
+        
+        {/* Expertise/Hosting: show at bottom on mobile, hidden on desktop */}
+        <div className="block lg:hidden">
+          <ExpertiseSection />
+          <HostingSection />
+        </div>
+        
         <Footer />
       </div>
       <Suspense fallback={null}><ExitIntentPopup /></Suspense>

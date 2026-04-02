@@ -788,6 +788,98 @@ const PackagesPage = () => {
         </div>
       </section>
 
+      {/* Dark Mode Feature Section */}
+      <section className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-12">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-neutral-900 dark:bg-neutral-800/80 dark:backdrop-blur-sm rounded-3xl overflow-hidden border border-neutral-800 dark:border-neutral-700/50">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4" data-testid="darkmode-label">
+                  {language === 'nl' ? 'Extra Optie' : 'Extra Option'}
+                </span>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white mb-4" data-testid="darkmode-heading">
+                  Dark Mode
+                </h2>
+                <p className="text-gray-400 leading-relaxed mb-6">
+                  {language === 'nl'
+                    ? 'Geef je website een stijlvolle donkere variant. Bezoekers kunnen zelf kiezen tussen licht en donker — ideaal voor avondgebruikers en een moderne uitstraling.'
+                    : 'Give your website a stylish dark variant. Visitors can choose between light and dark — ideal for evening users and a modern look.'}
+                </p>
+                <div className="space-y-3 mb-8">
+                  {(language === 'nl' ? [
+                    'Automatische licht/donker schakeling',
+                    'Aangepaste kleuren per thema',
+                    'Logo-varianten (licht + donker)',
+                    'Oogvriendelijk bij weinig licht',
+                  ] : [
+                    'Automatic light/dark switching',
+                    'Custom colors per theme',
+                    'Logo variants (light + dark)',
+                    'Eye-friendly in low light',
+                  ]).map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-white" />
+                      </div>
+                      <span className="text-gray-300 text-sm">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-white">€80</span>
+                  <span className="text-gray-500 text-sm">{language === 'nl' ? 'eenmalig' : 'one-time'}</span>
+                </div>
+              </div>
+              <div className="relative p-6 sm:p-8 flex items-center justify-center bg-neutral-950/50">
+                <div className="w-full max-w-[280px]">
+                  <div className="rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl">
+                    <div className="bg-neutral-800 px-3 py-2 flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-red-400" />
+                      <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                      <div className="w-2 h-2 rounded-full bg-green-400" />
+                      <span className="ml-2 text-[10px] text-gray-500">jouwsite.nl</span>
+                    </div>
+                    <div className="bg-white p-4 space-y-2">
+                      <div className="h-2 bg-gray-200 rounded-full w-3/4" />
+                      <div className="h-2 bg-gray-100 rounded-full w-full" />
+                      <div className="h-2 bg-gray-100 rounded-full w-2/3" />
+                      <div className="h-6 bg-gray-900 rounded-lg w-20 mt-3" />
+                    </div>
+                  </div>
+                  <div className="flex justify-center my-3">
+                    <div className="flex items-center gap-2 bg-neutral-800 rounded-full px-3 py-1.5 border border-neutral-700">
+                      <div className="w-4 h-4 rounded-full bg-yellow-400 flex items-center justify-center">
+                        <span className="text-[8px]">&#9728;</span>
+                      </div>
+                      <div className="w-6 h-3 bg-neutral-600 rounded-full relative">
+                        <div className="absolute right-0.5 top-0.5 w-2 h-2 bg-white rounded-full" />
+                      </div>
+                      <div className="w-4 h-4 rounded-full bg-indigo-400 flex items-center justify-center">
+                        <span className="text-[8px]">&#9790;</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl">
+                    <div className="bg-neutral-800 px-3 py-2 flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-red-400" />
+                      <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                      <div className="w-2 h-2 rounded-full bg-green-400" />
+                      <span className="ml-2 text-[10px] text-gray-500">jouwsite.nl</span>
+                    </div>
+                    <div className="bg-neutral-900 p-4 space-y-2">
+                      <div className="h-2 bg-neutral-700 rounded-full w-3/4" />
+                      <div className="h-2 bg-neutral-800 rounded-full w-full" />
+                      <div className="h-2 bg-neutral-800 rounded-full w-2/3" />
+                      <div className="h-6 bg-white rounded-lg w-20 mt-3" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Extra possibilities - centered, no prices */}
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-neutral-950 border-t border-gray-100 dark:border-neutral-800">
         <div className="max-w-5xl mx-auto">

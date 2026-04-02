@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage, useTheme } from "../App";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import BeforeAfterSlider from "../components/BeforeAfterSlider";
 import {
   RefreshCw,
   Palette,
@@ -293,6 +294,9 @@ const RebrandingPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Before & After */}
+        <BeforeAfterSlider />
 
         {/* Footer */}
         <footer className="py-8 px-6 lg:px-12 border-t border-gray-100 dark:border-neutral-800">

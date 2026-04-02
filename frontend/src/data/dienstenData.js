@@ -41,9 +41,10 @@ import {
   Droplet,
   Wind,
   Headphones,
+  RefreshCw,
 } from "lucide-react";
 
-// Service data - Only Webdesign and Onderhoud
+// Service data - Webdesign, Rebranding and Onderhoud
 export const services = {
   webdesign: {
     icon: Monitor,
@@ -73,6 +74,35 @@ export const services = {
       ],
     },
     price: '€500',
+  },
+  rebranding: {
+    icon: RefreshCw,
+    color: 'amber',
+    title: { nl: 'Rebranding', en: 'Rebranding' },
+    subtitle: { nl: 'Geef je bestaande website een compleet nieuw uiterlijk', en: 'Give your existing website a completely new look' },
+    description: {
+      nl: 'Heeft je website een opfrisbeurt nodig? Je bedrijf groeit, maar je website is achtergebleven. Ik geef je bestaande site een compleet nieuw design met moderne styling, betere UX en snellere laadtijden — zonder dat je opnieuw hoeft te beginnen.',
+      en: "Does your website need a refresh? Your business is growing, but your website hasn't kept up. I give your existing site a completely new design with modern styling, better UX and faster loading times — without starting from scratch."
+    },
+    features: {
+      nl: [
+        'Compleet nieuw design voor bestaande website',
+        'Moderne layout & styling',
+        'Responsive optimalisatie (mobiel, tablet, desktop)',
+        'Verbeterde gebruikservaring (UX)',
+        'Snelheidsoptimalisatie',
+        'Huisstijl doorvertaling naar het web',
+      ],
+      en: [
+        'Complete new design for existing website',
+        'Modern layout & styling',
+        'Responsive optimization (mobile, tablet, desktop)',
+        'Improved user experience (UX)',
+        'Speed optimization',
+        'Brand identity translation to the web',
+      ],
+    },
+    price: '€349',
   },
   onderhoud: {
     icon: Wrench,
