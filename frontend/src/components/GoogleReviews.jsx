@@ -4,7 +4,7 @@ import { Star, ExternalLink } from "lucide-react";
 import { useLanguage } from "../App";
 import axios from "axios";
 
-const API = process.env.REACT_APP_BACKEND_URL;
+const API = process.env.REACT_APP_BACKEND_URL || '';
 
 const GoogleReviews = () => {
   const { language } = useLanguage();

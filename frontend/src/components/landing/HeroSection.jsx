@@ -10,7 +10,7 @@ const HeroSection = () => {
   const [googleRating, setGoogleRating] = useState(null);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/reviews`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL || ''}/api/reviews`)
       .then(res => { if (res.data?.rating) setGoogleRating(res.data); })
       .catch(() => {});
   }, []);

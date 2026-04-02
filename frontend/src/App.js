@@ -20,7 +20,7 @@ const LeadFinderPage = lazy(() => import("./pages/LeadFinderPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const RebrandingPage = lazy(() => import("./pages/RebrandingPage"));
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${BACKEND_URL}/api`;
 
 // Language Context
