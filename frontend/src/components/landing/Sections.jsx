@@ -11,7 +11,7 @@ export const ProcessSection = () => {
     { icon: ClipboardList, label: 'Planning', desc: language === 'nl' ? 'Duidelijk plan en tijdlijn' : 'Clear plan and timeline' },
     { icon: Code, label: language === 'nl' ? 'Ontwerp & Code' : 'Design & Code', desc: language === 'nl' ? 'Jouw website wordt gebouwd' : 'Your website gets built' },
     { icon: Rocket, label: language === 'nl' ? 'Implementatie' : 'Implementation', desc: language === 'nl' ? 'Testen en finetunen' : 'Testing and fine-tuning' },
-    { icon: Globe, label: 'Live!', desc: language === 'nl' ? 'Jouw website gaat online' : 'Your website goes live' },
+    { icon: Globe, label: 'Live!', desc: language === 'nl' ? 'Domein koppelen en online!' : 'Connect domain and go live!' },
   ];
 
   return (

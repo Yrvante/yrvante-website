@@ -1011,6 +1011,18 @@ const CalculatorPage = () => {
 
                 <p className="text-xs text-gray-500 mt-6">{t.exclVat}</p>
 
+                {/* Domain reminder */}
+                <div className="mt-4 p-3 bg-gray-50 dark:bg-neutral-700/40 rounded-xl border border-gray-200/50 dark:border-neutral-600/50">
+                  <div className="flex items-start gap-2">
+                    <Globe size={13} className="text-gray-400 flex-shrink-0 mt-0.5" />
+                    <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">
+                      {language === 'nl'
+                        ? 'Je hebt een domeinnaam nodig (±€10/jaar). Koop bij TransIP of Antagonist — ik help gratis met koppelen.'
+                        : 'You need a domain name (±€10/yr). Buy at TransIP or Antagonist — I help connect it for free.'}
+                    </p>
+                  </div>
+                </div>
+
                 {/* CTA */}
                 <button
                   onClick={() => setShowQuoteForm(true)}

@@ -995,6 +995,78 @@ const PackagesPage = () => {
         </div>
       </section>
 
+      {/* Domain Name Info Section */}
+      <section className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-12">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-3xl border border-gray-200/50 dark:border-neutral-700/50 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+              <div className="lg:col-span-3 p-8 sm:p-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-2xl bg-gray-100 dark:bg-neutral-800 flex items-center justify-center">
+                    <Globe size={20} className="text-gray-500" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
+                    {language === 'nl' ? 'Domeinnaam' : 'Domain Name'}
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight dark:text-white mb-4" data-testid="domain-info-heading">
+                  {language === 'nl' ? 'Je hebt een domeinnaam nodig' : 'You need a domain name'}
+                </h2>
+                <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-6 text-sm">
+                  {language === 'nl'
+                    ? 'Een domeinnaam is het adres van je website (bijv. jouwbedrijf.nl). Je koopt deze zelf bij een provider — zo staat de domeinnaam altijd op jouw naam en blijf je 100% eigenaar.'
+                    : 'A domain name is your website address (e.g. yourbusiness.com). You buy it yourself from a provider — this way it\'s always in your name and you remain 100% owner.'}
+                </p>
+                <div className="space-y-3 mb-6">
+                  {(language === 'nl' ? [
+                    'Kost slechts €10 – €15 per jaar',
+                    'Koop bij TransIP of Antagonist (aangeraden)',
+                    'Ik help je gratis met het koppelen aan je website',
+                    'Je blijft altijd volledig eigenaar van je domein',
+                  ] : [
+                    'Costs only €10 – €15 per year',
+                    'Buy from TransIP or Antagonist (recommended)',
+                    'I help you connect it to your website for free',
+                    'You always remain full owner of your domain',
+                  ]).map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <Check size={14} className="text-gray-400 flex-shrink-0" />
+                      <span className="text-gray-600 dark:text-gray-300 text-sm">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="lg:col-span-2 bg-gray-50 dark:bg-neutral-800/50 p-8 sm:p-10 flex flex-col justify-center">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+                  {language === 'nl' ? 'Aangeraden providers' : 'Recommended providers'}
+                </p>
+                <div className="space-y-4">
+                  <a href="https://www.transip.nl/domeinnaam/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group">
+                    <div>
+                      <p className="font-bold text-sm dark:text-white group-hover:underline">TransIP</p>
+                      <p className="text-xs text-gray-400">{language === 'nl' ? 'Nederlands, betrouwbaar' : 'Dutch, reliable'}</p>
+                    </div>
+                    <ArrowRight size={14} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <a href="https://www.antagonist.nl/domeinnaam" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-gray-400 dark:hover:border-neutral-500 transition-colors group">
+                    <div>
+                      <p className="font-bold text-sm dark:text-white group-hover:underline">Antagonist</p>
+                      <p className="text-xs text-gray-400">{language === 'nl' ? 'Nederlands, goede support' : 'Dutch, great support'}</p>
+                    </div>
+                    <ArrowRight size={14} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+                <p className="text-[11px] text-gray-400 mt-5 leading-relaxed">
+                  {language === 'nl'
+                    ? 'Heb je al een domein? Dan koppel ik die gewoon aan je nieuwe website.'
+                    : 'Already have a domain? I\'ll simply connect it to your new website.'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Competitor Comparison */}
       <CompetitorComparison />
 
