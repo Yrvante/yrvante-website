@@ -20,8 +20,11 @@ export default async function handler(req, res) {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID;
 
+  console.log('Reviews API - Key exists:', !!apiKey, 'PlaceId exists:', !!placeId);
+
   if (!apiKey || !placeId) {
-    return res.status(500).json({ error: 'Google Places not configured' });
+    console.error('Missing env vars - GOOGLE_PLACES_API_KEY:', !!apiKey, 'GOOGLE_PLACE_ID:', !!placeId);
+    return res.status(500).json({ error: 'Google Places not configured', hasKey: !!apiKey, hasPlaceId: !!placeId });
   }
 
   try {
