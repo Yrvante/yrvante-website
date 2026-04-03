@@ -90,6 +90,12 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Mobile logo-in-text**: On mobile/iPhone, the "O" in "JOUW" is replaced with the round Yrvante logo (since desktop right-side mockups are hidden on mobile)
 - **CSS cleanup**: Removed `!important` overrides from dark mode that blocked glassmorphism
 
+### Phase 12 - UI Polish (Complete - Apr 2026)
+- **FAQ "Zie meer"**: Eerste 3 vragen zichtbaar, rest achter "Zie meer" knop
+- **Groen beschikbaarheidbolletje**: `bg-gray-400` → `bg-green-500` met pulse animatie
+- **Google Reviews fallback**: Toont altijd reviews, zelfs als API niet geconfigureerd is op productie
+- **Nav opschoning**: "Alle Branches" en "Blog" verwijderd uit header dropdown menu's
+
 ## Vercel Environment Variables Required
 - `POSTGRES_URL` — Vercel Postgres connection string
 - `ADMIN_PASSWORD` — Admin dashboard password

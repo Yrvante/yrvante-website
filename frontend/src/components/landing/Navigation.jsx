@@ -33,14 +33,11 @@ const Navigation = () => {
     { to: '/diensten/webdesign', label: language === 'nl' ? 'Webdesign' : 'Web Design' },
     { to: '/rebranding', label: 'Rebranding' },
     { to: '/onderhoud', label: language === 'nl' ? 'Onderhoud & Hosting' : 'Maintenance & Hosting' },
-    { divider: true },
-    { to: '/diensten', label: language === 'nl' ? 'Alle Branches →' : 'All Industries →' },
   ];
 
   const overLinks = [
     { to: '/over-mij', label: language === 'nl' ? 'Over Mij' : 'About Me' },
     { to: '/waarom-website', label: language === 'nl' ? 'Waarom een Website?' : 'Why a Website?' },
-    { to: '/blog', label: 'Blog' },
     { divider: true },
     { to: '/pakketten', label: language === 'nl' ? 'Pakketten & Prijzen' : 'Packages & Pricing' },
     { to: '/privacy', label: language === 'nl' ? 'Privacybeleid' : 'Privacy Policy' },

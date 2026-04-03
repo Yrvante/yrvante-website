@@ -315,6 +315,7 @@ export const TestimonialsSection = () => {
 export const FAQSection = () => {
   const { language } = useLanguage();
   const [openIndex, setOpenIndex] = React.useState(null);
+  const [showAll, setShowAll] = React.useState(false);
 
   const faqs = [
     { q: language === 'nl' ? 'Hoe lang duurt het om een website te maken?' : 'How long does it take to build a website?', a: language === 'nl' ? 'Een basis website is meestal binnen 1 week klaar. Voor Pro en Premium pakketten reken ik 1 tot 2 weken.' : 'A basic website is usually ready within 1 week. For Pro and Premium packages I estimate 1 to 2 weeks.' },
@@ -331,6 +332,8 @@ export const FAQSection = () => {
     { q: language === 'nl' ? 'Kan ik ook alleen een pagina laten aanpassen?' : 'Can I have just one page adjusted?', a: language === 'nl' ? 'Ja, dat kan. Neem gewoon contact op en ik kijk wat ik voor je kan doen. Ik geef je altijd eerst een eerlijke prijsindicatie voordat er iets van start gaat.' : 'Yes, that\'s possible. Just get in touch and I\'ll see what I can do. I\'ll always give you an honest price indication first.' },
   ];
 
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 3);
+
   return (
     <section id="faq" className="py-24 lg:py-32 relative overflow-hidden bg-gray-50/80 dark:bg-neutral-900/50">
       <motion.div className="absolute inset-0 opacity-[0.01] dark:opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '36px 36px' }} initial={{ y: 0 }} whileInView={{ y: -10 }} viewport={{ once: false }} transition={{ duration: 1.5, ease: "easeOut" }} />
@@ -340,7 +343,7 @@ export const FAQSection = () => {
           <h2 className="text-5xl lg:text-7xl font-black tracking-tighter dark:text-white">FAQ</h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {faqs.map((faq, index) => (
+          {visibleFaqs.map((faq, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }} className="bg-gray-50 dark:bg-neutral-800/60 rounded-3xl border border-gray-200 hover:border-gray-300 transition-colors">
               <button onClick={() => setOpenIndex(openIndex === index ? null : index)} className="w-full p-6 text-left cursor-pointer" data-testid={`faq-button-${index}`}>
                 <div className="flex items-start justify-between gap-4">
@@ -361,6 +364,18 @@ export const FAQSection = () => {
             </motion.div>
           ))}
         </div>
+        {!showAll && (
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-8 text-center">
+            <button
+              onClick={() => setShowAll(true)}
+              data-testid="faq-show-more"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-full text-sm font-bold text-gray-600 dark:text-gray-300 hover:border-gray-400 dark:hover:border-neutral-500 hover:text-black dark:hover:text-white transition-all"
+            >
+              {language === 'nl' ? 'Zie meer' : 'See more'}
+              <ChevronDown size={16} />
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
