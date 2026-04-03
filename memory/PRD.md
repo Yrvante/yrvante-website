@@ -95,6 +95,13 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Groen beschikbaarheidbolletje**: `bg-gray-400` → `bg-green-500` met pulse animatie
 - **Google Reviews fallback**: Toont altijd reviews, zelfs als API niet geconfigureerd is op productie
 - **Nav opschoning**: "Alle Branches" en "Blog" verwijderd uit header dropdown menu's
+- **Mobile logo-in-text**: Logo in "JOUW" op mobiel (O → Yrvante logo)
+
+### Phase 13 - Lead Finder Synoniem-Uitbreiding (Complete - Apr 2026)
+- **Synoniem-dictionary**: 30+ branches met automatische zoekterm-uitbreiding (bijv. "nagelstudio" → nagels, nail salon, manicure, gelnagels, pedicure nagels)
+- **Multi-term scraping**: Alle scrapers (Instagram, Facebook, LinkedIn, Telefoongids, Gouden Gids, Marktplaats, KVK) doorzoeken nu ELKE synoniem per branche
+- **Deduplicatie**: Dubbele resultaten worden automatisch verwijderd via place_id en URL tracking
+- **UI indicator**: Blauw "Synoniem-uitbreiding actief" banner toont alle gebruikte zoektermen na het zoeken
 
 ## Vercel Environment Variables Required
 - `POSTGRES_URL` — Vercel Postgres connection string

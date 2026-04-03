@@ -65,6 +65,7 @@ const LeadFinderPage = () => {
   const [totaalGevonden, setTotaalGevonden] = useState(0);
   const [zoekgebied, setZoekgebied] = useState('');
   const [bronnenDoorzocht, setBronnenDoorzocht] = useState([]);
+  const [synoniemenGezocht, setSynoniemenGezocht] = useState([]);
   
   // Lead management states
   const [opgeslagenLeads, setOpgeslagenLeads] = useState([]);
@@ -179,9 +180,13 @@ const LeadFinderPage = () => {
       setTotaalGevonden(data.totaal_gevonden || 0);
       setZoekgebied(data.zoekgebied || '');
       setBronnenDoorzocht(data.bronnen_doorzocht || []);
+      setSynoniemenGezocht(data.synoniemen_gezocht || []);
       
       if (!useToken) {
-        toast.success(`${data.totaal_gevonden} bedrijven zonder website gevonden!`);
+        const synMsg = data.synoniemen_gezocht?.length > 1 
+          ? ` (${data.synoniemen_gezocht.length} zoektermen gebruikt)` 
+          : '';
+        toast.success(`${data.totaal_gevonden} bedrijven gevonden!${synMsg}`);
         if (data.zoekgebied) {
           toast.info(`Zoekgebied: ${data.zoekgebied}`, { duration: 4000 });
         }
@@ -237,11 +242,15 @@ const LeadFinderPage = () => {
       setTotaalGevonden(data.totaal_gevonden || 0);
       setZoekgebied(data.zoekgebied || '');
       setBronnenDoorzocht(data.bronnen_doorzocht || []);
+      setSynoniemenGezocht(data.synoniemen_gezocht || []);
       
       if (data.totaal_gevonden > 0) {
-        toast.success(`${data.totaal_gevonden} leads zonder website gevonden!`);
+        const synMsg = data.synoniemen_gezocht?.length > 1 
+          ? ` (${data.synoniemen_gezocht.length} zoektermen gebruikt)` 
+          : '';
+        toast.success(`${data.totaal_gevonden} leads gevonden!${synMsg}`);
       } else {
-        toast.info('Geen bedrijven zonder website gevonden. Probeer een andere branche of grotere radius.');
+        toast.info('Geen bedrijven gevonden. Probeer een andere branche of grotere radius.');
       }
       
       if (data.zoektermen_gebruikt && data.zoektermen_gebruikt.length > 0) {
@@ -725,6 +734,21 @@ const LeadFinderPage = () => {
                       </button>
                     </div>
                   </div>
+
+                  {/* Synoniemen indicator */}
+                  {synoniemenGezocht.length > 1 && (
+                    <div className="mb-4 p-3 bg-blue-50 border border-blue-100 rounded-xl" data-testid="synonyms-indicator">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <Zap size={14} className="text-blue-500" />
+                        <span className="text-xs font-bold text-blue-700">Synoniem-uitbreiding actief — {synoniemenGezocht.length} zoektermen gebruikt</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {synoniemenGezocht.map((term, i) => (
+                          <span key={i} className="px-2 py-0.5 bg-white border border-blue-200 rounded-full text-xs text-blue-600">{term}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="grid gap-3">
                     {zoekResultaten.map((lead, i) => (

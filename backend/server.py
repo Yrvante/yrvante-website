@@ -426,7 +426,7 @@ async def leadfinder_auth(data: LeadFinderAuth):
 
 @api_router.post("/admin/leadfinder/zoek")
 async def leadfinder_zoek(request: Request):
-    """Search for businesses without websites using multiple sources"""
+    """Search for businesses without websites using multiple sources and synonym expansion"""
     import aiohttp
     import re
     
@@ -441,7 +441,59 @@ async def leadfinder_zoek(request: Request):
     if not stad:
         raise HTTPException(status_code=400, detail="Stad is verplicht")
     
-    search_term = branche if branche else "zzp freelancer diensten"
+    # Synonym expansion: map a branche to related search terms
+    BRANCHE_SYNONIEMEN = {
+        "nagelstudio": ["nagelstudio", "nagels", "nail salon", "manicure", "gelnagels", "pedicure nagels"],
+        "kapper": ["kapper", "barbershop", "kapsalon", "hairstylist", "hairdresser", "herenkapper", "dameskapper"],
+        "schoonheidssalon": ["schoonheidssalon", "beautysalon", "beauty salon", "schoonheidsspecialiste", "gezichtsbehandeling", "huidverzorging"],
+        "fotograaf": ["fotograaf", "fotografie", "photographer", "fotostudio", "bruidsfotograaf", "portretfotograaf"],
+        "schilder": ["schilder", "schildersbedrijf", "huisschilder", "verfspecialist", "schilderwerk"],
+        "loodgieter": ["loodgieter", "installateur", "sanitair", "loodgieterswerk", "cv ketel", "verwarming installateur"],
+        "elektricien": ["elektricien", "elektriciën", "elektra", "elektriciteit", "elektrotechniek"],
+        "tuinman": ["tuinman", "hovenier", "tuinonderhoud", "tuinaanleg", "tuinarchitect", "groenvoorziening"],
+        "schoonmaker": ["schoonmaker", "schoonmaakbedrijf", "glazenwasser", "reiniging", "cleaning service"],
+        "personal trainer": ["personal trainer", "fitness coach", "sportcoach", "fitness instructeur", "personal coaching"],
+        "fysiotherapeut": ["fysiotherapeut", "fysiotherapie", "manueel therapeut", "sportfysiotherapie"],
+        "coach": ["coach", "life coach", "business coach", "loopbaancoach", "mindset coach", "coaching praktijk"],
+        "masseur": ["masseur", "massagepraktijk", "massage therapeut", "sportmassage", "ontspanningsmassage"],
+        "autobedrijf": ["autobedrijf", "garage", "automonteur", "autoservice", "apk keuring", "autoschade"],
+        "restaurant": ["restaurant", "eetcafe", "bistro", "trattoria", "brasserie", "lunchroom"],
+        "cafe": ["cafe", "koffiebar", "coffee shop", "espressobar", "lunchcafe", "grand cafe"],
+        "bakker": ["bakker", "bakkerij", "broodbakker", "patisserie", "banketbakker"],
+        "slager": ["slager", "slagerij", "vleesspecialist", "poelier"],
+        "bloemist": ["bloemist", "bloemenwinkel", "bloemenspecialist", "florist"],
+        "dierenarts": ["dierenarts", "dierenkliniek", "dierenpraktijk", "veterinair"],
+        "tandarts": ["tandarts", "tandartspraktijk", "mondzorg", "dental"],
+        "advocaat": ["advocaat", "advocatenkantoor", "juridisch adviseur", "jurist"],
+        "accountant": ["accountant", "boekhouder", "belastingadviseur", "administratiekantoor"],
+        "makelaar": ["makelaar", "makelaardij", "vastgoed", "woningmakelaar", "hypotheekadviseur"],
+        "webdesigner": ["webdesigner", "webdesign", "website ontwerp", "web developer", "webbureau"],
+        "grafisch ontwerper": ["grafisch ontwerper", "graphic designer", "vormgever", "logo ontwerp", "huisstijl"],
+        "tattoo": ["tattoo", "tattooshop", "tattoo artist", "tatoeage", "piercing"],
+        "yoga": ["yoga", "yogastudio", "yoga docent", "pilates", "meditatie"],
+        "rijschool": ["rijschool", "rijinstructeur", "rijles", "autorijschool", "rijbewijs"],
+        "hondenuitlaatservice": ["hondenuitlaatservice", "hondentrimmer", "dogwalker", "huisdieren service", "hondensalon"],
+    }
+    
+    base_term = branche.lower().strip() if branche else ""
+    
+    # Find matching synonyms
+    search_terms = [branche] if branche else ["zzp freelancer diensten"]
+    used_synonyms = []
+    
+    if base_term:
+        # Check exact match first
+        if base_term in BRANCHE_SYNONIEMEN:
+            search_terms = BRANCHE_SYNONIEMEN[base_term]
+            used_synonyms = search_terms
+        else:
+            # Check partial match
+            for key, synonyms in BRANCHE_SYNONIEMEN.items():
+                if base_term in key or key in base_term or any(base_term in s or s in base_term for s in synonyms):
+                    search_terms = synonyms
+                    used_synonyms = synonyms
+                    break
+    
     all_leads = []
     scraped_sources = []
     seen_ids = set()
@@ -471,26 +523,27 @@ async def leadfinder_zoek(request: Request):
     async def scrape_instagram():
         leads = []
         try:
-            query = f"site:instagram.com {search_term} {stad}"
-            urls = await google_search(query, 12)
-            for url in urls:
-                if "instagram.com/" in url and "/p/" not in url and "/reel/" not in url:
-                    match = re.search(r'instagram\.com/([^/\?]+)', url)
-                    if match:
-                        username = match.group(1)
-                        if username not in ["explore", "accounts", "about", "legal", "privacy"]:
-                            lead_id = f"ig_{username}"
-                            if lead_id not in seen_ids:
-                                seen_ids.add(lead_id)
-                                leads.append({
-                                    "place_id": lead_id,
-                                    "naam": f"@{username}",
-                                    "source": "instagram",
-                                    "instagram_url": url,
-                                    "adres": stad,
-                                    "telefoonnummer": None,
-                                    "google_maps_url": None
-                                })
+            for term in search_terms:
+                query = f"site:instagram.com {term} {stad}"
+                urls = await google_search(query, 8)
+                for url in urls:
+                    if "instagram.com/" in url and "/p/" not in url and "/reel/" not in url:
+                        match = re.search(r'instagram\.com/([^/\?]+)', url)
+                        if match:
+                            username = match.group(1)
+                            if username not in ["explore", "accounts", "about", "legal", "privacy"]:
+                                lead_id = f"ig_{username}"
+                                if lead_id not in seen_ids:
+                                    seen_ids.add(lead_id)
+                                    leads.append({
+                                        "place_id": lead_id,
+                                        "naam": f"@{username}",
+                                        "source": "instagram",
+                                        "instagram_url": url,
+                                        "adres": stad,
+                                        "telefoonnummer": None,
+                                        "google_maps_url": None
+                                    })
         except Exception as e:
             logger.error(f"Instagram scrape error: {e}")
         return leads
@@ -499,26 +552,27 @@ async def leadfinder_zoek(request: Request):
     async def scrape_facebook():
         leads = []
         try:
-            query = f"site:facebook.com {search_term} {stad}"
-            urls = await google_search(query, 12)
-            for url in urls:
-                if "facebook.com/" in url and "/posts/" not in url:
-                    match = re.search(r'facebook\.com/([^/\?]+)', url)
-                    if match:
-                        page_name = match.group(1)
-                        if page_name not in ["watch", "marketplace", "groups", "events", "gaming", "login"]:
-                            lead_id = f"fb_{page_name}"
-                            if lead_id not in seen_ids:
-                                seen_ids.add(lead_id)
-                                leads.append({
-                                    "place_id": lead_id,
-                                    "naam": page_name.replace("-", " ").replace(".", " "),
-                                    "source": "facebook",
-                                    "facebook_url": url,
-                                    "adres": stad,
-                                    "telefoonnummer": None,
-                                    "google_maps_url": None
-                                })
+            for term in search_terms:
+                query = f"site:facebook.com {term} {stad}"
+                urls = await google_search(query, 8)
+                for url in urls:
+                    if "facebook.com/" in url and "/posts/" not in url:
+                        match = re.search(r'facebook\.com/([^/\?]+)', url)
+                        if match:
+                            page_name = match.group(1)
+                            if page_name not in ["watch", "marketplace", "groups", "events", "gaming", "login"]:
+                                lead_id = f"fb_{page_name}"
+                                if lead_id not in seen_ids:
+                                    seen_ids.add(lead_id)
+                                    leads.append({
+                                        "place_id": lead_id,
+                                        "naam": page_name.replace("-", " ").replace(".", " "),
+                                        "source": "facebook",
+                                        "facebook_url": url,
+                                        "adres": stad,
+                                        "telefoonnummer": None,
+                                        "google_maps_url": None
+                                    })
         except Exception as e:
             logger.error(f"Facebook scrape error: {e}")
         return leads
@@ -527,25 +581,26 @@ async def leadfinder_zoek(request: Request):
     async def scrape_linkedin():
         leads = []
         try:
-            query = f"site:linkedin.com/company {search_term} {stad}"
-            urls = await google_search(query, 10)
-            for url in urls:
-                if "linkedin.com/company/" in url:
-                    match = re.search(r'linkedin\.com/company/([^/\?]+)', url)
-                    if match:
-                        company = match.group(1)
-                        lead_id = f"li_{company}"
-                        if lead_id not in seen_ids:
-                            seen_ids.add(lead_id)
-                            leads.append({
-                                "place_id": lead_id,
-                                "naam": company.replace("-", " "),
-                                "source": "linkedin",
-                                "linkedin_url": url,
-                                "adres": stad,
-                                "telefoonnummer": None,
-                                "google_maps_url": None
-                            })
+            for term in search_terms:
+                query = f"site:linkedin.com/company {term} {stad}"
+                urls = await google_search(query, 6)
+                for url in urls:
+                    if "linkedin.com/company/" in url:
+                        match = re.search(r'linkedin\.com/company/([^/\?]+)', url)
+                        if match:
+                            company = match.group(1)
+                            lead_id = f"li_{company}"
+                            if lead_id not in seen_ids:
+                                seen_ids.add(lead_id)
+                                leads.append({
+                                    "place_id": lead_id,
+                                    "naam": company.replace("-", " "),
+                                    "source": "linkedin",
+                                    "linkedin_url": url,
+                                    "adres": stad,
+                                    "telefoonnummer": None,
+                                    "google_maps_url": None
+                                })
         except Exception as e:
             logger.error(f"LinkedIn scrape error: {e}")
         return leads
@@ -553,21 +608,24 @@ async def leadfinder_zoek(request: Request):
     # Scrape Telefoongids
     async def scrape_telefoongids():
         leads = []
+        seen_urls = set()
         try:
-            query = f"site:detelefoongids.nl {search_term} {stad}"
-            urls = await google_search(query, 10)
-            for url in urls:
-                if "detelefoongids.nl" in url:
-                    lead_id = f"tg_{uuid.uuid4().hex[:8]}"
-                    leads.append({
-                        "place_id": lead_id,
-                        "naam": f"Telefoongids - {search_term}",
-                        "source": "telefoongids",
-                        "telefoongids_url": url,
-                        "adres": stad,
-                        "telefoonnummer": None,
-                        "google_maps_url": None
-                    })
+            for term in search_terms:
+                query = f"site:detelefoongids.nl {term} {stad}"
+                urls = await google_search(query, 6)
+                for url in urls:
+                    if "detelefoongids.nl" in url and url not in seen_urls:
+                        seen_urls.add(url)
+                        lead_id = f"tg_{uuid.uuid4().hex[:8]}"
+                        leads.append({
+                            "place_id": lead_id,
+                            "naam": f"Telefoongids - {term}",
+                            "source": "telefoongids",
+                            "telefoongids_url": url,
+                            "adres": stad,
+                            "telefoonnummer": None,
+                            "google_maps_url": None
+                        })
         except Exception as e:
             logger.error(f"Telefoongids scrape error: {e}")
         return leads
@@ -575,21 +633,24 @@ async def leadfinder_zoek(request: Request):
     # Scrape Gouden Gids
     async def scrape_goudengids():
         leads = []
+        seen_urls = set()
         try:
-            query = f"site:goudengids.nl {search_term} {stad}"
-            urls = await google_search(query, 10)
-            for url in urls:
-                if "goudengids.nl" in url:
-                    lead_id = f"gg_{uuid.uuid4().hex[:8]}"
-                    leads.append({
-                        "place_id": lead_id,
-                        "naam": f"Gouden Gids - {search_term}",
-                        "source": "goudengids",
-                        "goudengids_url": url,
-                        "adres": stad,
-                        "telefoonnummer": None,
-                        "google_maps_url": None
-                    })
+            for term in search_terms:
+                query = f"site:goudengids.nl {term} {stad}"
+                urls = await google_search(query, 6)
+                for url in urls:
+                    if "goudengids.nl" in url and url not in seen_urls:
+                        seen_urls.add(url)
+                        lead_id = f"gg_{uuid.uuid4().hex[:8]}"
+                        leads.append({
+                            "place_id": lead_id,
+                            "naam": f"Gouden Gids - {term}",
+                            "source": "goudengids",
+                            "goudengids_url": url,
+                            "adres": stad,
+                            "telefoonnummer": None,
+                            "google_maps_url": None
+                        })
         except Exception as e:
             logger.error(f"Gouden Gids scrape error: {e}")
         return leads
@@ -597,21 +658,24 @@ async def leadfinder_zoek(request: Request):
     # Scrape Marktplaats
     async def scrape_marktplaats():
         leads = []
+        seen_urls = set()
         try:
-            query = f"site:marktplaats.nl/diensten {search_term} {stad}"
-            urls = await google_search(query, 8)
-            for url in urls:
-                if "marktplaats.nl" in url:
-                    lead_id = f"mp_{uuid.uuid4().hex[:8]}"
-                    leads.append({
-                        "place_id": lead_id,
-                        "naam": f"Marktplaats ZZP - {search_term}",
-                        "source": "marktplaats",
-                        "marktplaats_url": url,
-                        "adres": stad,
-                        "telefoonnummer": None,
-                        "google_maps_url": None
-                    })
+            for term in search_terms:
+                query = f"site:marktplaats.nl/diensten {term} {stad}"
+                urls = await google_search(query, 5)
+                for url in urls:
+                    if "marktplaats.nl" in url and url not in seen_urls:
+                        seen_urls.add(url)
+                        lead_id = f"mp_{uuid.uuid4().hex[:8]}"
+                        leads.append({
+                            "place_id": lead_id,
+                            "naam": f"Marktplaats ZZP - {term}",
+                            "source": "marktplaats",
+                            "marktplaats_url": url,
+                            "adres": stad,
+                            "telefoonnummer": None,
+                            "google_maps_url": None
+                        })
         except Exception as e:
             logger.error(f"Marktplaats scrape error: {e}")
         return leads
@@ -619,21 +683,24 @@ async def leadfinder_zoek(request: Request):
     # Scrape KVK
     async def scrape_kvk():
         leads = []
+        seen_urls = set()
         try:
-            query = f"site:kvk.nl {search_term} {stad}"
-            urls = await google_search(query, 8)
-            for url in urls:
-                if "kvk.nl" in url:
-                    lead_id = f"kvk_{uuid.uuid4().hex[:8]}"
-                    leads.append({
-                        "place_id": lead_id,
-                        "naam": f"KVK Bedrijf - {search_term}",
-                        "source": "kvk",
-                        "kvk_url": url,
-                        "adres": stad,
-                        "telefoonnummer": None,
-                        "google_maps_url": None
-                    })
+            for term in search_terms:
+                query = f"site:kvk.nl {term} {stad}"
+                urls = await google_search(query, 5)
+                for url in urls:
+                    if "kvk.nl" in url and url not in seen_urls:
+                        seen_urls.add(url)
+                        lead_id = f"kvk_{uuid.uuid4().hex[:8]}"
+                        leads.append({
+                            "place_id": lead_id,
+                            "naam": f"KVK Bedrijf - {term}",
+                            "source": "kvk",
+                            "kvk_url": url,
+                            "adres": stad,
+                            "telefoonnummer": None,
+                            "google_maps_url": None
+                        })
         except Exception as e:
             logger.error(f"KVK scrape error: {e}")
         return leads
@@ -697,8 +764,10 @@ async def leadfinder_zoek(request: Request):
         "nextPageToken": None,
         "zoekgebied": f"{stad} + {radius}km radius",
         "bronnen_doorzocht": scraped_sources,
-        "zoekterm": search_term,
-        "note": "Live scraping actief. Voor volledige Google Maps resultaten, deploy naar Vercel met GOOGLE_MAPS_API_KEY."
+        "zoekterm": branche or "zzp freelancer diensten",
+        "synoniemen_gezocht": used_synonyms,
+        "aantal_zoektermen": len(search_terms),
+        "note": "Live scraping actief met synoniem-uitbreiding. Voor volledige Google Maps resultaten, deploy naar Vercel met GOOGLE_MAPS_API_KEY."
     }
 
 @api_router.get("/admin/leadfinder/leads")
