@@ -47,21 +47,21 @@ const HeroSection = () => {
             <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-[16vw] sm:text-[14vw] lg:text-[9vw] font-black leading-[0.95] tracking-tighter dark:text-white">
               {language === 'nl' ? (
                 <span className="flex flex-col">
-                  <span>
-                    <span className="hidden lg:inline">JOUW</span>
-                    <span className="lg:hidden inline-flex items-baseline">J<img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mx-[-0.02em]" />UW</span>
-                  </span>
+                  <span>JOUW</span>
                   <span>BEDRIJF</span>
-                  <span className="text-gray-500 dark:text-gray-400">ONLINE</span>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    <span className="hidden lg:inline">ONLINE</span>
+                    <span className="lg:hidden inline-flex items-baseline"><img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mr-[-0.02em]" />NLINE</span>
+                  </span>
                 </span>
               ) : (
                 <span className="flex flex-col">
-                  <span>
-                    <span className="hidden lg:inline">YOUR</span>
-                    <span className="lg:hidden inline-flex items-baseline">Y<img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mx-[-0.02em]" />UR</span>
-                  </span>
+                  <span>YOUR</span>
                   <span>BUSINESS</span>
-                  <span className="text-gray-500 dark:text-gray-400">ONLINE</span>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    <span className="hidden lg:inline">ONLINE</span>
+                    <span className="lg:hidden inline-flex items-baseline"><img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mr-[-0.02em]" />NLINE</span>
+                  </span>
                 </span>
               )}
             </motion.h1>
