@@ -51,7 +51,7 @@ const HeroSection = () => {
                   <span>BEDRIJF</span>
                   <span className="text-gray-500 dark:text-gray-400">
                     <span className="hidden lg:inline">ONLINE</span>
-                    <span className="lg:hidden inline-flex items-baseline"><img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mr-[-0.02em]" />NLINE</span>
+                    <span className="lg:hidden inline-flex items-baseline"><img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mr-[-0.02em] opacity-50" />NLINE</span>
                   </span>
                 </span>
               ) : (
@@ -60,7 +60,7 @@ const HeroSection = () => {
                   <span>BUSINESS</span>
                   <span className="text-gray-500 dark:text-gray-400">
                     <span className="hidden lg:inline">ONLINE</span>
-                    <span className="lg:hidden inline-flex items-baseline"><img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mr-[-0.02em]" />NLINE</span>
+                    <span className="lg:hidden inline-flex items-baseline"><img src="/yrvante-logo-code.png" alt="O" className="inline-block h-[0.75em] w-[0.75em] object-contain align-baseline relative -top-[0.02em] mr-[-0.02em] opacity-50" />NLINE</span>
                   </span>
                 </span>
               )}
