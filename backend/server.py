@@ -705,9 +705,118 @@ async def leadfinder_zoek(request: Request):
             logger.error(f"KVK scrape error: {e}")
         return leads
     
+    # ===== REAL Google Places API Text Search with pagination =====
+    async def search_google_places():
+        leads = []
+        api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")
+        if not api_key:
+            logger.warning("No GOOGLE_PLACES_API_KEY set, skipping Google Places")
+            return leads
+        
+        async with aiohttp.ClientSession() as session:
+            for term in search_terms[:3]:  # Top 3 synonyms for Places API
+                query = f"{term} in {stad}"
+                next_token = None
+                pages_fetched = 0
+                
+                while pages_fetched < 3:  # Max 3 pages = ~60 results per term
+                    params = {
+                        "query": query,
+                        "key": api_key,
+                        "language": "nl",
+                        "region": "nl",
+                    }
+                    if next_token:
+                        params["pagetoken"] = next_token
+                        await asyncio.sleep(2)  # Google requires delay between page requests
+                    
+                    try:
+                        url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+                        async with session.get(url, params=params, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+                            data = await resp.json()
+                        
+                        if data.get("status") not in ["OK", "ZERO_RESULTS"]:
+                            logger.warning(f"Places API status: {data.get('status')} - {data.get('error_message', '')}")
+                            break
+                        
+                        for place in data.get("results", []):
+                            pid = place.get("place_id", "")
+                            lead_id = f"gm_{pid}"
+                            if lead_id not in seen_ids:
+                                seen_ids.add(lead_id)
+                                leads.append({
+                                    "place_id": lead_id,
+                                    "naam": place.get("name", "Onbekend"),
+                                    "source": "google",
+                                    "adres": place.get("formatted_address", stad),
+                                    "telefoonnummer": None,
+                                    "google_maps_url": f"https://www.google.com/maps/place/?q=place_id:{pid}",
+                                    "rating": place.get("rating"),
+                                    "user_ratings_total": place.get("user_ratings_total", 0),
+                                    "types": place.get("types", []),
+                                    "open_now": place.get("opening_hours", {}).get("open_now"),
+                                })
+                        
+                        next_token = data.get("next_page_token")
+                        pages_fetched += 1
+                        
+                        if not next_token:
+                            break
+                    except Exception as e:
+                        logger.error(f"Google Places API error for '{term}': {e}")
+                        break
+        
+        return leads
+    
+    # ===== OpenStreetMap / Nominatim API (100% gratis) =====
+    async def search_openstreetmap():
+        leads = []
+        async with aiohttp.ClientSession() as session:
+            headers = {"User-Agent": "YrvanteLeadFinder/1.0 (info@yrvante.com)"}
+            
+            for term in search_terms[:3]:  # Top 3 synonyms
+                try:
+                    params = {
+                        "q": f"{term}, {stad}, Nederland",
+                        "format": "json",
+                        "addressdetails": "1",
+                        "limit": "20",
+                        "countrycodes": "nl",
+                    }
+                    url = "https://nominatim.openstreetmap.org/search"
+                    async with session.get(url, params=params, headers=headers, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+                        results = await resp.json()
+                    
+                    for place in results:
+                        osm_id = f"osm_{place.get('osm_id', '')}"
+                        if osm_id not in seen_ids:
+                            seen_ids.add(osm_id)
+                            addr = place.get("address", {})
+                            address_parts = [addr.get("road", ""), addr.get("house_number", ""), addr.get("city", addr.get("town", addr.get("village", stad)))]
+                            address = " ".join(p for p in address_parts if p).strip() or place.get("display_name", stad)
+                            
+                            leads.append({
+                                "place_id": osm_id,
+                                "naam": place.get("name") or place.get("display_name", "").split(",")[0],
+                                "source": "openstreetmap",
+                                "adres": address,
+                                "telefoonnummer": None,
+                                "google_maps_url": f"https://www.openstreetmap.org/{place.get('osm_type', 'node')}/{place.get('osm_id', '')}",
+                            })
+                    
+                    await asyncio.sleep(1.1)  # Nominatim rate limit: 1 req/sec
+                except Exception as e:
+                    logger.error(f"OSM Nominatim error for '{term}': {e}")
+        
+        return leads
+    
     # Run all scrapers in parallel
     tasks = []
     
+    if "google" in sources:
+        tasks.append(("Google Maps", search_google_places()))
+    if "openstreetmap" in sources:
+        tasks.append(("OpenStreetMap", search_openstreetmap()))
     if "instagram" in sources:
         tasks.append(("Instagram", scrape_instagram()))
     if "facebook" in sources:
@@ -723,51 +832,28 @@ async def leadfinder_zoek(request: Request):
     if "kvk" in sources:
         tasks.append(("KVK", scrape_kvk()))
     
-    # Execute all tasks
+    # Execute all tasks with timeouts
     for source_name, task in tasks:
         try:
-            leads = await asyncio.wait_for(task, timeout=10.0)
+            leads = await asyncio.wait_for(task, timeout=30.0)
             all_leads.extend(leads)
             if leads:
-                scraped_sources.append(source_name)
+                scraped_sources.append(f"{source_name} ({len(leads)})")
         except asyncio.TimeoutError:
             logger.warning(f"{source_name} scrape timed out")
+            scraped_sources.append(f"{source_name} (timeout)")
         except Exception as e:
             logger.error(f"{source_name} scrape failed: {e}")
-    
-    # Add mock Google Maps results for demo
-    if "google" in sources:
-        zzp_branches = ["Kapper", "Coach", "Fotograaf", "Schilder", "Tuinman", "Schoonmaker"]
-        nearby_cities = {
-            "almelo": ["Wierden", "Vriezenveen", "Tubbergen", "Rijssen", "Borne", "Hengelo"],
-            "amsterdam": ["Amstelveen", "Zaandam", "Haarlem", "Hoofddorp", "Diemen"],
-            "rotterdam": ["Schiedam", "Vlaardingen", "Capelle", "Barendrecht"],
-        }
-        extra_cities = nearby_cities.get(stad.lower(), [f"Omgeving {stad}"])
-        
-        for i, branch in enumerate(zzp_branches[:6]):
-            city = stad if i % 2 == 0 else extra_cities[i % len(extra_cities)]
-            lead_id = f"gm_{uuid.uuid4().hex[:8]}"
-            all_leads.append({
-                "place_id": lead_id,
-                "naam": f"{branch} Studio {city}",
-                "source": "google",
-                "adres": f"Voorbeeldstraat {i+1}, {city}",
-                "telefoonnummer": f"+31 6 {random.randint(10000000, 99999999)}",
-                "google_maps_url": f"https://maps.google.com/?q={branch}+{city}"
-            })
-        scraped_sources.append("Google Maps (Demo)")
     
     return {
         "leads": all_leads,
         "totaal_gevonden": len(all_leads),
         "nextPageToken": None,
-        "zoekgebied": f"{stad} + {radius}km radius",
+        "zoekgebied": stad,
         "bronnen_doorzocht": scraped_sources,
         "zoekterm": branche or "zzp freelancer diensten",
         "synoniemen_gezocht": used_synonyms,
         "aantal_zoektermen": len(search_terms),
-        "note": "Live scraping actief met synoniem-uitbreiding. Voor volledige Google Maps resultaten, deploy naar Vercel met GOOGLE_MAPS_API_KEY."
     }
 
 @api_router.get("/admin/leadfinder/leads")

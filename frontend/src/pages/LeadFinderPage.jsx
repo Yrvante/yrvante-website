@@ -19,7 +19,8 @@ const BG_IMAGE = "/bg-pattern.jpg";
 
 // Search source configurations
 const SEARCH_SOURCES = {
-  google: { id: 'google', name: 'Google Maps', icon: MapPin, color: '#4285F4', description: 'Zoek bedrijven via Google Maps' },
+  google: { id: 'google', name: 'Google Maps', icon: MapPin, color: '#4285F4', description: 'Google Places API — echte bedrijfsdata' },
+  openstreetmap: { id: 'openstreetmap', name: 'OpenStreetMap', icon: Globe, color: '#7EBC6F', description: 'Gratis open-data kaart' },
   kvk: { id: 'kvk', name: 'KVK / ZZP', icon: Building2, color: '#00A1E0', description: 'Kamer van Koophandel database' },
   instagram: { id: 'instagram', name: 'Instagram', icon: Instagram, color: '#E4405F', description: 'Zakelijke Instagram accounts' },
   facebook: { id: 'facebook', name: 'Facebook', icon: Facebook, color: '#1877F2', description: 'Facebook bedrijfspagina\'s' },
@@ -52,7 +53,6 @@ const LeadFinderPage = () => {
   // Search states
   const [searchQuery, setSearchQuery] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
-  const [searchRadius, setSearchRadius] = useState(25);
   const [searchAll, setSearchAll] = useState(false);
   const [searchFilters, setSearchFilters] = useState({
     onlyWithoutWebsite: true,
@@ -151,9 +151,9 @@ const LeadFinderPage = () => {
       const body = { 
         branche: searchQuery, 
         stad: searchLocation, 
-        radius: searchRadius,
         searchAll: searchAll,
         source: activeSource,
+        sources: ["google", "openstreetmap", "instagram", "facebook", "linkedin", "telefoongids", "goudengids", "marktplaats", "kvk"],
         filters: searchFilters
       };
       if (useToken && nextPageToken) body.pageToken = nextPageToken;
@@ -210,8 +210,8 @@ const LeadFinderPage = () => {
       const body = { 
         branche: searchQuery || '', 
         stad: searchLocation, 
-        radius: searchRadius,
         searchAll: true,
+        sources: ["google", "openstreetmap", "instagram", "facebook", "linkedin", "telefoongids", "goudengids", "marktplaats", "kvk"],
         filters: searchFilters
       };
       
@@ -250,7 +250,7 @@ const LeadFinderPage = () => {
           : '';
         toast.success(`${data.totaal_gevonden} leads gevonden!${synMsg}`);
       } else {
-        toast.info('Geen bedrijven gevonden. Probeer een andere branche of grotere radius.');
+        toast.info('Geen bedrijven gevonden. Probeer een andere branche of stad.');
       }
       
       if (data.zoektermen_gebruikt && data.zoektermen_gebruikt.length > 0) {
@@ -644,7 +644,7 @@ const LeadFinderPage = () => {
                         onKeyPress={e => e.key === 'Enter' && zoekAlles()}
                       />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="sm:col-span-5">
                       <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5 sm:mb-2 block">Locatie *</label>
                       <input
                         value={searchLocation}
@@ -653,22 +653,6 @@ const LeadFinderPage = () => {
                         className="w-full bg-gray-50 border border-gray-200 rounded-lg sm:rounded-xl focus:border-black focus:bg-white outline-none py-3 sm:py-3.5 px-3 sm:px-4 transition-all text-base"
                         onKeyPress={e => e.key === 'Enter' && zoekAlles()}
                       />
-                    </div>
-                    <div className="sm:col-span-3">
-                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5 sm:mb-2 block">Radius</label>
-                      <select
-                        value={searchRadius}
-                        onChange={e => setSearchRadius(Number(e.target.value))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-lg sm:rounded-xl outline-none py-3 sm:py-3.5 px-3 sm:px-4 transition-all cursor-pointer focus:border-black focus:bg-white text-base"
-                      >
-                        <option value={5}>+5 km</option>
-                        <option value={10}>+10 km</option>
-                        <option value={15}>+15 km</option>
-                        <option value={25}>+25 km</option>
-                        <option value={50}>+50 km</option>
-                        <option value={75}>+75 km</option>
-                        <option value={100}>+100 km</option>
-                      </select>
                     </div>
                   </div>
 

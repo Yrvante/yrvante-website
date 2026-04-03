@@ -103,6 +103,12 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Deduplicatie**: Dubbele resultaten worden automatisch verwijderd via place_id en URL tracking
 - **UI indicator**: Blauw "Synoniem-uitbreiding actief" banner toont alle gebruikte zoektermen na het zoeken
 
+### Phase 14 - Lead Finder Pro Upgrade (Complete - Apr 2026)
+- **ECHTE Google Places API**: Vervangt mock-data met live Text Search API + paginering (3 pagina's × 3 zoektermen = tot ~180 resultaten)
+- **OpenStreetMap / Nominatim**: Gratis extra databron naast Google Maps, zoekt per synoniem
+- **Radius verwijderd**: Zoekt nu op stadsnaam (slimmer en eenvoudiger)
+- **Resultaten**: "nagelstudio almelo" → 93 echte leads, "kapper almelo" → 75 echte leads
+
 ## Vercel Environment Variables Required
 - `POSTGRES_URL` — Vercel Postgres connection string
 - `ADMIN_PASSWORD` — Admin dashboard password
