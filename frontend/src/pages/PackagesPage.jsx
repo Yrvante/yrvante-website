@@ -710,6 +710,22 @@ const PackagesPage = () => {
                 <div className="mb-6">
                   <span className="text-5xl font-heading font-bold dark:text-white">€{pkg.price}</span>
                   <span className={`text-sm ${pkg.popular ? 'text-gray-500 dark:text-gray-400' : 'text-gray-500'}`}> excl. BTW</span>
+                  {pkg.id === 'pro' && (
+                    <div className="mt-2 inline-flex items-center gap-1.5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-full px-3 py-1">
+                      <Zap size={12} className="text-green-600 dark:text-green-400" />
+                      <span className="text-xs font-bold text-green-700 dark:text-green-400">
+                        {language === 'nl' ? 'Bespaar €150+ t.o.v. los kopen' : 'Save €150+ vs buying separately'}
+                      </span>
+                    </div>
+                  )}
+                  {pkg.id === 'premium' && (
+                    <div className="mt-2 inline-flex items-center gap-1.5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-full px-3 py-1">
+                      <Zap size={12} className="text-green-600 dark:text-green-400" />
+                      <span className="text-xs font-bold text-green-700 dark:text-green-400">
+                        {language === 'nl' ? 'Bespaar €400+ t.o.v. los kopen' : 'Save €400+ vs buying separately'}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-4 flex items-center gap-2">
