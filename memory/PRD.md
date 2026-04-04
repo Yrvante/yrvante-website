@@ -124,7 +124,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - Terug naar boven knop (ScrollToTop)
 - Automatische nachtmodus (20:00-06:00 → dark mode)
 - Automatische taaldetectie (browser taal NL/EN)
-- Interactieve achtergrond (parallax effect op bg-pattern bij muisbeweging)
+- Geanimeerde achtergrond (5 zwevende gradient-orbs met langzame organische CSS drift-animaties, 22-35s cycli)
 - Hover card CSS effect
 
 ## Vercel Environment Variables Required

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect, useRef, useCallback, lazy, Suspense } from "react";
+import React, { useState, createContext, useContext, useEffect, lazy, Suspense } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
@@ -313,27 +313,17 @@ function App() {
     trackPageView(window.location.pathname);
   }, []);
 
-  // Interactive background: mouse tracking for subtle parallax on bg-pattern
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const handleMouseMove = useCallback((e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    setMousePos({ x, y });
-  }, []);
-
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <div className="App relative" onMouseMove={handleMouseMove}>
-        {/* Global background pattern - interactive parallax on mouse/touch */}
+      <div className="App relative">
+        {/* Animated background orbs - slow organic drift */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-          <div
-            className={`absolute -inset-5 bg-cover bg-center bg-no-repeat transition-transform duration-[2000ms] ease-out ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`}
-            style={{
-              backgroundImage: `url(/bg-pattern.jpg)`,
-              transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-            }}
-          />
+          <div className="bg-orb bg-orb-1" />
+          <div className="bg-orb bg-orb-2" />
+          <div className="bg-orb bg-orb-3" />
+          <div className="bg-orb bg-orb-4" />
+          <div className="bg-orb bg-orb-5" />
         </div>
         <div className="relative z-10">
         <BrowserRouter>
