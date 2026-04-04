@@ -565,14 +565,14 @@ const PackagesPage = () => {
 
   // Losse prijzen voor extra's
   const loosePrices = [
-    { name: language === 'nl' ? 'Extra pagina' : 'Extra page', price: '€39' },
-    { name: language === 'nl' ? 'Meertalig' : 'Multi-language', price: '€109' },
-    { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€59' },
-    { name: language === 'nl' ? 'Dark mode' : 'Dark mode', price: '€69' },
+    { name: language === 'nl' ? 'Extra pagina' : 'Extra page', price: '€49' },
+    { name: language === 'nl' ? 'Meertalig' : 'Multi-language', price: '€149' },
+    { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€69' },
+    { name: language === 'nl' ? 'Dark mode' : 'Dark mode', price: '€79' },
     { name: language === 'nl' ? 'Onderhoud' : 'Maintenance', price: '€25/pm' },
-    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€199' },
-    { name: language === 'nl' ? 'Pop-up (aanbieding)' : 'Pop-up (offer)', price: '€29' },
-    { name: language === 'nl' ? 'Voor & na slider' : 'Before & after slider', price: '€29' },
+    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€249' },
+    { name: language === 'nl' ? 'Pop-up (aanbieding)' : 'Pop-up (offer)', price: '€39' },
+    { name: language === 'nl' ? 'Voor & na slider' : 'Before & after slider', price: '€39' },
   ];
 
   // Extra possibilities - no prices, just what's possible

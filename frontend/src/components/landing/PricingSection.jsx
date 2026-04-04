@@ -15,14 +15,14 @@ const PricingSection = () => {
   ];
 
   const extras = [
-    { name: language === 'nl' ? 'Extra pagina\'s' : 'Extra pages', price: '€39', unit: language === 'nl' ? '/pagina' : '/page', icon: FileText },
-    { name: language === 'nl' ? 'Meertalige website' : 'Multi-language website', price: '€109', unit: '', icon: GlobeIcon },
-    { name: language === 'nl' ? 'Extra contactformulier' : 'Extra contact form', price: '€59', unit: '', icon: MessageSquare },
-    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€199', unit: '', icon: BookOpen },
+    { name: language === 'nl' ? 'Extra pagina\'s' : 'Extra pages', price: '€49', unit: language === 'nl' ? '/pagina' : '/page', icon: FileText },
+    { name: language === 'nl' ? 'Meertalige website' : 'Multi-language website', price: '€149', unit: '', icon: GlobeIcon },
+    { name: language === 'nl' ? 'Extra contactformulier' : 'Extra contact form', price: '€69', unit: '', icon: MessageSquare },
+    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€249', unit: '', icon: BookOpen },
     { name: 'Google Reviews', price: '€120', unit: '', icon: StarIcon },
-    { name: 'Dark mode', price: '€69', unit: '', icon: Moon },
-    { name: language === 'nl' ? 'Pop-up (aanbieding/aankondiging)' : 'Pop-up (offer/announcement)', price: '€29', unit: '', icon: MessageSquare },
-    { name: language === 'nl' ? 'Voor & na slider' : 'Before & after slider', price: '€29', unit: '', icon: RefreshCw },
+    { name: 'Dark mode', price: '€79', unit: '', icon: Moon },
+    { name: language === 'nl' ? 'Pop-up (aanbieding/aankondiging)' : 'Pop-up (offer/announcement)', price: '€39', unit: '', icon: MessageSquare },
+    { name: language === 'nl' ? 'Voor & na slider' : 'Before & after slider', price: '€39', unit: '', icon: RefreshCw },
   ];
 
   return (

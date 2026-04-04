@@ -382,19 +382,19 @@ const CalculatorPage = () => {
         extraPages: {
           title: "Extra pagina's",
           description: "Voor extra content (diensten, blog artikelen, portfolio items)",
-          price: 39,
+          price: 49,
           unit: "per pagina"
         },
         multiLanguage: {
           title: "Meertalige website",
           description: "Website in meerdere talen met taalwisselaar",
-          price: 109,
+          price: 149,
           unit: "eenmalig"
         },
         extraForm: {
           title: "Extra contactformulier",
           description: "Voor offerte aanvragen of afspraak verzoeken",
-          price: 59,
+          price: 69,
           unit: "eenmalig"
         },
         maintenance: {
@@ -406,7 +406,7 @@ const CalculatorPage = () => {
         bookingSystem: {
           title: "Online boekingssysteem",
           description: "Afspraken boeken via de website met admin dashboard",
-          price: 199,
+          price: 249,
           unit: "eenmalig"
         },
         googleReviews: {
@@ -419,19 +419,19 @@ const CalculatorPage = () => {
         darkMode: {
           title: "Dark mode",
           description: "Licht/donker modus schakelaar op je website",
-          price: 69,
+          price: 79,
           unit: "eenmalig"
         },
         popup: {
           title: "Pop-up (aanbieding/aankondiging)",
           description: "Aanbieding of aankondiging popup voor bezoekers",
-          price: 29,
+          price: 39,
           unit: "eenmalig"
         },
         beforeAfterSlider: {
           title: "Voor & na slider",
           description: "Interactieve slider om resultaten te vergelijken",
-          price: 29,
+          price: 39,
           unit: "eenmalig"
         }
       },
@@ -535,19 +535,19 @@ const CalculatorPage = () => {
         extraPages: {
           title: "Extra pages",
           description: "For extra content (services, blog posts, portfolio items)",
-          price: 39,
+          price: 49,
           unit: "per page"
         },
         multiLanguage: {
           title: "Multi-language website",
           description: "Website in multiple languages with language switcher",
-          price: 109,
+          price: 149,
           unit: "one-time"
         },
         extraForm: {
           title: "Extra contact form",
           description: "For quote requests or appointment requests",
-          price: 59,
+          price: 69,
           unit: "one-time"
         },
         maintenance: {
@@ -559,7 +559,7 @@ const CalculatorPage = () => {
         bookingSystem: {
           title: "Online booking system",
           description: "Book appointments via the website with admin dashboard",
-          price: 199,
+          price: 249,
           unit: "one-time"
         },
         googleReviews: {
@@ -572,19 +572,19 @@ const CalculatorPage = () => {
         darkMode: {
           title: "Dark mode",
           description: "Light/dark mode toggle on your website",
-          price: 69,
+          price: 79,
           unit: "one-time"
         },
         popup: {
           title: "Pop-up (offer/announcement)",
           description: "Offer or announcement popup for visitors",
-          price: 29,
+          price: 39,
           unit: "one-time"
         },
         beforeAfterSlider: {
           title: "Before & after slider",
           description: "Interactive slider to compare results",
-          price: 29,
+          price: 39,
           unit: "one-time"
         }
       },
@@ -629,15 +629,15 @@ const CalculatorPage = () => {
     basic: 399,
     pro: 699,
     premium: 999,
-    extraPages: 39,
-    multiLanguage: 109,
-    extraForm: 59,
+    extraPages: 49,
+    multiLanguage: 149,
+    extraForm: 69,
     maintenance: 25,
-    bookingSystem: 199,
+    bookingSystem: 249,
     googleReviews: 120,
-    darkMode: 69,
-    popup: 29,
-    beforeAfterSlider: 29,
+    darkMode: 79,
+    popup: 39,
+    beforeAfterSlider: 39,
   };
 
   const calculateTotal = () => {
