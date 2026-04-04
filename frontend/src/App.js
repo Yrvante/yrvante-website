@@ -317,13 +317,17 @@ function App() {
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <div className="App relative">
-        {/* Animated background orbs - slow organic drift */}
+        {/* Animated background: orbs + original pattern overlay */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="bg-orb bg-orb-1" />
           <div className="bg-orb bg-orb-2" />
           <div className="bg-orb bg-orb-3" />
           <div className="bg-orb bg-orb-4" />
           <div className="bg-orb bg-orb-5" />
+          <div
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.18]'}`}
+            style={{ backgroundImage: `url(/bg-pattern.jpg)` }}
+          />
         </div>
         <div className="relative z-10">
         <BrowserRouter>
