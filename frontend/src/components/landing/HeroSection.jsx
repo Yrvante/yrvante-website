@@ -75,7 +75,7 @@ const HeroSection = () => {
           {/* Stats */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.45 }} className="flex items-center flex-wrap gap-2 sm:gap-4 mb-8">
             <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-bold text-gray-700 dark:text-gray-300">
-              <span>€349</span><span className="text-gray-400 font-normal">{language === 'nl' ? 'VANAF' : 'FROM'}</span>
+              <span>€249</span><span className="text-gray-400 font-normal">{language === 'nl' ? 'VANAF' : 'FROM'}</span>
             </span>
             <span className="w-1 h-1 bg-gray-300 dark:bg-neutral-600 rounded-full hidden sm:block" />
             <span className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-bold text-gray-700 dark:text-gray-300">

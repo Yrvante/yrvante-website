@@ -159,7 +159,7 @@ const DienstenPage = () => {
                     : "A website is your 24/7 salesperson. I design websites that position your business professionally, convert visitors into customers and help you get found on Google."}
                 </p>
                 <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-5xl font-black text-gray-900 dark:text-gray-100">€500</span>
+                  <span className="text-5xl font-black text-gray-900 dark:text-gray-100">€399</span>
                   <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
                   <span className="text-xs text-gray-400 ml-2">{language === 'nl' ? 'excl. BTW' : 'excl. VAT'}</span>
                 </div>
@@ -347,12 +347,12 @@ const DienstenPage = () => {
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
               {language === 'nl'
-                ? 'Vanaf €500 excl. BTW. Opgeleverd in 1-2 weken.'
-                : 'From €500 excl. VAT. Delivered in 1-2 weeks.'}
+                ? 'Vanaf €399 excl. BTW. Opgeleverd in 1-2 weken.'
+                : 'From €399 excl. VAT. Delivered in 1-2 weeks.'}
             </p>
             <div className="bg-white/60 dark:bg-neutral-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-700/50 rounded-3xl p-8 mb-8 max-w-md mx-auto shadow-sm dark:shadow-neutral-900">
               <div className="flex items-baseline justify-center gap-2 mb-4">
-                <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€500</span>
+                <span className="text-5xl font-black text-gray-800 dark:text-gray-200">€399</span>
                 <span className="text-gray-500">/ {language === 'nl' ? 'vanaf' : 'from'}</span>
               </div>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400 text-left">
@@ -604,7 +604,7 @@ const DienstenPage = () => {
               {language === 'nl' ? 'Klaar voor jouw website?' : 'Ready for your website?'}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mb-6">
-              {language === 'nl' ? 'Vanaf €500 excl. BTW' : 'From €500 excl. VAT'}
+              {language === 'nl' ? 'Vanaf €399 excl. BTW' : 'From €399 excl. VAT'}
             </p>
             <div className="flex justify-center gap-4">
               <button

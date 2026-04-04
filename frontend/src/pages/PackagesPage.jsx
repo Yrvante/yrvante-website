@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage, useTheme } from "../App";
-import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock, FileText } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Star, Zap, Shield, Calendar, Globe, Mail, Users, Clock, FileText, Gift } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import CompetitorComparison from "../components/CompetitorComparison";
@@ -442,7 +442,7 @@ const PackagesPage = () => {
     {
       id: 'rebranding',
       name: language === 'nl' ? 'Rebranding Website' : 'Rebranding Website',
-      price: 349,
+      price: 249,
       description: language === 'nl' 
         ? 'Heeft je website een opfrisbeurt nodig? Ik geef je bestaande site een compleet nieuw uiterlijk.'
         : 'Does your website need a refresh? I give your existing site a completely new look.',
@@ -452,6 +452,13 @@ const PackagesPage = () => {
         language === 'nl' ? 'Responsive optimalisatie (mobiel, tablet, desktop)' : 'Responsive optimization (mobile, tablet, desktop)',
         language === 'nl' ? 'Verbeterde gebruikservaring (UX)' : 'Improved user experience (UX)',
         language === 'nl' ? 'Snelheidsoptimalisatie' : 'Speed optimization',
+      ],
+      freeIncludes: [
+        'Cookie melding',
+        '404 pagina (eigen stijl)',
+        language === 'nl' ? 'Prijstabel (pakketten vergelijken)' : 'Pricing table',
+        language === 'nl' ? 'Sticky WhatsApp / social media / bel-knop' : 'Sticky WhatsApp / social / call button',
+        'Click-to-call knop',
       ],
       notIncluded: [
         language === 'nl' ? 'Extra pagina\'s toevoegen' : 'Adding extra pages',
@@ -465,7 +472,7 @@ const PackagesPage = () => {
     {
       id: 'basic',
       name: language === 'nl' ? 'Basis Website' : 'Basic Website',
-      price: 500,
+      price: 399,
       description: language === 'nl' 
         ? 'Perfect voor startende ondernemers die een professionele online aanwezigheid willen.'
         : 'Perfect for starting entrepreneurs who want a professional online presence.',
@@ -475,6 +482,13 @@ const PackagesPage = () => {
         language === 'nl' ? 'Werkt perfect op mobiel, tablet en desktop' : 'Works perfectly on mobile, tablet and desktop',
         language === 'nl' ? 'Snelle en veilige hosting' : 'Fast and secure hosting',
         language === 'nl' ? 'Basis contactpagina' : 'Basic contact page',
+      ],
+      freeIncludes: [
+        'Cookie melding',
+        '404 pagina (eigen stijl)',
+        language === 'nl' ? 'Prijstabel (pakketten vergelijken)' : 'Pricing table',
+        language === 'nl' ? 'Sticky WhatsApp / social media / bel-knop' : 'Sticky WhatsApp / social / call button',
+        'Click-to-call knop',
       ],
       notIncluded: [
         language === 'nl' ? 'SEO-optimalisatie (kan later toegevoegd worden)' : 'SEO optimization (can be added later)',
@@ -488,7 +502,7 @@ const PackagesPage = () => {
     {
       id: 'pro',
       name: language === 'nl' ? 'Pro Website' : 'Pro Website',
-      price: 900,
+      price: 699,
       description: language === 'nl'
         ? 'Mijn meest gekozen optie voor groeiende bedrijven die meer functionaliteit nodig hebben.'
         : 'My most chosen option for growing businesses that need more functionality.',
@@ -500,6 +514,15 @@ const PackagesPage = () => {
         language === 'nl' ? 'Blog pagina' : 'Blog page',
         language === 'nl' ? 'Portfolio pagina' : 'Portfolio page',
         language === 'nl' ? 'Contactformulier (berichten direct in je email)' : 'Contact form (messages directly to your email)',
+        language === 'nl' ? 'FAQ sectie (t.w.v. €39)' : 'FAQ section (worth €39)',
+        language === 'nl' ? 'Scroll animaties (t.w.v. €49)' : 'Scroll animations (worth €49)',
+      ],
+      freeIncludes: [
+        'Cookie melding',
+        '404 pagina (eigen stijl)',
+        language === 'nl' ? 'Prijstabel (pakketten vergelijken)' : 'Pricing table',
+        language === 'nl' ? 'Sticky WhatsApp / social media / bel-knop' : 'Sticky WhatsApp / social / call button',
+        'Click-to-call knop',
       ],
       notIncluded: [
         language === 'nl' ? 'Boekingssysteem' : 'Booking system',
@@ -512,7 +535,7 @@ const PackagesPage = () => {
     {
       id: 'premium',
       name: language === 'nl' ? 'Premium Website' : 'Premium Website',
-      price: 1400,
+      price: 999,
       description: language === 'nl'
         ? 'Complete oplossing met alle mogelijkheden voor ambitieuze bedrijven.'
         : 'Complete solution with all possibilities for ambitious businesses.',
@@ -523,7 +546,16 @@ const PackagesPage = () => {
         language === 'nl' ? 'Contactformulier' : 'Contact form',
         language === 'nl' ? 'Afspraaksysteem ingebouwd' : 'Booking system built-in',
         language === 'nl' ? 'Meertalige optie op je site' : 'Multi-language option on your site',
+        language === 'nl' ? 'FAQ sectie (t.w.v. €39)' : 'FAQ section (worth €39)',
+        language === 'nl' ? 'Scroll animaties (t.w.v. €49)' : 'Scroll animations (worth €49)',
         language === 'nl' ? 'Snellere reactietijd (binnen 2 uur)' : 'Faster response time (within 2 hours)',
+      ],
+      freeIncludes: [
+        'Cookie melding',
+        '404 pagina (eigen stijl)',
+        language === 'nl' ? 'Prijstabel (pakketten vergelijken)' : 'Pricing table',
+        language === 'nl' ? 'Sticky WhatsApp / social media / bel-knop' : 'Sticky WhatsApp / social / call button',
+        'Click-to-call knop',
       ],
       notIncluded: [],
       idealFor: language === 'nl' ? 'Gevestigde bedrijven, Professionals' : 'Established businesses, Professionals',
@@ -534,12 +566,14 @@ const PackagesPage = () => {
 
   // Losse prijzen voor extra's
   const loosePrices = [
-    { name: language === 'nl' ? 'Extra pagina' : 'Extra page', price: '€50' },
-    { name: language === 'nl' ? 'Meertalig' : 'Multi-language', price: '€200' },
-    { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€80' },
-    { name: language === 'nl' ? 'Dark mode' : 'Dark mode', price: '€80' },
+    { name: language === 'nl' ? 'Extra pagina' : 'Extra page', price: '€39' },
+    { name: language === 'nl' ? 'Meertalig' : 'Multi-language', price: '€109' },
+    { name: language === 'nl' ? 'Extra formulier' : 'Extra form', price: '€59' },
+    { name: language === 'nl' ? 'Dark mode' : 'Dark mode', price: '€69' },
     { name: language === 'nl' ? 'Onderhoud' : 'Maintenance', price: '€25/pm' },
-    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€250' },
+    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€199' },
+    { name: language === 'nl' ? 'Pop-up (aanbieding)' : 'Pop-up (offer)', price: '€29' },
+    { name: language === 'nl' ? 'Voor & na slider' : 'Before & after slider', price: '€29' },
   ];
 
   // Extra possibilities - no prices, just what's possible
@@ -573,8 +607,8 @@ const PackagesPage = () => {
       icon: <Shield size={24} />,
       title: language === 'nl' ? 'Website onderhoud' : 'Website maintenance',
       description: language === 'nl'
-        ? 'Hosting, updates, kleine wijzigingen en beveiliging. Alles geregeld.'
-        : 'Hosting, updates, small changes and security. Everything taken care of.',
+        ? 'Hosting, updates, kleine wijzigingen en beveiliging. Inclusief: onderhoudspagina, welkomst popup, announcement bar, urgentie timer en seizoensthema.'
+        : 'Hosting, updates, small changes and security. Includes: maintenance page, welcome popup, announcement bar, urgency timer and seasonal theme.',
     },
     {
       key: 'booking',
@@ -708,13 +742,27 @@ const PackagesPage = () => {
                 </div>
 
                 {pkg.notIncluded && pkg.notIncluded.length > 0 && (
-                  <div className="space-y-1 mb-6 pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700">
+                  <div className="space-y-1 mb-4 pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700">
                     <p className="text-xs uppercase tracking-wider mb-3 text-gray-400">
                       {language === 'nl' ? 'Niet inbegrepen (apart te kopen)' : 'Not included (available separately)'}
                     </p>
                     {pkg.notIncluded.map((item, i) => (
                       <div key={i} className="flex items-start gap-3 py-1">
                         <span className="text-sm text-gray-400">• {item}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {pkg.freeIncludes && pkg.freeIncludes.length > 0 && (
+                  <div className="space-y-1 mb-6 pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700">
+                    <p className="text-xs uppercase tracking-wider mb-3 text-green-600 dark:text-green-400 font-bold">
+                      {language === 'nl' ? 'Gratis inbegrepen' : 'Free included'}
+                    </p>
+                    {pkg.freeIncludes.map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 py-1">
+                        <Gift size={14} className="flex-shrink-0 mt-0.5 text-green-500" />
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -943,8 +991,8 @@ const PackagesPage = () => {
                 <div className="mt-8 pt-6 border-t border-gray-600">
                   <p className="text-gray-400 text-xs">
                     {language === 'nl'
-                      ? 'Inbegrepen in Premium pakket of als add-on voor €250 eenmalig.'
-                      : 'Included in Premium package or as add-on for €250 one-time.'}
+                      ? 'Inbegrepen in Premium pakket of als add-on voor €199 eenmalig.'
+                      : 'Included in Premium package or as add-on for €199 one-time.'}
                   </p>
                 </div>
               </div>

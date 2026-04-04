@@ -91,25 +91,25 @@ const recommendations = {
   nl: {
     rebranding: {
       name: "Rebranding Website",
-      price: "€349",
+      price: "€249",
       desc: "Perfect voor jou! Je bestaande website krijgt een compleet nieuw design.",
       link: "/calculator?package=rebranding",
     },
     basic: {
       name: "Basis Website",
-      price: "€500",
+      price: "€399",
       desc: "Ideaal voor een startende ondernemer met een simpele maar professionele website.",
       link: "/calculator?package=basic",
     },
     pro: {
       name: "Pro Website",
-      price: "€900",
+      price: "€699",
       desc: "De beste keuze voor groeiende bedrijven die meer willen dan het basis.",
       link: "/calculator?package=pro",
     },
     premium: {
       name: "Premium Website",
-      price: "€1400",
+      price: "€999",
       desc: "De complete oplossing met alle features die je nodig hebt.",
       link: "/calculator?package=premium",
     },
@@ -117,25 +117,25 @@ const recommendations = {
   en: {
     rebranding: {
       name: "Rebranding Website",
-      price: "€349",
+      price: "€249",
       desc: "Perfect for you! Your existing website gets a complete new design.",
       link: "/calculator?package=rebranding",
     },
     basic: {
       name: "Basic Website",
-      price: "€500",
+      price: "€399",
       desc: "Ideal for starting entrepreneurs with a simple but professional website.",
       link: "/calculator?package=basic",
     },
     pro: {
       name: "Pro Website",
-      price: "€900",
+      price: "€699",
       desc: "The best choice for growing businesses that want more than the basics.",
       link: "/calculator?package=pro",
     },
     premium: {
       name: "Premium Website",
-      price: "€1400",
+      price: "€999",
       desc: "The complete solution with all the features you need.",
       link: "/calculator?package=premium",
     },

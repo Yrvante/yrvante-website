@@ -297,7 +297,7 @@ const OverMijPage = () => {
               <div className="bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 ring-2 ring-green-500">
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Yrvante</span>
-                  <span className="text-green-600 text-xl sm:text-2xl font-black">{language === 'nl' ? 'Vanaf' : 'From'} €349</span>
+                  <span className="text-green-600 text-xl sm:text-2xl font-black">{language === 'nl' ? 'Vanaf' : 'From'} €249</span>
                 </div>
                 <p className="text-[10px] sm:text-xs text-gray-400">
                   {language === 'nl' ? 'Rechtstreeks met de maker — 100% waarde' : 'Directly with the maker — 100% value'}

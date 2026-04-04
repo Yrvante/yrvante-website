@@ -8,19 +8,21 @@ const PricingSection = () => {
   const { language } = useLanguage();
 
   const pkgs = [
-    { key: 'rebranding', name: 'Rebranding', price: '349', icon: RefreshCw, desc: language === 'nl' ? 'Bestaande website, nieuw design' : 'Existing website, new design', features: [language === 'nl' ? 'Nieuw modern design' : 'New modern design', language === 'nl' ? 'Responsive optimalisatie' : 'Responsive optimization', language === 'nl' ? 'Hosting & SSL' : 'Hosting & SSL'] },
-    { key: 'basis', name: language === 'nl' ? 'Basis' : 'Basic', price: '500', icon: Monitor, desc: language === 'nl' ? '1-3 pagina\'s, ideaal om te starten' : '1-3 pages, ideal to start', features: ['Responsive design', language === 'nl' ? 'Contactformulier' : 'Contact form', 'Hosting & SSL'] },
-    { key: 'pro', name: 'Pro', price: '900', icon: Zap, popular: true, desc: language === 'nl' ? 'Tot 10 pagina\'s, voor groei' : 'Up to 10 pages, for growth', features: [language === 'nl' ? 'SEO optimalisatie' : 'SEO optimization', 'Blog / Portfolio', language === 'nl' ? 'Contactformulier + meer' : 'Contact form + more'] },
-    { key: 'premium', name: 'Premium', price: '1400', icon: Award, desc: language === 'nl' ? 'Alles inbegrepen, incl. boekingssysteem' : 'Everything included, incl. booking system', features: [language === 'nl' ? 'Boekingssysteem inbegrepen' : 'Booking system included', language === 'nl' ? 'Meertalig' : 'Multi-language', 'Priority support'] },
+    { key: 'rebranding', name: 'Rebranding', price: '249', icon: RefreshCw, desc: language === 'nl' ? 'Bestaande website, nieuw design' : 'Existing website, new design', features: [language === 'nl' ? 'Nieuw modern design' : 'New modern design', language === 'nl' ? 'Responsive optimalisatie' : 'Responsive optimization', language === 'nl' ? 'Hosting & SSL' : 'Hosting & SSL'] },
+    { key: 'basis', name: language === 'nl' ? 'Basis' : 'Basic', price: '399', icon: Monitor, desc: language === 'nl' ? '1-3 pagina\'s, ideaal om te starten' : '1-3 pages, ideal to start', features: ['Responsive design', language === 'nl' ? 'Contactformulier' : 'Contact form', 'Hosting & SSL'] },
+    { key: 'pro', name: 'Pro', price: '699', icon: Zap, popular: true, desc: language === 'nl' ? 'Tot 10 pagina\'s, voor groei' : 'Up to 10 pages, for growth', features: [language === 'nl' ? 'SEO optimalisatie' : 'SEO optimization', 'Blog / Portfolio', language === 'nl' ? 'Contactformulier + meer' : 'Contact form + more'] },
+    { key: 'premium', name: 'Premium', price: '999', icon: Award, desc: language === 'nl' ? 'Alles inbegrepen, incl. boekingssysteem' : 'Everything included, incl. booking system', features: [language === 'nl' ? 'Boekingssysteem inbegrepen' : 'Booking system included', language === 'nl' ? 'Meertalig' : 'Multi-language', 'Priority support'] },
   ];
 
   const extras = [
-    { name: language === 'nl' ? 'Extra pagina\'s' : 'Extra pages', price: '€50', unit: language === 'nl' ? '/pagina' : '/page', icon: FileText },
-    { name: language === 'nl' ? 'Meertalige website' : 'Multi-language website', price: '€200', unit: '', icon: GlobeIcon },
-    { name: language === 'nl' ? 'Extra contactformulier' : 'Extra contact form', price: '€80', unit: '', icon: MessageSquare },
-    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€250', unit: '', icon: BookOpen },
+    { name: language === 'nl' ? 'Extra pagina\'s' : 'Extra pages', price: '€39', unit: language === 'nl' ? '/pagina' : '/page', icon: FileText },
+    { name: language === 'nl' ? 'Meertalige website' : 'Multi-language website', price: '€109', unit: '', icon: GlobeIcon },
+    { name: language === 'nl' ? 'Extra contactformulier' : 'Extra contact form', price: '€59', unit: '', icon: MessageSquare },
+    { name: language === 'nl' ? 'Boekingssysteem' : 'Booking system', price: '€199', unit: '', icon: BookOpen },
     { name: 'Google Reviews', price: '€120', unit: '', icon: StarIcon },
-    { name: 'Dark mode', price: '€80', unit: '', icon: Moon },
+    { name: 'Dark mode', price: '€69', unit: '', icon: Moon },
+    { name: language === 'nl' ? 'Pop-up (aanbieding/aankondiging)' : 'Pop-up (offer/announcement)', price: '€29', unit: '', icon: MessageSquare },
+    { name: language === 'nl' ? 'Voor & na slider' : 'Before & after slider', price: '€29', unit: '', icon: RefreshCw },
   ];
 
   return (

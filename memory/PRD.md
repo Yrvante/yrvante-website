@@ -109,6 +109,24 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Radius verwijderd**: Zoekt nu op stadsnaam (slimmer en eenvoudiger)
 - **Resultaten**: "nagelstudio almelo" → 93 echte leads, "kapper almelo" → 75 echte leads
 
+### Phase 15 - Prijzen Update + Pakket Features + Website Functies (Complete - Apr 2026)
+**Prijzen bijgewerkt over alle pagina's:**
+- Rebranding €249, Basis €399, Pro €699, Premium €999
+- Extra pagina €39, Dark mode €69, Meertalig €109, Extra formulier €59, Boekingssysteem €199
+- Nieuwe extra's: Pop-up €29, Voor & na slider €29
+
+**Pakket features uitgebreid:**
+- Elk pakket: gratis Cookie melding, 404 pagina, Prijstabel, Sticky WhatsApp/social/bel-knop, Click-to-call
+- Pro + Premium: FAQ sectie (t.w.v. €39) + Scroll animaties (t.w.v. €49) inbegrepen
+- Maandabonnement: Onderhoudspagina, Welkomst popup, Announcement bar, Urgentie timer, Seizoensthema
+
+**Website features toegevoegd:**
+- Terug naar boven knop (ScrollToTop)
+- Automatische nachtmodus (20:00-06:00 → dark mode)
+- Automatische taaldetectie (browser taal NL/EN)
+- Interactieve achtergrond (parallax effect op bg-pattern bij muisbeweging)
+- Hover card CSS effect
+
 ## Vercel Environment Variables Required
 - `POSTGRES_URL` — Vercel Postgres connection string
 - `ADMIN_PASSWORD` — Admin dashboard password

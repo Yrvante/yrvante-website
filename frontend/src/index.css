@@ -339,3 +339,16 @@ html.dark [class*="shadow"] {
         border-bottom-width: inherit;
     }
 }
+
+
+/* Hover card effect - subtle lift on interactive cards */
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+html.dark .hover-card:hover {
+  box-shadow: 0 12px 40px rgba(255,255,255,0.04);
+}

@@ -73,7 +73,7 @@ export const services = {
         'Call-to-actions that work',
       ],
     },
-    price: '€500',
+    price: '€399',
   },
   rebranding: {
     icon: RefreshCw,
@@ -102,7 +102,7 @@ export const services = {
         'Brand identity translation to the web',
       ],
     },
-    price: '€349',
+    price: '€249',
   },
   onderhoud: {
     icon: Wrench,

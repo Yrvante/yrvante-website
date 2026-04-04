@@ -324,7 +324,7 @@ const CalculatorPage = () => {
       packages: {
         rebranding: {
           name: "Rebranding Website",
-          price: 349,
+          price: 249,
           description: "Bestaande website een nieuw uiterlijk",
           includes: [
             "Compleet nieuw design",
@@ -336,7 +336,7 @@ const CalculatorPage = () => {
         },
         basic: {
           name: "Basis Website",
-          price: 500,
+          price: 399,
           description: "Perfect voor startende ondernemers",
           includes: [
             "Moderne responsive website",
@@ -348,7 +348,7 @@ const CalculatorPage = () => {
         },
         pro: {
           name: "Pro Website",
-          price: 900,
+          price: 699,
           description: "Meest gekozen door groeiende bedrijven",
           popular: true,
           includes: [
@@ -358,18 +358,21 @@ const CalculatorPage = () => {
             "Blog pagina",
             "Portfolio pagina",
             "Contactformulier met email",
-            "Complexere layouts"
+            "FAQ sectie",
+            "Scroll animaties"
           ]
         },
         premium: {
           name: "Premium Website",
-          price: 1400,
+          price: 999,
           description: "Complete oplossing voor ambitieuze bedrijven",
           includes: [
             "Alles uit Pro +",
             "Tot 15 pagina's",
             "Afspraaksysteem",
             "Meertalige website",
+            "FAQ sectie",
+            "Scroll animaties",
             "Snellere reactietijd (binnen 2 uur)"
           ]
         }
@@ -379,19 +382,19 @@ const CalculatorPage = () => {
         extraPages: {
           title: "Extra pagina's",
           description: "Voor extra content (diensten, blog artikelen, portfolio items)",
-          price: 50,
+          price: 39,
           unit: "per pagina"
         },
         multiLanguage: {
           title: "Meertalige website",
           description: "Website in meerdere talen met taalwisselaar",
-          price: 200,
+          price: 109,
           unit: "eenmalig"
         },
         extraForm: {
           title: "Extra contactformulier",
           description: "Voor offerte aanvragen of afspraak verzoeken",
-          price: 80,
+          price: 59,
           unit: "eenmalig"
         },
         maintenance: {
@@ -403,7 +406,7 @@ const CalculatorPage = () => {
         bookingSystem: {
           title: "Online boekingssysteem",
           description: "Afspraken boeken via de website met admin dashboard",
-          price: 250,
+          price: 199,
           unit: "eenmalig"
         },
         googleReviews: {
@@ -416,7 +419,19 @@ const CalculatorPage = () => {
         darkMode: {
           title: "Dark mode",
           description: "Licht/donker modus schakelaar op je website",
-          price: 80,
+          price: 69,
+          unit: "eenmalig"
+        },
+        popup: {
+          title: "Pop-up (aanbieding/aankondiging)",
+          description: "Aanbieding of aankondiging popup voor bezoekers",
+          price: 29,
+          unit: "eenmalig"
+        },
+        beforeAfterSlider: {
+          title: "Voor & na slider",
+          description: "Interactieve slider om resultaten te vergelijken",
+          price: 29,
           unit: "eenmalig"
         }
       },
@@ -462,7 +477,7 @@ const CalculatorPage = () => {
       packages: {
         rebranding: {
           name: "Rebranding Website",
-          price: 349,
+          price: 249,
           description: "Give your existing website a new look",
           includes: [
             "Complete new design",
@@ -474,7 +489,7 @@ const CalculatorPage = () => {
         },
         basic: {
           name: "Basic Website",
-          price: 500,
+          price: 399,
           description: "Perfect for starting entrepreneurs",
           includes: [
             "Modern responsive website",
@@ -487,7 +502,7 @@ const CalculatorPage = () => {
         },
         pro: {
           name: "Pro Website",
-          price: 900,
+          price: 699,
           description: "Most chosen by growing businesses",
           popular: true,
           includes: [
@@ -497,18 +512,21 @@ const CalculatorPage = () => {
             "Blog page",
             "Portfolio page",
             "Contact form with email",
-            "Complex layouts"
+            "FAQ section",
+            "Scroll animations"
           ]
         },
         premium: {
           name: "Premium Website",
-          price: 1400,
+          price: 999,
           description: "Complete solution for ambitious businesses",
           includes: [
             "Everything from Pro +",
             "Up to 15 pages",
             "Booking system",
             "Multi-language website",
+            "FAQ section",
+            "Scroll animations",
             "Priority support"
           ]
         }
@@ -518,19 +536,19 @@ const CalculatorPage = () => {
         extraPages: {
           title: "Extra pages",
           description: "For extra content (services, blog posts, portfolio items)",
-          price: 50,
+          price: 39,
           unit: "per page"
         },
         multiLanguage: {
           title: "Multi-language website",
           description: "Website in multiple languages with language switcher",
-          price: 200,
+          price: 109,
           unit: "one-time"
         },
         extraForm: {
           title: "Extra contact form",
           description: "For quote requests or appointment requests",
-          price: 80,
+          price: 59,
           unit: "one-time"
         },
         maintenance: {
@@ -542,7 +560,7 @@ const CalculatorPage = () => {
         bookingSystem: {
           title: "Online booking system",
           description: "Book appointments via the website with admin dashboard",
-          price: 250,
+          price: 199,
           unit: "one-time"
         },
         googleReviews: {
@@ -555,7 +573,19 @@ const CalculatorPage = () => {
         darkMode: {
           title: "Dark mode",
           description: "Light/dark mode toggle on your website",
-          price: 80,
+          price: 69,
+          unit: "one-time"
+        },
+        popup: {
+          title: "Pop-up (offer/announcement)",
+          description: "Offer or announcement popup for visitors",
+          price: 29,
+          unit: "one-time"
+        },
+        beforeAfterSlider: {
+          title: "Before & after slider",
+          description: "Interactive slider to compare results",
+          price: 29,
           unit: "one-time"
         }
       },
@@ -596,17 +626,19 @@ const CalculatorPage = () => {
   const t = content[language] || content.nl;
 
   const prices = {
-    rebranding: 349,
-    basic: 500,
-    pro: 900,
-    premium: 1400,
-    extraPages: 50,
-    multiLanguage: 200,
-    extraForm: 80,
+    rebranding: 249,
+    basic: 399,
+    pro: 699,
+    premium: 999,
+    extraPages: 39,
+    multiLanguage: 109,
+    extraForm: 59,
     maintenance: 25,
-    bookingSystem: 250,
+    bookingSystem: 199,
     googleReviews: 120,
-    darkMode: 80,
+    darkMode: 69,
+    popup: 29,
+    beforeAfterSlider: 29,
   };
 
   const calculateTotal = () => {

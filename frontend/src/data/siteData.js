@@ -12,7 +12,7 @@ export const PHONE = "+31 85 505 5314";
 export const PACKAGE_PRICES = {
   basic: 500,
   pro: 900,
-  premium: 1400,
+  premium: 999,
 };
 
 // Package names (used across pages)

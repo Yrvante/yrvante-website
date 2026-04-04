@@ -20,9 +20,9 @@ const industries = {
 };
 
 const tiers = [
-  { key: "basic", label: "Basis", price: "500" },
-  { key: "pro", label: "Pro", price: "900" },
-  { key: "premium", label: "Premium", price: "1400" },
+  { key: "basic", label: "Basis", price: "399" },
+  { key: "pro", label: "Pro", price: "699" },
+  { key: "premium", label: "Premium", price: "999" },
 ];
 
 const tierFeatures = {

@@ -140,7 +140,7 @@ const BasisDemo = ({ onClose }) => {
 
       {/* Package Info Banner */}
       <div className="bg-amber-500 text-white py-4 px-6 text-center">
-        <p className="font-semibold">BASIS PAKKET - €500 | 3 pagina's | Responsive Design | Basis Contact</p>
+        <p className="font-semibold">BASIS PAKKET - €399 | 3 pagina's | Responsive Design | Basis Contact</p>
       </div>
     </div>
   );
@@ -362,7 +362,7 @@ const ProDemo = ({ onClose }) => {
 
       {/* Package Info Banner */}
       <div className="bg-blue-600 text-white py-4 px-6 text-center">
-        <p className="font-semibold">PRO PAKKET - €900 | 10 pagina's | SEO | Blog | Portfolio | Contactformulier</p>
+        <p className="font-semibold">PRO PAKKET - €699 | 10 pagina's | SEO | Blog | Portfolio | Contactformulier</p>
       </div>
     </div>
   );
@@ -623,7 +623,7 @@ const PremiumDemo = ({ onClose }) => {
 
       {/* Package Info Banner */}
       <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white py-4 px-6 text-center">
-        <p className="font-semibold">PREMIUM PAKKET - €1400 | 15 pagina's | Boekingssysteem | Google Reviews | Meertalig | Premium Design</p>
+        <p className="font-semibold">PREMIUM PAKKET - €999 | 15 pagina's | Boekingssysteem | Google Reviews | Meertalig | Premium Design</p>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ const WhyWebsitePage = () => {
       stats: [
         { value: "95%", label: "zoekt online" },
         { value: "24/7", label: "bereikbaar" },
-        { value: "€500", label: "vanaf" }
+        { value: "€399", label: "vanaf" }
       ],
       
       section1Title: "Klanten zoeken online",
@@ -53,7 +53,7 @@ const WhyWebsitePage = () => {
       },
       yrvante: {
         title: "Yrvante",
-        price: "Vanaf €500",
+        price: "Vanaf €399",
         extra: "Geen verplichte abonnementen",
         points: [
           { text: "Klaar binnen 1-2 weken", negative: false },
@@ -64,7 +64,7 @@ const WhyWebsitePage = () => {
       },
       
       solutionTitle: "Professionele websites, zonder onnodig hoge prijzen",
-      solutionText: "Bij Yrvante geloof ik dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen mijn websites al vanaf €500.",
+      solutionText: "Bij Yrvante geloof ik dat een professionele website voor iedere ondernemer bereikbaar moet zijn. Daarom beginnen mijn websites al vanaf €399.",
       solutionText2: "Je krijgt een moderne, snelle website die er professioneel uitziet en perfect werkt op mobiel, tablet en desktop.",
       
       featuresTitle: "Wat krijg je bij Yrvante?",
@@ -85,9 +85,9 @@ const WhyWebsitePage = () => {
       ctaCalculator: "Bereken je prijs",
       
       packages: [
-        { name: "Basis", price: "€500", desc: "Startende ondernemers" },
-        { name: "Pro", price: "€900", desc: "Groeiende bedrijven" },
-        { name: "Premium", price: "€1400", desc: "Complete oplossing" }
+        { name: "Basis", price: "€399", desc: "Startende ondernemers" },
+        { name: "Pro", price: "€699", desc: "Groeiende bedrijven" },
+        { name: "Premium", price: "€999", desc: "Complete oplossing" }
       ]
     },
     en: {
@@ -99,7 +99,7 @@ const WhyWebsitePage = () => {
       stats: [
         { value: "95%", label: "search online" },
         { value: "24/7", label: "accessible" },
-        { value: "€500", label: "starting from" }
+        { value: "€399", label: "starting from" }
       ],
       
       section1Title: "Customers search online",
@@ -130,7 +130,7 @@ const WhyWebsitePage = () => {
       },
       yrvante: {
         title: "Yrvante",
-        price: "From €500",
+        price: "From €399",
         extra: "No mandatory subscriptions",
         points: [
           { text: "Ready within 1-2 weeks", negative: false },
@@ -141,7 +141,7 @@ const WhyWebsitePage = () => {
       },
       
       solutionTitle: "Professional websites, without unnecessarily high prices",
-      solutionText: "At Yrvante I believe a professional website should be accessible to every entrepreneur. That's why my websites start from just €500.",
+      solutionText: "At Yrvante I believe a professional website should be accessible to every entrepreneur. That's why my websites start from just €399.",
       solutionText2: "You get a modern, fast website that looks professional and works perfectly on mobile, tablet, and desktop.",
       
       featuresTitle: "What do you get at Yrvante?",
@@ -162,9 +162,9 @@ const WhyWebsitePage = () => {
       ctaCalculator: "Calculate your price",
       
       packages: [
-        { name: "Basic", price: "€500", desc: "Starting entrepreneurs" },
-        { name: "Pro", price: "€900", desc: "Growing businesses" },
-        { name: "Premium", price: "€1400", desc: "Complete solution" }
+        { name: "Basic", price: "€399", desc: "Starting entrepreneurs" },
+        { name: "Pro", price: "€699", desc: "Growing businesses" },
+        { name: "Premium", price: "€999", desc: "Complete solution" }
       ]
     }
   };

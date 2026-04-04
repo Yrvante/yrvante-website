@@ -1,8 +1,9 @@
-import React, { useState, createContext, useContext, useEffect, lazy, Suspense } from "react";
+import React, { useState, createContext, useContext, useEffect, useRef, useCallback, lazy, Suspense } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
+import ScrollToTop from "./components/ScrollToTop";
 import axios from "axios";
 
 // Lazy-loaded pages for better performance
@@ -76,12 +77,12 @@ const translations = {
       web: {
         title: "Website Ontwikkeling",
         description: "Moderne, responsieve websites gebouwd voor freelancers en bedrijven.",
-        price: "Vanaf €500 excl. BTW"
+        price: "Vanaf €399 excl. BTW"
       },
       business: {
         title: "Geavanceerde Websites",
         description: "Websites met werkende functionaliteiten: afspraken maken, klantportalen, app development en meer.",
-        price: "Vanaf €900 excl. BTW"
+        price: "Vanaf €699 excl. BTW"
       },
       software: {
         title: "Maandelijks Onderhoud",
@@ -168,12 +169,12 @@ const translations = {
       web: {
         title: "Website Development",
         description: "Modern, responsive websites built for freelancers and businesses.",
-        price: "From €500 excl. VAT"
+        price: "From €399 excl. VAT"
       },
       business: {
         title: "Advanced Websites",
         description: "Websites with working features: appointment booking, client portals, app development and more.",
-        price: "From €900 excl. VAT"
+        price: "From €699 excl. VAT"
       },
       software: {
         title: "Monthly Maintenance",
@@ -254,9 +255,28 @@ const PageLoader = () => (
 );
 
 function App() {
-  const [language, setLanguage] = useState("nl");
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+  // Auto language detection based on browser language
+  const [language, setLanguage] = useState(() => {
+    const stored = localStorage.getItem("language");
+    if (stored) return stored;
+    const browserLang = navigator.language || navigator.userLanguage || "nl";
+    return browserLang.startsWith("nl") ? "nl" : "en";
+  });
+  
+  const [theme, setTheme] = useState(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored) return stored;
+    // Auto night mode: dark between 20:00 and 06:00
+    const hour = new Date().getHours();
+    return (hour >= 20 || hour < 6) ? "dark" : "light";
+  });
+  
   const t = translations[language];
+
+  // Save language preference
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
 
   // Apply theme class to html element
   useEffect(() => {
@@ -269,20 +289,51 @@ function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(prev => prev === "light" ? "dark" : "light");
+  // Auto night mode check every 30 minutes (only if user hasn't manually toggled)
+  useEffect(() => {
+    const checkNightMode = () => {
+      const hour = new Date().getHours();
+      const shouldBeDark = hour >= 20 || hour < 6;
+      const manuallySet = localStorage.getItem("theme_manual");
+      if (!manuallySet) {
+        setTheme(shouldBeDark ? "dark" : "light");
+      }
+    };
+    const interval = setInterval(checkNightMode, 30 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleTheme = () => {
+    localStorage.setItem("theme_manual", "true");
+    setTheme(prev => prev === "light" ? "dark" : "light");
+  };
 
   // Track page view on mount
   useEffect(() => {
     trackPageView(window.location.pathname);
   }, []);
 
+  // Interactive background: mouse tracking for subtle parallax on bg-pattern
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const handleMouseMove = useCallback((e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    setMousePos({ x, y });
+  }, []);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <div className="App relative">
-        {/* Global background pattern - visible on ALL pages */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`} style={{ backgroundImage: `url(/bg-pattern.jpg)` }} />
+      <div className="App relative" onMouseMove={handleMouseMove}>
+        {/* Global background pattern - interactive parallax on mouse/touch */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <div
+            className={`absolute -inset-5 bg-cover bg-center bg-no-repeat transition-transform duration-[2000ms] ease-out ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.25]'}`}
+            style={{
+              backgroundImage: `url(/bg-pattern.jpg)`,
+              transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
+            }}
+          />
         </div>
         <div className="relative z-10">
         <BrowserRouter>
@@ -309,6 +360,7 @@ function App() {
           </Suspense>
         </BrowserRouter>
         </div>
+        <ScrollToTop />
         <Toaster position="bottom-right" />
       </div>
     </LanguageContext.Provider>

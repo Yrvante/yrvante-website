@@ -612,7 +612,7 @@ const DemoPreview = ({ language = 'nl' }) => {
     { 
       id: 'basic', 
       name: language === 'nl' ? 'Basis' : 'Basic',
-      price: '€500',
+      price: '€399',
       description: language === 'nl' ? 'Hondenwandelservice' : 'Dog Walking Service',
       pages: language === 'nl' ? '3 pagina\'s' : '3 pages',
       color: 'amber'
@@ -620,7 +620,7 @@ const DemoPreview = ({ language = 'nl' }) => {
     { 
       id: 'pro', 
       name: 'Pro',
-      price: '€900',
+      price: '€699',
       description: language === 'nl' ? 'Schoonmaakbedrijf' : 'Cleaning Company',
       pages: language === 'nl' ? '10 pagina\'s + blog' : '10 pages + blog',
       color: 'emerald',
@@ -629,7 +629,7 @@ const DemoPreview = ({ language = 'nl' }) => {
     { 
       id: 'premium', 
       name: 'Premium',
-      price: '€1400',
+      price: '€999',
       description: language === 'nl' ? 'Nagelstudio' : 'Nail Studio',
       pages: language === 'nl' ? '15 pagina\'s + boekingssysteem' : '15 pages + booking',
       color: 'rose'

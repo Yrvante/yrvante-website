@@ -160,7 +160,7 @@ const RebrandingPage = () => {
               </div>
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
-                  <span className="text-3xl font-black dark:text-white">€349</span>
+                  <span className="text-3xl font-black dark:text-white">€249</span>
                   <span className="text-xs uppercase tracking-widest text-gray-400">
                     {language === "nl" ? "vanaf" : "from"}
                   </span>
@@ -291,7 +291,7 @@ const RebrandingPage = () => {
                 to="/calculator?package=rebranding"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gray-500 text-white text-sm font-bold uppercase tracking-wider rounded-full hover:bg-gray-600 transition-all"
               >
-                {language === "nl" ? "Start vandaag voor €349" : "Start today for €349"}
+                {language === "nl" ? "Start vandaag voor €249" : "Start today for €249"}
                 <ArrowRight size={16} />
               </Link>
             </div>

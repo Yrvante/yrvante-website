@@ -27,7 +27,7 @@ const CompetitorComparison = () => {
     {
       label: language === "nl" ? "Prijs" : "Price",
       agency: "€3.000 - €8.000",
-      yrvante: "€349 - €1.400",
+      yrvante: "€249 - €999",
       cheap: "€100 - €300",
     },
     {

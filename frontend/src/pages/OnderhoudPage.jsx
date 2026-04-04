@@ -23,6 +23,7 @@ import {
   Terminal,
   Wrench,
   DollarSign,
+  Gift,
 } from "lucide-react";
 
 const LOGO_URL = "/logo.png";
@@ -506,6 +507,25 @@ const OnderhoudPage = () => {
                 </li>
               ))}
             </ul>
+            <div className="mt-4 pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700">
+              <p className="text-xs uppercase tracking-wider mb-2 text-green-600 dark:text-green-400 font-bold">
+                {language === 'nl' ? 'Gratis inbegrepen' : 'Free included'}
+              </p>
+              <ul className="space-y-1.5 text-sm text-gray-500 dark:text-gray-400 text-left">
+                {[
+                  language === 'nl' ? 'Onderhoudspagina ("We zijn zo terug")' : 'Maintenance page ("We\'ll be right back")',
+                  language === 'nl' ? 'Welkomst popup (bijv. korting)' : 'Welcome popup (e.g. discount)',
+                  language === 'nl' ? 'Announcement bar bovenaan' : 'Announcement bar on top',
+                  language === 'nl' ? 'Urgentie timer (afteltimer)' : 'Urgency timer (countdown)',
+                  language === 'nl' ? 'Seizoensthema (kleuren per seizoen)' : 'Seasonal theme (colors per season)',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <Gift size={12} className="text-green-500 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <button

@@ -6,7 +6,7 @@ const seoData = {
   nl: {
     '/': {
       title: 'Yrvante | Professionele Websites voor ZZP\'ers & MKB | Nederland',
-      description: 'Yrvante bouwt moderne, professionele websites voor ZZP\'ers en MKB. Vanaf €500 een complete website. Snel, betaalbaar en resultaatgericht.',
+      description: 'Yrvante bouwt moderne, professionele websites voor ZZP\'ers en MKB. Vanaf €399 een complete website. Snel, betaalbaar en resultaatgericht.',
       keywords: 'website laten maken, webdesign Nederland, ZZP website, MKB website, goedkope website, professionele website'
     },
     '/404': {
@@ -16,12 +16,12 @@ const seoData = {
     },
     '/pakketten': {
       title: 'Website Pakketten & Prijzen | Yrvante',
-      description: 'Bekijk onze website pakketten: Rebranding (€349), Basis (€500), Pro (€900) en Premium (€1400). Transparante prijzen, geen verborgen kosten.',
+      description: 'Bekijk onze website pakketten: Rebranding (€249), Basis (€399), Pro (€699) en Premium (€999). Transparante prijzen, geen verborgen kosten.',
       keywords: 'website pakket, website prijzen, website kosten, webdesign prijzen, ZZP website prijs, rebranding website'
     },
     '/calculator': {
       title: 'Website Prijscalculator | Bereken Je Website Kosten | Yrvante',
-      description: 'Bereken direct wat jouw website kost. Kies uit 4 pakketten: Rebranding (€349), Basis (€500), Pro (€900) of Premium (€1400) en ontvang een transparante offerte.',
+      description: 'Bereken direct wat jouw website kost. Kies uit 4 pakketten: Rebranding (€249), Basis (€399), Pro (€699) of Premium (€999) en ontvang een transparante offerte.',
       keywords: 'website calculator, website prijs berekenen, website kosten calculator, webdesign offerte, rebranding website'
     },
     '/waarom-website': {
@@ -56,37 +56,37 @@ const seoData = {
     },
     '/voor/kappers': {
       title: 'Website voor Kappers | Yrvante',
-      description: 'Een professionele website laten maken als kapper? Yrvante bouwt stijlvolle kapperssites met online afspraken, galerij en meer. Vanaf €500.',
+      description: 'Een professionele website laten maken als kapper? Yrvante bouwt stijlvolle kapperssites met online afspraken, galerij en meer. Vanaf €399.',
       keywords: 'website kapper, kapperszaak website, kapper online afspraken, webdesign kapper'
     },
     '/voor/loodgieters': {
       title: 'Website voor Loodgieters | Yrvante',
-      description: 'Meer klanten als loodgieter via een professionele website. Met contactformulier, diensten en snel vindbaar op Google. Vanaf €500.',
+      description: 'Meer klanten als loodgieter via een professionele website. Met contactformulier, diensten en snel vindbaar op Google. Vanaf €399.',
       keywords: 'website loodgieter, loodgietersbedrijf website, loodgieter online, webdesign loodgieter'
     },
     '/voor/electriciens': {
       title: 'Website voor Electriciëns | Yrvante',
-      description: 'Professionele website voor electriciëns. Laat klanten je vinden via Google en vergroot je opdrachten. Vanaf €500.',
+      description: 'Professionele website voor electriciëns. Laat klanten je vinden via Google en vergroot je opdrachten. Vanaf €399.',
       keywords: 'website electricien, elektricien website, webdesign electricien'
     },
     '/voor/coaches': {
       title: 'Website voor Coaches | Yrvante',
-      description: 'Een professionele coachingswebsite laten maken? Met online boeken, diensten en testimonials. Yrvante helpt je groeien. Vanaf €500.',
+      description: 'Een professionele coachingswebsite laten maken? Met online boeken, diensten en testimonials. Yrvante helpt je groeien. Vanaf €399.',
       keywords: 'website coach, coaching website, life coach website, webdesign coach'
     },
     '/voor/nagelstudios': {
       title: 'Website voor Nagelstudio\'s | Yrvante',
-      description: 'Laat je nagelstudio online schitteren. Professionele website met galerij, behandelingen en online afspraken. Vanaf €500.',
+      description: 'Laat je nagelstudio online schitteren. Professionele website met galerij, behandelingen en online afspraken. Vanaf €399.',
       keywords: 'website nagelstudio, nagelstudio online, nail studio website'
     },
     '/voor/restaurants': {
       title: 'Website voor Restaurants | Yrvante',
-      description: 'Een professionele restaurantwebsite met menu, reserveringen en sfeerfotos. Meer gasten via Google. Vanaf €500.',
+      description: 'Een professionele restaurantwebsite met menu, reserveringen en sfeerfotos. Meer gasten via Google. Vanaf €399.',
       keywords: 'website restaurant, restaurant website, horeca website, menu website'
     },
     '/diensten/webdesign': {
       title: 'Webdesign | Moderne Websites die Werken | Yrvante',
-      description: 'Professioneel webdesign dat converteert. Responsive, snel en SEO-vriendelijk. Van €500 — opgeleverd in 1-2 weken.',
+      description: 'Professioneel webdesign dat converteert. Responsive, snel en SEO-vriendelijk. Van €399 — opgeleverd in 1-2 weken.',
       keywords: 'webdesign, website laten maken, professionele website, responsive website, snel website'
     },
     '/diensten/onderhoud': {
@@ -96,102 +96,102 @@ const seoData = {
     },
     '/voor/zzp': {
       title: 'Website voor ZZP\'ers | Yrvante',
-      description: 'Een betaalbare, professionele website voor ZZP\'ers. Gevonden worden op Google. Vanaf €500.',
+      description: 'Een betaalbare, professionele website voor ZZP\'ers. Gevonden worden op Google. Vanaf €399.',
       keywords: 'website zzp, zzper website, freelancer website, zelfstandige website'
     },
     '/voor/nagelstylisten': {
       title: 'Website voor Nagelstylisten | Yrvante',
-      description: 'Laat je nagel kunst online schitteren. Professionele website met galerij, behandelingen en online afspraken. Vanaf €500.',
+      description: 'Laat je nagel kunst online schitteren. Professionele website met galerij, behandelingen en online afspraken. Vanaf €399.',
       keywords: 'website nagelstyliste, nagelstudio website, nail artist website'
     },
     '/voor/interieurstylisten': {
       title: 'Website voor Interieurstylisten | Yrvante',
-      description: 'Toon je portfolio aan potentiële klanten. Elegante website voor interieurontwerpers. Vanaf €500.',
+      description: 'Toon je portfolio aan potentiële klanten. Elegante website voor interieurontwerpers. Vanaf €399.',
       keywords: 'website interieurontwerpster, interieurdesign website, home staging website'
     },
     '/voor/bloemisten': {
       title: 'Website voor Bloemisten | Yrvante',
-      description: 'Laat je bloemen online bloeien. Website met catalogus, bestelmogelijkheid en seizoensaanbiedingen. Vanaf €500.',
+      description: 'Laat je bloemen online bloeien. Website met catalogus, bestelmogelijkheid en seizoensaanbiedingen. Vanaf €399.',
       keywords: 'website bloemist, bloemenwinkel website, bloemenzaak website'
     },
     '/voor/personaltrainers': {
       title: 'Website voor Personal Trainers | Yrvante',
-      description: 'Inspireer klanten om te starten. Website met transformatiefoto\'s, aanpak en online afspraken. Vanaf €500.',
+      description: 'Inspireer klanten om te starten. Website met transformatiefoto\'s, aanpak en online afspraken. Vanaf €399.',
       keywords: 'website personal trainer, fitness coach website, sportcoach website'
     },
     '/voor/fotografen': {
       title: 'Website voor Fotografen | Yrvante',
-      description: 'Je portfolio verdient een podium. Strak, snel ladende website voor fotografen. Vanaf €500.',
+      description: 'Je portfolio verdient een podium. Strak, snel ladende website voor fotografen. Vanaf €399.',
       keywords: 'website fotograaf, portfolio website fotograaf, fotografie website'
     },
     '/voor/makelaars': {
       title: 'Website voor Makelaars | Yrvante',
-      description: 'Onderscheid je van grote kantoren. Persoonlijke makelaarwebsite met woningaanbod en directe contactmogelijkheden. Vanaf €500.',
+      description: 'Onderscheid je van grote kantoren. Persoonlijke makelaarwebsite met woningaanbod en directe contactmogelijkheden. Vanaf €399.',
       keywords: 'website makelaar, makelaar website, vastgoed website'
     },
     '/voor/tandartsen': {
       title: 'Website voor Tandartsen | Yrvante',
-      description: 'Nieuwe patiënten met vertrouwen. Warme, professionele website voor tandartsen met online afspraken. Vanaf €500.',
+      description: 'Nieuwe patiënten met vertrouwen. Warme, professionele website voor tandartsen met online afspraken. Vanaf €399.',
       keywords: 'website tandarts, tandartspraktijk website, mondhygiënist website'
     },
     '/voor/garages': {
       title: 'Website voor Garages | Yrvante',
-      description: 'Meer klanten voor je werkplaats. Duidelijke website met diensten, APK-afspraken en reviews. Vanaf €500.',
+      description: 'Meer klanten voor je werkplaats. Duidelijke website met diensten, APK-afspraken en reviews. Vanaf €399.',
       keywords: 'website garage, autogarage website, APK station website'
     },
     '/voor/hondentrimmers': {
       title: 'Website voor Hondentrimsalons | Yrvante',
-      description: 'Laat zien hoe mooi je ze maakt. Website met voor-en-na foto\'s, prijslijst en online afspraken. Vanaf €500.',
+      description: 'Laat zien hoe mooi je ze maakt. Website met voor-en-na foto\'s, prijslijst en online afspraken. Vanaf €399.',
       keywords: 'website hondentrimmer, trimsalon website, dierenverzorging website'
     },
     '/voor/schoonheidsspecialisten': {
       title: 'Website voor Schoonheidsspecialisten | Yrvante',
-      description: 'Laat je expertise glansen. Website met behandelingen, galerij en online afspraken voor schoonheidssalons. Vanaf €500.',
+      description: 'Laat je expertise glansen. Website met behandelingen, galerij en online afspraken voor schoonheidssalons. Vanaf €399.',
       keywords: 'website schoonheidsspecialist, beauty salon website, huidverzorging website'
     },
     '/voor/masseurs': {
       title: 'Website voor Masseurs | Yrvante',
-      description: 'Rust en professionaliteit online. Website voor massagepraktijken met diensten en online afspraken. Vanaf €500.',
+      description: 'Rust en professionaliteit online. Website voor massagepraktijken met diensten en online afspraken. Vanaf €399.',
       keywords: 'website masseur, massagepraktijk website, wellnesssalon website'
     },
     '/voor/fysiotherapeuten': {
       title: 'Website voor Fysiotherapeuten | Yrvante',
-      description: 'Patiënten vinden je makkelijker. Professionele website voor fysiotherapiepraktijken. Vanaf €500.',
+      description: 'Patiënten vinden je makkelijker. Professionele website voor fysiotherapiepraktijken. Vanaf €399.',
       keywords: 'website fysiotherapeut, fysiotherapiepraktijk website, sportfysio website'
     },
     '/voor/accountants': {
       title: 'Website voor Accountants | Yrvante',
-      description: 'Vertrouwen uitstralen online. Strakke website voor accountants en boekhouders. Vanaf €500.',
+      description: 'Vertrouwen uitstralen online. Strakke website voor accountants en boekhouders. Vanaf €399.',
       keywords: 'website accountant, boekhoudkantoor website, belastingadviseur website'
     },
     '/voor/electriciens': {
       title: 'Website voor Elektriciens | Yrvante',
-      description: 'Gevonden worden bij elke klus. Duidelijke website voor elektriciensbedrijven. Vanaf €500.',
+      description: 'Gevonden worden bij elke klus. Duidelijke website voor elektriciensbedrijven. Vanaf €399.',
       keywords: 'website elektricien, installatiebedrijf website, elektrisch bedrijf website'
     },
     '/voor/schilders': {
       title: 'Website voor Schilders | Yrvante',
-      description: 'Je werk verdient een podium. Portfolio website voor schildersbedrijven met voor-en-na foto\'s. Vanaf €500.',
+      description: 'Je werk verdient een podium. Portfolio website voor schildersbedrijven met voor-en-na foto\'s. Vanaf €399.',
       keywords: 'website schilder, schildersbedrijf website, decorateur website'
     },
     '/voor/timmerlieden': {
       title: 'Website voor Timmerlieden | Yrvante',
-      description: 'Toon je vakmanschap online. Portfolio website voor timmerbedrijven en aannemers. Vanaf €500.',
+      description: 'Toon je vakmanschap online. Portfolio website voor timmerbedrijven en aannemers. Vanaf €399.',
       keywords: 'website timmerman, timmerbedrijf website, aannemer website'
     },
     '/voor/dierenartsen': {
       title: 'Website voor Dierenartsen | Yrvante',
-      description: 'Baasjes vinden je makkelijker. Warme, professionele website voor dierenkliniek en dierenartsen. Vanaf €500.',
+      description: 'Baasjes vinden je makkelijker. Warme, professionele website voor dierenkliniek en dierenartsen. Vanaf €399.',
       keywords: 'website dierenarts, dierenkliniek website, veterinair website'
     },
     '/voor/klusbedrijven': {
       title: 'Website voor Klusbedrijven | Yrvante',
-      description: 'Altijd gevonden bij de juiste klus. Professionele website voor klusbedrijven met portfolio. Vanaf €500.',
+      description: 'Altijd gevonden bij de juiste klus. Professionele website voor klusbedrijven met portfolio. Vanaf €399.',
       keywords: 'website klusbedrijf, handyman website, woningrenovatie website'
     },
     '/rebranding': {
       title: 'Website Rebranding | Nieuwe Look voor Je Site | Yrvante',
-      description: 'Geef je bestaande website een compleet nieuw uiterlijk. Rebranding vanaf €349 — modern design, betere conversie en een frisse uitstraling.',
+      description: 'Geef je bestaande website een compleet nieuw uiterlijk. Rebranding vanaf €249 — modern design, betere conversie en een frisse uitstraling.',
       keywords: 'website rebranding, website vernieuwen, website redesign, website opfrissen, site restylen'
     },
     '/privacy': {
@@ -203,7 +203,7 @@ const seoData = {
   en: {
     '/': {
       title: 'Yrvante | Professional Websites for Freelancers & SMBs | Netherlands',
-      description: 'Yrvante builds modern, professional websites for freelancers and SMBs. Complete website from €500. Fast, affordable and result-driven.',
+      description: 'Yrvante builds modern, professional websites for freelancers and SMBs. Complete website from €399. Fast, affordable and result-driven.',
       keywords: 'website design, web development Netherlands, freelancer website, SMB website, affordable website'
     },
     '/404': {
@@ -213,12 +213,12 @@ const seoData = {
     },
     '/pakketten': {
       title: 'Website Packages & Pricing | Yrvante',
-      description: 'View our website packages: Rebranding (€349), Basic (€500), Pro (€900) and Premium (€1400). Transparent pricing, no hidden costs.',
+      description: 'View our website packages: Rebranding (€249), Basic (€399), Pro (€699) and Premium (€999). Transparent pricing, no hidden costs.',
       keywords: 'website package, website pricing, website costs, web design prices, website rebranding'
     },
     '/calculator': {
       title: 'Website Price Calculator | Calculate Your Website Cost | Yrvante',
-      description: 'Calculate your website cost instantly. Choose from 4 packages: Rebranding (€349), Basic (€500), Pro (€900) or Premium (€1400) and get a transparent quote.',
+      description: 'Calculate your website cost instantly. Choose from 4 packages: Rebranding (€249), Basic (€399), Pro (€699) or Premium (€999) and get a transparent quote.',
       keywords: 'website calculator, website price calculator, website cost estimate, web design quote, website rebranding'
     },
     '/waarom-website': {
@@ -253,127 +253,127 @@ const seoData = {
     },
     '/voor/kappers': {
       title: 'Website for Hair Salons | Yrvante',
-      description: 'A professional website for hair salons with online booking, gallery and more. From €500.',
+      description: 'A professional website for hair salons with online booking, gallery and more. From €399.',
       keywords: 'hair salon website, barber website, hairdresser website'
     },
     '/voor/loodgieters': {
       title: 'Website for Plumbers | Yrvante',
-      description: 'More customers as a plumber with a professional website. Contact form, services and easy to find on Google. From €500.',
+      description: 'More customers as a plumber with a professional website. Contact form, services and easy to find on Google. From €399.',
       keywords: 'plumber website, plumbing business website'
     },
     '/voor/coaches': {
       title: 'Website for Coaches | Yrvante',
-      description: 'A professional coaching website with online booking, services and testimonials. From €500.',
+      description: 'A professional coaching website with online booking, services and testimonials. From €399.',
       keywords: 'coach website, coaching website, life coach website'
     },
     '/voor/restaurants': {
       title: 'Website for Restaurants | Yrvante',
-      description: 'A professional restaurant website with menu, reservations and photos. More guests via Google. From €500.',
+      description: 'A professional restaurant website with menu, reservations and photos. More guests via Google. From €399.',
       keywords: 'restaurant website, hospitality website, menu website'
     },
     '/diensten/webdesign': {
       title: 'Web Design | Modern Websites That Work | Yrvante',
-      description: 'Professional web design that converts. Responsive, fast and SEO-friendly. From €500 — delivered in 1-2 weeks.',
+      description: 'Professional web design that converts. Responsive, fast and SEO-friendly. From €399 — delivered in 1-2 weeks.',
       keywords: 'web design, website creation, professional website, responsive website'
     },
     '/voor/zzp': {
       title: 'Website for Freelancers | Yrvante',
-      description: 'An affordable, professional website for freelancers. Get found on Google. From €500.',
+      description: 'An affordable, professional website for freelancers. Get found on Google. From €399.',
       keywords: 'freelancer website, self-employed website, ZZP website'
     },
     '/voor/nagelstylisten': {
       title: 'Website for Nail Technicians | Yrvante',
-      description: 'Let your nail art shine online. Professional website with gallery and online booking. From €500.',
+      description: 'Let your nail art shine online. Professional website with gallery and online booking. From €399.',
       keywords: 'nail technician website, nail studio website'
     },
     '/voor/fysiotherapeuten': {
       title: 'Website for Physiotherapists | Yrvante',
-      description: 'Patients find you more easily. Professional website for physiotherapy practices. From €500.',
+      description: 'Patients find you more easily. Professional website for physiotherapy practices. From €399.',
       keywords: 'physiotherapist website, physio practice website'
     },
     '/voor/accountants': {
       title: 'Website for Accountants | Yrvante',
-      description: 'Radiate trust online. Clean website for accountants and bookkeepers. From €500.',
+      description: 'Radiate trust online. Clean website for accountants and bookkeepers. From €399.',
       keywords: 'accountant website, bookkeeper website, tax advisor website'
     },
     '/voor/electriciens': {
       title: 'Website for Electricians | Yrvante',
-      description: 'Found for every job. Clear website for electrical companies. From €500.',
+      description: 'Found for every job. Clear website for electrical companies. From €399.',
       keywords: 'electrician website, electrical company website'
     },
     '/voor/schilders': {
       title: 'Website for Painters | Yrvante',
-      description: 'Your work deserves a stage. Portfolio website for painting companies. From €500.',
+      description: 'Your work deserves a stage. Portfolio website for painting companies. From €399.',
       keywords: 'painter website, painting company website'
     },
     '/voor/timmerlieden': {
       title: 'Website for Carpenters | Yrvante',
-      description: 'Show your craftsmanship online. Portfolio website for carpentry businesses. From €500.',
+      description: 'Show your craftsmanship online. Portfolio website for carpentry businesses. From €399.',
       keywords: 'carpenter website, carpentry company website'
     },
     '/voor/dierenartsen': {
       title: 'Website for Veterinarians | Yrvante',
-      description: 'Pet owners find you more easily. Warm, professional website for animal clinics. From €500.',
+      description: 'Pet owners find you more easily. Warm, professional website for animal clinics. From €399.',
       keywords: 'veterinarian website, animal clinic website, vet website'
     },
     '/voor/klusbedrijven': {
       title: 'Website for Handymen | Yrvante',
-      description: 'Always found for the right job. Professional website for handyman services. From €500.',
+      description: 'Always found for the right job. Professional website for handyman services. From €399.',
       keywords: 'handyman website, home renovation website'
     },
     '/voor/nagelstudios': {
       title: 'Website for Nail Studios | Yrvante',
-      description: 'Let your nail studio shine online. Professional website with gallery and online booking. From €500.',
+      description: 'Let your nail studio shine online. Professional website with gallery and online booking. From €399.',
       keywords: 'nail studio website, nail salon website'
     },
     '/voor/interieurstylisten': {
       title: 'Website for Interior Designers | Yrvante',
-      description: 'Show your portfolio to potential clients. Elegant website for interior designers. From €500.',
+      description: 'Show your portfolio to potential clients. Elegant website for interior designers. From €399.',
       keywords: 'interior designer website, home staging website'
     },
     '/voor/bloemisten': {
       title: 'Website for Florists | Yrvante',
-      description: 'Let your flowers bloom online. Website with catalogue and seasonal offers. From €500.',
+      description: 'Let your flowers bloom online. Website with catalogue and seasonal offers. From €399.',
       keywords: 'florist website, flower shop website'
     },
     '/voor/personaltrainers': {
       title: 'Website for Personal Trainers | Yrvante',
-      description: 'Inspire clients to get started. Website with transformation photos and online booking. From €500.',
+      description: 'Inspire clients to get started. Website with transformation photos and online booking. From €399.',
       keywords: 'personal trainer website, fitness coach website'
     },
     '/voor/fotografen': {
       title: 'Website for Photographers | Yrvante',
-      description: 'Your portfolio deserves a stage. Fast-loading website for photographers. From €500.',
+      description: 'Your portfolio deserves a stage. Fast-loading website for photographers. From €399.',
       keywords: 'photographer website, photography portfolio website'
     },
     '/voor/makelaars': {
       title: 'Website for Real Estate Agents | Yrvante',
-      description: 'Stand out from large agencies. Personal real estate website with property listings. From €500.',
+      description: 'Stand out from large agencies. Personal real estate website with property listings. From €399.',
       keywords: 'real estate agent website, property website'
     },
     '/voor/tandartsen': {
       title: 'Website for Dentists | Yrvante',
-      description: 'New patients with confidence. Warm, professional website for dentists with online appointments. From €500.',
+      description: 'New patients with confidence. Warm, professional website for dentists with online appointments. From €399.',
       keywords: 'dentist website, dental practice website'
     },
     '/voor/garages': {
       title: 'Website for Auto Garages | Yrvante',
-      description: 'More customers for your workshop. Clear website with services and reviews. From €500.',
+      description: 'More customers for your workshop. Clear website with services and reviews. From €399.',
       keywords: 'auto garage website, car repair website'
     },
     '/voor/hondentrimmers': {
       title: 'Website for Dog Groomers | Yrvante',
-      description: 'Show how beautiful you make them. Website with before-and-after photos and online booking. From €500.',
+      description: 'Show how beautiful you make them. Website with before-and-after photos and online booking. From €399.',
       keywords: 'dog groomer website, pet grooming website'
     },
     '/voor/schoonheidsspecialisten': {
       title: 'Website for Beauty Specialists | Yrvante',
-      description: 'Let your expertise shine. Website with treatments, gallery and online booking. From €500.',
+      description: 'Let your expertise shine. Website with treatments, gallery and online booking. From €399.',
       keywords: 'beauty specialist website, beauty salon website'
     },
     '/voor/masseurs': {
       title: 'Website for Massage Therapists | Yrvante',
-      description: 'Calm and professionalism online. Website for massage practices with services and online booking. From €500.',
+      description: 'Calm and professionalism online. Website for massage practices with services and online booking. From €399.',
       keywords: 'massage therapist website, wellness salon website'
     },
     '/diensten/onderhoud': {
@@ -383,7 +383,7 @@ const seoData = {
     },
     '/rebranding': {
       title: 'Website Rebranding | A Fresh Look for Your Site | Yrvante',
-      description: 'Give your existing website a completely new look. Rebranding from €349 — modern design, better conversion and a fresh appearance.',
+      description: 'Give your existing website a completely new look. Rebranding from €249 — modern design, better conversion and a fresh appearance.',
       keywords: 'website rebranding, website redesign, website refresh, site restyling'
     },
     '/privacy': {

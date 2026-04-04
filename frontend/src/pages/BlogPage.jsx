@@ -104,7 +104,7 @@ const BlogPage = () => {
         },
         yrvante: {
           title: "Yrvante",
-          price: "Vanaf €500",
+          price: "Vanaf €399",
           points: [
             "Klaar binnen 1-2 weken",
             "Direct contact met de bouwer",
@@ -124,7 +124,7 @@ const BlogPage = () => {
       },
       conclusion: {
         title: "Een website is een investering, geen kostenpost",
-        text: "Een goede website verdient zichzelf terug. Eén nieuwe klant kan de investering al waard zijn. En met prijzen vanaf €500 is de drempel lager dan ooit.",
+        text: "Een goede website verdient zichzelf terug. Eén nieuwe klant kan de investering al waard zijn. En met prijzen vanaf €399 is de drempel lager dan ooit.",
         cta: "Bekijk de pakketten"
       }
     },
@@ -220,7 +220,7 @@ const BlogPage = () => {
         },
         yrvante: {
           title: "Yrvante",
-          price: "From €500",
+          price: "From €399",
           points: [
             "Ready within 1-2 weeks",
             "Direct contact with builder",
@@ -240,7 +240,7 @@ const BlogPage = () => {
       },
       conclusion: {
         title: "A website is an investment, not an expense",
-        text: "A good website pays for itself. One new customer can already be worth the investment. And with prices from €500, the barrier is lower than ever.",
+        text: "A good website pays for itself. One new customer can already be worth the investment. And with prices from €399, the barrier is lower than ever.",
         cta: "View packages"
       }
     }
