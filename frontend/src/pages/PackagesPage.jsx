@@ -481,7 +481,7 @@ const PackagesPage = () => {
         language === 'nl' ? 'Tot 3 pagina\'s (bijv. Home, Over mij, Contact)' : 'Up to 3 pages (e.g., Home, About, Contact)',
         language === 'nl' ? 'Werkt perfect op mobiel, tablet en desktop' : 'Works perfectly on mobile, tablet and desktop',
         language === 'nl' ? 'Snelle en veilige hosting' : 'Fast and secure hosting',
-        language === 'nl' ? 'Basis contactpagina' : 'Basic contact page',
+        language === 'nl' ? 'Contactformulier' : 'Contact form',
       ],
       freeIncludes: [
         'Cookie melding',
@@ -492,7 +492,6 @@ const PackagesPage = () => {
       ],
       notIncluded: [
         language === 'nl' ? 'SEO-optimalisatie (kan later toegevoegd worden)' : 'SEO optimization (can be added later)',
-        language === 'nl' ? 'Contactformulier met email' : 'Contact form with email',
         language === 'nl' ? 'Blog of portfolio pagina' : 'Blog or portfolio page',
       ],
       idealFor: language === 'nl' ? 'ZZP\'ers, Startende ondernemers' : 'Freelancers, Starting entrepreneurs',

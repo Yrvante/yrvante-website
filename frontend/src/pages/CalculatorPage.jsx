@@ -343,7 +343,7 @@ const CalculatorPage = () => {
             "Tot 3 pagina's",
             "Mobiel, tablet & desktop",
             "Snelle en veilige hosting",
-            "Basis contactpagina"
+            "Contactformulier"
           ]
         },
         pro: {
@@ -496,8 +496,7 @@ const CalculatorPage = () => {
             "Up to 3 pages",
             "Mobile, tablet & desktop",
             "Fast and secure hosting",
-            "Basic contact page",
-            "6 revision rounds"
+            "Contact form"
           ]
         },
         pro: {
