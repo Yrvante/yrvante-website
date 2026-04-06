@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import Papa from "papaparse";
 import { 
   Search, Phone, MapPin, ExternalLink, Save, Trash2, Edit2, Check, X, 
   Download, ChevronDown, BarChart3, Users, Lock, ArrowLeft, Loader2, RefreshCw,
   Bookmark, FileText, ArrowRight, Menu as MenuIcon, Mail, Globe, Building2,
   Instagram, Facebook, Filter, SortAsc, CheckSquare, Square, MoreHorizontal,
   Target, TrendingUp, Calendar, Clock, Star, Tag, Copy, MessageSquare,
-  Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database, FileSpreadsheet
+  Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database, FileSpreadsheet,
+  Upload
 } from "lucide-react";
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -41,6 +43,32 @@ const PRIORITY_CONFIG = {
   hoog: { label: 'Hoog', color: '#EF4444', icon: '🔥' },
   medium: { label: 'Medium', color: '#F59E0B', icon: '⚡' },
   laag: { label: 'Laag', color: '#6B7280', icon: '📌' },
+};
+
+const CSV_STATUS_OPTIONS = [
+  { value: 'nieuw', label: 'Nieuw', color: '#3B82F6', bg: '#EFF6FF' },
+  { value: 'benaderd', label: 'Benaderd', color: '#F59E0B', bg: '#FFFBEB' },
+  { value: 'gereageerd', label: 'Gereageerd', color: '#10B981', bg: '#ECFDF5' },
+  { value: 'overgeslagen', label: 'Overgeslagen', color: '#6B7280', bg: '#F3F4F6' },
+];
+
+const formatPhoneForWhatsApp = (phone) => {
+  if (!phone) return '';
+  let cleaned = phone.replace(/[\s\-\(\)]/g, '');
+  if (cleaned.startsWith('0')) cleaned = '31' + cleaned.substring(1);
+  if (!cleaned.startsWith('+') && !cleaned.startsWith('31')) cleaned = '31' + cleaned;
+  cleaned = cleaned.replace(/^\+/, '');
+  return cleaned;
+};
+
+const extractCity = (address) => {
+  if (!address) return '-';
+  const parts = address.split(',').map(p => p.trim());
+  if (parts.length >= 2) {
+    const cityPart = parts[1].replace(/^\d{4}\s?[A-Z]{0,2}\s*/, '').trim();
+    return cityPart || parts[1].trim();
+  }
+  return parts[0];
 };
 
 const LeadFinderPage = () => {
@@ -84,6 +112,14 @@ const LeadFinderPage = () => {
   
   // Bulk action states
   const [showBulkActions, setShowBulkActions] = useState(false);
+
+  // CSV Import states
+  const csvFileRef = useRef(null);
+  const [csvLeads, setCsvLeads] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('csv_imported_leads') || '[]'); } catch { return []; }
+  });
+  const [csvSearchQuery, setCsvSearchQuery] = useState('');
+  const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
 
   useEffect(() => {
     if (localStorage.getItem('leadfinder_auth') === 'true') {
@@ -472,6 +508,95 @@ const LeadFinderPage = () => {
     toast.success('Gekopieerd!');
   };
 
+  // === CSV Import Functions ===
+  const persistCsvLeads = (leads) => {
+    setCsvLeads(leads);
+    localStorage.setItem('csv_imported_leads', JSON.stringify(leads));
+  };
+
+  const handleCsvImport = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const rows = results.data;
+        if (!rows.length) { toast.error('CSV is leeg'); return; }
+        
+        const totalImported = rows.length;
+        const mapped = rows
+          .map((row, i) => ({
+            id: `csv_${Date.now()}_${i}`,
+            naam: row.title || row.naam || '',
+            categorie: row.category || row.categorie || '',
+            adres: row.address || row.adres || '',
+            telefoon: row.phone || row.telefoon || '',
+            website: row.website || '',
+            rating: row.review_rating || row.rating || '',
+            aantalReviews: row.review_count || row.aantalReviews || '',
+            status: 'nieuw',
+          }))
+          .filter(lead => !lead.website || lead.website.trim() === '');
+
+        const filtered = mapped.length;
+        const existing = csvLeads.map(l => `${l.naam}|${l.telefoon}`);
+        const newLeads = mapped.filter(l => !existing.includes(`${l.naam}|${l.telefoon}`));
+        
+        const merged = [...csvLeads, ...newLeads];
+        persistCsvLeads(merged);
+        
+        toast.success(
+          `${totalImported} rijen gelezen — ${filtered} zonder website — ${newLeads.length} nieuw toegevoegd`
+        );
+      },
+      error: () => { toast.error('Fout bij het lezen van de CSV'); }
+    });
+    
+    e.target.value = '';
+  };
+
+  const updateCsvStatus = (id, status) => {
+    const updated = csvLeads.map(l => l.id === id ? { ...l, status } : l);
+    persistCsvLeads(updated);
+  };
+
+  const deleteCsvLead = (id) => {
+    persistCsvLeads(csvLeads.filter(l => l.id !== id));
+  };
+
+  const clearAllCsvLeads = () => {
+    if (!window.confirm('Alle geïmporteerde leads verwijderen?')) return;
+    persistCsvLeads([]);
+    toast.success('Alle CSV leads verwijderd');
+  };
+
+  const getWhatsAppUrl = (lead) => {
+    const phone = formatPhoneForWhatsApp(lead.telefoon);
+    const msg = encodeURIComponent(
+      `Hallo! Ik ben Yvar van Yrvante. Ik zag dat ${lead.naam} nog geen website heeft. Ik help kleine bedrijven met een professionele online aanwezigheid — snel, betaalbaar en persoonlijk. Wilt u hier meer over weten?`
+    );
+    return `https://wa.me/${phone}?text=${msg}`;
+  };
+
+  const filteredCsvLeads = csvLeads.filter(lead => {
+    if (csvStatusFilter !== 'alle' && lead.status !== csvStatusFilter) return false;
+    if (csvSearchQuery) {
+      const q = csvSearchQuery.toLowerCase();
+      const city = extractCity(lead.adres).toLowerCase();
+      return lead.naam?.toLowerCase().includes(q) || city.includes(q);
+    }
+    return true;
+  });
+
+  const csvStats = {
+    totaal: csvLeads.length,
+    zonderWebsite: csvLeads.length,
+    benaderd: csvLeads.filter(l => l.status === 'benaderd').length,
+    gereageerd: csvLeads.filter(l => l.status === 'gereageerd').length,
+  };
+
   const toggleSelectLead = (id) => {
     setSelectedLeads(prev => 
       prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
@@ -575,6 +700,7 @@ const LeadFinderPage = () => {
             <div className="flex items-center gap-0.5 sm:gap-1">
               {[
                 { id: 'zoeken', label: 'ZOEKEN', icon: Search },
+                { id: 'csv', label: 'CSV IMPORT', icon: Upload },
                 { id: 'leads', label: 'LEADS', icon: Users, count: opgeslagenLeads.length },
                 { id: 'dashboard', label: 'STATS', icon: BarChart3 },
                 { id: 'tools', label: 'TOOLS', icon: Settings }
@@ -812,6 +938,247 @@ const LeadFinderPage = () => {
                   </div>
                   <h3 className="text-xl font-bold mb-2">Begin met zoeken</h3>
                   <p className="text-gray-500 text-sm">Voer een locatie in en klik op zoeken</p>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {/* ZOEKEN TAB - END */}
+
+        {/* CSV IMPORT TAB */}
+        {activeTab === 'csv' && (
+          <motion.div key="csv" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+              
+              {/* Header + Import Button */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight" data-testid="csv-import-title">CSV Import</h1>
+                  <p className="text-gray-500 text-sm">Importeer leads van Google Maps Scraper</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    ref={csvFileRef}
+                    type="file"
+                    accept=".csv"
+                    onChange={handleCsvImport}
+                    className="hidden"
+                    data-testid="csv-file-input"
+                  />
+                  <button
+                    onClick={() => csvFileRef.current?.click()}
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-800 transition-all rounded-full flex items-center gap-2"
+                    data-testid="csv-import-button"
+                  >
+                    <Upload size={16} /> CSV IMPORTEREN
+                  </button>
+                  {csvLeads.length > 0 && (
+                    <button
+                      onClick={clearAllCsvLeads}
+                      className="px-3 sm:px-4 py-2.5 sm:py-3 border border-red-200 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 flex items-center gap-1.5"
+                      data-testid="csv-clear-all"
+                    >
+                      <Trash2 size={14} /> WISSEN
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                {[
+                  { label: 'Totaal Geïmporteerd', value: csvStats.totaal, color: '#000' },
+                  { label: 'Zonder Website', value: csvStats.zonderWebsite, color: '#3B82F6' },
+                  { label: 'Benaderd', value: csvStats.benaderd, color: '#F59E0B' },
+                  { label: 'Gereageerd', value: csvStats.gereageerd, color: '#10B981' },
+                ].map((stat, i) => (
+                  <div key={i} className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5" data-testid={`csv-stat-${i}`}>
+                    <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">{stat.label}</p>
+                    <p className="text-2xl sm:text-3xl font-black" style={{ color: stat.color }}>{stat.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Search + Filter Bar */}
+              {csvLeads.length > 0 && (
+                <div className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4 mb-4 sm:mb-6">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div className="flex-1 relative">
+                      <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                      <input
+                        value={csvSearchQuery}
+                        onChange={e => setCsvSearchQuery(e.target.value)}
+                        placeholder="Zoek op naam of plaats..."
+                        className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-sm"
+                        data-testid="csv-search-input"
+                      />
+                    </div>
+                    <select
+                      value={csvStatusFilter}
+                      onChange={e => setCsvStatusFilter(e.target.value)}
+                      className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium focus:outline-none focus:border-black"
+                      data-testid="csv-status-filter"
+                    >
+                      <option value="alle">Alle Status</option>
+                      {CSV_STATUS_OPTIONS.map(s => (
+                        <option key={s.value} value={s.value}>{s.label}</option>
+                      ))}
+                    </select>
+                    <span className="text-sm text-gray-500 whitespace-nowrap self-center">{filteredCsvLeads.length} resultaten</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Leads Table */}
+              {csvLeads.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-200 p-10 sm:p-16 text-center">
+                  <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Upload size={28} className="text-gray-300" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Geen leads geïmporteerd</h3>
+                  <p className="text-gray-500 text-sm mb-6">Upload een CSV van de Google Maps Scraper om te beginnen</p>
+                  <button
+                    onClick={() => csvFileRef.current?.click()}
+                    className="px-6 py-3 bg-black text-white rounded-full font-bold text-sm"
+                    data-testid="csv-import-empty-button"
+                  >
+                    CSV IMPORTEREN
+                  </button>
+                </div>
+              ) : filteredCsvLeads.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
+                  <Search size={40} className="mx-auto mb-4 text-gray-300" />
+                  <h3 className="text-xl font-bold mb-2">Geen resultaten</h3>
+                  <p className="text-gray-500 text-sm">Pas je zoekopdracht of filter aan</p>
+                </div>
+              ) : (
+                <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                  {/* Desktop Table */}
+                  <div className="hidden md:block overflow-x-auto">
+                    <table className="w-full" data-testid="csv-leads-table">
+                      <thead>
+                        <tr className="bg-gray-50 border-b border-gray-200">
+                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Bedrijfsnaam</th>
+                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Categorie</th>
+                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Plaats</th>
+                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Telefoon</th>
+                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Status</th>
+                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">WhatsApp</th>
+                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 w-10"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredCsvLeads.map(lead => {
+                          const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
+                          return (
+                            <tr key={lead.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
+                              <td className="px-4 py-3">
+                                <span className="font-semibold text-sm">{lead.naam}</span>
+                              </td>
+                              <td className="px-4 py-3 text-sm text-gray-600">{lead.categorie || '-'}</td>
+                              <td className="px-4 py-3 text-sm text-gray-600">{extractCity(lead.adres)}</td>
+                              <td className="px-4 py-3">
+                                {lead.telefoon ? (
+                                  <a href={`tel:${lead.telefoon}`} className="text-sm font-medium flex items-center gap-1 hover:underline">
+                                    <Phone size={13} />{lead.telefoon}
+                                  </a>
+                                ) : <span className="text-sm text-gray-400">-</span>}
+                              </td>
+                              <td className="px-4 py-3">
+                                <select
+                                  value={lead.status}
+                                  onChange={e => updateCsvStatus(lead.id, e.target.value)}
+                                  className="px-2.5 py-1 rounded-full text-xs font-bold border-0 cursor-pointer"
+                                  style={{ backgroundColor: statusConf.bg, color: statusConf.color }}
+                                  data-testid={`csv-status-select-${lead.id}`}
+                                >
+                                  {CSV_STATUS_OPTIONS.map(s => (
+                                    <option key={s.value} value={s.value}>{s.label}</option>
+                                  ))}
+                                </select>
+                              </td>
+                              <td className="px-4 py-3 text-center">
+                                {lead.telefoon ? (
+                                  <a
+                                    href={getWhatsAppUrl(lead)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors"
+                                    data-testid={`csv-whatsapp-${lead.id}`}
+                                  >
+                                    <MessageSquare size={12} /> WhatsApp
+                                  </a>
+                                ) : <span className="text-xs text-gray-400">Geen nr.</span>}
+                              </td>
+                              <td className="px-4 py-3 text-center">
+                                <button
+                                  onClick={() => deleteCsvLead(lead.id)}
+                                  className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors"
+                                  title="Verwijderen"
+                                  data-testid={`csv-delete-${lead.id}`}
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Mobile Cards */}
+                  <div className="md:hidden divide-y divide-gray-100">
+                    {filteredCsvLeads.map(lead => {
+                      const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
+                      return (
+                        <div key={lead.id} className="p-4" data-testid={`csv-lead-card-${lead.id}`}>
+                          <div className="flex items-start justify-between mb-2">
+                            <div>
+                              <h4 className="font-semibold text-sm">{lead.naam}</h4>
+                              <p className="text-xs text-gray-500">{lead.categorie} — {extractCity(lead.adres)}</p>
+                            </div>
+                            <select
+                              value={lead.status}
+                              onChange={e => updateCsvStatus(lead.id, e.target.value)}
+                              className="px-2 py-0.5 rounded-full text-[10px] font-bold border-0 cursor-pointer"
+                              style={{ backgroundColor: statusConf.bg, color: statusConf.color }}
+                            >
+                              {CSV_STATUS_OPTIONS.map(s => (
+                                <option key={s.value} value={s.value}>{s.label}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="flex items-center gap-2 mt-2">
+                            {lead.telefoon && (
+                              <a href={`tel:${lead.telefoon}`} className="text-xs font-medium flex items-center gap-1">
+                                <Phone size={12} />{lead.telefoon}
+                              </a>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 mt-3">
+                            {lead.telefoon && (
+                              <a
+                                href={getWhatsAppUrl(lead)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-500 text-white rounded-lg text-xs font-bold hover:bg-green-600"
+                              >
+                                <MessageSquare size={12} /> WhatsApp
+                              </a>
+                            )}
+                            <button
+                              onClick={() => deleteCsvLead(lead.id)}
+                              className="p-2 text-gray-400 hover:text-red-500 border border-gray-200 rounded-lg"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
