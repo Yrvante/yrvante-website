@@ -139,6 +139,20 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 ## Credentials
 - Admin Dashboard Password (Preview): `yrvante2025`
 
+### Phase 17 - Admin Dashboard Glassmorphism + CSV (Complete - Feb 2026)
+- **Glassmorphism redesign**: Volledig Admin Dashboard herschreven met frosted glass effect (`bg-white/60 backdrop-blur-xl border-white/40`)
+- **CSV Leads tab**: Toegevoegd aan admin dashboard met import, tabel, zoeken, statusfilter, WhatsApp knoppen
+- **Overzicht tab**: CSV Leads Overzicht kaart met snelle statistieken + "Bekijk alles" link
+- **4 tabs**: Overzicht, CSV Leads, Berichten, Analytics — allemaal glassmorphism
+- **Dark mode**: Volledig werkend op alle tabs + login scherm
+- **Bug fix**: Analytics tab crash gefixt (null check op pageviews.daily_views)
+- **100% tests geslaagd** (iteration 34)
+
+### Phase 16c - Dark Mode Lead Finder + Admin (Complete - Feb 2026)
+- Volledige dark mode ondersteuning toegevoegd aan LeadFinderPage.jsx (alle 5 tabs)
+- Admin Dashboard login scherm herontworpen met glassmorphism
+- Witte logo variant (`logo-nav-white.png`) in dark mode
+
 ### Phase 16 - CSV Import Feature (Complete - Feb 2026)
 - **CSV Import tab**: Nieuwe tab in Lead Finder dashboard voor het importeren van Google Maps Scraper CSV's
 - **Filtering**: Bedrijven MET website worden automatisch gefilterd — alleen bedrijven zonder website worden getoond
