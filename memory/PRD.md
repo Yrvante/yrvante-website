@@ -139,6 +139,20 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 ## Credentials
 - Admin Dashboard Password (Preview): `yrvante2025`
 
+### Phase 16 - CSV Import Feature (Complete - Feb 2026)
+- **CSV Import tab**: Nieuwe tab in Lead Finder dashboard voor het importeren van Google Maps Scraper CSV's
+- **Filtering**: Bedrijven MET website worden automatisch gefilterd — alleen bedrijven zonder website worden getoond
+- **Tabel**: Bedrijfsnaam, Categorie, Plaats (automatisch uit adres), Telefoon, Status dropdown, WhatsApp knop
+- **Status**: 4 opties (Nieuw/Benaderd/Gereageerd/Overgeslagen) — opgeslagen in localStorage
+- **WhatsApp**: Groene knop met gepersonaliseerd Nederlands bericht en automatisch geformateerd telefoonnummer (0→31)
+- **Statistieken**: 4 kaarten: Totaal, Zonder Website, Benaderd, Gereageerd
+- **Zoeken & Filteren**: Zoek op naam/plaats + filter op status
+- **34/34 tests geslaagd** (iteration 32)
+
+### Phase 16b - Achtergrond Animatie (Complete - Feb 2026)
+- Statische achtergrond vervangen door 5 zwevende gradient-orbs met CSS drift-animaties (22-35s cycli)
+- Originele bg-pattern.jpg transparant behouden als overlay
+
 ## Backlog (P2)
 - Google Sheets API for lead export
 - Case studies/success stories for niche pages
