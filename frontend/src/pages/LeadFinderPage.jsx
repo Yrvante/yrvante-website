@@ -522,7 +522,28 @@ const LeadFinderPage = () => {
   const loadCsvLeads = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/admin/csv-leads`);
-      if (res.ok) { const data = await res.json(); setCsvLeads(data); }
+      if (!res.ok) return;
+      let dbLeads = await res.json();
+
+      // Migratie: oude localStorage data naar database overzetten
+      if (dbLeads.length === 0) {
+        try {
+          const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
+          if (local.length > 0) {
+            await fetch(`${API_BASE}/api/admin/csv-leads`, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ leads: local })
+            });
+            dbLeads = local;
+            localStorage.removeItem('csv_imported_leads');
+            toast.success(`${local.length} leads gemigreerd vanuit je browser naar de database!`);
+          }
+        } catch { /* silent */ }
+      } else {
+        localStorage.removeItem('csv_imported_leads');
+      }
+
+      setCsvLeads(dbLeads);
     } catch { /* silent */ }
   };
 

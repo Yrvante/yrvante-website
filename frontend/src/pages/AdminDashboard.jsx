@@ -94,7 +94,25 @@ const AdminDashboard = () => {
       setStats(statsRes.data);
       setContacts(contactsRes.data);
       setPageviews(pageviewsRes.data);
-      setCsvLeads(csvRes.data);
+
+      let dbLeads = csvRes.data;
+
+      // Migratie: oude localStorage data naar database overzetten
+      if (dbLeads.length === 0) {
+        try {
+          const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
+          if (local.length > 0) {
+            await axios.post(`${API}/admin/csv-leads`, { leads: local });
+            dbLeads = local;
+            localStorage.removeItem('csv_imported_leads');
+            toast.success(`${local.length} leads gemigreerd vanuit je browser naar de database!`);
+          }
+        } catch { /* silent */ }
+      } else {
+        localStorage.removeItem('csv_imported_leads');
+      }
+
+      setCsvLeads(dbLeads);
     } catch { toast.error("Fout bij laden van data"); }
     setLoading(false);
   };
