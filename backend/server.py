@@ -109,6 +109,8 @@ class CsvLead(BaseModel):
     rating: Optional[str] = ""
     aantalReviews: Optional[str] = ""
     status: str = "nieuw"
+    notitie: Optional[str] = ""
+    benaderdOp: Optional[str] = ""
 
 class CsvLeadsBulk(BaseModel):
     leads: List[CsvLead]
@@ -959,8 +961,12 @@ async def save_csv_leads(data: CsvLeadsBulk):
 @api_router.put("/admin/csv-leads/{lead_id}/status")
 async def update_csv_lead_status(lead_id: str, request: Request):
     body = await request.json()
-    status = body.get("status", "nieuw")
-    result = await db.csv_leads.update_one({"id": lead_id}, {"$set": {"status": status}})
+    update = {"status": body.get("status", "nieuw")}
+    if "notitie" in body:
+        update["notitie"] = body["notitie"]
+    if "benaderdOp" in body:
+        update["benaderdOp"] = body["benaderdOp"]
+    result = await db.csv_leads.update_one({"id": lead_id}, {"$set": update})
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Lead not found")
     return {"success": True}

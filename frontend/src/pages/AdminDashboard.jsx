@@ -9,7 +9,8 @@ import {
   Eye, Users, Mail, MailOpen, Calendar, TrendingUp, 
   Trash2, Check, Lock, ArrowLeft, RefreshCw, Shield,
   Upload, Search, Phone, MessageSquare, ChevronDown, ChevronUp,
-  BarChart3, FileText, Settings, ExternalLink, Star, Globe, Save
+  BarChart3, FileText, Settings, ExternalLink, Star, Globe, Save,
+  Copy, Clock, Download
 } from "lucide-react";
 import { Toaster } from "../components/ui/sonner";
 
@@ -208,9 +209,37 @@ const AdminDashboard = () => {
   };
 
   const updateCsvStatus = async (id, status) => {
-    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l));
-    try { await axios.put(`${API}/admin/csv-leads/${id}/status`, { status }); }
+    const benaderdOp = status === 'benaderd' ? new Date().toLocaleString('nl-NL') : undefined;
+    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status, ...(benaderdOp ? { benaderdOp } : {}) } : l));
+    try { await axios.put(`${API}/admin/csv-leads/${id}/status`, { status, ...(benaderdOp ? { benaderdOp } : {}) }); }
     catch { toast.error("Fout bij status update"); }
+  };
+
+  const updateCsvNote = async (id, notitie) => {
+    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, notitie } : l));
+    try { await axios.put(`${API}/admin/csv-leads/${id}/status`, { status: csvLeads.find(l => l.id === id)?.status || 'nieuw', notitie }); }
+    catch { /* silent */ }
+  };
+
+  const copyPhone = (phone) => {
+    navigator.clipboard.writeText(phone);
+    toast.success('Telefoonnummer gekopieerd!');
+  };
+
+  const exportCsvLeads = () => {
+    if (!csvLeads.length) { toast.error('Geen CSV leads om te exporteren'); return; }
+    const headers = ['Bedrijfsnaam','Categorie','Adres','Telefoon','Website','Rating','Reviews','Status','Notitie','Benaderd op'];
+    const csv = [
+      headers.join(','),
+      ...csvLeads.map(l => [
+        l.naam, l.categorie, l.adres, l.telefoon, l.website, l.rating, l.aantalReviews, l.status, l.notitie || '', l.benaderdOp || ''
+      ].map(c => `"${(c || '').toString().replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+    a.download = `csv_leads_backup_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    toast.success(`${csvLeads.length} leads geëxporteerd`);
   };
 
   const deleteCsvLead = async (id) => {
@@ -312,6 +341,7 @@ Yrvante — Smart Web & Software 085-5055314`);
     zonderWebsite: csvLeads.filter(l => !l.website || l.website.trim() === '').length,
     benaderd: csvLeads.filter(l => l.status === 'benaderd').length,
     gereageerd: csvLeads.filter(l => l.status === 'gereageerd').length,
+    geenInteresse: csvLeads.filter(l => l.status === 'geen_interesse').length,
     overgeslagen: csvLeads.filter(l => l.status === 'overgeslagen').length,
   };
 
@@ -511,6 +541,13 @@ Yrvante — Smart Web & Software 085-5055314`);
                     </button>
                   )}
                   {csvLeads.length > 0 && (
+                    <button onClick={exportCsvLeads}
+                      className="px-4 py-2.5 text-blue-600 text-xs font-bold rounded-full border border-blue-200/50 dark:border-blue-800/30 hover:bg-blue-50 dark:hover:bg-blue-900/10 flex items-center gap-1.5 transition-all"
+                      data-testid="csv-export-button">
+                      <Download size={13} /> Export
+                    </button>
+                  )}
+                  {csvLeads.length > 0 && (
                     <button onClick={clearCsv}
                       className="px-4 py-2.5 text-red-500 text-xs font-bold rounded-full border border-red-200/50 dark:border-red-800/30 hover:bg-red-50 dark:hover:bg-red-900/10 flex items-center gap-1.5 transition-all"
                       data-testid="csv-clear-all">
@@ -635,7 +672,8 @@ Yrvante — Smart Web & Software 085-5055314`);
                           const sc = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
                           const hasWebsite = lead.website && lead.website.trim() !== '';
                           return (
-                            <tr key={lead.id} className="border-b border-gray-100/30 dark:border-white/[0.03] hover:bg-white/40 dark:hover:bg-white/[0.03] transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
+                            <React.Fragment key={lead.id}>
+                            <tr className="border-b border-gray-100/30 dark:border-white/[0.03] hover:bg-white/40 dark:hover:bg-white/[0.03] transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
                               <td className="px-3 py-3">
                                 <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
                                   target="_blank" rel="noopener noreferrer"
@@ -656,9 +694,14 @@ Yrvante — Smart Web & Software 085-5055314`);
                               </td>
                               <td className="px-3 py-3">
                                 {lead.telefoon ? (
-                                  <a href={`tel:${lead.telefoon}`} className="text-sm font-medium flex items-center gap-1 text-black dark:text-white hover:underline">
-                                    <Phone size={12} />{lead.telefoon}
-                                  </a>
+                                  <div className="flex items-center gap-1.5">
+                                    <a href={`tel:${lead.telefoon}`} className="text-sm font-medium text-black dark:text-white hover:underline">
+                                      {lead.telefoon}
+                                    </a>
+                                    <button onClick={() => copyPhone(lead.telefoon)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" title="Kopiëren">
+                                      <Copy size={11} />
+                                    </button>
+                                  </div>
                                 ) : <span className="text-sm text-gray-400">-</span>}
                               </td>
                               <td className="px-3 py-3 text-center">
@@ -694,6 +737,26 @@ Yrvante — Smart Web & Software 085-5055314`);
                                 </button>
                               </td>
                             </tr>
+                            <tr className="border-b border-gray-100/30 dark:border-white/[0.03]">
+                              <td colSpan={10} className="px-3 py-1.5">
+                                <div className="flex items-center gap-3">
+                                  <input
+                                    type="text"
+                                    value={lead.notitie || ''}
+                                    onChange={e => updateCsvNote(lead.id, e.target.value)}
+                                    placeholder="Notitie toevoegen..."
+                                    className="flex-1 text-xs bg-transparent border-0 outline-none text-gray-500 dark:text-gray-400 placeholder:text-gray-300 dark:placeholder:text-gray-600"
+                                    data-testid={`csv-note-${lead.id}`}
+                                  />
+                                  {lead.benaderdOp && (
+                                    <span className="text-[10px] text-gray-400 whitespace-nowrap flex items-center gap-1">
+                                      <Clock size={10} /> {lead.benaderdOp}
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                            </React.Fragment>
                           );
                         })}
                       </tbody>

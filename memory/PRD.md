@@ -174,6 +174,15 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Slim**: Tip verschijnt ALLEEN wanneer upgrade echt goedkoper is; verborgen bij laagste tier of als upgrade duurder is
 - **42/42 tests geslaagd** (iteration 35)
 
+### Phase 20 - LeadFinder Verbeteringen (Complete - Apr 2026)
+- **CSV Export**: Download alle leads als CSV backup bestand
+- **Notitie per lead**: Type direct notities onder elke lead in de tabel (opgeslagen in DB)
+- **Telefoon kopiëren**: 1-klik kopieer-knop naast telefoonnummers
+- **"Geen interesse" stat**: Teller toegevoegd in stats balk (5 stats nu: Totaal, Zonder Website, Benaderd, Gereageerd, Geen Interesse)
+- **Datum bij "Benaderd"**: Automatisch tijdstempel wanneer WhatsApp is verstuurd
+- **Vercel API**: CSV leads endpoints aangemaakt voor productie (`/api/admin/csv-leads.js`, `[id].js`)
+- **localStorage backup**: Altijd lokale backup als vangnet + automatische migratie bij eerste load
+
 ### Phase 19 - CSV Database Sync + Statusverbeteringen (Complete - Apr 2026)
 - **CSV leads naar MongoDB**: Alle CSV leads worden nu opgeslagen in MongoDB (`csv_leads` collection) i.p.v. localStorage. Zichtbaar op elk apparaat na inloggen.
 - **API endpoints**: GET/POST/PUT/DELETE `/api/admin/csv-leads` voor volledige CRUD
