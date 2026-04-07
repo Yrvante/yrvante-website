@@ -18,7 +18,11 @@ const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api/admin/leadfinder`;
 const LOGO_URL = "/logo-nav.png";
 const LOGO_URL_WHITE = "/logo-nav-white.png";
-const BG_IMAGE = "/bg-pattern.jpg";
+
+// Glassmorphism base classes (matching AdminDashboard)
+const G = "bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/40 dark:border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)]";
+const GC = `${G} rounded-2xl`;
+const GI = "bg-white/50 dark:bg-white/[0.06] border border-gray-200/60 dark:border-white/10 backdrop-blur-sm rounded-xl focus:border-black dark:focus:border-white focus:bg-white/80 dark:focus:bg-white/10 outline-none transition-all text-black dark:text-white";
 
 // Search source configurations
 const SEARCH_SOURCES = {
@@ -640,26 +644,20 @@ const LeadFinderPage = () => {
   // Login Screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden bg-white dark:bg-neutral-950">
+      <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-neutral-950 dark:to-neutral-900">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md relative z-10">
-          <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-neutral-700 p-6 sm:p-8 shadow-lg">
+          <div className={`${GC} p-6 sm:p-8`}>
             <div className="text-center mb-6 sm:mb-8">
               <Link to="/"><img src={isDark ? LOGO_URL_WHITE : LOGO_URL} alt="Yrvante" className="h-7 sm:h-8 mx-auto mb-4 sm:mb-6" /></Link>
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-50 dark:bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-gray-100 dark:border-neutral-700">
+              <div className={`w-14 h-14 sm:w-16 sm:h-16 ${G} rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4`}>
                 <Lock className="text-gray-400 dark:text-gray-500" size={24} />
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-black dark:text-white mb-1">Admin Dashboard</h1>
               <p className="text-gray-400 dark:text-gray-500 text-sm">Beveiligd gebied — Yrvante</p>
             </div>
             <form onSubmit={handleLogin}>
-              <input 
-                type="password" 
-                value={password} 
-                onChange={e => setPassword(e.target.value)} 
-                placeholder="Wachtwoord" 
-                className="w-full bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 rounded-xl focus:border-black dark:focus:border-white focus:bg-white dark:focus:bg-neutral-700 outline-none py-3.5 sm:py-4 px-4 transition-all mb-4 text-base text-black dark:text-white" 
-                autoFocus 
-              />
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Wachtwoord"
+                className={`w-full py-3.5 sm:py-4 px-4 text-base mb-4 ${GI}`} autoFocus />
               {authError && <p className="text-red-500 text-sm mb-4 text-center">{authError}</p>}
               <button type="submit" className="w-full py-3.5 sm:py-4 bg-black dark:bg-white text-white dark:text-black text-sm font-bold uppercase tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full">
                 Inloggen
@@ -677,38 +675,37 @@ const LeadFinderPage = () => {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-gray-100 dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-900">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-neutral-800">
+      <nav className="sticky top-0 z-50 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-b border-white/40 dark:border-white/[0.06]">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-14 sm:h-16">
             <div className="flex items-center gap-2 sm:gap-4">
               <Link to="/" className="flex items-center">
                 <img src={isDark ? LOGO_URL_WHITE : LOGO_URL} alt="Yrvante" className="h-5 sm:h-6" />
               </Link>
-              <span className="hidden sm:inline text-xs bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded font-bold">ADMIN DASHBOARD</span>
+              <span className="hidden sm:inline text-[10px] font-bold bg-black dark:bg-white text-white dark:text-black px-2.5 py-1 rounded-full tracking-wider">ADMIN</span>
             </div>
             
-            {/* Tabs - Mobile: icons only, Desktop: icons + labels */}
-            <div className="flex items-center gap-0.5 sm:gap-1">
+            {/* Tab Pills */}
+            <div className={`${G} !rounded-xl !shadow-none p-0.5 flex gap-0.5`}>
               {[
                 { id: 'zoeken', label: 'ZOEKEN', icon: Search },
-                { id: 'csv', label: 'CSV IMPORT', icon: Upload },
+                { id: 'csv', label: 'CSV', icon: Upload },
                 { id: 'leads', label: 'LEADS', icon: Users, count: opgeslagenLeads.length },
                 { id: 'dashboard', label: 'STATS', icon: BarChart3 },
                 { id: 'tools', label: 'TOOLS', icon: Settings }
               ].map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-[0.05em] sm:tracking-[0.1em] transition-all ${
-                    activeTab === tab.id ? 'bg-black dark:bg-white text-white dark:text-black' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-neutral-800'
-                  }`}
-                >
-                  <tab.icon size={14} />
+                <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all ${
+                    activeTab === tab.id
+                      ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm'
+                      : 'text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white hover:bg-white/40 dark:hover:bg-white/[0.06]'
+                  }`}>
+                  <tab.icon size={13} />
                   <span className="hidden sm:inline">{tab.label}</span>
                   {tab.count !== undefined && tab.count > 0 && (
-                    <span className={`px-1.5 py-0.5 rounded text-[10px] ${activeTab === tab.id ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200 dark:bg-neutral-700'}`}>
+                    <span className={`px-1 py-0.5 rounded text-[9px] ${activeTab === tab.id ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200/50 dark:bg-white/10'}`}>
                       {tab.count}
                     </span>
                   )}
@@ -717,11 +714,11 @@ const LeadFinderPage = () => {
             </div>
             
             <div className="flex items-center gap-2 sm:gap-3">
-              <button onClick={logout} className="text-xs text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors hidden sm:block">Uitloggen</button>
-              <button onClick={logout} className="sm:hidden p-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white">
+              <button onClick={logout} className="text-xs text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors hidden sm:block">Uitloggen</button>
+              <button onClick={logout} className="sm:hidden p-2 text-gray-400 hover:text-black dark:hover:text-white">
                 <ArrowLeft size={18} />
               </button>
-              <Link to="/" className="hidden sm:flex px-5 py-2 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full">
+              <Link to="/" className="hidden sm:flex px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-[10px] font-bold uppercase tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full">
                 YRVANTE.COM →
               </Link>
             </div>
@@ -736,7 +733,7 @@ const LeadFinderPage = () => {
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
               
               {/* Main Search Card */}
-              <div className="bg-white dark:bg-neutral-900 rounded-xl sm:rounded-2xl border border-gray-100 dark:border-neutral-800 shadow-sm overflow-hidden mb-4 sm:mb-8">
+              <div className={`${GC} overflow-hidden mb-4 sm:mb-8`}>
                 {/* Header */}
                 <div className="bg-black dark:bg-white text-white dark:text-black p-4 sm:p-6">
                   <div className="flex items-center gap-3">
@@ -759,7 +756,7 @@ const LeadFinderPage = () => {
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
                         placeholder="bijv. kapper, coach..."
-                        className="w-full bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg sm:rounded-xl focus:border-black dark:focus:border-white focus:bg-white dark:focus:bg-neutral-700 outline-none py-3 sm:py-3.5 px-3 sm:px-4 transition-all text-base text-black dark:text-white"
+                        className={`w-full py-3 sm:py-3.5 px-3 sm:px-4 text-base ${GI}`}
                         onKeyPress={e => e.key === 'Enter' && zoekAlles()}
                       />
                     </div>
@@ -769,15 +766,15 @@ const LeadFinderPage = () => {
                         value={searchLocation}
                         onChange={e => setSearchLocation(e.target.value)}
                         placeholder="bijv. Almelo"
-                        className="w-full bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg sm:rounded-xl focus:border-black dark:focus:border-white focus:bg-white dark:focus:bg-neutral-700 outline-none py-3 sm:py-3.5 px-3 sm:px-4 transition-all text-base text-black dark:text-white"
+                        className={`w-full py-3 sm:py-3.5 px-3 sm:px-4 text-base ${GI}`}
                         onKeyPress={e => e.key === 'Enter' && zoekAlles()}
                       />
                     </div>
                   </div>
 
                   {/* Filter & Search Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 pt-3 sm:pt-4 border-t border-gray-100 dark:border-neutral-800">
-                    <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 pt-3 sm:pt-4 border-t border-gray-100/40 dark:border-white/[0.05]">
+                    <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
                       <input 
                         type="checkbox" 
                         checked={searchFilters.onlyWithPhone} 
@@ -798,8 +795,8 @@ const LeadFinderPage = () => {
                 </div>
 
                 {/* Bronnen Info - Hidden on mobile */}
-                <div className="hidden sm:block bg-gray-50 dark:bg-neutral-800 px-6 py-3 border-t border-gray-100 dark:border-neutral-800">
-                  <div className="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400">
+                <div className="hidden sm:block bg-black/[0.02] dark:bg-white/[0.02] px-6 py-3 border-t border-gray-100/40 dark:border-white/[0.05]">
+                  <div className="flex items-center gap-6 text-xs text-gray-400 dark:text-gray-500">
                     <span className="font-medium">Doorzoekt:</span>
                     {Object.values(SEARCH_SOURCES).map(source => (
                       <span key={source.id} className="flex items-center gap-1">
@@ -855,7 +852,7 @@ const LeadFinderPage = () => {
 
                   <div className="grid gap-3">
                     {zoekResultaten.map((lead, i) => (
-                      <div key={lead.place_id || i} className="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 p-4 sm:p-5 rounded-xl hover:shadow-md hover:border-gray-200 dark:hover:border-neutral-600 transition-all">
+                      <div key={lead.place_id || i} className={`${GC} p-4 sm:p-5 hover:shadow-lg transition-all`}>
                         <div className="flex justify-between gap-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -882,28 +879,28 @@ const LeadFinderPage = () => {
                             {/* Quick Links - Compact */}
                             <div className="flex flex-wrap gap-1.5">
                               {lead.google_maps_url && (
-                                <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs font-medium hover:bg-gray-100 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                                <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
                                   <MapPin size={11} /> Maps
                                 </a>
                               )}
-                              <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs font-medium hover:bg-gray-100 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                              <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
                                 <Building2 size={11} /> KVK
                               </a>
-                              <a href={`https://www.facebook.com/search/pages?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs font-medium hover:bg-gray-100 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                              <a href={`https://www.facebook.com/search/pages?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
                                 <Facebook size={11} /> FB
                               </a>
-                              <a href={`https://www.instagram.com/${lead.naam.toLowerCase().replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs font-medium hover:bg-gray-100 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                              <a href={`https://www.instagram.com/${lead.naam.toLowerCase().replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
                                 <Instagram size={11} /> IG
                               </a>
                             </div>
                           </div>
                           
                           <div className="flex flex-col sm:flex-row items-center gap-2">
-                            <button onClick={() => saveLead(lead)} className="p-2.5 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors" title="Opslaan">
+                            <button onClick={() => saveLead(lead)} className="p-2.5 bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors" title="Opslaan">
                               <Save size={16} />
                             </button>
                             {lead.google_maps_url && (
-                              <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="p-2.5 border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-black dark:hover:border-white transition-colors text-black dark:text-white" title="Open">
+                              <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className={`p-2.5 ${G} !rounded-xl !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`} title="Open">
                                 <ExternalLink size={16} />
                               </a>
                             )}
@@ -925,12 +922,12 @@ const LeadFinderPage = () => {
 
               {/* Empty State */}
               {!loading && zoekResultaten.length === 0 && (
-                <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-gray-100 dark:border-neutral-800 p-16 text-center">
-                  <div className="w-16 h-16 bg-gray-50 dark:bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className={`${GC} p-16 text-center`}>
+                  <div className={`w-16 h-16 ${G} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
                     <Search size={28} className="text-gray-300 dark:text-gray-600" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-black dark:text-white">Begin met zoeken</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Voer een locatie in en klik op zoeken</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm">Voer een locatie in en klik op zoeken</p>
                 </div>
               )}
             </div>
@@ -975,7 +972,7 @@ const LeadFinderPage = () => {
                   { label: 'Benaderd', value: csvStats.benaderd, color: '#F59E0B' },
                   { label: 'Gereageerd', value: csvStats.gereageerd, color: '#10B981' },
                 ].map((stat, i) => (
-                  <div key={i} className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-4 sm:p-5" data-testid={`csv-stat-${i}`}>
+                  <div key={i} className={`${GC} p-4 sm:p-5`} data-testid={`csv-stat-${i}`}>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">{stat.label}</p>
                     <p className="text-2xl sm:text-3xl font-black" style={{ color: stat.color }}>{stat.value}</p>
                   </div>
@@ -984,21 +981,21 @@ const LeadFinderPage = () => {
 
               {/* Search + Filter Bar */}
               {csvLeads.length > 0 && (
-                <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-3 sm:p-4 mb-4 sm:mb-6">
+                <div className={`${GC} p-3 sm:p-4 mb-4 sm:mb-6`}>
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                     <div className="flex-1 relative">
                       <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                       <input value={csvSearchQuery} onChange={e => setCsvSearchQuery(e.target.value)}
                         placeholder="Zoek op naam of plaats..."
-                        className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white text-sm bg-white dark:bg-neutral-800 text-black dark:text-white"
+                        className={`w-full pl-10 pr-4 py-2 text-sm ${GI}`}
                         data-testid="csv-search-input" />
                     </div>
                     <button
                       onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
-                      className={`px-3 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all border ${
+                      className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
                         csvOnlyNoWebsite
                           ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-600 dark:text-red-400'
-                          : 'bg-white dark:bg-neutral-800 border-gray-200 dark:border-neutral-700 text-gray-500 dark:text-gray-400'
+                          : 'bg-white/50 dark:bg-white/[0.06] border-gray-200/60 dark:border-white/10 text-gray-500 dark:text-gray-400'
                       }`}
                       data-testid="csv-no-website-toggle"
                     >
@@ -1006,24 +1003,24 @@ const LeadFinderPage = () => {
                       {csvOnlyNoWebsite ? 'Zonder website' : 'Alle websites'}
                     </button>
                     <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
-                      className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white"
+                      className={`px-4 py-2 text-sm font-medium cursor-pointer ${GI}`}
                       data-testid="csv-status-filter">
                       <option value="alle">Alle Status</option>
                       {CSV_STATUS_OPTIONS.map(s => (<option key={s.value} value={s.value}>{s.label}</option>))}
                     </select>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap self-center">{filteredCsvLeads.length} resultaten</span>
+                    <span className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap self-center">{filteredCsvLeads.length} resultaten</span>
                   </div>
                 </div>
               )}
 
               {/* Leads Table */}
               {csvLeads.length === 0 ? (
-                <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-gray-200 dark:border-neutral-800 p-10 sm:p-16 text-center">
-                  <div className="w-16 h-16 bg-gray-50 dark:bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className={`${GC} p-10 sm:p-16 text-center`}>
+                  <div className={`w-16 h-16 ${G} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
                     <Upload size={28} className="text-gray-300 dark:text-gray-600" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-black dark:text-white">Geen leads geïmporteerd</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">Upload een CSV van de Google Maps Scraper om te beginnen</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm mb-6">Upload een CSV van de Google Maps Scraper om te beginnen</p>
                   <button onClick={() => csvFileRef.current?.click()}
                     className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-sm"
                     data-testid="csv-import-empty-button">
@@ -1031,18 +1028,18 @@ const LeadFinderPage = () => {
                   </button>
                 </div>
               ) : filteredCsvLeads.length === 0 ? (
-                <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-gray-200 dark:border-neutral-800 p-12 text-center">
+                <div className={`${GC} p-12 text-center`}>
                   <Search size={40} className="mx-auto mb-4 text-gray-300 dark:text-gray-600" />
                   <h3 className="text-xl font-bold mb-2 text-black dark:text-white">Geen resultaten</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Pas je zoekopdracht of filter aan</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm">Pas je zoekopdracht of filter aan</p>
                 </div>
               ) : (
-                <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 overflow-hidden">
+                <div className={`${GC} overflow-hidden`}>
                   {/* Desktop Table */}
                   <div className="hidden md:block overflow-x-auto">
                     <table className="w-full" data-testid="csv-leads-table">
                       <thead>
-                        <tr className="bg-gray-50 dark:bg-neutral-800 border-b border-gray-200 dark:border-neutral-700">
+                        <tr className="bg-black/[0.02] dark:bg-white/[0.02] border-b border-gray-100/50 dark:border-white/[0.05]">
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Bedrijfsnaam</th>
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Categorie</th>
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Plaats</th>
@@ -1060,7 +1057,7 @@ const LeadFinderPage = () => {
                           const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
                           const hasWebsite = lead.website && lead.website.trim() !== '';
                           return (
-                            <tr key={lead.id} className="border-b border-gray-100 dark:border-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-800/50 transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
+                            <tr key={lead.id} className="border-b border-gray-100/30 dark:border-white/[0.03] hover:bg-white/40 dark:hover:bg-white/[0.03] transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
                               <td className="px-4 py-3">
                                 <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
                                   target="_blank" rel="noopener noreferrer"
@@ -1212,81 +1209,64 @@ const LeadFinderPage = () => {
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h1 className="text-3xl font-black tracking-tight text-black dark:text-white">Leads Database</h1>
-                  <p className="text-gray-500 dark:text-gray-400">{opgeslagenLeads.length} leads opgeslagen</p>
+                  <p className="text-gray-400 dark:text-gray-500">{opgeslagenLeads.length} leads opgeslagen</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={loadLeads} className="p-2 border border-gray-200 dark:border-neutral-700 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-800 text-black dark:text-white"><RefreshCw size={18} /></button>
-                  <button onClick={() => exportToGoogleSheets()} className="px-4 py-2 bg-emerald-500 text-white rounded-lg text-sm font-bold hover:bg-emerald-600 flex items-center gap-2"><FileSpreadsheet size={16} /> GOOGLE SHEETS</button>
-                  <button onClick={() => exportCSV()} className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-bold hover:bg-gray-50 dark:hover:bg-neutral-800 flex items-center gap-2 text-black dark:text-white"><Download size={16} /> CSV</button>
+                  <button onClick={loadLeads} className={`p-2 ${G} !rounded-xl !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`}><RefreshCw size={18} /></button>
+                  <button onClick={() => exportToGoogleSheets()} className="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-bold hover:bg-emerald-600 flex items-center gap-2"><FileSpreadsheet size={16} /> SHEETS</button>
+                  <button onClick={() => exportCSV()} className={`px-4 py-2 ${G} !rounded-xl !shadow-none text-sm font-bold hover:bg-white/80 dark:hover:bg-white/10 flex items-center gap-2 text-black dark:text-white`}><Download size={16} /> CSV</button>
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-4 mb-6">
-                <div className="flex flex-wrap items-center gap-4">
-                  <div className="flex-1 min-w-[200px]">
-                    <div className="relative">
-                      <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                      <input value={searchLeadsQuery} onChange={e => setSearchLeadsQuery(e.target.value)} placeholder="Zoek leads..."
-                        className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white" />
-                    </div>
+              <div className={`${GC} p-4 mb-6`}>
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex-1 min-w-[200px] relative">
+                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input value={searchLeadsQuery} onChange={e => setSearchLeadsQuery(e.target.value)} placeholder="Zoek leads..."
+                      className={`w-full pl-10 pr-4 py-2 text-sm ${GI}`} />
                   </div>
-                  <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
-                    className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white">
-                    <option value="alle">Alle Status</option>
-                    {Object.entries(STATUS_CONFIG).map(([key, val]) => (<option key={key} value={key}>{val.label}</option>))}
-                  </select>
-                  <select value={sourceFilter} onChange={e => setSourceFilter(e.target.value)}
-                    className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white">
-                    <option value="alle">Alle Bronnen</option>
-                    {Object.entries(SEARCH_SOURCES).map(([key, val]) => (<option key={key} value={key}>{val.name}</option>))}
-                  </select>
-                  <select value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)}
-                    className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white">
-                    <option value="alle">Alle Prioriteit</option>
-                    {Object.entries(PRIORITY_CONFIG).map(([key, val]) => (<option key={key} value={key}>{val.icon} {val.label}</option>))}
-                  </select>
-                  <select value={sortBy} onChange={e => setSortBy(e.target.value)}
-                    className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white">
-                    <option value="datum">Nieuwste eerst</option>
-                    <option value="naam">Naam A-Z</option>
-                    <option value="status">Status</option>
-                  </select>
+                  {[
+                    { val: statusFilter, set: setStatusFilter, opts: Object.entries(STATUS_CONFIG).map(([k,v]) => [k, v.label]), def: 'Alle Status' },
+                    { val: sourceFilter, set: setSourceFilter, opts: Object.entries(SEARCH_SOURCES).map(([k,v]) => [k, v.name]), def: 'Alle Bronnen' },
+                    { val: priorityFilter, set: setPriorityFilter, opts: Object.entries(PRIORITY_CONFIG).map(([k,v]) => [k, `${v.icon} ${v.label}`]), def: 'Alle Prioriteit' },
+                    { val: sortBy, set: setSortBy, opts: [['datum','Nieuwste'],['naam','Naam A-Z'],['status','Status']], def: null },
+                  ].map((f, i) => (
+                    <select key={i} value={f.val} onChange={e => f.set(e.target.value)} className={`px-3 py-2 text-sm font-medium cursor-pointer ${GI}`}>
+                      {f.def && <option value="alle">{f.def}</option>}
+                      {f.opts.map(([k, l]) => <option key={k} value={k}>{l}</option>)}
+                    </select>
+                  ))}
                 </div>
-
                 {selectedLeads.length > 0 && (
-                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100 dark:border-neutral-800">
+                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100/40 dark:border-white/[0.05]">
                     <span className="text-sm font-medium text-black dark:text-white">{selectedLeads.length} geselecteerd</span>
-                    <div className="flex items-center gap-2">
-                      <select onChange={e => { if(e.target.value) { bulkUpdateStatus(e.target.value); e.target.value = ''; }}}
-                        className="px-3 py-1.5 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm focus:outline-none bg-white dark:bg-neutral-800 text-black dark:text-white">
-                        <option value="">Status wijzigen...</option>
-                        {Object.entries(STATUS_CONFIG).map(([key, val]) => (<option key={key} value={key}>{val.label}</option>))}
-                      </select>
-                      <button onClick={bulkDelete} className="px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg text-sm font-medium hover:bg-red-200 dark:hover:bg-red-900/50">Verwijderen</button>
-                      <button onClick={() => setSelectedLeads([])} className="px-3 py-1.5 text-gray-500 dark:text-gray-400 text-sm hover:text-black dark:hover:text-white">Annuleren</button>
-                    </div>
+                    <select onChange={e => { if(e.target.value) { bulkUpdateStatus(e.target.value); e.target.value = ''; }}} className={`px-3 py-1.5 text-sm ${GI}`}>
+                      <option value="">Status wijzigen...</option>
+                      {Object.entries(STATUS_CONFIG).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+                    </select>
+                    <button onClick={bulkDelete} className="px-3 py-1.5 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl text-sm font-medium">Verwijderen</button>
+                    <button onClick={() => setSelectedLeads([])} className="px-3 py-1.5 text-gray-400 text-sm hover:text-black dark:hover:text-white">Annuleren</button>
                   </div>
                 )}
               </div>
 
               {filteredLeads.length === 0 ? (
-                <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-gray-200 dark:border-neutral-800 p-16 text-center">
+                <div className={`${GC} p-16 text-center`}>
                   <Users size={48} className="mx-auto mb-4 text-gray-300 dark:text-gray-600" />
                   <h3 className="text-2xl font-bold mb-2 text-black dark:text-white">Geen leads gevonden</h3>
-                  <p className="text-gray-500 dark:text-gray-400 mb-6">Pas je filters aan of zoek nieuwe leads</p>
+                  <p className="text-gray-400 dark:text-gray-500 mb-6">Pas je filters aan of zoek nieuwe leads</p>
                   <button onClick={() => setActiveTab('zoeken')} className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-sm">ZOEK LEADS</button>
                 </div>
               ) : (
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 px-2">
-                    <button onClick={selectAllLeads} className="p-1 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded text-black dark:text-white">
+                    <button onClick={selectAllLeads} className="p-1 hover:bg-white/40 dark:hover:bg-white/[0.06] rounded text-black dark:text-white">
                       {selectedLeads.length === filteredLeads.length ? <CheckSquare size={18} /> : <Square size={18} />}
                     </button>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">Selecteer alles ({filteredLeads.length})</span>
+                    <span className="text-sm text-gray-400 dark:text-gray-500">Selecteer alles ({filteredLeads.length})</span>
                   </div>
-
                   {filteredLeads.map(lead => (
-                    <div key={lead.id} className={`bg-white dark:bg-neutral-900 border rounded-xl p-5 transition-all ${selectedLeads.includes(lead.id) ? 'border-black dark:border-white' : 'border-gray-200 dark:border-neutral-800 hover:border-gray-300 dark:hover:border-neutral-600'}`}>
+                    <div key={lead.id} className={`${GC} p-5 transition-all ${selectedLeads.includes(lead.id) ? '!border-black dark:!border-white' : ''}`}>
                       <div className="flex items-start gap-4">
                         <button onClick={() => toggleSelectLead(lead.id)} className="mt-1 text-black dark:text-white">
                           {selectedLeads.includes(lead.id) ? <CheckSquare size={20} /> : <Square size={20} className="text-gray-300 dark:text-gray-600" />}
@@ -1297,47 +1277,41 @@ const LeadFinderPage = () => {
                             <select value={lead.status || 'nieuw'} onChange={e => updateLead(lead.id, { status: e.target.value })}
                               className="px-2 py-1 rounded-full text-xs font-bold border-0 cursor-pointer"
                               style={{ backgroundColor: STATUS_CONFIG[lead.status || 'nieuw']?.bg, color: STATUS_CONFIG[lead.status || 'nieuw']?.color }}>
-                              {Object.entries(STATUS_CONFIG).map(([key, val]) => (<option key={key} value={key}>{val.label}</option>))}
+                              {Object.entries(STATUS_CONFIG).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
                             </select>
                             <select value={lead.priority || 'medium'} onChange={e => updateLead(lead.id, { priority: e.target.value })}
-                              className="px-2 py-1 rounded text-xs font-bold border border-gray-200 dark:border-neutral-700 cursor-pointer bg-white dark:bg-neutral-800 text-black dark:text-white">
-                              {Object.entries(PRIORITY_CONFIG).map(([key, val]) => (<option key={key} value={key}>{val.icon} {val.label}</option>))}
+                              className={`px-2 py-1 rounded text-xs font-bold cursor-pointer ${GI} !rounded-md`}>
+                              {Object.entries(PRIORITY_CONFIG).map(([k, v]) => <option key={k} value={k}>{v.icon} {v.label}</option>)}
                             </select>
-                            {lead.source && (
-                              <span className="px-2 py-1 rounded text-xs font-medium" style={{ backgroundColor: SEARCH_SOURCES[lead.source]?.color + '15', color: SEARCH_SOURCES[lead.source]?.color }}>
-                                {SEARCH_SOURCES[lead.source]?.name}
-                              </span>
-                            )}
+                            {lead.source && <span className="px-2 py-1 rounded text-xs font-medium" style={{ backgroundColor: SEARCH_SOURCES[lead.source]?.color + '15', color: SEARCH_SOURCES[lead.source]?.color }}>{SEARCH_SOURCES[lead.source]?.name}</span>}
                           </div>
                           <div className="flex flex-wrap gap-4 text-sm mb-3">
-                            {lead.adres && <span className="text-gray-500 dark:text-gray-400 flex items-center gap-1"><MapPin size={14} />{lead.adres}</span>}
-                            {lead.telefoonnummer && (<a href={`tel:${lead.telefoonnummer}`} className="text-gray-600 dark:text-gray-300 flex items-center gap-1 hover:underline"><Phone size={14} />{lead.telefoonnummer}</a>)}
-                            {lead.email && (<a href={`mailto:${lead.email}`} className="text-gray-600 dark:text-gray-300 flex items-center gap-1 hover:underline"><Mail size={14} />{lead.email}</a>)}
+                            {lead.adres && <span className="text-gray-400 flex items-center gap-1"><MapPin size={14} />{lead.adres}</span>}
+                            {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-gray-500 dark:text-gray-300 flex items-center gap-1 hover:underline"><Phone size={14} />{lead.telefoonnummer}</a>}
+                            {lead.email && <a href={`mailto:${lead.email}`} className="text-gray-500 dark:text-gray-300 flex items-center gap-1 hover:underline"><Mail size={14} />{lead.email}</a>}
                           </div>
                           {editingLead === lead.id ? (
                             <div className="flex gap-2 mt-2">
                               <input value={editData.notitie || ''} onChange={e => setEditData({...editData, notitie: e.target.value})} placeholder="Voeg notitie toe..."
-                                className="flex-1 px-3 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white" autoFocus />
-                              <button onClick={() => { updateLead(lead.id, editData); setEditingLead(null); }} className="p-2 bg-black dark:bg-white text-white dark:text-black rounded-lg"><Check size={16} /></button>
-                              <button onClick={() => setEditingLead(null)} className="p-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-black dark:text-white"><X size={16} /></button>
+                                className={`flex-1 px-3 py-2 text-sm ${GI}`} autoFocus />
+                              <button onClick={() => { updateLead(lead.id, editData); setEditingLead(null); }} className="p-2 bg-black dark:bg-white text-white dark:text-black rounded-xl"><Check size={16} /></button>
+                              <button onClick={() => setEditingLead(null)} className={`p-2 ${G} !rounded-xl !shadow-none text-black dark:text-white`}><X size={16} /></button>
                             </div>
                           ) : (
                             <div onClick={() => { setEditingLead(lead.id); setEditData({ notitie: lead.notitie || '' }); }}
-                              className="text-sm text-gray-500 dark:text-gray-400 cursor-pointer flex items-center gap-2 hover:text-black dark:hover:text-white mt-2">
+                              className="text-sm text-gray-400 cursor-pointer flex items-center gap-2 hover:text-black dark:hover:text-white mt-2">
                               <Edit2 size={12} />{lead.notitie || 'Klik om notitie toe te voegen...'}
                             </div>
                           )}
                           <div className="flex flex-wrap gap-2 mt-3">
-                            {lead.google_maps_url && (<a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-medium hover:bg-gray-200 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-700 dark:text-gray-300"><MapPin size={12} /> Maps</a>)}
-                            <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-medium hover:bg-gray-200 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-700 dark:text-gray-300"><Building2 size={12} /> KVK</a>
-                            <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-medium hover:bg-gray-200 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-700 dark:text-gray-300"><Facebook size={12} /> FB</a>
-                            <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-xs font-medium hover:bg-gray-200 dark:hover:bg-neutral-700 flex items-center gap-1 text-gray-700 dark:text-gray-300"><Instagram size={12} /> IG</a>
-                            {lead.telefoonnummer && (<a href={`https://wa.me/${lead.telefoonnummer.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/50 flex items-center gap-1"><MessageSquare size={12} /> WhatsApp</a>)}
+                            {lead.google_maps_url && <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><MapPin size={12} /> Maps</a>}
+                            <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Building2 size={12} /> KVK</a>
+                            <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Facebook size={12} /> FB</a>
+                            <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Instagram size={12} /> IG</a>
+                            {lead.telefoonnummer && <a href={`https://wa.me/${lead.telefoonnummer.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/30 flex items-center gap-1 border border-green-200/50 dark:border-green-800/30"><MessageSquare size={12} /> WhatsApp</a>}
                           </div>
                         </div>
-                        <div className="flex flex-col gap-2">
-                          <button onClick={() => deleteLead(lead.id)} className="p-2 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500" title="Verwijderen"><Trash2 size={16} /></button>
-                        </div>
+                        <button onClick={() => deleteLead(lead.id)} className="p-2 border border-red-200/50 dark:border-red-800/30 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-red-500"><Trash2 size={16} /></button>
                       </div>
                     </div>
                   ))}
@@ -1353,50 +1327,47 @@ const LeadFinderPage = () => {
             <div className="max-w-[1800px] mx-auto px-6 py-8">
               <h1 className="text-3xl font-black tracking-tight mb-8 text-black dark:text-white">Dashboard</h1>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-                <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-6">
+                <div className={`${GC} p-6`}>
                   <p className="text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Totaal Leads</p>
                   <p className="text-4xl font-black text-black dark:text-white">{dashboardData?.totaal_leads || 0}</p>
                 </div>
                 {Object.entries(STATUS_CONFIG).slice(0, 5).map(([key, val]) => (
-                  <div key={key} className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-6">
+                  <div key={key} className={`${GC} p-6`}>
                     <p className="text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">{val.label}</p>
                     <p className="text-4xl font-black" style={{ color: val.color }}>{dashboardData?.status_verdeling?.[key] || 0}</p>
                   </div>
                 ))}
               </div>
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-6">
+                <div className={`${GC} p-6`}>
                   <h3 className="font-bold mb-4 text-black dark:text-white">Status Verdeling</h3>
                   <div className="space-y-3">
                     {Object.entries(STATUS_CONFIG).map(([key, val]) => {
                       const count = dashboardData?.status_verdeling?.[key] || 0;
                       const total = dashboardData?.totaal_leads || 1;
-                      const percentage = Math.round((count / total) * 100);
+                      const pct = Math.round((count / total) * 100);
                       return (
                         <div key={key}>
                           <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-700 dark:text-gray-300">{val.label}</span>
+                            <span className="text-gray-500 dark:text-gray-400">{val.label}</span>
                             <span className="font-bold text-black dark:text-white">{count}</span>
                           </div>
-                          <div className="h-2 bg-gray-100 dark:bg-neutral-800 rounded-full overflow-hidden">
-                            <div className="h-full rounded-full transition-all" style={{ width: `${percentage}%`, backgroundColor: val.color }} />
+                          <div className="h-2 bg-black/[0.04] dark:bg-white/[0.04] rounded-full overflow-hidden">
+                            <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: val.color }} />
                           </div>
                         </div>
                       );
                     })}
                   </div>
                 </div>
-                <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-6">
+                <div className={`${GC} p-6`}>
                   <h3 className="font-bold mb-4 text-black dark:text-white">Bronnen</h3>
                   <div className="space-y-3">
                     {Object.entries(SEARCH_SOURCES).map(([key, source]) => {
                       const count = opgeslagenLeads.filter(l => l.source === key).length;
                       return (
-                        <div key={key} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-neutral-800 last:border-0">
-                          <div className="flex items-center gap-2">
-                            <source.icon size={18} style={{ color: source.color }} />
-                            <span className="text-gray-700 dark:text-gray-300">{source.name}</span>
-                          </div>
+                        <div key={key} className="flex items-center justify-between py-2 border-b border-gray-100/30 dark:border-white/[0.04] last:border-0">
+                          <div className="flex items-center gap-2"><source.icon size={18} style={{ color: source.color }} /><span className="text-gray-500 dark:text-gray-400">{source.name}</span></div>
                           <span className="font-bold text-black dark:text-white">{count}</span>
                         </div>
                       );
@@ -1404,17 +1375,17 @@ const LeadFinderPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-6">
+              <div className={`${GC} p-6`}>
                 <h3 className="font-bold mb-4 text-black dark:text-white">Recent Toegevoegd</h3>
                 {opgeslagenLeads.slice(0, 5).map(lead => (
-                  <div key={lead.id} className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-neutral-800 last:border-0">
+                  <div key={lead.id} className="flex items-center justify-between py-3 border-b border-gray-100/30 dark:border-white/[0.04] last:border-0">
                     <div className="flex items-center gap-3">
                       <span className="font-medium text-black dark:text-white">{lead.naam}</span>
                       <span className="px-2 py-0.5 rounded text-xs" style={{ backgroundColor: STATUS_CONFIG[lead.status || 'nieuw']?.bg, color: STATUS_CONFIG[lead.status || 'nieuw']?.color }}>
                         {STATUS_CONFIG[lead.status || 'nieuw']?.label}
                       </span>
                     </div>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{lead.opgeslagen_op ? new Date(lead.opgeslagen_op).toLocaleDateString('nl-NL') : '-'}</span>
+                    <span className="text-sm text-gray-400 dark:text-gray-500">{lead.opgeslagen_op ? new Date(lead.opgeslagen_op).toLocaleDateString('nl-NL') : '-'}</span>
                   </div>
                 ))}
               </div>
@@ -1429,20 +1400,20 @@ const LeadFinderPage = () => {
               <h1 className="text-3xl font-black tracking-tight mb-8 text-black dark:text-white">Tools & Integraties</h1>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { icon: Download, iconBg: 'bg-green-100 dark:bg-green-900/30', iconColor: 'text-green-600 dark:text-green-400', title: 'CSV Export', desc: 'Exporteer alle leads naar een CSV bestand voor gebruik in Excel of Google Sheets.', btnText: 'EXPORTEER ALLE LEADS', btnClass: 'bg-green-600 text-white hover:bg-green-700', action: () => exportCSV() },
-                  { icon: FileText, iconBg: 'bg-gray-100 dark:bg-neutral-800', iconColor: 'text-gray-600 dark:text-gray-400', title: 'Bulk Import', desc: 'Importeer leads vanuit een CSV bestand. Handig voor migratie van andere systemen.', btnText: 'COMING SOON', btnClass: 'border-2 border-gray-200 dark:border-neutral-700 hover:border-black dark:hover:border-white text-black dark:text-white', soon: true },
-                  { icon: Building2, iconBg: 'bg-purple-100 dark:bg-purple-900/30', iconColor: 'text-purple-600 dark:text-purple-400', title: 'KVK Integratie', desc: 'Directe koppeling met de Kamer van Koophandel voor bedrijfsgegevens.', btnText: 'COMING SOON', btnClass: 'border-2 border-gray-200 dark:border-neutral-700 hover:border-black dark:hover:border-white text-black dark:text-white', soon: true },
-                  { icon: MessageSquare, iconBg: 'bg-green-100 dark:bg-green-900/30', iconColor: 'text-green-600 dark:text-green-400', title: 'WhatsApp Templates', desc: 'Stuur gepersonaliseerde WhatsApp berichten naar leads met één klik.', btnText: 'COMING SOON', btnClass: 'border-2 border-gray-200 dark:border-neutral-700 hover:border-black dark:hover:border-white text-black dark:text-white', soon: true },
-                  { icon: Mail, iconBg: 'bg-orange-100 dark:bg-orange-900/30', iconColor: 'text-orange-600 dark:text-orange-400', title: 'Email Campagnes', desc: 'Verstuur gepersonaliseerde email campagnes naar geselecteerde leads.', btnText: 'COMING SOON', btnClass: 'border-2 border-gray-200 dark:border-neutral-700 hover:border-black dark:hover:border-white text-black dark:text-white', soon: true },
-                  { icon: Calendar, iconBg: 'bg-red-100 dark:bg-red-900/30', iconColor: 'text-red-600 dark:text-red-400', title: 'Follow-up Reminders', desc: 'Plan automatische herinneringen voor lead opvolging.', btnText: 'COMING SOON', btnClass: 'border-2 border-gray-200 dark:border-neutral-700 hover:border-black dark:hover:border-white text-black dark:text-white', soon: true },
+                  { icon: Download, iconBg: 'bg-green-100 dark:bg-green-900/20', iconColor: 'text-green-600 dark:text-green-400', title: 'CSV Export', desc: 'Exporteer alle leads naar een CSV bestand voor gebruik in Excel of Google Sheets.', btnText: 'EXPORTEER ALLE LEADS', btnClass: 'bg-green-600 text-white hover:bg-green-700', action: () => exportCSV() },
+                  { icon: FileText, iconBg: 'bg-gray-100/50 dark:bg-white/[0.04]', iconColor: 'text-gray-500 dark:text-gray-400', title: 'Bulk Import', desc: 'Importeer leads vanuit een CSV bestand. Handig voor migratie van andere systemen.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
+                  { icon: Building2, iconBg: 'bg-purple-100 dark:bg-purple-900/20', iconColor: 'text-purple-600 dark:text-purple-400', title: 'KVK Integratie', desc: 'Directe koppeling met de Kamer van Koophandel voor bedrijfsgegevens.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
+                  { icon: MessageSquare, iconBg: 'bg-green-100 dark:bg-green-900/20', iconColor: 'text-green-600 dark:text-green-400', title: 'WhatsApp Templates', desc: 'Stuur gepersonaliseerde WhatsApp berichten naar leads met één klik.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
+                  { icon: Mail, iconBg: 'bg-orange-100 dark:bg-orange-900/20', iconColor: 'text-orange-600 dark:text-orange-400', title: 'Email Campagnes', desc: 'Verstuur gepersonaliseerde email campagnes naar geselecteerde leads.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
+                  { icon: Calendar, iconBg: 'bg-red-100 dark:bg-red-900/20', iconColor: 'text-red-600 dark:text-red-400', title: 'Follow-up Reminders', desc: 'Plan automatische herinneringen voor lead opvolging.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
                 ].map((tool, i) => (
-                  <div key={i} className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-800 p-6">
-                    <div className={`w-12 h-12 ${tool.iconBg} rounded-xl flex items-center justify-center mb-4`}>
+                  <div key={i} className={`${GC} p-6`}>
+                    <div className={`w-12 h-12 ${tool.iconBg} rounded-xl flex items-center justify-center mb-4 border border-white/30 dark:border-white/[0.06]`}>
                       <tool.icon size={24} className={tool.iconColor} />
                     </div>
                     <h3 className="font-bold text-lg mb-2 text-black dark:text-white">{tool.title}</h3>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">{tool.desc}</p>
-                    <button onClick={tool.action} className={`w-full py-3 rounded-lg font-bold text-sm ${tool.btnClass}`}>{tool.btnText}</button>
+                    <p className="text-gray-400 dark:text-gray-500 text-sm mb-4">{tool.desc}</p>
+                    <button onClick={tool.action} className={`w-full py-3 rounded-xl font-bold text-sm ${tool.btnClass}`}>{tool.btnText}</button>
                   </div>
                 ))}
               </div>
