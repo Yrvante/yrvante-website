@@ -198,12 +198,15 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Sorteerbare CSV kolommen**: Klik op kolomheaders (Bedrijfsnaam, Categorie, Plaats, Website, Rating, Reviews, Status) om te sorteren met richting-pijltjes
 - **42/42 tests geslaagd** (iteration 36)
 
-### Phase 21 - Interactieve Add-on Previews (Complete - Feb 2026)
-- **Dark Mode Preview**: Interactieve zon/maan toggle die de demo-layout wisselt tussen licht en donker
-- **Pop-up Preview**: Mini website achtergrond met "Toon popup" knop die een 10% korting popup toont
-- **Voor & Na Slider Preview**: Sleepbare slider met VOOR/NA labels, ouderwets design vs modern design vergelijking
-- **Bug fix**: `popup` en `beforeAfterSlider` toegevoegd aan addOns state en calculateTotal (werden niet meegeteld)
-- **39/39 tests geslaagd** (iteration 38)
+### Phase 22 - Prisma Postgres Migratie + LeadFinder Mobile Fix (Complete - Feb 2026)
+- **Prisma Postgres**: CsvLead model aangemaakt, `/api/leads.js` endpoint met GET/POST/PATCH/DELETE, oude `csv-leads.js` verwijderd (blijft op 12 Vercel functies)
+- **Frontend migratie**: AdminDashboard + LeadFinder omgezet naar `/api/leads`, veldnamen `adres→plaats`, `aantalReviews→reviews`
+- **Preview backend**: server.py bijgewerkt met `/api/leads` routes (MongoDB) + legacy backward compatibility
+- **LeadFinder mobiel**: Alle tabs (CSV, Leads, Dashboard, Tools) volledig responsive voor iPhone (390px)
+- **Dark/Light toggle**: Zon/Maan schakelknop in LeadFinder navbar met ThemeContext
+- **Mobiele CSV kaarten**: Notitie veld, kopieer-telefoon knop, full-width WhatsApp, flex-wrap knoppen
+- **CSV tab badge**: Toont aantal leads naast het icoon
+- **28/28 frontend tests + 13/13 backend tests geslaagd** (iteraties 39-40)
 
 ## Backlog (P2)
 - Google Sheets API for lead export
