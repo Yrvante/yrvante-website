@@ -167,9 +167,9 @@ const AdminDashboard = () => {
 
 Ik bouw websites voor kleine bedrijven in Nederland!
 
-Ik scroll elke dag door Google Maps en zie prachtige bedrijven die online nergens te vinden zijn. Toen ik ${lead.naam} tegenkwam dacht ik hetzelfde, geen website? Want ${lead.naam} ziet er geweldig uit. En zou zonde zijn om onzichtbaar te blijven.
+Ik scroll elke dag door Google Maps en zie prachtige bedrijven die online nergens te vinden zijn. Toen ik ${lead.naam} tegenkwam dacht ik hetzelfde, geen website? Want jullie bedrijf ziet er geweldig uit. En zou zonde zijn om onzichtbaar te blijven.
 
-Wist je trouwens ook dat elke dag dat ${lead.naam} geen website heeft loopt er ergens een klant langs die ${lead.naam} had kunnen vinden — maar in plaats daarvan naar de concurrent gaat. Niet omdat ${lead.naam} minder goed is. Gewoon omdat die wel online staat.
+Wist je trouwens ook dat elke dag dat jullie geen website hebben loopt er ergens een klant langs die jullie had kunnen vinden — maar in plaats daarvan naar de concurrent gaat. Niet omdat jullie minder goed zijn. Gewoon omdat die wel online staat.
 
 🌐 Professionele website vanaf €399
 ⚡ Binnen 2 weken live
