@@ -8,7 +8,7 @@ import { useTheme } from "../App";
 import { 
   Eye, Users, Mail, MailOpen, Calendar, TrendingUp, 
   Trash2, Check, Lock, ArrowLeft, RefreshCw, Shield,
-  Upload, Search, Phone, MessageSquare, ChevronDown,
+  Upload, Search, Phone, MessageSquare, ChevronDown, ChevronUp,
   BarChart3, FileText, Settings, ExternalLink, Star, Globe
 } from "lucide-react";
 import { Toaster } from "../components/ui/sonner";
@@ -67,6 +67,8 @@ const AdminDashboard = () => {
   const [csvSearch, setCsvSearch] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
+  const [csvSortCol, setCsvSortCol] = useState(null);
+  const [csvSortDir, setCsvSortDir] = useState('asc');
 
   const login = async (e) => {
     e.preventDefault();
@@ -170,6 +172,34 @@ const AdminDashboard = () => {
     if (csvStatusFilter !== 'alle' && l.status !== csvStatusFilter) return false;
     if (csvSearch) { const q = csvSearch.toLowerCase(); return l.naam?.toLowerCase().includes(q) || extractCity(l.adres).toLowerCase().includes(q); }
     return true;
+  });
+
+  const formatRating = (r) => {
+    if (!r) return null;
+    const n = parseFloat(r);
+    return isNaN(n) ? r : n.toFixed(1);
+  };
+
+  const toggleCsvSort = (col) => {
+    if (csvSortCol === col) { setCsvSortDir(d => d === 'asc' ? 'desc' : 'asc'); }
+    else { setCsvSortCol(col); setCsvSortDir('asc'); }
+  };
+
+  const sortedCsv = [...filteredCsv].sort((a, b) => {
+    if (!csvSortCol) return 0;
+    const dir = csvSortDir === 'asc' ? 1 : -1;
+    let va, vb;
+    switch (csvSortCol) {
+      case 'naam': va = a.naam || ''; vb = b.naam || ''; break;
+      case 'categorie': va = a.categorie || ''; vb = b.categorie || ''; break;
+      case 'plaats': va = extractCity(a.adres); vb = extractCity(b.adres); break;
+      case 'website': va = a.website ? '0' : '1'; vb = b.website ? '0' : '1'; break;
+      case 'rating': va = parseFloat(a.rating) || 0; vb = parseFloat(b.rating) || 0; return (va - vb) * dir;
+      case 'reviews': va = parseInt(a.aantalReviews) || 0; vb = parseInt(b.aantalReviews) || 0; return (va - vb) * dir;
+      case 'status': va = a.status || ''; vb = b.status || ''; break;
+      default: return 0;
+    }
+    return typeof va === 'string' ? va.localeCompare(vb) * dir : (va - vb) * dir;
   });
 
   const csvStats = {
@@ -440,13 +470,34 @@ const AdminDashboard = () => {
                     <table className="w-full" data-testid="csv-leads-table">
                       <thead>
                         <tr className="bg-black/[0.02] dark:bg-white/[0.02] border-b border-gray-100/50 dark:border-white/[0.05]">
-                          {['Bedrijfsnaam','Categorie','Plaats','Website','Telefoon','Rating','Reviews','Status','WhatsApp',''].map((h,i) => (
-                            <th key={i} className={`${[5,6,8,9].includes(i)?'text-center':'text-left'} px-3 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500`}>{h}</th>
+                          {[
+                            { key: 'naam', label: 'Bedrijfsnaam', sortable: true },
+                            { key: 'categorie', label: 'Categorie', sortable: true },
+                            { key: 'plaats', label: 'Plaats', sortable: true },
+                            { key: 'website', label: 'Website', sortable: true },
+                            { key: 'telefoon', label: 'Telefoon', sortable: false },
+                            { key: 'rating', label: 'Rating', sortable: true, center: true },
+                            { key: 'reviews', label: 'Reviews', sortable: true, center: true },
+                            { key: 'status', label: 'Status', sortable: true },
+                            { key: 'whatsapp', label: 'WhatsApp', sortable: false, center: true },
+                            { key: 'delete', label: '', sortable: false },
+                          ].map((h) => (
+                            <th key={h.key}
+                              onClick={h.sortable ? () => toggleCsvSort(h.key) : undefined}
+                              className={`${h.center ? 'text-center' : 'text-left'} px-3 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 ${h.sortable ? 'cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 select-none transition-colors' : ''}`}
+                              data-testid={`csv-header-${h.key}`}>
+                              <span className="inline-flex items-center gap-1">
+                                {h.label}
+                                {h.sortable && csvSortCol === h.key && (
+                                  csvSortDir === 'asc' ? <ChevronUp size={12} /> : <ChevronDown size={12} />
+                                )}
+                              </span>
+                            </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredCsv.map(lead => {
+                        {sortedCsv.map(lead => {
                           const sc = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
                           const hasWebsite = lead.website && lead.website.trim() !== '';
                           return (
@@ -479,7 +530,7 @@ const AdminDashboard = () => {
                               <td className="px-3 py-3 text-center">
                                 {lead.rating ? (
                                   <span className="text-sm font-bold flex items-center justify-center gap-1 text-amber-500">
-                                    <Star size={12} fill="currentColor" />{lead.rating}
+                                    <Star size={12} fill="currentColor" />{formatRating(lead.rating)}
                                   </span>
                                 ) : <span className="text-xs text-gray-400">-</span>}
                               </td>
@@ -517,7 +568,7 @@ const AdminDashboard = () => {
 
                   {/* Mobile */}
                   <div className="md:hidden divide-y divide-gray-100/30 dark:divide-white/[0.03]">
-                    {filteredCsv.map(lead => {
+                    {sortedCsv.map(lead => {
                       const sc = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
                       const hasWebsite = lead.website && lead.website.trim() !== '';
                       return (
@@ -544,7 +595,7 @@ const AdminDashboard = () => {
                                 {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
                               </a>
                             ) : <span className="font-semibold text-red-500">Geen website</span>}
-                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{lead.rating}</span>}
+                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{formatRating(lead.rating)}</span>}
                             {lead.aantalReviews && <span className="text-gray-400">({lead.aantalReviews})</span>}
                           </div>
                           {lead.telefoon && <p className="text-xs font-medium flex items-center gap-1 text-black dark:text-white mb-2"><Phone size={11} />{lead.telefoon}</p>}

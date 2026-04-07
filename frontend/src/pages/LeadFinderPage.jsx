@@ -6,7 +6,7 @@ import Papa from "papaparse";
 import { useTheme } from "../App";
 import { 
   Search, Phone, MapPin, ExternalLink, Save, Trash2, Edit2, Check, X, 
-  Download, ChevronDown, BarChart3, Users, Lock, ArrowLeft, Loader2, RefreshCw,
+  Download, ChevronDown, ChevronUp, BarChart3, Users, Lock, ArrowLeft, Loader2, RefreshCw,
   Bookmark, FileText, ArrowRight, Menu as MenuIcon, Mail, Globe, Building2,
   Instagram, Facebook, Filter, SortAsc, CheckSquare, Square, MoreHorizontal,
   Target, TrendingUp, Calendar, Clock, Star, Tag, Copy, MessageSquare,
@@ -128,6 +128,8 @@ const LeadFinderPage = () => {
   const [csvSearchQuery, setCsvSearchQuery] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
+  const [csvSortCol, setCsvSortCol] = useState(null);
+  const [csvSortDir, setCsvSortDir] = useState('asc');
 
   useEffect(() => {
     if (localStorage.getItem('leadfinder_auth') === 'true') {
@@ -598,6 +600,34 @@ const LeadFinderPage = () => {
     return true;
   });
 
+  const formatRating = (r) => {
+    if (!r) return null;
+    const n = parseFloat(r);
+    return isNaN(n) ? r : n.toFixed(1);
+  };
+
+  const toggleCsvSort = (col) => {
+    if (csvSortCol === col) { setCsvSortDir(d => d === 'asc' ? 'desc' : 'asc'); }
+    else { setCsvSortCol(col); setCsvSortDir('asc'); }
+  };
+
+  const sortedCsvLeads = [...filteredCsvLeads].sort((a, b) => {
+    if (!csvSortCol) return 0;
+    const dir = csvSortDir === 'asc' ? 1 : -1;
+    let va, vb;
+    switch (csvSortCol) {
+      case 'naam': va = a.naam || ''; vb = b.naam || ''; break;
+      case 'categorie': va = a.categorie || ''; vb = b.categorie || ''; break;
+      case 'plaats': va = extractCity(a.adres); vb = extractCity(b.adres); break;
+      case 'website': va = a.website ? '0' : '1'; vb = b.website ? '0' : '1'; break;
+      case 'rating': va = parseFloat(a.rating) || 0; vb = parseFloat(b.rating) || 0; return (va - vb) * dir;
+      case 'reviews': va = parseInt(a.aantalReviews) || 0; vb = parseInt(b.aantalReviews) || 0; return (va - vb) * dir;
+      case 'status': va = a.status || ''; vb = b.status || ''; break;
+      default: return 0;
+    }
+    return typeof va === 'string' ? va.localeCompare(vb) * dir : (va - vb) * dir;
+  });
+
   const csvStats = {
     totaal: csvLeads.length,
     zonderWebsite: csvLeads.filter(l => !l.website || l.website.trim() === '').length,
@@ -1040,20 +1070,34 @@ const LeadFinderPage = () => {
                     <table className="w-full" data-testid="csv-leads-table">
                       <thead>
                         <tr className="bg-black/[0.02] dark:bg-white/[0.02] border-b border-gray-100/50 dark:border-white/[0.05]">
-                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Bedrijfsnaam</th>
-                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Categorie</th>
-                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Plaats</th>
-                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Website</th>
-                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Telefoon</th>
-                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Rating</th>
-                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Reviews</th>
-                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Status</th>
-                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">WhatsApp</th>
-                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 w-10"></th>
+                          {[
+                            { key: 'naam', label: 'Bedrijfsnaam', sortable: true },
+                            { key: 'categorie', label: 'Categorie', sortable: true },
+                            { key: 'plaats', label: 'Plaats', sortable: true },
+                            { key: 'website', label: 'Website', sortable: true },
+                            { key: 'telefoon', label: 'Telefoon', sortable: false },
+                            { key: 'rating', label: 'Rating', sortable: true, center: true },
+                            { key: 'reviews', label: 'Reviews', sortable: true, center: true },
+                            { key: 'status', label: 'Status', sortable: true },
+                            { key: 'whatsapp', label: 'WhatsApp', sortable: false, center: true },
+                            { key: 'delete', label: '', sortable: false, center: true },
+                          ].map((h) => (
+                            <th key={h.key}
+                              onClick={h.sortable ? () => toggleCsvSort(h.key) : undefined}
+                              className={`${h.center ? 'text-center' : 'text-left'} px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 ${h.sortable ? 'cursor-pointer hover:text-gray-800 dark:hover:text-gray-200 select-none transition-colors' : ''}`}
+                              data-testid={`csv-header-${h.key}`}>
+                              <span className="inline-flex items-center gap-1">
+                                {h.label}
+                                {h.sortable && csvSortCol === h.key && (
+                                  csvSortDir === 'asc' ? <ChevronUp size={12} /> : <ChevronDown size={12} />
+                                )}
+                              </span>
+                            </th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredCsvLeads.map(lead => {
+                        {sortedCsvLeads.map(lead => {
                           const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
                           const hasWebsite = lead.website && lead.website.trim() !== '';
                           return (
@@ -1090,7 +1134,7 @@ const LeadFinderPage = () => {
                               <td className="px-4 py-3 text-center">
                                 {lead.rating ? (
                                   <span className="text-sm font-bold flex items-center justify-center gap-1 text-amber-500">
-                                    <Star size={13} fill="currentColor" />{lead.rating}
+                                    <Star size={13} fill="currentColor" />{formatRating(lead.rating)}
                                   </span>
                                 ) : <span className="text-xs text-gray-400">-</span>}
                               </td>
@@ -1141,7 +1185,7 @@ const LeadFinderPage = () => {
 
                   {/* Mobile Cards */}
                   <div className="md:hidden divide-y divide-gray-100 dark:divide-neutral-800">
-                    {filteredCsvLeads.map(lead => {
+                    {sortedCsvLeads.map(lead => {
                       const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
                       const hasWebsite = lead.website && lead.website.trim() !== '';
                       return (
@@ -1170,7 +1214,7 @@ const LeadFinderPage = () => {
                             ) : (
                               <span className="font-semibold text-red-500">Geen website</span>
                             )}
-                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{lead.rating}</span>}
+                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{formatRating(lead.rating)}</span>}
                             {lead.aantalReviews && <span className="text-gray-400">({lead.aantalReviews} reviews)</span>}
                           </div>
                           <div className="flex items-center gap-2 mt-2">

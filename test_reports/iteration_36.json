@@ -1,0 +1,87 @@
+{
+  "summary": "Frontend testing of CSV table bug fixes: 1) Rating column decimal formatting, 2) Sortable column headers. Both bugs verified as FIXED on Admin Dashboard and LeadFinder pages. Rating values now display with max 1 decimal (e.g., 5.0 instead of 5.0000000). Column headers are clickable and sort data correctly with chevron indicators.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "ADMIN TEST 1.1: PASS - Login page loaded",
+    "ADMIN TEST 1.2: PASS - Password entered (yrvante2025)",
+    "ADMIN TEST 1.3: PASS - Login button clicked",
+    "ADMIN TEST 1.4: PASS - Successfully logged in, CSV tab visible",
+    "ADMIN TEST 2.1: PASS - Clicked CSV tab",
+    "ADMIN TEST 3.1: PASS - CSV file uploaded (test_sort.csv with ratings 5.0000000, 4.3000000, etc.)",
+    "ADMIN TEST 4.1: PASS - CSV leads table found",
+    "ADMIN TEST 4.2: PASS - Ratings display correctly: [5.0, 4.3, 3.8, 4.8, 4.1, 4.9] (max 1 decimal)",
+    "ADMIN TEST 4.3: PASS - All ratings display with max 1 decimal (BUG #1 FIXED)",
+    "ADMIN TEST 5.1: PASS - Clicked Plaats column header",
+    "ADMIN TEST 5.2: PASS - Sort indicator (chevron) appears on Plaats column",
+    "ADMIN TEST 5.3: PASS - Plaats values sorted alphabetically ascending",
+    "ADMIN TEST 5.4: PASS - Clicked Plaats header again to reverse sort",
+    "ADMIN TEST 5.5: PASS - Plaats values sorted alphabetically descending",
+    "ADMIN TEST 5.6: PASS - Sort direction reversed on second click (BUG #2 FIXED)",
+    "ADMIN TEST 6.1: PASS - Clicked Rating column header",
+    "ADMIN TEST 6.2: PASS - Sort indicator moved to Rating column",
+    "ADMIN TEST 6.3: PASS - Rating values sorted numerically: [3.8, 4.1, 4.3, 4.8, 4.9, 5.0]",
+    "ADMIN TEST 6.4: PASS - Ratings sorted numerically (ascending)",
+    "ADMIN TEST 7.1: PASS - Clicked Website column header",
+    "ADMIN TEST 7.2: PASS - Sort indicator on Website column",
+    "LEADFINDER TEST 1.1: PASS - Login page loaded",
+    "LEADFINDER TEST 1.2: PASS - Password entered (yrvante2025)",
+    "LEADFINDER TEST 1.3: PASS - Login button clicked",
+    "LEADFINDER TEST 1.4: PASS - Successfully logged in",
+    "LEADFINDER TEST 2.1: PASS - Clicked CSV tab",
+    "LEADFINDER TEST 3.1: PASS - CSV file uploaded",
+    "LEADFINDER TEST 4.1: PASS - CSV leads table found",
+    "LEADFINDER TEST 4.2: PASS - Ratings display correctly: [5.0, 4.3, 3.8, 4.8, 4.1, 4.9] (max 1 decimal)",
+    "LEADFINDER TEST 4.3: PASS - All ratings display with max 1 decimal (BUG #1 FIXED)",
+    "LEADFINDER TEST 5.1: PASS - Clicked Plaats column header",
+    "LEADFINDER TEST 5.2: PASS - Sort indicator (chevron) appears on Plaats column",
+    "LEADFINDER TEST 5.3: PASS - Plaats values sorted alphabetically ascending",
+    "LEADFINDER TEST 5.4: PASS - Clicked Plaats header again to reverse sort",
+    "LEADFINDER TEST 5.5: PASS - Plaats values sorted alphabetically descending",
+    "LEADFINDER TEST 5.6: PASS - Sort direction reversed on second click (BUG #2 FIXED)",
+    "LEADFINDER TEST 6.1: PASS - Clicked Rating column header",
+    "LEADFINDER TEST 6.2: PASS - Sort indicator moved to Rating column",
+    "LEADFINDER TEST 6.3: PASS - Rating values sorted numerically: [3.8, 4.1, 4.3, 4.8, 4.9, 5.0]",
+    "LEADFINDER TEST 6.4: PASS - Ratings sorted numerically (ascending)",
+    "LEADFINDER TEST 7.1: PASS - Clicked Website column header",
+    "LEADFINDER TEST 7.2: PASS - Sort indicator on Website column"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "formatRating() function correctly parses and formats ratings to 1 decimal using parseFloat().toFixed(1)",
+    "toggleCsvSort() function correctly toggles sort direction when clicking same column twice",
+    "sortedCsv/sortedCsvLeads correctly sorts by column with proper direction handling",
+    "Sortable column headers have data-testid='csv-header-{key}' for testing",
+    "ChevronUp/ChevronDown icons correctly show on active sort column only",
+    "Both AdminDashboard.jsx and LeadFinderPage.jsx share same CSV import/sort implementation"
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A - Frontend only testing",
+    "frontend": "100% - All 42 tests PASS"
+  },
+  "bugs_verified_fixed": [
+    {
+      "bug": "Rating column shows too many decimals (e.g., 5.0000000 instead of 5.0)",
+      "status": "FIXED",
+      "verification": "Imported CSV with ratings like 5.0000000, 4.3000000 - displayed as 5.0, 4.3"
+    },
+    {
+      "bug": "CSV table columns need to be sortable by clicking on headers",
+      "status": "FIXED",
+      "verification": "Clicked Plaats, Rating, Website headers - all sort correctly with chevron indicators"
+    }
+  ],
+  "seed_data_creation": "Created /tmp/test_sort.csv with 6 rows containing varied ratings (5.0000000, 4.3000000, 3.7500000, 4.8000000, 4.1000000, 4.9000000) and mixed website presence",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 36: Verified CSV table bug fixes. Key findings: 1) formatRating() at line ~177 in AdminDashboard.jsx and ~603 in LeadFinderPage.jsx correctly formats ratings to 1 decimal, 2) toggleCsvSort() at line ~181/~608 handles sort direction toggle, 3) sortedCsv/sortedCsvLeads at line ~187/~614 implements sorting logic, 4) Table headers have data-testid='csv-header-{key}' where key is: naam, categorie, plaats, website, telefoon, rating, reviews, status, whatsapp, delete. 5) Both pages share localStorage key 'csv_imported_leads' for CSV data persistence."
+}
