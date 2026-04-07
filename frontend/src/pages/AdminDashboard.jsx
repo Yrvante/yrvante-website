@@ -285,7 +285,17 @@ const AdminDashboard = () => {
 
   const getWhatsAppUrl = (lead) => {
     const phone = formatPhoneForWhatsApp(lead.telefoon);
-    const msg = encodeURIComponent(`Hoi ${lead.naam}! Ik ben Yvar
+    const hasWebsite = lead.website && lead.website.trim() !== '';
+
+    const msg = hasWebsite
+      ? encodeURIComponent(`Hallo! ${lead.naam}, ik ben Yvar van Yrvante.
+
+Ik kwam uw website tegen en zag dat die wel een opfrisbeurt kan gebruiken. Een moderne website maakt echt het verschil — meer vertrouwen, meer klanten.
+
+Ik help kleine bedrijven in Overijssel met een professionele online aanwezigheid, voor een vaste prijs van €249 — snel en persoonlijk.
+
+App mij gerust terug of kijk op Yrvante.com`)
+      : encodeURIComponent(`Hoi ${lead.naam}! Ik ben Yvar
 
 Ik bouw websites voor kleine bedrijven in Nederland!
 
@@ -293,14 +303,14 @@ Ik scroll elke dag door Google Maps en zie prachtige bedrijven die online nergen
 
 Wist je trouwens ook dat elke dag dat jullie geen website hebben loopt er ergens een klant langs die jullie had kunnen vinden — maar in plaats daarvan naar de concurrent gaat. Niet omdat jullie minder goed zijn. Gewoon omdat die wel online staat.
 
-🌐 Professionele website vanaf €399
-⚡ Binnen 2 weken live
-🤝 Eerst 40% — de rest pas als je blij bent
-💯 Niet tevreden? Ik ga door tot je dat wel bent
-🔄 Al een website? Ik blaas 'm nieuw leven in vanaf €249
+Professionele website vanaf €399
+Binnen 2 weken live
+Eerst 40% — de rest pas als je blij bent
+Niet tevreden? Ik ga door tot je dat wel bent
+Al een website? Ik blaas 'm nieuw leven in vanaf €249
 
 Benieuwd? → https://yrvante.com
-Of stuur me gewoon een berichtje terug 😊
+Of stuur me gewoon een berichtje terug
 
 Yvar
 Yrvante — Smart Web & Software 085-5055314`);
