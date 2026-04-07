@@ -561,8 +561,13 @@ const LeadFinderPage = () => {
           }));
 
         const zonderWebsite = mapped.filter(l => !l.website || l.website.trim() === '').length;
-        const existing = csvLeads.map(l => `${l.naam}|${l.telefoon}`);
-        const newLeads = mapped.filter(l => !existing.includes(`${l.naam}|${l.telefoon}`));
+        const existing = new Set(csvLeads.map(l => l.telefoon?.trim()).filter(Boolean));
+        const newLeads = mapped.filter(l => {
+          const phone = l.telefoon?.trim();
+          if (phone && existing.has(phone)) return false;
+          if (phone) existing.add(phone);
+          return true;
+        });
         
         const merged = [...csvLeads, ...newLeads];
         setCsvLeads(merged);

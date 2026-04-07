@@ -945,10 +945,12 @@ async def get_csv_leads():
 async def save_csv_leads(data: CsvLeadsBulk):
     if data.leads:
         docs = [lead.model_dump() for lead in data.leads]
-        existing_ids = set()
-        async for doc in db.csv_leads.find({}, {"id": 1, "_id": 0}):
-            existing_ids.add(doc["id"])
-        new_docs = [d for d in docs if d["id"] not in existing_ids]
+        existing = set()
+        async for doc in db.csv_leads.find({}, {"id": 1, "telefoon": 1, "_id": 0}):
+            existing.add(doc.get("id", ""))
+            if doc.get("telefoon", "").strip():
+                existing.add(doc["telefoon"].strip())
+        new_docs = [d for d in docs if d["id"] not in existing and (not d.get("telefoon", "").strip() or d["telefoon"].strip() not in existing)]
         if new_docs:
             await db.csv_leads.insert_many(new_docs)
     total = await db.csv_leads.count_documents({})
