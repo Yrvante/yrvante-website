@@ -99,6 +99,20 @@ class PageViewCreate(BaseModel):
 class AdminLogin(BaseModel):
     password: str
 
+class CsvLead(BaseModel):
+    id: str
+    naam: str = ""
+    categorie: str = ""
+    adres: str = ""
+    telefoon: str = ""
+    website: str = ""
+    rating: Optional[str] = ""
+    aantalReviews: Optional[str] = ""
+    status: str = "nieuw"
+
+class CsvLeadsBulk(BaseModel):
+    leads: List[CsvLead]
+
 class AdminStats(BaseModel):
     total_page_views: int
     unique_visitors: int
@@ -919,6 +933,47 @@ async def leadfinder_dashboard():
         "status_verdeling": status_verdeling,
         "recente_zoekopdrachten": []
     }
+
+# ========== CSV Leads API (synced across devices) ==========
+
+@api_router.get("/admin/csv-leads")
+async def get_csv_leads():
+    leads = await db.csv_leads.find({}, {"_id": 0}).to_list(10000)
+    return leads
+
+@api_router.post("/admin/csv-leads")
+async def save_csv_leads(data: CsvLeadsBulk):
+    if data.leads:
+        docs = [lead.model_dump() for lead in data.leads]
+        existing_ids = set()
+        async for doc in db.csv_leads.find({}, {"id": 1, "_id": 0}):
+            existing_ids.add(doc["id"])
+        new_docs = [d for d in docs if d["id"] not in existing_ids]
+        if new_docs:
+            await db.csv_leads.insert_many(new_docs)
+    total = await db.csv_leads.count_documents({})
+    return {"success": True, "total": total}
+
+@api_router.put("/admin/csv-leads/{lead_id}/status")
+async def update_csv_lead_status(lead_id: str, request: Request):
+    body = await request.json()
+    status = body.get("status", "nieuw")
+    result = await db.csv_leads.update_one({"id": lead_id}, {"$set": {"status": status}})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    return {"success": True}
+
+@api_router.delete("/admin/csv-leads/{lead_id}")
+async def delete_csv_lead(lead_id: str):
+    result = await db.csv_leads.delete_one({"id": lead_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    return {"success": True}
+
+@api_router.delete("/admin/csv-leads")
+async def clear_csv_leads():
+    await db.csv_leads.delete_many({})
+    return {"success": True}
 
 # ========== Google Reviews API ==========
 

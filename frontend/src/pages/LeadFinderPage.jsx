@@ -123,9 +123,7 @@ const LeadFinderPage = () => {
 
   // CSV Import states
   const csvFileRef = useRef(null);
-  const [csvLeads, setCsvLeads] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('csv_imported_leads') || '[]'); } catch { return []; }
-  });
+  const [csvLeads, setCsvLeads] = useState([]);
   const [csvSearchQuery, setCsvSearchQuery] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
@@ -142,6 +140,7 @@ const LeadFinderPage = () => {
     if (isAuthenticated) {
       loadLeads();
       loadDashboard();
+      loadCsvLeads();
     }
   }, [isAuthenticated]);
 
@@ -519,10 +518,21 @@ const LeadFinderPage = () => {
     toast.success('Gekopieerd!');
   };
 
-  // === CSV Import Functions ===
-  const persistCsvLeads = (leads) => {
-    setCsvLeads(leads);
-    localStorage.setItem('csv_imported_leads', JSON.stringify(leads));
+  // === CSV Import Functions (synced via API) ===
+  const loadCsvLeads = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/admin/csv-leads`);
+      if (res.ok) { const data = await res.json(); setCsvLeads(data); }
+    } catch { /* silent */ }
+  };
+
+  const saveCsvToServer = async (newLeads) => {
+    try {
+      await fetch(`${API_BASE}/api/admin/csv-leads`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leads: newLeads })
+      });
+    } catch { toast.error("Fout bij opslaan CSV"); }
   };
 
   const handleCsvImport = (e) => {
@@ -532,7 +542,7 @@ const LeadFinderPage = () => {
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
-      complete: (results) => {
+      complete: async (results) => {
         const rows = results.data;
         if (!rows.length) { toast.error('CSV is leeg'); return; }
         
@@ -555,7 +565,8 @@ const LeadFinderPage = () => {
         const newLeads = mapped.filter(l => !existing.includes(`${l.naam}|${l.telefoon}`));
         
         const merged = [...csvLeads, ...newLeads];
-        persistCsvLeads(merged);
+        setCsvLeads(merged);
+        await saveCsvToServer(newLeads);
         
         toast.success(
           `${totalImported} rijen gelezen — ${zonderWebsite} zonder website — ${newLeads.length} nieuw toegevoegd`
@@ -567,19 +578,25 @@ const LeadFinderPage = () => {
     e.target.value = '';
   };
 
-  const updateCsvStatus = (id, status) => {
-    const updated = csvLeads.map(l => l.id === id ? { ...l, status } : l);
-    persistCsvLeads(updated);
+  const updateCsvStatus = async (id, status) => {
+    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l));
+    try { await fetch(`${API_BASE}/api/admin/csv-leads/${id}/status`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    }); } catch { toast.error("Fout bij status update"); }
   };
 
-  const deleteCsvLead = (id) => {
-    persistCsvLeads(csvLeads.filter(l => l.id !== id));
+  const deleteCsvLead = async (id) => {
+    setCsvLeads(prev => prev.filter(l => l.id !== id));
+    try { await fetch(`${API_BASE}/api/admin/csv-leads/${id}`, { method: 'DELETE' }); }
+    catch { toast.error("Fout bij verwijderen"); }
   };
 
-  const clearAllCsvLeads = () => {
+  const clearAllCsvLeads = async () => {
     if (!window.confirm('Alle geïmporteerde leads verwijderen?')) return;
-    persistCsvLeads([]);
-    toast.success('Alle CSV leads verwijderd');
+    setCsvLeads([]);
+    try { await fetch(`${API_BASE}/api/admin/csv-leads`, { method: 'DELETE' }); toast.success('Alle CSV leads verwijderd'); }
+    catch { toast.error("Fout bij wissen"); }
   };
 
   const getWhatsAppUrl = (lead) => {

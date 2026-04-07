@@ -62,9 +62,7 @@ const AdminDashboard = () => {
 
   // CSV states
   const csvFileRef = useRef(null);
-  const [csvLeads, setCsvLeads] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('csv_imported_leads') || '[]'); } catch { return []; }
-  });
+  const [csvLeads, setCsvLeads] = useState([]);
   const [csvSearch, setCsvSearch] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
@@ -87,14 +85,16 @@ const AdminDashboard = () => {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [statsRes, contactsRes, pageviewsRes] = await Promise.all([
+      const [statsRes, contactsRes, pageviewsRes, csvRes] = await Promise.all([
         axios.get(`${API}/admin/stats`),
         axios.get(`${API}/admin/contacts`),
-        axios.get(`${API}/admin/stats?type=pageviews`)
+        axios.get(`${API}/admin/stats?type=pageviews`),
+        axios.get(`${API}/admin/csv-leads`)
       ]);
       setStats(statsRes.data);
       setContacts(contactsRes.data);
       setPageviews(pageviewsRes.data);
+      setCsvLeads(csvRes.data);
     } catch { toast.error("Fout bij laden van data"); }
     setLoading(false);
   };
@@ -124,15 +124,23 @@ const AdminDashboard = () => {
 
   const logout = () => { setIsAuthenticated(false); localStorage.removeItem("admin_auth"); };
 
-  // CSV functions
-  const persistCsv = (leads) => { setCsvLeads(leads); localStorage.setItem('csv_imported_leads', JSON.stringify(leads)); };
+  // CSV functions - synced via API
+  const persistCsv = async (leads) => {
+    setCsvLeads(leads);
+  };
+
+  const saveCsvToServer = async (newLeads) => {
+    try {
+      await axios.post(`${API}/admin/csv-leads`, { leads: newLeads });
+    } catch { toast.error("Fout bij opslaan CSV"); }
+  };
 
   const handleCsvImport = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     Papa.parse(file, {
       header: true, skipEmptyLines: true,
-      complete: (results) => {
+      complete: async (results) => {
         const rows = results.data;
         if (!rows.length) { toast.error('CSV is leeg'); return; }
         const totalImported = rows.length;
@@ -150,7 +158,9 @@ const AdminDashboard = () => {
         const zonderWebsite = mapped.filter(l => !l.website || l.website.trim() === '').length;
         const existing = csvLeads.map(l => `${l.naam}|${l.telefoon}`);
         const newLeads = mapped.filter(l => !existing.includes(`${l.naam}|${l.telefoon}`));
-        persistCsv([...csvLeads, ...newLeads]);
+        const merged = [...csvLeads, ...newLeads];
+        setCsvLeads(merged);
+        await saveCsvToServer(newLeads);
         toast.success(`${totalImported} rijen — ${zonderWebsite} zonder website — ${newLeads.length} nieuw`);
       },
       error: () => { toast.error('CSV leesfout'); }
@@ -158,9 +168,24 @@ const AdminDashboard = () => {
     e.target.value = '';
   };
 
-  const updateCsvStatus = (id, status) => persistCsv(csvLeads.map(l => l.id === id ? { ...l, status } : l));
-  const deleteCsvLead = (id) => persistCsv(csvLeads.filter(l => l.id !== id));
-  const clearCsv = () => { if (window.confirm('Alle CSV leads verwijderen?')) { persistCsv([]); toast.success('Gewist'); }};
+  const updateCsvStatus = async (id, status) => {
+    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l));
+    try { await axios.put(`${API}/admin/csv-leads/${id}/status`, { status }); }
+    catch { toast.error("Fout bij status update"); }
+  };
+
+  const deleteCsvLead = async (id) => {
+    setCsvLeads(prev => prev.filter(l => l.id !== id));
+    try { await axios.delete(`${API}/admin/csv-leads/${id}`); }
+    catch { toast.error("Fout bij verwijderen"); }
+  };
+
+  const clearCsv = async () => {
+    if (!window.confirm('Alle CSV leads verwijderen?')) return;
+    setCsvLeads([]);
+    try { await axios.delete(`${API}/admin/csv-leads`); toast.success('Gewist'); }
+    catch { toast.error("Fout bij wissen"); }
+  };
 
   const getWhatsAppUrl = (lead) => {
     const phone = formatPhoneForWhatsApp(lead.telefoon);
