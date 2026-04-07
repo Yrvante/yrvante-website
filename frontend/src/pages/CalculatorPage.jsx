@@ -663,6 +663,48 @@ const CalculatorPage = () => {
 
   const totals = calculateTotal();
 
+  // Smart Upgrade Tip: check if upgrading to a higher package is cheaper
+  const getUpgradeTip = () => {
+    const packageOrder = ['rebranding', 'basic', 'pro', 'premium'];
+    const currentIdx = packageOrder.indexOf(selectedPackage);
+    if (currentIdx >= packageOrder.length - 1) return null;
+
+    // One-time add-on keys that are active (exclude extraPages and maintenance)
+    const activeAddOnKeys = Object.keys(addOns).filter(k => k !== 'extraPages' && k !== 'maintenance' && addOns[k]);
+    const extraPagesCost = addOns.extraPages * prices.extraPages;
+
+    let currentAddOnCost = extraPagesCost;
+    activeAddOnKeys.forEach(k => { if (prices[k]) currentAddOnCost += prices[k]; });
+
+    if (currentAddOnCost === 0) return null;
+
+    const currentTotal = prices[selectedPackage] + currentAddOnCost;
+
+    for (let i = currentIdx + 1; i < packageOrder.length; i++) {
+      const pkg = packageOrder[i];
+      const excluded = excludedAddOns[pkg] || [];
+
+      let upgradedAddOnCost = extraPagesCost;
+      activeAddOnKeys.forEach(k => {
+        if (!excluded.includes(k) && prices[k]) upgradedAddOnCost += prices[k];
+      });
+
+      const upgradedTotal = prices[pkg] + upgradedAddOnCost;
+
+      if (upgradedTotal <= currentTotal) {
+        return {
+          packageKey: pkg,
+          packageName: t.packages[pkg].name,
+          savings: currentTotal - upgradedTotal,
+          newPrice: upgradedTotal
+        };
+      }
+    }
+    return null;
+  };
+
+  const upgradeTip = getUpgradeTip();
+
   const toggleAddOn = (key) => {
     if (key === 'extraPages') return;
     setAddOns(prev => ({ ...prev, [key]: !prev[key] }));
@@ -1040,6 +1082,41 @@ const CalculatorPage = () => {
                     </div>
                   )}
                 </div>
+
+                {/* Smart Upgrade Tip */}
+                <AnimatePresence>
+                  {upgradeTip && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      data-testid="upgrade-tip-banner"
+                      className="mt-5 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/50 rounded-2xl"
+                    >
+                      <div className="flex items-start gap-2.5">
+                        <Sparkles size={16} className="text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-bold text-green-800 dark:text-green-300">
+                            {language === 'nl' ? 'Slimme tip!' : 'Smart tip!'}
+                          </p>
+                          <p className="text-xs text-green-700 dark:text-green-400 mt-1 leading-relaxed">
+                            {language === 'nl'
+                              ? `Upgrade naar ${upgradeTip.packageName} en bespaar €${upgradeTip.savings}! Je geselecteerde extra's zitten al inbegrepen.`
+                              : `Upgrade to ${upgradeTip.packageName} and save €${upgradeTip.savings}! Your selected extras are already included.`}
+                          </p>
+                          <button
+                            onClick={() => handlePackageChange(upgradeTip.packageKey)}
+                            className="mt-2.5 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-bold rounded-xl transition-colors"
+                            data-testid="upgrade-tip-button"
+                          >
+                            {language === 'nl' ? `Upgrade naar ${upgradeTip.packageName}` : `Upgrade to ${upgradeTip.packageName}`}
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <p className="text-xs text-gray-500 mt-6">{t.exclVat}</p>
 
