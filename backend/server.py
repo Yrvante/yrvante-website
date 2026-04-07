@@ -100,17 +100,16 @@ class AdminLogin(BaseModel):
     password: str
 
 class CsvLead(BaseModel):
-    id: str
+    id: Optional[str] = None
     naam: str = ""
-    categorie: str = ""
-    adres: str = ""
-    telefoon: str = ""
-    website: str = ""
+    categorie: Optional[str] = ""
+    plaats: Optional[str] = ""
+    telefoon: Optional[str] = ""
+    website: Optional[str] = ""
     rating: Optional[str] = ""
-    aantalReviews: Optional[str] = ""
+    reviews: Optional[str] = ""
     status: str = "nieuw"
     notitie: Optional[str] = ""
-    benaderdOp: Optional[str] = ""
 
 class CsvLeadsBulk(BaseModel):
     leads: List[CsvLead]
@@ -936,67 +935,78 @@ async def leadfinder_dashboard():
         "recente_zoekopdrachten": []
     }
 
-# ========== CSV Leads API (synced across devices) ==========
+# ========== CSV Leads API (Prisma-compatible, synced across devices) ==========
 
-@api_router.get("/admin/csv-leads")
+@api_router.get("/leads")
 async def get_csv_leads():
     leads = await db.csv_leads.find({}, {"_id": 0}).to_list(10000)
     return leads
 
-@api_router.post("/admin/csv-leads")
+@api_router.post("/leads")
 async def save_csv_leads(data: CsvLeadsBulk):
     if data.leads:
         docs = [lead.model_dump() for lead in data.leads]
-        existing = set()
-        async for doc in db.csv_leads.find({}, {"id": 1, "telefoon": 1, "_id": 0}):
-            existing.add(doc.get("id", ""))
+        existing_phones = set()
+        async for doc in db.csv_leads.find({}, {"telefoon": 1, "_id": 0}):
             if doc.get("telefoon", "").strip():
-                existing.add(doc["telefoon"].strip())
-        new_docs = [d for d in docs if d["id"] not in existing and (not d.get("telefoon", "").strip() or d["telefoon"].strip() not in existing)]
-        if new_docs:
-            await db.csv_leads.insert_many(new_docs)
+                existing_phones.add(doc["telefoon"].strip())
+        inserted = 0
+        for d in docs:
+            phone = (d.get("telefoon") or "").strip()
+            if phone and phone in existing_phones:
+                continue
+            if not d.get("id"):
+                d["id"] = f"csv_{int(__import__('time').time()*1000)}_{inserted}"
+            await db.csv_leads.insert_one(d)
+            if phone:
+                existing_phones.add(phone)
+            inserted += 1
     total = await db.csv_leads.count_documents({})
-    return {"success": True, "total": total}
+    return {"success": True, "total": total, "inserted": inserted if data.leads else 0}
 
-@api_router.put("/admin/csv-leads")
-async def update_csv_lead_by_query(request: Request, id: str = None):
+@api_router.patch("/leads")
+async def update_csv_lead(request: Request, id: str = None):
     if not id:
-        raise HTTPException(status_code=400, detail="Missing id parameter")
+        raise HTTPException(status_code=400, detail="id query parameter required")
     body = await request.json()
-    update = {"status": body.get("status", "nieuw")}
+    update = {}
+    if "status" in body:
+        update["status"] = body["status"]
     if "notitie" in body:
         update["notitie"] = body["notitie"]
-    if "benaderdOp" in body:
-        update["benaderdOp"] = body["benaderdOp"]
     result = await db.csv_leads.update_one({"id": id}, {"$set": update})
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Lead not found")
     return {"success": True}
 
-@api_router.put("/admin/csv-leads/{lead_id}/status")
-async def update_csv_lead_status(lead_id: str, request: Request):
-    body = await request.json()
-    update = {"status": body.get("status", "nieuw")}
-    if "notitie" in body:
-        update["notitie"] = body["notitie"]
-    if "benaderdOp" in body:
-        update["benaderdOp"] = body["benaderdOp"]
-    result = await db.csv_leads.update_one({"id": lead_id}, {"$set": update})
-    if result.matched_count == 0:
-        raise HTTPException(status_code=404, detail="Lead not found")
+@api_router.delete("/leads")
+async def delete_csv_leads(request: Request, id: str = None):
+    if id:
+        result = await db.csv_leads.delete_one({"id": id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Lead not found")
+    else:
+        await db.csv_leads.delete_many({})
     return {"success": True}
 
-@api_router.delete("/admin/csv-leads/{lead_id}")
-async def delete_csv_lead(lead_id: str):
-    result = await db.csv_leads.delete_one({"id": lead_id})
-    if result.deleted_count == 0:
-        raise HTTPException(status_code=404, detail="Lead not found")
-    return {"success": True}
+# ========== Legacy CSV routes (backward compatibility) ==========
+
+@api_router.get("/admin/csv-leads")
+async def get_csv_leads_legacy():
+    leads = await db.csv_leads.find({}, {"_id": 0}).to_list(10000)
+    return leads
+
+@api_router.post("/admin/csv-leads")
+async def save_csv_leads_legacy(data: CsvLeadsBulk):
+    return await save_csv_leads(data)
+
+@api_router.put("/admin/csv-leads")
+async def update_csv_lead_legacy(request: Request, id: str = None):
+    return await update_csv_lead(request, id)
 
 @api_router.delete("/admin/csv-leads")
-async def clear_csv_leads():
-    await db.csv_leads.delete_many({})
-    return {"success": True}
+async def clear_csv_leads_legacy(request: Request, id: str = None):
+    return await delete_csv_leads(request, id)
 
 # ========== Google Reviews API ==========
 

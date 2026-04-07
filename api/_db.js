@@ -26,20 +26,7 @@ export async function initTables() {
         timestamp TIMESTAMPTZ DEFAULT NOW()
       )
     `;
-    await sql`
-      CREATE TABLE IF NOT EXISTS csv_leads (
-        id VARCHAR(255) PRIMARY KEY,
-        naam VARCHAR(500) DEFAULT '',
-        categorie VARCHAR(255) DEFAULT '',
-        adres VARCHAR(500) DEFAULT '',
-        telefoon VARCHAR(100) DEFAULT '',
-        website VARCHAR(500) DEFAULT '',
-        rating VARCHAR(50) DEFAULT '',
-        aantalreviews VARCHAR(50) DEFAULT '',
-        status VARCHAR(50) DEFAULT 'nieuw',
-        created_at TIMESTAMPTZ DEFAULT NOW()
-      )
-    `;
+    // csv_leads tabel is verplaatst naar Prisma — zie /api/leads.js
   } catch (error) {
   }
 }

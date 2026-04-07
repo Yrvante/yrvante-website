@@ -98,13 +98,19 @@ const AdminDashboard = () => {
 
     // CSV leads laden: probeer database, fallback naar localStorage
     try {
-      const csvRes = await axios.get(`${API}/admin/csv-leads`);
+      const csvRes = await axios.get(`${API}/leads`);
       let dbLeads = csvRes.data;
 
       // Migratie: oude localStorage data naar database
       const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
       if (dbLeads.length === 0 && local.length > 0) {
-        await axios.post(`${API}/admin/csv-leads`, { leads: local });
+        // Map oude veldnamen naar nieuwe
+        const migrated = local.map(l => ({
+          ...l,
+          plaats: l.plaats || extractCity(l.adres) || '',
+          reviews: l.reviews || l.aantalReviews || '',
+        }));
+        await axios.post(`${API}/leads`, { leads: migrated });
         dbLeads = local;
         toast.success(`${local.length} leads hersteld vanuit backup!`);
       }
@@ -154,14 +160,14 @@ const AdminDashboard = () => {
 
   const saveCsvToServer = async (newLeads) => {
     try {
-      await axios.post(`${API}/admin/csv-leads`, { leads: newLeads });
+      await axios.post(`${API}/leads`, { leads: newLeads });
     } catch { toast.error("Fout bij opslaan naar server — lokale backup bewaard"); }
   };
 
   const manualSaveAll = async () => {
     try {
       backupToLocal(csvLeads);
-      await axios.post(`${API}/admin/csv-leads`, { leads: csvLeads });
+      await axios.post(`${API}/leads`, { leads: csvLeads });
       toast.success(`${csvLeads.length} leads opgeslagen!`);
     } catch {
       backupToLocal(csvLeads);
@@ -182,11 +188,11 @@ const AdminDashboard = () => {
           id: `csv_${Date.now()}_${i}`,
           naam: row.title || row.naam || '',
           categorie: row.category || row.categorie || '',
-          adres: row.address || row.adres || '',
+          plaats: row.city || row.plaats || extractCity(row.address || row.adres || ''),
           telefoon: row.phone || row.telefoon || '',
           website: row.website || '',
-          rating: row.review_rating || '',
-          aantalReviews: row.review_count || '',
+          rating: row.review_rating || row.rating || '',
+          reviews: row.review_count || row.reviews || '',
           status: 'nieuw',
         }));
         const zonderWebsite = mapped.filter(l => !l.website || l.website.trim() === '').length;
@@ -209,15 +215,14 @@ const AdminDashboard = () => {
   };
 
   const updateCsvStatus = async (id, status) => {
-    const benaderdOp = status === 'benaderd' ? new Date().toLocaleString('nl-NL') : undefined;
-    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status, ...(benaderdOp ? { benaderdOp } : {}) } : l));
-    try { await axios.put(`${API}/admin/csv-leads?id=${id}`, { status, ...(benaderdOp ? { benaderdOp } : {}) }); }
+    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l));
+    try { await axios.patch(`${API}/leads?id=${id}`, { status }); }
     catch { toast.error("Fout bij status update"); }
   };
 
   const updateCsvNote = async (id, notitie) => {
     setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, notitie } : l));
-    try { await axios.put(`${API}/admin/csv-leads?id=${id}`, { status: csvLeads.find(l => l.id === id)?.status || 'nieuw', notitie }); }
+    try { await axios.patch(`${API}/leads?id=${id}`, { notitie }); }
     catch { /* silent */ }
   };
 
@@ -228,11 +233,11 @@ const AdminDashboard = () => {
 
   const exportCsvLeads = () => {
     if (!csvLeads.length) { toast.error('Geen CSV leads om te exporteren'); return; }
-    const headers = ['Bedrijfsnaam','Categorie','Adres','Telefoon','Website','Rating','Reviews','Status','Notitie','Benaderd op'];
+    const headers = ['Bedrijfsnaam','Categorie','Plaats','Telefoon','Website','Rating','Reviews','Status','Notitie'];
     const csv = [
       headers.join(','),
       ...csvLeads.map(l => [
-        l.naam, l.categorie, l.adres, l.telefoon, l.website, l.rating, l.aantalReviews, l.status, l.notitie || '', l.benaderdOp || ''
+        l.naam, l.categorie, l.plaats || '', l.telefoon, l.website, l.rating, l.reviews || '', l.status, l.notitie || ''
       ].map(c => `"${(c || '').toString().replace(/"/g, '""')}"`).join(','))
     ].join('\n');
     const a = document.createElement('a');
@@ -244,14 +249,14 @@ const AdminDashboard = () => {
 
   const deleteCsvLead = async (id) => {
     setCsvLeads(prev => prev.filter(l => l.id !== id));
-    try { await axios.delete(`${API}/admin/csv-leads?id=${id}`); }
+    try { await axios.delete(`${API}/leads?id=${id}`); }
     catch { toast.error("Fout bij verwijderen"); }
   };
 
   const clearCsv = async () => {
     if (!window.confirm('Alle CSV leads verwijderen?')) return;
     setCsvLeads([]);
-    try { await axios.delete(`${API}/admin/csv-leads`); toast.success('Gewist'); }
+    try { await axios.delete(`${API}/leads`); toast.success('Gewist'); }
     catch { toast.error("Fout bij wissen"); }
   };
 
@@ -305,7 +310,7 @@ Yrvante — Smart Web & Software 085-5055314`);
   const filteredCsv = csvLeads.filter(l => {
     if (csvOnlyNoWebsite && l.website && l.website.trim() !== '') return false;
     if (csvStatusFilter !== 'alle' && l.status !== csvStatusFilter) return false;
-    if (csvSearch) { const q = csvSearch.toLowerCase(); return l.naam?.toLowerCase().includes(q) || extractCity(l.adres).toLowerCase().includes(q); }
+    if (csvSearch) { const q = csvSearch.toLowerCase(); return l.naam?.toLowerCase().includes(q) || (l.plaats || '').toLowerCase().includes(q); }
     return true;
   });
 
@@ -327,10 +332,10 @@ Yrvante — Smart Web & Software 085-5055314`);
     switch (csvSortCol) {
       case 'naam': va = a.naam || ''; vb = b.naam || ''; break;
       case 'categorie': va = a.categorie || ''; vb = b.categorie || ''; break;
-      case 'plaats': va = extractCity(a.adres); vb = extractCity(b.adres); break;
+      case 'plaats': va = a.plaats || ''; vb = b.plaats || ''; break;
       case 'website': va = a.website ? '0' : '1'; vb = b.website ? '0' : '1'; break;
       case 'rating': va = parseFloat(a.rating) || 0; vb = parseFloat(b.rating) || 0; return (va - vb) * dir;
-      case 'reviews': va = parseInt(a.aantalReviews) || 0; vb = parseInt(b.aantalReviews) || 0; return (va - vb) * dir;
+      case 'reviews': va = parseInt(a.reviews) || 0; vb = parseInt(b.reviews) || 0; return (va - vb) * dir;
       case 'status': va = a.status || ''; vb = b.status || ''; break;
       default: return 0;
     }
@@ -676,14 +681,14 @@ Yrvante — Smart Web & Software 085-5055314`);
                             <React.Fragment key={lead.id}>
                             <tr className="border-b border-gray-100/30 dark:border-white/[0.03] hover:bg-white/40 dark:hover:bg-white/[0.03] transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
                               <td className="px-3 py-3">
-                                <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
+                                <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + (lead.plaats || ''))}`}
                                   target="_blank" rel="noopener noreferrer"
                                   className="font-semibold text-sm text-black dark:text-white hover:underline flex items-center gap-1">
                                   {lead.naam} <ExternalLink size={10} className="text-gray-400 shrink-0" />
                                 </a>
                               </td>
                               <td className="px-3 py-3 text-sm text-gray-500 dark:text-gray-400">{lead.categorie || '-'}</td>
-                              <td className="px-3 py-3 text-sm text-gray-500 dark:text-gray-400">{extractCity(lead.adres)}</td>
+                              <td className="px-3 py-3 text-sm text-gray-500 dark:text-gray-400">{lead.plaats || '-'}</td>
                               <td className="px-3 py-3">
                                 {hasWebsite ? (
                                   <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
@@ -712,7 +717,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                                   </span>
                                 ) : <span className="text-xs text-gray-400">-</span>}
                               </td>
-                              <td className="px-3 py-3 text-center text-sm text-gray-500 dark:text-gray-400">{lead.aantalReviews || '-'}</td>
+                              <td className="px-3 py-3 text-center text-sm text-gray-500 dark:text-gray-400">{lead.reviews || '-'}</td>
                               <td className="px-3 py-3">
                                 <select value={lead.status} onChange={e => updateCsvStatus(lead.id, e.target.value)}
                                   className="px-2.5 py-1 rounded-full text-xs font-bold border-0 cursor-pointer"
@@ -749,9 +754,9 @@ Yrvante — Smart Web & Software 085-5055314`);
                                     className="flex-1 text-xs bg-transparent border-0 outline-none text-gray-500 dark:text-gray-400 placeholder:text-gray-300 dark:placeholder:text-gray-600"
                                     data-testid={`csv-note-${lead.id}`}
                                   />
-                                  {lead.benaderdOp && (
+                                  {lead.updatedAt && lead.status === 'benaderd' && (
                                     <span className="text-[10px] text-gray-400 whitespace-nowrap flex items-center gap-1">
-                                      <Clock size={10} /> {lead.benaderdOp}
+                                      <Clock size={10} /> {new Date(lead.updatedAt).toLocaleString('nl-NL')}
                                     </span>
                                   )}
                                 </div>
@@ -773,12 +778,12 @@ Yrvante — Smart Web & Software 085-5055314`);
                         <div key={lead.id} className="p-4" data-testid={`csv-lead-card-${lead.id}`}>
                           <div className="flex items-start justify-between mb-2">
                             <div>
-                              <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
+                              <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + (lead.plaats || ''))}`}
                                 target="_blank" rel="noopener noreferrer"
                                 className="font-semibold text-sm text-black dark:text-white hover:underline flex items-center gap-1">
                                 {lead.naam} <ExternalLink size={10} className="text-gray-400" />
                               </a>
-                              <p className="text-xs text-gray-400 dark:text-gray-500">{lead.categorie} — {extractCity(lead.adres)}</p>
+                              <p className="text-xs text-gray-400 dark:text-gray-500">{lead.categorie} — {lead.plaats || '-'}</p>
                             </div>
                             <select value={lead.status} onChange={e => updateCsvStatus(lead.id, e.target.value)}
                               className="px-2 py-0.5 rounded-full text-[10px] font-bold border-0 cursor-pointer"
@@ -794,7 +799,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                               </a>
                             ) : <span className="font-semibold text-red-500">Geen website</span>}
                             {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{formatRating(lead.rating)}</span>}
-                            {lead.aantalReviews && <span className="text-gray-400">({lead.aantalReviews})</span>}
+                            {lead.reviews && <span className="text-gray-400">({lead.reviews})</span>}
                           </div>
                           {lead.telefoon && <p className="text-xs font-medium flex items-center gap-1 text-black dark:text-white mb-2"><Phone size={11} />{lead.telefoon}</p>}
                           <div className="flex items-center gap-2">

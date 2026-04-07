@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && yarn install && yarn build",
+  "buildCommand": "npx prisma generate && cd frontend && yarn install && yarn build",
   "outputDirectory": "frontend/build",
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
