@@ -54,6 +54,7 @@ const CSV_STATUS_OPTIONS = [
   { value: 'nieuw', label: 'Nieuw', color: '#3B82F6', bg: '#EFF6FF' },
   { value: 'benaderd', label: 'Benaderd', color: '#F59E0B', bg: '#FFFBEB' },
   { value: 'gereageerd', label: 'Gereageerd', color: '#10B981', bg: '#ECFDF5' },
+  { value: 'geen_interesse', label: 'Geen interesse', color: '#EF4444', bg: '#FEF2F2' },
   { value: 'overgeslagen', label: 'Overgeslagen', color: '#6B7280', bg: '#F3F4F6' },
 ];
 
@@ -1171,15 +1172,13 @@ Yrvante — Smart Web & Software 085-5055314`);
                               </td>
                               <td className="px-4 py-3 text-center">
                                 {lead.telefoon ? (
-                                  <a
-                                    href={getWhatsAppUrl(lead)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors"
+                                  <button
+                                    onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
+                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors cursor-pointer"
                                     data-testid={`csv-whatsapp-${lead.id}`}
                                   >
                                     <MessageSquare size={12} /> WhatsApp
-                                  </a>
+                                  </button>
                                 ) : <span className="text-xs text-gray-400">Geen nr.</span>}
                               </td>
                               <td className="px-4 py-3 text-center">
@@ -1241,10 +1240,10 @@ Yrvante — Smart Web & Software 085-5055314`);
                           </div>
                           <div className="flex items-center gap-2 mt-3">
                             {lead.telefoon && (
-                              <a href={getWhatsAppUrl(lead)} target="_blank" rel="noopener noreferrer"
-                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-500 text-white rounded-lg text-xs font-bold hover:bg-green-600">
+                              <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
+                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-500 text-white rounded-lg text-xs font-bold hover:bg-green-600 cursor-pointer">
                                 <MessageSquare size={12} /> WhatsApp
-                              </a>
+                              </button>
                             )}
                             <button onClick={() => deleteCsvLead(lead.id)}
                               className="p-2 text-gray-400 hover:text-red-500 border border-gray-200 dark:border-neutral-700 rounded-lg">

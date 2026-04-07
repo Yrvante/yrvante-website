@@ -27,6 +27,7 @@ const CSV_STATUS_OPTIONS = [
   { value: 'nieuw', label: 'Nieuw', color: '#3B82F6', bg: '#EFF6FF', darkBg: 'rgba(59,130,246,0.15)' },
   { value: 'benaderd', label: 'Benaderd', color: '#F59E0B', bg: '#FFFBEB', darkBg: 'rgba(245,158,11,0.15)' },
   { value: 'gereageerd', label: 'Gereageerd', color: '#10B981', bg: '#ECFDF5', darkBg: 'rgba(16,185,129,0.15)' },
+  { value: 'geen_interesse', label: 'Geen interesse', color: '#EF4444', bg: '#FEF2F2', darkBg: 'rgba(239,68,68,0.15)' },
   { value: 'overgeslagen', label: 'Overgeslagen', color: '#6B7280', bg: '#F3F4F6', darkBg: 'rgba(107,114,128,0.15)' },
 ];
 
@@ -562,11 +563,11 @@ Yrvante — Smart Web & Software 085-5055314`);
                               </td>
                               <td className="px-3 py-3 text-center">
                                 {lead.telefoon ? (
-                                  <a href={getWhatsAppUrl(lead)} target="_blank" rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors"
+                                  <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
+                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors cursor-pointer"
                                     data-testid={`csv-whatsapp-${lead.id}`}>
                                     <MessageSquare size={11} /> WhatsApp
-                                  </a>
+                                  </button>
                                 ) : <span className="text-xs text-gray-400">-</span>}
                               </td>
                               <td className="px-3 py-3 text-center">
@@ -618,10 +619,10 @@ Yrvante — Smart Web & Software 085-5055314`);
                           {lead.telefoon && <p className="text-xs font-medium flex items-center gap-1 text-black dark:text-white mb-2"><Phone size={11} />{lead.telefoon}</p>}
                           <div className="flex items-center gap-2">
                             {lead.telefoon && (
-                              <a href={getWhatsAppUrl(lead)} target="_blank" rel="noopener noreferrer"
-                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-500 text-white rounded-lg text-xs font-bold hover:bg-green-600">
+                              <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
+                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-500 text-white rounded-lg text-xs font-bold hover:bg-green-600 cursor-pointer">
                                 <MessageSquare size={11} /> WhatsApp
-                              </a>
+                              </button>
                             )}
                             <button onClick={() => deleteCsvLead(lead.id)} className="p-2 text-gray-400 hover:text-red-500 border border-gray-200/40 dark:border-white/10 rounded-lg">
                               <Trash2 size={13} />
