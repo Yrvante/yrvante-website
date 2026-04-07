@@ -198,6 +198,13 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Sorteerbare CSV kolommen**: Klik op kolomheaders (Bedrijfsnaam, Categorie, Plaats, Website, Rating, Reviews, Status) om te sorteren met richting-pijltjes
 - **42/42 tests geslaagd** (iteration 36)
 
+### Phase 21 - Interactieve Add-on Previews (Complete - Feb 2026)
+- **Dark Mode Preview**: Interactieve zon/maan toggle die de demo-layout wisselt tussen licht en donker
+- **Pop-up Preview**: Mini website achtergrond met "Toon popup" knop die een 10% korting popup toont
+- **Voor & Na Slider Preview**: Sleepbare slider met VOOR/NA labels, ouderwets design vs modern design vergelijking
+- **Bug fix**: `popup` en `beforeAfterSlider` toegevoegd aan addOns state en calculateTotal (werden niet meegeteld)
+- **39/39 tests geslaagd** (iteration 38)
+
 ## Backlog (P2)
 - Google Sheets API for lead export
 - Case studies/success stories for niche pages
