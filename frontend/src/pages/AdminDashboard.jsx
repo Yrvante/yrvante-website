@@ -292,6 +292,7 @@ Wist je trouwens ook dat elke dag dat jullie geen website hebben loopt er ergens
 ⚡ Binnen 2 weken live
 🤝 Eerst 40% — de rest pas als je blij bent
 💯 Niet tevreden? Ik ga door tot je dat wel bent
+🔄 Al een website? Ik blaas 'm nieuw leven in vanaf €249
 
 Benieuwd? → https://yrvante.com
 Of stuur me gewoon een berichtje terug 😊
