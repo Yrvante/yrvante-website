@@ -174,6 +174,14 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Slim**: Tip verschijnt ALLEEN wanneer upgrade echt goedkoper is; verborgen bij laagste tier of als upgrade duurder is
 - **42/42 tests geslaagd** (iteration 35)
 
+### Phase 19 - CSV Database Sync + Statusverbeteringen (Complete - Apr 2026)
+- **CSV leads naar MongoDB**: Alle CSV leads worden nu opgeslagen in MongoDB (`csv_leads` collection) i.p.v. localStorage. Zichtbaar op elk apparaat na inloggen.
+- **API endpoints**: GET/POST/PUT/DELETE `/api/admin/csv-leads` voor volledige CRUD
+- **"Geen interesse" status**: Nieuwe rode status optie in CSV tabellen (AdminDashboard + LeadFinder)
+- **WhatsApp auto-status**: Klik op WhatsApp knop → status automatisch naar "Benaderd" + WhatsApp opent
+- **Cross-device sync**: Leads geïmporteerd op Admin Dashboard verschijnen automatisch op LeadFinder
+- **37/37 tests geslaagd** (iteration 37, backend + frontend)
+
 ### Phase 18b - WhatsApp & CSV Tabel Verbeteringen (Complete - Apr 2026)
 - **WhatsApp direct app**: `wa.me` vervangen door `api.whatsapp.com/send` voor directe app-opening op alle WhatsApp-knoppen
 - **Nieuwe WhatsApp template**: Persoonlijk verkoopbericht met automatische bedrijfsnaam ("Hoi {naam}!"), prijsinformatie, en Yrvante contactgegevens
