@@ -123,6 +123,7 @@ const LeadFinderPage = () => {
   });
   const [csvSearchQuery, setCsvSearchQuery] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
+  const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('leadfinder_auth') === 'true') {
@@ -540,10 +541,9 @@ const LeadFinderPage = () => {
             rating: row.review_rating || row.rating || '',
             aantalReviews: row.review_count || row.aantalReviews || '',
             status: 'nieuw',
-          }))
-          .filter(lead => !lead.website || lead.website.trim() === '');
+          }));
 
-        const filtered = mapped.length;
+        const zonderWebsite = mapped.filter(l => !l.website || l.website.trim() === '').length;
         const existing = csvLeads.map(l => `${l.naam}|${l.telefoon}`);
         const newLeads = mapped.filter(l => !existing.includes(`${l.naam}|${l.telefoon}`));
         
@@ -551,7 +551,7 @@ const LeadFinderPage = () => {
         persistCsvLeads(merged);
         
         toast.success(
-          `${totalImported} rijen gelezen — ${filtered} zonder website — ${newLeads.length} nieuw toegevoegd`
+          `${totalImported} rijen gelezen — ${zonderWebsite} zonder website — ${newLeads.length} nieuw toegevoegd`
         );
       },
       error: () => { toast.error('Fout bij het lezen van de CSV'); }
@@ -584,6 +584,7 @@ const LeadFinderPage = () => {
   };
 
   const filteredCsvLeads = csvLeads.filter(lead => {
+    if (csvOnlyNoWebsite && lead.website && lead.website.trim() !== '') return false;
     if (csvStatusFilter !== 'alle' && lead.status !== csvStatusFilter) return false;
     if (csvSearchQuery) {
       const q = csvSearchQuery.toLowerCase();
@@ -595,7 +596,7 @@ const LeadFinderPage = () => {
 
   const csvStats = {
     totaal: csvLeads.length,
-    zonderWebsite: csvLeads.length,
+    zonderWebsite: csvLeads.filter(l => !l.website || l.website.trim() === '').length,
     benaderd: csvLeads.filter(l => l.status === 'benaderd').length,
     gereageerd: csvLeads.filter(l => l.status === 'gereageerd').length,
   };
@@ -647,7 +648,7 @@ const LeadFinderPage = () => {
               <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-50 dark:bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-gray-100 dark:border-neutral-700">
                 <Lock className="text-gray-400 dark:text-gray-500" size={24} />
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-black dark:text-white mb-1">Lead Finder Pro</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-black dark:text-white mb-1">Admin Dashboard</h1>
               <p className="text-gray-400 dark:text-gray-500 text-sm">Beveiligd gebied — Yrvante</p>
             </div>
             <form onSubmit={handleLogin}>
@@ -685,7 +686,7 @@ const LeadFinderPage = () => {
               <Link to="/" className="flex items-center">
                 <img src={isDark ? LOGO_URL_WHITE : LOGO_URL} alt="Yrvante" className="h-5 sm:h-6" />
               </Link>
-              <span className="hidden sm:inline text-xs bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded font-bold">LEAD FINDER PRO</span>
+              <span className="hidden sm:inline text-xs bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded font-bold">ADMIN DASHBOARD</span>
             </div>
             
             {/* Tabs - Mobile: icons only, Desktop: icons + labels */}
@@ -743,7 +744,7 @@ const LeadFinderPage = () => {
                       <Target size={18} />
                     </div>
                     <div>
-                      <h2 className="font-bold text-lg sm:text-xl tracking-tight">Lead Finder Pro</h2>
+                      <h2 className="font-bold text-lg sm:text-xl tracking-tight">Lead Finder</h2>
                       <p className="text-gray-400 dark:text-gray-600 text-xs sm:text-sm">Vind ZZP'ers & bedrijven zonder website</p>
                     </div>
                   </div>
@@ -992,6 +993,18 @@ const LeadFinderPage = () => {
                         className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white text-sm bg-white dark:bg-neutral-800 text-black dark:text-white"
                         data-testid="csv-search-input" />
                     </div>
+                    <button
+                      onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
+                      className={`px-3 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all border ${
+                        csvOnlyNoWebsite
+                          ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-600 dark:text-red-400'
+                          : 'bg-white dark:bg-neutral-800 border-gray-200 dark:border-neutral-700 text-gray-500 dark:text-gray-400'
+                      }`}
+                      data-testid="csv-no-website-toggle"
+                    >
+                      <Globe size={13} />
+                      {csvOnlyNoWebsite ? 'Zonder website' : 'Alle websites'}
+                    </button>
                     <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
                       className="px-4 py-2 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:border-black dark:focus:border-white bg-white dark:bg-neutral-800 text-black dark:text-white"
                       data-testid="csv-status-filter">
@@ -1033,7 +1046,10 @@ const LeadFinderPage = () => {
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Bedrijfsnaam</th>
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Categorie</th>
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Plaats</th>
+                          <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Website</th>
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Telefoon</th>
+                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Rating</th>
+                          <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Reviews</th>
                           <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Status</th>
                           <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">WhatsApp</th>
                           <th className="text-center px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 w-10"></th>
@@ -1042,17 +1058,47 @@ const LeadFinderPage = () => {
                       <tbody>
                         {filteredCsvLeads.map(lead => {
                           const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
+                          const hasWebsite = lead.website && lead.website.trim() !== '';
                           return (
                             <tr key={lead.id} className="border-b border-gray-100 dark:border-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-800/50 transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
-                              <td className="px-4 py-3"><span className="font-semibold text-sm text-black dark:text-white">{lead.naam}</span></td>
+                              <td className="px-4 py-3">
+                                <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
+                                  target="_blank" rel="noopener noreferrer"
+                                  className="font-semibold text-sm text-black dark:text-white hover:underline flex items-center gap-1"
+                                  data-testid={`csv-lead-name-${lead.id}`}>
+                                  {lead.naam} <ExternalLink size={11} className="text-gray-400 shrink-0" />
+                                </a>
+                              </td>
                               <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{lead.categorie || '-'}</td>
                               <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{extractCity(lead.adres)}</td>
+                              <td className="px-4 py-3">
+                                {hasWebsite ? (
+                                  <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline truncate block max-w-[160px]"
+                                    data-testid={`csv-website-${lead.id}`}>
+                                    {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
+                                  </a>
+                                ) : (
+                                  <span className="text-xs font-semibold text-red-500" data-testid={`csv-no-website-${lead.id}`}>Geen website</span>
+                                )}
+                              </td>
                               <td className="px-4 py-3">
                                 {lead.telefoon ? (
                                   <a href={`tel:${lead.telefoon}`} className="text-sm font-medium flex items-center gap-1 hover:underline text-black dark:text-white">
                                     <Phone size={13} />{lead.telefoon}
                                   </a>
                                 ) : <span className="text-sm text-gray-400">-</span>}
+                              </td>
+                              <td className="px-4 py-3 text-center">
+                                {lead.rating ? (
+                                  <span className="text-sm font-bold flex items-center justify-center gap-1 text-amber-500">
+                                    <Star size={13} fill="currentColor" />{lead.rating}
+                                  </span>
+                                ) : <span className="text-xs text-gray-400">-</span>}
+                              </td>
+                              <td className="px-4 py-3 text-center">
+                                <span className="text-sm text-gray-600 dark:text-gray-400">{lead.aantalReviews || '-'}</span>
                               </td>
                               <td className="px-4 py-3">
                                 <select
@@ -1083,8 +1129,7 @@ const LeadFinderPage = () => {
                               <td className="px-4 py-3 text-center">
                                 <button
                                   onClick={() => deleteCsvLead(lead.id)}
-                                  className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors"
-                                  title="Verwijderen"
+                                  className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                                   data-testid={`csv-delete-${lead.id}`}
                                 >
                                   <Trash2 size={14} />
@@ -1101,11 +1146,16 @@ const LeadFinderPage = () => {
                   <div className="md:hidden divide-y divide-gray-100 dark:divide-neutral-800">
                     {filteredCsvLeads.map(lead => {
                       const statusConf = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
+                      const hasWebsite = lead.website && lead.website.trim() !== '';
                       return (
                         <div key={lead.id} className="p-4" data-testid={`csv-lead-card-${lead.id}`}>
                           <div className="flex items-start justify-between mb-2">
                             <div>
-                              <h4 className="font-semibold text-sm text-black dark:text-white">{lead.naam}</h4>
+                              <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
+                                target="_blank" rel="noopener noreferrer"
+                                className="font-semibold text-sm text-black dark:text-white hover:underline flex items-center gap-1">
+                                {lead.naam} <ExternalLink size={10} className="text-gray-400" />
+                              </a>
                               <p className="text-xs text-gray-500 dark:text-gray-400">{lead.categorie} — {extractCity(lead.adres)}</p>
                             </div>
                             <select value={lead.status} onChange={e => updateCsvStatus(lead.id, e.target.value)}
@@ -1113,6 +1163,18 @@ const LeadFinderPage = () => {
                               style={{ backgroundColor: statusConf.bg, color: statusConf.color }}>
                               {CSV_STATUS_OPTIONS.map(s => (<option key={s.value} value={s.value}>{s.label}</option>))}
                             </select>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-3 mt-1 mb-2 text-xs">
+                            {hasWebsite ? (
+                              <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
+                                target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline truncate max-w-[180px]">
+                                {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
+                              </a>
+                            ) : (
+                              <span className="font-semibold text-red-500">Geen website</span>
+                            )}
+                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{lead.rating}</span>}
+                            {lead.aantalReviews && <span className="text-gray-400">({lead.aantalReviews} reviews)</span>}
                           </div>
                           <div className="flex items-center gap-2 mt-2">
                             {lead.telefoon && (

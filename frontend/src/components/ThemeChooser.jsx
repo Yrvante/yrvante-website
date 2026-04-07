@@ -49,13 +49,13 @@ const ThemeChooser = () => {
               <div className="h-1 bg-gradient-to-r from-amber-300 via-gray-300 to-gray-500" />
 
               <div className="px-6 pt-6 pb-2 text-center">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-400 mb-2">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-2">
                   Yrvante
                 </p>
-                <h3 className="text-lg font-black tracking-tight text-gray-900 mb-1">
+                <h3 className="text-lg font-black tracking-tight text-black dark:text-white mb-1">
                   {language === "nl" ? "Welkom" : "Welcome"}
                 </h3>
-                <p className="text-xs text-gray-500 leading-relaxed">
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                   {language === "nl"
                     ? "Hoe wil je de site bekijken?"
                     : "How would you like to view the site?"}

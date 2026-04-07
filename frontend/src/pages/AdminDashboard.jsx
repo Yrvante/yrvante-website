@@ -9,7 +9,7 @@ import {
   Eye, Users, Mail, MailOpen, Calendar, TrendingUp, 
   Trash2, Check, Lock, ArrowLeft, RefreshCw, Shield,
   Upload, Search, Phone, MessageSquare, ChevronDown,
-  BarChart3, FileText, Settings, ExternalLink
+  BarChart3, FileText, Settings, ExternalLink, Star, Globe
 } from "lucide-react";
 import { Toaster } from "../components/ui/sonner";
 
@@ -66,6 +66,7 @@ const AdminDashboard = () => {
   });
   const [csvSearch, setCsvSearch] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
+  const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -142,11 +143,12 @@ const AdminDashboard = () => {
           rating: row.review_rating || '',
           aantalReviews: row.review_count || '',
           status: 'nieuw',
-        })).filter(l => !l.website || l.website.trim() === '');
+        }));
+        const zonderWebsite = mapped.filter(l => !l.website || l.website.trim() === '').length;
         const existing = csvLeads.map(l => `${l.naam}|${l.telefoon}`);
         const newLeads = mapped.filter(l => !existing.includes(`${l.naam}|${l.telefoon}`));
         persistCsv([...csvLeads, ...newLeads]);
-        toast.success(`${totalImported} rijen — ${mapped.length} zonder website — ${newLeads.length} nieuw`);
+        toast.success(`${totalImported} rijen — ${zonderWebsite} zonder website — ${newLeads.length} nieuw`);
       },
       error: () => { toast.error('CSV leesfout'); }
     });
@@ -164,6 +166,7 @@ const AdminDashboard = () => {
   };
 
   const filteredCsv = csvLeads.filter(l => {
+    if (csvOnlyNoWebsite && l.website && l.website.trim() !== '') return false;
     if (csvStatusFilter !== 'alle' && l.status !== csvStatusFilter) return false;
     if (csvSearch) { const q = csvSearch.toLowerCase(); return l.naam?.toLowerCase().includes(q) || extractCity(l.adres).toLowerCase().includes(q); }
     return true;
@@ -171,6 +174,7 @@ const AdminDashboard = () => {
 
   const csvStats = {
     totaal: csvLeads.length,
+    zonderWebsite: csvLeads.filter(l => !l.website || l.website.trim() === '').length,
     benaderd: csvLeads.filter(l => l.status === 'benaderd').length,
     gereageerd: csvLeads.filter(l => l.status === 'gereageerd').length,
     overgeslagen: csvLeads.filter(l => l.status === 'overgeslagen').length,
@@ -378,7 +382,7 @@ const AdminDashboard = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                 {[
                   { label: 'Totaal', val: csvStats.totaal, color: isDark ? '#fff' : '#000' },
-                  { label: 'Zonder Website', val: csvStats.totaal, color: '#3B82F6' },
+                  { label: 'Zonder Website', val: csvStats.zonderWebsite, color: '#3B82F6' },
                   { label: 'Benaderd', val: csvStats.benaderd, color: '#F59E0B' },
                   { label: 'Gereageerd', val: csvStats.gereageerd, color: '#10B981' },
                 ].map((s, i) => (
@@ -398,6 +402,14 @@ const AdminDashboard = () => {
                       <input value={csvSearch} onChange={e => setCsvSearch(e.target.value)} placeholder="Zoek op naam of plaats..."
                         className={`w-full pl-10 pr-4 py-2.5 text-sm ${GLASS_INPUT}`} data-testid="csv-search-input" />
                     </div>
+                    <button onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
+                      className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
+                        csvOnlyNoWebsite
+                          ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-600 dark:text-red-400'
+                          : 'bg-white/50 dark:bg-white/[0.06] border-gray-200/60 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                      }`} data-testid="csv-no-website-toggle">
+                      <Globe size={13} /> {csvOnlyNoWebsite ? 'Zonder website' : 'Alle websites'}
+                    </button>
                     <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
                       className={`px-4 py-2.5 text-sm font-medium ${GLASS_INPUT} cursor-pointer`} data-testid="csv-status-filter">
                       <option value="alle">Alle Status</option>
@@ -428,27 +440,51 @@ const AdminDashboard = () => {
                     <table className="w-full" data-testid="csv-leads-table">
                       <thead>
                         <tr className="bg-black/[0.02] dark:bg-white/[0.02] border-b border-gray-100/50 dark:border-white/[0.05]">
-                          {['Bedrijfsnaam','Categorie','Plaats','Telefoon','Status','WhatsApp',''].map((h,i) => (
-                            <th key={i} className={`${i===5||i===6?'text-center':'text-left'} px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500`}>{h}</th>
+                          {['Bedrijfsnaam','Categorie','Plaats','Website','Telefoon','Rating','Reviews','Status','WhatsApp',''].map((h,i) => (
+                            <th key={i} className={`${[5,6,8,9].includes(i)?'text-center':'text-left'} px-3 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500`}>{h}</th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
                         {filteredCsv.map(lead => {
                           const sc = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
+                          const hasWebsite = lead.website && lead.website.trim() !== '';
                           return (
                             <tr key={lead.id} className="border-b border-gray-100/30 dark:border-white/[0.03] hover:bg-white/40 dark:hover:bg-white/[0.03] transition-colors" data-testid={`csv-lead-row-${lead.id}`}>
-                              <td className="px-4 py-3"><span className="font-semibold text-sm text-black dark:text-white">{lead.naam}</span></td>
-                              <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{lead.categorie || '-'}</td>
-                              <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{extractCity(lead.adres)}</td>
-                              <td className="px-4 py-3">
+                              <td className="px-3 py-3">
+                                <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
+                                  target="_blank" rel="noopener noreferrer"
+                                  className="font-semibold text-sm text-black dark:text-white hover:underline flex items-center gap-1">
+                                  {lead.naam} <ExternalLink size={10} className="text-gray-400 shrink-0" />
+                                </a>
+                              </td>
+                              <td className="px-3 py-3 text-sm text-gray-500 dark:text-gray-400">{lead.categorie || '-'}</td>
+                              <td className="px-3 py-3 text-sm text-gray-500 dark:text-gray-400">{extractCity(lead.adres)}</td>
+                              <td className="px-3 py-3">
+                                {hasWebsite ? (
+                                  <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline truncate block max-w-[140px]">
+                                    {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
+                                  </a>
+                                ) : <span className="text-xs font-semibold text-red-500">Geen website</span>}
+                              </td>
+                              <td className="px-3 py-3">
                                 {lead.telefoon ? (
                                   <a href={`tel:${lead.telefoon}`} className="text-sm font-medium flex items-center gap-1 text-black dark:text-white hover:underline">
                                     <Phone size={12} />{lead.telefoon}
                                   </a>
                                 ) : <span className="text-sm text-gray-400">-</span>}
                               </td>
-                              <td className="px-4 py-3">
+                              <td className="px-3 py-3 text-center">
+                                {lead.rating ? (
+                                  <span className="text-sm font-bold flex items-center justify-center gap-1 text-amber-500">
+                                    <Star size={12} fill="currentColor" />{lead.rating}
+                                  </span>
+                                ) : <span className="text-xs text-gray-400">-</span>}
+                              </td>
+                              <td className="px-3 py-3 text-center text-sm text-gray-500 dark:text-gray-400">{lead.aantalReviews || '-'}</td>
+                              <td className="px-3 py-3">
                                 <select value={lead.status} onChange={e => updateCsvStatus(lead.id, e.target.value)}
                                   className="px-2.5 py-1 rounded-full text-xs font-bold border-0 cursor-pointer"
                                   style={{ backgroundColor: isDark ? sc.darkBg : sc.bg, color: sc.color }}
@@ -456,7 +492,7 @@ const AdminDashboard = () => {
                                   {CSV_STATUS_OPTIONS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                                 </select>
                               </td>
-                              <td className="px-4 py-3 text-center">
+                              <td className="px-3 py-3 text-center">
                                 {lead.telefoon ? (
                                   <a href={getWhatsAppUrl(lead)} target="_blank" rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors"
@@ -465,7 +501,7 @@ const AdminDashboard = () => {
                                   </a>
                                 ) : <span className="text-xs text-gray-400">-</span>}
                               </td>
-                              <td className="px-4 py-3 text-center">
+                              <td className="px-3 py-3 text-center">
                                 <button onClick={() => deleteCsvLead(lead.id)}
                                   className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                                   data-testid={`csv-delete-${lead.id}`}>
@@ -483,11 +519,16 @@ const AdminDashboard = () => {
                   <div className="md:hidden divide-y divide-gray-100/30 dark:divide-white/[0.03]">
                     {filteredCsv.map(lead => {
                       const sc = CSV_STATUS_OPTIONS.find(s => s.value === lead.status) || CSV_STATUS_OPTIONS[0];
+                      const hasWebsite = lead.website && lead.website.trim() !== '';
                       return (
                         <div key={lead.id} className="p-4" data-testid={`csv-lead-card-${lead.id}`}>
                           <div className="flex items-start justify-between mb-2">
                             <div>
-                              <h4 className="font-semibold text-sm text-black dark:text-white">{lead.naam}</h4>
+                              <a href={`https://www.google.com/maps/search/${encodeURIComponent(lead.naam + ' ' + lead.adres)}`}
+                                target="_blank" rel="noopener noreferrer"
+                                className="font-semibold text-sm text-black dark:text-white hover:underline flex items-center gap-1">
+                                {lead.naam} <ExternalLink size={10} className="text-gray-400" />
+                              </a>
                               <p className="text-xs text-gray-400 dark:text-gray-500">{lead.categorie} — {extractCity(lead.adres)}</p>
                             </div>
                             <select value={lead.status} onChange={e => updateCsvStatus(lead.id, e.target.value)}
@@ -495,6 +536,16 @@ const AdminDashboard = () => {
                               style={{ backgroundColor: isDark ? sc.darkBg : sc.bg, color: sc.color }}>
                               {CSV_STATUS_OPTIONS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                             </select>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2 text-xs mb-2">
+                            {hasWebsite ? (
+                              <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
+                                target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline truncate max-w-[180px]">
+                                {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
+                              </a>
+                            ) : <span className="font-semibold text-red-500">Geen website</span>}
+                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{lead.rating}</span>}
+                            {lead.aantalReviews && <span className="text-gray-400">({lead.aantalReviews})</span>}
                           </div>
                           {lead.telefoon && <p className="text-xs font-medium flex items-center gap-1 text-black dark:text-white mb-2"><Phone size={11} />{lead.telefoon}</p>}
                           <div className="flex items-center gap-2">
