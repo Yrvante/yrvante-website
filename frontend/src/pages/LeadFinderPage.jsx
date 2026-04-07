@@ -11,7 +11,7 @@ import {
   Instagram, Facebook, Filter, SortAsc, CheckSquare, Square, MoreHorizontal,
   Target, TrendingUp, Calendar, Clock, Star, Tag, Copy, MessageSquare,
   Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database, FileSpreadsheet,
-  Upload
+  Upload, Sun, Moon
 } from "lucide-react";
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -78,7 +78,7 @@ const extractCity = (address) => {
 };
 
 const LeadFinderPage = () => {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -859,7 +859,7 @@ Yrvante — Smart Web & Software 085-5055314`);
             <div className={`${G} !rounded-xl !shadow-none p-0.5 flex gap-0.5`}>
               {[
                 { id: 'zoeken', label: 'ZOEKEN', icon: Search },
-                { id: 'csv', label: 'CSV', icon: Upload },
+                { id: 'csv', label: 'CSV', icon: Upload, count: csvLeads.length },
                 { id: 'leads', label: 'LEADS', icon: Users, count: opgeslagenLeads.length },
                 { id: 'dashboard', label: 'STATS', icon: BarChart3 },
                 { id: 'tools', label: 'TOOLS', icon: Settings }
@@ -881,7 +881,13 @@ Yrvante — Smart Web & Software 085-5055314`);
               ))}
             </div>
             
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-3">
+              <button onClick={toggleTheme}
+                className="p-2 rounded-xl text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/[0.06] transition-all"
+                data-testid="theme-toggle-button"
+                title={isDark ? 'Licht thema' : 'Donker thema'}>
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
               <button onClick={logout} className="text-xs text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors hidden sm:block">Uitloggen</button>
               <button onClick={logout} className="sm:hidden p-2 text-gray-400 hover:text-black dark:hover:text-white">
                 <ArrowLeft size={18} />
@@ -1115,30 +1121,30 @@ Yrvante — Smart Web & Software 085-5055314`);
                   <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="csv-import-title">CSV Import</h1>
                   <p className="text-gray-500 dark:text-gray-400 text-sm">Importeer leads van Google Maps Scraper</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <input ref={csvFileRef} type="file" accept=".csv" onChange={handleCsvImport} className="hidden" data-testid="csv-file-input" />
                   <button onClick={() => csvFileRef.current?.click()}
-                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full flex items-center gap-2"
+                    className="px-4 sm:px-6 py-2 sm:py-3 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full flex items-center gap-2"
                     data-testid="csv-import-button">
-                    <Upload size={16} /> CSV IMPORTEREN
+                    <Upload size={14} /> IMPORTEREN
                   </button>
                   {csvLeads.length > 0 && (
                     <button onClick={manualSaveAll}
-                      className="px-3 sm:px-4 py-2.5 sm:py-3 border border-green-200 dark:border-green-800 text-green-600 text-xs font-bold rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-green-200 dark:border-green-800 text-green-600 text-xs font-bold rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center gap-1.5"
                       data-testid="csv-save-all">
                       <Save size={14} /> OPSLAAN
                     </button>
                   )}
                   {csvLeads.length > 0 && (
                     <button onClick={exportCsvLeads}
-                      className="px-3 sm:px-4 py-2.5 sm:py-3 border border-blue-200 dark:border-blue-800 text-blue-600 text-xs font-bold rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-blue-200 dark:border-blue-800 text-blue-600 text-xs font-bold rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-1.5"
                       data-testid="csv-export-button">
                       <Download size={14} /> EXPORT
                     </button>
                   )}
                   {csvLeads.length > 0 && (
                     <button onClick={clearAllCsvLeads}
-                      className="px-3 sm:px-4 py-2.5 sm:py-3 border border-red-200 dark:border-red-800 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-red-200 dark:border-red-800 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-1.5"
                       data-testid="csv-clear-all">
                       <Trash2 size={14} /> WISSEN
                     </button>
@@ -1149,20 +1155,20 @@ Yrvante — Smart Web & Software 085-5055314`);
               {/* Stats Cards */}
               {/* Bulk WhatsApp */}
               {csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length > 0 && (
-                <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/10 border border-green-200/50 dark:border-green-800/30 rounded-2xl flex items-center justify-between" data-testid="bulk-whatsapp-bar">
+                <div className="mb-6 p-3 sm:p-4 bg-green-50 dark:bg-green-900/10 border border-green-200/50 dark:border-green-800/30 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" data-testid="bulk-whatsapp-bar">
                   <div>
-                    <p className="text-sm font-bold text-green-800 dark:text-green-300">
+                    <p className="text-xs sm:text-sm font-bold text-green-800 dark:text-green-300">
                       {bulkSending
                         ? `WhatsApp versturen... ${bulkProgress.current}/${bulkProgress.total}`
                         : `${csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length} nieuwe leads klaar om te benaderen`
                       }
                     </p>
-                    <p className="text-xs text-green-600 dark:text-green-400 mt-0.5">Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)</p>
+                    <p className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 mt-0.5">Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)</p>
                   </div>
                   <button
                     onClick={bulkWhatsApp}
                     disabled={bulkSending}
-                    className={`px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center gap-2 transition-all ${bulkSending ? 'bg-green-400 cursor-wait' : 'bg-green-600 hover:bg-green-700'}`}
+                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${bulkSending ? 'bg-green-400 cursor-wait' : 'bg-green-600 hover:bg-green-700'}`}
                     data-testid="bulk-whatsapp-button">
                     <MessageSquare size={14} /> {bulkSending ? `${bulkProgress.current}/${bulkProgress.total}` : 'Bulk WhatsApp'}
                   </button>
@@ -1187,7 +1193,7 @@ Yrvante — Smart Web & Software 085-5055314`);
               {/* Search + Filter Bar */}
               {csvLeads.length > 0 && (
                 <div className={`${GC} p-3 sm:p-4 mb-4 sm:mb-6`}>
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                     <div className="flex-1 relative">
                       <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                       <input value={csvSearchQuery} onChange={e => setCsvSearchQuery(e.target.value)}
@@ -1195,25 +1201,27 @@ Yrvante — Smart Web & Software 085-5055314`);
                         className={`w-full pl-10 pr-4 py-2 text-sm ${GI}`}
                         data-testid="csv-search-input" />
                     </div>
-                    <button
-                      onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
-                      className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
-                        csvOnlyNoWebsite
-                          ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-600 dark:text-red-400'
-                          : 'bg-white/50 dark:bg-white/[0.06] border-gray-200/60 dark:border-white/10 text-gray-500 dark:text-gray-400'
-                      }`}
-                      data-testid="csv-no-website-toggle"
-                    >
-                      <Globe size={13} />
-                      {csvOnlyNoWebsite ? 'Zonder website' : 'Alle websites'}
-                    </button>
-                    <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
-                      className={`px-4 py-2 text-sm font-medium cursor-pointer ${GI}`}
-                      data-testid="csv-status-filter">
-                      <option value="alle">Alle Status</option>
-                      {CSV_STATUS_OPTIONS.map(s => (<option key={s.value} value={s.value}>{s.label}</option>))}
-                    </select>
-                    <span className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap self-center">{filteredCsvLeads.length} resultaten</span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <button
+                        onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
+                        className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
+                          csvOnlyNoWebsite
+                            ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-600 dark:text-red-400'
+                            : 'bg-white/50 dark:bg-white/[0.06] border-gray-200/60 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                        }`}
+                        data-testid="csv-no-website-toggle"
+                      >
+                        <Globe size={13} />
+                        {csvOnlyNoWebsite ? 'Zonder' : 'Alle'}
+                      </button>
+                      <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
+                        className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}
+                        data-testid="csv-status-filter">
+                        <option value="alle">Alle Status</option>
+                        {CSV_STATUS_OPTIONS.map(s => (<option key={s.value} value={s.value}>{s.label}</option>))}
+                      </select>
+                      <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap">{filteredCsvLeads.length} resultaten</span>
+                    </div>
                   </div>
                 </div>
               )}
@@ -1423,7 +1431,20 @@ Yrvante — Smart Web & Software 085-5055314`);
                                 <Phone size={12} />{lead.telefoon}
                               </a>
                             )}
+                            {lead.telefoon && (
+                              <button onClick={() => { navigator.clipboard.writeText(lead.telefoon); toast.success('Gekopieerd!'); }}
+                                className="p-1 text-gray-400 hover:text-black dark:hover:text-white"><Copy size={12} /></button>
+                            )}
                           </div>
+                          {/* Notitie */}
+                          <input
+                            type="text"
+                            value={lead.notitie || ''}
+                            onChange={e => updateCsvNote(lead.id, e.target.value)}
+                            placeholder="Notitie toevoegen..."
+                            className="w-full mt-2 text-xs bg-gray-50 dark:bg-white/[0.04] border border-gray-200/60 dark:border-white/10 rounded-lg px-3 py-2 text-gray-600 dark:text-gray-400 placeholder:text-gray-300 dark:placeholder:text-gray-600 outline-none focus:border-gray-400 dark:focus:border-white/20"
+                            data-testid={`csv-note-mobile-${lead.id}`}
+                          />
                           <div className="flex items-center gap-2 mt-3">
                             {lead.telefoon && (
                               <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
@@ -1449,37 +1470,39 @@ Yrvante — Smart Web & Software 085-5055314`);
         {/* LEADS TAB */}
         {activeTab === 'leads' && (
           <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-6 py-8">
-              <div className="flex items-center justify-between mb-6">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
-                  <h1 className="text-3xl font-black tracking-tight text-black dark:text-white">Leads Database</h1>
-                  <p className="text-gray-400 dark:text-gray-500">{opgeslagenLeads.length} leads opgeslagen</p>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white">Leads Database</h1>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm">{opgeslagenLeads.length} leads opgeslagen</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button onClick={loadLeads} className={`p-2 ${G} !rounded-xl !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`}><RefreshCw size={18} /></button>
-                  <button onClick={() => exportToGoogleSheets()} className="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-bold hover:bg-emerald-600 flex items-center gap-2"><FileSpreadsheet size={16} /> SHEETS</button>
-                  <button onClick={() => exportCSV()} className={`px-4 py-2 ${G} !rounded-xl !shadow-none text-sm font-bold hover:bg-white/80 dark:hover:bg-white/10 flex items-center gap-2 text-black dark:text-white`}><Download size={16} /> CSV</button>
+                  <button onClick={() => exportToGoogleSheets()} className="px-3 sm:px-4 py-2 bg-emerald-500 text-white rounded-xl text-xs sm:text-sm font-bold hover:bg-emerald-600 flex items-center gap-1.5"><FileSpreadsheet size={14} /> SHEETS</button>
+                  <button onClick={() => exportCSV()} className={`px-3 sm:px-4 py-2 ${G} !rounded-xl !shadow-none text-xs sm:text-sm font-bold hover:bg-white/80 dark:hover:bg-white/10 flex items-center gap-1.5 text-black dark:text-white`}><Download size={14} /> CSV</button>
                 </div>
               </div>
 
-              <div className={`${GC} p-4 mb-6`}>
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex-1 min-w-[200px] relative">
+              <div className={`${GC} p-3 sm:p-4 mb-6`}>
+                <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3">
+                  <div className="flex-1 min-w-0 sm:min-w-[200px] relative">
                     <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input value={searchLeadsQuery} onChange={e => setSearchLeadsQuery(e.target.value)} placeholder="Zoek leads..."
                       className={`w-full pl-10 pr-4 py-2 text-sm ${GI}`} />
                   </div>
+                  <div className="flex flex-wrap items-center gap-2">
                   {[
                     { val: statusFilter, set: setStatusFilter, opts: Object.entries(STATUS_CONFIG).map(([k,v]) => [k, v.label]), def: 'Alle Status' },
                     { val: sourceFilter, set: setSourceFilter, opts: Object.entries(SEARCH_SOURCES).map(([k,v]) => [k, v.name]), def: 'Alle Bronnen' },
                     { val: priorityFilter, set: setPriorityFilter, opts: Object.entries(PRIORITY_CONFIG).map(([k,v]) => [k, `${v.icon} ${v.label}`]), def: 'Alle Prioriteit' },
                     { val: sortBy, set: setSortBy, opts: [['datum','Nieuwste'],['naam','Naam A-Z'],['status','Status']], def: null },
                   ].map((f, i) => (
-                    <select key={i} value={f.val} onChange={e => f.set(e.target.value)} className={`px-3 py-2 text-sm font-medium cursor-pointer ${GI}`}>
+                    <select key={i} value={f.val} onChange={e => f.set(e.target.value)} className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}>
                       {f.def && <option value="alle">{f.def}</option>}
                       {f.opts.map(([k, l]) => <option key={k} value={k}>{l}</option>)}
                     </select>
                   ))}
+                  </div>
                 </div>
                 {selectedLeads.length > 0 && (
                   <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100/40 dark:border-white/[0.05]">
@@ -1510,14 +1533,14 @@ Yrvante — Smart Web & Software 085-5055314`);
                     <span className="text-sm text-gray-400 dark:text-gray-500">Selecteer alles ({filteredLeads.length})</span>
                   </div>
                   {filteredLeads.map(lead => (
-                    <div key={lead.id} className={`${GC} p-5 transition-all ${selectedLeads.includes(lead.id) ? '!border-black dark:!border-white' : ''}`}>
-                      <div className="flex items-start gap-4">
-                        <button onClick={() => toggleSelectLead(lead.id)} className="mt-1 text-black dark:text-white">
-                          {selectedLeads.includes(lead.id) ? <CheckSquare size={20} /> : <Square size={20} className="text-gray-300 dark:text-gray-600" />}
+                    <div key={lead.id} className={`${GC} p-3 sm:p-5 transition-all ${selectedLeads.includes(lead.id) ? '!border-black dark:!border-white' : ''}`}>
+                      <div className="flex items-start gap-2 sm:gap-4">
+                        <button onClick={() => toggleSelectLead(lead.id)} className="mt-1 text-black dark:text-white shrink-0">
+                          {selectedLeads.includes(lead.id) ? <CheckSquare size={18} /> : <Square size={18} className="text-gray-300 dark:text-gray-600" />}
                         </button>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-bold text-lg text-black dark:text-white">{lead.naam}</h3>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 mb-2">
+                            <h3 className="font-bold text-sm sm:text-lg text-black dark:text-white truncate">{lead.naam}</h3>
                             <select value={lead.status || 'nieuw'} onChange={e => updateLead(lead.id, { status: e.target.value })}
                               className="px-2 py-1 rounded-full text-xs font-bold border-0 cursor-pointer"
                               style={{ backgroundColor: STATUS_CONFIG[lead.status || 'nieuw']?.bg, color: STATUS_CONFIG[lead.status || 'nieuw']?.color }}>
@@ -1529,7 +1552,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                             </select>
                             {lead.source && <span className="px-2 py-1 rounded text-xs font-medium" style={{ backgroundColor: SEARCH_SOURCES[lead.source]?.color + '15', color: SEARCH_SOURCES[lead.source]?.color }}>{SEARCH_SOURCES[lead.source]?.name}</span>}
                           </div>
-                          <div className="flex flex-wrap gap-4 text-sm mb-3">
+                          <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm mb-3">
                             {lead.adres && <span className="text-gray-400 flex items-center gap-1"><MapPin size={14} />{lead.adres}</span>}
                             {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-gray-500 dark:text-gray-300 flex items-center gap-1 hover:underline"><Phone size={14} />{lead.telefoonnummer}</a>}
                             {lead.email && <a href={`mailto:${lead.email}`} className="text-gray-500 dark:text-gray-300 flex items-center gap-1 hover:underline"><Mail size={14} />{lead.email}</a>}
@@ -1568,17 +1591,17 @@ Yrvante — Smart Web & Software 085-5055314`);
         {/* DASHBOARD TAB */}
         {activeTab === 'dashboard' && (
           <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-6 py-8">
-              <h1 className="text-3xl font-black tracking-tight mb-8 text-black dark:text-white">Dashboard</h1>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-                <div className={`${GC} p-6`}>
-                  <p className="text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Totaal Leads</p>
-                  <p className="text-4xl font-black text-black dark:text-white">{dashboardData?.totaal_leads || 0}</p>
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+              <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-6 sm:mb-8 text-black dark:text-white">Dashboard</h1>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className={`${GC} p-4 sm:p-6`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1 sm:mb-2">Totaal Leads</p>
+                  <p className="text-2xl sm:text-4xl font-black text-black dark:text-white">{dashboardData?.totaal_leads || 0}</p>
                 </div>
                 {Object.entries(STATUS_CONFIG).slice(0, 5).map(([key, val]) => (
-                  <div key={key} className={`${GC} p-6`}>
-                    <p className="text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">{val.label}</p>
-                    <p className="text-4xl font-black" style={{ color: val.color }}>{dashboardData?.status_verdeling?.[key] || 0}</p>
+                  <div key={key} className={`${GC} p-4 sm:p-6`}>
+                    <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1 sm:mb-2">{val.label}</p>
+                    <p className="text-2xl sm:text-4xl font-black" style={{ color: val.color }}>{dashboardData?.status_verdeling?.[key] || 0}</p>
                   </div>
                 ))}
               </div>
@@ -1640,9 +1663,9 @@ Yrvante — Smart Web & Software 085-5055314`);
         {/* TOOLS TAB */}
         {activeTab === 'tools' && (
           <motion.div key="tools" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-6 py-8">
-              <h1 className="text-3xl font-black tracking-tight mb-8 text-black dark:text-white">Tools & Integraties</h1>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+              <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-6 sm:mb-8 text-black dark:text-white">Tools & Integraties</h1>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {[
                   { icon: Download, iconBg: 'bg-green-100 dark:bg-green-900/20', iconColor: 'text-green-600 dark:text-green-400', title: 'CSV Export', desc: 'Exporteer alle leads naar een CSV bestand voor gebruik in Excel of Google Sheets.', btnText: 'EXPORTEER ALLE LEADS', btnClass: 'bg-green-600 text-white hover:bg-green-700', action: () => exportCSV() },
                   { icon: FileText, iconBg: 'bg-gray-100/50 dark:bg-white/[0.04]', iconColor: 'text-gray-500 dark:text-gray-400', title: 'Bulk Import', desc: 'Importeer leads vanuit een CSV bestand. Handig voor migratie van andere systemen.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
@@ -1651,13 +1674,13 @@ Yrvante — Smart Web & Software 085-5055314`);
                   { icon: Mail, iconBg: 'bg-orange-100 dark:bg-orange-900/20', iconColor: 'text-orange-600 dark:text-orange-400', title: 'Email Campagnes', desc: 'Verstuur gepersonaliseerde email campagnes naar geselecteerde leads.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
                   { icon: Calendar, iconBg: 'bg-red-100 dark:bg-red-900/20', iconColor: 'text-red-600 dark:text-red-400', title: 'Follow-up Reminders', desc: 'Plan automatische herinneringen voor lead opvolging.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
                 ].map((tool, i) => (
-                  <div key={i} className={`${GC} p-6`}>
-                    <div className={`w-12 h-12 ${tool.iconBg} rounded-xl flex items-center justify-center mb-4 border border-white/30 dark:border-white/[0.06]`}>
-                      <tool.icon size={24} className={tool.iconColor} />
+                  <div key={i} className={`${GC} p-4 sm:p-6`}>
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 ${tool.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 border border-white/30 dark:border-white/[0.06]`}>
+                      <tool.icon size={20} className={tool.iconColor} />
                     </div>
-                    <h3 className="font-bold text-lg mb-2 text-black dark:text-white">{tool.title}</h3>
-                    <p className="text-gray-400 dark:text-gray-500 text-sm mb-4">{tool.desc}</p>
-                    <button onClick={tool.action} className={`w-full py-3 rounded-xl font-bold text-sm ${tool.btnClass}`}>{tool.btnText}</button>
+                    <h3 className="font-bold text-base sm:text-lg mb-1.5 sm:mb-2 text-black dark:text-white">{tool.title}</h3>
+                    <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">{tool.desc}</p>
+                    <button onClick={tool.action} className={`w-full py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm ${tool.btnClass}`}>{tool.btnText}</button>
                   </div>
                 ))}
               </div>
