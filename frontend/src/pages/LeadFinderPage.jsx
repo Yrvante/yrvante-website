@@ -596,12 +596,11 @@ Wist je trouwens ook dat elke dag dat jullie geen website hebben loopt er ergens
 🤝 Eerst 40% — de rest pas als je blij bent
 💯 Niet tevreden? Ik ga door tot je dat wel bent
 
-Benieuwd? → yrvante.com
+Benieuwd? → https://yrvante.com
 Of stuur me gewoon een berichtje terug 😊
 
 Yvar
-Yrvante — Smart Web & Software
-085-5055314`);
+Yrvante — Smart Web & Software 085-5055314`);
     return `https://api.whatsapp.com/send?phone=${phone}&text=${msg}`;
   };
 
