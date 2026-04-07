@@ -626,7 +626,7 @@ const LeadFinderPage = () => {
   const updateCsvStatus = async (id, status) => {
     const benaderdOp = status === 'benaderd' ? new Date().toLocaleString('nl-NL') : undefined;
     setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, status, ...(benaderdOp ? { benaderdOp } : {}) } : l));
-    try { await fetch(`${API_BASE}/api/admin/csv-leads/${id}/status`, {
+    try { await fetch(`${API_BASE}/api/admin/csv-leads?id=${id}`, {
       method: 'PUT', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status, ...(benaderdOp ? { benaderdOp } : {}) })
     }); } catch { toast.error("Fout bij status update"); }
@@ -634,7 +634,7 @@ const LeadFinderPage = () => {
 
   const deleteCsvLead = async (id) => {
     setCsvLeads(prev => prev.filter(l => l.id !== id));
-    try { await fetch(`${API_BASE}/api/admin/csv-leads/${id}`, { method: 'DELETE' }); }
+    try { await fetch(`${API_BASE}/api/admin/csv-leads?id=${id}`, { method: 'DELETE' }); }
     catch { toast.error("Fout bij verwijderen"); }
   };
 
@@ -757,7 +757,7 @@ Yrvante — Smart Web & Software 085-5055314`);
 
   const updateCsvNote = async (id, notitie) => {
     setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, notitie } : l));
-    try { await fetch(`${API_BASE}/api/admin/csv-leads/${id}/status`, {
+    try { await fetch(`${API_BASE}/api/admin/csv-leads?id=${id}`, {
       method: 'PUT', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: csvLeads.find(l => l.id === id)?.status || 'nieuw', notitie })
     }); } catch { /* silent */ }

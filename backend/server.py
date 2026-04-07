@@ -958,6 +958,21 @@ async def save_csv_leads(data: CsvLeadsBulk):
     total = await db.csv_leads.count_documents({})
     return {"success": True, "total": total}
 
+@api_router.put("/admin/csv-leads")
+async def update_csv_lead_by_query(request: Request, id: str = None):
+    if not id:
+        raise HTTPException(status_code=400, detail="Missing id parameter")
+    body = await request.json()
+    update = {"status": body.get("status", "nieuw")}
+    if "notitie" in body:
+        update["notitie"] = body["notitie"]
+    if "benaderdOp" in body:
+        update["benaderdOp"] = body["benaderdOp"]
+    result = await db.csv_leads.update_one({"id": id}, {"$set": update})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    return {"success": True}
+
 @api_router.put("/admin/csv-leads/{lead_id}/status")
 async def update_csv_lead_status(lead_id: str, request: Request):
     body = await request.json()
