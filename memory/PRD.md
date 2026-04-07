@@ -167,6 +167,13 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - Statische achtergrond vervangen door 5 zwevende gradient-orbs met CSS drift-animaties (22-35s cycli)
 - Originele bg-pattern.jpg transparant behouden als overlay
 
+### Phase 18 - Smart Upgrade Tip (Complete - Apr 2026)
+- **Smart Upgrade Tip**: `getUpgradeTip()` functie in CalculatorPage.jsx berekent of upgraden naar een hoger pakket goedkoper is dan het huidige pakket + geselecteerde add-ons
+- **Voorbeeld**: Pro (€699) + Meertalig (€149) + Boekingssysteem (€249) = €1097 → Tip: "Upgrade naar Premium (€999) en bespaar €98!"
+- **Upgrade knop**: Klik om direct naar het aanbevolen pakket te wisselen, inbegrepen add-ons worden automatisch gereset
+- **Slim**: Tip verschijnt ALLEEN wanneer upgrade echt goedkoper is; verborgen bij laagste tier of als upgrade duurder is
+- **42/42 tests geslaagd** (iteration 35)
+
 ## Backlog (P2)
 - Google Sheets API for lead export
 - Case studies/success stories for niche pages
@@ -174,6 +181,7 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - Resend email DNS config (DKIM/SPF for yrvante.com)
 - Dark mode edge cases review on all subpages
 - SEO verification on all pages
+- Split CalculatorPage.jsx, LeadFinderPage.jsx, AdminDashboard.jsx into smaller sub-components
 
 ## Critical Design Rules
 - **Glassmorphism**: Use `bg-white/40 backdrop-blur-sm` (NOT solid `bg-white`)
