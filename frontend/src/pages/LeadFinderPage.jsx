@@ -142,6 +142,7 @@ const LeadFinderPage = () => {
       loadDashboard();
       loadCsvLeads();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   const handleLogin = async (e) => {
