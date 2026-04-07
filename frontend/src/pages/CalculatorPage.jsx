@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage, useTheme } from "../App";
-import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star, Tag, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Plus, Minus, Calculator, Info, Sparkles, Send, User, Mail, Phone, MessageSquare, Calendar, Clock, Globe, Shield, Star, Tag, X, Sun, Moon, Bell, GripVertical } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import SEO from "../components/SEO";
 import { IPhoneMockup, MiniWebsite } from "../components/DeviceMockups";
@@ -203,6 +203,189 @@ const MaintenancePreview = ({ language }) => (
   </motion.div>
 );
 
+// Dark Mode Preview
+const DarkModePreview = ({ language }) => {
+  const [isDark, setIsDark] = useState(false);
+  return (
+    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">{isDark ? <Moon size={16} className="text-gray-600" /> : <Sun size={16} className="text-gray-600" />}</div>
+          <div>
+            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Voorbeeld: Dark Mode' : 'Preview: Dark Mode'}</p>
+            <p className="text-xs text-gray-400">{language === 'nl' ? 'Klik op de schakelaar hieronder' : 'Click the toggle below'}</p>
+          </div>
+        </div>
+        <div className={`rounded-xl p-4 transition-all duration-500 ${isDark ? 'bg-neutral-900' : 'bg-gray-50'}`}>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className={`w-5 h-5 rounded-md ${isDark ? 'bg-neutral-700' : 'bg-gray-200'}`} />
+              <div className={`h-2 w-16 rounded-full ${isDark ? 'bg-neutral-700' : 'bg-gray-200'}`} />
+            </div>
+            <button onClick={(e) => { e.stopPropagation(); setIsDark(!isDark); }}
+              className={`w-11 h-6 rounded-full relative transition-all duration-300 ${isDark ? 'bg-gray-600' : 'bg-gray-300'}`}>
+              <motion.div animate={{ x: isDark ? 20 : 2 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm flex items-center justify-center">
+                {isDark ? <Moon size={8} className="text-gray-600" /> : <Sun size={8} className="text-yellow-500" />}
+              </motion.div>
+            </button>
+          </div>
+          <div className="space-y-2">
+            <div className={`h-2 w-full rounded-full ${isDark ? 'bg-neutral-700' : 'bg-gray-200'}`} />
+            <div className={`h-2 w-3/4 rounded-full ${isDark ? 'bg-neutral-700' : 'bg-gray-200'}`} />
+            <div className={`h-2 w-1/2 rounded-full ${isDark ? 'bg-neutral-700' : 'bg-gray-200'}`} />
+          </div>
+          <div className="flex gap-2 mt-3">
+            <div className={`h-8 flex-1 rounded-lg ${isDark ? 'bg-neutral-800 border border-neutral-700' : 'bg-white border border-gray-200'}`} />
+            <div className={`h-8 flex-1 rounded-lg ${isDark ? 'bg-neutral-800 border border-neutral-700' : 'bg-white border border-gray-200'}`} />
+          </div>
+        </div>
+        <p className="text-center text-xs text-gray-400 mt-2">{language === 'nl' ? 'Bezoekers kiezen zelf licht of donker' : 'Visitors choose light or dark'}</p>
+      </div>
+    </motion.div>
+  );
+};
+
+// Popup Preview
+const PopupPreview = ({ language }) => {
+  const [showPopup, setShowPopup] = useState(false);
+  return (
+    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><Bell size={16} className="text-gray-600" /></div>
+          <div>
+            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Voorbeeld: Pop-up' : 'Preview: Pop-up'}</p>
+            <p className="text-xs text-gray-400">{language === 'nl' ? 'Vang bezoekers met een aanbieding' : 'Catch visitors with an offer'}</p>
+          </div>
+        </div>
+        <div className="relative rounded-xl bg-gray-50 dark:bg-neutral-800/60 p-3 min-h-[120px] overflow-hidden">
+          {/* Mini website achtergrond */}
+          <div className="space-y-1.5 opacity-40">
+            <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-neutral-700" />
+            <div className="h-2 w-3/4 rounded-full bg-gray-200 dark:bg-neutral-700" />
+            <div className="h-2 w-1/2 rounded-full bg-gray-200 dark:bg-neutral-700" />
+            <div className="flex gap-1.5 mt-2">
+              <div className="h-10 flex-1 rounded-lg bg-gray-200 dark:bg-neutral-700" />
+              <div className="h-10 flex-1 rounded-lg bg-gray-200 dark:bg-neutral-700" />
+            </div>
+          </div>
+          <AnimatePresence>
+            {showPopup && (
+              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
+                className="absolute inset-2 bg-white dark:bg-neutral-800 rounded-xl shadow-xl border border-gray-200 dark:border-neutral-600 flex flex-col items-center justify-center p-3 z-10">
+                <button onClick={(e) => { e.stopPropagation(); setShowPopup(false); }} className="absolute top-1.5 right-2 text-gray-400 hover:text-gray-600 text-xs">&#10005;</button>
+                <div className="text-lg mb-1">&#127873;</div>
+                <p className="text-xs font-bold text-gray-800 dark:text-gray-200 text-center">{language === 'nl' ? '10% Korting!' : '10% Discount!'}</p>
+                <p className="text-[10px] text-gray-400 text-center mt-0.5">{language === 'nl' ? 'Gebruik code WELKOM10' : 'Use code WELCOME10'}</p>
+                <div className="mt-2 px-3 py-1.5 bg-gray-900 dark:bg-neutral-700 text-white rounded-lg text-[10px] font-bold">{language === 'nl' ? 'Pakken!' : 'Grab it!'}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {!showPopup && (
+            <button onClick={(e) => { e.stopPropagation(); setShowPopup(true); }}
+              className="absolute bottom-2 right-2 px-2.5 py-1.5 bg-gray-900 dark:bg-neutral-700 text-white text-[10px] font-bold rounded-lg hover:bg-gray-700 transition-colors">
+              {language === 'nl' ? 'Toon popup' : 'Show popup'}
+            </button>
+          )}
+        </div>
+        <p className="text-center text-xs text-gray-400 mt-2">{language === 'nl' ? 'Ideaal voor kortingen of aankondigingen' : 'Ideal for discounts or announcements'}</p>
+      </div>
+    </motion.div>
+  );
+};
+
+// Before & After Slider Preview
+const BeforeAfterPreview = ({ language }) => {
+  const [sliderPos, setSliderPos] = useState(50);
+  const sliderRef = React.useRef(null);
+  const isDragging = React.useRef(false);
+
+  const handleMove = (clientX) => {
+    if (!sliderRef.current || !isDragging.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setSliderPos((x / rect.width) * 100);
+  };
+
+  React.useEffect(() => {
+    const onMouseMove = (e) => handleMove(e.clientX);
+    const onTouchMove = (e) => handleMove(e.touches[0].clientX);
+    const onUp = () => { isDragging.current = false; };
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchend', onUp);
+    };
+  });
+
+  return (
+    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+      className="mt-3 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-neutral-700/50 bg-white/60 backdrop-blur-sm shadow-sm dark:shadow-neutral-900">
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0"><GripVertical size={16} className="text-gray-600" /></div>
+          <div>
+            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{language === 'nl' ? 'Voorbeeld: Voor & Na Slider' : 'Preview: Before & After Slider'}</p>
+            <p className="text-xs text-gray-400">{language === 'nl' ? 'Sleep de lijn om te vergelijken' : 'Drag the line to compare'}</p>
+          </div>
+        </div>
+        <div ref={sliderRef} className="relative rounded-xl overflow-hidden h-28 select-none cursor-col-resize"
+          onMouseDown={(e) => { e.stopPropagation(); isDragging.current = true; handleMove(e.clientX); }}
+          onTouchStart={(e) => { e.stopPropagation(); isDragging.current = true; handleMove(e.touches[0].clientX); }}>
+          {/* "Na" (rechts) - modern */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-neutral-800 dark:to-neutral-900 p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-4 h-4 rounded-md bg-gray-900 dark:bg-white" />
+              <div className="h-1.5 w-12 bg-gray-900 dark:bg-white rounded-full" />
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              <div className="h-10 rounded-lg bg-gray-200/80 dark:bg-neutral-700" />
+              <div className="h-10 rounded-lg bg-gray-200/80 dark:bg-neutral-700" />
+              <div className="h-10 rounded-lg bg-gray-200/80 dark:bg-neutral-700" />
+            </div>
+            <div className="mt-2 h-6 w-16 rounded-full bg-gray-900 dark:bg-white" />
+          </div>
+          {/* "Voor" (links) - ouderwets */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/40 p-3"
+            style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-4 h-4 rounded-sm bg-amber-800/60" />
+              <div className="h-1.5 w-12 bg-amber-800/40 rounded-full" />
+            </div>
+            <div className="space-y-1.5">
+              <div className="h-4 w-full bg-amber-200/60 dark:bg-amber-900/40 rounded" />
+              <div className="h-4 w-3/4 bg-amber-200/60 dark:bg-amber-900/40 rounded" />
+              <div className="h-4 w-1/2 bg-amber-200/60 dark:bg-amber-900/40 rounded" />
+            </div>
+          </div>
+          {/* Slider lijn */}
+          <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-10" style={{ left: `${sliderPos}%` }}>
+            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center border border-gray-200">
+              <GripVertical size={10} className="text-gray-400" />
+            </div>
+          </div>
+          {/* Labels */}
+          <div className="absolute bottom-1.5 left-2 bg-black/50 text-white text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ opacity: sliderPos > 15 ? 1 : 0 }}>
+            {language === 'nl' ? 'VOOR' : 'BEFORE'}
+          </div>
+          <div className="absolute bottom-1.5 right-2 bg-black/50 text-white text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ opacity: sliderPos < 85 ? 1 : 0 }}>
+            {language === 'nl' ? 'NA' : 'AFTER'}
+          </div>
+        </div>
+        <p className="text-center text-xs text-gray-400 mt-2">{language === 'nl' ? 'Laat jouw resultaten zien aan klanten' : 'Show your results to customers'}</p>
+      </div>
+    </motion.div>
+  );
+};
+
 // Google Reviews Preview
 const GoogleReviewsPreview = ({ language }) => (
   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
@@ -251,6 +434,8 @@ const CalculatorPage = () => {
     bookingSystem: false,
     googleReviews: false,
     darkMode: false,
+    popup: false,
+    beforeAfterSlider: false,
   });
   const [discountCode, setDiscountCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(null);
@@ -650,6 +835,8 @@ const CalculatorPage = () => {
     if (addOns.bookingSystem) oneTime += prices.bookingSystem;
     if (addOns.googleReviews) oneTime += prices.googleReviews;
     if (addOns.darkMode) oneTime += prices.darkMode;
+    if (addOns.popup) oneTime += prices.popup;
+    if (addOns.beforeAfterSlider) oneTime += prices.beforeAfterSlider;
     if (addOns.maintenance) monthly = prices.maintenance;
 
     let discountAmount = 0;
@@ -743,6 +930,12 @@ const CalculatorPage = () => {
     }
     if (addOns.darkMode) {
       extras.push(`• ${t.addOns.darkMode.title} - €${prices.darkMode}`);
+    }
+    if (addOns.popup) {
+      extras.push(`• ${t.addOns.popup.title} - €${prices.popup}`);
+    }
+    if (addOns.beforeAfterSlider) {
+      extras.push(`• ${t.addOns.beforeAfterSlider.title} - €${prices.beforeAfterSlider}`);
     }
     if (addOns.maintenance) {
       extras.push(`• ${t.addOns.maintenance.title} - €${prices.maintenance}/maand`);
@@ -984,6 +1177,9 @@ const CalculatorPage = () => {
                       {key === 'extraForm'      && addOns.extraForm      && <ContactFormPreview language={language} />}
                       {key === 'maintenance'    && addOns.maintenance    && <MaintenancePreview language={language} />}
                       {key === 'googleReviews'  && addOns.googleReviews  && <GoogleReviewsPreview language={language} />}
+                      {key === 'darkMode'       && addOns.darkMode       && <DarkModePreview language={language} />}
+                      {key === 'popup'           && addOns.popup           && <PopupPreview language={language} />}
+                      {key === 'beforeAfterSlider' && addOns.beforeAfterSlider && <BeforeAfterPreview language={language} />}
                     </AnimatePresence>
                   </div>
                 ))}
@@ -1251,6 +1447,24 @@ const CalculatorPage = () => {
                         <div className="flex justify-between text-gray-600 dark:text-gray-400">
                           <span>{t.addOns.googleReviews.title}</span>
                           <span>€{prices.googleReviews}</span>
+                        </div>
+                      )}
+                      {addOns.darkMode && (
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                          <span>{t.addOns.darkMode.title}</span>
+                          <span>€{prices.darkMode}</span>
+                        </div>
+                      )}
+                      {addOns.popup && (
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                          <span>{t.addOns.popup.title}</span>
+                          <span>€{prices.popup}</span>
+                        </div>
+                      )}
+                      {addOns.beforeAfterSlider && (
+                        <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                          <span>{t.addOns.beforeAfterSlider.title}</span>
+                          <span>€{prices.beforeAfterSlider}</span>
                         </div>
                       )}
                       {addOns.maintenance && (
