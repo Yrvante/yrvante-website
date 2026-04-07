@@ -643,6 +643,29 @@ const LeadFinderPage = () => {
     catch { toast.error("Fout bij wissen"); }
   };
 
+  const [bulkSending, setBulkSending] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0 });
+
+  const bulkWhatsApp = async () => {
+    const targets = csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim());
+    if (!targets.length) { toast.error('Geen nieuwe leads met telefoonnummer gevonden'); return; }
+    if (!window.confirm(`WhatsApp openen voor ${targets.length} leads? (elke 2 sec een nieuw tabblad)`)) return;
+
+    setBulkSending(true);
+    setBulkProgress({ current: 0, total: targets.length });
+
+    for (let i = 0; i < targets.length; i++) {
+      const lead = targets[i];
+      setBulkProgress({ current: i + 1, total: targets.length });
+      window.open(getWhatsAppUrl(lead), '_blank');
+      updateCsvStatus(lead.id, 'benaderd');
+      if (i < targets.length - 1) await new Promise(r => setTimeout(r, 2000));
+    }
+
+    setBulkSending(false);
+    toast.success(`${targets.length} WhatsApp berichten geopend!`);
+  };
+
   const getWhatsAppUrl = (lead) => {
     const phone = formatPhoneForWhatsApp(lead.telefoon);
     const msg = encodeURIComponent(`Hoi ${lead.naam}! Ik ben Yvar
@@ -1079,6 +1102,28 @@ Yrvante — Smart Web & Software 085-5055314`);
               </div>
 
               {/* Stats Cards */}
+              {/* Bulk WhatsApp */}
+              {csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length > 0 && (
+                <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/10 border border-green-200/50 dark:border-green-800/30 rounded-2xl flex items-center justify-between" data-testid="bulk-whatsapp-bar">
+                  <div>
+                    <p className="text-sm font-bold text-green-800 dark:text-green-300">
+                      {bulkSending
+                        ? `WhatsApp versturen... ${bulkProgress.current}/${bulkProgress.total}`
+                        : `${csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length} nieuwe leads klaar om te benaderen`
+                      }
+                    </p>
+                    <p className="text-xs text-green-600 dark:text-green-400 mt-0.5">Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)</p>
+                  </div>
+                  <button
+                    onClick={bulkWhatsApp}
+                    disabled={bulkSending}
+                    className={`px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center gap-2 transition-all ${bulkSending ? 'bg-green-400 cursor-wait' : 'bg-green-600 hover:bg-green-700'}`}
+                    data-testid="bulk-whatsapp-button">
+                    <MessageSquare size={14} /> {bulkSending ? `${bulkProgress.current}/${bulkProgress.total}` : 'Bulk WhatsApp'}
+                  </button>
+                </div>
+              )}
+
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 {[
                   { label: 'Totaal Geïmporteerd', value: csvStats.totaal, color: isDark ? '#fff' : '#000' },
