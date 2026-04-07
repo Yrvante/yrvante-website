@@ -174,6 +174,13 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Slim**: Tip verschijnt ALLEEN wanneer upgrade echt goedkoper is; verborgen bij laagste tier of als upgrade duurder is
 - **42/42 tests geslaagd** (iteration 35)
 
+### Phase 18b - WhatsApp & CSV Tabel Verbeteringen (Complete - Apr 2026)
+- **WhatsApp direct app**: `wa.me` vervangen door `api.whatsapp.com/send` voor directe app-opening op alle WhatsApp-knoppen
+- **Nieuwe WhatsApp template**: Persoonlijk verkoopbericht met automatische bedrijfsnaam ("Hoi {naam}!"), prijsinformatie, en Yrvante contactgegevens
+- **Rating afronding**: `formatRating()` functie — ratings als max 1 decimaal (5.0 i.p.v. 5.0000000) op AdminDashboard + LeadFinder
+- **Sorteerbare CSV kolommen**: Klik op kolomheaders (Bedrijfsnaam, Categorie, Plaats, Website, Rating, Reviews, Status) om te sorteren met richting-pijltjes
+- **42/42 tests geslaagd** (iteration 36)
+
 ## Backlog (P2)
 - Google Sheets API for lead export
 - Case studies/success stories for niche pages

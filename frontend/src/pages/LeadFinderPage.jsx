@@ -583,10 +583,26 @@ const LeadFinderPage = () => {
 
   const getWhatsAppUrl = (lead) => {
     const phone = formatPhoneForWhatsApp(lead.telefoon);
-    const msg = encodeURIComponent(
-      `Hallo! Ik ben Yvar van Yrvante. Ik zag dat ${lead.naam} nog geen website heeft. Ik help kleine bedrijven met een professionele online aanwezigheid — snel, betaalbaar en persoonlijk. Wilt u hier meer over weten?`
-    );
-    return `https://wa.me/${phone}?text=${msg}`;
+    const msg = encodeURIComponent(`Hoi ${lead.naam}! Ik ben Yvar
+
+Ik bouw websites voor kleine bedrijven in Nederland!
+
+Ik scroll elke dag door Google Maps en zie prachtige bedrijven die online nergens te vinden zijn. Toen ik jullie tegenkwam dacht ik hetzelfde, geen website? Want jullie bedrijf ziet er geweldig uit. En zou zonde zijn om onzichtbaar te blijven.
+
+Wist je trouwens ook dat elke dag dat jullie geen website hebben loopt er ergens een klant langs die jullie had kunnen vinden — maar in plaats daarvan naar de concurrent gaat. Niet omdat jullie minder goed zijn. Gewoon omdat die wel online staat.
+
+🌐 Professionele website vanaf €399
+⚡ Binnen 2 weken live
+🤝 Eerst 40% — de rest pas als je blij bent
+💯 Niet tevreden? Ik ga door tot je dat wel bent
+
+Benieuwd? → yrvante.com
+Of stuur me gewoon een berichtje terug 😊
+
+Yvar
+Yrvante — Smart Web & Software
+085-5055314`);
+    return `https://api.whatsapp.com/send?phone=${phone}&text=${msg}`;
   };
 
   const filteredCsvLeads = csvLeads.filter(lead => {
@@ -1352,7 +1368,7 @@ const LeadFinderPage = () => {
                             <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Building2 size={12} /> KVK</a>
                             <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Facebook size={12} /> FB</a>
                             <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Instagram size={12} /> IG</a>
-                            {lead.telefoonnummer && <a href={`https://wa.me/${lead.telefoonnummer.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/30 flex items-center gap-1 border border-green-200/50 dark:border-green-800/30"><MessageSquare size={12} /> WhatsApp</a>}
+                            {lead.telefoonnummer && <a href={`https://api.whatsapp.com/send?phone=${lead.telefoonnummer.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/30 flex items-center gap-1 border border-green-200/50 dark:border-green-800/30"><MessageSquare size={12} /> WhatsApp</a>}
                           </div>
                         </div>
                         <button onClick={() => deleteLead(lead.id)} className="p-2 border border-red-200/50 dark:border-red-800/30 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-red-500"><Trash2 size={16} /></button>
