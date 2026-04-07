@@ -518,33 +518,36 @@ const LeadFinderPage = () => {
     toast.success('Gekopieerd!');
   };
 
-  // === CSV Import Functions (synced via API) ===
+  // === CSV Import Functions (synced via API + localStorage backup) ===
+  const backupToLocal = (leads) => {
+    localStorage.setItem('csv_imported_leads', JSON.stringify(leads));
+  };
+
   const loadCsvLeads = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/admin/csv-leads`);
-      if (!res.ok) return;
+      if (!res.ok) throw new Error('API niet bereikbaar');
       let dbLeads = await res.json();
 
-      // Migratie: oude localStorage data naar database overzetten
-      if (dbLeads.length === 0) {
-        try {
-          const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
-          if (local.length > 0) {
-            await fetch(`${API_BASE}/api/admin/csv-leads`, {
-              method: 'POST', headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ leads: local })
-            });
-            dbLeads = local;
-            localStorage.removeItem('csv_imported_leads');
-            toast.success(`${local.length} leads gemigreerd vanuit je browser naar de database!`);
-          }
-        } catch { /* silent */ }
-      } else {
-        localStorage.removeItem('csv_imported_leads');
+      // Migratie: oude localStorage data naar database
+      const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
+      if (dbLeads.length === 0 && local.length > 0) {
+        await fetch(`${API_BASE}/api/admin/csv-leads`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ leads: local })
+        });
+        dbLeads = local;
+        toast.success(`${local.length} leads hersteld vanuit backup!`);
       }
 
       setCsvLeads(dbLeads);
-    } catch { /* silent */ }
+      if (dbLeads.length > 0) backupToLocal(dbLeads);
+    } catch {
+      // Fallback naar localStorage
+      const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
+      setCsvLeads(local);
+      if (local.length > 0) toast.info(`${local.length} leads geladen uit lokale backup`);
+    }
   };
 
   const saveCsvToServer = async (newLeads) => {
@@ -553,7 +556,21 @@ const LeadFinderPage = () => {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leads: newLeads })
       });
-    } catch { toast.error("Fout bij opslaan CSV"); }
+    } catch { toast.error("Fout bij opslaan naar server — lokale backup bewaard"); }
+  };
+
+  const manualSaveAll = async () => {
+    try {
+      backupToLocal(csvLeads);
+      await fetch(`${API_BASE}/api/admin/csv-leads`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leads: csvLeads })
+      });
+      toast.success(`${csvLeads.length} leads opgeslagen!`);
+    } catch {
+      backupToLocal(csvLeads);
+      toast.success(`${csvLeads.length} leads opgeslagen als lokale backup`);
+    }
   };
 
   const handleCsvImport = (e) => {
@@ -592,6 +609,7 @@ const LeadFinderPage = () => {
         
         const merged = [...csvLeads, ...newLeads];
         setCsvLeads(merged);
+        backupToLocal(merged);
         await saveCsvToServer(newLeads);
         
         toast.success(
@@ -1043,6 +1061,13 @@ Yrvante — Smart Web & Software 085-5055314`);
                     data-testid="csv-import-button">
                     <Upload size={16} /> CSV IMPORTEREN
                   </button>
+                  {csvLeads.length > 0 && (
+                    <button onClick={manualSaveAll}
+                      className="px-3 sm:px-4 py-2.5 sm:py-3 border border-green-200 dark:border-green-800 text-green-600 text-xs font-bold rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center gap-1.5"
+                      data-testid="csv-save-all">
+                      <Save size={14} /> OPSLAAN
+                    </button>
+                  )}
                   {csvLeads.length > 0 && (
                     <button onClick={clearAllCsvLeads}
                       className="px-3 sm:px-4 py-2.5 sm:py-3 border border-red-200 dark:border-red-800 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-1.5"

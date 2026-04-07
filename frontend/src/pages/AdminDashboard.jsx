@@ -9,7 +9,7 @@ import {
   Eye, Users, Mail, MailOpen, Calendar, TrendingUp, 
   Trash2, Check, Lock, ArrowLeft, RefreshCw, Shield,
   Upload, Search, Phone, MessageSquare, ChevronDown, ChevronUp,
-  BarChart3, FileText, Settings, ExternalLink, Star, Globe
+  BarChart3, FileText, Settings, ExternalLink, Star, Globe, Save
 } from "lucide-react";
 import { Toaster } from "../components/ui/sonner";
 
@@ -85,35 +85,39 @@ const AdminDashboard = () => {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [statsRes, contactsRes, pageviewsRes, csvRes] = await Promise.all([
+      const [statsRes, contactsRes, pageviewsRes] = await Promise.all([
         axios.get(`${API}/admin/stats`),
         axios.get(`${API}/admin/contacts`),
-        axios.get(`${API}/admin/stats?type=pageviews`),
-        axios.get(`${API}/admin/csv-leads`)
+        axios.get(`${API}/admin/stats?type=pageviews`)
       ]);
       setStats(statsRes.data);
       setContacts(contactsRes.data);
       setPageviews(pageviewsRes.data);
+    } catch { toast.error("Fout bij laden van data"); }
 
+    // CSV leads laden: probeer database, fallback naar localStorage
+    try {
+      const csvRes = await axios.get(`${API}/admin/csv-leads`);
       let dbLeads = csvRes.data;
 
-      // Migratie: oude localStorage data naar database overzetten
-      if (dbLeads.length === 0) {
-        try {
-          const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
-          if (local.length > 0) {
-            await axios.post(`${API}/admin/csv-leads`, { leads: local });
-            dbLeads = local;
-            localStorage.removeItem('csv_imported_leads');
-            toast.success(`${local.length} leads gemigreerd vanuit je browser naar de database!`);
-          }
-        } catch { /* silent */ }
-      } else {
-        localStorage.removeItem('csv_imported_leads');
+      // Migratie: oude localStorage data naar database
+      const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
+      if (dbLeads.length === 0 && local.length > 0) {
+        await axios.post(`${API}/admin/csv-leads`, { leads: local });
+        dbLeads = local;
+        toast.success(`${local.length} leads hersteld vanuit backup!`);
       }
 
       setCsvLeads(dbLeads);
-    } catch { toast.error("Fout bij laden van data"); }
+      // Altijd lokale backup bijhouden
+      if (dbLeads.length > 0) localStorage.setItem('csv_imported_leads', JSON.stringify(dbLeads));
+    } catch {
+      // Database niet bereikbaar → gebruik localStorage als fallback
+      const local = JSON.parse(localStorage.getItem('csv_imported_leads') || '[]');
+      setCsvLeads(local);
+      if (local.length > 0) toast.info(`${local.length} leads geladen uit lokale backup`);
+    }
+
     setLoading(false);
   };
 
@@ -142,15 +146,26 @@ const AdminDashboard = () => {
 
   const logout = () => { setIsAuthenticated(false); localStorage.removeItem("admin_auth"); };
 
-  // CSV functions - synced via API
-  const persistCsv = async (leads) => {
-    setCsvLeads(leads);
+  // CSV functions - synced via API + localStorage backup
+  const backupToLocal = (leads) => {
+    localStorage.setItem('csv_imported_leads', JSON.stringify(leads));
   };
 
   const saveCsvToServer = async (newLeads) => {
     try {
       await axios.post(`${API}/admin/csv-leads`, { leads: newLeads });
-    } catch { toast.error("Fout bij opslaan CSV"); }
+    } catch { toast.error("Fout bij opslaan naar server — lokale backup bewaard"); }
+  };
+
+  const manualSaveAll = async () => {
+    try {
+      backupToLocal(csvLeads);
+      await axios.post(`${API}/admin/csv-leads`, { leads: csvLeads });
+      toast.success(`${csvLeads.length} leads opgeslagen!`);
+    } catch {
+      backupToLocal(csvLeads);
+      toast.success(`${csvLeads.length} leads opgeslagen als lokale backup`);
+    }
   };
 
   const handleCsvImport = (e) => {
@@ -183,6 +198,7 @@ const AdminDashboard = () => {
         });
         const merged = [...csvLeads, ...newLeads];
         setCsvLeads(merged);
+        backupToLocal(merged);
         await saveCsvToServer(newLeads);
         toast.success(`${totalImported} rijen — ${zonderWebsite} zonder website — ${newLeads.length} nieuw`);
       },
@@ -464,6 +480,13 @@ Yrvante — Smart Web & Software 085-5055314`);
                     data-testid="csv-import-button">
                     <Upload size={14} /> Importeren
                   </button>
+                  {csvLeads.length > 0 && (
+                    <button onClick={manualSaveAll}
+                      className="px-4 py-2.5 text-green-600 text-xs font-bold rounded-full border border-green-200/50 dark:border-green-800/30 hover:bg-green-50 dark:hover:bg-green-900/10 flex items-center gap-1.5 transition-all"
+                      data-testid="csv-save-all">
+                      <Save size={13} /> Opslaan
+                    </button>
+                  )}
                   {csvLeads.length > 0 && (
                     <button onClick={clearCsv}
                       className="px-4 py-2.5 text-red-500 text-xs font-bold rounded-full border border-red-200/50 dark:border-red-800/30 hover:bg-red-50 dark:hover:bg-red-900/10 flex items-center gap-1.5 transition-all"
