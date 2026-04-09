@@ -369,6 +369,34 @@ const LeadFinderPage = () => {
     loadDashboard();
   };
 
+  // Auto-add zoekresultaten naar WhatsApp/Email leads (csv_leads DB)
+  const addSearchResultsToLeads = async () => {
+    if (zoekResultaten.length === 0) { toast.error('Geen resultaten'); return; }
+    const mapped = zoekResultaten.map((r, i) => ({
+      id: `search_${Date.now()}_${i}`,
+      naam: r.naam || '',
+      categorie: searchQuery || r.branche || '',
+      plaats: r.stad || extractCity(r.adres) || searchLocation || '',
+      telefoon: r.telefoonnummer || '',
+      website: r.website || '',
+      email: r.email || '',
+      rating: r.rating ? String(r.rating) : '',
+      reviews: r.user_ratings_total ? String(r.user_ratings_total) : '',
+      status: 'nieuw',
+      emailStatus: 'niet_verstuurd',
+    }));
+    try {
+      const res = await fetch(`${API_BASE}/api/leads`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leads: mapped })
+      });
+      const data = await res.json();
+      toast.success(`${data.inserted || 0} leads toegevoegd aan WhatsApp & Email!`);
+      loadCsvLeads();
+      loadEmailStats();
+    } catch { toast.error('Fout bij toevoegen'); }
+  };
+
   const updateLead = async (id, updates) => {
     try {
       await fetch(`${API}/lead/${id}`, { 
@@ -936,11 +964,10 @@ Yrvante — Smart Web & Software 085-5055314`);
             {/* Tab Pills */}
             <div className={`${G} !rounded-xl !shadow-none p-0.5 flex gap-0.5`}>
               {[
-                { id: 'zoeken', label: 'ZOEKEN', icon: Search },
-                { id: 'leads', label: 'LEADS', icon: Users, count: csvLeads.length + opgeslagenLeads.length },
+                { id: 'zoeken', label: 'HOME', icon: Search },
+                { id: 'leads', label: 'WHATSAPP', icon: MessageSquare, count: csvLeads.length },
                 { id: 'email', label: 'EMAIL', icon: Mail, count: emailStats.emailableLeads },
                 { id: 'dashboard', label: 'STATS', icon: BarChart3 },
-                { id: 'tools', label: 'TOOLS', icon: Settings }
               ].map(tab => (
                 <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all ${
@@ -982,81 +1009,90 @@ Yrvante — Smart Web & Software 085-5055314`);
         {/* ZOEKEN TAB */}
         {activeTab === 'zoeken' && (
           <motion.div key="zoeken" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
-              
-              {/* Main Search Card */}
-              <div className={`${GC} overflow-hidden mb-4 sm:mb-8`}>
-                {/* Header */}
-                <div className="bg-black dark:bg-white text-white dark:text-black p-4 sm:p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white/10 dark:bg-black/10 rounded-lg sm:rounded-xl flex items-center justify-center">
-                      <Target size={18} />
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 sm:py-6">
+
+              {/* Dashboard Status Overview */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
+                <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('leads')}>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="w-8 h-8 bg-gray-100 dark:bg-white/10 rounded-lg flex items-center justify-center">
+                      <Users size={16} className="text-gray-600 dark:text-gray-400" />
                     </div>
-                    <div>
-                      <h2 className="font-bold text-lg sm:text-xl tracking-tight">Lead Finder</h2>
-                      <p className="text-gray-400 dark:text-gray-600 text-xs sm:text-sm">Vind ZZP'ers & bedrijven zonder website</p>
-                    </div>
+                    <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">Leads</p>
                   </div>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{csvLeads.length + opgeslagenLeads.length}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{csvLeads.filter(l => l.status === 'nieuw').length} nieuw</p>
                 </div>
-                
-                {/* Search Form */}
+                <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('leads')}>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="w-8 h-8 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                      <MessageSquare size={16} className="text-green-600 dark:text-green-400" />
+                    </div>
+                    <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">WhatsApp</p>
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-black text-green-600">{csvLeads.filter(l => l.status === 'benaderd').length}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{csvLeads.filter(l => l.telefoon?.trim() && l.status === 'nieuw').length} te benaderen</p>
+                </div>
+                <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('email')}>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+                      <Mail size={16} className="text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">Email</p>
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-black text-blue-600">{emailStats.totaalVerstuurd}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{emailStats.resterend}/{emailStats.limiet} vandaag</p>
+                </div>
+              </div>
+
+              {/* Search Form — Clean, modern */}
+              <div className={`${GC} overflow-hidden mb-6`}>
                 <div className="p-4 sm:p-6">
+                  <h2 className="font-bold text-lg sm:text-xl tracking-tight text-black dark:text-white mb-1">Zoek nieuwe leads</h2>
+                  <p className="text-xs sm:text-sm text-gray-400 mb-4 sm:mb-5">Vind bedrijven via Google Maps, Telefoongids & meer</p>
                   <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-4 mb-4">
                     <div className="sm:col-span-5">
-                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 sm:mb-2 block">Branche (optioneel)</label>
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 block">Branche</label>
                       <input
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
                         placeholder="bijv. kapper, coach..."
-                        className={`w-full py-3 sm:py-3.5 px-3 sm:px-4 text-base ${GI}`}
+                        className={`w-full py-3 px-4 text-base ${GI}`}
                         onKeyPress={e => e.key === 'Enter' && zoekAlles()}
                       />
                     </div>
                     <div className="sm:col-span-5">
-                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 sm:mb-2 block">Locatie *</label>
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 block">Locatie *</label>
                       <input
                         value={searchLocation}
                         onChange={e => setSearchLocation(e.target.value)}
                         placeholder="bijv. Almelo"
-                        className={`w-full py-3 sm:py-3.5 px-3 sm:px-4 text-base ${GI}`}
+                        className={`w-full py-3 px-4 text-base ${GI}`}
                         onKeyPress={e => e.key === 'Enter' && zoekAlles()}
                       />
                     </div>
+                    <div className="sm:col-span-2 flex items-end">
+                      <button
+                        onClick={zoekAlles}
+                        disabled={loading || !searchLocation.trim()}
+                        className="w-full py-3 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-xl disabled:opacity-50 flex items-center justify-center gap-2"
+                      >
+                        {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
+                        ZOEK
+                      </button>
+                    </div>
                   </div>
-
-                  {/* Filter & Search Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 pt-3 sm:pt-4 border-t border-gray-100/40 dark:border-white/[0.05]">
-                    <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-gray-400">
+                    <label className="flex items-center gap-2 cursor-pointer hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                       <input 
-                        type="checkbox" 
-                        checked={searchFilters.onlyWithPhone} 
+                        type="checkbox" checked={searchFilters.onlyWithPhone} 
                         onChange={e => setSearchFilters({...searchFilters, onlyWithPhone: e.target.checked})}
-                        className="w-4 h-4 accent-black dark:accent-white rounded"
+                        className="w-3.5 h-3.5 accent-black dark:accent-white rounded"
                       />
-                      Alleen met telefoonnummer
+                      Alleen met telefoon
                     </label>
-                    <button
-                      onClick={zoekAlles}
-                      disabled={loading || !searchLocation.trim()}
-                      className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                      {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
-                      ZOEKEN
-                    </button>
-                  </div>
-                </div>
-
-                {/* Bronnen Info - Hidden on mobile */}
-                <div className="hidden sm:block bg-black/[0.02] dark:bg-white/[0.02] px-6 py-3 border-t border-gray-100/40 dark:border-white/[0.05]">
-                  <div className="flex items-center gap-6 text-xs text-gray-400 dark:text-gray-500">
-                    <span className="font-medium">Doorzoekt:</span>
-                    {Object.values(SEARCH_SOURCES).map(source => (
-                      <span key={source.id} className="flex items-center gap-1">
-                        <source.icon size={12} style={{ color: source.color }} />
-                        {source.name}
-                      </span>
-                    ))}
-                    <span className="flex items-center gap-1"><Database size={12} /> + Telefoongids, Gouden Gids, Marktplaats</span>
+                    <span className="hidden sm:inline">|</span>
+                    <span className="hidden sm:flex items-center gap-1.5">Bronnen: Google Maps, Telefoongids, Gouden Gids</span>
                   </div>
                 </div>
               </div>
@@ -1066,22 +1102,22 @@ Yrvante — Smart Web & Software 085-5055314`);
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-                      <h3 className="font-bold text-lg sm:text-xl">{totaalGevonden} Resultaten</h3>
+                      <h3 className="font-bold text-lg sm:text-xl text-black dark:text-white">{totaalGevonden} Resultaten</h3>
                       {zoekgebied && (
-                        <span className="px-2 sm:px-3 py-1 bg-white rounded-full text-xs font-medium text-gray-600 border border-gray-200">
+                        <span className={`px-2 sm:px-3 py-1 ${G} !shadow-none rounded-full text-xs font-medium text-gray-600 dark:text-gray-400`}>
                           <MapPin size={12} className="inline mr-1" />
                           {zoekgebied}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-2">
-                      <button onClick={saveAllResults} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-black text-white text-xs font-bold rounded-lg hover:bg-gray-800 flex items-center justify-center gap-1.5">
+                      <button onClick={saveAllResults} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 flex items-center justify-center gap-1.5">
                         <Save size={14} /> <span className="hidden sm:inline">OPSLAAN</span>
                       </button>
-                      <button onClick={() => exportToGoogleSheets(zoekResultaten)} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-emerald-500 text-white text-xs font-bold rounded-lg hover:bg-emerald-600 flex items-center justify-center gap-1.5">
-                        <FileSpreadsheet size={14} /> <span className="hidden sm:inline">SHEETS</span>
+                      <button onClick={() => addSearchResultsToLeads()} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 flex items-center justify-center gap-1.5" data-testid="add-to-whatsapp-btn">
+                        <MessageSquare size={14} /> <span className="hidden sm:inline">→ WHATSAPP</span>
                       </button>
-                      <button onClick={() => exportCSV(zoekResultaten)} className="px-3 sm:px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-xs font-bold rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-700 flex items-center justify-center gap-1.5 text-black dark:text-white">
+                      <button onClick={() => exportCSV(zoekResultaten)} className={`px-3 py-2 ${G} !shadow-none !rounded-lg text-xs font-bold text-black dark:text-white`}>
                         <Download size={14} />
                       </button>
                     </div>
@@ -1188,38 +1224,16 @@ Yrvante — Smart Web & Software 085-5055314`);
 
         {/* ZOEKEN TAB - END */}
 
-        {/* LEADS TAB - Source Toggle */}
+        {/* WHATSAPP TAB */}
         {activeTab === 'leads' && (
-          <div className="max-w-[1800px] mx-auto px-4 sm:px-6 pt-4 sm:pt-6">
-            <div className={`${G} !rounded-xl !shadow-none p-0.5 flex gap-0.5 mb-4 w-fit`}>
-              <button onClick={() => setLeadSource('csv')}
-                className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  leadSource === 'csv' ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm' : 'text-gray-400 hover:text-black dark:hover:text-white'
-                }`} data-testid="source-csv">
-                <Upload size={13} /> CSV Leads
-                {csvLeads.length > 0 && <span className={`px-1.5 py-0.5 rounded text-[9px] ${leadSource === 'csv' ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200/50 dark:bg-white/10'}`}>{csvLeads.length}</span>}
-              </button>
-              <button onClick={() => setLeadSource('maps')}
-                className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  leadSource === 'maps' ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm' : 'text-gray-400 hover:text-black dark:hover:text-white'
-                }`} data-testid="source-maps">
-                <MapPin size={13} /> Google Maps
-                {opgeslagenLeads.length > 0 && <span className={`px-1.5 py-0.5 rounded text-[9px] ${leadSource === 'maps' ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200/50 dark:bg-white/10'}`}>{opgeslagenLeads.length}</span>}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* CSV LEADS (within LEADS tab) */}
-        {activeTab === 'leads' && leadSource === 'csv' && (
-          <motion.div key="csv" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 pb-4 sm:pb-8">
+          <motion.div key="whatsapp" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-6">
               
               {/* Header + Import Button */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="csv-import-title">CSV Leads</h1>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Importeer & beheer leads van Google Maps Scraper</p>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="csv-import-title">WhatsApp Outreach</h1>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Beheer & benader leads via WhatsApp</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <input ref={csvFileRef} type="file" accept=".csv" onChange={handleCsvImport} className="hidden" data-testid="csv-file-input" />
