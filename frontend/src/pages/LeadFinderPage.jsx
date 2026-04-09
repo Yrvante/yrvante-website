@@ -11,7 +11,7 @@ import {
   Instagram, Facebook, Filter, SortAsc, CheckSquare, Square, MoreHorizontal,
   Target, TrendingUp, Calendar, Clock, Star, Tag, Copy, MessageSquare,
   Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database, FileSpreadsheet,
-  Upload, Sun, Moon
+  Upload, Sun, Moon, Send
 } from "lucide-react";
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -129,6 +129,12 @@ const LeadFinderPage = () => {
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
   const [csvSortCol, setCsvSortCol] = useState(null);
   const [csvSortDir, setCsvSortDir] = useState('asc');
+  const [leadSource, setLeadSource] = useState('csv');
+
+  // Email automation states
+  const [emailStats, setEmailStats] = useState({ vandaag: 0, limiet: 30, resterend: 30, totaalVerstuurd: 0, totaalGereageerd: 0, emailableLeads: 0 });
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailBatchSending, setEmailBatchSending] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('leadfinder_auth') === 'true') {
@@ -141,6 +147,7 @@ const LeadFinderPage = () => {
       loadLeads();
       loadDashboard();
       loadCsvLeads();
+      loadEmailStats();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
@@ -599,9 +606,11 @@ const LeadFinderPage = () => {
             plaats: row.city || row.plaats || extractCity(row.address || row.adres || ''),
             telefoon: row.phone || row.telefoon || '',
             website: row.website || '',
+            email: row.email || row.e_mail || row.emailAddress || row.email_address || '',
             rating: row.review_rating || row.rating || '',
             reviews: row.review_count || row.reviews || '',
             status: 'nieuw',
+            emailStatus: 'niet_verstuurd',
           }));
 
         const zonderWebsite = mapped.filter(l => !l.website || l.website.trim() === '').length;
@@ -778,6 +787,65 @@ Yrvante — Smart Web & Software 085-5055314`);
     }); } catch { /* silent */ }
   };
 
+  // ===== EMAIL AUTOMATION =====
+  const loadEmailStats = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/leads/email-stats`);
+      if (res.ok) setEmailStats(await res.json());
+    } catch { /* silent */ }
+  };
+
+  const sendSingleEmail = async (leadId) => {
+    setEmailSending(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/leads/send-email`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId })
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || data.detail || 'Fout bij versturen'); return; }
+      setCsvLeads(prev => prev.map(l => l.id === leadId ? { ...l, emailStatus: 'verstuurd', emailSentAt: new Date().toISOString() } : l));
+      toast.success(`Email verstuurd! Nog ${data.remaining} over vandaag`);
+      loadEmailStats();
+    } catch { toast.error('Email versturen mislukt'); }
+    finally { setEmailSending(false); }
+  };
+
+  const sendBatchEmails = async () => {
+    if (!window.confirm(`Batch emails versturen naar alle leads met email (max ${emailStats.resterend})?`)) return;
+    setEmailBatchSending(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/leads/send-batch`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || data.detail || 'Fout'); return; }
+      toast.success(`${data.sent} emails verstuurd! Nog ${data.remaining} over vandaag`);
+      loadCsvLeads();
+      loadEmailStats();
+    } catch { toast.error('Batch versturen mislukt'); }
+    finally { setEmailBatchSending(false); }
+  };
+
+  const updateEmailStatus = async (id, emailStatus) => {
+    setCsvLeads(prev => prev.map(l => l.id === id ? { ...l, emailStatus } : l));
+    try { await fetch(`${API_BASE}/api/leads?id=${id}`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ emailStatus })
+    }); loadEmailStats(); } catch { /* silent */ }
+  };
+
+  const updateDailyLimit = async (limit) => {
+    try {
+      await fetch(`${API_BASE}/api/leads/email-stats`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ limit })
+      });
+      setEmailStats(prev => ({ ...prev, limiet: limit, resterend: Math.max(0, limit - prev.vandaag) }));
+      toast.success(`Limiet bijgewerkt naar ${limit}/dag`);
+    } catch { toast.error('Fout bij bijwerken limiet'); }
+  };
+
   const copyPhone = (phone) => {
     navigator.clipboard.writeText(phone);
     toast.success('Telefoonnummer gekopieerd!');
@@ -869,8 +937,8 @@ Yrvante — Smart Web & Software 085-5055314`);
             <div className={`${G} !rounded-xl !shadow-none p-0.5 flex gap-0.5`}>
               {[
                 { id: 'zoeken', label: 'ZOEKEN', icon: Search },
-                { id: 'csv', label: 'CSV', icon: Upload, count: csvLeads.length },
-                { id: 'leads', label: 'LEADS', icon: Users, count: opgeslagenLeads.length },
+                { id: 'leads', label: 'LEADS', icon: Users, count: csvLeads.length + opgeslagenLeads.length },
+                { id: 'email', label: 'EMAIL', icon: Mail, count: emailStats.emailableLeads },
                 { id: 'dashboard', label: 'STATS', icon: BarChart3 },
                 { id: 'tools', label: 'TOOLS', icon: Settings }
               ].map(tab => (
@@ -1120,16 +1188,38 @@ Yrvante — Smart Web & Software 085-5055314`);
 
         {/* ZOEKEN TAB - END */}
 
-        {/* CSV IMPORT TAB */}
-        {activeTab === 'csv' && (
+        {/* LEADS TAB - Source Toggle */}
+        {activeTab === 'leads' && (
+          <div className="max-w-[1800px] mx-auto px-4 sm:px-6 pt-4 sm:pt-6">
+            <div className={`${G} !rounded-xl !shadow-none p-0.5 flex gap-0.5 mb-4 w-fit`}>
+              <button onClick={() => setLeadSource('csv')}
+                className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  leadSource === 'csv' ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm' : 'text-gray-400 hover:text-black dark:hover:text-white'
+                }`} data-testid="source-csv">
+                <Upload size={13} /> CSV Leads
+                {csvLeads.length > 0 && <span className={`px-1.5 py-0.5 rounded text-[9px] ${leadSource === 'csv' ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200/50 dark:bg-white/10'}`}>{csvLeads.length}</span>}
+              </button>
+              <button onClick={() => setLeadSource('maps')}
+                className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  leadSource === 'maps' ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm' : 'text-gray-400 hover:text-black dark:hover:text-white'
+                }`} data-testid="source-maps">
+                <MapPin size={13} /> Google Maps
+                {opgeslagenLeads.length > 0 && <span className={`px-1.5 py-0.5 rounded text-[9px] ${leadSource === 'maps' ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200/50 dark:bg-white/10'}`}>{opgeslagenLeads.length}</span>}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* CSV LEADS (within LEADS tab) */}
+        {activeTab === 'leads' && leadSource === 'csv' && (
           <motion.div key="csv" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 pb-4 sm:pb-8">
               
               {/* Header + Import Button */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="csv-import-title">CSV Import</h1>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Importeer leads van Google Maps Scraper</p>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="csv-import-title">CSV Leads</h1>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Importeer & beheer leads van Google Maps Scraper</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <input ref={csvFileRef} type="file" accept=".csv" onChange={handleCsvImport} className="hidden" data-testid="csv-file-input" />
@@ -1478,12 +1568,13 @@ Yrvante — Smart Web & Software 085-5055314`);
         )}
 
         {/* LEADS TAB */}
-        {activeTab === 'leads' && (
+        {/* GOOGLE MAPS LEADS (within LEADS tab) */}
+        {activeTab === 'leads' && leadSource === 'maps' && (
           <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 pb-4 sm:pb-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white">Leads Database</h1>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white">Google Maps Leads</h1>
                   <p className="text-gray-400 dark:text-gray-500 text-sm">{opgeslagenLeads.length} leads opgeslagen</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -1598,6 +1689,173 @@ Yrvante — Smart Web & Software 085-5055314`);
           </motion.div>
         )}
 
+        {/* EMAIL AUTOMATION TAB */}
+        {activeTab === 'email' && (
+          <motion.div key="email" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
+              
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="email-tab-title">Email Campagne</h1>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">Geautomatiseerde outreach via info@yrvante.com</p>
+                </div>
+                <button onClick={loadEmailStats} className={`p-2 ${G} !rounded-xl !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`}><RefreshCw size={18} /></button>
+              </div>
+
+              {/* Daily Stats Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Vandaag Verstuurd</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{emailStats.vandaag}<span className="text-sm font-normal text-gray-400">/{emailStats.limiet}</span></p>
+                  <div className="mt-2 h-1.5 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                    <div className="h-full bg-black dark:bg-white rounded-full transition-all" style={{ width: `${Math.min(100, (emailStats.vandaag / emailStats.limiet) * 100)}%` }} />
+                  </div>
+                </div>
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Nog Te Versturen</p>
+                  <p className="text-2xl sm:text-3xl font-black text-green-600">{emailStats.resterend}</p>
+                </div>
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Totaal Verstuurd</p>
+                  <p className="text-2xl sm:text-3xl font-black text-blue-600">{emailStats.totaalVerstuurd}</p>
+                </div>
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Gereageerd</p>
+                  <p className="text-2xl sm:text-3xl font-black text-emerald-600">{emailStats.totaalGereageerd}</p>
+                </div>
+              </div>
+
+              {/* Daily Limit Setting */}
+              <div className={`${GC} p-4 mb-6`}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div>
+                    <p className="font-bold text-sm text-black dark:text-white">Dagelijkse limiet</p>
+                    <p className="text-xs text-gray-400">Max aantal emails per dag</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {[10, 20, 30, 40, 50].map(n => (
+                      <button key={n} onClick={() => updateDailyLimit(n)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                          emailStats.limiet === n
+                            ? 'bg-black dark:bg-white text-white dark:text-black'
+                            : `${G} !shadow-none text-gray-500 hover:text-black dark:hover:text-white`
+                        }`} data-testid={`limit-${n}`}>{n}</button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Batch Send Button */}
+              {emailStats.emailableLeads > 0 && emailStats.resterend > 0 && (
+                <div className={`${GC} p-4 mb-6 border-green-200/50 dark:border-green-800/30`}>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div>
+                      <p className="font-bold text-sm text-green-800 dark:text-green-300">
+                        {emailStats.emailableLeads} leads klaar om te emailen
+                      </p>
+                      <p className="text-xs text-green-600 dark:text-green-400 mt-0.5">
+                        Verstuurt max {emailStats.resterend} emails (dagelijkse limiet)
+                      </p>
+                    </div>
+                    <button onClick={sendBatchEmails} disabled={emailBatchSending}
+                      className={`w-full sm:w-auto px-6 py-3 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${
+                        emailBatchSending ? 'bg-gray-400 cursor-wait' : 'bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200'
+                      }`} data-testid="batch-send-button">
+                      <Send size={14} /> {emailBatchSending ? 'Versturen...' : 'Start Batch Email'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {emailStats.resterend <= 0 && (
+                <div className={`${GC} p-4 mb-6 border-red-200/50 dark:border-red-800/30`}>
+                  <p className="text-sm font-bold text-red-600">Dagelijkse limiet bereikt ({emailStats.limiet} emails)</p>
+                  <p className="text-xs text-red-400 mt-0.5">Morgen worden er automatisch weer emails verstuurd</p>
+                </div>
+              )}
+
+              {/* Email Queue — Leads with email addresses */}
+              <div className={`${GC} overflow-hidden`}>
+                <div className="p-4 border-b border-gray-200/40 dark:border-white/[0.06]">
+                  <h2 className="font-bold text-sm text-black dark:text-white">Email Wachtrij</h2>
+                  <p className="text-xs text-gray-400 mt-0.5">Leads met email adres — gesorteerd op status</p>
+                </div>
+
+                {csvLeads.filter(l => l.email?.trim()).length === 0 && opgeslagenLeads.filter(l => l.email?.trim()).length === 0 ? (
+                  <div className="p-8 text-center">
+                    <Mail size={32} className="mx-auto text-gray-300 dark:text-gray-600 mb-3" />
+                    <p className="text-sm text-gray-400 dark:text-gray-500">Geen leads met email adres gevonden</p>
+                    <p className="text-xs text-gray-300 dark:text-gray-600 mt-1">Importeer een CSV met email kolom of zoek leads via Google Maps</p>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-gray-200/40 dark:divide-white/[0.06]">
+                    {[
+                      ...csvLeads.filter(l => l.email?.trim()).map(l => ({ ...l, bron: 'CSV' })),
+                      ...opgeslagenLeads.filter(l => l.email?.trim()).map(l => ({
+                        id: l.id, naam: l.naam, email: l.email, website: l.website,
+                        telefoon: l.telefoonnummer, plaats: l.stad || extractCity(l.adres),
+                        emailStatus: l.emailStatus || 'niet_verstuurd', bron: 'Maps'
+                      }))
+                    ]
+                    .sort((a, b) => {
+                      const order = { niet_verstuurd: 0, verstuurd: 1, gereageerd: 2 };
+                      return (order[a.emailStatus] || 0) - (order[b.emailStatus] || 0);
+                    })
+                    .map(lead => (
+                      <div key={lead.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-3 sm:p-4 hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                        <div className="flex items-center gap-3 min-w-0 flex-1">
+                          <div className={`w-2 h-2 rounded-full shrink-0 ${
+                            lead.emailStatus === 'verstuurd' ? 'bg-blue-500' :
+                            lead.emailStatus === 'gereageerd' ? 'bg-emerald-500' : 'bg-gray-300 dark:bg-gray-600'
+                          }`} />
+                          <div className="min-w-0">
+                            <p className="font-semibold text-sm text-black dark:text-white truncate">{lead.naam}</p>
+                            <p className="text-xs text-gray-400 truncate">{lead.email}</p>
+                          </div>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            lead.bron === 'CSV' ? 'bg-gray-100 dark:bg-white/10 text-gray-500' : 'bg-blue-50 dark:bg-blue-900/20 text-blue-500'
+                          }`}>{lead.bron}</span>
+                        </div>
+                        <div className="flex items-center gap-2 ml-5 sm:ml-0">
+                          <select value={lead.emailStatus} onChange={e => {
+                            if (lead.bron === 'CSV') updateEmailStatus(lead.id, e.target.value);
+                          }}
+                            className={`px-2 py-1 text-xs font-bold rounded-lg cursor-pointer ${
+                              lead.emailStatus === 'verstuurd' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 border-blue-200 dark:border-blue-800' :
+                              lead.emailStatus === 'gereageerd' ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 border-emerald-200 dark:border-emerald-800' :
+                              'bg-gray-50 dark:bg-white/[0.04] text-gray-500 border-gray-200 dark:border-white/10'
+                            } border`}
+                            data-testid={`email-status-${lead.id}`}>
+                            <option value="niet_verstuurd">Niet verstuurd</option>
+                            <option value="verstuurd">Verstuurd</option>
+                            <option value="gereageerd">Gereageerd</option>
+                          </select>
+                          {lead.emailStatus === 'niet_verstuurd' && lead.bron === 'CSV' && (
+                            <button onClick={() => sendSingleEmail(lead.id)} disabled={emailSending || emailStats.resterend <= 0}
+                              className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1 transition-all ${
+                                emailSending || emailStats.resterend <= 0
+                                  ? 'bg-gray-100 dark:bg-white/10 text-gray-400 cursor-not-allowed'
+                                  : 'bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200'
+                              }`} data-testid={`send-email-${lead.id}`}>
+                              <Send size={12} /> Email
+                            </button>
+                          )}
+                          {lead.emailStatus === 'verstuurd' && lead.emailSentAt && (
+                            <span className="text-[10px] text-gray-400 whitespace-nowrap">
+                              {new Date(lead.emailSentAt).toLocaleDateString('nl-NL')}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* DASHBOARD TAB */}
         {activeTab === 'dashboard' && (
           <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -1614,6 +1872,27 @@ Yrvante — Smart Web & Software 085-5055314`);
                     <p className="text-2xl sm:text-4xl font-black" style={{ color: val.color }}>{dashboardData?.status_verdeling?.[key] || 0}</p>
                   </div>
                 ))}
+              </div>
+
+              {/* Email Statistics */}
+              <h2 className="text-lg sm:text-xl font-black tracking-tight mb-3 text-black dark:text-white">Email Statistieken</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Vandaag</p>
+                  <p className="text-xl sm:text-2xl font-black text-black dark:text-white">{emailStats.vandaag}<span className="text-xs font-normal text-gray-400">/{emailStats.limiet}</span></p>
+                </div>
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Resterend</p>
+                  <p className="text-xl sm:text-2xl font-black text-green-600">{emailStats.resterend}</p>
+                </div>
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Totaal Verstuurd</p>
+                  <p className="text-xl sm:text-2xl font-black text-blue-600">{emailStats.totaalVerstuurd}</p>
+                </div>
+                <div className={`${GC} p-4 sm:p-5`}>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Gereageerd</p>
+                  <p className="text-xl sm:text-2xl font-black text-emerald-600">{emailStats.totaalGereageerd}</p>
+                </div>
               </div>
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className={`${GC} p-6`}>

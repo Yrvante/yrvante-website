@@ -106,10 +106,13 @@ class CsvLead(BaseModel):
     plaats: Optional[str] = ""
     telefoon: Optional[str] = ""
     website: Optional[str] = ""
+    email: Optional[str] = ""
     rating: Optional[str] = ""
     reviews: Optional[str] = ""
     status: str = "nieuw"
     notitie: Optional[str] = ""
+    emailStatus: Optional[str] = "niet_verstuurd"
+    emailSentAt: Optional[str] = None
 
 class CsvLeadsBulk(BaseModel):
     leads: List[CsvLead]
@@ -974,10 +977,152 @@ async def update_csv_lead(request: Request, id: str = None):
         update["status"] = body["status"]
     if "notitie" in body:
         update["notitie"] = body["notitie"]
+    if "emailStatus" in body:
+        update["emailStatus"] = body["emailStatus"]
+    if "emailSentAt" in body:
+        update["emailSentAt"] = body["emailSentAt"]
     result = await db.csv_leads.update_one({"id": id}, {"$set": update})
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Lead not found")
     return {"success": True}
+
+# ========== Email Automation API ==========
+
+def get_email_html(lead):
+    naam = lead.get("naam", "daar")
+    has_website = bool(lead.get("website", "").strip())
+    if has_website:
+        subject = f"{naam} — uw website kan beter"
+        html = f"""<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:600px;margin:0 auto;padding:32px 24px;color:#1a1a1a">
+        <p style="font-size:16px;line-height:1.7">Hallo {naam},</p>
+        <p style="font-size:16px;line-height:1.7">Ik ben Yvar van Yrvante.</p>
+        <p style="font-size:16px;line-height:1.7">Ik kwam uw website tegen en zag dat die wel een opfrisbeurt kan gebruiken. Een moderne website maakt echt het verschil — meer vertrouwen, meer klanten.</p>
+        <p style="font-size:16px;line-height:1.7">Ik help kleine bedrijven in Overijssel met een professionele online aanwezigheid, voor een vaste prijs van <strong>€249</strong> — snel en persoonlijk.</p>
+        <a href="https://yrvante.com" style="display:inline-block;background:#000;color:#fff;padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:14px;margin:16px 0">BEKIJK YRVANTE.COM</a>
+        <p style="font-size:16px;line-height:1.7">App of mail mij gerust terug!</p>
+        <p style="font-size:14px;color:#666;margin-top:32px;border-top:1px solid #eee;padding-top:16px">Yvar — Yrvante<br>Smart Web & Software<br>085-5055314</p></div>"""
+    else:
+        subject = f"{naam} — online zichtbaar worden?"
+        html = f"""<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:600px;margin:0 auto;padding:32px 24px;color:#1a1a1a">
+        <p style="font-size:16px;line-height:1.7">Hoi {naam}!</p>
+        <p style="font-size:16px;line-height:1.7">Ik ben Yvar. Ik bouw websites voor kleine bedrijven in Nederland.</p>
+        <p style="font-size:16px;line-height:1.7">Ik zag dat {naam} nog geen website heeft. Jullie bedrijf ziet er geweldig uit — het zou zonde zijn om onzichtbaar te blijven.</p>
+        <p style="font-size:16px;line-height:1.7">Professionele website vanaf <strong>€399</strong> · Binnen 2 weken live · Al een website? Opfrisbeurt vanaf <strong>€249</strong></p>
+        <a href="https://yrvante.com" style="display:inline-block;background:#000;color:#fff;padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:14px;margin:16px 0">BEKIJK YRVANTE.COM</a>
+        <p style="font-size:16px;line-height:1.7">Mail of app mij gerust terug!</p>
+        <p style="font-size:14px;color:#666;margin-top:32px;border-top:1px solid #eee;padding-top:16px">Yvar — Yrvante<br>Smart Web & Software<br>085-5055314</p></div>"""
+    return subject, html
+
+@api_router.get("/leads/email-stats")
+async def get_email_stats():
+    today = __import__('datetime').date.today().isoformat()
+    daily = await db.email_daily_log.find_one({"date": today})
+    if not daily:
+        daily = {"date": today, "count": 0, "dailyLimit": 30}
+
+    pipeline_sent = [{"$match": {"emailStatus": "verstuurd"}}, {"$count": "total"}]
+    pipeline_resp = [{"$match": {"emailStatus": "gereageerd"}}, {"$count": "total"}]
+    pipeline_emailable = [{"$match": {"email": {"$ne": None, "$ne": ""}, "emailStatus": "niet_verstuurd"}}, {"$count": "total"}]
+
+    sent_result = await db.csv_leads.aggregate(pipeline_sent).to_list(1)
+    resp_result = await db.csv_leads.aggregate(pipeline_resp).to_list(1)
+    emailable_result = await db.csv_leads.aggregate(pipeline_emailable).to_list(1)
+
+    return {
+        "vandaag": daily.get("count", 0),
+        "limiet": daily.get("dailyLimit", 30),
+        "resterend": max(0, daily.get("dailyLimit", 30) - daily.get("count", 0)),
+        "totaalVerstuurd": sent_result[0]["total"] if sent_result else 0,
+        "totaalGereageerd": resp_result[0]["total"] if resp_result else 0,
+        "emailableLeads": emailable_result[0]["total"] if emailable_result else 0,
+    }
+
+@api_router.post("/leads/email-stats")
+async def update_email_limit(request: Request):
+    body = await request.json()
+    limit = body.get("limit", 30)
+    today = __import__('datetime').date.today().isoformat()
+    await db.email_daily_log.update_one(
+        {"date": today}, {"$set": {"dailyLimit": limit}}, upsert=True
+    )
+    return {"success": True}
+
+@api_router.post("/leads/send-email")
+async def send_single_email(request: Request):
+    body = await request.json()
+    lead_id = body.get("leadId")
+    if not lead_id:
+        raise HTTPException(status_code=400, detail="leadId required")
+
+    today = __import__('datetime').date.today().isoformat()
+    daily = await db.email_daily_log.find_one({"date": today})
+    if not daily:
+        daily = {"date": today, "count": 0, "dailyLimit": 30}
+        await db.email_daily_log.insert_one(daily)
+
+    if daily.get("count", 0) >= daily.get("dailyLimit", 30):
+        raise HTTPException(status_code=429, detail="Dagelijkse limiet bereikt")
+
+    lead = await db.csv_leads.find_one({"id": lead_id}, {"_id": 0})
+    if not lead:
+        raise HTTPException(status_code=404, detail="Lead niet gevonden")
+    if not lead.get("email"):
+        raise HTTPException(status_code=400, detail="Lead heeft geen email adres")
+
+    subject, html = get_email_html(lead)
+    try:
+        await asyncio.to_thread(resend.Emails.send, {
+            "from": "Yrvante <info@yrvante.com>",
+            "to": [lead["email"]],
+            "subject": subject,
+            "html": html,
+        })
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Email versturen mislukt: {str(e)}")
+
+    now_str = __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()
+    await db.csv_leads.update_one({"id": lead_id}, {"$set": {"emailStatus": "verstuurd", "emailSentAt": now_str}})
+    await db.email_daily_log.update_one({"date": today}, {"$inc": {"count": 1}})
+
+    remaining = daily.get("dailyLimit", 30) - daily.get("count", 0) - 1
+    return {"success": True, "remaining": max(0, remaining)}
+
+@api_router.post("/leads/send-batch")
+async def send_batch_emails():
+    today = __import__('datetime').date.today().isoformat()
+    daily = await db.email_daily_log.find_one({"date": today})
+    if not daily:
+        daily = {"date": today, "count": 0, "dailyLimit": 30}
+        await db.email_daily_log.insert_one(daily)
+
+    remaining = daily.get("dailyLimit", 30) - daily.get("count", 0)
+    if remaining <= 0:
+        raise HTTPException(status_code=429, detail="Dagelijkse limiet bereikt")
+
+    leads = await db.csv_leads.find(
+        {"email": {"$ne": None, "$ne": ""}, "emailStatus": "niet_verstuurd"}, {"_id": 0}
+    ).sort("createdAt", 1).limit(remaining).to_list(remaining)
+
+    sent = 0
+    for lead in leads:
+        if not lead.get("email"):
+            continue
+        try:
+            subject, html = get_email_html(lead)
+            await asyncio.to_thread(resend.Emails.send, {
+                "from": "Yrvante <info@yrvante.com>",
+                "to": [lead["email"]],
+                "subject": subject,
+                "html": html,
+            })
+            now_str = __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()
+            await db.csv_leads.update_one({"id": lead["id"]}, {"$set": {"emailStatus": "verstuurd", "emailSentAt": now_str}})
+            sent += 1
+        except Exception as e:
+            print(f"Email failed for {lead.get('naam')}: {e}")
+
+    await db.email_daily_log.update_one({"date": today}, {"$inc": {"count": sent}})
+    return {"success": True, "sent": sent, "remaining": remaining - sent}
 
 @api_router.delete("/leads")
 async def delete_csv_leads(request: Request, id: str = None):

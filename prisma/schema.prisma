@@ -9,16 +9,26 @@ datasource db {
 }
 
 model CsvLead {
-  id        String   @id @default(cuid())
-  naam      String
-  categorie String?
-  plaats    String?
-  telefoon  String?
-  website   String?
-  rating    String?
-  reviews   String?
-  status    String   @default("nieuw")
-  notitie   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String    @id @default(cuid())
+  naam        String
+  categorie   String?
+  plaats      String?
+  telefoon    String?
+  website     String?
+  email       String?
+  rating      String?
+  reviews     String?
+  status      String    @default("nieuw")
+  notitie     String?
+  emailStatus String    @default("niet_verstuurd")
+  emailSentAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model EmailDailyLog {
+  id    String @id @default(cuid())
+  date  String @unique
+  count Int    @default(0)
+  dailyLimit Int @default(30)
 }
