@@ -25,36 +25,36 @@ const GI = "bg-white/50 dark:bg-white/[0.06] border border-gray-200/60 dark:bord
 
 // Search source configurations
 const SEARCH_SOURCES = {
-  google: { id: 'google', name: 'Google Maps', icon: MapPin, color: '#4285F4', description: 'Google Places API — echte bedrijfsdata' },
-  openstreetmap: { id: 'openstreetmap', name: 'OpenStreetMap', icon: Globe, color: '#7EBC6F', description: 'Gratis open-data kaart' },
-  kvk: { id: 'kvk', name: 'KVK / ZZP', icon: Building2, color: '#00A1E0', description: 'Kamer van Koophandel database' },
-  instagram: { id: 'instagram', name: 'Instagram', icon: Instagram, color: '#E4405F', description: 'Zakelijke Instagram accounts' },
-  facebook: { id: 'facebook', name: 'Facebook', icon: Facebook, color: '#1877F2', description: 'Facebook bedrijfspagina\'s' },
+  google: { id: 'google', name: 'Google Maps', icon: MapPin, color: '#6B7280', description: 'Google Places API — echte bedrijfsdata' },
+  openstreetmap: { id: 'openstreetmap', name: 'OpenStreetMap', icon: Globe, color: '#9CA3AF', description: 'Gratis open-data kaart' },
+  kvk: { id: 'kvk', name: 'KVK / ZZP', icon: Building2, color: '#6B7280', description: 'Kamer van Koophandel database' },
+  instagram: { id: 'instagram', name: 'Instagram', icon: Instagram, color: '#9CA3AF', description: 'Zakelijke Instagram accounts' },
+  facebook: { id: 'facebook', name: 'Facebook', icon: Facebook, color: '#6B7280', description: 'Facebook bedrijfspagina\'s' },
 };
 
 const STATUS_CONFIG = {
-  nieuw: { label: 'Nieuw', color: '#3B82F6', bg: '#EFF6FF' },
-  contact: { label: 'Gecontacteerd', color: '#F59E0B', bg: '#FFFBEB' },
-  interesse: { label: 'Interesse', color: '#8B5CF6', bg: '#F5F3FF' },
-  offerte: { label: 'Offerte Gestuurd', color: '#EC4899', bg: '#FDF2F8' },
-  onderhandeling: { label: 'Onderhandeling', color: '#F97316', bg: '#FFF7ED' },
-  klant: { label: 'Klant Geworden', color: '#10B981', bg: '#ECFDF5' },
-  afgewezen: { label: 'Afgewezen', color: '#EF4444', bg: '#FEF2F2' },
+  nieuw: { label: 'Nieuw', color: '#6B7280', bg: '#F3F4F6' },
+  contact: { label: 'Gecontacteerd', color: '#4B5563', bg: '#E5E7EB' },
+  interesse: { label: 'Interesse', color: '#374151', bg: '#D1D5DB' },
+  offerte: { label: 'Offerte Gestuurd', color: '#374151', bg: '#E5E7EB' },
+  onderhandeling: { label: 'Onderhandeling', color: '#4B5563', bg: '#D1D5DB' },
+  klant: { label: 'Klant Geworden', color: '#111827', bg: '#E5E7EB' },
+  afgewezen: { label: 'Afgewezen', color: '#9CA3AF', bg: '#F3F4F6' },
   later: { label: 'Later Opvolgen', color: '#6B7280', bg: '#F3F4F6' },
 };
 
 const PRIORITY_CONFIG = {
-  hoog: { label: 'Hoog', color: '#EF4444', icon: '🔥' },
-  medium: { label: 'Medium', color: '#F59E0B', icon: '⚡' },
-  laag: { label: 'Laag', color: '#6B7280', icon: '📌' },
+  hoog: { label: 'Hoog', color: '#111827', icon: '!' },
+  medium: { label: 'Medium', color: '#6B7280', icon: '-' },
+  laag: { label: 'Laag', color: '#9CA3AF', icon: '.' },
 };
 
 const CSV_STATUS_OPTIONS = [
-  { value: 'nieuw', label: 'Nieuw', color: '#3B82F6', bg: '#EFF6FF' },
-  { value: 'benaderd', label: 'Benaderd', color: '#F59E0B', bg: '#FFFBEB' },
-  { value: 'gereageerd', label: 'Gereageerd', color: '#10B981', bg: '#ECFDF5' },
-  { value: 'geen_interesse', label: 'Geen interesse', color: '#EF4444', bg: '#FEF2F2' },
-  { value: 'overgeslagen', label: 'Overgeslagen', color: '#6B7280', bg: '#F3F4F6' },
+  { value: 'nieuw', label: 'Nieuw', color: '#6B7280', bg: '#F3F4F6' },
+  { value: 'benaderd', label: 'Benaderd', color: '#4B5563', bg: '#E5E7EB' },
+  { value: 'gereageerd', label: 'Gereageerd', color: '#111827', bg: '#D1D5DB' },
+  { value: 'geen_interesse', label: 'Geen interesse', color: '#9CA3AF', bg: '#F3F4F6' },
+  { value: 'overgeslagen', label: 'Overgeslagen', color: '#9CA3AF', bg: '#F3F4F6' },
 ];
 
 const formatPhoneForWhatsApp = (phone) => {
@@ -731,7 +731,7 @@ Yrvante — Smart Web & Software 085-5055314`);
   // Login Screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-neutral-950 dark:to-neutral-900">
+      <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md relative z-10">
           <div className={`${GC} p-6 sm:p-8`}>
             <div className="text-center mb-6 sm:mb-8">
@@ -762,7 +762,7 @@ Yrvante — Smart Web & Software 085-5055314`);
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-gray-100 dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-900">
+    <div className="min-h-screen">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-b border-white/40 dark:border-white/[0.06]">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
@@ -828,8 +828,8 @@ Yrvante — Smart Web & Software 085-5055314`);
               <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
                 <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('leads')}>
                   <div className="flex items-center gap-2.5 mb-2">
-                    <div className="w-8 h-8 bg-gray-100 dark:bg-white/10 rounded-lg flex items-center justify-center">
-                      <Users size={16} className="text-gray-600 dark:text-gray-400" />
+                    <div className="w-8 h-8 bg-gray-100/80 dark:bg-white/10 rounded-lg flex items-center justify-center">
+                      <Users size={16} className="text-gray-500 dark:text-gray-400" />
                     </div>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">Leads</p>
                   </div>
@@ -838,22 +838,22 @@ Yrvante — Smart Web & Software 085-5055314`);
                 </div>
                 <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('leads')}>
                   <div className="flex items-center gap-2.5 mb-2">
-                    <div className="w-8 h-8 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
-                      <MessageSquare size={16} className="text-green-600 dark:text-green-400" />
+                    <div className="w-8 h-8 bg-gray-100/80 dark:bg-white/10 rounded-lg flex items-center justify-center">
+                      <MessageSquare size={16} className="text-gray-500 dark:text-gray-400" />
                     </div>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">WhatsApp</p>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-black text-green-600">{csvLeads.filter(l => l.status === 'benaderd').length}</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{csvLeads.filter(l => l.status === 'benaderd').length}</p>
                   <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{csvLeads.filter(l => l.telefoon?.trim() && l.status === 'nieuw').length} te benaderen</p>
                 </div>
                 <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('email')}>
                   <div className="flex items-center gap-2.5 mb-2">
-                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
-                      <Mail size={16} className="text-blue-600 dark:text-blue-400" />
+                    <div className="w-8 h-8 bg-gray-100/80 dark:bg-white/10 rounded-lg flex items-center justify-center">
+                      <Mail size={16} className="text-gray-500 dark:text-gray-400" />
                     </div>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">Email</p>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-black text-blue-600">{emailStats.totaalVerstuurd}</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{emailStats.totaalVerstuurd}</p>
                   <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{emailStats.resterend}/{emailStats.limiet} vandaag</p>
                 </div>
               </div>
@@ -927,7 +927,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                       <button onClick={saveAllResults} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 flex items-center justify-center gap-1.5">
                         <Save size={14} /> <span className="hidden sm:inline">OPSLAAN</span>
                       </button>
-                      <button onClick={() => addSearchResultsToLeads()} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 flex items-center justify-center gap-1.5" data-testid="add-to-whatsapp-btn">
+                      <button onClick={() => addSearchResultsToLeads()} className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 flex items-center justify-center gap-1.5" data-testid="add-to-whatsapp-btn">
                         <MessageSquare size={14} /> <span className="hidden sm:inline">→ WHATSAPP</span>
                       </button>
                       <button onClick={() => exportCSV(zoekResultaten)} className={`px-3 py-2 ${G} !shadow-none !rounded-lg text-xs font-bold text-black dark:text-white`}>
@@ -938,14 +938,14 @@ Yrvante — Smart Web & Software 085-5055314`);
 
                   {/* Synoniemen indicator */}
                   {synoniemenGezocht.length > 1 && (
-                    <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl" data-testid="synonyms-indicator">
+                    <div className="mb-4 p-3 bg-white/50 dark:bg-white/[0.04] border border-gray-200/60 dark:border-white/[0.08] rounded-xl backdrop-blur-sm" data-testid="synonyms-indicator">
                       <div className="flex items-center gap-2 mb-1.5">
-                        <Zap size={14} className="text-blue-500" />
-                        <span className="text-xs font-bold text-blue-700 dark:text-blue-300">Synoniem-uitbreiding actief — {synoniemenGezocht.length} zoektermen gebruikt</span>
+                        <Zap size={14} className="text-gray-500 dark:text-gray-400" />
+                        <span className="text-xs font-bold text-black dark:text-white">Synoniem-uitbreiding actief — {synoniemenGezocht.length} zoektermen gebruikt</span>
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {synoniemenGezocht.map((term, i) => (
-                          <span key={i} className="px-2 py-0.5 bg-white dark:bg-neutral-800 border border-blue-200 dark:border-blue-700 rounded-full text-xs text-blue-600 dark:text-blue-300">{term}</span>
+                          <span key={i} className="px-2 py-0.5 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-white/10 rounded-full text-xs text-gray-600 dark:text-gray-300">{term}</span>
                         ))}
                       </div>
                     </div>
@@ -1057,21 +1057,21 @@ Yrvante — Smart Web & Software 085-5055314`);
                   </button>
                   {csvLeads.length > 0 && (
                     <button onClick={manualSaveAll}
-                      className="px-3 sm:px-4 py-2 sm:py-3 border border-green-200 dark:border-green-800 text-green-600 text-xs font-bold rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-full hover:bg-white/50 dark:hover:bg-white/[0.06] flex items-center gap-1.5"
                       data-testid="csv-save-all">
                       <Save size={14} /> OPSLAAN
                     </button>
                   )}
                   {csvLeads.length > 0 && (
                     <button onClick={exportCsvLeads}
-                      className="px-3 sm:px-4 py-2 sm:py-3 border border-blue-200 dark:border-blue-800 text-blue-600 text-xs font-bold rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-full hover:bg-white/50 dark:hover:bg-white/[0.06] flex items-center gap-1.5"
                       data-testid="csv-export-button">
                       <Download size={14} /> EXPORT
                     </button>
                   )}
                   {csvLeads.length > 0 && (
                     <button onClick={clearAllCsvLeads}
-                      className="px-3 sm:px-4 py-2 sm:py-3 border border-red-200 dark:border-red-800 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-white/20 text-gray-400 dark:text-gray-500 text-xs font-bold rounded-full hover:bg-white/50 dark:hover:bg-white/[0.06] flex items-center gap-1.5"
                       data-testid="csv-clear-all">
                       <Trash2 size={14} /> WISSEN
                     </button>
@@ -1082,20 +1082,20 @@ Yrvante — Smart Web & Software 085-5055314`);
               {/* Stats Cards */}
               {/* Bulk WhatsApp */}
               {csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length > 0 && (
-                <div className="mb-6 p-3 sm:p-4 bg-green-50 dark:bg-green-900/10 border border-green-200/50 dark:border-green-800/30 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" data-testid="bulk-whatsapp-bar">
+                <div className="mb-6 p-3 sm:p-4 bg-white/50 dark:bg-white/[0.04] border border-gray-200/60 dark:border-white/[0.08] rounded-2xl backdrop-blur-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" data-testid="bulk-whatsapp-bar">
                   <div>
-                    <p className="text-xs sm:text-sm font-bold text-green-800 dark:text-green-300">
+                    <p className="text-xs sm:text-sm font-bold text-black dark:text-white">
                       {bulkSending
                         ? `WhatsApp versturen... ${bulkProgress.current}/${bulkProgress.total}`
                         : `${csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length} nieuwe leads klaar om te benaderen`
                       }
                     </p>
-                    <p className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 mt-0.5">Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)</p>
+                    <p className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 mt-0.5">Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)</p>
                   </div>
                   <button
                     onClick={bulkWhatsApp}
                     disabled={bulkSending}
-                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${bulkSending ? 'bg-green-400 cursor-wait' : 'bg-green-600 hover:bg-green-700'}`}
+                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${bulkSending ? 'bg-gray-400 cursor-wait' : 'bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200'}`}
                     data-testid="bulk-whatsapp-button">
                     <MessageSquare size={14} /> {bulkSending ? `${bulkProgress.current}/${bulkProgress.total}` : 'Bulk WhatsApp'}
                   </button>
@@ -1104,15 +1104,15 @@ Yrvante — Smart Web & Software 085-5055314`);
 
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-6">
                 {[
-                  { label: 'Totaal', value: csvStats.totaal, color: isDark ? '#fff' : '#000' },
-                  { label: 'Zonder Website', value: csvStats.zonderWebsite, color: '#3B82F6' },
-                  { label: 'Benaderd', value: csvStats.benaderd, color: '#F59E0B' },
-                  { label: 'Gereageerd', value: csvStats.gereageerd, color: '#10B981' },
-                  { label: 'Geen Interesse', value: csvStats.geenInteresse, color: '#EF4444' },
+                  { label: 'Totaal', value: csvStats.totaal },
+                  { label: 'Zonder Website', value: csvStats.zonderWebsite },
+                  { label: 'Benaderd', value: csvStats.benaderd },
+                  { label: 'Gereageerd', value: csvStats.gereageerd },
+                  { label: 'Geen Interesse', value: csvStats.geenInteresse },
                 ].map((stat, i) => (
                   <div key={i} className={`${GC} p-4 sm:p-5`} data-testid={`csv-stat-${i}`}>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">{stat.label}</p>
-                    <p className="text-2xl sm:text-3xl font-black" style={{ color: stat.color }}>{stat.value}</p>
+                    <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{stat.value}</p>
                   </div>
                 ))}
               </div>
@@ -1133,7 +1133,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                         onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
                         className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
                           csvOnlyNoWebsite
-                            ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-600 dark:text-red-400'
+                            ? 'bg-black dark:bg-white border-black dark:border-white text-white dark:text-black'
                             : 'bg-white/50 dark:bg-white/[0.06] border-gray-200/60 dark:border-white/10 text-gray-500 dark:text-gray-400'
                         }`}
                         data-testid="csv-no-website-toggle"
@@ -1227,12 +1227,12 @@ Yrvante — Smart Web & Software 085-5055314`);
                                 {hasWebsite ? (
                                   <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
                                     target="_blank" rel="noopener noreferrer"
-                                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline truncate block max-w-[160px]"
+                                    className="text-xs text-gray-600 dark:text-gray-400 hover:underline truncate block max-w-[160px]"
                                     data-testid={`csv-website-${lead.id}`}>
                                     {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
                                   </a>
                                 ) : (
-                                  <span className="text-xs font-semibold text-red-500" data-testid={`csv-no-website-${lead.id}`}>Geen website</span>
+                                  <span className="text-xs font-semibold text-gray-400" data-testid={`csv-no-website-${lead.id}`}>Geen website</span>
                                 )}
                               </td>
                               <td className="px-4 py-3">
@@ -1249,7 +1249,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                               </td>
                               <td className="px-4 py-3 text-center">
                                 {lead.rating ? (
-                                  <span className="text-sm font-bold flex items-center justify-center gap-1 text-amber-500">
+                                  <span className="text-sm font-bold flex items-center justify-center gap-1 text-gray-500 dark:text-gray-400">
                                     <Star size={13} fill="currentColor" />{formatRating(lead.rating)}
                                   </span>
                                 ) : <span className="text-xs text-gray-400">-</span>}
@@ -1274,7 +1274,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                                 {lead.telefoon ? (
                                   <button
                                     onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-600 transition-colors cursor-pointer"
+                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors cursor-pointer"
                                     data-testid={`csv-whatsapp-${lead.id}`}
                                   >
                                     <MessageSquare size={12} /> WhatsApp
@@ -1284,7 +1284,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                               <td className="px-4 py-3 text-center">
                                 <button
                                   onClick={() => deleteCsvLead(lead.id)}
-                                  className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                                  className="p-1.5 text-gray-400 hover:text-black dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-white/[0.06] transition-colors"
                                   data-testid={`csv-delete-${lead.id}`}
                                 >
                                   <Trash2 size={14} />
@@ -1343,13 +1343,13 @@ Yrvante — Smart Web & Software 085-5055314`);
                           <div className="flex flex-wrap items-center gap-3 mt-1 mb-2 text-xs">
                             {hasWebsite ? (
                               <a href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`}
-                                target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline truncate max-w-[180px]">
+                                target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:underline truncate max-w-[180px]">
                                 {lead.website.replace(/^https?:\/\/(www\.)?/, '')}
                               </a>
                             ) : (
-                              <span className="font-semibold text-red-500">Geen website</span>
+                              <span className="font-semibold text-gray-400">Geen website</span>
                             )}
-                            {lead.rating && <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star size={11} fill="currentColor" />{formatRating(lead.rating)}</span>}
+                            {lead.rating && <span className="flex items-center gap-0.5 text-gray-500 dark:text-gray-400 font-bold"><Star size={11} fill="currentColor" />{formatRating(lead.rating)}</span>}
                             {lead.reviews && <span className="text-gray-400">({lead.reviews} reviews)</span>}
                           </div>
                           <div className="flex items-center gap-2 mt-2">
@@ -1375,12 +1375,12 @@ Yrvante — Smart Web & Software 085-5055314`);
                           <div className="flex items-center gap-2 mt-3">
                             {lead.telefoon && (
                               <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
-                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-500 text-white rounded-lg text-xs font-bold hover:bg-green-600 cursor-pointer">
+                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg text-xs font-bold hover:bg-gray-800 dark:hover:bg-gray-200 cursor-pointer">
                                 <MessageSquare size={12} /> WhatsApp
                               </button>
                             )}
                             <button onClick={() => deleteCsvLead(lead.id)}
-                              className="p-2 text-gray-400 hover:text-red-500 border border-gray-200 dark:border-neutral-700 rounded-lg">
+                              className="p-2 text-gray-400 hover:text-black dark:hover:text-white border border-gray-200 dark:border-neutral-700 rounded-lg">
                               <Trash2 size={14} />
                             </button>
                           </div>
@@ -1415,21 +1415,21 @@ Yrvante — Smart Web & Software 085-5055314`);
                   </button>
                   {csvLeads.length > 0 && (
                     <button onClick={manualSaveAll}
-                      className="px-3 sm:px-4 py-2 sm:py-3 border border-green-200 dark:border-green-800 text-green-600 text-xs font-bold rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-full hover:bg-white/50 dark:hover:bg-white/[0.06] flex items-center gap-1.5"
                       data-testid="email-save-all">
                       <Save size={14} /> OPSLAAN
                     </button>
                   )}
                   {csvLeads.length > 0 && (
                     <button onClick={exportCsvLeads}
-                      className="px-3 sm:px-4 py-2 sm:py-3 border border-blue-200 dark:border-blue-800 text-blue-600 text-xs font-bold rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-full hover:bg-white/50 dark:hover:bg-white/[0.06] flex items-center gap-1.5"
                       data-testid="email-export-button">
                       <Download size={14} /> EXPORT
                     </button>
                   )}
                   {csvLeads.length > 0 && (
                     <button onClick={clearAllCsvLeads}
-                      className="px-3 sm:px-4 py-2 sm:py-3 border border-red-200 dark:border-red-800 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-1.5"
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-white/20 text-gray-400 dark:text-gray-500 text-xs font-bold rounded-full hover:bg-white/50 dark:hover:bg-white/[0.06] flex items-center gap-1.5"
                       data-testid="email-clear-all">
                       <Trash2 size={14} /> WISSEN
                     </button>
@@ -1449,15 +1449,15 @@ Yrvante — Smart Web & Software 085-5055314`);
                 </div>
                 <div className={`${GC} p-4 sm:p-5`}>
                   <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Nog Te Versturen</p>
-                  <p className="text-2xl sm:text-3xl font-black text-green-600">{emailStats.resterend}</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{emailStats.resterend}</p>
                 </div>
                 <div className={`${GC} p-4 sm:p-5`}>
                   <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Totaal Verstuurd</p>
-                  <p className="text-2xl sm:text-3xl font-black text-blue-600">{emailStats.totaalVerstuurd}</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{emailStats.totaalVerstuurd}</p>
                 </div>
                 <div className={`${GC} p-4 sm:p-5`}>
                   <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">Gereageerd</p>
-                  <p className="text-2xl sm:text-3xl font-black text-emerald-600">{emailStats.totaalGereageerd}</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{emailStats.totaalGereageerd}</p>
                 </div>
               </div>
 
@@ -1483,13 +1483,13 @@ Yrvante — Smart Web & Software 085-5055314`);
 
               {/* Batch Send Button */}
               {emailStats.emailableLeads > 0 && emailStats.resterend > 0 && (
-                <div className={`${GC} p-4 mb-6 border-green-200/50 dark:border-green-800/30`}>
+                <div className={`${GC} p-4 mb-6`}>
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div>
-                      <p className="font-bold text-sm text-green-800 dark:text-green-300">
+                      <p className="font-bold text-sm text-black dark:text-white">
                         {emailStats.emailableLeads} leads klaar om te emailen
                       </p>
-                      <p className="text-xs text-green-600 dark:text-green-400 mt-0.5">
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                         Verstuurt max {emailStats.resterend} emails (dagelijkse limiet)
                       </p>
                     </div>
@@ -1504,9 +1504,9 @@ Yrvante — Smart Web & Software 085-5055314`);
               )}
 
               {emailStats.resterend <= 0 && (
-                <div className={`${GC} p-4 mb-6 border-red-200/50 dark:border-red-800/30`}>
-                  <p className="text-sm font-bold text-red-600">Dagelijkse limiet bereikt ({emailStats.limiet} emails)</p>
-                  <p className="text-xs text-red-400 mt-0.5">Morgen worden er automatisch weer emails verstuurd</p>
+                <div className={`${GC} p-4 mb-6`}>
+                  <p className="text-sm font-bold text-black dark:text-white">Dagelijkse limiet bereikt ({emailStats.limiet} emails)</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Morgen worden er automatisch weer emails verstuurd</p>
                 </div>
               )}
 
@@ -1541,24 +1541,22 @@ Yrvante — Smart Web & Software 085-5055314`);
                       <div key={lead.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-3 sm:p-4 hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors">
                         <div className="flex items-center gap-3 min-w-0 flex-1">
                           <div className={`w-2 h-2 rounded-full shrink-0 ${
-                            lead.emailStatus === 'verstuurd' ? 'bg-blue-500' :
-                            lead.emailStatus === 'gereageerd' ? 'bg-emerald-500' : 'bg-gray-300 dark:bg-gray-600'
+                            lead.emailStatus === 'verstuurd' ? 'bg-gray-400' :
+                            lead.emailStatus === 'gereageerd' ? 'bg-black dark:bg-white' : 'bg-gray-300 dark:bg-gray-600'
                           }`} />
                           <div className="min-w-0">
                             <p className="font-semibold text-sm text-black dark:text-white truncate">{lead.naam}</p>
                             <p className="text-xs text-gray-400 truncate">{lead.email}</p>
                           </div>
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                            lead.bron === 'CSV' ? 'bg-gray-100 dark:bg-white/10 text-gray-500' : 'bg-blue-50 dark:bg-blue-900/20 text-blue-500'
-                          }`}>{lead.bron}</span>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 dark:bg-white/10 text-gray-500">{lead.bron}</span>
                         </div>
                         <div className="flex items-center gap-2 ml-5 sm:ml-0">
                           <select value={lead.emailStatus} onChange={e => {
                             if (lead.bron === 'CSV') updateEmailStatus(lead.id, e.target.value);
                           }}
                             className={`px-2 py-1 text-xs font-bold rounded-lg cursor-pointer ${
-                              lead.emailStatus === 'verstuurd' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 border-blue-200 dark:border-blue-800' :
-                              lead.emailStatus === 'gereageerd' ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 border-emerald-200 dark:border-emerald-800' :
+                              lead.emailStatus === 'verstuurd' ? 'bg-gray-100 dark:bg-white/10 text-gray-500 border-gray-200 dark:border-white/10' :
+                              lead.emailStatus === 'gereageerd' ? 'bg-gray-100 dark:bg-white/10 text-black dark:text-white border-gray-200 dark:border-white/10' :
                               'bg-gray-50 dark:bg-white/[0.04] text-gray-500 border-gray-200 dark:border-white/10'
                             } border`}
                             data-testid={`email-status-${lead.id}`}>
@@ -1604,7 +1602,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                 {Object.entries(STATUS_CONFIG).slice(0, 5).map(([key, val]) => (
                   <div key={key} className={`${GC} p-4 sm:p-6`}>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1 sm:mb-2">{val.label}</p>
-                    <p className="text-2xl sm:text-4xl font-black" style={{ color: val.color }}>{dashboardData?.status_verdeling?.[key] || 0}</p>
+                    <p className="text-2xl sm:text-4xl font-black text-black dark:text-white">{dashboardData?.status_verdeling?.[key] || 0}</p>
                   </div>
                 ))}
               </div>
@@ -1618,15 +1616,15 @@ Yrvante — Smart Web & Software 085-5055314`);
                 </div>
                 <div className={`${GC} p-4 sm:p-5`}>
                   <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Resterend</p>
-                  <p className="text-xl sm:text-2xl font-black text-green-600">{emailStats.resterend}</p>
+                  <p className="text-xl sm:text-2xl font-black text-black dark:text-white">{emailStats.resterend}</p>
                 </div>
                 <div className={`${GC} p-4 sm:p-5`}>
                   <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Totaal Verstuurd</p>
-                  <p className="text-xl sm:text-2xl font-black text-blue-600">{emailStats.totaalVerstuurd}</p>
+                  <p className="text-xl sm:text-2xl font-black text-black dark:text-white">{emailStats.totaalVerstuurd}</p>
                 </div>
                 <div className={`${GC} p-4 sm:p-5`}>
                   <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-1">Gereageerd</p>
-                  <p className="text-xl sm:text-2xl font-black text-emerald-600">{emailStats.totaalGereageerd}</p>
+                  <p className="text-xl sm:text-2xl font-black text-black dark:text-white">{emailStats.totaalGereageerd}</p>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -1644,7 +1642,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                             <span className="font-bold text-black dark:text-white">{count}</span>
                           </div>
                           <div className="h-2 bg-black/[0.04] dark:bg-white/[0.04] rounded-full overflow-hidden">
-                            <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: val.color }} />
+                            <div className="h-full rounded-full transition-all bg-black/30 dark:bg-white/30" style={{ width: `${pct}%` }} />
                           </div>
                         </div>
                       );

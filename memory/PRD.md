@@ -208,6 +208,19 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Mobiel responsief**: Alle tabs werken op iPhone (390px)
 - **16/16 backend + alle frontend tests geslaagd** (iteratie 41)
 
+### Phase 25 - LeadFinder Monochroom Redesign (Complete - Feb 2026)
+- **Achtergrond**: Solid grijze achtergrond verwijderd → homepage achtergrond (geanimeerde orbs + bg-pattern) schijnt nu door
+- **Kleurpatroon unified**: Alle gekleurde elementen (groen/blauw/rood/amber/paars) vervangen door monochroom (zwart/wit/grijs)
+  - Status cards: zwart/wit nummers ipv gekleurde nummers
+  - WhatsApp/Email knoppen: zwart/wit ipv groen/blauw
+  - Bulk WhatsApp bar: glassmorphism ipv groene achtergrond
+  - Email batch: monochroom ipv groen/rood
+  - Stats/Dashboard: alle nummers zwart/wit, progress bars grijs
+  - Status badges: grijstinten ipv regenboog kleuren
+  - Bronnen icons: grijstinten ipv gekleurde brand icons
+  - Zoekresultaten: website links grijs, ratings grijs, "Geen website" grijs ipv rood
+- **Visueel getest** in zowel light als dark mode
+
 ### Phase 24 - LeadFinder Cleanup & Dead Code Removal (Complete - Feb 2026)
 - **Tools tab verwijderd**: Volledige onbereikbare "Tools & Integraties" tab verwijderd (5 van 6 items waren "COMING SOON", CSV Export al beschikbaar via andere knoppen)
 - **Google Maps Leads sectie verwijderd**: Onbereikbare `leadSource === 'maps'` sectie verwijderd (toggle was nooit zichtbaar in UI)
