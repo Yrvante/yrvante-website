@@ -5,13 +5,12 @@ import { Link } from "react-router-dom";
 import Papa from "papaparse";
 import { useTheme } from "../App";
 import { 
-  Search, Phone, MapPin, ExternalLink, Save, Trash2, Edit2, Check, X, 
+  Search, Phone, MapPin, ExternalLink, Save, Trash2,
   Download, ChevronDown, ChevronUp, BarChart3, Users, Lock, ArrowLeft, Loader2, RefreshCw,
-  Bookmark, FileText, ArrowRight, Menu as MenuIcon, Mail, Globe, Building2,
-  Instagram, Facebook, Filter, SortAsc, CheckSquare, Square, MoreHorizontal,
-  Target, TrendingUp, Calendar, Clock, Star, Tag, Copy, MessageSquare,
-  Briefcase, User, Hash, Link2, ChevronRight, Settings, Zap, Database, FileSpreadsheet,
-  Upload, Sun, Moon, Send
+  Mail, Globe, Building2,
+  Instagram, Facebook,
+  Clock, Star, Copy, MessageSquare,
+  Upload, Sun, Moon, Send, Zap
 } from "lucide-react";
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -106,20 +105,7 @@ const LeadFinderPage = () => {
   // Lead management states
   const [opgeslagenLeads, setOpgeslagenLeads] = useState([]);
   const [dashboardData, setDashboardData] = useState(null);
-  const [statusFilter, setStatusFilter] = useState('alle');
-  const [sourceFilter, setSourceFilter] = useState('alle');
-  const [priorityFilter, setPriorityFilter] = useState('alle');
-  const [searchLeadsQuery, setSearchLeadsQuery] = useState('');
-  const [sortBy, setSortBy] = useState('datum');
-  const [selectedLeads, setSelectedLeads] = useState([]);
   
-  // Edit states
-  const [editingLead, setEditingLead] = useState(null);
-  const [editData, setEditData] = useState({});
-  const [showLeadModal, setShowLeadModal] = useState(null);
-  
-  // Bulk action states
-  const [showBulkActions, setShowBulkActions] = useState(false);
 
   // CSV Import states
   const csvFileRef = useRef(null);
@@ -129,7 +115,6 @@ const LeadFinderPage = () => {
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
   const [csvSortCol, setCsvSortCol] = useState(null);
   const [csvSortDir, setCsvSortDir] = useState('asc');
-  const [leadSource, setLeadSource] = useState('csv');
 
   // Email automation states
   const [emailStats, setEmailStats] = useState({ vandaag: 0, limiet: 30, resterend: 30, totaalVerstuurd: 0, totaalGereageerd: 0, emailableLeads: 0 });
@@ -397,141 +382,8 @@ const LeadFinderPage = () => {
     } catch { toast.error('Fout bij toevoegen'); }
   };
 
-  const updateLead = async (id, updates) => {
-    try {
-      await fetch(`${API}/lead/${id}`, { 
-        method: 'PUT', 
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify(updates) 
-      });
-      loadLeads(); 
-      loadDashboard();
-      toast.success('Lead bijgewerkt');
-    } catch (err) {
-      toast.error('Fout bij bijwerken');
-    }
-  };
-
-  const deleteLead = async (id) => {
-    if (!window.confirm('Lead verwijderen?')) return;
-    await fetch(`${API}/lead/${id}`, { method: 'DELETE' });
-    loadLeads(); loadDashboard(); toast.success('Verwijderd');
-  };
-
-  const bulkUpdateStatus = async (status) => {
-    if (selectedLeads.length === 0) return;
-    for (const id of selectedLeads) {
-      await fetch(`${API}/lead/${id}`, { 
-        method: 'PUT', 
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify({ status }) 
-      });
-    }
-    setSelectedLeads([]);
-    loadLeads();
-    toast.success(`${selectedLeads.length} leads bijgewerkt`);
-  };
-
-  const bulkDelete = async () => {
-    if (selectedLeads.length === 0) return;
-    if (!window.confirm(`${selectedLeads.length} leads verwijderen?`)) return;
-    for (const id of selectedLeads) {
-      await fetch(`${API}/lead/${id}`, { method: 'DELETE' });
-    }
-    setSelectedLeads([]);
-    loadLeads();
-    loadDashboard();
-    toast.success(`${selectedLeads.length} leads verwijderd`);
-  };
-
-  // Google Sheets Export - Copy to clipboard in Google Sheets format
-  const exportToGoogleSheets = (data = null) => {
-    const exportData = data || (activeTab === 'zoeken' ? zoekResultaten : filteredLeads);
-    if (!exportData.length) { 
-      toast.error('Geen data om te exporteren'); 
-      return; 
-    }
-    
-    // Create tab-separated values (TSV) for Google Sheets
-    const headers = ['Naam', 'Adres', 'Telefoon', 'Bron', 'Google Maps', 'Instagram', 'Facebook', 'LinkedIn', 'Status', 'Notitie'];
-    const rows = exportData.map(l => [
-      l.naam || '',
-      l.adres || '',
-      l.telefoonnummer || '',
-      l.source || '',
-      l.google_maps_url || '',
-      l.instagram_url || '',
-      l.facebook_url || '',
-      l.linkedin_url || '',
-      l.status || 'nieuw',
-      l.notitie || ''
-    ].map(c => c.toString().replace(/\t/g, ' ').replace(/\n/g, ' ')).join('\t'));
-    
-    const tsv = [headers.join('\t'), ...rows].join('\n');
-    
-    navigator.clipboard.writeText(tsv).then(() => {
-      toast.success(
-        <div>
-          <strong>✅ Gekopieerd naar klembord!</strong>
-          <p className="text-sm mt-1">Open Google Sheets → Ctrl+V om te plakken</p>
-        </div>,
-        { duration: 5000 }
-      );
-    }).catch(() => {
-      // Fallback: create a textarea and copy
-      const textarea = document.createElement('textarea');
-      textarea.value = tsv;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      toast.success('Gekopieerd! Open Google Sheets en druk Ctrl+V');
-    });
-  };
-
-  // Open directly in Google Sheets (creates new sheet with data)
-  const openInGoogleSheets = (data = null) => {
-    const exportData = data || (activeTab === 'zoeken' ? zoekResultaten : filteredLeads);
-    if (!exportData.length) { 
-      toast.error('Geen data om te exporteren'); 
-      return; 
-    }
-    
-    // Create CSV content
-    const headers = ['Naam', 'Adres', 'Telefoon', 'Bron', 'Google Maps URL', 'Status'];
-    const csvContent = [
-      headers.join(','),
-      ...exportData.map(l => [
-        `"${(l.naam || '').replace(/"/g, '""')}"`,
-        `"${(l.adres || '').replace(/"/g, '""')}"`,
-        `"${(l.telefoonnummer || '').replace(/"/g, '""')}"`,
-        `"${(l.source || '').replace(/"/g, '""')}"`,
-        `"${(l.google_maps_url || '').replace(/"/g, '""')}"`,
-        `"${(l.status || 'nieuw').replace(/"/g, '""')}"`
-      ].join(','))
-    ].join('\n');
-    
-    // Create blob and download as CSV (Google Sheets can open CSV files)
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    
-    // Create download link
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `leads_${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    
-    toast.success(
-      <div>
-        <strong>📊 CSV gedownload!</strong>
-        <p className="text-sm mt-1">Open in Google Sheets: File → Import → Upload</p>
-      </div>,
-      { duration: 5000 }
-    );
-  };
-
-  const exportCSV = (data = null) => {
-    const exportData = data || (activeTab === 'zoeken' ? zoekResultaten : filteredLeads);
+  const exportCSV = (data) => {
+    const exportData = data || zoekResultaten;
     if (!exportData.length) { toast.error('Geen data om te exporteren'); return; }
     const headers = ['Naam','Adres','Telefoon','Email','Website','Instagram','Facebook','KVK','Bron','Status','Prioriteit','Notitie','Datum'];
     const csv = [
@@ -549,10 +401,6 @@ const LeadFinderPage = () => {
     toast.success('CSV geëxporteerd');
   };
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-    toast.success('Gekopieerd!');
-  };
 
   // === CSV Import Functions (synced via API + localStorage backup) ===
   const backupToLocal = (leads) => {
@@ -879,41 +727,6 @@ Yrvante — Smart Web & Software 085-5055314`);
     toast.success('Telefoonnummer gekopieerd!');
   };
 
-  const toggleSelectLead = (id) => {
-    setSelectedLeads(prev => 
-      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
-    );
-  };
-
-  const selectAllLeads = () => {
-    if (selectedLeads.length === filteredLeads.length) {
-      setSelectedLeads([]);
-    } else {
-      setSelectedLeads(filteredLeads.map(l => l.id));
-    }
-  };
-
-  // Filter and sort leads
-  const filteredLeads = opgeslagenLeads
-    .filter(lead => {
-      if (statusFilter !== 'alle' && (lead.status || 'nieuw') !== statusFilter) return false;
-      if (sourceFilter !== 'alle' && lead.source !== sourceFilter) return false;
-      if (priorityFilter !== 'alle' && lead.priority !== priorityFilter) return false;
-      if (searchLeadsQuery) {
-        const q = searchLeadsQuery.toLowerCase();
-        return lead.naam?.toLowerCase().includes(q) || 
-               lead.adres?.toLowerCase().includes(q) ||
-               lead.telefoonnummer?.includes(q) ||
-               lead.email?.toLowerCase().includes(q);
-      }
-      return true;
-    })
-    .sort((a, b) => {
-      if (sortBy === 'datum') return new Date(b.opgeslagen_op) - new Date(a.opgeslagen_op);
-      if (sortBy === 'naam') return (a.naam || '').localeCompare(b.naam || '');
-      if (sortBy === 'status') return (a.status || '').localeCompare(b.status || '');
-      return 0;
-    });
 
   // Login Screen
   if (!isAuthenticated) {
@@ -1581,127 +1394,6 @@ Yrvante — Smart Web & Software 085-5055314`);
           </motion.div>
         )}
 
-        {/* LEADS TAB */}
-        {/* GOOGLE MAPS LEADS (within LEADS tab) */}
-        {activeTab === 'leads' && leadSource === 'maps' && (
-          <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 pb-4 sm:pb-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-                <div>
-                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white">Google Maps Leads</h1>
-                  <p className="text-gray-400 dark:text-gray-500 text-sm">{opgeslagenLeads.length} leads opgeslagen</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={loadLeads} className={`p-2 ${G} !rounded-xl !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`}><RefreshCw size={18} /></button>
-                  <button onClick={() => exportToGoogleSheets()} className="px-3 sm:px-4 py-2 bg-emerald-500 text-white rounded-xl text-xs sm:text-sm font-bold hover:bg-emerald-600 flex items-center gap-1.5"><FileSpreadsheet size={14} /> SHEETS</button>
-                  <button onClick={() => exportCSV()} className={`px-3 sm:px-4 py-2 ${G} !rounded-xl !shadow-none text-xs sm:text-sm font-bold hover:bg-white/80 dark:hover:bg-white/10 flex items-center gap-1.5 text-black dark:text-white`}><Download size={14} /> CSV</button>
-                </div>
-              </div>
-
-              <div className={`${GC} p-3 sm:p-4 mb-6`}>
-                <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3">
-                  <div className="flex-1 min-w-0 sm:min-w-[200px] relative">
-                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                    <input value={searchLeadsQuery} onChange={e => setSearchLeadsQuery(e.target.value)} placeholder="Zoek leads..."
-                      className={`w-full pl-10 pr-4 py-2 text-sm ${GI}`} />
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                  {[
-                    { val: statusFilter, set: setStatusFilter, opts: Object.entries(STATUS_CONFIG).map(([k,v]) => [k, v.label]), def: 'Alle Status' },
-                    { val: sourceFilter, set: setSourceFilter, opts: Object.entries(SEARCH_SOURCES).map(([k,v]) => [k, v.name]), def: 'Alle Bronnen' },
-                    { val: priorityFilter, set: setPriorityFilter, opts: Object.entries(PRIORITY_CONFIG).map(([k,v]) => [k, `${v.icon} ${v.label}`]), def: 'Alle Prioriteit' },
-                    { val: sortBy, set: setSortBy, opts: [['datum','Nieuwste'],['naam','Naam A-Z'],['status','Status']], def: null },
-                  ].map((f, i) => (
-                    <select key={i} value={f.val} onChange={e => f.set(e.target.value)} className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}>
-                      {f.def && <option value="alle">{f.def}</option>}
-                      {f.opts.map(([k, l]) => <option key={k} value={k}>{l}</option>)}
-                    </select>
-                  ))}
-                  </div>
-                </div>
-                {selectedLeads.length > 0 && (
-                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100/40 dark:border-white/[0.05]">
-                    <span className="text-sm font-medium text-black dark:text-white">{selectedLeads.length} geselecteerd</span>
-                    <select onChange={e => { if(e.target.value) { bulkUpdateStatus(e.target.value); e.target.value = ''; }}} className={`px-3 py-1.5 text-sm ${GI}`}>
-                      <option value="">Status wijzigen...</option>
-                      {Object.entries(STATUS_CONFIG).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
-                    </select>
-                    <button onClick={bulkDelete} className="px-3 py-1.5 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl text-sm font-medium">Verwijderen</button>
-                    <button onClick={() => setSelectedLeads([])} className="px-3 py-1.5 text-gray-400 text-sm hover:text-black dark:hover:text-white">Annuleren</button>
-                  </div>
-                )}
-              </div>
-
-              {filteredLeads.length === 0 ? (
-                <div className={`${GC} p-16 text-center`}>
-                  <Users size={48} className="mx-auto mb-4 text-gray-300 dark:text-gray-600" />
-                  <h3 className="text-2xl font-bold mb-2 text-black dark:text-white">Geen leads gevonden</h3>
-                  <p className="text-gray-400 dark:text-gray-500 mb-6">Pas je filters aan of zoek nieuwe leads</p>
-                  <button onClick={() => setActiveTab('zoeken')} className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-sm">ZOEK LEADS</button>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 px-2">
-                    <button onClick={selectAllLeads} className="p-1 hover:bg-white/40 dark:hover:bg-white/[0.06] rounded text-black dark:text-white">
-                      {selectedLeads.length === filteredLeads.length ? <CheckSquare size={18} /> : <Square size={18} />}
-                    </button>
-                    <span className="text-sm text-gray-400 dark:text-gray-500">Selecteer alles ({filteredLeads.length})</span>
-                  </div>
-                  {filteredLeads.map(lead => (
-                    <div key={lead.id} className={`${GC} p-3 sm:p-5 transition-all ${selectedLeads.includes(lead.id) ? '!border-black dark:!border-white' : ''}`}>
-                      <div className="flex items-start gap-2 sm:gap-4">
-                        <button onClick={() => toggleSelectLead(lead.id)} className="mt-1 text-black dark:text-white shrink-0">
-                          {selectedLeads.includes(lead.id) ? <CheckSquare size={18} /> : <Square size={18} className="text-gray-300 dark:text-gray-600" />}
-                        </button>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 mb-2">
-                            <h3 className="font-bold text-sm sm:text-lg text-black dark:text-white truncate">{lead.naam}</h3>
-                            <select value={lead.status || 'nieuw'} onChange={e => updateLead(lead.id, { status: e.target.value })}
-                              className="px-2 py-1 rounded-full text-xs font-bold border-0 cursor-pointer"
-                              style={{ backgroundColor: STATUS_CONFIG[lead.status || 'nieuw']?.bg, color: STATUS_CONFIG[lead.status || 'nieuw']?.color }}>
-                              {Object.entries(STATUS_CONFIG).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
-                            </select>
-                            <select value={lead.priority || 'medium'} onChange={e => updateLead(lead.id, { priority: e.target.value })}
-                              className={`px-2 py-1 rounded text-xs font-bold cursor-pointer ${GI} !rounded-md`}>
-                              {Object.entries(PRIORITY_CONFIG).map(([k, v]) => <option key={k} value={k}>{v.icon} {v.label}</option>)}
-                            </select>
-                            {lead.source && <span className="px-2 py-1 rounded text-xs font-medium" style={{ backgroundColor: SEARCH_SOURCES[lead.source]?.color + '15', color: SEARCH_SOURCES[lead.source]?.color }}>{SEARCH_SOURCES[lead.source]?.name}</span>}
-                          </div>
-                          <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm mb-3">
-                            {lead.adres && <span className="text-gray-400 flex items-center gap-1"><MapPin size={14} />{lead.adres}</span>}
-                            {lead.telefoonnummer && <a href={`tel:${lead.telefoonnummer}`} className="text-gray-500 dark:text-gray-300 flex items-center gap-1 hover:underline"><Phone size={14} />{lead.telefoonnummer}</a>}
-                            {lead.email && <a href={`mailto:${lead.email}`} className="text-gray-500 dark:text-gray-300 flex items-center gap-1 hover:underline"><Mail size={14} />{lead.email}</a>}
-                          </div>
-                          {editingLead === lead.id ? (
-                            <div className="flex gap-2 mt-2">
-                              <input value={editData.notitie || ''} onChange={e => setEditData({...editData, notitie: e.target.value})} placeholder="Voeg notitie toe..."
-                                className={`flex-1 px-3 py-2 text-sm ${GI}`} autoFocus />
-                              <button onClick={() => { updateLead(lead.id, editData); setEditingLead(null); }} className="p-2 bg-black dark:bg-white text-white dark:text-black rounded-xl"><Check size={16} /></button>
-                              <button onClick={() => setEditingLead(null)} className={`p-2 ${G} !rounded-xl !shadow-none text-black dark:text-white`}><X size={16} /></button>
-                            </div>
-                          ) : (
-                            <div onClick={() => { setEditingLead(lead.id); setEditData({ notitie: lead.notitie || '' }); }}
-                              className="text-sm text-gray-400 cursor-pointer flex items-center gap-2 hover:text-black dark:hover:text-white mt-2">
-                              <Edit2 size={12} />{lead.notitie || 'Klik om notitie toe te voegen...'}
-                            </div>
-                          )}
-                          <div className="flex flex-wrap gap-2 mt-3">
-                            {lead.google_maps_url && <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><MapPin size={12} /> Maps</a>}
-                            <a href={`https://www.kvk.nl/zoeken/?q=${encodeURIComponent(lead.naam)}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Building2 size={12} /> KVK</a>
-                            <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' facebook')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Facebook size={12} /> FB</a>
-                            <a href={`https://www.google.com/search?q=${encodeURIComponent(lead.naam + ' instagram')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm border border-white/30 dark:border-white/[0.06] rounded-full text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-300"><Instagram size={12} /> IG</a>
-                            {lead.telefoonnummer && <a href={`https://api.whatsapp.com/send?phone=${lead.telefoonnummer.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/30 flex items-center gap-1 border border-green-200/50 dark:border-green-800/30"><MessageSquare size={12} /> WhatsApp</a>}
-                          </div>
-                        </div>
-                        <button onClick={() => deleteLead(lead.id)} className="p-2 border border-red-200/50 dark:border-red-800/30 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-red-500"><Trash2 size={16} /></button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
 
         {/* EMAIL AUTOMATION TAB */}
         {activeTab === 'email' && (
@@ -1963,33 +1655,6 @@ Yrvante — Smart Web & Software 085-5055314`);
           </motion.div>
         )}
 
-        {/* TOOLS TAB */}
-        {activeTab === 'tools' && (
-          <motion.div key="tools" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
-              <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-6 sm:mb-8 text-black dark:text-white">Tools & Integraties</h1>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {[
-                  { icon: Download, iconBg: 'bg-green-100 dark:bg-green-900/20', iconColor: 'text-green-600 dark:text-green-400', title: 'CSV Export', desc: 'Exporteer alle leads naar een CSV bestand voor gebruik in Excel of Google Sheets.', btnText: 'EXPORTEER ALLE LEADS', btnClass: 'bg-green-600 text-white hover:bg-green-700', action: () => exportCSV() },
-                  { icon: FileText, iconBg: 'bg-gray-100/50 dark:bg-white/[0.04]', iconColor: 'text-gray-500 dark:text-gray-400', title: 'Bulk Import', desc: 'Importeer leads vanuit een CSV bestand. Handig voor migratie van andere systemen.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
-                  { icon: Building2, iconBg: 'bg-purple-100 dark:bg-purple-900/20', iconColor: 'text-purple-600 dark:text-purple-400', title: 'KVK Integratie', desc: 'Directe koppeling met de Kamer van Koophandel voor bedrijfsgegevens.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
-                  { icon: MessageSquare, iconBg: 'bg-green-100 dark:bg-green-900/20', iconColor: 'text-green-600 dark:text-green-400', title: 'WhatsApp Templates', desc: 'Stuur gepersonaliseerde WhatsApp berichten naar leads met één klik.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
-                  { icon: Mail, iconBg: 'bg-orange-100 dark:bg-orange-900/20', iconColor: 'text-orange-600 dark:text-orange-400', title: 'Email Campagnes', desc: 'Verstuur gepersonaliseerde email campagnes naar geselecteerde leads.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
-                  { icon: Calendar, iconBg: 'bg-red-100 dark:bg-red-900/20', iconColor: 'text-red-600 dark:text-red-400', title: 'Follow-up Reminders', desc: 'Plan automatische herinneringen voor lead opvolging.', btnText: 'COMING SOON', btnClass: `${G} !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`, soon: true },
-                ].map((tool, i) => (
-                  <div key={i} className={`${GC} p-4 sm:p-6`}>
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 ${tool.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 border border-white/30 dark:border-white/[0.06]`}>
-                      <tool.icon size={20} className={tool.iconColor} />
-                    </div>
-                    <h3 className="font-bold text-base sm:text-lg mb-1.5 sm:mb-2 text-black dark:text-white">{tool.title}</h3>
-                    <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">{tool.desc}</p>
-                    <button onClick={tool.action} className={`w-full py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm ${tool.btnClass}`}>{tool.btnText}</button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
       </AnimatePresence>
     </div>
   );
