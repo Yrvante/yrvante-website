@@ -208,6 +208,12 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Mobiel responsief**: Alle tabs werken op iPhone (390px)
 - **16/16 backend + alle frontend tests geslaagd** (iteratie 41)
 
+### Phase 26 - WhatsApp Groen + Achtergrond Versterkt (Complete - Feb 2026)
+- **WhatsApp knoppen groen** (#25D366): Individuele WhatsApp knoppen, Bulk WhatsApp, en "Toevoegen aan WhatsApp" knop
+- **Achtergrond prominenter**: bg-pattern.jpg opacity 18%→25%, orbs +30% sterker, zowel homepage als LeadFinder
+- **Glassmorphism verfijnd**: bg-white/60→50%, border grijs subtiel, transparanter zodat achtergrond doorschijnt
+- **Navbar transparanter**: bg-white/70→50% voor betere achtergrond doorschijn
+
 ### Phase 25 - LeadFinder Monochroom Redesign (Complete - Feb 2026)
 - **Achtergrond**: Solid grijze achtergrond verwijderd → homepage achtergrond (geanimeerde orbs + bg-pattern) schijnt nu door
 - **Kleurpatroon unified**: Alle gekleurde elementen (groen/blauw/rood/amber/paars) vervangen door monochroom (zwart/wit/grijs)

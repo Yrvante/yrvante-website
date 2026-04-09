@@ -19,9 +19,9 @@ const LOGO_URL = "/logo-nav.png";
 const LOGO_URL_WHITE = "/logo-nav-white.png";
 
 // Glassmorphism base classes (matching AdminDashboard)
-const G = "bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/40 dark:border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)]";
+const G = "bg-white/50 dark:bg-white/[0.03] backdrop-blur-2xl border border-gray-200/40 dark:border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.2)]";
 const GC = `${G} rounded-2xl`;
-const GI = "bg-white/50 dark:bg-white/[0.06] border border-gray-200/60 dark:border-white/10 backdrop-blur-sm rounded-xl focus:border-black dark:focus:border-white focus:bg-white/80 dark:focus:bg-white/10 outline-none transition-all text-black dark:text-white";
+const GI = "bg-white/40 dark:bg-white/[0.05] border border-gray-200/50 dark:border-white/10 backdrop-blur-sm rounded-xl focus:border-black dark:focus:border-white focus:bg-white/70 dark:focus:bg-white/10 outline-none transition-all text-black dark:text-white";
 
 // Search source configurations
 const SEARCH_SOURCES = {
@@ -764,7 +764,7 @@ Yrvante — Smart Web & Software 085-5055314`);
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-b border-white/40 dark:border-white/[0.06]">
+      <nav className="sticky top-0 z-50 bg-white/50 dark:bg-neutral-900/60 backdrop-blur-2xl border-b border-gray-200/30 dark:border-white/[0.06]">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-14 sm:h-16">
             <div className="flex items-center gap-2 sm:gap-4">
@@ -1095,7 +1095,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                   <button
                     onClick={bulkWhatsApp}
                     disabled={bulkSending}
-                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${bulkSending ? 'bg-gray-400 cursor-wait' : 'bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200'}`}
+                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${bulkSending ? 'bg-gray-400 cursor-wait' : 'bg-[#25D366] hover:bg-[#1DA851]'}`}
                     data-testid="bulk-whatsapp-button">
                     <MessageSquare size={14} /> {bulkSending ? `${bulkProgress.current}/${bulkProgress.total}` : 'Bulk WhatsApp'}
                   </button>
@@ -1274,7 +1274,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                                 {lead.telefoon ? (
                                   <button
                                     onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors cursor-pointer"
+                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#25D366] text-white rounded-full text-xs font-bold hover:bg-[#1DA851] transition-colors cursor-pointer"
                                     data-testid={`csv-whatsapp-${lead.id}`}
                                   >
                                     <MessageSquare size={12} /> WhatsApp
@@ -1375,7 +1375,7 @@ Yrvante — Smart Web & Software 085-5055314`);
                           <div className="flex items-center gap-2 mt-3">
                             {lead.telefoon && (
                               <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
-                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg text-xs font-bold hover:bg-gray-800 dark:hover:bg-gray-200 cursor-pointer">
+                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-[#25D366] text-white rounded-lg text-xs font-bold hover:bg-[#1DA851] cursor-pointer">
                                 <MessageSquare size={12} /> WhatsApp
                               </button>
                             )}

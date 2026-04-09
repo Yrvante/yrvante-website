@@ -325,7 +325,7 @@ function App() {
           <div className="bg-orb bg-orb-4" />
           <div className="bg-orb bg-orb-5" />
           <div
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.08]' : 'opacity-[0.18]'}`}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${theme === 'dark' ? 'opacity-[0.12]' : 'opacity-[0.25]'}`}
             style={{ backgroundImage: `url(/bg-pattern.jpg)` }}
           />
         </div>
