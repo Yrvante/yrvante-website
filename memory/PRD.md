@@ -198,15 +198,15 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Sorteerbare CSV kolommen**: Klik op kolomheaders (Bedrijfsnaam, Categorie, Plaats, Website, Rating, Reviews, Status) om te sorteren met richting-pijltjes
 - **42/42 tests geslaagd** (iteration 36)
 
-### Phase 22 - Prisma Postgres Migratie + LeadFinder Mobile Fix (Complete - Feb 2026)
-- **Prisma Postgres**: CsvLead model aangemaakt, `/api/leads.js` endpoint met GET/POST/PATCH/DELETE, oude `csv-leads.js` verwijderd (blijft op 12 Vercel functies)
-- **Frontend migratie**: AdminDashboard + LeadFinder omgezet naar `/api/leads`, veldnamen `adres→plaats`, `aantalReviews→reviews`
-- **Preview backend**: server.py bijgewerkt met `/api/leads` routes (MongoDB) + legacy backward compatibility
-- **LeadFinder mobiel**: Alle tabs (CSV, Leads, Dashboard, Tools) volledig responsive voor iPhone (390px)
-- **Dark/Light toggle**: Zon/Maan schakelknop in LeadFinder navbar met ThemeContext
-- **Mobiele CSV kaarten**: Notitie veld, kopieer-telefoon knop, full-width WhatsApp, flex-wrap knoppen
-- **CSV tab badge**: Toont aantal leads naast het icoon
-- **28/28 frontend tests + 13/13 backend tests geslaagd** (iteraties 39-40)
+### Phase 23 - LeadFinder Herstructurering + Email Automatisering (Complete - Feb 2026)
+- **Tab herstructurering**: CSV en Google Maps tabs samengevoegd tot één "LEADS" tab met source toggle (CSV Leads / Google Maps)
+- **Email Campagne tab**: Nieuw dashboard met dagelijkse email limiet (10-50), batch send, email wachtrij, status tracking (niet_verstuurd/verstuurd/gereageerd)
+- **Email API**: /api/leads/email-stats (GET/POST), /api/leads/send-email, /api/leads/send-batch via Resend (info@yrvante.com)
+- **Prisma schema**: CsvLead uitgebreid met email, emailStatus, emailSentAt + nieuw EmailDailyLog model
+- **Email statistieken**: Toegevoegd aan STATS dashboard (vandaag, resterend, totaal verstuurd, gereageerd)
+- **Berichten**: Automatisch correct bericht gebaseerd op website status (met website → €249 rebranding, zonder → €399 nieuw)
+- **Mobiel responsief**: Alle tabs werken op iPhone (390px)
+- **16/16 backend + alle frontend tests geslaagd** (iteratie 41)
 
 ## Backlog (P2)
 - Google Sheets API for lead export
