@@ -1406,7 +1406,36 @@ Yrvante — Smart Web & Software 085-5055314`);
                   <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-black dark:text-white" data-testid="email-tab-title">Email Campagne</h1>
                   <p className="text-gray-500 dark:text-gray-400 text-sm">Geautomatiseerde outreach via info@yrvante.com</p>
                 </div>
-                <button onClick={loadEmailStats} className={`p-2 ${G} !rounded-xl !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`}><RefreshCw size={18} /></button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <input ref={csvFileRef} type="file" accept=".csv" onChange={handleCsvImport} className="hidden" />
+                  <button onClick={() => csvFileRef.current?.click()}
+                    className="px-4 sm:px-6 py-2 sm:py-3 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-[0.1em] hover:bg-gray-800 dark:hover:bg-gray-200 transition-all rounded-full flex items-center gap-2"
+                    data-testid="email-import-button">
+                    <Upload size={14} /> IMPORTEREN
+                  </button>
+                  {csvLeads.length > 0 && (
+                    <button onClick={manualSaveAll}
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-green-200 dark:border-green-800 text-green-600 text-xs font-bold rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center gap-1.5"
+                      data-testid="email-save-all">
+                      <Save size={14} /> OPSLAAN
+                    </button>
+                  )}
+                  {csvLeads.length > 0 && (
+                    <button onClick={exportCsvLeads}
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-blue-200 dark:border-blue-800 text-blue-600 text-xs font-bold rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-1.5"
+                      data-testid="email-export-button">
+                      <Download size={14} /> EXPORT
+                    </button>
+                  )}
+                  {csvLeads.length > 0 && (
+                    <button onClick={clearAllCsvLeads}
+                      className="px-3 sm:px-4 py-2 sm:py-3 border border-red-200 dark:border-red-800 text-red-500 text-xs font-bold rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-1.5"
+                      data-testid="email-clear-all">
+                      <Trash2 size={14} /> WISSEN
+                    </button>
+                  )}
+                  <button onClick={loadEmailStats} className={`p-2 sm:p-3 ${G} !rounded-full !shadow-none hover:bg-white/80 dark:hover:bg-white/10 text-black dark:text-white`}><RefreshCw size={16} /></button>
+                </div>
               </div>
 
               {/* Daily Stats Cards */}
