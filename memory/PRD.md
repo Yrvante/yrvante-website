@@ -208,6 +208,15 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Mobiel responsief**: Alle tabs werken op iPhone (390px)
 - **16/16 backend + alle frontend tests geslaagd** (iteratie 41)
 
+### Phase 24 - LeadFinder Cleanup & Dead Code Removal (Complete - Feb 2026)
+- **Tools tab verwijderd**: Volledige onbereikbare "Tools & Integraties" tab verwijderd (5 van 6 items waren "COMING SOON", CSV Export al beschikbaar via andere knoppen)
+- **Google Maps Leads sectie verwijderd**: Onbereikbare `leadSource === 'maps'` sectie verwijderd (toggle was nooit zichtbaar in UI)
+- **Ongebruikte functies verwijderd**: `updateLead`, `deleteLead`, `bulkUpdateStatus`, `bulkDelete`, `toggleSelectLead`, `selectAllLeads`, `exportToGoogleSheets`, `openInGoogleSheets`, `copyToClipboard`
+- **Ongebruikte state verwijderd**: `editingLead`, `editData`, `showLeadModal`, `showBulkActions`, `statusFilter`, `sourceFilter`, `priorityFilter`, `searchLeadsQuery`, `sortBy`, `selectedLeads`, `leadSource`
+- **Imports opgeschoond**: 15+ ongebruikte Lucide icons verwijderd
+- **Resultaat**: ~2000 → ~1663 regels (-337 regels dode code, -17%)
+- **36/36 tests geslaagd** (iteratie 42)
+
 ## Backlog (P2)
 - Google Sheets API for lead export
 - Case studies/success stories for niche pages
