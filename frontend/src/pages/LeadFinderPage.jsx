@@ -113,6 +113,9 @@ const LeadFinderPage = () => {
   const [csvSearchQuery, setCsvSearchQuery] = useState('');
   const [csvStatusFilter, setCsvStatusFilter] = useState('alle');
   const [csvOnlyNoWebsite, setCsvOnlyNoWebsite] = useState(false);
+  const [csvCategorieFilter, setCsvCategorieFilter] = useState('alle');
+  const [csvPlaatsFilter, setCsvPlaatsFilter] = useState('alle');
+  const [csvOnlyMetTelefoon, setCsvOnlyMetTelefoon] = useState(false);
   const [csvSortCol, setCsvSortCol] = useState(null);
   const [csvSortDir, setCsvSortDir] = useState('asc');
 
@@ -544,8 +547,8 @@ const LeadFinderPage = () => {
   const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0 });
 
   const bulkWhatsApp = async () => {
-    const targets = csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim());
-    if (!targets.length) { toast.error('Geen nieuwe leads met telefoonnummer gevonden'); return; }
+    const targets = filteredCsvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim());
+    if (!targets.length) { toast.error('Geen leads met telefoonnummer in huidige selectie'); return; }
     
     const max = Math.min(targets.length, waStats.resterend);
     if (max <= 0) { toast.error('Dagelijkse WhatsApp limiet bereikt!'); return; }
@@ -614,14 +617,21 @@ Yrvante — Smart Web & Software 085-5055314`);
 
   const filteredCsvLeads = csvLeads.filter(lead => {
     if (csvOnlyNoWebsite && lead.website && lead.website.trim() !== '') return false;
+    if (csvOnlyMetTelefoon && (!lead.telefoon || !lead.telefoon.trim())) return false;
     if (csvStatusFilter !== 'alle' && lead.status !== csvStatusFilter) return false;
+    if (csvCategorieFilter !== 'alle' && (lead.categorie || '').toLowerCase() !== csvCategorieFilter.toLowerCase()) return false;
+    if (csvPlaatsFilter !== 'alle' && (lead.plaats || '').toLowerCase() !== csvPlaatsFilter.toLowerCase()) return false;
     if (csvSearchQuery) {
       const q = csvSearchQuery.toLowerCase();
       const city = (lead.plaats || '').toLowerCase();
-      return lead.naam?.toLowerCase().includes(q) || city.includes(q);
+      return lead.naam?.toLowerCase().includes(q) || city.includes(q) || (lead.categorie || '').toLowerCase().includes(q);
     }
     return true;
   });
+
+  // Unieke categorieën en plaatsen voor dropdowns
+  const uniqueCategorieen = [...new Set(csvLeads.map(l => l.categorie).filter(Boolean).map(c => c.trim()).filter(c => c))].sort();
+  const uniquePlaatsen = [...new Set(csvLeads.map(l => l.plaats).filter(Boolean).map(p => p.trim()).filter(p => p))].sort();
 
   const formatRating = (r) => {
     if (!r) return null;
@@ -1204,16 +1214,22 @@ Yrvante — Smart Web & Software 085-5055314`);
 
               {/* Stats Cards */}
               {/* Bulk WhatsApp */}
-              {csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length > 0 && (
+              {filteredCsvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length > 0 && (
                 <div className="mb-6 p-3 sm:p-4 bg-white/50 dark:bg-white/[0.04] border border-gray-200/60 dark:border-white/[0.08] rounded-2xl backdrop-blur-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" data-testid="bulk-whatsapp-bar">
                   <div>
                     <p className="text-xs sm:text-sm font-bold text-black dark:text-white">
                       {bulkSending
                         ? `WhatsApp versturen... ${bulkProgress.current}/${bulkProgress.total}`
-                        : `${csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length} nieuwe leads klaar om te benaderen`
+                        : `${filteredCsvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length} leads in selectie klaar om te benaderen`
                       }
                     </p>
-                    <p className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 mt-0.5">Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)</p>
+                    <p className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                      {csvCategorieFilter !== 'alle' || csvPlaatsFilter !== 'alle' || csvOnlyNoWebsite || csvOnlyMetTelefoon || csvStatusFilter !== 'alle'
+                        ? 'Stuurt alleen naar gefilterde resultaten — '
+                        : ''
+                      }
+                      Opent WhatsApp per lead met vooringevuld bericht (elke 2 sec)
+                    </p>
                   </div>
                   <button
                     onClick={bulkWhatsApp}
@@ -1245,15 +1261,35 @@ Yrvante — Smart Web & Software 085-5055314`);
               {/* Search + Filter Bar */}
               {csvLeads.length > 0 && (
                 <div className={`${GC} p-3 sm:p-4 mb-4 sm:mb-6`}>
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                  <div className="flex flex-col gap-2 sm:gap-3">
+                    {/* Row 1: Search */}
                     <div className="flex-1 relative">
                       <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                       <input value={csvSearchQuery} onChange={e => setCsvSearchQuery(e.target.value)}
-                        placeholder="Zoek op naam of plaats..."
+                        placeholder="Zoek op naam, plaats of categorie..."
                         className={`w-full pl-10 pr-4 py-2 text-sm ${GI}`}
                         data-testid="csv-search-input" />
                     </div>
+                    {/* Row 2: Filters */}
                     <div className="flex items-center gap-2 flex-wrap">
+                      <select value={csvCategorieFilter} onChange={e => setCsvCategorieFilter(e.target.value)}
+                        className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}
+                        data-testid="csv-categorie-filter">
+                        <option value="alle">Alle Categorieën</option>
+                        {uniqueCategorieen.map(c => (<option key={c} value={c}>{c}</option>))}
+                      </select>
+                      <select value={csvPlaatsFilter} onChange={e => setCsvPlaatsFilter(e.target.value)}
+                        className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}
+                        data-testid="csv-plaats-filter">
+                        <option value="alle">Alle Plaatsen</option>
+                        {uniquePlaatsen.map(p => (<option key={p} value={p}>{p}</option>))}
+                      </select>
+                      <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
+                        className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}
+                        data-testid="csv-status-filter">
+                        <option value="alle">Alle Status</option>
+                        {CSV_STATUS_OPTIONS.map(s => (<option key={s.value} value={s.value}>{s.label}</option>))}
+                      </select>
                       <button
                         onClick={() => setCsvOnlyNoWebsite(!csvOnlyNoWebsite)}
                         className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
@@ -1264,15 +1300,21 @@ Yrvante — Smart Web & Software 085-5055314`);
                         data-testid="csv-no-website-toggle"
                       >
                         <Globe size={13} />
-                        {csvOnlyNoWebsite ? 'Zonder' : 'Alle'}
+                        Zonder website
                       </button>
-                      <select value={csvStatusFilter} onChange={e => setCsvStatusFilter(e.target.value)}
-                        className={`px-3 py-2 text-xs sm:text-sm font-medium cursor-pointer ${GI}`}
-                        data-testid="csv-status-filter">
-                        <option value="alle">Alle Status</option>
-                        {CSV_STATUS_OPTIONS.map(s => (<option key={s.value} value={s.value}>{s.label}</option>))}
-                      </select>
-                      <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap">{filteredCsvLeads.length} resultaten</span>
+                      <button
+                        onClick={() => setCsvOnlyMetTelefoon(!csvOnlyMetTelefoon)}
+                        className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
+                          csvOnlyMetTelefoon
+                            ? 'bg-[#25D366] border-[#25D366] text-white'
+                            : 'bg-white/50 dark:bg-white/[0.06] border-gray-200/60 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                        }`}
+                        data-testid="csv-met-telefoon-toggle"
+                      >
+                        <Phone size={13} />
+                        Met telefoon
+                      </button>
+                      <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap ml-auto">{filteredCsvLeads.length} resultaten</span>
                     </div>
                   </div>
                 </div>
