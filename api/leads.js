@@ -54,6 +54,15 @@ async function getDailyCount() {
   return log;
 }
 
+async function getWhatsAppDailyCount() {
+  const today = new Date().toISOString().split('T')[0];
+  let log = await prisma.whatsAppDailyLog.findUnique({ where: { date: today } });
+  if (!log) {
+    log = await prisma.whatsAppDailyLog.create({ data: { date: today, count: 0, dailyLimit: 30 } });
+  }
+  return log;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
@@ -62,6 +71,39 @@ export default async function handler(req, res) {
 
   try {
     const { id, action } = req.query;
+
+    // ===== WHATSAPP ACTIONS =====
+    if (action === 'whatsapp-stats') {
+      const daily = await getWhatsAppDailyCount();
+      return res.status(200).json({
+        vandaag: daily.count,
+        limiet: daily.dailyLimit,
+        resterend: Math.max(0, daily.dailyLimit - daily.count),
+      });
+    }
+
+    if (action === 'whatsapp-limit' && req.method === 'POST') {
+      const { limit } = req.body;
+      const today = new Date().toISOString().split('T')[0];
+      await prisma.whatsAppDailyLog.upsert({
+        where: { date: today },
+        update: { dailyLimit: limit },
+        create: { date: today, count: 0, dailyLimit: limit }
+      });
+      return res.status(200).json({ success: true });
+    }
+
+    if (action === 'whatsapp-click' && req.method === 'POST') {
+      const daily = await getWhatsAppDailyCount();
+      if (daily.count >= daily.dailyLimit) {
+        return res.status(429).json({ success: false, error: 'Dagelijkse limiet bereikt', vandaag: daily.count, limiet: daily.dailyLimit, resterend: 0 });
+      }
+      await prisma.whatsAppDailyLog.update({
+        where: { date: daily.date },
+        data: { count: daily.count + 1 }
+      });
+      return res.status(200).json({ success: true, vandaag: daily.count + 1, limiet: daily.dailyLimit, resterend: Math.max(0, daily.dailyLimit - daily.count - 1) });
+    }
 
     // ===== EMAIL ACTIONS =====
     if (action === 'email-stats') {
@@ -196,6 +238,7 @@ export default async function handler(req, res) {
             status: lead.status || 'nieuw',
             notitie: lead.notitie || null,
             emailStatus: lead.emailStatus || 'niet_verstuurd',
+            whatsappBeschikbaar: lead.whatsappBeschikbaar || 'onbekend',
           }
         });
         if (phone) existingPhones.add(phone);

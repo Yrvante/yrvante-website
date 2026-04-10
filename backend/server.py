@@ -113,6 +113,7 @@ class CsvLead(BaseModel):
     notitie: Optional[str] = ""
     emailStatus: Optional[str] = "niet_verstuurd"
     emailSentAt: Optional[str] = None
+    whatsappBeschikbaar: Optional[str] = "onbekend"
 
 class CsvLeadsBulk(BaseModel):
     leads: List[CsvLead]
@@ -863,6 +864,54 @@ async def leadfinder_zoek(request: Request):
         except Exception as e:
             logger.error(f"{source_name} scrape failed: {e}")
     
+    # ===== Enrich Google leads with Place Details (phone, website, email) =====
+    api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")
+    if api_key:
+        async with aiohttp.ClientSession() as session:
+            for lead in all_leads[:30]:  # Limit to 30 to avoid API cost explosion
+                pid = lead.get("place_id", "")
+                if not pid.startswith("gm_"):
+                    continue
+                real_pid = pid.replace("gm_", "")
+                try:
+                    detail_url = "https://maps.googleapis.com/maps/api/place/details/json"
+                    detail_params = {
+                        "place_id": real_pid,
+                        "fields": "formatted_phone_number,website",
+                        "key": api_key,
+                        "language": "nl",
+                    }
+                    async with session.get(detail_url, params=detail_params, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                        detail_data = await resp.json()
+                    result = detail_data.get("result", {})
+                    if result.get("formatted_phone_number"):
+                        lead["telefoonnummer"] = result["formatted_phone_number"]
+                    if result.get("website"):
+                        lead["website"] = result["website"]
+                        # Try to extract email from website
+                        try:
+                            async with session.get(result["website"], timeout=aiohttp.ClientTimeout(total=5), headers={"User-Agent": "Mozilla/5.0"}) as web_resp:
+                                html = await web_resp.text()
+                                email_match = re.findall(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', html)
+                                # Filter out common false positives
+                                valid_emails = [e for e in email_match if not any(x in e.lower() for x in ['example.com', 'wixpress', 'sentry', 'webpack', 'googleapis', '.png', '.jpg', '.gif', '.svg'])]
+                                if valid_emails:
+                                    lead["email"] = valid_emails[0]
+                        except Exception:
+                            pass  # Website not reachable, skip email extraction
+                except Exception as e:
+                    logger.debug(f"Place details error for {lead.get('naam')}: {e}")
+    
+    # ===== Check WhatsApp availability (Dutch mobile format check) =====
+    for lead in all_leads:
+        phone = (lead.get("telefoonnummer") or "").replace(" ", "").replace("-", "").replace("+31", "06")
+        if phone.startswith("06") and len(phone) == 10:
+            lead["whatsapp_beschikbaar"] = "waarschijnlijk"
+        elif phone.startswith("0") and len(phone) == 10 and not phone.startswith("06"):
+            lead["whatsapp_beschikbaar"] = "vast_nummer"
+        else:
+            lead["whatsapp_beschikbaar"] = "onbekend"
+    
     return {
         "leads": all_leads,
         "totaal_gevonden": len(all_leads),
@@ -1133,6 +1182,46 @@ async def delete_csv_leads(request: Request, id: str = None):
     else:
         await db.csv_leads.delete_many({})
     return {"success": True}
+
+# ========== WhatsApp Daily Limit Tracking ==========
+
+@api_router.get("/leads/whatsapp-stats")
+async def get_whatsapp_stats():
+    today = __import__('datetime').date.today().isoformat()
+    daily = await db.whatsapp_daily_log.find_one({"date": today})
+    if not daily:
+        daily = {"date": today, "count": 0, "dailyLimit": 30}
+    return {
+        "vandaag": daily.get("count", 0),
+        "limiet": daily.get("dailyLimit", 30),
+        "resterend": max(0, daily.get("dailyLimit", 30) - daily.get("count", 0)),
+    }
+
+@api_router.post("/leads/whatsapp-stats")
+async def update_whatsapp_limit(request: Request):
+    body = await request.json()
+    limit = body.get("limit", 30)
+    today = __import__('datetime').date.today().isoformat()
+    await db.whatsapp_daily_log.update_one(
+        {"date": today}, {"$set": {"dailyLimit": limit}}, upsert=True
+    )
+    return {"success": True}
+
+@api_router.post("/leads/whatsapp-click")
+async def track_whatsapp_click(request: Request):
+    today = __import__('datetime').date.today().isoformat()
+    daily = await db.whatsapp_daily_log.find_one({"date": today})
+    if not daily:
+        await db.whatsapp_daily_log.insert_one({"date": today, "count": 0, "dailyLimit": 30})
+        daily = {"date": today, "count": 0, "dailyLimit": 30}
+    
+    current = daily.get("count", 0)
+    limit = daily.get("dailyLimit", 30)
+    if current >= limit:
+        return {"success": False, "error": "Dagelijkse limiet bereikt", "vandaag": current, "limiet": limit, "resterend": 0}
+    
+    await db.whatsapp_daily_log.update_one({"date": today}, {"$inc": {"count": 1}}, upsert=True)
+    return {"success": True, "vandaag": current + 1, "limiet": limit, "resterend": max(0, limit - current - 1)}
 
 # ========== Legacy CSV routes (backward compatibility) ==========
 

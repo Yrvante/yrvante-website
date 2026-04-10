@@ -121,6 +121,9 @@ const LeadFinderPage = () => {
   const [emailSending, setEmailSending] = useState(false);
   const [emailBatchSending, setEmailBatchSending] = useState(false);
 
+  // WhatsApp daily limit states
+  const [waStats, setWaStats] = useState({ vandaag: 0, limiet: 30, resterend: 30 });
+
   useEffect(() => {
     if (localStorage.getItem('leadfinder_auth') === 'true') {
       setIsAuthenticated(true);
@@ -133,6 +136,7 @@ const LeadFinderPage = () => {
       loadDashboard();
       loadCsvLeads();
       loadEmailStats();
+      loadWaStats();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
@@ -369,6 +373,7 @@ const LeadFinderPage = () => {
       reviews: r.user_ratings_total ? String(r.user_ratings_total) : '',
       status: 'nieuw',
       emailStatus: 'niet_verstuurd',
+      whatsappBeschikbaar: r.whatsapp_beschikbaar || 'onbekend',
     }));
     try {
       const res = await fetch(`${API_BASE}/api/leads`, {
@@ -379,6 +384,7 @@ const LeadFinderPage = () => {
       toast.success(`${data.inserted || 0} leads toegevoegd aan WhatsApp & Email!`);
       loadCsvLeads();
       loadEmailStats();
+      loadWaStats();
     } catch { toast.error('Fout bij toevoegen'); }
   };
 
@@ -540,21 +546,36 @@ const LeadFinderPage = () => {
   const bulkWhatsApp = async () => {
     const targets = csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim());
     if (!targets.length) { toast.error('Geen nieuwe leads met telefoonnummer gevonden'); return; }
-    if (!window.confirm(`WhatsApp openen voor ${targets.length} leads? (elke 2 sec een nieuw tabblad)`)) return;
+    
+    const max = Math.min(targets.length, waStats.resterend);
+    if (max <= 0) { toast.error('Dagelijkse WhatsApp limiet bereikt!'); return; }
+    if (!window.confirm(`WhatsApp openen voor ${max} leads? (limiet: ${waStats.resterend} resterend, elke 2 sec)`)) return;
 
     setBulkSending(true);
-    setBulkProgress({ current: 0, total: targets.length });
+    setBulkProgress({ current: 0, total: max });
 
-    for (let i = 0; i < targets.length; i++) {
+    for (let i = 0; i < max; i++) {
       const lead = targets[i];
-      setBulkProgress({ current: i + 1, total: targets.length });
+      setBulkProgress({ current: i + 1, total: max });
+      
+      // Track the click before opening
+      try {
+        const res = await fetch(`${API_BASE}/api/leads/whatsapp-click`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if (!data.success) { toast.error('WhatsApp limiet bereikt'); break; }
+        setWaStats({ vandaag: data.vandaag, limiet: data.limiet, resterend: data.resterend });
+      } catch { /* continue */ }
+      
       window.open(getWhatsAppUrl(lead), '_blank');
       updateCsvStatus(lead.id, 'benaderd');
-      if (i < targets.length - 1) await new Promise(r => setTimeout(r, 2000));
+      if (i < max - 1) await new Promise(r => setTimeout(r, 2000));
     }
 
     setBulkSending(false);
-    toast.success(`${targets.length} WhatsApp berichten geopend!`);
+    loadWaStats();
+    toast.success(`${max} WhatsApp berichten geopend!`);
   };
 
   const getWhatsAppUrl = (lead) => {
@@ -669,6 +690,47 @@ Yrvante — Smart Web & Software 085-5055314`);
       const res = await fetch(`${API_BASE}/api/leads/email-stats`);
       if (res.ok) setEmailStats(await res.json());
     } catch { /* silent */ }
+  };
+
+  // WhatsApp daily limit functions
+  const loadWaStats = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/leads/whatsapp-stats`);
+      if (res.ok) setWaStats(await res.json());
+    } catch { /* silent */ }
+  };
+
+  const updateWaLimit = async (limit) => {
+    try {
+      await fetch(`${API_BASE}/api/leads/whatsapp-stats`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ limit })
+      });
+      setWaStats(prev => ({ ...prev, limiet: limit, resterend: Math.max(0, limit - prev.vandaag) }));
+      toast.success(`WhatsApp limiet: ${limit}/dag`);
+    } catch { toast.error('Fout bij opslaan limiet'); }
+  };
+
+  const trackWhatsAppClick = async (phone, naam, hasWebsite) => {
+    if (waStats.resterend <= 0) {
+      toast.error('Dagelijkse WhatsApp limiet bereikt!');
+      return false;
+    }
+    try {
+      const res = await fetch(`${API_BASE}/api/leads/whatsapp-click`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (!data.success) { toast.error(data.error || 'Limiet bereikt'); return false; }
+      setWaStats({ vandaag: data.vandaag, limiet: data.limiet, resterend: data.resterend });
+      // Open WhatsApp
+      const cleanPhone = phone.replace(/\D/g, '');
+      const msg = hasWebsite
+        ? `Hoi ${naam}, ik ben Yvar van Yrvante. Ik heb uw website bekeken en ik denk dat ik die echt een stuk beter kan maken. Een moderne website maakt echt het verschil – meer vertrouwen, meer klanten. Wilt u eens vrijblijvend sparren?`
+        : `Hoi ${naam}! Ik ben Yvar van Yrvante. Ik zag dat ${naam} nog geen website heeft. Wist je dat bedrijven met een professionele website gemiddeld 40% meer klanten aantrekken? Ik help je graag – al vanaf €249. Interesse?`;
+      window.open(`https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(msg)}`, '_blank');
+      return true;
+    } catch { toast.error('WhatsApp tracking fout'); return false; }
   };
 
   const sendSingleEmail = async (leadId) => {
@@ -839,12 +901,12 @@ Yrvante — Smart Web & Software 085-5055314`);
                 <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('leads')}>
                   <div className="flex items-center gap-2.5 mb-2">
                     <div className="w-8 h-8 bg-gray-100/80 dark:bg-white/10 rounded-lg flex items-center justify-center">
-                      <MessageSquare size={16} className="text-gray-500 dark:text-gray-400" />
+                      <MessageSquare size={16} className="text-[#25D366]" />
                     </div>
                     <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 font-bold">WhatsApp</p>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{csvLeads.filter(l => l.status === 'benaderd').length}</p>
-                  <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{csvLeads.filter(l => l.telefoon?.trim() && l.status === 'nieuw').length} te benaderen</p>
+                  <p className="text-2xl sm:text-3xl font-black text-black dark:text-white">{waStats.resterend}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{waStats.vandaag}/{waStats.limiet} vandaag</p>
                 </div>
                 <div className={`${GC} p-4 sm:p-5 cursor-pointer hover:shadow-lg transition-all`} onClick={() => setActiveTab('email')}>
                   <div className="flex items-center gap-2.5 mb-2">
@@ -979,6 +1041,25 @@ Yrvante — Smart Web & Software 085-5055314`);
 
                             {/* Quick Links - Compact */}
                             <div className="flex flex-wrap gap-1.5">
+                              {lead.email && (
+                                <span className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
+                                  <Mail size={11} /> {lead.email}
+                                </span>
+                              )}
+                              {lead.website && (
+                                <a href={lead.website} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
+                                  <Globe size={11} /> Website
+                                </a>
+                              )}
+                              {lead.whatsapp_beschikbaar && lead.whatsapp_beschikbaar !== 'onbekend' && (
+                                <span className={`px-2 sm:px-2.5 py-1 rounded-lg text-xs font-medium flex items-center gap-1 border ${
+                                  lead.whatsapp_beschikbaar === 'waarschijnlijk' 
+                                    ? 'bg-[#25D366]/10 text-[#25D366] border-[#25D366]/20' 
+                                    : 'bg-gray-100 dark:bg-white/[0.06] text-gray-400 border-gray-200/60 dark:border-white/10'
+                                }`}>
+                                  <MessageSquare size={11} /> {lead.whatsapp_beschikbaar === 'waarschijnlijk' ? 'WhatsApp' : 'Vast nr.'}
+                                </span>
+                              )}
                               {lead.google_maps_url && (
                                 <a href={lead.google_maps_url} target="_blank" rel="noopener noreferrer" className="px-2 sm:px-2.5 py-1 bg-white/40 dark:bg-white/[0.06] backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-white/10 flex items-center gap-1 text-gray-600 dark:text-gray-400 border border-white/30 dark:border-white/[0.06]">
                                   <MapPin size={11} /> Maps
@@ -1079,6 +1160,48 @@ Yrvante — Smart Web & Software 085-5055314`);
                 </div>
               </div>
 
+              {/* WhatsApp Daily Limit Tracker */}
+              <div className={`${GC} p-4 sm:p-5 mb-6`} data-testid="whatsapp-limit-tracker">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#25D366]/10 rounded-xl flex items-center justify-center">
+                      <MessageSquare size={18} className="text-[#25D366]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-black dark:text-white" data-testid="wa-remaining">
+                        {waStats.resterend > 0 
+                          ? `Nog ${waStats.resterend} WhatsApp berichten vandaag`
+                          : 'Dagelijkse WhatsApp limiet bereikt'
+                        }
+                      </p>
+                      <p className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500">
+                        {waStats.vandaag}/{waStats.limiet} verstuurd — reset om middernacht
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Limiet:</span>
+                    <select 
+                      value={waStats.limiet} 
+                      onChange={e => updateWaLimit(Number(e.target.value))}
+                      className={`px-3 py-1.5 text-xs font-bold ${GI} !rounded-lg`}
+                      data-testid="wa-limit-select"
+                    >
+                      {[20, 30, 40, 50, 100].map(n => (
+                        <option key={n} value={n}>{n}/dag</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                {/* Progress bar */}
+                <div className="mt-3 h-2 bg-gray-100 dark:bg-white/[0.06] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full rounded-full transition-all bg-[#25D366]" 
+                    style={{ width: `${Math.min(100, (waStats.vandaag / waStats.limiet) * 100)}%` }} 
+                  />
+                </div>
+              </div>
+
               {/* Stats Cards */}
               {/* Bulk WhatsApp */}
               {csvLeads.filter(l => l.status === 'nieuw' && l.telefoon?.trim()).length > 0 && (
@@ -1094,8 +1217,10 @@ Yrvante — Smart Web & Software 085-5055314`);
                   </div>
                   <button
                     onClick={bulkWhatsApp}
-                    disabled={bulkSending}
-                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${bulkSending ? 'bg-gray-400 cursor-wait' : 'bg-[#25D366] hover:bg-[#1DA851]'}`}
+                    disabled={bulkSending || waStats.resterend <= 0}
+                    className={`w-full sm:w-auto px-5 py-2.5 text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all ${
+                      bulkSending ? 'bg-gray-400 cursor-wait' : waStats.resterend <= 0 ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed' : 'bg-[#25D366] hover:bg-[#1DA851]'
+                    }`}
                     data-testid="bulk-whatsapp-button">
                     <MessageSquare size={14} /> {bulkSending ? `${bulkProgress.current}/${bulkProgress.total}` : 'Bulk WhatsApp'}
                   </button>
@@ -1273,8 +1398,14 @@ Yrvante — Smart Web & Software 085-5055314`);
                               <td className="px-4 py-3 text-center">
                                 {lead.telefoon ? (
                                   <button
-                                    onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#25D366] text-white rounded-full text-xs font-bold hover:bg-[#1DA851] transition-colors cursor-pointer"
+                                    onClick={async () => { 
+                                      const ok = await trackWhatsAppClick(lead.telefoon, lead.naam, lead.website?.trim());
+                                      if (ok) updateCsvStatus(lead.id, 'benaderd');
+                                    }}
+                                    disabled={waStats.resterend <= 0}
+                                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold transition-colors cursor-pointer ${
+                                      waStats.resterend <= 0 ? 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-[#25D366] text-white hover:bg-[#1DA851]'
+                                    }`}
                                     data-testid={`csv-whatsapp-${lead.id}`}
                                   >
                                     <MessageSquare size={12} /> WhatsApp
@@ -1374,8 +1505,15 @@ Yrvante — Smart Web & Software 085-5055314`);
                           />
                           <div className="flex items-center gap-2 mt-3">
                             {lead.telefoon && (
-                              <button onClick={() => { window.open(getWhatsAppUrl(lead), '_blank'); updateCsvStatus(lead.id, 'benaderd'); }}
-                                className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-[#25D366] text-white rounded-lg text-xs font-bold hover:bg-[#1DA851] cursor-pointer">
+                              <button 
+                                onClick={async () => {
+                                  const ok = await trackWhatsAppClick(lead.telefoon, lead.naam, lead.website?.trim());
+                                  if (ok) updateCsvStatus(lead.id, 'benaderd');
+                                }}
+                                disabled={waStats.resterend <= 0}
+                                className={`flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-bold cursor-pointer ${
+                                  waStats.resterend <= 0 ? 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-[#25D366] text-white hover:bg-[#1DA851]'
+                                }`}>
                                 <MessageSquare size={12} /> WhatsApp
                               </button>
                             )}
