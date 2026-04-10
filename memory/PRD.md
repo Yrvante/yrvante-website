@@ -208,6 +208,20 @@ Build and iteratively develop the Yrvante web platform — a Dutch freelance web
 - **Mobiel responsief**: Alle tabs werken op iPhone (390px)
 - **16/16 backend + alle frontend tests geslaagd** (iteratie 41)
 
+### Phase 27 - WhatsApp Dagelijkse Limiet + Email/WhatsApp Enrichment (Complete - Feb 2026)
+- **WhatsApp Limiet Tracking**: Dagelijkse limiet tracker toegevoegd (20/30/40/50/100 per dag)
+  - MongoDB `whatsapp_daily_log` collectie + Prisma `WhatsAppDailyLog` model
+  - Backend endpoints: GET/POST `/api/leads/whatsapp-stats`, POST `/api/leads/whatsapp-click`
+  - Frontend: Limiet tracker met groene progress bar en dropdown selector op WHATSAPP tab
+  - HOME tab toont resterende WhatsApp berichten
+  - Individuele + Bulk WhatsApp knoppen geblokkeerd bij limiet bereikt
+  - Automatische reset om middernacht (date-based lookup)
+- **Scraper Email Enrichment**: Google Places Detail API uitgebreid
+  - Haalt telefoon + website op via Place Details
+  - Extraheert email adressen van bedrijfswebsites (regex + false positive filtering)
+  - WhatsApp beschikbaarheid check (Nederlands mobiel format: 06-nummers = waarschijnlijk, vast nr = niet)
+- **29/29 tests geslaagd** (iteratie 43)
+
 ### Phase 26 - WhatsApp Groen + Achtergrond Versterkt (Complete - Feb 2026)
 - **WhatsApp knoppen groen** (#25D366): Individuele WhatsApp knoppen, Bulk WhatsApp, en "Toevoegen aan WhatsApp" knop
 - **Achtergrond prominenter**: bg-pattern.jpg opacity 18%→25%, orbs +30% sterker, zowel homepage als LeadFinder
